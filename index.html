@@ -1,23 +1,28 @@
 ---
-layout: default
+
+layout:     default
+title:      Why Jekyll rocks
+type:       home
+navigation: true
+
+date:       2014-05-08
+image:      header-1.jpg
+excerpt:    Let's face it, there are literally <i>millions of ways to create and manage a website or blog</i> these days and all of them got dark and bright sides. <b>Jekyll</b> is yet another, albeit incredible way to do so and <b>Hashtag for Jekyll</b> adds a sweet little face to it so your site doesn't turn into <b>Mr. Hyde</b>. <a href="/about.html" title="Continue" class="more">Continue</a>
+gradient:   1
+
 ---
 
-<div class="home">
+<div class="summary">
 
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  <p>Well, I guess it's quite obvious that I really enjoy working with Jekyll — <b>with good reasons</b> — so let me just briefly suggest some of the benefits of using a static site generator in favor of a heavy dynamic, database driven content management system. <a href="/why-jekyll.html" title="Continue" class="more">Continue</a></p>
 
 </div>
+
+<h2>Guides</h2>
+<p>Please follow these guides in order to get a good impression about the themes functionality and how it works.</p>
+
+{% for post in paginator.posts %}
+
+  {% include summary.html %}
+  
+{% endfor %}
