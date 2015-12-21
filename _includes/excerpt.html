@@ -2,7 +2,7 @@
 <div class="excerpt">
         
 	<span class="title">{{ page.content }}</span>
-
+<!---
 	{% if page.title %}
 
 		{% if page.type == 'home' %}
@@ -10,9 +10,10 @@
 		{% else %}
 			<h1><a href="{{ page.url | prepend: site.baseurl }}" title="{{ page.title }}">{{ page.title }}</a></h1>
 		{% endif %}
-		
-	{% endif %}
 
+	{% endif %}
+-->		
+	<p>{{ page.excerpt | remove: '<p>' | remove: '</p>' }}</p>
 
 	{% if page.date or page.categories %}
 
