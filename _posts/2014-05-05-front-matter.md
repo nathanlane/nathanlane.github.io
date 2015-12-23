@@ -12,7 +12,7 @@ gradient: 		4
 image: 			header-3.jpg
 details:		false
 
-author: 		Maximilian Bartel
+author: 	 "Nathaniel"
 bio: 			I'm a freelance web designer who enjoys creating beautiful and standard compliant solutions for my clients from all around the world.
 twitter: 		"http://twitter.com/indiqo"
 facebook: 		"http://facebook.com"

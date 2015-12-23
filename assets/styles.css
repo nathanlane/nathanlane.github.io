@@ -1,6 +1,7 @@
 /* Google Webfonts */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600);
 @import url(http://fonts.googleapis.com/css?family=Karla:700);
+@import url(http://fonts.googleapis.com/css?family=Nixie+One);
 
 /* Fallback */
 header, footer, section, article, nav, aside { display: block }
@@ -27,7 +28,7 @@ b, strong { font-weight: 600 }
 i, em { font-style: italic }
 
 a {
-    color: #eb2344;
+    color: #222;
     text-decoration: none; }
 
 a:hover, a:active, a:visited { opacity: 0.65 }
@@ -79,7 +80,7 @@ input[type="button"], input[type="submit"] {
     border: none;
     color: white;
     font-weight: 600;
-    background: #eb2344;
+    background: #222;
     padding: 12px 8px; }
 
 input[type="button"]:hover, input[type="submit"]:hover { opacity: 0.65 }
@@ -103,34 +104,37 @@ a, button {
 p { margin: 12px 0 }
 
 h1, h2, h3, h4, h5 {
+    font-family: "Nixie One", sans-serif;
     color: #191a1a;
     line-height: 1;
     padding: 17px 0 8px;
     margin: 0; }
 
 h1 {
-    font-size: 2rem;
-    font-weight: 600; }
+    font-size: 4rem;
+    font-weight: 100; }
 
 h2 {
+    font-size: 3rem;
+    font-weight: 100; 
+    margin: 40px 0px 10px;
+    }
+
+h3 {
+    font-size: 2.5rem;
+    font-weight: 200; }
+
+h4 {
+    font-size: 2rem;
+    font-weight: 300; }
+
+h5 {
     font-size: 1.5rem;
     font-weight: 400; }
 
-h3 {
-    font-size: 1.125rem;
-    font-weight: 600; }
-
-h4 {
-    font-size: 1rem;
-    font-weight: 400; }
-
-h5 {
-    font-size: 0.875rem;
-    font-weight: 600; }
-
 /* Reusable Styles */
 .title {
-    font-family: "Karla", sans-serif;
+    font-family: "Nixie One", sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -146,7 +150,7 @@ h5 {
         position: absolute;
         left: 0;
         bottom: -15px;
-        background: #eb2344; }
+        background: #222; }
 
 .more {
     display: inline-block;
@@ -292,7 +296,7 @@ body > header {
 
                 body > header nav ul li a:hover {
                     position: relative;
-                    color: #eb2344;
+                    color: #222;
                     opacity: 1; }
 
                 body > header nav ul li a:hover:after {
@@ -356,6 +360,7 @@ body > header {
         opacity: 1; }
 
     .content article header .excerpt h1 {
+        font-family: "Nixie One", sans-serif;
         color: white;
         padding: 15px 0 4px; }
 
@@ -459,7 +464,7 @@ body > header {
             position: absolute;
             left: 0;
             bottom: -11px;
-            background: #eb2344; }
+            background: #222; }
 
         .content article .body .media .caption a { color: #4b505a }
 
@@ -648,7 +653,7 @@ body > footer {
         position: absolute;
         left: 0;
         top: -15px;
-        background: #eb2344; }
+        background: #222; }
 
     body > footer .copyright a { margin-left: 6px }
 
@@ -690,7 +695,7 @@ code { padding: 3px 6px; }
 .highlight .c, .highlight .cm, .highlight .c1, .highlight .cs, .highlight .ge { font-style: italic }
 .highlight .cs, .highlight .ow, .highlight .ne, .highlight .nf, .highlight .kc, .highlight .kd, .highlight .kp, .highlight .kr, .highlight .k, .highlight .o, .highlight .nc, .highlight .kt, .highlight .gs { font-weight: 700 }
 .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo, .highlight .il { color: #009999 }
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .s1  { color: #eb2344 } 
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .s1  { color: #222 } 
 .highlight .gh, .highlight .cs, .highlight .cp, .highlight .bp { color: #8c8a99 }
 .highlight .na, .highlight .no, .highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi { color: #6b658c }
 
@@ -774,4 +779,19 @@ code { padding: 3px 6px; }
 
         body > footer .copyright a { margin: 0 }
 
+}
+
+
+.image-wrapper{
+  max-width:90%;
+  height:auto;
+  position: relative;
+  display:block;
+  margin:0 auto;
+}
+
+.image-wrapper img{
+  max-width:100% !important;
+  height:auto;
+  display:block;
 }

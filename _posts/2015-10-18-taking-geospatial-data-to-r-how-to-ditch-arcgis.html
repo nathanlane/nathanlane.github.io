@@ -14,11 +14,7 @@ meta:
   pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"504";}}
   _edit_last: '1'
 author:
-  login: landlaborcapital
-  email: nathaniel.x.lane@gmail.com
-  display_name: landlaborcapital
-  first_name: ''
-  last_name: ''
+ "Nathaniel"
 ---
 <div>For R users it's very straightforward to ditch ArcGIS (for most tasks) in favor of doing everything through an R script. There are many reasons to do this:</div>
 <p>&nbsp;</p>
@@ -32,7 +28,7 @@ author:
 </div>
 <div>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</div>
 <p>&nbsp;<br />
-<img src="{{ site.baseurl }}/assets/calledout.gif" alt="Damnnnnnn" /></p>
+<div class="media image"><img src="{{ site.baseurl }}/assets/calledout.gif" alt="Damnnnnnn" /></div></p>
 <div>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</div>
 <p>He's totally right.<br />
 &nbsp;</p>
@@ -54,7 +50,7 @@ rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))</pre>
 <p>&nbsp;</p>
 <div>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile)</code>:</div>
 <p>&nbsp;</p>
-<div><img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" /></div>
+<div><div class="media image"><img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" /></div></div>
 <div>Similarly, it is fairly easy to plot multiple layers. Of course there are all sorts of wacky things you can do to visualize GIS objects, but this is pretty much what you need to graphically verify nothing wacky is going on. Hence, manipulating GIS data programmatically in R doesn't mean flying blind.</div>
 <p>&nbsp;</p>
 <div>
@@ -92,13 +88,13 @@ library(rgdal)
 globeshape&lt;-readOGR(dsn="/home/user/countries.shp", layer = "countries") 
 plot(globeshape)
 </pre>
-<p><img src="{{ site.baseurl }}/assets/globen.jpg" alt="" /></p>
+<p><div class="media image"><img src="{{ site.baseurl }}/assets/globen.jpg" alt="" /></div></p>
 <pre>
 # Subset the European files. 
 swedeshape &lt;- globeshape[globeshape$COUNTRY=="Sweden", ]
 plot(swedeshape)
 </pre>
-<p><img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" /><br />
+<p><div class="media image"><img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" /></div><br />
 &nbsp;</p>
 <p>&nbsp;</p>
 <div><b>Ingredients to Manipulating GIS Data En Masse</b></div>
