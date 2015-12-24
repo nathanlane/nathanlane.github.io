@@ -22,10 +22,12 @@ author:
 Most historical digitization projects will entail training. Old statistical documents often use long-gone proprietary typefaces. While modern OCR software can easily read Arials and Times New Romans, it needs help with more exotic typography; this is where training come in. If you have ever worked with machine learning-type projects and/or text analysis, training software to properly classify <em>stuff </em> is a familiar concept. And luckily, training ABBYY FineReader's engine is pretty easy.<br />
 &nbsp;<br />
 <center><br />
-<a title="Tutorial: Training an OCR Engine" href="http://www.nathanlane.info/?p=421" target="_blank"><div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/robotguy.jpg" alt="Gotta train 'em." width="395" height="480" /></div></a></center></p>
+<a title="Tutorial: Training an OCR Engine" href="http://www.nathanlane.info/?p=421" target="_blank">
+<img class="aligncenter" src="{{ site.baseurl }}/assets/robotguy.jpg" alt="Gotta train 'em." width="395" height="480" />
+</a></center></p>
 <p>&nbsp;<br />
 Say you're working with an old scanned document and you wish to extract its tables. If you OCR the document using the default pattern recognition settings you will likely be disappointed. Below is an example of  historic document OCRd using FineReader's default recognition schemes; many numbers have been replaced by letters or strange characters.</p>
-<p><div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/badex.png" alt="FineReader gone wrong." /></div><br />
+<p><img class="aligncenter" src="{{ site.baseurl }}/assets/badex.png" alt="FineReader gone wrong." /><br />
 &nbsp;<br />
 Training is used to tell FineReader, "Hey, don't do that. That British pound sign is really a number. Same with that W. Hey, don't do that." Anyone who has ever had to get their hands dirty with machine learning will immediately recognize the intuition. And if not, don't worry.<br />
 &nbsp;<br />
@@ -39,7 +41,7 @@ Save your "training pages" as a distinct file and open them in FineReader.<br />
 &nbsp;<br />
 Pre-process these test pages, but do not "Read" them yet. Instead, click the <strong>Options</strong> button on the main toolbar (or <strong>Tools &gt; Options</strong>), and then click the <strong>Read</strong> tab.<br />
 &nbsp;<br />
-<div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/ex2.png" alt="" /></div><br />
+<img class="aligncenter" src="{{ site.baseurl }}/assets/ex2.png" alt="" /><br />
 &nbsp;<br />
 From the <strong>Training</strong> section, select either <strong>Use built-in</strong> <strong>and user patterns</strong> or <strong>Use only user patterns</strong>. I typically go with the built-in and user patterns options. You can (and should) experiment to see which is best for your job.<br />
 &nbsp;<br />
@@ -56,7 +58,7 @@ Instead of reading the document per usual, a <strong>Pattern Training</strong> m
 &nbsp;<br />
 Adjust the green frame around each character FineReader selects, making sure the box completely encompasses each character. The program is usually good about selecting the full character, but sometimes it needs some help.</p>
 <p>&nbsp;</p>
-<p><div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/ex3.png" alt="" /></div></p>
+<p><img class="aligncenter" src="{{ site.baseurl }}/assets/ex3.png" alt="" /></p>
 <p>In many old documents, printed letters may be misread using FineReader's default OCRing pattern. In my document (seen in the image above), the letter D is always poorly printed. Without direction, the OCR engine systematically reads these letters as Us or Os.<br />
 &nbsp;<br />
 Confirm or correct the highlighted character using the <strong>Enter the character enclosed by the frame</strong> box and click <strong>Train</strong>. FineReader saves the corrected character and moves to the next one.<br />
@@ -69,7 +71,7 @@ People argue about the optimal amount of pages to train ABBYY on, but it will pr
 &nbsp;<br />
 There may be gross characters you don't want ABBYY FineRead to store. For instance, in the image below the word "TABLE" is cut. Feeding ABBYY bad examples can diminish recognition. If letters/numbers are cut, use the <strong>Skip</strong> button.<br />
 &nbsp;<br />
-<div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/ex4.png" alt="" /></div><br />
+<img class="aligncenter" src="{{ site.baseurl }}/assets/ex4.png" alt="" /><br />
 &nbsp;<br />
 Err on the side of caution and skip weird stuff. For example, if you are uncertain what a letter/number is, also <strong>Skip</strong> it. It is better to skip a letter you are unsure about versus training FineReader incorrectly.<br />
 &nbsp;<br />
@@ -87,4 +89,4 @@ The <b>User Pattern</b> box will open. In the training process we may accident
 If you find an incorrect character (for example, the L that has been mis-characterized as E below), click the letter image and press <strong>Delete</strong>. Be sure to <em>really</em> check for these types of errors, or any matches that seem iffy.<br />
 &nbsp;<br />
 Press <b>OK</b> when you are done, then save the corrected <b>User Pattern</b>.</p>
-<p><div class="media image"><img class="aligncenter" src="{{ site.baseurl }}/assets/ex5.png" alt="" /></div></p>
+<p><img class="aligncenter" src="{{ site.baseurl }}/assets/ex5.png" alt="" /></p>
