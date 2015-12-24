@@ -19,9 +19,12 @@ author:
  "Nathaniel"
 ---
 <p>I am used to writing code in notepad programs, such as N++ and the <code><a href="http://www.sublimetext.com/3">fantastic Sublime Text 3</a></code>. Here's a quick note on connecting a powerful coding notepad in Linux to Stata.</p>
+&nbsp;
 <p>Sublime, like many of these programming-oriented editing notepads, have massively powerful tools that crush Stata's default editor. Moreover, since many people are simultaneously juggling Python, R, and Stata (and more) scripts for a single project, the ability to work from one programming-oriented environment is nice. </p>
+&nbsp;
 <p>While it is straightforward to run Stata do-files from Sublime Text in Mac OS and Windows, using packages like Sublime Stata Enhanced, it wasn't obvious how to do so in Linux. The following is a little integration guide, which is <code><a href="https://github.com/rhoconlinux/Stata-12-in-Sublime-3-under-Ubuntu">indebted to this Github howto here</a></code>. </p>
 <h4> Sublime, Stata & Unix Walk Into a Bar:</h4>
+&nbsp;
 <p>First, from your terminal create symbolic links for <code>xStata</code> and <code>Stata</code> commands. The gist of creating a link in the terminal is the following,</p>
 <pre>ln -s <em>[target-filename]</em> <em>[symbolic-filename]</em></pre>
 <pre>

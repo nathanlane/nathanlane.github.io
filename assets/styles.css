@@ -101,7 +101,7 @@ a, button {
     -o-transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: opacity 0.2s ease-in-out, color 0.2s ease-in-out; }
 
-p { margin: 12px 0 }
+p { margin: 1em 0 }
 
 h1, h2, h3, h4, h5 {
     font-family: "Nixie One", sans-serif;
@@ -393,6 +393,10 @@ body > header {
 
 /* Article Body */
 .content article .body { padding: 68px 0 34px }
+
+    .content article p {
+        margin-bottom:30px;
+    }
 
     .content article .body .more {
         display: block;
