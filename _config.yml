@@ -6,7 +6,7 @@ name: 			Nathaniel  <i> Lane </i>
 description: 	Nathan Lane - Ph.D. Candidate, Economics IIES
 url: 			"http://localhost:4000"
 
-paginate: 		25
+paginate: 		30
 paginate_path: 	"blog/page:num"
 
 twitter: 		straightedge
