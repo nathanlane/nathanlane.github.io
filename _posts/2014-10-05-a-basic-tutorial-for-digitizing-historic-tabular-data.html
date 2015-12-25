@@ -13,9 +13,6 @@ tags:
 - ocr
 - python
 - regex
-meta:
-  pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"262";}}
-  _edit_last: '1'
 author:
  "Nathaniel"
 ---
@@ -32,7 +29,6 @@ For those more comfortable with the command line and programming, or for open so
 </p>
 &nbsp;
 <h3>First, Some OCRing Tips.</h3>
-<p>
 <ul style="padding-left: 60px;">
 	<li style="text-align: left;">Try to work with scans that are at least 300 DPI, saved in TIFF format. PDFs are often unavoidable, but use less "lossy" formats when possible.</li>
 </ul>
@@ -57,8 +53,7 @@ For those more comfortable with the command line and programming, or for open so
 <ul style="padding-left: 60px;">
 	<li style="text-align: left;">OCR software needs your help, especially for weird type faces: invest in training software prior to OCRing.</li>
 </ul>
-&nbsp;
-</p>
+
 <h3>1. Convert Scans: split PDFs &amp; convert to TIFF.</h3>
 <p>
 Most digitization projects don't start with clean TIFF files. They start with a nasty, multi-page PDFs produced from harried library scanning sessions. Before OCRing our scans, we must pre-process (i.e. batch clean) our images---and before we pre-process our images, we must break apart our multi-page PDF and convert it to TIFF format. This is the format used by our pre-processing software, as well as by other OCRing tools:
@@ -68,11 +63,8 @@ Most digitization projects don't start with clean TIFF files. They start with a 
 If you have the luxury of Adobe Acrobat Pro, you can easily convert multi-page scans or a set of combined PDF images into TIFFS. (File: <strong>Save As &gt; Image &gt; TIFFs</strong>). Better yet, you can use their GUI to extract and export subsets of the PDF document to TIFF format.
 </p>
 
-<div class="media image"><p><img src="http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/adobe.png" alt="" width="920" height="555" /> Splitting and converting a multi-page PDF to TIFF in Acrobat Pro.
-</p>
-
-&nbsp;
-
+<div class="media image"><img src="http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/adobe.png" alt="" width="920" height="555" /></div>
+<p>Splitting and converting a multi-page PDF to TIFF in Acrobat Pro.</p>
 <h4>Open source alternatives:</h4>
 <p>
 If you don't have access to Acrobat Pro, you're in luck. There are oodles of open source tools for breaking apart PDFs and/or batch conversion. <strong><a href="http://www.imagemagick.org/)" target="_blank">ImageMagick</a></strong> is the workhorse open source tool for command line-based image manipulation and is incorporated into many digitization projects. It is cross-platform and can be integrated into most major programming languages. For OSX, <strong><a href="https://github.com/thejefflarson/pdf-splitter" target="_blank">Pdf-Splitter</a></strong> by Pro-Publica's Jeff Larson is a simple command line tool that utilizes native OSX libraries. Born from the frustration of dealing with PDFs, there are many Python packages for deconstructing documents. For instance, the <strong><a href="https://pypi.python.org/pypi/pdfserenitynow/0.6.7" target="_blank">pdfserenity</a></strong> package converts multi-page PDFs into TIFFs.
@@ -111,8 +103,8 @@ Training is the next crucial step. With historic data, you will likely get poor
 In general, training improves the ability of OCR algorithms to correctly classify characters by "tuning" the algorithm on your document's typeface. In FineReader, training is a trivial task, where you walk the program through recognizing a sample set of characters from your document. You can easily append and save these training files, called "<strong>User Patterns</strong>."
 </p>
 <div class="media image">
-<img src="http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbytraining.png" alt="" width="776" height="546" /> Training ABBYY FineReader's OCR engine on a sample document.
-</div>
+<img src="http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbytraining.png" alt="" width="776" height="546" /></div>
+<p> Training ABBYY FineReader's OCR engine on a sample document.</p>
 
 <h4>"Analyzing" &amp; "Reading" - Table recognition &amp; OCRing in FineReader.</h4>
 <p>

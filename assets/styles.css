@@ -134,7 +134,7 @@ h5 {
 
 /* Reusable Styles */
 .title {
-    font-family: "Nixie One", sans-serif;
+    font-family: "Stint Ultra", sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -362,6 +362,8 @@ body > header {
     .content article header .excerpt h1 {
         font-family: "Nixie One", sans-serif;
         color: white;
+        font-size: 5em;
+        text-transform: uppercase;
         padding: 15px 0 4px; }
 
         .content article header .excerpt h1 a { color: white }
@@ -371,7 +373,7 @@ body > header {
     .content article header .excerpt .meta { font-size: 0.875rem }
 
 .content article header:hover .excerpt {
-    opacity: 0.65;
+    opacity: 1;
     -webkit-transform: translate3d(0, 12px, 0);
     -moz-transform: translate3d(0, 12px, 0);
     -o-transform: translate3d(0, 12px, 0);
