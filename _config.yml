@@ -1,9 +1,9 @@
 # Site Settings
 baseurl: 		""
-title: 			Land Labor Capital - Nathan Lane - Ph.D. Candidate
+title: 			Land Labor & Capital - Nathan Lane - Ph.D. Candidate
 
-name: 			Nathaniel  <i> Lane </i>
-description: 	Nathan Lane - Ph.D. Candidate, Economics IIES
+name: 			Nathan Lane <i> Ph.D. Candidate, Economics</i>
+description: 	Nathan Lane - Ph.D. Candidate, Economics IIES-Sweden
 url: 			"http://localhost:4000"
 
 paginate: 		30
