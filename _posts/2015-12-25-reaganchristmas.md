@@ -1,5 +1,7 @@
 ---
-published: false
+layout:			default
+title:  		Happy Holidays from the Gipper
+type:			post
 ---
 
 
