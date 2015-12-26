@@ -40,9 +40,7 @@ rasterpop&lt;-raster(popfile) 
 <pre>
 rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))
 </pre>
-<p>&nbsp;</p>
-<div>Above, I used the<code> extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</div>
-<p>&nbsp;</p>
+<p>Above, I used the<code> extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</p>
 <p>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile)</code>:</p>
 <p><img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" /></p>
 <p>Similarly, it is fairly easy to plot multiple layers. Of course there are all sorts of wacky things you can do to visualize GIS objects, but this is pretty much what you need to graphically verify nothing wacky is going on. Hence, manipulating GIS data programmatically in R doesn't mean flying blind.</p>
