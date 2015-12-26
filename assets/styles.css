@@ -115,7 +115,7 @@ h1 {
     font-weight: 100; }
 
 h2 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 100; 
     margin: 40px 0px 10px;
     }
@@ -627,6 +627,8 @@ body > header {
             padding: 15px 0 4px; }
 
             .teaser .excerpt h1 a { color: white }
+
+            .teaser .excerpt h2 a { color: white }
 
         .teaser .excerpt p { margin: 10px 0 }
 
