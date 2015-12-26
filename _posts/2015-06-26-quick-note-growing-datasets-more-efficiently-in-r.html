@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tutorial: Growing Datasets in R
+title: Tutorial - Growing Datasets in R
 date: 2015-06-26 11:57:06.000000000 +08:00
 type: post
 published: true
@@ -11,9 +11,6 @@ tags:
 - Big Data Blah Blah Blah
 - Code
 - programming
-meta:
-  pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"504";}}
-  _edit_last: '1'
 author:
  "Nathaniel"
 ---
@@ -49,36 +46,25 @@ This is all great, but it can still take a ton of time. Below I condense the <co
 &nbsp;</p>
 <pre>
 ptm &lt;- proc.time()
-&nbsp;
 dataset1&lt;-do.call("rbind",lapply(csvlist, read.csv))
-&nbsp;
 proc.time() - ptm
-&nbsp;
 &gt; user system elapsed
 &gt; 48.840 0.148 50.241
 </pre>
-<p>&nbsp;<br />
-If you're doing more complicated tasks or working with large sets of data, processing time can balloon.<br />
-&nbsp;</p>
+<p>If you're doing more complicated tasks or working with large sets of data, processing time can balloon.</p>
 <h2>A faster method.</h2>
 <p>Using <a href="https://github.com/Rdatatable/data.table/wiki">the <code>data.table</code> package</a> can speed things along if we're trying to get big data into R efficiently (<a href="I highly recommend checking out the github for the project">I highly recommend checking out the github for the project</a>).<br />
 The <code>rbindlist</code> function included in the package is incredibly fast and written in C. In addition the <code>fread</code> function is built to efficiently read data into R.<br />
 &nbsp;<br />
-Below I replace the normal <code>read.csv</code> function with <code>fread</code>, and replace <code>do.call</code>+<code>rbind</code> with <code>rbindlist</code>.<br />
-&nbsp;</p>
+Below I replace the normal <code>read.csv</code> function with <code>fread</code>, and replace <code>do.call</code>+<code>rbind</code> with <code>rbindlist</code>.</p>
 <pre>
 library(data.table)
-&nbsp;
 dataset2&lt;-rbindlist(lapply(csvlist, fread))
-&nbsp;
 proc.time() - ptm
-&nbsp;
 &gt; user system elapsed
 &gt; 4.044 0.084 4.144
 </pre>
-<p>&nbsp;<br />
-Both methods deliver identical datasets but there are some real efficiency gains when using <code>fread</code> and <code>rbindlist</code> from the super useful <code>data.table</code> package.<br />
-&nbsp;</p>
+<p>Both methods deliver identical datasets but there are some real efficiency gains when using <code>fread</code> and <code>rbindlist</code> from the super useful <code>data.table</code> package.</p>
 <pre>
 identical(dataset1,dataset2)
 &gt; TRUE
