@@ -366,7 +366,18 @@ body > header {
         text-transform: uppercase;
         padding: 15px 0 4px; }
 
+     .content article header .excerpt h2 {
+        font-family: "Nixie One", sans-serif;
+        color: white;
+        font-size: 3.5em;
+        text-transform: uppercase;
+        padding: 15px 0 4px; }
+
+
         .content article header .excerpt h1 a { color: white }
+
+        .content article header .excerpt h2 a { color: white }
+
 
     .content article header .excerpt p { margin: 10px 0 }
 
