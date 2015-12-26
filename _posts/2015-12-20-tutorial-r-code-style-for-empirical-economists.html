@@ -1,32 +1,34 @@
 ---
 layout: post
-title: 'Tutorial: R Code Style for Empirical Economists'
-date: 2015-12-20 10:58:48.000000000 +08:00
+title: "Tutorial: R Code Style for Empirical Economists"
+date: {}
 type: post
 published: true
 status: publish
 image: ibm_1280.jpg
-categories:
-- Programming
-- R
-- Tutorials
-tags:
-- Code
-- programming
-- r
-meta:
-  _edit_last: '1'
-  pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"504";}}
-author: "Nathaniel"
+categories: 
+  - Programming
+  - R
+  - Tutorials
+tags: 
+  - Code
+  - programming
+  - r
+meta: 
+  _edit_last: "1"
+  pe_theme_meta: "O:8:\"stdClass\":2:{s:7:\"gallery\";O:8:\"stdClass\":3:{s:2:\"id\";s:2:\"89\";s:5:\"width\";s:0:\"\";s:6:\"height\";s:0:\"\";}s:5:\"video\";O:8:\"stdClass\":1:{s:2:\"id\";s:3:\"504\";}}"
+author: Nathaniel
 ---
+
+
 <p><div class="media image"><div class="media image"><img src="{{ site.baseurl }}/assets/ibm_1280.jpg" alt="" /></div></div> Make your code understandable. <emph>IBM's data center in the 1960s, Toronto. Source:<a href="http://ibm-1401.info/IBM1401_ArchivePics.html">ibm-1401.info/</a></emph> </p>
-<h2>Heuristics, Hunches, &amp; Why the Heck We Care.</h2>
+<h4>Heuristics, Hunches, &amp; Why the Heck We Care.</h4>
 <p>We hear many horror stories about big names having their results over turned over because of problems in our code. The struggle is real. The best rules of thumb used in developer circles, even the simple ones, have large value added for social scientists. Especially since this stuff is seldom ever mentioned in any graduate curriculum. Abiding by a few norms can go a long way in making data-driven research reproducible, sharable, and readable by collaborators.</p>
 <p>In this small tutorial I cover some coding norms used by clean coding gurus and R developers. While I am talking to R users, I’m sure some of this generalizable to Stata folks.</p>
 <p>I’m not going to talk about relatively fancy schmany stuff — like unit testing or object oriented specifics. Most of us are social scientists and aren’t developing applications.</p>
 <p>While “code-driven” research can learn a lot form from the craft of programming, our needs are bit a different. Gentzkow and Shapiro make a huge point in their recent work on big data practices for economists: if professionals are paying to do it is is likely important. However, I am not sure how much is practical for the social scientist. So</p>
 <p>I’ll go out on a limb: researchers probably emphasize readability and reproducibility over writing slick, ultra-optimized code. We write to get the job done. The programming background of collaborators varies wildly, so understandability is a must. Seldom are we working with industrial scale projects. In fact, most big data people would probably laugh at what we consider “big.”</p>
-<h2>The Broad Stuff : humbling “bang for your buck” rules.</h2>
+<h4>The Broad Stuff : humbling “bang for your buck” rules.</h4>
 <p>A lot of this will seem like plain common sense, of course. Then again, many of us never think to do it. </p>
 <p>First things first, consider the clean code theorem, from their <a href="http://shop.oreilly.com/product/9780596802301.do">&quot;The Art of Readable Code.&quot;</a></p>
 <blockquote><p><strong>A clean code theorem :</strong> &quot;Code should be written to minimize the time it would take for someone else to understand it.&quot;</p>
@@ -54,7 +56,7 @@ author: "Nathaniel"
 Author comment
 File description comment, including purpose of program, inputs, and outputs
 source() and library() statements
-Function definitionsF
+Function definitions
 Executed statements, if applicable (e.g., print, plot)
 </pre>
 <p><strong>Write D.R.Y. Code: Don’t Repeat Yourself.</strong></p>
