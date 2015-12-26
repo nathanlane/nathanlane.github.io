@@ -64,30 +64,20 @@ re_rasterpopfile &lt;-resample(re_rasterpopfile,target_raster<i>,</i>method = "b
 <p>The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.</p>
 <p>Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or <em>class</em>, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.</p>
 <p>The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:</p>
-
-<pre>
-<p>
-library(rgdal) 
+<pre><p>library(rgdal) 
 # Read in with readOGR since it preserves CRS projections.
 globeshape&lt;-readOGR(dsn="/home/user/countries.shp", layer = "countries") 
 plot(globeshape)
 </p>
 </pre>
-
 <img src="{{ site.baseurl }}/assets/globen.jpg" width="450px" alt="" />
-
 <pre>
-<p>
-# Subset the European files. 
+<p># Subset the European files. 
 swedeshape &lt;- globeshape[globeshape$COUNTRY=="Sweden", ]
-plot(swedeshape)
-</p>
+plot(swedeshape)</p>
 </pre>
-
-<img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300"/>
-
+<img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300px"/>
 <p><b>Ingredients to Manipulating GIS Data En Masse</b></p>
-
 <p>Sure R is a free, programmatic solution to working with spatial data. Sure it also gives you transparent control over transforming spatial data. However, a big benefit of using R is being able to manipulate giant chunks of geographic data--and to do so in a way that is reproducible via a script.</p>
 <p><i><br />Work with <em>Brick</em> and <em>Stack</em> Objects </i></p>
 
