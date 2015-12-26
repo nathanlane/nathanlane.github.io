@@ -67,15 +67,11 @@ re_rasterpopfile &lt;-resample(re_rasterpopfile,target_raster<i>,</i>method = "b
 <pre><p>library(rgdal) 
 # Read in with readOGR since it preserves CRS projections.
 globeshape&lt;-readOGR(dsn="/home/user/countries.shp", layer = "countries") 
-plot(globeshape)
-</p>
-</pre>
+plot(globeshape)</p></pre>
 <img src="{{ site.baseurl }}/assets/globen.jpg" width="450px" alt="" />
-<pre>
-<p># Subset the European files. 
+<pre><p># Subset the European files. 
 swedeshape &lt;- globeshape[globeshape$COUNTRY=="Sweden", ]
-plot(swedeshape)</p>
-</pre>
+plot(swedeshape)</p></pre>
 <img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300px"/>
 <p><b>Ingredients to Manipulating GIS Data En Masse</b></p>
 <p>Sure R is a free, programmatic solution to working with spatial data. Sure it also gives you transparent control over transforming spatial data. However, a big benefit of using R is being able to manipulate giant chunks of geographic data--and to do so in a way that is reproducible via a script.</p>
