@@ -24,7 +24,7 @@ author: Nathaniel
 </ul>
 </p>
 <p>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</p>
-<img src="{{ site.baseurl }}/assets/calledout.gif" width="300px" alt="Damnnnnnn" />
+<img src="{{ site.baseurl }}/assets/calledout.gif" width="500px" alt="Damnnnnnn" />
 <p>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</p>
 <p>To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html"><i><br />
 this is helpful to note if you're a Linux user</i></a>).</p>
@@ -43,9 +43,7 @@ rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))</pre>
 <p>&nbsp;</p>
 <p>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile)</code>:</p>
 <p>&nbsp;</p>
-<p>
-<img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" />
-</p>
+<p><img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" /></p>
 <p>Similarly, it is fairly easy to plot multiple layers. Of course there are all sorts of wacky things you can do to visualize GIS objects, but this is pretty much what you need to graphically verify nothing wacky is going on. Hence, manipulating GIS data programmatically in R doesn't mean flying blind.</p>
 <p>&nbsp;</p>
 <pre># Superimpose a rasters and vectors by using "add=TRUE"
