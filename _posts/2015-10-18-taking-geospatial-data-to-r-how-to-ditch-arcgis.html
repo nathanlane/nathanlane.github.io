@@ -23,18 +23,12 @@ author: Nathaniel
 <li>Fourth, you can escape the mysterious, temperamental nature of ArcGIS and have full control over data outputs. Most quant folks I know try to minimize their time processing things on ArcGIS, outsourcing data as soon as possible to Stata or R. By working entirely in R lets you skip the murky black box of ArcGIS.</li>
 </ul>
 </p>
-
 <p>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</p>
-
 <img src="{{ site.baseurl }}/assets/calledout.gif" width="300px" alt="Damnnnnnn" />
-
 <p>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</p>
-
 <p>To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html"><i><br />
 this is helpful to note if you're a Linux user</i></a>).</p>
-
 <p><b>Starting with Raster Data</b></p>
-
 <p>Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as .csv file. Specifically, <code>library(raster)</code> is enough to load raster-based images directly into R.  </p>
 <pre>library(raster)
 weatherfile &lt;-"/home/user/population_raster.tif"
