@@ -1,24 +1,23 @@
 ---
 layout: post
-title: Taking geospatial data to R (& how to ditch ArcGIS)
-date: 2015-10-18 22:29:58.000000000 +08:00
+title: "Taking geospatial data to R (& how to ditch ArcGIS)"
+date: {}
 type: post
 published: true
 status: publish
-categories:
-- Programming
-- R
-- Tutorials
+categories: 
+  - Programming
+  - R
+  - Tutorials
 tags: []
-meta:
-  pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"504";}}
-  _edit_last: '1'
-author:
- "Nathaniel"
+meta: 
+  pe_theme_meta: "O:8:\"stdClass\":2:{s:7:\"gallery\";O:8:\"stdClass\":3:{s:2:\"id\";s:2:\"89\";s:5:\"width\";s:0:\"\";s:6:\"height\";s:0:\"\";}s:5:\"video\";O:8:\"stdClass\":1:{s:2:\"id\";s:3:\"504\";}}"
+  _edit_last: "1"
+author: Nathaniel
 ---
+
 <div>For R users it's very straightforward to ditch ArcGIS (for most tasks) in favor of doing everything through an R script. There are many reasons to do this:</div>
 <p>&nbsp;</p>
-<div>
 <ul>
 <li>First, if you can do GIS work on your Linux system or Mac without having to run things through a lame emulator.</li>
 <li>Second, you can cut yourself loose from dealing with the clunky ArcGIS licensing system.</li>
@@ -26,18 +25,18 @@ author:
 <li>Fourth, you can escape the mysterious, temperamental nature of ArcGIS and have full control over data outputs. Most quant folks I know try to minimize their time processing things on ArcGIS, outsourcing data as soon as possible to Stata or R. By working entirely in R lets you skip the murky black box of ArcGIS.</li>
 </ul>
 
-</div>
-<div>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</div>
-<p>&nbsp;<br />
-<div class="media image"><img src="{{ site.baseurl }}/assets/calledout.gif" alt="Damnnnnnn" /></div></p>
-<div>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</div>
+<p>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</p>
+
+<div class="media image"><img src="{{ site.baseurl }}/assets/calledout.gif" alt="Damnnnnnn" /></div>
+
+<p>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</p>
 <p>He's totally right.<br />
 &nbsp;</p>
-<div>To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html"><i><br />
-this is helpful to note if you're a Linux user</i></a>).</div>
+<p>To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html"><i><br />
+this is helpful to note if you're a Linux user</i></a>).</p>
 <p>&nbsp;<br />
 <b>Starting with Raster Data</b></p>
-<div>Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as .csv file. Specifically, <code>library(raster)</code> is enough to load raster-based images directly into R.  </div>
+<p>Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as .csv file. Specifically, <code>library(raster)</code> is enough to load raster-based images directly into R.  </p>
 <pre>library(raster)
 weatherfile &lt;-"/home/user/population_raster.tif"
 rasterweather&lt;-raster(weatherfile)
@@ -76,33 +75,36 @@ Alternatively, you can easily specify nearest neighbor methods if you are workin
 <p>
 While <code>resample()</code> allows us to align the grids of the two files, if the target raster is much more coarse--at a much lower resolution--we should use the <code>aggregate()</code> function, which lets us aggregate the cells of the fine raster to the larger raster; <code>disaggregate()</code> does just the opposite.</p>
 
-
-
-&nbsp;
 <p><b>Shapefiles &amp; Vector Manipulations</b></p>
-&nbsp;
+
 <p>The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.</p>
-&nbsp;
+
 <p>Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or <em>class</em>, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.</p>
-<div>
-The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:</div>
-<p>&nbsp;</p>
+
+<p>
+The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:
+</p>
+
 <pre>
+<p>
 library(rgdal) 
 # Read in with readOGR since it preserves CRS projections.
 globeshape&lt;-readOGR(dsn="/home/user/countries.shp", layer = "countries") 
 plot(globeshape)
+</p>
 </pre>
-<p><div class="media image"><img src="{{ site.baseurl }}/assets/globen.jpg" alt="" /></div></p>
+
+<div class="media image"><img src="{{ site.baseurl }}/assets/globen.jpg" alt="" /></div>
+
 <pre>
 # Subset the European files. 
 swedeshape &lt;- globeshape[globeshape$COUNTRY=="Sweden", ]
 plot(swedeshape)
 </pre>
-<p><div class="media image"><img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300"/></div><br /></p>
-<p>&nbsp;</p>
+<img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300"/></div>
+
 <p><b>Ingredients to Manipulating GIS Data En Masse</b></p>
-<p>&nbsp;</p>
+
 <p>Sure R is a free, programmatic solution to working with spatial data. Sure it also gives you transparent control over transforming spatial data. However, a big benefit of using R is being able to manipulate giant chunks of geographic data--and to do so in a way that is reproducible via a script.</p>
 <p><i><br />Work with <em>Brick</em> and <em>Stack</em> Objects </i></p>
 
