@@ -49,13 +49,11 @@ splits = os.path.join(start_dir, "splits1")
 if not os.path.exists(splits): os.makedirs(splits)</code></pre>
 <p>Second, our stack-o-PDFs are read, chopped, and their pages are placed in (page) numbered folders.</p>
 <p>The following code chunk begins at the <code>/start_dir</code>, the file containing our original PDF files. We read each scan and then loop over its pages with the line, <code>for i in xrange(in_file_pdf.numPages)</code>. Each page <code>i</code> is saved to a variable folder, corresponding to its page number: first pages are saved in <code>start_dir/splits/1</code>; second pages, into <code>start_dir/splits/2</code> folder, etc..</p>
-<pre><p>for filename in os.listdir(start_dir):
-
-    #Run the following on PDFs only.
-    if filename.endswith('.pdf'):
-
-        #Show current multi-page PDF.
-        print("Splitting "+filename)
+<pre><p>for filename in os.listdir(start_dir):</p>
+<p>#Run the following on PDFs only.
+    if filename.endswith('.pdf'):</p>
+<p>#Show current multi-page PDF.
+        print("Splitting "+filename)</p>
 
         #Define input files, paths.
         in_file = os.path.join(start_dir,filename)
@@ -75,7 +73,8 @@ if not os.path.exists(splits): os.makedirs(splits)</code></pre>
             print("Saving "+out_file)
             outputStream = file(out_file, "wb")
             output.write(outputStream)
-            outputStream.close()</p></pre>
+            outputStream.close()
+            </p></pre>
 
 <p>Third, after chopping and saving, we combine the separated pages into variable-based PDFs.</p>
 <p>The following code loops over each page folder (<code>/splits/1</code>, <code>/splits/2</code>,<code>...</code>). Using pyPDF2's <code>PdfFilerMerge </code>function, we combine pages within each folder into a single PDF file.</p>
