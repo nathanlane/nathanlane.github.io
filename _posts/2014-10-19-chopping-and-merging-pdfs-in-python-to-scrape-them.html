@@ -16,9 +16,7 @@ tags:
 - pdf
 - python
 - tutorails
-meta:
-  pe_theme_meta: O:8:"stdClass":2:{s:7:"gallery";O:8:"stdClass":3:{s:2:"id";s:2:"89";s:5:"width";s:0:"";s:6:"height";s:0:"";}s:5:"video";O:8:"stdClass":1:{s:2:"id";s:3:"262";}}
-  _edit_last: '1'
+meta: 
 author:
  "Nathaniel"
 ---
@@ -51,7 +49,7 @@ splits = os.path.join(start_dir, "splits1")
 if not os.path.exists(splits): os.makedirs(splits)</code></pre>
 <p>Second, our stack-o-PDFs are read, chopped, and their pages are placed in (page) numbered folders.</p>
 <p>The following code chunk begins at the <code>/start_dir</code>, the file containing our original PDF files. We read each scan and then loop over its pages with the line, <code>for i in xrange(in_file_pdf.numPages)</code>. Each page <code>i</code> is saved to a variable folder, corresponding to its page number: first pages are saved in <code>start_dir/splits/1</code>; second pages, into <code>start_dir/splits/2</code> folder, etc..</p>
-<pre><code>for filename in os.listdir(start_dir):
+<pre><p>for filename in os.listdir(start_dir):
 
     #Run the following on PDFs only.
     if filename.endswith('.pdf'):
@@ -77,7 +75,8 @@ if not os.path.exists(splits): os.makedirs(splits)</code></pre>
             print("Saving "+out_file)
             outputStream = file(out_file, "wb")
             output.write(outputStream)
-            outputStream.close()</code></pre>
+            outputStream.close()</p></pre>
+
 <p>Third, after chopping and saving, we combine the separated pages into variable-based PDFs.</p>
 <p>The following code loops over each page folder (<code>/splits/1</code>, <code>/splits/2</code>,<code>...</code>). Using pyPDF2's <code>PdfFilerMerge </code>function, we combine pages within each folder into a single PDF file.</p>
 <p>Hence, the first page of each provincial yearbook is combined into a new file (i.e. the pages in <code>/splits/1</code> become 1.pdf), which we can then scrape/digitize/pre-process/whatever.</p>
