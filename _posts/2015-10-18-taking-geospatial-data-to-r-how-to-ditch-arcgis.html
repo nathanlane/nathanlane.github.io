@@ -37,7 +37,9 @@ popfile&lt;-"/home/user/population_raster.tif"
 rasterpop&lt;-raster(popfile) 
 </pre>
 <p>Crop to the size of Europe shapefile; the extent() function helps with this.</p>
-rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))</pre>
+<pre>
+rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))
+</pre>
 <p>&nbsp;</p>
 <div>Above, I used the<code> extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</div>
 <p>&nbsp;</p>
