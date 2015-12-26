@@ -38,7 +38,7 @@ rasterpop&lt;-raster(popfile) 
 </pre>
 <p>Crop to the size of Europe shapefile; the extent() function helps with this.</p>
 <pre>
-rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))
+<p>rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))</p>
 </pre>
 <p>Above, I used the<code> extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</p>
 <p>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile)</code>:</p>
