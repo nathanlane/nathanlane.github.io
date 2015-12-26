@@ -42,13 +42,11 @@ rasterpop&lt;-crop(rasterpopfile,extent(rasterweather))</pre>
 <div>Above, I used the<code> extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</div>
 <p>&nbsp;</p>
 <p>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile)</code>:</p>
-<p>&nbsp;</p>
 <p><img class="alignnone" src="{{ site.baseurl }}/assets/Rplot04.jpg" alt="" width="521" height="614" /></p>
 <p>Similarly, it is fairly easy to plot multiple layers. Of course there are all sorts of wacky things you can do to visualize GIS objects, but this is pretty much what you need to graphically verify nothing wacky is going on. Hence, manipulating GIS data programmatically in R doesn't mean flying blind.</p>
 <p>&nbsp;</p>
 <pre># Superimpose a rasters and vectors by using "add=TRUE"
 plot(rasterpop); plot(countryshape, add=TRUE)</pre>
-<p>&nbsp;</p>
 <p>Moreover, it's pretty straightforward to perform common manipulations of raster data, such as changing the changing the CRS. One can change the projection by using the <code>reprojectRaster()</code> function followed by the <code>resample()</code> function.</p>
 <pre># Say we have another raster with a different coordinate system.
 # We can save this coordinate system using the proj4string() function.
@@ -66,6 +64,7 @@ re_rasterpopfile &lt;-resample(re_rasterpopfile,target_raster<i>,</i>method = "b
 <p>The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.</p>
 <p>Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or <em>class</em>, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.</p>
 <p>The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:</p>
+
 <pre>
 <p>
 library(rgdal) 
@@ -75,14 +74,19 @@ plot(globeshape)
 </p>
 </pre>
 
-<div class="media image"><img src="{{ site.baseurl }}/assets/globen.jpg" alt="" /></div>
+<div class="media image">
+<img src="{{ site.baseurl }}/assets/globen.jpg" alt="" />
+</div>
 
 <pre>
+<p>
 # Subset the European files. 
 swedeshape &lt;- globeshape[globeshape$COUNTRY=="Sweden", ]
 plot(swedeshape)
+</p>
 </pre>
-<img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300"/></div>
+
+<img src="{{ site.baseurl }}/assets/sweden.jpg" alt="" width="300"/>
 
 <p><b>Ingredients to Manipulating GIS Data En Masse</b></p>
 
@@ -94,24 +98,23 @@ plot(swedeshape)
 <p>With the <code>ncdf4</code> library, you can load a 365 layer NetCDF raster file directly into R. Together with the <code>brick()</code> function (from the <code>raster</code> package), you can work with large, multi-dimensional raster files as if they were one single raster file. In other words, you can apply raster manipulations to a block of raster data directly by defining it as a brick (or <code>stack()</code> as well, though raster bricks and raster stacks are treated a bit differently in memory). This is handy when you want to resize, crop, or transpose an entire set of raster layers all at once instead of looping through each individual raster layer.</p>
 
 <p>For instance, using the <code>ncdf4</code> library I can load a giant NetCDF file directly; together with the <code>raster</code> library's <code>brick()</code> function, you get load an entire NetCDF file and recognize it as a RasterBrick with minimal fuss.</p>
-&nbsp;
 <pre>
+<p>
 library(ncdf4)
 library(raster)
 netdata&lt;- nc_open("/home/user/rain.2015.nc")
 netdata&lt;- get(netdata)
 dailyweather&lt;-brick(netdata)
+</p>
 </pre>
-&nbsp;
 <p>And we chop hundreds of layers to an appropriate size in one go,</p>
-&nbsp;
 
 <pre>
+<p>
 cropsize&lt;-extent(eushape)
 cropped_dailyweather&lt;-crop(dailyweather,crop_size)
+</p>
 </pre>
-
-&nbsp;
 
 <p>We can also multiply a multi-dimensional brick object by a single raster layer, effectively multiplying a hundred rasters contained in the brick with the singleton layer. I find this extremely useful for calculation population-based weights.</p>
 
