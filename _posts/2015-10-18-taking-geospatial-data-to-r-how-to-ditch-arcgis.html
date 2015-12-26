@@ -60,24 +60,12 @@ re_rasterpopfile&lt;-projectRaster(rasterpopfile,crs=<i>target_crs</i>,method = 
 <pre># Reproject using the projectRaster() function and the target_crs.
 re_rasterpopfile &lt;-resample(re_rasterpopfile,target_raster<i>,</i>method = "bilinear")</pre>
 <p>The first manipulation changes coordinate system of a current raster, changing it to match the target coordinate system; the second function is necessary so that the grid of the starting raster matches the grid of the target raster.</p>
-
-<p>
-Alternatively, you can easily specify nearest neighbor methods if you are working with categorical raster data. Now, both the target and starting raster layers should have the same resolution.<br />
-&nbsp;</p>
-
-<p>
-While <code>resample()</code> allows us to align the grids of the two files, if the target raster is much more coarse--at a much lower resolution--we should use the <code>aggregate()</code> function, which lets us aggregate the cells of the fine raster to the larger raster; <code>disaggregate()</code> does just the opposite.</p>
-
+<p>Alternatively, you can easily specify nearest neighbor methods if you are working with categorical raster data. Now, both the target and starting raster layers should have the same resolution.</p>
+<p>While <code>resample()</code> allows us to align the grids of the two files, if the target raster is much more coarse--at a much lower resolution--we should use the <code>aggregate()</code> function, which lets us aggregate the cells of the fine raster to the larger raster; <code>disaggregate()</code> does just the opposite.</p>
 <p><b>Shapefiles &amp; Vector Manipulations</b></p>
-
 <p>The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.</p>
-
 <p>Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or <em>class</em>, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.</p>
-
-<p>
-The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:
-</p>
-
+<p>The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:</p>
 <pre>
 <p>
 library(rgdal) 
