@@ -7,7 +7,7 @@ navigation: 	true
 
 date:   		2015-12-25
 gradient: 		4
-image: 			ibm360.png
+image: 			ibm360_cleaned.png
 
 ---
 
