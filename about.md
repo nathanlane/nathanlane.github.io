@@ -6,8 +6,8 @@ type:			page
 navigation: 	true
 
 date:   		2015-12-25
-gradient: 		2
-image: 			soviet_1930s_norwayarchivesjpg.jpg
+gradient: 		4
+image: 			ibm360.png
 
 ---
 
