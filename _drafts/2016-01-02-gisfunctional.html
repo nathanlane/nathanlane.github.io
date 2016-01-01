@@ -1,0 +1,255 @@
+---
+layout: post
+title: Crunching Big GIS Data in R with functional programming.
+type: post
+published: true
+author:
+  "Nathaniel"
+---
+<h2>Crushing GIS data in R  with functional programming.</h1>
+
+<p><strong>The problem: </strong> 100+ years of (almost) hourly GIS satellite data was in front of me. Imagine a nasty NetCDF file for every year, and each NetCDF data file contains thousands of layers of raster data. In other words, how can we transform half a million layers of raster GIS data into usable data?</p>
+
+<p><strong>The goal:</strong> transform this giant pile of high-frequency data into a used CSV file.</p>
+
+<p>This problem is interesting because normal approaches to processing this data (using nested loops) would take forever. Instead, we have to turn to some optimized methods in R for dealing with large data. In particular, more "functional" approaches, to tackling the problem.</p>
+
+</p>So what is functional? At it's core R is a functional object-oriented language. Meaning,</p> 
+
+<blockquote>"Most R programming should be functional programming, in the sense that each function call performs a well-defined computation depending only on the arguments to that call." - Good ol' John Chambers.</blockquote>
+
+
+<h2>Part 1. A comparison of Two Approaches. </h4>
+
+<h4>Conventional Dead Ends with Loops.</h4>
+
+<p>A typical approach to processing a lot of raster data may entail two loops. The first reads and prepares NetCDF. A second deals with the thousands of raster files within each NetCDF file.</p>
+
+<strong>Consider a first unfortunate stab at the block.</strong>
+
+<pre><code>
+for(i=1:number_of_netcdffiles) {
+	
+	... Load file[i] ...
+	... Do preliminary stuff to file[i] ... 
+
+	for(l=1:numnber_of_rasterlayers) {
+
+		... Extract geographic statistics from layer[l] ...
+		... Add statistics from layer[l] to a data set ... 
+	}
+
+	... Save giant file for each NetCDF file ... 
+}
+</pre></code>
+
+<p>We're tempted to iterate over the raster layers ( layer[l] ) and use standard R GIS libraries to, say, extract everage values from the rasters over a country boundary shapefile (e.g. hourly weather readings over the borders of Finland). Above all, we're tempted to "harvest" the geographic statistics, taking the mean values we extract and adding them to a giant file that we save.</p>
+
+<p>Straight up, this is a bad idea.</p> 
+
+<p>In general, the performance of forloops can be abysmall for these jobs. When we're iterating with a for() loop we're actually calling many little functions repeatedy. Not only is "for()" a function, but so is the ":", and so our brackets in the loop subscript "[]." Calling functions takes time, and by using such an approach, we're calling many functions ad nauseum.</p>
+
+<p>To make matters worse, when we manipulate a vector or data.frame within a forloop, we're making many, many copies of objects within memory, whether it is a vector we're extracting from the raster layer or a data.frame that is collecting each new slice of data. Hence, we're making a ballooning number of copies in the background.</p>
+
+<p>Related to this all is the agony of loop-based "data-harvesting:" repeatedly adding new results into a dataset.</p>
+
+<h4>A template for Speed.</h4>
+
+<p>Instead of using nested loops and performing repeatedly with loops we can collapsed or "de-loop" the conventional approach into one that exploits the power of R's functional programming style, along with power of the "RasterBrick" we can generate a pile of CSV files from our rasters without crashing your computer.<p/>
+
+<p>With some thought and writing code in a functional style, we can boil things down to a single "apply+function" program.</p>
+
+<pre><code>
+generate_statistics_from_netcdf <- function( input_netcdffile ) {
+	
+	... Turn input_netcdffile into a "raster brick" ...
+	... Get statistics from "raster brick" ...
+	... Save statistics for input_netcdffile ... 
+}
+
+apply( list_of_netcdffiles , generate_statistics_from_netcdffile) 
+</pre></code>
+
+<p>Specifically, the "apply + function" approach can give us tremendous speed gains. Instead of using a for loop to iterate over NetCDF weather files, we take a list of files (list_of_netcdffiles) and APPLY a big function <emph>generate_statistics_from_netcdf<emph>. </p>
+
+<p>This main function takes, with the help of smaller functions, processes the input NetCDF file. In particular, it turns the NetCDF file into a RasterBrick, an object that essentially lets you analyze an entire stack of raster layers at once. Instead of using a time-consuming inner-loop to process, we can extract simple statics from every raster layer at once. </p>
+
+<p>Instead of taking, say, 30 minutes and a ton of memory to process a single NetCDF file, this takes around a minute to process the same file.</p>
+
+
+<h2>Part 2. A Small Program that Solves our Problem </h4>
+
+
+<pre><code>
+# ======= X. Header. =======
+
+
+# The libraries we use.
+library(rgdal) 
+library(raster)
+library(ncdf4)
+library(RNetCDF)
+library(sp)
+library(parallel)
+library(magrittr)
+library(data.table)
+
+# Detect cores automatically, I usually free one up.
+cores <- detectCores() - 1
+
+
+# Define your file paths here.
+weatherraster_path <- "/path/to/weatherrasterfiles"
+countryshape_path <- "/path/to/countryshapefiles"
+output_path <- "/path/to/countryshapefiles"
+
+
+# ======= 1. Define Functions. =======
+
+
+# === 1.A. Define Small Subfunctions.
+
+# Small function 1) Reads filename & explicitly opens it as a NetCDF file.
+open_netcdf_as_rasterbrick <- function( ncdf_filename_input ) {
+
+  ncdf_filename_input %>%
+    file.path( weatherraster_path , . ) %>%
+    nc_open( . )  %>%  # Open path as NetCDF file.
+ 	ncvar_get( . ) %>%  # Get NetCDF file. 
+
+ 	# Transform NetCDF into raster brick.
+    brick( . ,ymn = -0, ymx = 360, xmn = -90, xmx = 88.07022094726563, 
+             crs = "+init=epsg:4326 +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0" ) %>% 
+  
+  return( . )
+
+}
+
+# Small function 2) Transforms the raster brick to our country shapefile.
+match_rainbrick_to_countryshapefile <- function( brick_input ) {
+  
+  # NOTE: Depending on your setting and the nature of the shapefile
+  # and NetCDF raster files you're using, you may have to do many more
+  # manipulations to make sure the raster layers align with the shapefile.
+
+  brick_input %>%  
+
+    # Reproject raster brick to the shapefile's coordinate system.
+    projectRaster( . , crs = proj4string( country_shapefile ), 
+                   method = "ngb" ) %>%
+
+    # Apply crop function to the brick, so that it matches country shape.
+    raster::crop( . , extent( country_shapefile ) ) %>%
+
+  return( . )
+}
+
+
+# Small function 3) Extract data from a raster brick.
+generate_dataset_from_rasterbrickandcountryshape <- function( brick_input ) {
+
+	brick_input %>%  # Start with raster brick argument.
+
+	  # Take means according to the countryshapefile.
+	  # Make sure df = TRUE , so that output is a dataframe.
+      raster::extract( . , countryshapefile , df=TRUE, fun = mean, na.rm = TRUE  )
+
+    return( . )
+}
+
+
+
+# Small function 4) Grad 4-digit year from input file. NetCEDF files are named by year.
+grab_year_from_inputfile <- function( ncdf_filename_input ) {
+
+  ncdf_filename_input %>%
+
+    regexpr("[0-9]+", . ) %>%  # Match 4-digit year.
+    regmatches( ncdf_filename_input , . ) %>%  # Get matched REGEX from input string.
+
+  return( . )
+
+}
+
+
+
+# === 1.B. Define "BIG" Function That Extracts Dataset From a Single NetCDF File.
+
+
+generate_datatable_from_rasterbricks <- function( ncdf_filename_input ) {
+	
+	# Our only argument is a netcdf filename. 
+
+	# Start with file argument and process with the sub-functions above.
+	ncdf_filename_input %>%
+
+		open_netcdf_as_rasterbrick( . ) %>% 
+		match_rainbrick_to_countryshapefile( . ) %>% 
+		generate_data_from_rasterandcountry( . ) -> country_means_dataframe
+
+
+	# Go back to the file input name, create automatic names, and save.
+	ncdf_filename_input %>% 
+
+		grab_year_from_inputfile( ) %>% 
+		write.csv( country_means_dataframe , file = file.path( . , output_path ) )
+
+}
+
+
+# ======= 2. Main Code: Setup Environment to Run Big Function.
+
+
+# Start with your name of the country shapefile we're referencing.
+"country_shapefile_name.shp" %>% 
+	file.path( countryshape_path , ) %>% 
+	readODG( den = .  , layer = "countries" ) -> countryshape_file
+
+
+# Generate list of NetCDF files automatically from our directory.
+# Match all files ending in ".nc"
+raster_file_list <- list.files( path = weatherraster_path , 
+	pattern = ".nc" , all.files = FALSE , full.names = FALSE ) 
+
+
+
+# Run our big function on the list of NetCDF files.
+mclapply( raster_file_list , generate_datatable_from_rasterbricks ) 
+
+
+
+
+#======= 3. Assemble .CSV Files using Data.Table and Lapply.
+
+# Fetch all files ending in .CSV in out output path.
+csv_file_list <- list.files( path = output_path , 
+                             pattern = ".csv",
+                             all.files = FALSE,
+                             full.names = TRUE,
+                             recursive = FALSE )
+
+# Take the list of saved files, use "fast read" to read them.
+# Bind the list of read csv files together with rbindlist().
+lapply( csv_file_list , fread , sep = "," ) %>% 
+  rbindlist( . ) -> big_datatable 
+
+
+# Note: Before reassembling the data, or after, you may want 
+# to manipulate the data so that it is in a more usable format.
+# For example, my NetCDF files usually export data with layer names
+# as columns and geographic IDs as rows. 
+
+# Note: You may want to dataset setkeys() here.
+
+# Save the big file.
+write.csv( big_datatable, file = file.path( output_path , "big_file_name.csv") )
+</pre></code>
+
+
+
+
+
+
+
+
+
