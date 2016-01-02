@@ -7,7 +7,7 @@ author:
   "Nathaniel"
 ---
 <p>
-<a href="{{ site.baseurl }}/posts/2016-01-02-gisfunctional.html">
+<a href="{{ site.baseurl }}/2016/01/02/gisfunctional.html">
 <img src="{{ site.baseurl }}/assets/thermalmap.jpg" width="600px">
 </a>
 <small>
@@ -38,7 +38,7 @@ Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the I
 
 <p>Consider two approaches to our problem, a conventional loop-based approach and an optimized approach.</p>
 
-<strong>Conventional Dead Ends with Loops.</strong>
+<p><strong>Conventional Dead Ends with Loops.</strong></p>
 
 <p>
 Most of us would attack the problem using nexted loops. The first loop reads and prepares the NetCDF file; a second deals with the raster layers within each file.
@@ -259,7 +259,7 @@ write.csv( big_datatable, file = file.path( output_path , "big_file_name.csv") )
 
 <h4>One thing to try.</h4>
 
-<b>Compiling functions with R's byte-compiler</b>
+<p><b>Compiling functions with R's byte-compiler</b></p>
  
 <p>Writing our own functions also allows us to easily use R's <code>compiler()</code> on chunks of our code. The <code>cmpfun()</code> function allows us to generate byte-compiled version of our own functions, </p>
 
