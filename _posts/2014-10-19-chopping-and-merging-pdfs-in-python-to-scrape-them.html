@@ -33,7 +33,7 @@ author:
 </ul>
 <h3>The Code</h3>
 <p>The following is written for Python 3.* and uses the <strong><a title="pyPDF2" href="https://pypi.python.org/pypi/PyPDF2" target="_blank">PyPDF2 package</a></strong> (which is a <strong><a title="PyPdf" href="http://pybrary.net/pyPdf/" target="_blank">fork of the original PyPdf package</a></strong>), as well as the <code>OS</code> module for directory manipulation.</p>
-<p>The code starts with a directory containing our multi-page PDFs and creates a sub-folder to store individual pages, <code>/splits</code>.</p>
+<p>The code starts with a directory containing our multi-page PDFs and creates a sub-folder to store individual pages, <code>/splits.</code></p>
 
 {% highlight Python %}
 
@@ -80,6 +80,7 @@ for filename in os.listdir(start_dir):
             outputStream = file(out_file, "wb")
             output.write(outputStream)
             outputStream.close()
+            
 {% endhighlight %}
 
 <p>Third, after chopping and saving, we combine the separated pages into variable-based PDFs.</p>
