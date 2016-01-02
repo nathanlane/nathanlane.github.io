@@ -438,10 +438,14 @@ body > header {
 
     .content article .body .media.image { background-image: url(placeholder-image.svg) }
 
-        .content article .body .media.image img {
-            display: block;
-            width: 100%;
-            height: auto; }
+    .content article .body .media.image img {
+        display: block;
+        max-width: 800px;
+        width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto; 
+        }
 
     .content article .body .media.youtube iframe, .content article .body .media.vimeo iframe, .content article .body .media.audio iframe {
         display: block;

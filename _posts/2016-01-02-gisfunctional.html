@@ -8,10 +8,12 @@ categories:
 author:
   "Nathaniel"
 ---
-<p>
+<div class="media image"
 <a href="{{ site.baseurl }}/2016/01/02/gisfunctional.html">
 <img src="{{ site.baseurl }}/assets/thermalmap.jpg" width="600px">
+</div>
 </a>
+<p>
 <small>
 Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the Isothermal Axis of Identity, and its expansions up and down the 'Plateau' " From William Gilpin’s "Mission of the North American People (1873)." Via <a href="http://makingmaps.net/2014/09/30/gilpins-map-of-the-isothermal-zodiac-and-axis-of-intensity-round-the-world-calcareous-plain-maritime-selvage-etc-etc-maps-1873/">the "Making Maps: DIY Cartography" blog.</a>
 </small>
@@ -21,14 +23,12 @@ Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the I
  
 <p>I'll flesh out the problem more with a list:</p>
 
-<blockquote>
-<small>
-<p><strong>NetCDF files.</strong> We have over 100 NetCDF datasets: <i> 1850weather.nc, 1851weather.nc , 1851weather , ... , 1971weather, ... etc.</i>.</p>
-<p><strong>Raster layers.</strong> Each NetCDF is a stack of hourly raster layers: 1850weather.nc: <i> layer.hour1 , layer.hour2 , ... , layer.hour2000, ... etc</i>.</p>
-<p><strong>Shapefiles.</strong> We also have a shapefile countaining country boundaries.</p>
-<p><strong>Our goal.</strong> Extract a giant panel dataset, containing average hourly weather data for each country.</p>
-</small>
-</blockquote>
+<ul>
+<li><p><strong>NetCDF files.</strong> We have over 100 NetCDF datasets: <i> 1850weather.nc, 1851weather.nc , 1851weather , ... , 1971weather, ... etc.</i>.</p>
+<li><p><strong>Raster layers.</strong> Each NetCDF is a stack of hourly raster layers: 1850weather.nc: <i> layer.hour1 , layer.hour2 , ... , layer.hour2000, ... etc</i>.</p>
+<li><p><strong>Shapefiles.</strong> We also have a shapefile countaining country boundaries.</p>
+<li><p><strong>Our goal.</strong> Extract a giant panel dataset, containing average hourly weather data for each country.</p>
+</ul>
 
 <p>In other words, we need a way to cycle through each NetCDF file and for every layer within a file, retrieve the average raster stats corresponding to each country in our shapefile. This adds up: such a project means dealing with nearly a million raster layers. </p>
 
