@@ -214,6 +214,7 @@ h5 {
 
 article .body, .teaser .excerpt, footer {
     width: 734px;
+    /*width: 634px;*/
     margin: 0 auto; }
 
 /* Header incl. Logo & Navigation */
@@ -342,7 +343,8 @@ body > header {
     -o-filter: saturate(100%); }
 
 .content article header .excerpt {
-    width: 634px;
+    width: 734px;
+    /*width: 634px;*/
     position: absolute;
     bottom: 95px;
     left: 50%;
