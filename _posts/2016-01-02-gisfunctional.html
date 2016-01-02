@@ -47,18 +47,18 @@ Most of us would attack the problem using nexted loops. The first loop reads and
 
 {% highlight R %}
 for(i in 1:number_of_netcdffiles) {
-	 
-	 # Load file[i]
-	 # Do preliminary stuff to file[i] 
 
-	for(l in 1:numnber_of_rasterlayers) {
+   # Load file[i]
+   # Do preliminary stuff to file[i] 
 
-		# Extract geographic statistics from layer[l]
-		# Add statistics from layer[l] to a data set 
+	for(l in 1:number_of_rasterlayers) {
+
+       # Extract geographic statistics from layer[l]
+       # Add statistics from layer[l] to a data set
 
 	}
 
-	#  Save giant file for each NetCDF file 
+	 # Save giant file for each NetCDF file 
 
 }
 {% endhighlight %}

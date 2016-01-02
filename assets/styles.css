@@ -21,9 +21,9 @@ html {
 
 body {
     font-family: "Open Sans", sans-serif;
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     color: #4b505a;
-    line-height: 1.5;
+    line-height: 1.75;
     position: relative; }
 
 b, strong { font-weight: 600 }
@@ -502,6 +502,14 @@ body > header {
 
         .content article .body .media .caption a:hover { color: #191a1a }
 
+    .content article .body blockquote { 
+
+        border-left: 4px solid #f8f7fa; 
+        padding-left: 25px;
+
+    }
+
+
 /* Article Footer incl. Author Information, Share Options, Comments & Pagination */
 .content article footer .author, .content article footer .share, .content article footer .comments { font-size: 0.875rem }
 
@@ -686,15 +694,20 @@ body > footer {
     body > footer .copyright a { margin-left: 6px }
 
 /* Syntax Highlighting */
-pre, code {
+pre {
+    border: 1px solid #efedf0; 
+    border-radius: 10px;
     background: #f8f7fa;
     padding: 34px;
     font-family: "Inconsolata", sans-serif;
     color: #4b505a;
-    font-size: 1em;
+    font-size: 1rem;
     margin: 34px 0; }
 
-code { padding: 3px 6px; }
+code { 
+    font-family: "Inconsolata", sans-serif;
+    padding: 3px 6px; 
+    background: #f8f7fa; }
 
 .highlight { background: #ffffff }
 .highlight .c { color: #4b505a } 
