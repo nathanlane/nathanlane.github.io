@@ -125,8 +125,8 @@ plot( swedeshape )
 <p>For instance, using the <code>ncdf4</code> library I can load a giant NetCDF file directly; together with the <code>raster</code> library's <code>brick()</code> function, you get load an entire NetCDF file and recognize it as a RasterBrick with minimal fuss</p>
 
 {% highlight R %}
-library(ncdf4)
-library(raster)
+library( ncdf4 )
+library( raster )
 netdata <- nc_open( "/home/user/rain.2015.nc" )
 netdata <- get( netdata )
 dailyweather <- brick( netdata )
