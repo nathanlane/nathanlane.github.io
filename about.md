@@ -1,7 +1,7 @@
 ---
 
 layout:			default
-title:  		About
+title:  		About This Page.
 type:			page
 navigation: 	true
 
@@ -13,7 +13,7 @@ image: 			ibm360_cleaned.png
 
 ## This blog...
 
-Is a mish mash of current interests---big and small:
+Is a mish mash of current interests--big and small:
 >Economic development; comparative structural change; industrial history; political economy; messy data in Python+R; and "big data" approaches to historical data. 
 Oh, and I dabble in Southeast Asian studies.
 
@@ -29,4 +29,5 @@ I am a Ph.D. candidate in economics at the Institute for International Economic 
 
 Research-wise, my dissertation is on the history and political economy of structural change, applying modern econometric techniques to investigate classic questions in economic development---in particular, how institutions hastened (thwarted) industrialization. My job market paper explores the role of industrial policy in transforming South Korea.
 
-
+# Contact me.
+[Nathaniel.Lane@iies.su.se](mailto:nathaniel.lane@iies.su.se)
