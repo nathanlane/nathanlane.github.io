@@ -685,22 +685,17 @@ body > footer {
     body > footer .copyright a { margin-left: 6px }
 
 /* Syntax Highlighting */
-code {
-    padding: 3px 6px;
-    color: #4b505a;
-    font-weight: inherit;
-    font-family: "Fira Mono", sans-serif;
-    font-size: 1rem; }
-
-
 pre, code {
     border-radius: 7px;
+    border: 1px;
     background: #f8f7fa;
     padding: 20px;
     color: #4b505a;
     font-family: "Fira Mono", sans-serif;
     font-size: 1rem;
     margin: 15px 0; }
+
+code { padding: 3px 6px; }
 
 .highlight { background: #ffffff }
 .highlight .c { color: #4b505a } 
