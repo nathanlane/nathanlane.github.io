@@ -97,7 +97,7 @@ re_rasterpopfile <- resample( re_rasterpopfile, target_raster , method = "biline
 {% highlight R %}
 library( rgdal ) 
 # Read in with readOGR since it preserves CRS projections.
-globeshape <- readOGR( dsn= "/home/user/countries.shp" , layer = "countries") 
+globeshape <- readOGR( dsn= "/home/user/countries.shp" , layer = "countries" ) 
 plot( globeshape )
 {% endhighlight %}
 
@@ -105,7 +105,7 @@ plot( globeshape )
 
 {% highlight R %}
 # Subset the European files. 
-swedeshape <- globeshape[globeshape$COUNTRY=="Sweden", ]
+swedeshape <- globeshape[ globeshape$COUNTRY == "Sweden", ]
 plot( swedeshape )
 {% endhighlight %}
 
