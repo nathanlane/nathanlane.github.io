@@ -29,9 +29,9 @@ Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the I
 <li><p><strong>Our goal.</strong> Extract a giant panel dataset, containing average hourly weather data for each country.</p>
 </ul>
 
-<p>In other words, we need a way to cycle through each NetCDF file and for every layer within a file, retrieve the average raster stats corresponding to each country in our shapefile. This adds up: such a project means dealing with nearly a million raster layers. </p>
+<p>In other words, we need a way to cycle through each NetCDF file and for every layer within a file, retrieve the average raster stats corresponding to each country in our shapefile. This adds up. </p>
 
-<p>This problem is interesting because normal approaches to processing piles of raster data (using nested loops) take forever. A more "functional" approach to the problem can be amazingly more efficient.</p>
+<p>This problem is interesting because normal approaches to processing piles of raster data (using nested loops) takes forever. A more "functional" approach to the problem can be amazingly more efficient.</p>
 
 <p>In this post I consider the ways in which we can tackle this problem (Part I.) and then motive a solution (Part 2.) for comfortably extracting statistics from gigs of GIS weather data.</p>
 
@@ -71,13 +71,13 @@ for(i in 1:number_of_netcdffiles) {
 
 <p>To make matters worse, when we manipulate a vector or data.frame with a for-loop, we're also making many internal copies of our objects. Unbeknownst to us, mundane data transormations can quickly fill out memory with repeated copies.</p>
 
-<p>Moreover, embedded in our first attempt is the agony loop-based "data-harvesting." Unless we're carefull, using a loop to incrementally "grow" dataset will bring your computer to its knees.</p>
+<p>Moreover, embedded in our first attempt is the agony loop-based "data-harvesting." Unless we're carefull, using a loop to incrementally "grow" a dataset will bring your computer to its knees.</p>
 
 <p><strong>Consider an Alternative Approach.</strong></p>
 
 <p>Instead of loops, the following template - and specifically the full program in Part 2 - considers a solution more suited to R.</p> 
 
-<p>By combining functional style with the use of the <code>raster()</code> library, we eliminate the need for nested loops and boil the problem down to a streamlined "apply+function" structure. Put simply: we have a lot less bullshit going on.</p> 
+<p>By combining functional style with the use of the <code>raster()</code> library, we eliminate the need for nested loops and boil the problem down to a streamlined "apply+function" structure.</p> 
 
 {% highlight R %}
 generate_statistics_from_netcdf <- function( input_netcdffile ) {
@@ -88,12 +88,11 @@ generate_statistics_from_netcdf <- function( input_netcdffile ) {
 lapply( list_of_netcdffiles , generate_statistics_from_netcdffile) 
 {% endhighlight %}
 
-<p>Instead of using a for-loop to iterate over NetCDF weather files, we take a list of files <code>list_of_netcdffiles</code> and "apply" a big function <code>generate_statistics_from_netcdf</code>.</p>
+<p>Instead of using a for-loop to iterate over NetCDF weather files, we take a list of files <code>list_of_netcdffiles</code> and "apply" a big function, <code>generate_statistics_from_netcdf</code>.</p>
 
-<p>We eliminate the entire inner loop with the help of <code>RasterBrick</code> manipulations. That is, instead of looping over the individual raster layers within a NetCDF file, we transform the NetCDF into a <code>RasterBrick</code> object and manipulate the collection of layers as a single piece.</p>
+<p>We eliminate the entire inner loop with the help of <code>RasterBrick</code> manipulations. That is, instead of looping over the individual raster layers within a NetCDF file, we transform the NetCDF into a <code>RasterBrick</code> object and manipulate the collection of layers as a single object.</p>
 
 Appealing to <code>RasterBrick</code> instead of cycling through individual layers feels a lot of like the practice of <emph>"vectorization"</emph>, where instead of iteraring over individual members of a vector one-by-one, we work directly with the vector. Stylistically, this is a common line of attack for writing more efficient code.</p>
-
 
 <h3>Part 2. The Program.</h3>
 
@@ -240,16 +239,15 @@ csv_file_list <- list.files( path = output_path ,
                              full.names = TRUE,
                              recursive = FALSE )
 
-# Take the list of saved files, use "fast read" to read them.
-# Bind the list of read csv files together with rbindlist().
+# Take the list of saved files & "fast read" them into R.
 lapply( csv_file_list , fread , sep = "," ) %>% 
+
+# Transform the list of read files into a data.table:
 rbindlist( . ) -> big_datatable 
 
 
 # Note: Before reassembling the data, or after, you may want 
 # to manipulate the data so that it is in a more usable format.
-# For example, my NetCDF files usually export data with layer names
-# as columns and geographic IDs as rows. 
 
 # Note: You may want to dataset setkeys() here.
 
@@ -262,7 +260,7 @@ write.csv( big_datatable, file = file.path( output_path , "big_file_name.csv") )
 
 <p><b>Compiling functions with R's byte-compiler</b></p>
  
-<p>Writing our own functions also allows us to easily use R's <code>compiler()</code> on chunks of our code. The <code>cmpfun()</code> function allows us to generate byte-compiled version of our own functions, </p>
+<p>Writing our own functions also allows us to easily use R's <code>compiler()</code> on chunks of our code. The <code>cmpfun()</code> function allows us to generate byte-compiled versions of our own functions, </p>
 
 {% highlight R %}
 c.myfunction <- compiler::cmpfun(myfunction)
