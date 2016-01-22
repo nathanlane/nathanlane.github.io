@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Visualization: Digitizing & (Re-)Visualizing the Apollo 11 Landing"
+title: "Digitizing & (Re-)Visualizing the Apollo 11 Landing"
 type: post
 published: true
 categories: 
