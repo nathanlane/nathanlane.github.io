@@ -4,8 +4,15 @@ navigation: true
 title: Curriculum Vitae
 type: page
 ---
+
+<div class="ribbon left red">
+  <a href="http://nathanlane.github.io" class="fa fa-github"> Back home.</a>
+</div>
+
+
 # Nathan Lane
 Ph.D. Candidate, Economics - Institute for International Economic Studies.
+
 
 <i class="fa fa-envelope"></i> <a href="mailto:nathaniel.lane@iies.su.se">nathaniel.lane@iies.su.se</a>
  |
@@ -32,10 +39,10 @@ __Harvard University, Department of Economics__ Special Ph.D. Student, Economics
 __Stockholm University__ Ph.D. Student, Economics.
 
 `2009-11`
-__Columbia University__ M.A. Quantitative Methods in the Social Sciences. (Advisor - Suresh Naidu)
+__Columbia University__ M.A. Quantitative Methods in the Social Sciences.
 
 `2006-09`
-__University of Massachusettes--Amherst__ B.A. Economics - (with honors). (Advisor - Nancy Folbre)
+__University of Massachusettes--Amherst__ B.A. Economics.
 
 
 ## Fields
