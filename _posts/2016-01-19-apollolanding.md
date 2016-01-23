@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Digitizing & (Re-)Visualizing the Apollo 11 Landing"
+title: "Digitizing & (Re-) Visualizing the Apollo 11 Landing"
 type: post
 published: true
 categories: 
@@ -18,7 +18,7 @@ Originally from the Apollo 11 Preliminary Science Report volume. With some custo
 <p><img src="{{ site.baseurl }}/assets/a11_bbl.jpg" alt="Planetary Data." / width="70%" height="70%"></p>
 
 
-Paired with another multi-dimensional perspective given by Georgia TEch's __[Yanni Loukissas](http://yloukissas.com/)__:
+Paired with another multi-dimensional perspective given by Georgia Tech's __[Yanni Loukissas](http://yloukissas.com/)__:
 
 <div class='visually_embed' data-category='Science' rel='videographic' style='position: relative;width: 540px;height: 405px'><iframe src='http://player.vimeo.com/video/28199826' width='540' height='405' frameborder='0' ></iframe><div class='visually_embed_bar'><span class='visually_embed_cycle'></span></div><link rel='stylesheet' type='text/css' href='http://visual.ly/embeder/style.css' /><script type='text/javascript' src='http://visual.ly/embeder/embed.js'></script></div>
 
