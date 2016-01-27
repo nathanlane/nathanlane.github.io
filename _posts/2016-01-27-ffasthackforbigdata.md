@@ -6,9 +6,11 @@ published: true
 author:
   "Nathaniel"
 ---
-<p>
-<img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg" width="650px">
-<small>Using a really powerful library to do something simple. ([Image from here.](http://www.vintag.es/2016/01/man-with-his-motorized-tricycle-at.html).)</small></p>
+<div class="media image">
+<img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg" width="600px">
+</div>
+<p><small><small>Using a really powerful library to do something simple. ([Image from here.](http://www.vintag.es/2016/01/man-with-his-motorized-tricycle-at.html))</small></p>
+
 
 Right now, I am having to repeatedly manipulate and save a hundred datasets, each with around 4 million observations. While R tools like <code>fread()</code>, part of __[the <code>data.table</code> library](https://cran.r-project.org/web/packages/data.table/index.html)__, make it trivial to load massive datasets into memory, *writing* big datsets--muchless doing so repeatedly--is another story..
 
