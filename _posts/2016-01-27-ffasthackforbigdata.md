@@ -7,6 +7,8 @@ author:
   "Nathaniel"
 ---
 
+<div class="media image"><img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg"/></div>
+
 Right now, I am having to repeatedly manipulate and save a hundred datasets, each with around 4 million observations. While R tools like <code>fread()</code>, part of __[the <code>data.table</code> library](https://cran.r-project.org/web/packages/data.table/index.html)__, make it trivial to load massive datasets into memory, *writing* big datsets--muchless doing so repeatedly--is another story..
 
 When trying to save big datasets, many of folks first recommend the <code>write.table()</code> function, which gives some people some performance gains over <code>write.csv()</code> or <code>write.csv2()</code>. For my project, <code>write.table()</code> this wasn't cutting it. My system was constantly crashing. When it wasn't crashing, it was saving data at a snail's pace.
@@ -35,6 +37,6 @@ library(ff) # And the key package we'll use to save.
 {% endhighlight %}
 
 
-The type of data table (mygiant_datatable) I am working with is simple, so coercing it into an ffdf object is no problemo.
+Note: the type of data table (mygiant_datatable) I was working with was simple: only a few numeric columns. So coercing it into an ffdf object was no problemo.
 
 Of course, in the cheap workaround above, the <code>as.ffdf()</code> adds a costly step (time-wise). However, it was well worth the benefit of utilizing the <code>write.csv.ffdf()</code> function ... and worth not crashing *ad nauseum*.
