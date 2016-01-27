@@ -3,9 +3,12 @@ layout: post
 title: "Quick Note: Using 'ff' to quickly save giant data sets in R"
 type: post
 published: true
+categories:
+- Tutorial
 author:
   "Nathaniel"
 ---
+
 <div class="media image">
 <img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg" />
 <center><small>Using a really powerful library to do something simple.</small></center>
