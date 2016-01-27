@@ -8,9 +8,8 @@ author:
 ---
 <div class="media image">
 <img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg" />
+<small>Using a really powerful library to do something simple.</small>
 </div>
-<p><small>Using a really powerful library to do something simple.</small></p>
-
 
 Right now, I am having to repeatedly manipulate and save a hundred datasets, each with around 4 million observations. While R tools like <code>fread()</code>, part of __[the <code>data.table</code> library](https://cran.r-project.org/web/packages/data.table/index.html)__, make it trivial to load massive datasets into memory, *writing* big datsets--muchless doing so repeatedly--is another story..
 
