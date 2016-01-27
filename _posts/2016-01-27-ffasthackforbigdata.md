@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Quick Note: Using 'ff' to save large .csv date sets in R"
+title: "Quick Note: Using 'ff' to quickly save giant data sets in R"
 type: post
 published: true
 author:
@@ -23,7 +23,6 @@ Below I take a data.table object I was manipulating (perhaps in a loop), convert
 
 
 {% highlight R %}
-
 library(magrittr) # For use of piping %>%.
 library(data.table) # I use data.table to manipulate large datasets.
 library(ff) # And the key package we'll use to save.
@@ -37,10 +36,10 @@ library(ff) # And the key package we'll use to save.
     as.ffdf( . ) %>%
 
     # Write the ffdf object using ff's csv writing function.
-    write.csv.ffdf( . , file="/my/file/path/myfile.csv")
+    write.csv.ffdf( . , file = "/my/file/path/myfile.csv")
 {% endhighlight %}
 
 
-Note: the type of data table (mygiant_datatable) I was working with was quite simple: composed of only a few numeric columns. Coercing the table into an ffdf object was no problemo.
+Note: the type of data table (mygiant_datatable) I was working with was quite simple, composed of only a few numeric columns. Thus, coercing the data into an ffdf object was no problemo.
 
 Of course, in the cheap workaround above, the <code>as.ffdf()</code> adds a costly step (time-wise). However, it was well worth the benefit of utilizing the <code>write.csv.ffdf()</code> function ... and worth not crashing *ad nauseum*.
