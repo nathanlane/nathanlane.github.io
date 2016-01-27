@@ -15,16 +15,16 @@ Enter the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff
 
 Below I take a data.table object I was manipulating (perhaps in a loop), convert it into an "ff dataframe" (ffdf), which I can then save using <code>ff</code>'s speedy saving function.
 
-### A simple alternative to write.table():
+#### A simple alternative to write.table():
 {% highlight R %}
 
 library(magrittr) # For use of piping %>%.
 library(data.table) # I use data.table to manipulate large datasets.
 library(ff) # And the key package we'll use to save.
 
-  # Say up here I perform a bunch of data.table manipulations..
+  # (Let's say I perform a bunch of data.table manipulations here)
 
-  # Start with data.table object,
+  # Start with the data.table object,
   mygiant_datatable %>%
 
     # ... transform it into an ff dataframe,
