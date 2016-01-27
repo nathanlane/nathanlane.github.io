@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Quick Note: A Python-Based IDE for Data Work (& RStudio Lovers)"
+title: "Quick Note: A New Python IDE for Data Work (& RStudio Lovers)"
 type: post
 published: true
 author:
