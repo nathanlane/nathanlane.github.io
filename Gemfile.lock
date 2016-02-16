@@ -146,6 +146,3 @@ DEPENDENCIES
   open_uri_redirections
   pygments.rb
   rouge
-
-BUNDLED WITH
-   1.11.2
