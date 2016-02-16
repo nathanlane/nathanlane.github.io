@@ -17,15 +17,11 @@ We take Vietnam as a parable for the larger Asian experience: After independence
 
 Understandably, the history of Asian political development isn't known to many economists. However, the history of European state capacity has influenced a wave of research in the political economy of development. Classic works by eminent historians like Charles Tilly or Perry Anderson have become commonplace, informing the way economists explore the role of state history and economic development.
 
-Our paper on state capacity appeals to a rich literature on Asia -- one that may be less well known to economists. Since my co-authors and I spent much time delving into this literature, much of which can’t fully be discussed in the scope of an empirical economics paper, I wanted to share some scholarly resources on state formation in Southeast Asia. Below I review some great readings and resources on the historic state and the history of state formation across Asia, emphasizing Vietnam.
-
-
-_(Regretably, this list will be light on Vietnamese-language literature and prolific French scholarship.)_
-
+Our paper on state capacity appeals to a rich literature on Asia -- one that may be less well known to economists. Since my co-authors and I spent much time delving into these works, much of which can’t fully be discussed in the scope of an empirical economics paper, I wanted to share some of these readings on Asian formation in Asia, emphasizing Vietnam's history.
 
 #### Asian State Formation in a Comparative Perspective.
 <small>
-A great starting point for understand the patterns of long-run Asian state formation would be Victor Lierberman's wonderful two volume history, _Strange Parallels_. Lieberman synthesizes a massive literature on Asian political development, comparing Asian state history to that of Europe and Eurasia.
+A great starting point for understand the patterns of long-run Asian state formation would be Victor Lierberman's wonderful two volume history, _Strange Parallels_. Lieberman synthesizes a massive literature on political development, comparing Asian state history to that of Europe and Eurasia.
 
 * Lieberman, V. _Strange Parallels: Southeast Asia in Global Context, C. 800–1830. Volume I:  Integration on the Mainland._ Cambridge University Press, Cambridge (2003).
 * Lieberman, V. _Strange Parallels: Southeast Asia in Global Context, c. 800-1830. Volume II: Mainland Mirrors, Europe, China._ South Asia, and the Islands. Cambridge University Press, Cambridge (2010).
@@ -35,7 +31,7 @@ A great starting point for understand the patterns of long-run Asian state forma
 
 #### The Chinese State and Historical Congruity in East Asian Political Development
 <small>
-The Chinese state was surprisingly modern relative to its contemporaries and its institutions were copied across Asia. Lost Modernities, is a great synopsis of the common bureaucratic state features that distinguished the experience of East Asian states from elsewhere in Southeast Asia. 
+The Chinese state was surprisingly modern relative to its contemporaries and its institutions were copied across Asia. __Lost Modernities__ by Woodside is a great synopsis of the common bureaucratic state features that distinguished the experience of East Asian states from elsewhere in Southeast Asia. 
 
 * Woodside, Alexander. _Lost Modernities: China, Vietnam, Korea, and the hazards of world history_. Harvard University Press, 2009.
 * Kang, D. C. (2013). _East Asia Before the West: Five Centuries of Trade and Tribute._ Columbia University Press.
@@ -48,7 +44,7 @@ The Chinese state was surprisingly modern relative to its contemporaries and its
 
 #### The "Indianized" States of Southeast Asia
 <small>
-Similarly, building on the scholarship of George Cœdès, a rich literature has explored the shared characteristics of early Southeast Asian polities and the influence of Indian civilization on the region. O.W. Wolter's work is a fantastic tour of Southeast Asian pre-colonial states, motivating the concept of __[mandala kingdoms](https://en.wikipedia.org/wiki/Mandala_(Southeast_Asian_political_model))__ to describe the organization of these discordant polities.
+Building on the scholarship of George Cœdès, a rich literature has explored the shared characteristics of early Southeast Asian polities and the influence of __Indian__ civilization on the region. O.W. Wolter's work is a fantastic tour of Southeast Asian pre-colonial states, motivating the concept of __[mandala kingdoms](https://en.wikipedia.org/wiki/Mandala_(Southeast_Asian_political_model))__ to describe the organization of these discordant polities.
 
 * Wolters, O. W. (1999). _History, culture, and region in Southeast Asian perspectives._ SEAP Publications.
 * Cœdès, G. (1966). The Making of South East Asia. University of California Press.
@@ -94,4 +90,4 @@ Another strand of scholarship has studied the way in which--with the help of a m
 
 </small>
 
-Many thanks to the helpful discussion and input for the Vietnamese Studies Group listserv. 
+Many thanks to the helpful discussion and input for the Vietnamese Studies Group listserv and my co-authors.
