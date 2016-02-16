@@ -17,7 +17,7 @@ We take Vietnam as a parable for the larger Asian experience: After independence
 
 Understandably, the history of Asian political development isn't known to many economists. However, the history of European state capacity has influenced a wave of research in the political economy of development. Classic works by eminent historians like Charles Tilly or Perry Anderson have become commonplace, informing the way economists explore the role of state history and economic development.
 
-Our paper on state capacity appeals to a rich literature on Asia -- one that may be less well known to economists. Since my co-authors and I spent much time delving into these works, much of which can’t fully be discussed in the scope of an empirical economics paper, I wanted to share some of these readings on Asian formation in Asia, emphasizing Vietnam's history.
+Our paper on state capacity appeals to a rich literature on Asia -- one that may be less well known to economists. Since my co-authors and I spent much time delving into these works, much of which can’t fully be discussed in the scope of an empirical economics paper, I wanted to share some of these readings on Asian formation in Asia, emphasizing Vietnam.
 
 #### Asian State Formation in a Comparative Perspective.
 <small>
