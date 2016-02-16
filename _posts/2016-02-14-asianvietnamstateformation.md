@@ -5,11 +5,10 @@ type: post
 author:
   "Nathaniel"
 ---
-<div class="media image"><img src="{{ site.baseurl }}/assets/annamcochinchina.png" alt="" /><small>
-A clip from the <b>"Royaume d' Annan comprenant les Royaumes de Tumkin et de la Cocinchine / Designé par les Peres de la Compagnie de Iesus ; I. Somer sculp. - 1600-1699"</b>, from the La Bibliothèque nationale de France.
+<img src="{{ site.baseurl }}/assets/annamcochinchina.png" alt="" width="750px"/>
+<small>
+A clip from the <b>"Royaume d' Annan comprenant les Royaumes de Tumkin et de la Cocinchine / Designé par les Peres de la Compagnie de Iesus; I. Somer sculp. - 1600-1699"</b>, from the La Bibliothèque nationale de France.
 </small>
-</div>
-
 
 The following is a reading list related to a long undertaking with my two co-authors a, Melissa Dell (Harvard) and Pablo Querubin (NYU), where we explore the historic roots of economic divergence in Asia. Our paper, __["State Capacity, Local Governance, and Economic Development in Vietnam"](http://scholar.harvard.edu/dell/publications/state-capacity-local-governance-and-economic-development-vietnam)__ examines the role of historic state institutions in shaping the different developmental trajectories of Northeast and Southeast Asia.
 
