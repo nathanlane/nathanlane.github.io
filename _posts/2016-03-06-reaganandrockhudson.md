@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "From the Archive: Rock Hudson's Telagraph to Friend Nancy Reagan Before his Death from AIDS"
+title: "Rock Hudson's Telegraph to Nancy Reagan Before his Death from AIDS"
 type: post
 author:
   "Nathaniel"
