@@ -110,7 +110,7 @@ Now we can derive a <strong>technical coefficient matrix</strong>, also called <
 Matrix A is calculated by dividing intersectoral flows by the total output of each column's sector. Specifically, sector 1 ships 500 dollars of good 1 to sector 2, which produces 1000 dollars of total output. Thus, one dollar of good 1 is absorbed to produce 25 cents of sector 2's output.
 
 $$
-\textrm{Input Flow Matrix}  = \left[ \begin{matrix} 150 & 500 \\\ 200 & 100 \end{matrix} \right]~
+\textrm{Input Flow Matrix: }~X  = \left[ \begin{matrix} 150 & 500 \\\ 200 & 100 \end{matrix} \right]~
 \\\
 z = \textrm{I}_2 \textrm{Total Output}^{-1} =\left[ \begin{matrix} 1 & 0 \\\ 0 & 1 \end{matrix} \right] \left[ \begin{matrix} 1000 \\\ 2000 \end{matrix}   \right]^{-1}~
 $$
