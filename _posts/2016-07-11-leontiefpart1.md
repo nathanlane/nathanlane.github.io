@@ -112,11 +112,11 @@ Matrix A is calculated by dividing intersectoral flows by the total output of ea
 $$
 \textrm{Input Flow Matrix}  = \left[ \begin{matrix} 150 & 500 \\\ 200 & 100 \end{matrix} \right]~
 \\\
-z = \textrm{I}_2 \cdot \textrm{Total Output}^{-1} =\left[ \begin{matrix} 1 & 0 \\\ 0 & 1 \end{matrix} \right] \cdot \left[ \begin{matrix} 1000 \\\ 2000 \end{matrix}   \right]^{-1}~
+z = \textrm{I}_2 \textrm{Total Output}^{-1} =\left[ \begin{matrix} 1 & 0 \\\ 0 & 1 \end{matrix} \right] \left[ \begin{matrix} 1000 \\\ 2000 \end{matrix}   \right]^{-1}~
 $$
 
 $$
-\textrm{Technical Coefficient Matrix: }~A = X\hat{z} \Rightarrow A = \left[ \begin{matrix} .15 & .25 \\\ .2 & .05 \end{matrix} \right]
+\textrm{Technical Coefficient Matrix: }~A = Xz \Rightarrow A = \left[ \begin{matrix} .15 & .25 \\\ .2 & .05 \end{matrix} \right]
 $$
 
 To calculate matrix A in R: first take the inverse of the total output vector and multiply it with an identity matrix. The resulting object, <code>z</code>, is multiplied again with the <code>flowtable</code> matrix. 
