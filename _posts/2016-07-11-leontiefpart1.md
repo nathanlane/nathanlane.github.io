@@ -14,13 +14,13 @@ author:
 <a href="www.tekniskamuseet.se/1/706.html">From Sweden's Tekniska Museet photo collection</a>.</small>
 
 
-In input-output economics, the <strong>Leontief inverse</strong> (i.e. [I-A]^-1), is ubiquitous. Named after the father of input-output economics, <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/1973/leontief-bio.html">Wassily Leontief</a>, the matrix is a compact representation of the ripple effects in an economy where industries are linked to one another. A lone matrix coefficient conveys all direct and indirect effects on output in one sector required by a unit of output from another sector. 
+In input-output economics, the <strong>Leontief inverse</strong> (i.e. [I-A]^-1) is ubiquitous. Named after the father of input-output economics, <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/1973/leontief-bio.html">Wassily Leontief</a>, the matrix is a compact representation of the ripple effects in an economy where industries are interconnected. A lone matrix coefficient conveys all direct and indirect effects on output in one sector required by a unit of output from another sector. 
 
 Below is Part 1 of a two part tutorial on deriving the Leontief inverse using R. This first part is a "toy" example to motivated the pieces of the input-output analysis and the workflow in R. Part 2 describes how to calculate the Leontief inverse from a full scale input-output table.
 
 <h4>A Toy Input-Output Model.</h4>
 
-Consider a baby example. I'll use <strong>Table 1</strong> as a guide to calculating a simple Leontief inverse using R. Using two sector, the baby table represents the essential ingredients of common input-output tables. 
+Consider a baby example. I'll use <strong>Table 1</strong> as a guide to calculating a simple Leontief inverse using R. The table represents the essential ingredients of common input-output tables using only two sectors.
 
 <strong>Table 1. A Small Input-Output Table</strong>
 <table>
@@ -63,13 +63,13 @@ After the two columns of intermediate good sales, the "Final Goods" column shows
 
 <h4>Calculating the Matrix</h4>
 
-The Leontief inverse is calculated in the following way. We start with an IO table like the one above. Using this basic IO table, we generate a "technical coefficient matrix," which we then use to solve for the inverse matrix, L.
+The Leontief inverse is calculated in the following way. We start with an IO table like the one above. Using this basic IO table, we generate a "technical coefficient matrix," which we then use to solve for the Leontient inverse matrix, L.
 
 $$
 \textrm{Basic IO Table: }~ X \Rightarrow \textrm{Technical Matrix: }~ A \Rightarrow \textrm{Leontief Matrix: }~ L
 $$
 
-First we'll build the input-output table in Table 1. I generate the two-by-two flow of interindustry sales (<code>flowtable</code>). Then I create the vector of <code>finaldemand</code>. 
+First we'll build the input-output table in Table 1 using R. We generate the two-by-two flow of interindustry sales (<code>flowtable</code>). Then I create the vector of <code>finaldemand</code>. 
 
 {% highlight R %}
 # Intermediate flow matrix.
@@ -78,13 +78,13 @@ flowtable <- rbind( c( 150 , 500 ), c( 200 , 100 ) )
 finaldemand <- rbind( c( 350 ), c( 1700 ) )
 {% endhighlight %}
 
-We combined these pieces into a <code>data.frame</code> object. Once combined, we genenerate a new variable for total output. The result is a <code>data.frame</code> version of Table 1.
+We combined these pieces into a <code>data.frame</code> object. Once combined, we sum across the intermediate input columns and final demand column to produce a new variable: total demand. The result is a <code>data.frame</code> version of Table 1.
 
 {% highlight R %}
 # Bind into input-output table.
 inputoutputtable <- cbind( flowtable , finaldemand )
 
-# Convert to data.frame.
+# Convert object to data.frame.
 inputoutputtable <- as.data.frame( inputoutputtable )
 
 # Name columns of table (dataframe)
@@ -134,7 +134,7 @@ A
 
 {% endhighlight %}
 
-Alternatively, we can use R's <code>sweep()</code> function to calculate A directly from the <code>flowmatrix</code> and the <code>totaloutput</code> vector. <code>sweep()</code> takes the input matrix and divides each column by the corresponding entry of the vector. The argument <code>margin = 2</code> tells us were "sweeping" over the columns of our matrix, as opposed to rows (<code>margin = 1</code>).
+Alternatively, we can use R's <code>sweep()</code> function to calculate A directly from the <code>flowmatrix</code> and the <code>totaloutput</code> vector. <code>sweep()</code> takes the input matrix and divides each column by the corresponding entry of the vector. The argument <code>margin = 2</code> tells us we're "sweeping" over the columns of the input matrix, as opposed to rows (for row-wise calculations, <code>margin = 1</code>).
 
 {% highlight R %}
 # Using "Sweep"
@@ -148,13 +148,13 @@ A.alternative
 [2,] 0.20 0.05
 {% endhighlight %}
 
-Finally the Leontief matrix is calculated in the following way.
+Finally, the Leontief matrix is calculated in the following way.
 
 $$
 \textrm{Leontief Matrix: }~ L = (\textrm{I}_2 - A)^{-1} \Rightarrow L = \left[ \begin{matrix} 1.2541 & .33 \\\ .264 & 1.1221 \end{matrix}  \right]
 $$
 
-Using R, we first calculate <code>I-A</code>, substracting the technical coefficient matrix from the identity matrix. We then invert the I-A matrix using the<code>solve()</code> function. The result, <code>L</code>, is the Leontief coefficient matrix. 
+Using R, we first calculate <code>I-A</code>, substracting the technical coefficient matrix from the identity matrix. We then invert the I-A matrix by using the<code>solve()</code> function. The result, <code>L</code>, is the Leontief coefficient matrix. 
 
 {% highlight R %}
 
@@ -172,7 +172,7 @@ L
 
 {% endhighlight %}
 
-Substantively, the matrix L summarizes the network effects generated when final output changes. A single coefficient of matrix L, surprisingly, summarizes <strong>all</strong> direct and indirect effects created in sector <strong>i</strong> to satisfy a single unit of final demand for sector <strong>j</strong>.
+Substantively, the matrix L summarizes the network effects generated when final output changes. A single coefficient of matrix L, surprisingly, summarizes <strong>all</strong> direct and indirect effects created in sector <strong>i</strong> to supply a single unit of final demand for sector <strong>j</strong>.
 
 
 
