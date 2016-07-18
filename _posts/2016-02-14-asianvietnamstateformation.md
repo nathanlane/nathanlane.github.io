@@ -1,4 +1,4 @@
----
+C---
 layout: post
 title: "Readings in the History of Asian State Capacity"
 type: post
@@ -67,7 +67,7 @@ From Alexander Woodside's famous 1971 thesis, a number of works have documented 
 </small>
 
 
-#### The Vietnamese Village as a Cite of State Capacity.
+#### The Vietnamese Village as a Site of State Capacity.
 <small>
 The Vietnamese village has long been viewed as the fundamental unit of administration. Our paper hones in on how the central Dai Viet state projected power down to the village level, shaping the scope of village development for centuries. 
 
