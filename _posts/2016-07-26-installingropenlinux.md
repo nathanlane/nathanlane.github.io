@@ -6,7 +6,12 @@ author:
   "Nathaniel"
 ---
 
+<img src = "{{ site.baseurl }}/assets/firstwheelie.jpg" width = "700px" >
+
+
 Below is a guide to installing Microsoft Open R for those using Ubuntu Linux and R-Studio. Microsoft R Open (MRO) is a pretty powerful distribution of R (and yes, completely open source). It builds off (currently) R version 3.3.0, adding some darn useful enhancements, due in part to their use of Intel's Math Kernel Library (MKL). 
+
+<h4>What is R Open + MKL?</h4>
 
 What does this mean? Basically Microsoft R Open is an optimized version of your standard R, and can help tremendously if you're doing, say, many intense vector or matrix-based operations. Importantly, much of this is done for you: instead of having to fiddle around with multi-core support in your code, R Open optimizes things automatically.
 
