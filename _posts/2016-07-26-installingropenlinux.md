@@ -10,8 +10,7 @@ Below is a guide to installing Microsoft Open R for those using Ubuntu Linux and
 
 What does this mean? Basically Microsoft R Open is an optimized version of your standard R, and can help tremendously if you're doing, say, many intense vector or matrix-based operations. Importantly, much of this is done for you: instead of having to fiddle around with multi-core support in your code, R Open optimizes things automatically.
 
-Before stumbling across Revolution R, the predesessor to Microsoft R Open, I didn't know there were <strong>other</strong> distributions of R floating around. The idea of "installing" another flavour of R was hard for me to wrap my head around. So switching to Microsoft R Open simply means you install an enhanced version of R over the default version. <strong>Everything</strong> works the same. There is nothing special you have to do (other than installing your previous packages, which is covered below). If you're using RStudio, like most people out there, RStudio will automatically use the new, enhanced R distribution -- and there's likely nothing more you have to do.
-
+Before stumbling across Revolution R, the predesessor to Microsoft R Open, I didn't know there were <strong>other</strong> distributions of R floating around. Switching to Microsoft R Open simply means you're installing an enhanced version of R over the default version. <strong>Everything</strong> works the same. There is nothing special you have to do (other than installing your previous packages, which is covered below). If you're using RStudio, like most people out there, RStudio will automatically use the new, enhanced R.
 
 <h4>Upgrading to R Open</h4>
 
