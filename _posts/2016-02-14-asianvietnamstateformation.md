@@ -1,4 +1,4 @@
-C---
+---
 layout: post
 title: "Readings in the History of Asian State Capacity"
 type: post
