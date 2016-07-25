@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Quick Note: Upgrading RStudio to Microsoft R Open R in Linux"
+title: "Quick Note: Upgrading to Microsoft Open R in Linux"
 type: post
 author:
   "Nathaniel"
