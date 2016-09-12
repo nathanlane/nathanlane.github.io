@@ -45,7 +45,7 @@ __Stockholm University__ Ph.D. Student, Economics.
 __Columbia University__ M.A. Quantitative Methods in the Social Sciences.
 
 `2006-09`
-__University of Massachusettes--Amherst__ B.A. Economics.
+__University of Massachusettes - Amherst__ B.A. Economics.
 
 
 ## Fields
