@@ -32,8 +32,8 @@ Institute for International Economic Studies - Stockholm University - SE-106 91 
 
 ## Education
 
-`2013-16`
-__Institute for International Economic Studies__ Ph.D. Candidate (Year 5), Economics.
+`2013-Current`
+__Institute for International Economic Studies__ Ph.D. Candidate, Economics.
 
 `2013-15`
 __Harvard University, Department of Economics__ Special Ph.D. Student, Economics.
