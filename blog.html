@@ -1,0 +1,25 @@
+---
+
+layout:     blog
+title:      Land, Labor, & Capital
+type:       page
+navigation: true
+
+image:      header-1.png
+gradient:   1
+
+---
+
+<div class="summary">
+
+  <p>Musing on economic development, economic history, political economy, & big data techniques for social scientists.
+  <a href="/about.html" title="Continue" class="more">Continue</a></p>
+
+</div>
+
+
+{% for post in site.posts %}
+
+  {% include summary.html %}
+  
+{% endfor %}

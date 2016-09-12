@@ -6,7 +6,8 @@ type: page
 ---
 
 <div class="ribbon left red">
-  <a href="http://nathanlane.github.io" class="fa fa-github"> Back home.</a>
+  <a href="http://nathanlane.github.io" class="fa fa-github"> Home</a> |
+  <a href="https://www.dropbox.com/s/y95hig4x3c3b0pn/NathanLane_IIES_20162017.pdf?dl=0" class="fa fa-save"> Current PDF curriculum vitae here</a>
 </div>
 
 
@@ -19,6 +20,8 @@ Ph.D. Candidate, Economics - Institute for International Economic Studies.
  <i class="fa fa-github"></i> <a href="http://nathanlane.github.com/">nathanlane.github.io</a>
  |
  <i class="fa fa-phone"></i> <a href="">(SE)+46(0)729095265</a>
+ |
+  <i class="fa fa-save"></i> <a href="https://www.dropbox.com/s/y95hig4x3c3b0pn/NathanLane_IIES_20162017.pdf?dl=0">PDF Curriculum Vitae</a>
 
 
 ## Address
@@ -48,16 +51,58 @@ __University of Massachusettes--Amherst__ B.A. Economics.
 ## Fields
 
 * Economic Development
-* Economic History
 * Political Economy
+* Economic History
 
 ## Job Market Paper
 
-"Manufacturing Revolutions - State-led Development and Structural Change, Evidence from Post-War South Korea."
+`Title` 
+__Manufacturing Revolutions__
+
+Industrial Policy and Linkages in South Korea
+
+`Abstract` 
+This paper uses a natural experiment to estimate the causal effect of industrial policy on short and long-run industrial development with newly digitized, historic data from South Korea. Using the sudden shift in industrial strategy in 1973, following South Korea’s transition to military dictatorship, I find that industries targeted by big push-style industrial policies grew more than non-targeted industries, improving along several key measures of industrial development; these effects persisted long after industrial policies were retrenched after the 1979 assassination of the South Korean president, the big push’s chief architect. Furthermore, I estimate the spillovers of the industrial policies using exogenous variation in the exposure to the policy across input-output linkages. I find that non-targeted industries downstream from targeted sectors benefited significantly from the policy, while less advanced upstream sectors contracted. To conclude, I find that South Korea’s controversial industrial policies were successful in producing industrial development, the benefits of which persisted through time and in industries not directly targeted by the policies.
+
+
+
+## Papers
+
+`Title` 
+__State Capacity, Local Governance, and Economic Development in Vietnam__
+
+with Melissa Dell (Harvard) and Pablo Querubin (NYU)
+
+`Abstract` 
+There has been a large divergence in economic prosperity between Northeast and Southeast Asia since the mid-20th century, and the governance organizations and norms of Asian societies plausibly explain this divergence. This study examines the impacts of different historical governance norms on development using Vietnam as a laboratory. Northern Vietnam (Dai Viet) was ruled by strong state institutions inherited from China. It governed through a centralized, competitively selected bureaucracy, and the village was the fundamental administrative unit. Southern Vietnam was a weak tributary of the Khmer (Cambodian) Empire. It followed a patron-client model with more personalized power relations and no village intermediation. We use a regression discontinuity design across the Dai Viet-Khmer boundary to compare villages that had a strong state to nearby areas that did not. We find that areas historically under the strong state have higher living standards today. Using rich data from South Vietnam and the unified Socialist Republic of Vietnam, we document that in villages with a bureaucratic historical state, citizens have been better able to organize for public goods and redistribution through stronger local governments and civil society. Overall the study suggests that the bureaucratic state in East Asia - deeply embedded in civil society - played a central role in this region’s growth.
+
+## In Progress
+
+`Title` 
+__Workers of the World, Unite: The Economic Effects of Labor Day Demonstrations in Europe__
+
+with Andreas Madestam (Stockholm University) and David Yanagizawa-Drott (ETH-Zurich)
+
+`Title` 
+__Evolution of (Revealed) Preferences: Evidence form the Pride Movement__
+
+with Mounir Karadja (Uppsala University), Erik Prawitz (IIES), and Shuhei Kitamura (University of Rochester)
+
+`Title` 
+__Let Them Eat Cake – Lending and Luxury Good Leakage__ 
+
+with Mounir Karadja
+
+`Title` 
+__Waiting for the Great Leap Forward – Why Did the Green Revolution Fail in the Philippines?__
+
 
 ## Presentations
 
 ### Talks
+
+`2015`
+CIFAR, Institutions, Organizations & Growth meetings.
 
 `2015`
 NBER Summer Institute, Development of the American Economy: Graduate presentation.
@@ -116,7 +161,7 @@ Econometrics II (Ph.D.) - TA.
 ## References
 
 `Chair`
-__Torsten Persson__ <br>
+__Torsten Persson (Chair)__ <br>
 Torsten and Ragnar Söderberg Chair in Economic Sciences<br>
 Institute for International Economic Studies <br>
 <i class="fa fa-envelope"></i> <a href="mailto:torsten.persson@iies.su.se">torsten.persson@iies.su.se</a> <br>
