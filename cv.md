@@ -84,7 +84,7 @@ __Workers of the World, Unite: The Economic Effects of Labor Day Demonstrations 
 with Andreas Madestam (Stockholm University) and David Yanagizawa-Drott (ETH-Zurich)
 
 `Title` 
-__Evolution of (Revealed) Preferences: Evidence form the Pride Movement__
+__Evolution of (Revealed) Preferences: Evidence from the Pride Movement__
 
 with Mounir Karadja (Uppsala University), Erik Prawitz (IIES), and Shuhei Kitamura (University of Rochester)
 
@@ -101,6 +101,9 @@ __Waiting for the Great Leap Forward – Why Did the Green Revolution Fail in th
 
 ### Talks
 
+`2016`
+OXDEV Conference Centre for the Study of African Economies, Oxford University.
+
 `2015`
 CIFAR, Institutions, Organizations & Growth meetings.
 
@@ -108,7 +111,7 @@ CIFAR, Institutions, Organizations & Growth meetings.
 NBER Summer Institute, Development of the American Economy: Graduate presentation.
 
 `2015`
-Harvard University, Department of Economics: Economic History Brownbag.
+Harvard University, Department of Economics: Economic History Lunch.
 
 `2015`
 Harvard University, Department of Economics: Development Economic Tea.
