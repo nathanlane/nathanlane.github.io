@@ -59,7 +59,7 @@ __University of Massachusettes - Amherst__ B.A. Economics.
 `Title` 
 __Manufacturing Revolutions__
 
-Industrial Policy and Linkages in South Korea
+Industrial Policy and Networks in South Korea
 
 `Abstract` 
 This paper uses a natural experiment and newly digitized data from South Korea to estimate the causal effect of industrial policy on (short- and long-run) industrial development. In 1973 South Korea transitioned to a military dictatorship and drastically changed their development strategy. I find industries targeted by the regime's big push grew significantly more than non-targeted industries along several key dimensions of industrial development. These developmental effects persisted after industrial policies were retrenched, following the 1979 assassination of the president. Furthermore, I estimate the spillovers of the industrial policies using exogenous variation in the exposure to the policy across the input-output network. I find evidence of persistent pecuniary externalities like those posited by big push development theorists, such as Albert Hirschman. In other words, I find that South Korea’s controversial industrial policy was successful in producing industrial development, the benefits of which persisted through time and in industries not directly targeted by the policies.
