@@ -101,6 +101,9 @@ __Waiting for the Great Leap Forward – Why Did the Green Revolution Fail in th
 ### Talks
 
 `2016`
+ASWEDE Association of Swedish Development Economists Ph.D. Workshop, Stockholm School of Economics.
+
+`2016`
 OXDEV Conference Centre for the Study of African Economies, Oxford University.
 
 `2015`
