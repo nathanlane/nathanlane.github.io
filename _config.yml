@@ -1,22 +1,26 @@
 # Site Settings
 baseurl: 		""
-title: 			Nathan Lane - Ph.D. Candidate
+title: 			Nathan Lane, Ph.D. Candidate
 safe: true
 lsi: false
 name: 			Nathan Lane <i> Ph.D. Candidate, Economics</i>
-description: 	Nathan Lane - Ph.D. Candidate, Economics IIES-Sweden
+description: 	Nathan Lane, Ph.D. Candidate, Economics IIES-Sweden
 url: 			"http://localhost:4000"
 
 paginate: 		30
 paginate_path: 	"blog/page:num"
 
+incremental: false
 highlighter: rouge
+gist:
+  noscript: false
+   
 markdown: kramdown
 kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
-  
+  math_engine: mathjax  
 
 twitter: 		straightedge
 email: 			nathaniel.lane@iies.su.se
