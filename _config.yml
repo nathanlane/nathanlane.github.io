@@ -4,7 +4,6 @@ title: 			"Nathan Lane, Ph.D. Candidate"
 safe: true
 lsi: false
 name: 			"Nathan Lane <i> Ph.D. Candidate, Economics</i>"
-description: 	"Nathan Lane, Ph.D. Candidate, Economics"
 
 paginate: 		30
 paginate_path: 	"blog/page:num"
