@@ -1,10 +1,10 @@
 # Site Settings
 baseurl: 		""
-title: 			"Nathaniel Lane, Ph.D. Candidate"
+title: 			Nathaniel Lane
 safe: true
 lsi: false
-name: 			"Nathaniel Lane"
-description: "Nathaniel Lane, Ph.D. Candidate"
+name: 			Nathaniel Lane
+description: Nathaniel Lane
 
 paginate: 		30
 paginate_path: 	"blog/page:num"

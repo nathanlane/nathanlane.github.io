@@ -53,8 +53,6 @@
   <body>
 
     <header data-animation="fadeInDownBig">
-      
-      {% if site.title %}<a href="{{ '/' | prepend: site.baseurl }}" title="Back to Homepage" class="logo">{{ site.name }}</a>{% endif %}
 
       {% assign pages = site.pages | sort: 'date' | where: 'navigation', true %}
       {% assign posts = site.posts | sort: 'date' | where: 'navigation', true %}
