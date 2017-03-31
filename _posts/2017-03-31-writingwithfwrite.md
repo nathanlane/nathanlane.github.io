@@ -65,7 +65,7 @@ you could try ‘??fwrite’
 For my current project I have to repeatedly process a hundred files, each with over 40 million lines (around 4 gigs each). Writing these data.frames to a .csv takes under a minute on a pretty lowly desktop:
 
 <div class="media image">
-<img src="{{ site.baseurl }}/assets/fatality.png" />
+<img src="{{ site.baseurl }}/assets/fwritespeed.png" />
 </div>
 
 Much faster than other methods.
