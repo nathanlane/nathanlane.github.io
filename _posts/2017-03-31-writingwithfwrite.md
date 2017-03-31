@@ -8,19 +8,19 @@ author:
   "Nathaniel"
 ---
 
-R can be nasty when it comes to reading and writing "large" datasets. As practitioners, we often appeal to hacky practices and emergent libraries to avoid crashing our systems during heavy jobs.
+R can be nasty when it comes to reading and writing "large" datasets. As practitioners, we often appeal to hacky practices, emergent libraries, alternatives methods to avoid crashing our systems during heavy jobs.
 
-One alternative [I had the appealed to]({{ base }}/tutorial/2016/01/27/ffasthackforbigdata.html) was the__[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__, a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig .csv files (<code>write.table.ffdf</code>). 
+One alternative [I had the appealed to]({{ base }}/tutorial/2016/01/27/ffasthackforbigdata.html) was the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__ , a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig .csv files (<code>write.table.ffdf</code>). 
 
-Recently, however, <code>write.table.ffdf</code> (and other goto methods) seemed to constantly crash large jobs on my Linux machine. I'd come back to my computer to only to find,
+Recently, however, <code>write.table.ffdf</code> (and other go-to methods) seemed to constantly crash large jobs on my Linux machine. I'd come back to my computer to only to find,
 
 <div class="media image">
 <img src="{{ site.baseurl }}/assets/fatality.png" />
 </div>
 
-(Re-)enter the <code>data.table</code> package. Like ff, <code>data.table</code> is useful in its own right for processing big data. In particular, the library __had__ great methods for reading data into memory with its wonderful <code>fread()</code> command. For a long time, however, it lacked a comparable <code>fwrite()</code> command. Until now...
+(Re-)enter the <code>data.table</code> package. Like <code>ff</code>, <code>data.table</code> is useful in its own right for processing big data. Though the library __had__ great methods for quickly opening large files with its <code>fread()</code> command, it lacked a comparable <code>fwrite()</code> command. Until now...
 
-Now, <code>data.table</code> author, __[Matt Dowle](https://github.com/mattdowle)__, has experimented with adding (See his extensive blog post [here](http://blog.h2o.ai/2016/04/fast-csv-writing-for-r/)) an <code>fwrite()</code> functon (contributed by Otto Seiskari) to the package. Like <code>fread()</code>, <code>fwrite()</code> is also written in C and is surprisingly efficient. 
+<code>data.table</code> author, __[Matt Dowle](https://github.com/mattdowle)__, is experimenting with adding (See his extensive blog post [here](http://blog.h2o.ai/2016/04/fast-csv-writing-for-r/)) an <code>fwrite()</code> functon (contributed by Otto Seiskari) to the package. Like <code>fread()</code>, <code>fwrite()</code> is also written in C and is surprisingly efficient. 
 
 So far, it <code>fwrite()</code> has truly come through for me, writing terrabytes of weather data without the complications I have run into with other packages.
 
