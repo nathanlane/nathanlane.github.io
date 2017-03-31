@@ -35,7 +35,7 @@ install.packages("data.table",
     repos = "http://Rdatatable.github.io/data.table" )
 {% endhighlight %}
 
-(See [the data.table wiki for more](https://github.com/Rdatatable/data.table/wiki/Installation).)
+See [the data.table wiki for more](https://github.com/Rdatatable/data.table/wiki/Installation).s
 
 {% highlight R %}
 installing to /home/XXX/R/x86_64-pc-linux-gnu-library/3.3/data.table/libs
