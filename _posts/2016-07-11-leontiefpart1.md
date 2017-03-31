@@ -23,11 +23,12 @@ Below is Part 1 of a two part tutorial on deriving the Leontief inverse using R.
 Consider a baby example. I'll use <strong>Table 1</strong> as a guide to calculating a simple Leontief inverse using R. The table represents the essential ingredients of common input-output tables using only two sectors.
 
 <strong>Table 1. A Small Input-Output Table</strong>
+
 <table>
 <tbody>
 <tr>
 <td> </td>
-<td colspan=2><center>Intermediates</center></td>
+<td colspan="2"><center>Intermediates</center></td>
 <td> </td>
 <td> </td>
 </tr>
@@ -38,14 +39,14 @@ Consider a baby example. I'll use <strong>Table 1</strong> as a guide to calcula
 <td>Final Goods</td>
 <td>Total Output</td>
 </tr>
-<tr style="border-top:1px solid darkgray;"">
+<tr style="border-top:1px solid darkgray;">
 <td>Good 1</td>
 <td>150</td>
 <td>500</td>
 <td>350</td>
 <td>1000</td>
 </tr>
-<tr style="border-top:1px solid darkgray;"">
+<tr style="border-top:1px solid darkgray;">
 <td>Good 2</td>
 <td>200</td>
 <td>100</td>
