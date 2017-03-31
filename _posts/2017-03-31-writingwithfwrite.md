@@ -67,4 +67,4 @@ For my current project I have to repeatedly process a hundred files, each with o
 
 Much faster than other methods.
 
-Also: fairly recently, the prolific Wes McKinney and Hadley Wickham developed the <code>feather</code> package ([http://github.com/wesm/feather.](http://github.com/wesm/feather.) to address some of the memory issues that plague folks trying to edit and save large data sets in R (See a pretty good discussion [here](https://blog.rstudio.org/2016/03/29/feather/).).
+Also: fairly recently, the prolific Wes McKinney and Hadley Wickham developed the <code>feather</code> package ([See: http://github.com/wesm/feather](http://github.com/wesm/feather).) to address some of the memory issues that plague folks trying to edit and save large data sets in R (See a pretty good discussion [here](https://blog.rstudio.org/2016/03/29/feather/).).
