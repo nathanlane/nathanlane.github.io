@@ -11,17 +11,12 @@ type: page
 </div>
 
 
-# Nathan Lane
+# Nathaniel Lane
 Ph.D. Candidate, Economics - Institute for International Economic Studies.
 
 
-<i class="fa fa-envelope"></i> <a href="mailto:nathaniel.lane@iies.su.se">nathaniel.lane@iies.su.se</a>
- |
- <i class="fa fa-github"></i> <a href="http://nathanlane.github.com/">nathanlane.github.io</a>
- |
- <i class="fa fa-phone"></i> <a href="">(SE)+46(0)729095265</a>
- |
-  <i class="fa fa-save"></i> <a href="https://www.dropbox.com/s/y95hig4x3c3b0pn/NathanLane_IIES_20162017.pdf?dl=0">PDF Curriculum Vitae</a>
+<i class="fa fa-envelope"></i> <a href="mailto:nathaniel.lane@iies.su.se">nathaniel.lane@iies.su.se</a> | <i class="fa fa-github"></i> <a href="http://nathanlane.github.com/">nathanlane.github.io</a> | <i class="fa fa-phone"></i> <a href="">(SE)+46(0)729095265</a> |
+<i class="fa fa-save"></i> <a href="https://www.dropbox.com/s/y95hig4x3c3b0pn/NathanLane_IIES_20162017.pdf?dl=0">PDF Curriculum Vitae</a>
 
 
 ## Address

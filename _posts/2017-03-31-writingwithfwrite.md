@@ -8,6 +8,8 @@ author:
   "Nathaniel"
 ---
 
+<h4> The problem.</h4>
+
 R can be nasty when it comes to reading and writing "large" datasets. As practitioners, we often appeal to hacky practices, emergent libraries, alternatives methods to avoid crashing our systems during heavy jobs.
 
 One alternative [I had the appealed to]({{ base }}/tutorial/2016/01/27/ffasthackforbigdata.html) was the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__ , a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig .csv files (<code>write.table.ffdf</code>). 
@@ -18,11 +20,13 @@ Recently, however, <code>write.table.ffdf</code> (and other go-to methods) seeme
 <img src="{{ site.baseurl }}/assets/fatality.png" />
 </div>
 
+<h4> fwrite() to the rescure.</h4>
+
 (Re-)enter the <code>data.table</code> package. Like <code>ff</code>, <code>data.table</code> is useful in its own right for processing big data. Though the library __had__ great methods for quickly opening large files with its <code>fread()</code> command, it lacked a comparable <code>fwrite()</code> command. Until now...
 
 <code>data.table</code> author, __[Matt Dowle](https://github.com/mattdowle)__, is experimenting with adding (See his extensive blog post [here](http://blog.h2o.ai/2016/04/fast-csv-writing-for-r/)) an <code>fwrite()</code> functon (contributed by Otto Seiskari) to the package. Like <code>fread()</code>, <code>fwrite()</code> is also written in C and is surprisingly efficient. 
 
-So far, it <code>fwrite()</code> has truly come through for me, writing terrabytes of weather data without the complications I have run into with other packages.
+The <code>fwrite()</code> function has truly come through for me, allowing me to write terrabytes of weather data without the complications I have run into with other packages.
 
 <h4>Installing fwrite() functionality.</h4>
 
