@@ -1,10 +1,11 @@
 # Site Settings
-baseurl: 		""
 title: 			Nathaniel Lane
 safe: true
 lsi: false
 name: 			Nathaniel Lane
 description: Nathaniel Lane
+baseurl:     ""
+
 
 paginate: 		30
 paginate_path: 	"blog/page:num"
