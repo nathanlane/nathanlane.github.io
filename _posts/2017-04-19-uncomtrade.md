@@ -12,6 +12,10 @@ author:
  "Nathaniel"
 ---
 
+The following is a simple program for building data sets using the United Nation's COMTRADE API. 
+
+Note: this code does not apply to the "Bulk download" API, which allows users to download entire chunks of annual or monthly data. Instead, this program is for making specific, repeated queries for import (export) data between certain countries.
+
 
 #### 1. First Things First: Some Prepation. 
 
@@ -171,9 +175,9 @@ get.Comtrade <- function( url="https://comtrade.un.org/api/get?"
 
 {% endhighlight %}
 
-The second program simply saves our the API queries locally.
+The second program simply saves each date query.
 
-Specifically, within the <code>get.Comtrade()</code> function above, we dumping the queried .CSV tables into a a local directory. (As opposed to holding them in memory, given R's funky memory issues). Below is the function <code>save.Comtrade()</code> takes the retrieved data.frame, saving them using <code>write.csv()</code>.
+Specifically, within the <code>get.Comtrade()</code> function above, we dumped our queried .CSV tables into a local directory. (As opposed to holding them in memory, given R's funky memory issues). This was done using our function, <code>save.Comtrade()</code>, which takes an individual data.frame and saves it using <code>write.csv()</code>.
 
 
 {% highlight R %}
@@ -217,7 +221,7 @@ save.Comtrade <- function( dataset_argument , px , ps , r , p ){
 
 #### 3. Making Multiple Queries Using mapply()
 
-The <code>mapply()</code> function runs the <code>get.Comtrade()</code> UN COMTRADE retrieval program, doing so for each combination of countries from the _reporting_list_ and the _partners_list_ we generated in Part 1, holding a list of parameters constant with <code>MoreArgs</code>. 
+The <code>mapply()</code> function runs the <code>get.Comtrade()</code> UN COMTRADE retrieval program, doing so for each combination of countries from the __reporting_list__ and the __partners_list__ generated in Part 1 -- holding a list of parameters constant with <code>MoreArgs</code>. 
 
 
 {% highlight R %}
@@ -244,15 +248,15 @@ mapply( get.Comtrade ,
 
 {% endhighlight %}
 
-Again, <code>mapply()</code> is like a loop, applying the API querying function to each reporting+partner country combination. However, We cannot directly use the _reporting_list_ and the _partners_list_ as the two argument lists in <code>mapply()</code> (doing so generates from from combination of country pairs). Instead, we use the <code>expand.grid()</code> function to generate all reporting+partner country combinations; and this table gives us two columns, <code>argument_array$reporting_arguments</code> and <code>argument_array$partner_arguments</code>, which are the actual country argument lists used by <code>mapply()</code>.
+Again, <code>mapply()</code> is like a loop, applying the API querying function to each reporting+partner country combination. However, we cannot directly use the _reporting_list_ and the _partners_list_ as the two argument lists in <code>mapply()</code> (doing so won't generate a complete list of combinations). Instead, we use the <code>expand.grid()</code> function to generate all reporting+partner country combinations; and this table gives us two columns, <code>argument_array$reporting_arguments</code> and <code>argument_array$partner_arguments</code>, which are the actual country argument lists used by <code>mapply()</code>.
 
-While <code>mapply()</code> is used to apply a function to multiple argument lists, we hold some <code>get.Comtrade()</code> arguments constant using <code>MoreArgs</code>. The parameters we hold costant are in the list, <code>list( ps = "all" , fmt = "csv" , rg = "1" , px = "h0" , cc = "all")</code>. Substsantively, this list means we are only making queries for data from all time periods ("all"), in a .CSV-based format ("csv"), for imports ("1"), for commoditiees reported in historic h0 codes ("h0"), and for all traded goods ("all").
-
+While <code>mapply()</code>'s main value added is cycling over many argument lists, we want to hold some <code>get.Comtrade()</code> arguments constant. To do so, we supply a list of arguments to <code>MoreArgs</code>. The parameters we hold costant are in the list, <code>list( ps = "all" , fmt = "csv" , rg = "1" , px = "h0" , cc = "all")</code>. 
 
 #### 4. Stacking Saved Data Chunks into a Dataset
 
-Together, <code>mapply()</code> and <code>get.Comtrade()</code> repeatedly queried and saved each chunk of queried data to a local directory on our machine. However, 1000s of data chunks are hardly useful as a dataset. We may wish to assemble our data into a single coherent dataset.
+Together, <code>mapply()</code> and <code>get.Comtrade()</code> repeatedly queried and saved each chunk of queried data to a directory . However, 100s of data chunks are hardly useful as a dataset. We was to assemble the pieces into a single coherent dataset.
 
+Thus, the following program assembles our saved queries into a coherent dataset.
 
 
 {% highlight R %}
@@ -281,6 +285,6 @@ write.csv( main.dt ,
 
 The above code makes a list of all the files in _/your/file/path_ that match our naming scheme, <code>_trade_h0_all_[REPORTING COUNTRY]_[PARTNER COUNTRY]_raw.csv_</code>.
 
-Next, we efficiently open all these files and stack them into a coherent dataset. First, we then use <code>lapply()</code> to loop over the list of .csv files and open each using the very fast <code>fread()</code> function from the wonderful __data.table package. Then, the list of datasets are stacked using <code>rbindlist()</code>.
+Next, we efficiently open all these files and stack them into a coherent dataset. We use <code>lapply()</code> to loop over the list of .csv files and open each using nimble <code>fread()</code> function (from the wonderful __data.table package). The list of opened datasets are then "stacked" into a single dataset using <code>rbindlist()</code>.
 
-Finally we write the large .CSV file to your _/your/file/path_. You can use your preferred method of course, especially if you run into memory problems writing large .CSV files with R (I prefer using the experimental<code>fwrite()</code> function in the data.table package, __<a href = "http://nathanlane.info/tutorial/2017/03/31/writingwithfwrite.html">which I discuss here</a>.__).
+Finally, we we save the assembled dataset to our local direction, _/your/file/path_. You can use your preferred method of course, especially if you run into memory problems writing large .CSV files with R (I prefer using the experimental<code>fwrite()</code> function in the data.table package, __<a href = "http://nathanlane.info/tutorial/2017/03/31/writingwithfwrite.html">which I discuss here</a>.__).
