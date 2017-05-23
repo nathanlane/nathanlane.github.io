@@ -16,23 +16,19 @@ kramdown:
 paginate: 		30
 paginate_path: 	"blog/page:num"
 
-<<<<<<< HEAD
-markdown: kramdown
 
-highlighter: rouge
-=======
-incremental: false
-highlighter: rouge
-gist:
-  noscript: false
-   
 markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
   math_engine: mathjax  
->>>>>>> b03c493249fb5e513e4054cc026a20154dbba8bb
+
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
 
 twitter: 		straightedge
 email: 			nathaniel.lane@iies.su.se
