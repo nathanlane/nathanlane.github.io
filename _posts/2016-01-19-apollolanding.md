@@ -15,7 +15,7 @@ The __[Planetary DatArt blog](http://planetarydatart.blogspot.se/)__ digitized a
 
 Originally from the Apollo 11 Preliminary Science Report volume. With some custom perspective for the American audience __[added here]({{ site.baseurl }}/assets/a11_bbl.jpg).__
 
-<p><img src="{{ site.baseurl }}/assets/a11_bbl.jpg" alt="Planetary Data." / width="70%" height="70%"></p>
+<p><img src="{{ site.baseurl }}/assets/a11_bbl.jpg" alt="Planetary Data." width="70%" height="70%"></p>
 
 
 Paired with another multi-dimensional perspective given by Georgia Tech's __[Yanni Loukissas](http://yloukissas.com/)__:

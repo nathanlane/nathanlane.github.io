@@ -7,13 +7,7 @@
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="{{ site.description | truncate: 155 }}" />
 
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="{{ site.title }}" />
-    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
-    <meta property="og:description" content="{{ site.description | truncate: 300 }}" />
-    <meta property="og:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}" />
     <meta property="og:image" content="{{ page.image | prepend: '/images/' | prepend: site.baseurl | prepend: site.url }}" />
 
     <meta name="twitter:card" content="summary" />
@@ -53,8 +47,6 @@
   <body>
 
     <header data-animation="fadeInDownBig">
-      
-      {% if site.title %}<a href="{{ '/' | prepend: site.baseurl }}" title="Back to Homepage" class="logo">{{ site.name }}</a>{% endif %}
 
       {% assign pages = site.pages | sort: 'date' | where: 'navigation', true %}
       {% assign posts = site.posts | sort: 'date' | where: 'navigation', true %}

@@ -1,10 +1,11 @@
 # Site Settings
-baseurl: 		""
-title: 			Nathan Lane - Ph.D. Candidate
+title: 			Nathaniel Lane
+safe: true
+lsi: false
+name: 			Nathaniel Lane
+description: Nathaniel Lane
+baseurl:     ""
 
-name: 			Nathan Lane <i> Ph.D. Candidate, Economics</i>
-description: 	Nathan Lane - Ph.D. Candidate, Economics IIES-Sweden
-url: 			"http://localhost:4000"
 
 gems: [jekyll-paginate]
 
@@ -15,9 +16,23 @@ kramdown:
 paginate: 		30
 paginate_path: 	"blog/page:num"
 
+<<<<<<< HEAD
 markdown: kramdown
 
 highlighter: rouge
+=======
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+   
+markdown: kramdown
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
+  math_engine: mathjax  
+>>>>>>> b03c493249fb5e513e4054cc026a20154dbba8bb
 
 twitter: 		straightedge
 email: 			nathaniel.lane@iies.su.se
@@ -25,7 +40,7 @@ email: 			nathaniel.lane@iies.su.se
 disqus: 		your_disqus_shortname
 analytics: 		UA-XXXXXXX-Y
 
-copyright: 		Copyright 2016-2014 Nathaniel Lane.	
+copyright: 		Copyright 2017-2014 Nathaniel Lane.	
 
 # Build Settings
 permalinks: 	pretty
