@@ -5,8 +5,7 @@ lsi: false
 name: 			Nathaniel Lane
 description: Nathaniel Lane
 baseurl:     ""
-
-
+exclude: [vendor]
 gems: [jekyll-paginate]
 
 kramdown:
@@ -33,12 +32,9 @@ gist:
   noscript: false
 
 twitter: 		straightedge
-email: 			nathaniel.lane@iies.su.se
+email: 			nlane@mit.edu
 
-disqus: 		your_disqus_shortname
-analytics: 		UA-XXXXXXX-Y
-
-copyright: 		Copyright 2017-2014 Nathaniel Lane.	
+copyright: 		Copyright 2018-2014 Nathaniel Lane.	
 
 # Build Settings
 permalinks: 	pretty

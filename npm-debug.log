@@ -1,0 +1,22 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'list', '-g' ]
+2 info using npm@2.14.7
+3 info using node@v4.2.3
+4 error extraneous: jsonresume-theme-modern-extended@0.1.1 /usr/local/lib/node_modules/hackmyresume/node_modules/jsonresume-theme-modern-extended
+5 verbose exit [ 1, true ]
+6 verbose stack Error: write EPIPE
+6 verbose stack     at Object.exports._errnoException (util.js:874:11)
+6 verbose stack     at exports._exceptionWithHostPort (util.js:897:20)
+6 verbose stack     at WriteWrap.afterWrite (net.js:763:14)
+7 verbose cwd /Users/nlane/Transporter/Blog/nathanlane.github.io
+8 error Darwin 14.5.0
+9 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "list" "-g"
+10 error node v4.2.3
+11 error npm  v2.14.7
+12 error code EPIPE
+13 error errno EPIPE
+14 error syscall write
+15 error write EPIPE
+16 error If you need help, you may report this error at:
+16 error     <https://github.com/npm/npm/issues>
+17 verbose exit [ 1, true ]
