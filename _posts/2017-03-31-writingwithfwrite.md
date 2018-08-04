@@ -1,11 +1,11 @@
 ---
-layout: post
-title: "Quick Note: Writing large .csv files in R with fwrite()! and beyond"
-type: post
+title: 'Quick Note: Writing large .csv files in R with fwrite()! and beyond'
+date: 2017-03-31 00:00:00 Z
 categories:
 - Tutorial
-author:
-  "Nathaniel"
+layout: post
+type: post
+author: Nathaniel
 ---
 
 <h4> The problem.</h4>

@@ -1,9 +1,9 @@
 ---
+title: Mapping Developments Middle East
+date: 2016-07-16 00:00:00 Z
 layout: post
-title: "Mapping Developments Middle East"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 Mapping <a href="https://en.wikipedia.org/wiki/Manbij_offensive_(2016)">The Manbij Offensive </a>, summer 2016. The (currently ongoing) operation by Syrian Democratic Forces seeks to wrest control of Manbij from ISIS control:

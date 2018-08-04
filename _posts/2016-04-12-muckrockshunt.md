@@ -1,10 +1,11 @@
 ---
+title: A Hunt for the Oldest Government Computer
+date: 2016-04-12 00:00:00 Z
 layout: post
-title: "A Hunt for the Oldest Government Computer"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
+
 <img src="{{ site.baseurl }}/assets/labold.jpg" width="720px"/>
 
 Last year <strong><a href="http://www.popularmechanics.com/technology/infrastructure/a16010/30-year-old-computer-runs-school-heat/">Popular Mechanics and WOODtv reported</a></strong> that a single Amiga has been running non-stop for three decades, controlling the heating and cooling system of nineteen Michigan public schools. 

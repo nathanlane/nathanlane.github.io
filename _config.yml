@@ -1,41 +1,36 @@
-# Site Settings
-title: 			Nathaniel Lane
+---
+title: Nathaniel Lane
+timezone: UTC
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
 safe: true
 lsi: false
-name: 			Nathaniel Lane
+name: Nathaniel Lane
 description: Nathaniel Lane
-baseurl:     ""
-exclude: [vendor]
-gems: [jekyll-paginate]
-
-kramdown:
-  input: GFM
-  hard_wrap: false
-
-paginate: 		30
-paginate_path: 	"blog/page:num"
-
-image:      header-1.png
-
-
-markdown: kramdown
-highlighter: rouge
+baseurl: ''
+exclude:
+- vendor
+gems:
+- jekyll-paginate
 kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
-  math_engine: mathjax  
-
-incremental: false
+  math_engine: mathjax
+paginate: 30
+paginate_path: blog/page:num
+image: header-1.png
+markdown: kramdown
 highlighter: rouge
+incremental: false
 gist:
   noscript: false
-
-twitter: 		straightedge
-email: 			nlane@mit.edu
-
-copyright: 		Copyright 2018-2014 Nathaniel Lane.	
-
-# Build Settings
-permalinks: 	pretty
-
+twitter: straightedge
+email: nlane@mit.edu
+copyright: Copyright 2018-2014 Nathaniel Lane.
+permalinks: pretty

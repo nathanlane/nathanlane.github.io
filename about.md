@@ -1,11 +1,11 @@
 ---
-layout:			default
-title:  		About This Page
-type:			page
-navigation: 	true
-date:   		2015-12-25
-gradient: 		4
-image: 			ibm360_cleaned.png
+title: About This Page
+date: 2015-12-25 00:00:00 Z
+layout: default
+type: page
+navigation: true
+gradient: 4
+image: ibm360_cleaned.png
 ---
 
 ## This blog...

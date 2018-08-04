@@ -1,15 +1,12 @@
 ---
-layout: post
-title: Building a Dataset from UN Comtrade's API 
-date: 2017-04-19
-type: post
-published: true
-status: publish
-categories: []
+title: Building a Dataset from UN Comtrade's API
+date: 2017-04-19 00:00:00 Z
 tags:
 - rstats
-author:
- "Nathaniel"
+layout: post
+type: post
+status: publish
+author: Nathaniel
 ---
 
 The following is a simple program for building data sets using the United Nation's COMTRADE API. 

@@ -1,12 +1,12 @@
 ---
-layout: post
-title: "Input-Output Tables & the Leontief Inverse in R - Part I."
-type: post
+title: Input-Output Tables & the Leontief Inverse in R - Part I.
+date: 2016-07-11 00:00:00 Z
 categories:
 - Tutorial
 - Input-Output
-author:
-  "Nathaniel"
+layout: post
+type: post
+author: Nathaniel
 ---
 
 <img src="{{ site.baseurl }}/assets/surahammarssweden.jpg" width="700px"/>

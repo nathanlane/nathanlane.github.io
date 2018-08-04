@@ -1,10 +1,11 @@
 ---
+title: The Weird History of Microfilm
+date: 2016-06-17 00:00:00 Z
 layout: post
-title: "The Weird History of Microfilm"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
+
 <a href="http://tedium.co/2016/06/14/microfiche-microfilm-libraries-history/"><img src="{{ site.baseurl }}/assets/microfilmhistory.jpg" width="720px"/></a>
 
 <small>

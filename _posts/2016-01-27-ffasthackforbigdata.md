@@ -1,12 +1,11 @@
 ---
-layout: post
-title: "Quick Note: Using 'ff' to quickly save giant data sets in R"
-type: post
-published: true
+title: 'Quick Note: Using ''ff'' to quickly save giant data sets in R'
+date: 2016-01-27 00:00:00 Z
 categories:
 - Tutorial
-author:
-  "Nathaniel"
+layout: post
+type: post
+author: Nathaniel
 ---
 
 <div class="media image">

@@ -1,10 +1,11 @@
 ---
+title: Rock Hudson's Telegraph to Nancy Reagan Before His Death From AIDS
+date: 2016-03-06 00:00:00 Z
 layout: post
-title: "Rock Hudson's Telegraph to Nancy Reagan Before His Death From AIDS"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
+
 <img src="{{ site.baseurl }}/assets/reagannote.jpg" alt="" width="700px"/>
 
 <small>

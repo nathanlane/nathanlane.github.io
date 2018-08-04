@@ -1,9 +1,9 @@
 ---
+title: 'Quick Note: Upgrading to Microsoft Open R in Linux'
+date: 2016-07-26 00:00:00 Z
 layout: post
-title: "Quick Note: Upgrading to Microsoft Open R in Linux"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 <img src = "{{ site.baseurl }}/assets/firstwheelie.jpg" width = "700px" >

@@ -1,9 +1,9 @@
 ---
+title: Concrete Development & Path Dependent Capital in Afghanistan
+date: 2016-07-18 00:00:00 Z
 layout: post
-title: "Concrete Development & Path Dependent Capital in Afghanistan"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 <img src="{{ site.baseurl }}/assets/cementafghanistan_4.jpg" width="700px">

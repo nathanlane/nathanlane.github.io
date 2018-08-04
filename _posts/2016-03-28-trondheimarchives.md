@@ -1,10 +1,11 @@
 ---
+title: Stalinist Russia from the Trondheim Archives
+date: 2016-03-28 00:00:00 Z
 layout: post
-title: "Stalinist Russia from the Trondheim Archives"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
+
 <img src="{{ site.baseurl }}/assets/fromthekremlin.jpg" alt="" width="700px"/>
 <img src="{{ site.baseurl }}/assets/comrades.jpg" alt="" width="700px"/>
 

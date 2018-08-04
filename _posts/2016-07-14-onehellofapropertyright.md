@@ -1,9 +1,9 @@
 ---
+title: One Helluva Property Right
+date: 2016-07-14 00:00:00 Z
 layout: post
-title: "One Helluva Property Right"
 type: post
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 Bloomberg published a long-form <a href="http://www.bloomberg.com/graphics/2015-famous-texas-waggoner-ranch-for-sale/">piece on the sale of a "Texas Ranch That's the Size of a Small Nation"</a>. In fact, the Waggoner Ranch property is the largest U.S. ranch within a single fence:

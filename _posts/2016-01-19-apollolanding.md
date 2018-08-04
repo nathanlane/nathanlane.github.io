@@ -1,12 +1,11 @@
 ---
+title: Digitizing & (Re-) Visualizing the Apollo 11 Landing
+date: 2016-01-19 00:00:00 Z
+categories:
+- visualization
 layout: post
-title: "Digitizing & (Re-) Visualizing the Apollo 11 Landing"
 type: post
-published: true
-categories: 
-  - visualization
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 The __[Planetary DatArt blog](http://planetarydatart.blogspot.se/)__ digitized and evaluated the Apollo 11 lunar landing from some a collection of government diagrams, detailing the project in an interesting [blog post](http://planetarydatart.blogspot.se/2012/07/apollo-11-landing-site-map.html).

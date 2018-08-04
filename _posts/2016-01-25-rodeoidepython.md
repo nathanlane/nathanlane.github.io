@@ -1,10 +1,9 @@
 ---
+title: 'Quick Note: A New Python IDE for Data Work (& RStudio Lovers)'
+date: 2016-01-25 00:00:00 Z
 layout: post
-title: "Quick Note: A New Python IDE for Data Work (& RStudio Lovers)"
 type: post
-published: true
-author:
-  "Nathaniel"
+author: Nathaniel
 ---
 
 Just a quick heads-up: I've been using __[Yhat's new Python IDE, Rodeo](https://www.yhat.com/products/rodeo)__, which is pretty awesome for data-centric work. 
