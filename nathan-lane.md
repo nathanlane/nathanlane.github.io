@@ -7,6 +7,5 @@ navigation: true
 gradient: 1
 date: 2018-08-04 22:11:37 +0000
 landing_bio: Cool
-published: false
 
 ---
