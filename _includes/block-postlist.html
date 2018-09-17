@@ -1,0 +1,17 @@
+<section class="block block-postlist">
+  <div class="container">
+    <div class="columns">
+      <div class="column headline">
+        <h3>{{ section.headline }}</h3>
+      </div>
+      <ul>
+        {% for post in site.posts %}
+          <li>
+            <a href="{{ post.url }}">{{ post.title }}</a>
+            {{ post.excerpt }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

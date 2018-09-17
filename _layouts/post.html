@@ -1,8 +1,4 @@
----
-title: Land, Labor, & Capital
-layout: blog
-type: page
----
+{% include head.html %}
 
 <header class="block block-header-1">
 
@@ -24,31 +20,30 @@ type: page
 
 </header>
 
-<section class="block block-hero-3">
-  <div class="container">
-    <div class="columns">
-      <h1><a>Land, Labor, & Capital</a> Comparative economic development, economic history, &amp; data science mumbo jumbo.</h1>
-     </div>
-  </div>
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>{{ page.title }}</h1>
+			  <p>{{ page.introduction }}</p>
+
+			  {{ content }}
+
+			  <br>
+			   <p class="post--date">{{ page.date | date_to_string }}</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
 </section>
-
-{% for post in site.posts limit:25 %}
-
-<section class="block block-one-column-1">
-  <div class="container">
-    <div class="columns">
-      <div class="column">
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content | strip_html | truncatewords: 15 }}<a href="{{ post.url }}">[Read more]</a></p>        
-      </div>        
-    </div>
-  </div>
-</section>
-
-{% endfor %}
 
 <footer class="block block-footer-1">
   <div class="container">
     <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
   </div>
 </footer>
+
+{% include footer.html %}

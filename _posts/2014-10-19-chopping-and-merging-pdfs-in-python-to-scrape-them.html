@@ -1,0 +1,107 @@
+---
+title: 'Tutorial: Manipulating PDFs in Python (to Scrape Them).'
+date: 2014-10-19 08:16:08 Z
+categories:
+- Tutorials
+tags:
+- digital history
+- ocr
+- pdf
+- python
+- tutorails
+layout: post
+type: post
+status: publish
+meta: 
+author: Nathaniel
+---
+
+<p>When digitizing old data, we often start with a pile of scanned documents we must reorganize. Much time is spent manually trudging through scans, deducing what variables exist, and selecting the tables we eventually wish to turn into machine-readable data. When you have hundreds of multi-page PDFS, this can be a painful experience. However, automating PDF manipulation with Python can save major time.</p>
+<h3>The Problem</h3>
+<p>We start with scans of old, provincial statistical yearbooks for a Southeast Asian country.</p>
+<p>Each yearbook page corresponds to a variable we want: page 1 has land statistics, page 2 has rice statistics, page 3 irrigation, etc..</p>
+<p>We want to reorganize this stack of yearbooks into something that is easier to digitize and organized by variable, not province. In essence (to the data scientist) we need to "reshape" our scanned PDF data.</p>
+<p>To restate the problem:</p>
+<ul>
+<li>
+<h4>Have: Province x Variable PDFs</h4>
+<p>Most old historical data comes in the following format: hard copy volumes organized by province, state, region, etc., each with the same set of tables (<em>cough</em> variables).</li>
+<li>
+<h4>Need: Variable x Province PDFs</h4>
+<p>And most of the time we want to pull certain pages from each geographic volume and create a new document for each variable.</li>
+</ul>
+<h3>The Code</h3>
+<p>The following is written for Python 3.* and uses the <strong><a title="pyPDF2" href="https://pypi.python.org/pypi/PyPDF2" target="_blank">PyPDF2 package</a></strong> (which is a <strong><a title="PyPdf" href="http://pybrary.net/pyPdf/" target="_blank">fork of the original PyPdf package</a></strong>), as well as the <code>OS</code> module for directory manipulation.</p>
+<p>The code starts with a directory containing our multi-page PDFs and creates a sub-folder to store individual pages, <code>/splits.</code></p>
+
+{% highlight Python %}
+
+#The only two modules you need:
+import os
+from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
+
+#The directory of your (multipage) PDF files.
+start_dir = "/our/working/path" # Main working directory with PDFs to chop/clean
+
+#Make the following dirs if it doesn't exist.
+splits = os.path.join(start_dir, "splits1")
+if not os.path.exists(splits): os.makedirs(splits)
+{% endhighlight %}
+
+
+<p>Second, our stack-o-PDFs are read, chopped, and their pages are placed in (page) numbered folders.</p>
+<p>The following code chunk begins at the <code>/start_dir</code>, the file containing our original PDF files. We read each scan and then loop over its pages with the line, <code>for i in xrange(in_file_pdf.numPages)</code>. Each page <code>i</code> is saved to a variable folder, corresponding to its page number: first pages are saved in <code>start_dir/splits/1</code>; second pages, into <code>start_dir/splits/2</code> folder, etc..</p>
+
+{% highlight Python %}
+
+for filename in os.listdir(start_dir):
+    #Run the following on PDFs only.
+    if filename.endswith('.pdf'):
+    #Show current multi-page PDF.
+        print("Splitting "+filename)
+
+        #Define input files, paths.
+        in_file = os.path.join(start_dir,filename)
+        in_file_pdf = PdfFileReader(file(in_file, "rb")) #(be explicit about binary file)
+
+        for i in xrange(in_file_pdf.numPages):
+            output = PdfFileWriter()
+
+            #Make subfolder for each page, but only once.
+            num_path = os.path.join(splits,str(i))
+            if not os.path.exists(num_path): os.makedirs(num_path)
+
+            #Add i page to output, define output path, save, close outputstream.
+            output.addPage(in_file_pdf.getPage(i))
+            out_file_pdf = os.path.splitext(filename)[0]+str(i)+".pdf" #Add i number to new name.
+            out_file = os.path.join(splits,str(i),out_file_pdf)
+            print("Saving "+out_file)
+            outputStream = file(out_file, "wb")
+            output.write(outputStream)
+            outputStream.close()
+{% endhighlight %}
+
+<p>Third, after chopping and saving, we combine the separated pages into variable-based PDFs.</p>
+<p>The following code loops over each page folder (<code>/splits/1</code>, <code>/splits/2</code>,<code>...</code>). Using pyPDF2's <code>PdfFilerMerge </code>function, we combine pages within each folder into a single PDF file.</p>
+<p>Hence, the first page of each provincial yearbook is combined into a new file (i.e. the pages in <code>/splits/1</code> become 1.pdf), which we can then scrape/digitize/pre-process/whatever.</p>
+
+{% highlight Python %}
+for root, dirs, filenames in os.walk(splits):
+    for dir in dirs:
+        merger = PdfFileMerger()
+        dirname = os.path.join(splits, dir)
+        print(dirname)
+        for filename in os.listdir(dirname):
+            print(filename)
+            in_file_pdf = os.path.join(splits, dir, filename)
+            print(in_file_pdf)
+            merger.append(PdfFileReader(file(in_file_pdf, "rb")))
+
+        out_file_pdf = str(dir)+".pdf"
+        out_file = os.path.join(splits, out_file_pdf)
+        outputStream = file(out_file, "wb")
+        merger.write(outputStream)
+        outputStream.close()
+{% endhighlight %}
+
+<p>Importantly, your project will probably look much different from this, but combining the <code>OS module</code> with the <code>pyPDF2 package</code> in Python can make many splitting/merging tasks trivial. Digitizing old data often entails mind-numbing file manipulation, so a little Python can go a long way.</p>

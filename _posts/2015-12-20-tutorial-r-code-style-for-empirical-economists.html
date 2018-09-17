@@ -1,0 +1,69 @@
+---
+title: 'Tutorial: R Code Style for Empirical Economists'
+date: 2015-12-20 00:00:00 Z
+categories:
+- Tutorials
+tags:
+- Code
+- programming
+- r
+layout: post
+type: post
+status: publish
+image: ibm_1280.jpg
+author: Nathaniel
+---
+
+<p><div class="media image"><div class="media image"><img src="{{ site.baseurl }}/assets/ibm_1280.jpg" alt="" /></div></div> Make your code understandable. <emph>IBM's data center in the 1960s, Toronto. Source:<a href="http://ibm-1401.info/IBM1401_ArchivePics.html">ibm-1401.info/</a></emph> </p>
+<h4>Heuristics, Hunches, &amp; Why the Heck We Care.</h4>
+<p>We hear many horror stories about big names having their results over turned over because of problems in our code. The struggle is real.</p>
+<p>With this in mind, even simple <i>rules of thumb</i> used in programming can have large payoffs for social scientists. Especially since best practices are never discussed in graduate coursework. A few good norms can go a long way in making data-driven research reproducible, sharable, and readable by collaborators.</p>
+<p>In this post I cover some coding norms used by clean coding gurus and R developers. While I am talking to R users, I’m much of this is generalizable to Stata folks and beyond.</p>
+<p>Now, I’m not going to get advanced here, such as discuss unit testing or object-oriented specifics. Most of us are social scientists and aren’t developing applications. While “code-driven” research can learn a lot form from the craft of programming, our needs are bit a different. Gentzkow and Shapiro make a huge point in their recent work on big data practices for economists: if professionals are paying to do it is is likely important. However, I am not sure how much is practical for the social scientist.</p>
+<p>I’ll go out on a limb: researchers probably ought to emphasize readability and reproducibility over writing slick code. The programming background of collaborators varies wildly, so understandability is a must. Seldom are we working with industrial scale projects. In fact, most big data people would probably laugh at what we consider “big.”</p>
+<h4>The Broad Stuff : humbling “bang for your buck” rules.</h4>
+<p>A lot of this will seem like plain common sense, of course. Then again, many of us never think to do it. </p>
+<p>First things first, consider the <i>clean code theorem</i>, from <a href="http://shop.oreilly.com/product/9780596802301.do">&quot;The Art of Readable Code.&quot;</a></p>
+<blockquote><p><strong>A clean code theorem :</strong> &quot;Code should be written to minimize the time it would take for someone else to understand it.&quot;</p>
+</blockquote>
+<p><strong>Consistency is key.</strong></p>
+<p>Consistency goes a long way in making a code readable. This applies to the naming rules, syntax, capitalization, white spaces, how we indent, etc.. This type of rigidity makes our work more navigable. And this consistency minimizes the “WTFs per minute” we face we staring into the black hole of code we wrote a year ago.</p>
+<p><strong>Comment &amp; document like you’re at risk for a head injury.</strong></p>
+<p>It goes without saying, coding and documentation are huge. Many people who started off as research assistants have been admonished for not commenting enough. However, advice often stops there. However, any good programming book or style-guide spends a lot of time thinking about the way we document our work.</p>
+<p>Comment often, but be brutally concise and to the point. Elucidate complex tasks and consider your audience. Since their backgrounds vary, seemingly simple tasks may have to be spelled out.</p>
+<p>More is not always better however. For instance, comments easily become outdated. In fact, clean code practices in other domains can reduce the need for us to explain everything to the user. As in the case of naming, code can speak for itself.</p>
+<p>More generally, document your work. Make documentation consistent feature of your script layouts, keeping updated descriptions in file headers.</p>
+<p><strong>Use meaningful, informative names.</strong></p>
+<p>Informative names make code infinitely more readable. In fact, smart naming forces us to think deeper about our code and reduces the possibility of errors.</p>
+<p>Use concrete, descriptive words and avoid ambiguity. Nouns are used for variables—as well as for classes and attributes — and describe what they contain. Similarly, use verbs to describe functions and the action (hopefully singular) they perform. The names of script files explain what they do and end in capital R.</p>
+<p>You would be surprised how much clean coding texts emphasize this. Consider an apt quote from the late-computer scientist, <strong>Phil Karton</strong>:</p>
+<blockquote><p>“There are only two hard things in Computer Science: cache invalidation and naming things.”</p>
+</blockquote>
+<p>Try longer names, they hold more information and spare us from mysterious abbreviations. Contemporary code guides and <a href="http://www.aroma-project.org/developers/RCC">R convention are moving toward long names</a>. After all, solid IDEs — and new versions of RStudio — autofill variable names, reducing the cost of typing long names into out files.</p>
+<blockquote><p><em>Note: By variables I mean the objects in R/Python/etc., not to be confused by variable names used in the final output of cleaned data.</em></p>
+</blockquote>
+<p><strong>Layouts Matter.</strong></p>
+<p>Structure your script in a coherent, organized way. A lot of time spent thinking about the structure of code — as well as writing documentation — can save heartache.</p>
+<p>Consider <a href="https://google.github.io/styleguide/Rguide.xml#generallayout">Google’s R style guide suggestion for layouts</a>, much of which can be applied to Stata and other languages:</p>
+<pre><code>
+Copyright statement comment
+Author comment
+File description comment, inputs, and outputs
+source() and library() statements
+Function definitions
+Executed statements, if applicable (e.g., print, plot)
+</code></pre>
+<p><strong>Write D.R.Y. Code (Don’t Repeat Yourself).</strong></p>
+<p>Avoid repetition and duplicated code. The habit of pasting giant chunks of code is ubiquitous in economics. However, this practice is a cardinal sin among developers. Errors propagate and multiply. Fixing errors becomes complicated.</p>
+<p>Consider a bastardization of the famous &quot;rule of three&quot;, from Martin Fowler&#39;s seminal book on refactoring: First, we write code to get the job done. Second, we shudder and duplicate what we did. The third time, we think a little more deeply about how to rework (in coding parlance, &quot;refactor&quot;) and streamline out code. In other words, ask yourself: can I generalize what I&#39;m doing in a concise way?</p>
+<p><strong>Modularize.</strong></p>
+<p>Breaking code into re-usable, independent chunks will make code easier to read and debug.</p>
+<p>Functions play a key role in modularization. Use them often, keeping them short and specific to a task. <em>(Note: I recommend <a href="http://www.stat.cmu.edu/~cshalizi/402/programming/writing-functions.pdf">Cosma Shalizi’s notes on writing good R functions</a> and the <a href="http://nicercode.github.io/guides/functions/">Clean Code github’s function tutorial</a> ).</em></p>
+<p>Limit your <em>actual script files</em>. Split them into two files if necessary. At minimum, you should divide analysis and data preparation. Jonathan Nagler of NYU Polisci. <a href="www.nyu.edu/classes/nagler/quant2/coding_style.html">explains why</a>: </p>
+<blockquote><p>&quot;Separating data-manipulation and data-analysis is an example of modularity. ... The logic for this is simple. Lots of things can go wrong. You want to be able to isolate what went wrong. You also want to be able to isolate what went right.&quot;</p>
+</blockquote>
+<p><strong>Refine and Refactor.</strong></p>
+<p>Code should improve through time. Clean code gurus repeat a code of conduct adopted from the U.S. Boy Scout dictum: </p>
+<blockquote><p>“Leave the <strike>campground</strike> code cleaner than you found it” </p>
+<p> -<a href="http://amzn.com/0132350882%29.">Bob Martin’s &quot;Clean Code: A Handbook of Agile Software Craftsmanship&quot;</a>.</p>
+</blockquote>
