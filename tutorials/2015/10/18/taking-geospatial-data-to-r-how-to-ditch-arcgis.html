@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="">
+    <title>Geospatial Data in R - Nathan Lane - nathanlane.github.io</title>
+    <meta name="author" content="Dr. Nathan Lane">
+    <meta name="description" content="The personal webpage of Assistant Professor/Lecturer, Nathaniel Lane.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Karla:300,400,700">
+</head>
+<body>
+
+<header class="block block-header-1">
+
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
+  </div>
+
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
+
+</header>
+
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>Geospatial Data in R</h1>
+			  <p></p>
+
+			  <h3>Taking Geospatial Data to R (& how to ditch ArcGIS)</h3>
+
+<p>For R users it's very straightforward to ditch ArcGIS (for most tasks) in favor of doing everything through an R script. There are many reasons to do this:</p>
+
+<ul>
+<li>First, if you can do GIS work on your Linux system or Mac without having to run things through a lame emulator.
+<li>Second, you can cut yourself loose from dealing with the clunky ArcGIS licensing system.
+<li>Third, the GIS/R user community is pretty dang big, with a growing collection of resources and libraries.
+<li>Fourth, you can escape the mysterious, temperamental nature of ArcGIS and have full control over data outputs. Most quant folks I know try to minimize their time processing things on ArcGIS, outsourcing data as soon as possible to Stata or R. By working entirely in R lets you skip the murky black box of ArcGIS.
+</ul>
+
+<p>All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.</p>
+
+<img src="/assets/calledout.gif" width="500px" alt="Damnnnnnn" />
+
+<p>Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..</p>
+
+<p>To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html"><i> this is helpful to note if you're a Linux user</i></a>).</p>
+
+<p><b>Starting with Raster Data</b></p>
+
+<p>Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as .csv file. Specifically, <code>library( raster )</code> is enough to load raster-based images directly into R.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span><span class="w">
+</span><span class="n">weatherfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"/home/user/population_raster.tif"</span><span class="w">
+</span><span class="n">rasterweather</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raster</span><span class="p">(</span><span class="w"> </span><span class="n">weatherfile</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">popfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"/home/user/population_raster.tif"</span><span class="w">
+</span><span class="n">rasterpop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raster</span><span class="p">(</span><span class="w"> </span><span class="n">popfile</span><span class="w"> </span><span class="p">)</span><span class="err"> </span></code></pre></figure>
+
+<p>Crop to the size of Europe shapefile; the extent() function helps with this.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">rasterpop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">crop</span><span class="p">(</span><span class="w"> </span><span class="n">rasterpopfile</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="n">rasterweather</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+<p>Above, I used the <code>extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.</p>
+<p>One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to <em>see</em> multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile):</code></p>
+
+<p><img class="alignnone" src="/assets/Rplot04.jpg" alt="" width="521" height="614" /></p>
+
+<p>Similarly, it is fairly easy to plot multiple layers. Of course there are all sorts of wacky things you can do to visualize GIS objects, but this is pretty much what you need to graphically verify nothing wacky is going on. Hence, manipulating GIS data programmatically in R doesn't mean flying blind.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Superimpose a rasters and vectors by using "add=TRUE"</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">rasterpop</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">countryshape</span><span class="p">,</span><span class="w"> </span><span class="n">add</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></figure>
+
+
+<p>Moreover, it's pretty straightforward to perform common manipulations of raster data, such as changing the changing the CRS. One can change the projection by using the <code>reprojectRaster()</code> function followed by the <code>resample()</code> function.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Say we have another raster with a different coordinate system.</span><span class="w">
+</span><span class="c1"># We can save this coordinate system using the proj4string() function.</span><span class="w">
+</span><span class="n">target_raster</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">raster</span><span class="p">(</span><span class="w"> </span><span class="s2">"/home/user/target_raster.tif"</span><span class="w"> </span><span class="p">)</span><span class="err"> </span><span class="w">
+</span><span class="n">target_crs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">proj4string</span><span class="p">(</span><span class="w"> </span><span class="n">target_raster</span><span class="w"> </span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Reproject using the projectRaster() function and the target_crs.</span><span class="w">
+</span><span class="n">re_rasterpopfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">projectRaster</span><span class="p">(</span><span class="w"> </span><span class="n">rasterpopfile</span><span class="p">,</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_crs</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bilinear"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Reproject using the projectRaster() function and the target_crs.</span><span class="w">
+</span><span class="n">re_rasterpopfile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">resample</span><span class="p">(</span><span class="w"> </span><span class="n">re_rasterpopfile</span><span class="p">,</span><span class="w"> </span><span class="n">target_raster</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bilinear"</span><span class="p">)</span></code></pre></figure>
+
+
+<p>The first manipulation changes coordinate system of a current raster, changing it to match the target coordinate system; the second function is necessary so that the grid of the starting raster matches the grid of the target raster.</p>
+
+<p>Alternatively, you can easily specify nearest neighbor methods if you are working with categorical raster data. Now, both the target and starting raster layers should have the same resolution.</p>
+
+<p>While <code>resample()</code> allows us to align the grids of the two files, if the target raster is much more coarse--at a much lower resolution--we should use the <code>aggregate()</code> function, which lets us aggregate the cells of the fine raster to the larger raster; <code>disaggregate()</code> does just the opposite.</p>
+
+<p><b>Shapefiles &amp; Vector Manipulations</b></p>
+
+<p>The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.</p>
+
+<p>Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or <em>class</em>, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.</p>
+
+<p>The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="w"> </span><span class="n">rgdal</span><span class="w"> </span><span class="p">)</span><span class="w"> 
+</span><span class="c1"># Read in with readOGR since it preserves CRS projections.</span><span class="w">
+</span><span class="n">globeshape</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">readOGR</span><span class="p">(</span><span class="w"> </span><span class="n">dsn</span><span class="o">=</span><span class="w"> </span><span class="s2">"/home/user/countries.shp"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"countries"</span><span class="w"> </span><span class="p">)</span><span class="w"> 
+</span><span class="n">plot</span><span class="p">(</span><span class="w"> </span><span class="n">globeshape</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+<img src="/assets/globen.jpg" width="450px" alt="" />
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Subset the European files. </span><span class="w">
+</span><span class="n">swedeshape</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">globeshape</span><span class="p">[</span><span class="w"> </span><span class="n">globeshape</span><span class="o">$</span><span class="n">COUNTRY</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Sweden"</span><span class="p">,</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="w"> </span><span class="n">swedeshape</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+
+<img src="/assets/sweden.jpg" alt="" width="300px"/>
+
+<p><b>Ingredients to Manipulating GIS Data En Masse</b></p>
+
+<p>Sure R is a free, programmatic solution to working with spatial data. Sure it also gives you transparent control over transforming spatial data. However, a big benefit of using R is being able to manipulate giant chunks of geographic data--and to do so in a way that is reproducible via a script.</p>
+
+<p>Work with <em>Brick</em> and <em>Stack</em> Objects</p>
+
+<p><em>RasterBrick</em>s and <em>RasterStack</em>s are your friend when working with big datasets. For instance, weather data often comes in the compact NetCDF format, where a common NetCDF file may contain hundreds of layers of daily weather data, each dimension representing geocoded raster data for a single day. RasterBricks are useful in this case, and store a multi-layered raster file in a single object that can be manipulated.</p>
+
+<p>With the <code>ncdf4</code> library, you can load a 365 layer NetCDF raster file directly into R. Together with the <code>brick()</code> function (from the <code>raster</code> package), you can work with large, multi-dimensional raster files as if they were one single raster file. In other words, you can apply raster manipulations to a block of raster data directly by defining it as a brick (or <code>stack()</code> as well, though raster bricks and raster stacks are treated a bit differently in memory). This is handy when you want to resize, crop, or transpose an entire set of raster layers all at once instead of looping through each individual raster layer.</p>
+
+<p>For instance, using the <code>ncdf4</code> library I can load a giant NetCDF file directly; together with the <code>raster</code> library's <code>brick()</code> function, you get load an entire NetCDF file and recognize it as a RasterBrick with minimal fuss</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="w"> </span><span class="n">ncdf4</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="w"> </span><span class="n">raster</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">netdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">nc_open</span><span class="p">(</span><span class="w"> </span><span class="s2">"/home/user/rain.2015.nc"</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">netdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="w"> </span><span class="n">netdata</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">dailyweather</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">brick</span><span class="p">(</span><span class="w"> </span><span class="n">netdata</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+
+<p>And we chop hundreds of layers to an appropriate size in one go,</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">cropsize</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">extent</span><span class="p">(</span><span class="w"> </span><span class="n">eushape</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="n">cropped_dailyweather</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">crop</span><span class="p">(</span><span class="w"> </span><span class="n">dailyweather</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">crop_size</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+
+<p>We can also multiply a multi-dimensional brick object by a single raster layer, effectively multiplying a hundred rasters contained in the brick with the singleton layer. I find this extremely useful for calculation population-based weights.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">weatherXpop</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">overlay</span><span class="p">(</span><span class="w"> </span><span class="n">crop_dailyweather</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">population_raster</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+
+<p><strong>Parallelization, foreach/plyr, apply, and data.table</strong></p>
+
+<p>If you're trying to programmatically manipulate many files at once, you can speed things up tremendously with a a number of R libraries and features, especially those that support parallelization.</p>
+
+<p>For instance, the omnipresent <code>plyr</code> package and the handy <code>foreach</code> package allow you to parallalize time consuming manipulations of GIS data, especially GIS tasks that you would normally loop, such as computing repetitive calculations of zonal statistics and such. I'm not sure what geoprocessing tools are supported by ArcGIS' own parallel processing environment, but R certainly allows you to flexibly use the power of your multi-core processors for intensive tasks.</p>
+
+<p>Moreover, if you are manipulating GIS data and assembling the results into a dataset--e.g. `growing' a panel dataset of annual mean temperature readings across municipalities--the <code>data.table</code> package can be very helpful in speeding things along and reducing processes that are usually quite inefficient in R.</p>
+
+			  <br>
+			   <p class="post--date">18 Oct 2015</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
+</section>
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="">
+    <title>Quick Note: Using 'ff' to quickly save giant data sets in R - Nathan Lane - nathanlane.github.io</title>
+    <meta name="author" content="Dr. Nathan Lane">
+    <meta name="description" content="The personal webpage of Assistant Professor/Lecturer, Nathaniel Lane.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Karla:300,400,700">
+</head>
+<body>
+
+<header class="block block-header-1">
+
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
+  </div>
+
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
+
+</header>
+
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>Quick Note: Using 'ff' to quickly save giant data sets in R</h1>
+			  <p></p>
+
+			  <div class="media image">
+<img src="/assets/motorcycle1970s.jpg" />
+<center><small>Using a really powerful library to do something simple.</small></center>
+</div>
+
+<p>For a current project, I am having to repeatedly manipulate and save a hundred datasets, each with about 4 million observations. While R tools like <code>fread()</code>, part of <strong><a href="https://cran.r-project.org/web/packages/data.table/index.html">the <code>data.table</code> library</a></strong>, make it trivial to load massive data sets into memory, <em>writing</em> these data sets–and doing so repeatedly–is another story..</p>
+
+<p>When trying to save big data sets, many of folks first recommend the <code>write.table()</code> function, which gives some people performance gains over the default <code>write.csv()</code> method. For my project, <code>write.table()</code> wasn’t cutting it and, instead, often crashed my system.</p>
+
+<p>Enter the <strong><a href="https://cran.r-project.org/web/packages/ff/index.html"><code>ff</code> library</a></strong>, an incredibly handy tool for working with big data. In fact, ff nimbly deals with some of R’s serious memory issues (<strong><a href="http://ff.r-forge.r-project.org/bit&amp;ff2.1-2_WU_Vienna2010.pdf">see a more technical guide here.</a></strong>). Instead of doing anything fancy with ff, however, I realized one could harness the library to simply save problematic data sets. The performance gains were striking.</p>
+
+<h4 id="a-simple-alternative-to-writetable">A simple alternative to write.table():</h4>
+
+<p>Below I take a data.table object I was manipulating (perhaps in a loop), convert it into an “ff dataframe” (ffdf), which I can then save using <code>ff</code>’s speedy .csv file writing function.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span><span class="w"> </span><span class="c1"># For use of piping %&gt;%.</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span><span class="w"> </span><span class="c1"># I use data.table to manipulate large datasets.</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span><span class="w"> </span><span class="c1"># And the key package we'll use to save.</span><span class="w">
+
+  </span><span class="c1"># (Let's say I perform a bunch of data.table manipulations here)</span><span class="w">
+
+  </span><span class="c1"># Start with the data.table object,</span><span class="w">
+  </span><span class="n">mygiant_datatable</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+
+    </span><span class="c1"># ... transform it into an ff dataframe,</span><span class="w">
+    </span><span class="n">as.ffdf</span><span class="p">(</span><span class="w"> </span><span class="n">.</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+
+    </span><span class="c1"># Write the ffdf object using ff's csv writing function.</span><span class="w">
+    </span><span class="n">write.csv.ffdf</span><span class="p">(</span><span class="w"> </span><span class="n">.</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/my/file/path/myfile.csv"</span><span class="p">)</span></code></pre></figure>
+
+<p>Note: the type of data table (mygiant_datatable) I was working with was quite simple, composed of only a few numeric columns. Thus, coercing the data into an ffdf object was no problemo.</p>
+
+<p>Of course, in the cheap workaround above, the <code>as.ffdf()</code> adds a costly step (time-wise). However, it was well worth the benefit of utilizing the <code>write.csv.ffdf()</code> function … and worth not crashing <em>ad nauseum</em>.</p>
+
+
+			  <br>
+			   <p class="post--date">27 Jan 2016</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
+</section>
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>
+
+  </body>
+</html>

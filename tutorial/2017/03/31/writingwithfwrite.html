@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="">
+    <title>Quick Note: Writing large .csv files in R with fwrite()! and beyond - Nathan Lane - nathanlane.github.io</title>
+    <meta name="author" content="Dr. Nathan Lane">
+    <meta name="description" content="The personal webpage of Assistant Professor/Lecturer, Nathaniel Lane.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Karla:300,400,700">
+</head>
+<body>
+
+<header class="block block-header-1">
+
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
+  </div>
+
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
+
+</header>
+
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>Quick Note: Writing large .csv files in R with fwrite()! and beyond</h1>
+			  <p></p>
+
+			  <h4> The problem.</h4>
+
+<p>R can be nasty when it comes to reading and writing “large” datasets. As practitioners, we often appeal to hacky practices, emergent libraries, alternatives methods to avoid crashing our systems during heavy jobs.</p>
+
+<p>One alternative <a href="/tutorial/2016/01/27/ffasthackforbigdata.html">I had the appealed to</a> was the <strong><a href="https://cran.r-project.org/web/packages/ff/index.html"><code>ff</code> library</a></strong> , a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig .csv files (<code>write.table.ffdf</code>).</p>
+
+<p>Recently, however, <code>write.table.ffdf</code> (and other go-to methods) seemed to constantly crash large jobs on my Linux machine. I’d come back to my computer to only to find,</p>
+
+<div class="media image">
+<img src="/assets/fatality.png" />
+</div>
+
+<h4> fwrite() to the rescure.</h4>
+
+<p>(Re-)enter the <code>data.table</code> package. Like <code>ff</code>, <code>data.table</code> is useful in its own right for processing big data. Though the library <strong>had</strong> great methods for quickly opening large files with its <code>fread()</code> command, it lacked a comparable <code>fwrite()</code> command. Until now…</p>
+
+<p><code>data.table</code> author, <strong><a href="https://github.com/mattdowle">Matt Dowle</a></strong>, is experimenting with adding (See his extensive blog post <a href="http://blog.h2o.ai/2016/04/fast-csv-writing-for-r/">here</a>) an <code>fwrite()</code> functon (contributed by Otto Seiskari) to the package. Like <code>fread()</code>, <code>fwrite()</code> is also written in C and is surprisingly efficient.</p>
+
+<p>The <code>fwrite()</code> function has truly come through for me, allowing me to write terrabytes of weather data without the complications I have run into with other packages.</p>
+
+<h4>Installing fwrite() functionality.</h4>
+
+<p>As of March 30, 2017, <code>fwrite()</code> function hasn’t been added to current, core CRAN release of the package. To install the development version of the <code>data.table</code> library with the <code>fwrite()</code> command, you’ll have to uninstall your current standard version of the library and install the development version from the github repository:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">remove.packages</span><span class="p">(</span><span class="s2">"data.table"</span><span class="p">)</span><span class="w">
+</span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"data.table"</span><span class="p">,</span><span class="w"> 
+	</span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"source"</span><span class="p">,</span><span class="w">
+    </span><span class="n">repos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"http://Rdatatable.github.io/data.table"</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+<p>See <a href="https://github.com/Rdatatable/data.table/wiki/Installation">the data.table wiki for more</a>.s</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">installing</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">XXX</span><span class="o">/</span><span class="n">R</span><span class="o">/</span><span class="n">x</span><span class="m">86</span><span class="err">_</span><span class="m">64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">gnu</span><span class="o">-</span><span class="n">library</span><span class="o">/</span><span class="m">3.3</span><span class="o">/</span><span class="n">data.table</span><span class="o">/</span><span class="n">libs</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">R</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">inst</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">byte</span><span class="o">-</span><span class="n">compile</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">prepare</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">lazy</span><span class="w"> </span><span class="n">loading</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">help</span><span class="w">
+</span><span class="o">***</span><span class="w"> </span><span class="n">installing</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">indices</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">building</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">indices</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">installing</span><span class="w"> </span><span class="n">vignettes</span><span class="w">
+</span><span class="o">**</span><span class="w"> </span><span class="n">testing</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">installed</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">loaded</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">DONE</span><span class="w"> </span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span></code></pre></figure>
+
+<p>There wont be any documentation; don’t be alarmed when nothing shows up when you type <code>?(?)fwrite</code>:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span><span class="w"> </span><span class="o">?</span><span class="n">fwrite</span><span class="w">
+</span><span class="n">No</span><span class="w"> </span><span class="n">documentation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">‘</span><span class="n">fwrite</span><span class="err">’</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">specified</span><span class="w"> </span><span class="n">packages</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">libraries</span><span class="o">:</span><span class="w">
+</span><span class="n">you</span><span class="w"> </span><span class="n">could</span><span class="w"> </span><span class="n">try</span><span class="w"> </span><span class="err">‘</span><span class="o">??</span><span class="n">fwrite</span><span class="err">’</span></code></pre></figure>
+
+<p>For my current project I have to repeatedly process a hundred files, each with over 40 million lines (around 4 gigs each). Writing these data.frames to a .csv takes under a minute on a pretty lowly desktop:</p>
+
+<div class="media image">
+<img src="/assets/fwritespeed.png" />
+</div>
+
+<p>Much faster than other methods.</p>
+
+<p>Also: fairly recently, the prolific Wes McKinney and Hadley Wickham developed the <code>feather</code> package (<a href="http://github.com/wesm/feather">See: http://github.com/wesm/feather</a>.) to address some of the memory issues that plague folks trying to edit and save large data sets in R (See a pretty good discussion <a href="https://blog.rstudio.org/2016/03/29/feather/">here</a>.).</p>
+
+
+			  <br>
+			   <p class="post--date">31 Mar 2017</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
+</section>
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>
+
+  </body>
+</html>
