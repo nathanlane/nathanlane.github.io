@@ -32,15 +32,15 @@ page_sections:
   background_image: ''
 - template: text-only-hero-banner
   block: hero-1
-  heading: '<strong>I enjoy using<span class="Apple-converted-space"> </span></strong><a
+  heading: <strong>I enjoy using<span class="Apple-converted-space"> </span></strong><a
     href="" title=""><strong>statistical learning</strong></a><strong><span class="Apple-converted-space">
     </span>and<span class="Apple-converted-space"> </span>computational tools<span
     class="Apple-converted-space"> </span>to work with old, messy, and </strong><a
     href="" title=""><strong>unstructured data</strong></a><strong>.</strong><br><br><strong>I
-    study comparative historical development: how and why some economies modernize
-    and why others do not. I''m particularly interested in the way states shape their
-    economic fortunes - especially through </strong><a href="" title=""><strong>industrial
-    policy</strong></a><strong>.</strong>'
+    study comparative economic development. Why some economies modernize and others
+    do not, particularly through history. I'm particularly interested in the role
+    played by state politics - especially the use of </strong><a href="" title=""><strong>industrial
+    policies</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
   content: <p><a href="https://www.dropbox.com/s/b9mll7fx26j6uia/ManufacturingRevolutions_Lane_Live.pdf?dl=0">Manufacturing
