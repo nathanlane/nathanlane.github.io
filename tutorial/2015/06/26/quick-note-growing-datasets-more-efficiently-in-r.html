@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="">
+    <title>Tutorial: Growing Datasets in R - Nathan Lane - nathanlane.github.io</title>
+    <meta name="author" content="Dr. Nathan Lane">
+    <meta name="description" content="The personal webpage of Assistant Professor/Lecturer, Nathaniel Lane.">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Karla:300,400,700">
+</head>
+<body>
+
+<header class="block block-header-1">
+
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
+  </div>
+
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
+
+</header>
+
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>Tutorial: Growing Datasets in R</h1>
+			  <p></p>
+
+			  <div class="media image"><img src="/assets/pushingworkers_fieldmuseum.jpg" alt="From the Field Museum collection" /></div>
+<p><small>Figure: <a href="http://fieldmuseumphotoarchives.tumblr.com/">From the Field Museum archives, 1920, Photographer Herbert P. Burtch, Oriental Institute. "Men moving Totem Pole outside Field Museum by train."</a></small></p>
+
+<p><code>Note: This was originally some notes to RAs but I figured it may be useful for other people out there.</code></p>
+
+<p>I've had some discussion with econ folks and RAs who are working with giant datasets in R for the first time. In particular, those having to <em>"harvest"</em> or <em>"grow" </em>unweildy datasets. R is notoriously slow when it comes to expanding datasets, such as when you want to increntally append rows to a file with results from a scraping API, or combine a giant stack of raw text files from another text mining project.</p>
+
+<p>The usual "good" method for concatination uses a <code>do.call</code> function with the rbind function. This method essentially takes a list of stuff and passes them as arguments all at once to <code>rbind</code>. In other words, you can take a list of <em>data.frame</em> names and bind the rows together in one motion: <code>do.call("rbind", &lt;&lt;&lt;A list of data.frame names&gt;&gt;&gt;)</code>.</p>
+
+<h3>A Usual Approach </h3>
+
+<p>A common task I encounter is grabbing a chunk of files from a directory and combining them into a dataset. Such a task requires three steps. First, generating a list of files from a directory that match a pattern (e.g. all the .csv files in a directory) using the <code>list.files()</code> function. Next, looping over this list of files and loading them into R with with <code>lapply</code>, applying the <code>read.csv()</code> function to a list of files. Then, finally, using <code>do.call()</code> to <code>rbind</code>, or stack, all the loaded <em>.csv</em> files into a single dataset.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># Grab the list of files in the directory "/home/user/foo" that end in ".csv"</span><span class="w">
+</span><span class="n">csvlist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">list.files</span><span class="p">(</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/home/user/foo"</span><span class="p">,</span><span class="w">
+				</span><span class="n">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">".csv"</span><span class="p">,</span><span class="w">
+				</span><span class="n">all.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w">
+				</span><span class="n">full.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+				</span><span class="n">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="w"> </span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># "Apply" the read.csv function to the list of csv files.</span><span class="w">
+</span><span class="n">csvloaded</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="w"> </span><span class="n">csvlist</span><span class="p">,</span><span class="w"> </span><span class="n">read.csv</span><span class="w"> </span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Append the loaded .csv files into a list.</span><span class="w">
+</span><span class="n">dataset1</span><span class="w"> </span><span class="o">&lt;-</span><span class="n">do.call</span><span class="p">(</span><span class="w"> </span><span class="s2">"rbind"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">csvloaded</span><span class="w"> </span><span class="p">)</span></code></pre></figure>
+
+<p>
+This is all great, but it can still take a ton of time. Note, I condense the <code>lapply</code> function and the <code>do.call</code>+<code>rbind</code> line into one.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ptm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">proc.time</span><span class="p">()</span><span class="w">
+</span><span class="n">dataset1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">do.call</span><span class="p">(</span><span class="w"> </span><span class="s2">"rbind"</span><span class="p">,</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="w"> </span><span class="n">csvlist</span><span class="p">,</span><span class="w"> </span><span class="n">read.csv</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ptm</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">elapsed</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="m">48.840</span><span class="w"> </span><span class="m">0.148</span><span class="w"> </span><span class="m">50.241</span></code></pre></figure>
+
+<p>If you're doing more complicated tasks or working with large sets of data, processing time can balloon.</p>
+
+<h3>A faster method.</h3>
+
+<p>Using <a href="https://github.com/Rdatatable/data.table/wiki">the <code>data.table</code> package</a> can speed things along if we're trying to get big data into R efficiently (<a href="I highly recommend checking out the github for the project">I highly recommend checking out the github for the project</a>).<br />
+The <code>rbindlist</code> function included in the package is incredibly fast and written in C. In addition the <code>fread</code> function is built to efficiently read data into R.</p>
+
+<p>Below I replace the normal <code>read.csv</code> function with <code>fread()</code>, and replace <code>do.call()</code>+<code>rbind()</code> with <code>rbindlist()</code>.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">data.table</span><span class="p">)</span><span class="w">
+</span><span class="n">dataset2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rbindlist</span><span class="p">(</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="w"> </span><span class="n">csvlist</span><span class="p">,</span><span class="w"> </span><span class="n">fread</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="nf">proc.time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ptm</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="n">elapsed</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="m">4.044</span><span class="w"> </span><span class="m">0.084</span><span class="w"> </span><span class="m">4.144</span></code></pre></figure>
+
+
+<p>Both methods deliver identical datasets but there are some real efficiency gains when using <code>fread</code> and <code>rbindlist</code> from the super useful <code>data.table</code> package.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">identical</span><span class="p">(</span><span class="w"> </span><span class="n">dataset1</span><span class="p">,</span><span class="w"> </span><span class="n">dataset2</span><span class="w"> </span><span class="p">)</span><span class="w">
+</span><span class="o">&gt;</span><span class="w"> </span><span class="kc">TRUE</span></code></pre></figure>
+
+<p>This can have pretty amazing payoffs when working trying to load massive data sets into R to process.</p>
+
+
+			  <br>
+			   <p class="post--date">26 Jun 2015</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
+</section>
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>
+
+  </body>
+</html>
