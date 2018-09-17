@@ -15,8 +15,9 @@ page_sections:
 - template: hero-banner-w-image
   block: hero-2
   headline: <a href="mailto:nathaniel.lane@monash.edu" title=""><strong>Dr. Nathan
-    Lane</strong></a><strong>, Assistant Professor at Monash University. I work in
-    </strong><a href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
+    Lane</strong></a><strong>, Assistant Professor* at </strong><a href="https://www.monash.edu"
+    title=""><strong>Monash University</strong></a><strong>. I work in </strong><a
+    href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
     title=""><strong>political economics</strong></a><strong>, </strong><a href="http://scholar.harvard.edu/files/shleifer/files/indust_big_push.pdf"
     title=""><strong>development</strong></a><strong>, &amp; </strong><a href="http://eh.net/eha/about/"
     title=""><strong>economic history</strong></a><strong>.</strong>
@@ -31,15 +32,15 @@ page_sections:
   background_image: ''
 - template: text-only-hero-banner
   block: hero-1
-  heading: '<strong>I enjoy using<span class="Apple-converted-space"> </span></strong><a
+  heading: <strong>I enjoy using<span class="Apple-converted-space"> </span></strong><a
     href="" title=""><strong>statistical learning</strong></a><strong><span class="Apple-converted-space">
     </span>and<span class="Apple-converted-space"> </span>computational tools<span
     class="Apple-converted-space"> </span>to work with old, messy, and </strong><a
     href="" title=""><strong>unstructured data</strong></a><strong>.</strong><br><br><strong>I
-    study comparative historical development: how and why some economies modernize
-    and why others do not. I''m particularly interested in the way states shape their
-    economic fortunes - especially through </strong><a href="" title=""><strong>industrial
-    policy</strong></a><strong>.</strong>'
+    study comparative economic development. Why some economies modernize and others
+    do not, particularly through history. I'm particularly interested in the role
+    played by state politics - especially the use of </strong><a href="" title=""><strong>industrial
+    policies</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
   content: <p><a href="https://www.dropbox.com/s/b9mll7fx26j6uia/ManufacturingRevolutions_Lane_Live.pdf?dl=0">Manufacturing
