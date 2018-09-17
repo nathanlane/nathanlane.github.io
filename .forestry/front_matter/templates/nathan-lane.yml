@@ -1,5 +1,5 @@
 ---
-label: Home
+label: Landing Page
 hide_body: false
 is_partial: false
 fields:
@@ -8,16 +8,16 @@ fields:
   type: text
   hidden: false
   default: Nathan Lane
-- name: type
-  label: Type
-  type: text
-  hidden: false
-  default: page
 - name: layout
   label: Layout
   type: text
   hidden: false
   default: default
+- name: type
+  label: Type
+  type: text
+  hidden: false
+  default: page
 - name: image
   label: Image
   type: file
@@ -34,11 +34,9 @@ fields:
   hidden: false
   default: '1'
 - type: textarea
+  name: landing_bio
+  label: landing bio
   config:
     wysiwyg: true
     schema:
-      format: html-blocks
-    required: true
-  label: landing_bio
-  name: landing_bio
-  default: "<p>Cool dude.</p>"
+      format: markdown
