@@ -15,8 +15,9 @@ page_sections:
 - template: hero-banner-w-image
   block: hero-2
   headline: <a href="mailto:nathaniel.lane@monash.edu" title=""><strong>Dr. Nathan
-    Lane</strong></a><strong>, Assistant Professor at Monash University. I work in
-    </strong><a href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
+    Lane</strong></a><strong>, Assistant Professor* at </strong><a href="https://www.monash.edu"
+    title=""><strong>Monash University</strong></a><strong>. I work in </strong><a
+    href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
     title=""><strong>political economics</strong></a><strong>, </strong><a href="http://scholar.harvard.edu/files/shleifer/files/indust_big_push.pdf"
     title=""><strong>development</strong></a><strong>, &amp; </strong><a href="http://eh.net/eha/about/"
     title=""><strong>economic history</strong></a><strong>.</strong>
