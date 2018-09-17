@@ -1,0 +1,14 @@
+---
+label: Hero red footer
+hide_body: false
+is_partial: true
+fields:
+- type: blocks
+  name: block
+  label: block
+  description: block
+  hidden: true
+  template_types: []
+- type: textarea
+  name: header
+  label: Header

@@ -1,12 +1,49 @@
----
-layout: default
----
+{% include head.html %}
 
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+<header class="block block-header-1">
 
-
-  <div class="post-content" itemprop="articleBody">
-    {{ content }}
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
   </div>
 
-</article>
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
+
+</header>
+
+<section class="post--content">
+	<section class="block block-one-column-1">
+	  <div class="container">
+	    <div class="columns">
+	      <div class="column">
+
+			  <h1>{{ page.title }}</h1>
+			  <p>{{ page.introduction }}</p>
+
+			  {{ content }}
+
+			  <br>
+			   <p class="post--date">{{ page.date | date_to_string }}</p>
+
+	      </div>        
+	    </div>
+	  </div>
+	</section>
+</section>
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>
+
+{% include footer.html %}

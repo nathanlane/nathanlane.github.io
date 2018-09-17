@@ -1,0 +1,15 @@
+---
+label: Post List
+hide_body: false
+is_partial: true
+fields:
+- type: blocks
+  hidden: true
+  label: Post List
+  name: post_list
+  description: List of blog posts
+  template_types:
+  - 1-column-text
+  config:
+    min: ''
+    max: ''

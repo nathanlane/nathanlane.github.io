@@ -2,21 +2,53 @@
 title: Land, Labor, & Capital
 layout: blog
 type: page
-navigation: true
-image: header-1.png
-gradient: 1
 ---
 
-<div class="summary">
+<header class="block block-header-1">
 
-  <p>Musing on economic development, economic history, political economy, & big data techniques for social scientists.
-  <a href="/about.html" title="Continue" class="more">Continue</a></p>
+  <div class="block-header-1--logo">
+  <a href="http://nathanlane.info">Nathanlane.info</a>
+  </div>
 
-</div>
+  <div class="block-header-1--nav">
+    <ul>
+      
+      <li class="nav-item "><a href="">Main</a></li>
+      
+      <li class="nav-item "><a href="http://nathanlane.info/blog">Blog</a></li>
+      
+      <li class="nav-item "><a href="https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0">CV</a></li>
+      
+    </ul>
+  </div>
 
+</header>
 
-{% for post in site.posts %}
+<section class="block block-hero-3">
+  <div class="container">
+    <div class="columns">
+      <h1><a>Land, Labor, & Capital</a> Comparative economic development, economic history, &amp; data science mumbo jumbo.</h1>
+     </div>
+  </div>
+</section>
 
-  {% include summary.html %}
-  
+{% for post in site.posts limit:25 %}
+
+<section class="block block-one-column-1">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content | strip_html | truncatewords: 15 }}<a href="{{ post.url }}">[Read more]</a></p>        
+      </div>        
+    </div>
+  </div>
+</section>
+
 {% endfor %}
+
+<footer class="block block-footer-1">
+  <div class="container">
+    <p><a href="mailto:nathaniel.lane@gmail.com" title=""><strong>nathaniel.lane@monash.edu</strong></a> <span class="box"> • </span>Nathan Lane, 2014-2018 <span class="box"> • None of this garbage reflects my institution.</span></p>
+  </div>
+</footer>

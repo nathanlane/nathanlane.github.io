@@ -1,0 +1,22 @@
+---
+label: Text 1
+hide_body: false
+is_partial: true
+fields:
+- type: text
+  hidden: true
+  label: block
+  name: block
+  default: text-1
+- type: text
+  name: headline
+  label: Headline
+  default: Text in Text 1 Goes Here
+- type: textarea
+  name: content
+  label: Content
+  config:
+    wysiwyg: true
+    schema:
+      format: html-blocks
+  default: "<p></p>"

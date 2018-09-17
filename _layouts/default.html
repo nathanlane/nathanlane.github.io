@@ -1,43 +1,6 @@
-{% include header.html %}
+{% include head.html %}
 
-{% if page.gradient and page.gradient > 0 and page.gradient < 6 %}
-	{% assign gradient = page.gradient %}
-{% else %}
-	{% assign gradient = 1 %}
-{% endif %}
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<section class="content">
-  
-	<article>
-    
-		<header class="gradient-{{ gradient }}" data-animation="fadeInDownBig">
-
-			{% include excerpt.html %}
-
-		</header>
-
-		<div class="body" data-animation="fadeInUp">
-
-			{{ content }}
-
-		</div>
-
-		<footer>
-
-			<!--{% include meta.html %}-->
-
-			<!--{% include comments.html %}-->
-
-			<!--{% include pagination.html %}-->
-
-		</footer>
-
-	</article>
-
-</section>
-
-<!--{% include teaser.html %}-->
+<!-- Add your site or application content here -->
+<p>{{ content }}</p>
 
 {% include footer.html %}
