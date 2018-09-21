@@ -10,7 +10,7 @@ page_sections:
     link_text: Home
   - link: http://nathanlane.info/blog
     link_text: Blog
-  - link: http://www.dropbox.com
+  - link: https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0
     link_text: CV
 - template: hero-banner-w-image
   block: hero-2
