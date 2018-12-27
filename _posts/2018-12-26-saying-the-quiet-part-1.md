@@ -26,4 +26,4 @@ It's often revealing when someone when someone "says the quiet part loud." I tho
 
 I suspect this may be more true for the developing world than OECD countries. Regardless, though, I think do not think it is a radical statement there is a conflict between domestic political goals (globally) and the rules governing the international economic system. 
 
-Just ask the architects. The is a point captured in the recent book, "Globalists: The End of Empire and the Birth of Neoliberalism" by Quinn Slobodian. Coincidentally, the Greenspan quote is in the introduction.
+Just ask the architects. The is a point captured in the recent book, "Globalists: The End of Empire and the Birth of Neoliberalism" by Quinn Slobodian. (Coincidentally, quote is also in the introduction.)
