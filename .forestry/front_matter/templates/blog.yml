@@ -3,3 +3,5 @@ label: Blog
 hide_body: false
 is_partial: false
 fields: []
+pages:
+- _posts/saying-the-quiet-part.md
