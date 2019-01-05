@@ -19,9 +19,7 @@ The other day a colleague of mine mentioned that he was relieved by the directio
 
 With that, it hit me: _what the hell happened to implementation theory?_ So I tweeted into the Econ Twitter black hole.
 
-![](/uploads/2019/01/05/Screenshot 2019-01-05 19.43.19.png)
-
-And received this patient reply from good ol' Ben Golub:
+![](/uploads/2019/01/05/Screenshot 2019-01-05 19.43.19.png)And received this patient reply from good ol' Ben Golub:
 
 ![](/uploads/2019/01/05/Screenshot 2019-01-05 19.48.55-1.png)
 
