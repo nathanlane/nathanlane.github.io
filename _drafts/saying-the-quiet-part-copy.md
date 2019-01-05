@@ -1,5 +1,5 @@
 ---
-title: Saying the Quiet Part-(copy)
+title: A Delightful (Informal) Romp Through Implementation Theory
 date: 2018-12-26 16:28:12 +0000
 categories:
 - Not data
@@ -14,16 +14,32 @@ meta:
 author: Nathaniel
 
 ---
-![](/uploads/2018/12/27/c42145-20.jpg)
+As an undergraduate suffering through a graduate PhD micro course, I recall my professor bringing up the "hot new thing" that was implementation theory. I tried hard at the time to ascertain what this literature was.
 
-It's often revealing when someone when someone "says the quiet part loud." I thought this was particularly resonant:
+The other day a colleague of mine mentioned that he was relieved by the direction network economics as going, with more applied studies and an increasing number of empirically-grounded studies. "If that hadn't happened," he said, "it may have gone the way of implementation theory." 
 
-> We are fortunate that, thanks to globalisation, policy decisions in the  US have been largely replaced by global market forces. National security  aside, it hardly makes any difference who will be the next president.  The world is governed by market forces.  
->
-> \-Alan Greenspan, 2007, interview with a Swiss newspaper.
->
-> op cit. Tooze (2018) "Crashed: How a Decade of Financial Crises Changed the World" 
+With that, it hit me: _what the hell happened to implementation theory?_ So I tweeted into the Econ Twitter black hole.
 
-I suspect this may be more true for the developing world than OECD countries. Regardless, though, I think do not think it is a radical statement there is a conflict between domestic political goals (globally) and the rules governing the international economic system. 
+![](/uploads/2019/01/05/Screenshot 2019-01-05 19.43.19.png)
 
-Just ask the architects. The is a point captured in the recent book, "Globalists: The End of Empire and the Birth of Neoliberalism" by Quinn Slobodian. (Coincidentally, quote is also in the introduction.)
+And received this patient reply from good ol' Ben Golub:
+
+![](/uploads/2019/01/05/Screenshot 2019-01-05 19.48.55-1.png)
+
+Thus starts his thread with a fantastic piece by Matt Jackson (of current network theory fame): A Crash Course in Implementation Theory (2001). Which is a glimpse into the (then) state of the art.
+
+> [Jackson, M. O. (2001). A crash course in implementation theory. Social Choice and Welfare, 18(4), 655–708.](https://link.springer.com/content/pdf/10.1007/s003550100152.pdf) \[Ungated: [link](https://authors.library.caltech.edu/79990/1/sswp1076.pdf)\]
+
+With a also a little lit review.
+
+![](/uploads/2019/01/05/Screenshot 2019-01-05 19.52.43.png)
+
+The two articles are from Matt Jackson (1992), and Maskin and Jean Tirole (1999):
+
+> [Jackson, M. O. (1992). Implementation in Undominated Strategies: A Look at Bounded Mechanisms. The Review of Economic Studies, 59(4), 757–775](http://dx.doi.org/10.2307/2297996). \[Ungated: [Link](https://www.kellogg.northwestern.edu/research/math/papers/833.pdf)\] 
+
+> [Maskin, E., & Tirole, J. (1999). Unforeseen Contingencies and Incomplete Contracts. The Review of Economic Studies, 66(1), 83–114.](http://dx.doi.org/10.1111/1467-937X.00079) \[Ungated: [Link](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=5&cad=rja&uact=8&ved=2ahUKEwigj5SWpdbfAhXPdN4KHVzACaAQFjAEegQIBhAC&url=https%3A%2F%2Fwww.sss.ias.edu%2Ffiles%2Fpapers%2Feconpapereight.pdf&usg=AOvVaw2XzSxGBWsgdl7DABnMe9s2)\]
+
+But Ben then gives a nice synopsis of what happened.
+
+![](/uploads/2019/01/05/Screenshot 2019-01-05 19.53.15.png)
