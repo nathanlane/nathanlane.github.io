@@ -3,8 +3,7 @@ title: A Delightful (Informal) Romp Through Implementation Theory
 date: 2018-12-26 16:28:12 +0000
 categories:
 - Not data
-tags:
-- globalization
+tags: []
 layout: post
 type: post
 status: publish
