@@ -1,5 +1,6 @@
 ---
-title: A Delightful (Informal) Romp Through Implementation Theory-(copy)
+title: Contemporary Industrial Policy Papers - A Round Up of Historical Case Studies
+  (and Beyond)
 date: 2018-12-26 16:28:12 +0000
 categories:
 - Not data
@@ -13,30 +14,19 @@ meta:
 author: Nathaniel
 
 ---
-As an undergraduate suffering through a graduate PhD micro course, I recall my professor bringing up the "hot new thing" that was implementation theory. I tried hard at the time to ascertain what this literature was.
 
-The other day a colleague of mine mentioned that he was relieved by the direction network economics as going, with more applied studies and an increasing number of empirically-grounded studies. "If that hadn't happened," he said, "it may have gone the way of implementation theory." 
-
-With that, it hit me: _what the hell happened to implementation theory?_ So I tweeted into the Econ Twitter black hole.
-
-![](/uploads/2019/01/05/Screenshot 2019-01-05 19.43.19.png)And received this patient reply from good ol' Ben Golub:
-
-![](/uploads/2019/01/05/Screenshot 2019-01-05 19.48.55-1.png)
-
-Thus starts his thread with a fantastic piece by Matt Jackson (of current network theory fame): A Crash Course in Implementation Theory (2001). Which is a glimpse into the (then) state of the art.
-
-> [Jackson, M. O. (2001). A crash course in implementation theory. Social Choice and Welfare, 18(4), 655–708.](https://link.springer.com/content/pdf/10.1007/s003550100152.pdf) \[Ungated: [link](https://authors.library.caltech.edu/79990/1/sswp1076.pdf)\]
-
-With a also a little lit review.
-
-![](/uploads/2019/01/05/Screenshot 2019-01-05 19.52.43.png)
-
-The two articles are from Matt Jackson (1992), and Maskin and Jean Tirole (1999):
-
-> [Jackson, M. O. (1992). Implementation in Undominated Strategies: A Look at Bounded Mechanisms. The Review of Economic Studies, 59(4), 757–775](http://dx.doi.org/10.2307/2297996). \[Ungated: [Link](https://www.kellogg.northwestern.edu/research/math/papers/833.pdf)\] 
-
-> [Maskin, E., & Tirole, J. (1999). Unforeseen Contingencies and Incomplete Contracts. The Review of Economic Studies, 66(1), 83–114.](http://dx.doi.org/10.1111/1467-937X.00079) \[Ungated: [Link](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=5&cad=rja&uact=8&ved=2ahUKEwigj5SWpdbfAhXPdN4KHVzACaAQFjAEegQIBhAC&url=https%3A%2F%2Fwww.sss.ias.edu%2Ffiles%2Fpapers%2Feconpapereight.pdf&usg=AOvVaw2XzSxGBWsgdl7DABnMe9s2)\]
-
-But Ben then gives a nice synopsis of what happened.
-
-![](/uploads/2019/01/05/Screenshot 2019-01-05 19.53.15.png)
+A lil roundup!  
+  
+Bécuwe, S., & Blancheton, B. (2018). French textile specialisation in long run perspective (1836–1938): trade policy as industrial policy. Business History, 1–21. https://doi.org/10.1080/00076791.2018.1494732  
+  
+Giorcelli, M. (2019). The Long-Term Effects of Management and Technology Transfers. American Economic Review, 109(1), 1–33.  
+  
+Hanlon, W. (2018). The Persistent Effect of Temporary Input Cost Advantages in Shipbuilding, 1850-1911. Working Paper.  
+  
+Jaworski, T., & Smyth, A. (2018). Shakeout in the early commercial airframe industry. The Economic History Review, 71(2), 617–638. https://doi.org/10.1111/ehr.12430  
+  
+Juhasz, R. (2018). Temporary Protection and Technology Adoption: Evidence from the Napoleonic Blockade. _American Economic Review_, _108_(11), 3339–3376. [https://doi.org/https://doi.org/10.1257/aer.20151730](https://doi.org/https://doi.org/10.1257/aer.20151730 "https://doi.org/https://doi.org/10.1257/aer.20151730")  
+  
+Lane, N. (2019). Manufacturing Revolutions - Industrial Policy and Networks in South Korea. Working Paper.  
+  
+Mitrunen, M. (2019). War Reparations, Structural Change, and Intergenerational Mobility. Working Paper.
