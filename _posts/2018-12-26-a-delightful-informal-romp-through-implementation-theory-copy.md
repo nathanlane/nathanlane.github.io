@@ -35,14 +35,15 @@ Industrial policy is often associated with postwar East Asian economies and the 
 >
 > Inwood, K., & Keay, I. (2013). Trade policy and industrial development: iron and steel in a small open economy, 1870−1913. Canadian Journal of Economics/Revue Canadienne d’économique, 46(4), 1265–1294. [https://doi.org/10.1111/caje.12048](https://doi.org/10.1111/caje.12048 "https://doi.org/10.1111/caje.12048") \[Ungated: [http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf](http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf "http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf")\]
 
-**Temporary Subsidies and Spillovers  
-![](/uploads/2019/01/17/article-2283079-1834F3E9000005DC-202_638x682.jpg)**
+**Temporary Subsidies and SpilloversManagerial and technological interventionsManagerial and technological interventions**
 
-Besides temporary protection of output _per se_, a number of studies have considered the effect of other temporary interventions. For example, Hanlon (2018), considers how the temporary cost advantages related to steel jump started U.K.'s lead in metal ship building. He specifically highlights the role played by skilled labor in the U.K.'s lead.
+**  
+Temporary interventions and spillovers  
+**Besides temporary protection of output _per se_, a number of studies have considered the effect of other temporary interventions. For example, Hanlon (2018), considers how the temporary cost advantages related to steel jump-started the U.K.'s lead in metal ship building, and the role labor market spillovers played in maintaining their leadership. On the other side of the Atlantic, Hanlon focuses on how interventions allowed U.S. producers to transition from wood to steel.
 
 Mitrunen (2019), who also looks at the labor market spillovers of a particularly interesting intervention: Finland's postwar reparation's to the Soviet Union. The reparations mandated that Finland pay Stalin in the form of heavy industrial commodities. Accordingly, Mitrunen studies the policy as a type of forced export industrial policy, also focusing on the effects on skilled labor--contemporaneous and inter generational effects.
 
-Jaworski and Smyth (2018) considers how U.S. government purchases during wartime helped the "big names" of the U.S. aeronautical industry. In particular, these purchases allowed U.S. manufacturers survive later turbulent periods of shakeout. Hanlon (2018) also considers how government purchases allowed U.S. manufacturers to survive.
+Jaworski and Smyth (2018) considers how U.S. government purchases during wartime helped the "big names" of the U.S. aeronautical industry. In particular, these purchases allowed U.S. manufacturers survive later turbulent periods of shakeout. 
 
 Similarly, in this bucket, is also my own study on South Korea's heavy chemical and industry big push. Here (Lane 2017), I focus on the impact of a temporary big push policy, emphasizing linkage effects of industrial targeting. \[[Read my piece on this here.](https://voxdev.org/topic/firms-trade/manufacturing-revolutions-role-industrial-policy-south-korea-s-industrialisation)\]
 
@@ -54,7 +55,9 @@ Similarly, in this bucket, is also my own study on South Korea's heavy chemical 
 >
 > Mitrunen, M. (2019). War Reparations, Structural Change, and Intergenerational Mobility. Working Paper. \[Ungated: [https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0](https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0 "https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0")\]
 
-**Managerial and technological interventions:**![](/uploads/2019/01/17/atelierferragepeugeot1948.jpg)  
+**  
+Managerial and technological interventions  
+**  
 Giorcelli (2019) is a fantastic take on a large industrial intervention. The factor accumulation promoted by the Marshall Plan across Western Europe looms large as an explanation behind "Les Trente Glorieuses"—the decades of sustained economic growth following World War II. Giorcelli focuses on the long-run implications of a particularly successful Marshall Plan project in Italy, the United States Technical Assistance and Productivity Program (1952–58). Specifically, the policy focused on both transferring technology--and more importantly--modern managment techniques to Italian firms:
 
 > Giorcelli, M. (2019). The Long-Term Effects of Management and Technology Transfers. American Economic Review, 109(1), 1–33. \[Ungated: [www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf](www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf)\]
