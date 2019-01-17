@@ -19,7 +19,7 @@ author: Nathaniel
 ---
 This is a bit of a literature review of recent papers on industrial policy, and related topics.
 
-**Protection: Temporary and Otherwise.**  
+**Output Protection: Temporary and Otherwise.**  
 ![](/uploads/2019/01/17/e010782410-v8.jpg)  
 Reka Juhasz (2018) paper has been widely discussed, but it one of the first attempts to unpack the impact of infant industry policy using contemporary causal inference. In this case using the Napoleonic blockade of England as a short-term shock that a) mimicked a temporary protection policy of French textile producers, the spatial scope of which meant b) different regions of French producers were subjected to different amounts of protect. A lot, of course, has been written about this paper elsewhere (rightly so!). As well, a new paper Bécuwe and Blancheton (2018) considers the role of protection and the long-run impact on British textiles, albeit from a more case-study approach.
 
