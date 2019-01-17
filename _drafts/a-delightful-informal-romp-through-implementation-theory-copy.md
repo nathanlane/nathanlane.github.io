@@ -24,6 +24,9 @@ This is a bit of a literature review of contemporary papers on industrial policy
   
 Industrial policy is often associated with postwar East Asian economies and the input substitution industrialization (ISI) of Latin American. Of course, most Western nations pursued significant industrial policies. One canonical example is Canada's National Policy in the late 19th century. An interesting wave of papers covering this period: Alexander and Keay (2018), Harris, Keay, and Lewis (2015), and Inwood, and Keay, (2013)  
   
+  
+  
+  
 Alexander, P. D., & Keay, I. (2018). A general equilibrium analysis of Canada’s national policy. Explorations in Economic History, 68, 1–15. [https://doi.org/https://doi.org/10.1016/j.eeh.2017.11.002]()  
   
 Harris, R., Keay, I., & Lewis, F. (2015). Protecting infant industries: Canadian manufacturing and the national policy, 1870–1913. Explorations in Economic History, 56, 15–31. [https://doi.org/https://doi.org/10.1016/j.eeh.2015.01.001](https://doi.org/https://doi.org/10.1016/j.eeh.2015.01.001 "https://doi.org/https://doi.org/10.1016/j.eeh.2015.01.001")  
