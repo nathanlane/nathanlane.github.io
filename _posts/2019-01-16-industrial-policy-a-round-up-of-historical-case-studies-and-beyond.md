@@ -16,7 +16,7 @@ meta:
 author: Nathaniel
 
 ---
-This is a bit of a literature review of recent papers on industrial policy, and related topics, focusing on work coming from economic historians. It is taken somewhat, but not entirely, from an upcoming literature review I have written on the empirics of industrial policy.
+This is a short literature review of recent papers on industrial policy (and related topics) , focusing on work coming from economic historians. It is taken somewhat--though not entirely--from an upcoming literature review I have written on the empirics of industrial policy. (Stay tuned for more contemporary policy discussions.)
 
 **I. Output Protection: Temporary and Otherwise.**  
 ![](/uploads/2019/01/17/e010782410-v8.jpg)
