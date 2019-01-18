@@ -26,7 +26,7 @@ This is a bit of a literature review of recent papers on industrial policy, and 
 >
 > Juhasz, R. (2018). Temporary Protection and Technology Adoption: Evidence from the Napoleonic Blockade. _American Economic Review_, _108_(11), 3339–3376. [https://doi.org/https://doi.org/10.1257/aer.20151730](https://doi.org/https://doi.org/10.1257/aer.20151730 "https://doi.org/https://doi.org/10.1257/aer.20151730")
 
-_B. Canada._ Industrial policy is often associated with postwar East Asian economies and the input substitution industrialization (ISI) of Latin American. Of course, most Western nations pursued significant industrial policies throughout their development path. One canonical example is Canada's National Policy in the late 19th century. An interesting wave of papers covering period of protectionism Alexander and Keay (2018), Harris, Keay, and Lewis (2015), and Inwood, and Keay, (2013).
+_B. Canada._ Industrial policy is often associated with postwar East Asian economies and the input substitution industrialization (ISI) of Latin American. Of course, most Western nations pursued significant industrial policies throughout their development path. One canonical example is Canada's National Policy in the late 19th century. An interesting wave of papers have explored the development impact of protectionism on industrial development: Alexander and Keay (2018), Harris, Keay, and Lewis (2015), and Inwood, and Keay, (2013).
 
 > Alexander, P. D., & Keay, I. (2018). A general equilibrium analysis of Canada’s national policy. Explorations in Economic History, 68, 1–15. [https://doi.org/https://doi.org/10.1016/j.eeh.2017.11.002](https://doi.org/https://doi.org/10.1016/j.eeh.2017.11.002 "https://doi.org/https://doi.org/10.1016/j.eeh.2017.11.002") \[Ungated: [https://www.bankofcanada.ca/wp-content/uploads/2017/05/swp2017-18.pdf](https://www.bankofcanada.ca/wp-content/uploads/2017/05/swp2017-18.pdf "https://www.bankofcanada.ca/wp-content/uploads/2017/05/swp2017-18.pdf")\]
 >
@@ -34,11 +34,9 @@ _B. Canada._ Industrial policy is often associated with postwar East Asian econo
 >
 > Inwood, K., & Keay, I. (2013). Trade policy and industrial development: iron and steel in a small open economy, 1870−1913. Canadian Journal of Economics/Revue Canadienne d’économique, 46(4), 1265–1294. [https://doi.org/10.1111/caje.12048](https://doi.org/10.1111/caje.12048 "https://doi.org/10.1111/caje.12048") \[Ungated: [http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf](http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf "http://www.econ.queensu.ca/files/other/inwoodkeay13.pdf")\]
 
-**Temporary Subsidies and SpilloversManagerial and technological interventionsManagerial and technological interventions**
-
-**  
+**Temporary Subsidies and SpilloversManagerial and technological interventionsManagerial and technological interventions  
 Temporary interventions and spillovers  
-**Besides temporary protection of output _per se_, a number of studies have considered the effect of other temporary interventions. For example, Hanlon (2018), considers how the temporary cost advantages related to steel jump-started the U.K.'s lead in metal ship building, and the role labor market spillovers played in maintaining their leadership. On the other side of the Atlantic, Hanlon focuses on how interventions allowed U.S. producers to transition from wood to steel.
+**Besides temporary protection of output _per se_, a number of studies have considered the effect of other temporary interventions. For example, Hanlon (2018), considers how the temporary cost advantages related to steel jump-started the U.K.'s lead in metal ship building, and the role labor market spillovers played in maintaining their leadership. On the other side of the Atlantic, Hanlon also focuses on how interventions allowed U.S. producers to transition from wood to steel, as well as the fate of Canadian shipbuilders.
 
 Mitrunen (2019), who also looks at the labor market spillovers of a particularly interesting intervention: Finland's postwar reparation's to the Soviet Union. The reparations mandated that Finland pay Stalin in the form of heavy industrial commodities. Accordingly, Mitrunen studies the policy as a type of forced export industrial policy, also focusing on the effects on skilled labor--contemporaneous and inter generational effects.
 
