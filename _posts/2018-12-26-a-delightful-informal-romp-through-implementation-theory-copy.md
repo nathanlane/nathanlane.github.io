@@ -1,7 +1,7 @@
 ---
 title: Contemporary Industrial Policy Papers - A Round Up of Historical Case Studies
   (and Beyond)
-date: 2018-12-26 16:28:12 +0000
+date: 2019-01-16 16:28:12 +0000
 categories:
 - industrial policy
 tags:
