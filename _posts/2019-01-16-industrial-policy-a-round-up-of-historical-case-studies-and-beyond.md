@@ -40,7 +40,7 @@ Industrial policy is often associated with postwar East Asian economies and the 
 **II. Temporary Subsidies and Spillovers**  
 Besides temporary protection of output _per se_, a number of studies have considered the effect of other temporary interventions. For example, Hanlon (2018), considers how the temporary cost advantages related to steel jump-started the U.K.'s lead in metal ship building, and the role labor market spillovers played in maintaining their leadership. On the other side of the Atlantic, Hanlon also focuses on how interventions allowed U.S. producers to transition from wood to steel.
 
-Mitrunen (2019), who also looks at the labor market spillovers of a particularly interesting intervention: Finland's postwar reparation's to the Soviet Union. The reparations mandated that Finland pay Stalin in the form of heavy industrial commodities. Accordingly, Mitrunen studies the policy as a type of forced export industrial policy, also focusing on the effects on skilled labor--contemporaneous and inter generational effects.
+Mitrunen (2019) also looks at the labor market spillovers of a particularly interesting intervention, focusing Finland's postwar reparations to the Soviet Union. The reparations mandated that Finland pay Stalin in the form of heavy industrial commodities. Accordingly, Mitrunen studies the policy as a type of forced export industrial policy, also focusing on the effects on skilled labor--contemporaneous and inter generational effects.
 
 Jaworski and Smyth (2018) considers how U.S. government purchases during wartime helped the "big names" of the U.S. aeronautical industry. In particular, these purchases allowed U.S. manufacturers survive later turbulent periods of shakeout.
 
