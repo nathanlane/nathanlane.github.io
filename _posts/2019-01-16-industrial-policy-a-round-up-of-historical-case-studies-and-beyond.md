@@ -43,14 +43,18 @@ Jaworski and Smyth (2018) considers how U.S. government purchases during wartime
 
 Similarly, in this bucket, is also my own study on South Korea's heavy chemical and industry big push. Here (Lane 2017), I focus on the impact of a temporary big push policy, emphasizing linkage effects of industrial targeting. \[[Read my piece on this here.](https://voxdev.org/topic/firms-trade/manufacturing-revolutions-role-industrial-policy-south-korea-s-industrialisation)\] Similarly, Pons-Benaiges (2017) job market paper explores the composition and scope of Japan's postwar industrial policy. His paper is, in part, [a reply to a classic piece by Beason and Weinstien (1996)](https://econpapers.repec.org/article/tprrestat/v_3a78_3ay_3a1996_3ai_3a2_3ap_3a286-95.htm), which asked whether Japanese interventions targeted sectors with increasing returns to scale.
 
-> * Hanlon, W. (2018). The Persistent Effect of Temporary Input Cost Advantages in Shipbuilding, 1850-1911. Working Paper. \[Ungated: [walkerhanlon.com/papers/hanlon_shipbuilding.pdf](walkerhanlon.com/papers/hanlon_shipbuilding.pdf)\]
-> * Jaworski, T., and Smyth, A. (2018). Shakeout in the early commercial airframe industry. The Economic History Review, 71(2), 617–638. [https://doi.org/10.1111/ehr.12430](https://doi.org/10.1111/ehr.12430)
-> * Lane, N. (2017). Manufacturing Revolutions - Industrial Policy and Networks in South Korea. Working Paper. \[Ungated: [eh.net/eha/wp-content/uploads/2017/08/Lane.pdf]()\]
-> * Mitrunen, M. (2019). War Reparations, Structural Change, and Intergenerational Mobility. Working Paper. \[Ungated: [https://www.dropbox.com/s/ohl6zqyi4ctkclw  
->   /Mitrunen_JMP.pdf?dl=0](https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0 "https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0")\]
-> * 
+> Hanlon, W. (2018). The Persistent Effect of Temporary Input Cost Advantages in Shipbuilding, 1850-1911. Working Paper. \[Ungated: [walkerhanlon.com/papers/hanlon_shipbuilding.pdf](walkerhanlon.com/papers/hanlon_shipbuilding.pdf)\]
+>
+> Jaworski, T., and Smyth, A. (2018). Shakeout in the early commercial airframe industry. The Economic History Review, 71(2), 617–638. [https://doi.org/10.1111/ehr.12430](https://doi.org/10.1111/ehr.12430)
+>
+> Lane, N. (2017). Manufacturing Revolutions - Industrial Policy and Networks in South Korea. Working Paper. \[Ungated: [eh.net/eha/wp-content/uploads/2017/08/Lane.pdf]()\]
+>
+> Mitrunen, M. (2019). War Reparations, Structural Change, and Intergenerational Mobility. Working Paper. \[Ungated: [https://www.dropbox.com/s/ohl6zqyi4ctkclw  
+> /Mitrunen_JMP.pdf?dl=0](https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0 "https://www.dropbox.com/s/ohl6zqyi4ctkclw/Mitrunen_JMP.pdf?dl=0")\]
+>
+> Pons-Benaiges, O. (2017). Did Government Intervention Target Technological Externalities? Industrial Policy and Economic Growth in Postwar Japan, 1964-1983. Working Paper. https:// economics.stanford.edu/sites/g/files/ sbiybj9386/f/oriol_jmp.pdf
 
 **III. Managerial and technological interventions**  
 Giorcelli (2019) is a fantastic take on a large industrial intervention. The factor accumulation promoted by the Marshall Plan across Western Europe looms large as an explanation behind "Les Trente Glorieuses"—the decades of sustained economic growth following World War II. Giorcelli focuses on the long-run implications of a particularly successful Marshall Plan project in Italy, the United States Technical Assistance and Productivity Program (1952–58). Specifically, the policy focused on both transferring technology--and more importantly--modern managment techniques to Italian firms:
 
-> * Giorcelli, M. (2019). The Long-Term Effects of Management and Technology Transfers. American Economic Review, 109(1), 1–33. [https://www.aeaweb.org/articles?id=10.1257/aer.20170619](https://www.aeaweb.org/articles?id=10.1257/aer.20170619 "https://www.aeaweb.org/articles?id=10.1257/aer.20170619") \[Ungated: [www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf](www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf)\]
+> Giorcelli, M. (2019). The Long-Term Effects of Management and Technology Transfers. American Economic Review, 109(1), 1–33. [https://www.aeaweb.org/articles?id=10.1257/aer.20170619](https://www.aeaweb.org/articles?id=10.1257/aer.20170619 "https://www.aeaweb.org/articles?id=10.1257/aer.20170619") \[Ungated: [www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf](www.giorcellimichela.com/uploads/8/3/7/0/83709646/giorcelli_jmp.pdf)\]
