@@ -59,10 +59,10 @@ page_sections:
     development, the benefits of which persisted through time and in industries not
     directly targeted by the policies.<br><br></p><p><strong>[</strong>Coming this
     month<strong>] The New Empirics of Industrial Policy.</strong><br><strong>Abstract</strong>
-    - Nations have and will continue to shape their industrial destinies through industrial
+    - Nations have and will continue to shape their economic destinies through industrial
     policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
     the attention these policies receive by policymakers across the world. I review
-    the empirical issues surrounding these policies, emphasizing how new microeconometric
+    the empirical issues surrounding these interventions, emphasizing how new microeconometric
     work confronts these issues. This review is a proposal to take these interventions—along
     with all their complexities—more seriously as objects of inquiry. Doing so requires
     serious evaluations of past policy, but also reevaluation of past consensus.</p>
