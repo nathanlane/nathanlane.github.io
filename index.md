@@ -70,9 +70,8 @@ page_sections:
 - template: detail-content
   block: text-1
   headline: Publications
-  content: "<p>with Melissa Dell and Pablo Querubin. \"The Historical State, Local
-    Collective Action, and Economic Development in Vietnam.\x03\" <em>Forthcoming</em>.
-    <strong>Econometrica</strong>. </p>"
+  content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"The Historical State,
+    Local Collective Action, and Economic Development in Vietnam.\x03\" <strong>Econometrica</strong>.</p>"
 - template: detail-content
   block: text-1
   headline: Upcoming Talks
