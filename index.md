@@ -42,12 +42,12 @@ page_sections:
     data</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
-  content: '<p><a href="https://www.dropbox.com/s/b9mll7fx26j6uia/ManufacturingRevolutions_Lane_Live.pdf?dl=0">Manufacturing
+  content: <p><a href="https://www.dropbox.com/s/b9mll7fx26j6uia/ManufacturingRevolutions_Lane_Live.pdf?dl=0">Manufacturing
     Revolutions - Industrial Policy and Networks in South Korea</a><br><strong><br>Abstract</strong>
     - This paper uses a historic big push intervention with digitized data from South
     Korea to study the effects of industrial policy on (short- and long-run) industrial
     development. In 1973 South Korea transitioned to a military dictatorship and drastically
-    changed their development strategy. I find industries targeted by the regime''s
+    changed their development strategy. I find industries targeted by the regime's
     big push grew significantly more than non-targeted industries along several key
     dimensions of industrial development. These developmental effects persisted after
     industrial policies were retrenched, following the 1979 assassination of the president.
@@ -57,15 +57,15 @@ page_sections:
     development theorists, such as Albert Hirschman. In other words, I find that South
     Korea’s controversial industrial policy was successful in producing industrial
     development, the benefits of which persisted through time and in industries not
-    directly targeted by the policies.<br><br><br>Coming this monthy: </p><p><strong>The
-    New Empirics of Industrial Policy.</strong><br>Nations have and will continue
-    to shape their industrial destinies through industrial policy. Nevertheless, the
-    literature on industrial policy is thin, dwarfed by the attention these policies
-    receive by policymakers across the world. I review the empirical issues surrounding
-    these policies, emphasizing how new microeconometric work confronts these issues.
-    This review is a proposal to take these interventions—along with all their complexities—more
-    seriously as objects of inquiry. Doing so requires serious evaluations of past
-    policy, but also reevaluation of past consensus.</p>'
+    directly targeted by the policies.<br><br></p><p><strong>[</strong>Coming this
+    month<strong>] The New Empirics of Industrial Policy.</strong><br><strong>Abstract</strong>
+    - Nations have and will continue to shape their industrial destinies through industrial
+    policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
+    the attention these policies receive by policymakers across the world. I review
+    the empirical issues surrounding these policies, emphasizing how new microeconometric
+    work confronts these issues. This review is a proposal to take these interventions—along
+    with all their complexities—more seriously as objects of inquiry. Doing so requires
+    serious evaluations of past policy, but also reevaluation of past consensus.</p>
   headline: Current Paper
 - template: detail-content
   block: text-1
