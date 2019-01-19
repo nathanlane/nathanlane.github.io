@@ -66,7 +66,7 @@ page_sections:
     work confronts these issues. This review is a proposal to take these interventions—along
     with all their complexities—more seriously as objects of inquiry. Doing so requires
     serious evaluations of past policy, but also reevaluation of past consensus.</p>
-  headline: Current Paper
+  headline: Current Work
 - template: detail-content
   block: text-1
   headline: Publications
