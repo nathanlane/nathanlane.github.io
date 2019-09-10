@@ -1,7 +1,6 @@
 ---
 label: Text only hero banner
 hide_body: false
-is_partial: true
 display_field: block
 fields:
 - type: text

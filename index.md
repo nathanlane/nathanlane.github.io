@@ -1,7 +1,7 @@
 ---
 layout: blocks
 title: Nathanlane.info | Home
-date: 2017-11-22 23:00:00 +0000
+date: 2017-11-22T23:00:00.000+00:00
 page_sections:
 - template: navigation-header
   block: header-1
@@ -12,6 +12,7 @@ page_sections:
     link_text: Blog
   - link: http://www.dropbox.com
     link_text: CV
+  logo: ''
 - template: hero-banner-w-image
   block: hero-2
   headline: <a href="mailto:nathaniel.lane@monash.edu" title=""><strong>Dr. Nathan
@@ -88,7 +89,7 @@ page_sections:
       title="">@straightedge</a>
 - template: simple-footer
   block: footer-1
-  content: Nathan Lane, 2014-2018 <span class="box">• None of this garbage reflects
+  content: Nathan Lane, 2014-2019 <span class="box">• None of this garbage reflects
     my institution. • CSS hacked by me, forked from </span><a href="" title=""><span
     class="box">Forestry.io</span></a><span class="box">'s wonderful </span><a href="https://jekyllrb.com/"
     title=""><span class="box">Jekyll</span></a><span class="box"> theme/git, </span><a

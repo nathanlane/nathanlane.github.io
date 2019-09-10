@@ -1,7 +1,6 @@
 ---
 label: Post List
 hide_body: false
-is_partial: true
 fields:
 - type: blocks
   hidden: true

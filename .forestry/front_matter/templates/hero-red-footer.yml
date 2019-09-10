@@ -1,7 +1,6 @@
 ---
 label: Hero red footer
 hide_body: false
-is_partial: true
 fields:
 - type: blocks
   name: block
