@@ -71,6 +71,17 @@ page_sections:
     2019 - Sydney October 4th</p></li><li><p>University of Technology Sydney - October
     9th.</p></li><li><p>Geneva - Graduate Institute and UN October TBA</p></li><li><p>Paris
     School of Economics - October TBA</p></li></ul>"
+- template: detail-content
+  block: text-1
+  headline: Works in Progress
+  content: "<ul><li><p><em>Monopoly Power and the Rise of Digital Autocracy</em> -
+    with Weijia Li</p><p></p></li><li><p><em>Mapping the Digital State</em> - with
+    Klaus Ackerman, Simon Angus, Weijia Li, and Paul Raschky. [And related projects.]<br></p></li><li><p><em>Mining
+    the Value of an Activist's Life - Market Returns and Assassinations of Environmental
+    Activists in the Developing World - with </em>David Kreitmeir and Paul Raschky<br></p></li><li><p><em>Export-led
+    Industrialization and South Korea's Export Promotion Meetings </em>- with Changkeun
+    Lee.<br></p></li><li><p><em>Labor Repression, Democracy and Growth in South Korea</em>
+    - with Daron Acemoglu and Changkeun Lee<br></p></li></ul>"
 - template: 2-column-text
   block: two-column-1
   col_1:
