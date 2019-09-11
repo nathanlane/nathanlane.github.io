@@ -84,7 +84,7 @@ page_sections:
     - Evidence from South Korea's Export Promotion Meetings</em> - with Changkeun
     Lee<br></p></li><li><p><em>Labor Repression, Democracy, and Growth in South Korea</em>
     - with Daron Acemoglu and Changkeun Lee<br></p></li></ul>"
-  headline: ''
+  headline: Work in Progress
 - template: detail-content
   block: text-1
   headline: Upcoming Talks
