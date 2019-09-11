@@ -1,7 +1,7 @@
 ---
 layout: blocks
 title: Nathanlane.info
-date: 2017-11-22 23:00:00 +0000
+date: 2017-11-22T23:00:00.000+00:00
 page_sections:
 - template: navigation-header
   block: header-1
@@ -12,6 +12,7 @@ page_sections:
     link_text: Blog
   - link: https://www.dropbox.com/s/2xgg325wwayo9s9/NathanLane_IIES_20172018.pdf?dl=0
     link_text: CV
+  logo: ''
 - template: hero-banner-w-image
   block: hero-2
   headline: <a href="mailto:nathaniel.lane@monash.edu" title=""><strong>Dr. Nathan
@@ -72,6 +73,18 @@ page_sections:
   headline: Publications
   content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"The Historical State,
     Local Collective Action, and Economic Development in Vietnam.\x03\" <strong>Econometrica</strong>.</p>"
+- template: detail-content
+  block: text-1
+  content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
+    the Rise of the Digital State </em>- with Weijia Li</p><p></p></li><li><p><em>Mapping
+    the Digital State</em> - with Klaus Ackerman, Simon Angus, Weijia Li, and Paul
+    Raschky [And related projects.]<br></p></li><li><p><em>Market Returns and Assassinations
+    of Environmental Activists - Evidence from the Developing World - with </em>David
+    Kreitmeir and Paul Raschky<br></p></li><li><p><em>Managing Export-led Industrialization
+    - Evidence from South Korea's Export Promotion Meetings</em> - with Changkeun
+    Lee<br></p></li><li><p><em>Labor Repression, Democracy, and Growth in South Korea</em>
+    - with Daron Acemoglu and Changkeun Lee<br></p></li></ul>"
+  headline: ''
 - template: detail-content
   block: text-1
   headline: Upcoming Talks
