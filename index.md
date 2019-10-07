@@ -10,8 +10,8 @@ page_sections:
     link_text: Home
   - link: http://nathanlane.info/blog
     link_text: Blog
-  - link: https://nathanlane.github.io/assets/cv.pdf
-    link_text: CV
+  - link: https://nathanlane.github.io/assets/papers/CV_Nathaniel_Lane.pdf
+    link_text: CV [Updated]
   logo: ''
 - template: hero-banner-w-image
   block: hero-2
