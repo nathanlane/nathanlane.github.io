@@ -43,22 +43,23 @@ page_sections:
     data</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
-  content: <p><a href="https://www.dropbox.com/s/b9mll7fx26j6uia/ManufacturingRevolutions_Lane_Live.pdf?dl=0"><strong>Manufacturing
-    Revolutions - Industrial Policy and Networks in South Korea</strong></a><br><strong><br>Abstract</strong>
-    - This paper uses a historic big push intervention with digitized data from South
-    Korea to study the effects of industrial policy on (short- and long-run) industrial
-    development. In 1973 South Korea transitioned to a military dictatorship and drastically
-    changed their development strategy. I find industries targeted by the regime's
-    big push grew significantly more than non-targeted industries along several key
-    dimensions of industrial development. These developmental effects persisted after
-    industrial policies were retrenched, following the 1979 assassination of the president.
-    Furthermore, I estimate the spillovers of the industrial policies using exogenous
-    variation in the exposure to the policy across the input-output network. I find
-    evidence of persistent pecuniary externalities like those posited by big push
-    development theorists, such as Albert Hirschman. In other words, I find that South
-    Korea’s controversial industrial policy was successful in producing industrial
-    development, the benefits of which persisted through time and in industries not
-    directly targeted by the policies.<br><br></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
+  content: '<p><a href="http://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
+    title="ManufacturingRevolutions_Lane_Live.pdf"><strong>Manufacturing Revolutions
+    - Industrial Policy and Industrialization in South Korea </strong></a><strong>(2019)<br></strong><br>[Previously
+    titled: Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
+    - I study the impact of industrial policy on industrial development through a
+    canonical intervention. Following a political crisis in 1972, South Korea dramatically
+    altered its development strategy with a new sector-specific policy: the Heavy
+    Chemical and Industry (HCI) drive. With newly digitized data, I use the sharp
+    introduction and withdrawal of HCI trade policy and investment incentives to study
+    its impacts. (1) I show HCI successfully promoted the evolution of directly treated
+    industries. Next I provide evidence for two key justifications of industrial policy:
+    network and dynamic externalities. (2) Using variation in exposure to policies
+    through the input-output network, I show HCI indirectly benefited (non-treated)
+    downstream industry. (3) Finally, I show both direct and indirect benefits of
+    HCI persist even after the policy is withdrawn, following the 1979 assassination
+    of President Park. Together, my findings suggest that the temporary drive helped
+    shift the economy into higher value-added activity.<br></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
     title=""><strong>The New Empirics of Industrial Policy</strong></a><strong><br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economic destinies through industrial
     policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
@@ -66,7 +67,7 @@ page_sections:
     the empirical issues surrounding these interventions, emphasizing how new microeconometric
     work confronts these issues. This review is a proposal to take these interventions—along
     with all their complexities—more seriously as objects of inquiry. Doing so requires
-    serious evaluations of past policy, but also reevaluation of past consensus.</p>
+    serious evaluations of past policy, but also reevaluation of past consensus.</p>'
   headline: Current Work
 - template: detail-content
   block: text-1
