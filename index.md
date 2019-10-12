@@ -43,10 +43,10 @@ page_sections:
     data</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
-  content: '<p><a href="http://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
-    title="ManufacturingRevolutions_Lane_Live.pdf"><strong>Manufacturing Revolutions
-    - Industrial Policy and Industrialization in South Korea </strong></a><strong>(2019)<br></strong><br>[Previously
-    titled: Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
+  content: '<p><a href="https://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
+    title=""><strong>Manufacturing Revolutions - Industrial Policy and Industrialization
+    in South Korea</strong></a><strong> (2019)<br></strong><br>[Previously titled:
+    Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
     - I study the impact of industrial policy on industrial development through a
     canonical intervention. Following a political crisis in 1972, South Korea dramatically
     altered its development strategy with a new sector-specific policy: the Heavy
@@ -60,7 +60,7 @@ page_sections:
     HCI persist even after the policy is withdrawn, following the 1979 assassination
     of President Park. Together, my findings suggest that the temporary drive helped
     shift the economy into higher value-added activity.<br></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong><br></strong><br><strong>Abstract</strong>
+    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2019)<br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economic destinies through industrial
     policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
     the attention these policies receive by policymakers across the world. I review
