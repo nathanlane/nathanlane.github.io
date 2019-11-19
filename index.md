@@ -12,6 +12,8 @@ page_sections:
     link_text: Blog
   - link: https://nathanlane.github.io/assets/papers/CV_Nathaniel_Lane.pdf
     link_text: CV [Updated]
+  - link_text: Research Statement
+    link: ''
   logo: ''
 - template: hero-banner-w-image
   block: hero-2
