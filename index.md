@@ -91,8 +91,9 @@ page_sections:
   headline: Upcoming Talks
   content: "<ul><li><p>UNSW Dept. of Economics - October 3rd</p></li><li><p>OzClio
     2019 - Sydney October 4th</p></li><li><p>University of Technology Sydney - October
-    9th.</p></li><li><p>Geneva - Graduate Institute and UN October TBA</p></li><li><p>Paris
-    School of Economics - October TBA</p></li></ul>"
+    9th.</p></li><li><p>European Bank for Reconstruction and Development (EBRD) -
+    Nov. 20th.</p></li><li><p>Oxford University - Nov. 21st</p></li><li><p>ANU, Research
+    School of Economics - Nov. 25th</p></li><li><p>ANU, ACDE - Nov. 26th.</p></li></ul>"
 - template: 2-column-text
   block: two-column-1
   col_1:
