@@ -72,8 +72,10 @@ page_sections:
 - template: detail-content
   block: text-1
   headline: Publications
-  content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"The Historical State,
-    Local Collective Action, and Economic Development in Vietnam.\x03\" <strong>Econometrica</strong>.</p>"
+  content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"<a href=\"https://doi-org.ezproxy.lib.monash.edu.au/10.3982/ECTA15122\"
+    title=\"\">The Historical State, Local Collective Action, and Economic Development
+    in Vietnam</a>.\x03\" <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).<br><br>[PDF:
+    <a href=\"/Assets/papers/VietnamDellLaneQuerubin.pdf\" title=\"\">Download here</a>]</p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
