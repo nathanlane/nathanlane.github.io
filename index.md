@@ -11,7 +11,7 @@ page_sections:
   - link: http://nathanlane.info/blog
     link_text: Blog
   - link: https://nathanlane.github.io/assets/papers/CV_Nathaniel_Lane.pdf
-    link_text: CV [Updated]
+    link_text: CV
   - link_text: Research Statement
     link: ''
   logo: ''
