@@ -59,8 +59,10 @@ page_sections:
     downstream industry. (3) Finally, I show both direct and indirect benefits of
     HCI persist even after the policy is withdrawn, following the 1979 assassination
     of President Park. Together, my findings suggest that the temporary drive helped
-    shift the economy into higher value-added activity.<br></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2019)<br></strong><br><strong>Abstract</strong>
+    shift the economy into higher value-added activity.<br></p><hr><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
+    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2019)
+    - Review article requested for Dani Rodrik''s edited volume of </strong><em>Journal</em>
+    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economic destinies through industrial
     policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
     the attention these policies receive by policymakers across the world. I review
