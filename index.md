@@ -109,11 +109,11 @@ page_sections:
       title="">@straightedge</a>
 - template: simple-footer
   block: footer-1
-  content: Nathan Lane, 2014-2018 <span class="box">• None of this garbage reflects
-    my institution. • CSS hacked by me, forked from </span><a href="" title=""><span
-    class="box">Forestry.io</span></a><span class="box">'s wonderful </span><a href="https://jekyllrb.com/"
-    title=""><span class="box">Jekyll</span></a><span class="box"> theme/git, </span><a
-    href="https://forestry.io/blog/ubuild-a-new-theme-for-static-sites-using-blocks/"
+  content: Nathan Lane, 2014-2019 <span class="box">• None of this garbage reflects
+    my institution, or any of my affiliations. • CSS hacked by me, forked from </span><a
+    href="" title=""><span class="box">Forestry.io</span></a><span class="box">'s
+    wonderful </span><a href="https://jekyllrb.com/" title=""><span class="box">Jekyll</span></a><span
+    class="box"> theme/git, </span><a href="https://forestry.io/blog/ubuild-a-new-theme-for-static-sites-using-blocks/"
     title=""><span class="box">ubuild</span></a><span class="box">.</span>
 
 ---
