@@ -66,13 +66,17 @@ page_sections:
     title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2019)
     - Review article requested for Dani Rodrik''s edited volume of </strong><em>Journal</em>
     of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
-    - Nations have and will continue to shape their economic destinies through industrial
-    policy. Nevertheless, the literature on industrial policy is thin, dwarfed by
-    the attention these policies receive by policymakers across the world. I review
-    the empirical issues surrounding these interventions, emphasizing how new microeconometric
-    work confronts these issues. This review is a proposal to take these interventions—along
-    with all their complexities—more seriously as objects of inquiry. Doing so requires
-    serious evaluations of past policy, but also reevaluation of past consensus.</p>'
+    - Nations have and will continue to shape their economies through industrial policy.
+    Nevertheless, the empirical literature on these interventions is thin, dwarfed
+    by the attention these policies receive by policymakers across the world. In this
+    paper, I discuss the difficulties of empirically studying industrial policy, and
+    review how new econometric work is confronting these issues. Through careful research
+    design and attention to institutional detail, I argue that emergent evaluations
+    are rapidly expanding what we know—and updating what we thought we knew—about
+    these policies. This review is a proposal to take industrial interventions, along
+    with all their complexities, more seriously as objects of inquiry. Doing so requires
+    more serious evaluations of past policy, but also a reevaluation of prior empirical
+    work and consensus.</p>'
   headline: Current Work
 - template: detail-content
   block: text-1
