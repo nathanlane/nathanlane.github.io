@@ -35,9 +35,9 @@ page_sections:
 - template: text-only-hero-banner
   block: hero-1
   heading: <strong>I study comparative economic development, focusing on the role
-    of politics and the state. I'm particularly interested in </strong><a href=""
-    title=""><strong>industrial policy</strong></a><strong>.<br><br>I enjoy using<span
-    class="Apple-converted-space"> </span></strong><a href="" title=""><strong>statistical
+    of politics, history and the state. I'm particularly interested in </strong><a
+    href="" title=""><strong>industrial policy</strong></a><strong>.<br><br>I enjoy
+    using<span class="Apple-converted-space"> </span></strong><a href="" title=""><strong>statistical
     learning</strong></a><strong><span class="Apple-converted-space"> </span>and<span
     class="Apple-converted-space"> </span>computational tools<span class="Apple-converted-space">
     </span>to work with old, messy, and </strong><a href="" title=""><strong>unstructured
