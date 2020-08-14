@@ -108,9 +108,8 @@ page_sections:
   block: two-column-1
   col_1:
     headline: Contact
-    content: '<strong>Phone (Australia)</strong> +61 (0)399032384<br><strong>Email
-      </strong><a href="mailto:nathaniel.lane@monash.edu" title="">nathaniel.lane@monash.edu</a><br><strong>Office
-      hours </strong>(<a href="mailto:nathaniel.lane@monash.edu" title="">email me</a>) '
+    content: <strong>Email </strong><a href="mailto:nathaniel.lane@economics.ox.ac.uk"
+      title="">nathaniel.lane@economics.ox.ac.uk</a><br>
   col_2:
     headline: Social Media
     content: <strong>(Econ) Twitter </strong><a href="https://www.twitter.com/straightedge"
