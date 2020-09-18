@@ -12,17 +12,17 @@ page_sections:
     link_text: Blog
   - link: https://nathanlane.github.io/assets/papers/CV_Nathaniel_Lane.pdf
     link_text: CV
+  - link: nathaniel.lane@economics.ox.ac.uk
+    link_text: nathaniel.lane@economics.ox.ac.uk
   logo: ''
 - template: hero-banner-w-image
   block: hero-2
-  headline: <a href="mailto:nathaniel.lane@monash.edu" title=""><strong>Dr. Nathan
-    Lane</strong></a><strong>, Assistant Professor* at </strong><a href="https://www.monash.edu"
-    title=""><strong>Monash University</strong></a><strong>. I work in </strong><a
-    href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
-    title=""><strong>political economics</strong></a><strong>, </strong><a href="http://scholar.harvard.edu/files/shleifer/files/indust_big_push.pdf"
+  headline: <a href="mailto:nathaniel.lane@economics.ox.ac.uk" title=""><strong>Dr.
+    Nathan Lane</strong></a><strong>, Assoc. Professor, Univ. of Oxford. I work in
+    </strong><a href="https://books.google.com/ngrams/graph?content=economics%2Cpolitical+economy&amp;year_start=1776&amp;year_end=2008&amp;corpus=15&amp;smoothing=0&amp;share=&amp;direct_url=t1%B%2Ceconomics%3B%2Cc0%3B.t1%3B%2Cpolitical%20economy%3B%2Cc0"
+    title=""><strong>political economy</strong></a><strong>, </strong><a href="http://scholar.harvard.edu/files/shleifer/files/indust_big_push.pdf"
     title=""><strong>development</strong></a><strong>, &amp; </strong><a href="http://eh.net/eha/about/"
-    title=""><strong>economic history</strong></a><strong>. I co-founded </strong><a
-    href="http://www.sodalabs.io" title=""><strong>sodalabs.io</strong></a><strong>.</strong>
+    title=""><strong>economic history</strong></a><strong>.</strong>
   content: ''
   cta:
     enabled: true
@@ -35,9 +35,9 @@ page_sections:
 - template: text-only-hero-banner
   block: hero-1
   heading: <strong>I study comparative economic development, focusing on the role
-    of politics and the state. I'm particularly interested in </strong><a href=""
-    title=""><strong>industrial policy</strong></a><strong>.<br><br>I enjoy using<span
-    class="Apple-converted-space"> </span></strong><a href="" title=""><strong>statistical
+    of politics, history and the state. I'm particularly interested in </strong><a
+    href="" title=""><strong>industrial policy</strong></a><strong>.<br><br>I enjoy
+    using<span class="Apple-converted-space"> </span></strong><a href="" title=""><strong>statistical
     learning</strong></a><strong><span class="Apple-converted-space"> </span>and<span
     class="Apple-converted-space"> </span>computational tools<span class="Apple-converted-space">
     </span>to work with old, messy, and </strong><a href="" title=""><strong>unstructured
@@ -108,9 +108,8 @@ page_sections:
   block: two-column-1
   col_1:
     headline: Contact
-    content: '<strong>Phone (Australia)</strong> +61 (0)399032384<br><strong>Email
-      </strong><a href="mailto:nathaniel.lane@monash.edu" title="">nathaniel.lane@monash.edu</a><br><strong>Office
-      hours </strong>(<a href="mailto:nathaniel.lane@monash.edu" title="">email me</a>) '
+    content: <strong>Email </strong><a href="mailto:nathaniel.lane@economics.ox.ac.uk"
+      title="">nathaniel.lane@economics.ox.ac.uk</a><br>
   col_2:
     headline: Social Media
     content: <strong>(Econ) Twitter </strong><a href="https://www.twitter.com/straightedge"
