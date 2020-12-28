@@ -44,7 +44,21 @@ page_sections:
     data</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
-  content: '<p><a href="https://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
+  content: '<p></p><p></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
+    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
+    - </strong>Review article, requested for Dani Rodrik''s volume of<strong> </strong>Journal
+    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
+    - Nations have and will continue to shape their economies through industrial policy.
+    Nevertheless, the empirical literature on these interventions is thin, dwarfed
+    by the attention these policies receive by policymakers across the world. In this
+    paper, I discuss the difficulties of empirically studying industrial policy, and
+    review how new econometric work is confronting these issues. Through careful research
+    design and attention to institutional detail, I argue that emergent evaluations
+    are rapidly expanding what we know—and updating what we thought we knew—about
+    these policies. This review is a proposal to take industrial interventions, along
+    with all their complexities, more seriously as objects of inquiry. Doing so requires
+    more serious evaluations of past policy, but also a reevaluation of prior empirical
+    work and consensus.</p><p></p><hr><p><a href="https://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
     title=""><strong>Manufacturing Revolutions - Industrial Policy and Industrialization
     in South Korea</strong></a><strong> (2019)<br></strong><br>[Previously titled:
     Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
@@ -60,21 +74,7 @@ page_sections:
     downstream industry. (3) Finally, I show both direct and indirect benefits of
     HCI persist even after the policy is withdrawn, following the 1979 assassination
     of President Park. Together, my findings suggest that the temporary drive helped
-    shift the economy into higher value-added activity.<br></p><hr><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (Updated,
-    2019) - </strong>Review article, requested for Dani Rodrik''s volume of<strong>
-    </strong>Journal of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
-    - Nations have and will continue to shape their economies through industrial policy.
-    Nevertheless, the empirical literature on these interventions is thin, dwarfed
-    by the attention these policies receive by policymakers across the world. In this
-    paper, I discuss the difficulties of empirically studying industrial policy, and
-    review how new econometric work is confronting these issues. Through careful research
-    design and attention to institutional detail, I argue that emergent evaluations
-    are rapidly expanding what we know—and updating what we thought we knew—about
-    these policies. This review is a proposal to take industrial interventions, along
-    with all their complexities, more seriously as objects of inquiry. Doing so requires
-    more serious evaluations of past policy, but also a reevaluation of prior empirical
-    work and consensus.</p>'
+    shift the economy into higher value-added activity.<br></p>'
   headline: Current Work
 - template: detail-content
   block: text-1
