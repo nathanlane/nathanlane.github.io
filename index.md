@@ -44,10 +44,33 @@ page_sections:
     data</strong></a><strong>.</strong>
 - template: detail-content
   block: text-1
-  content: '<p></p><p></p><p><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
-    - </strong>Review article, requested for Dani Rodrik''s volume of<strong> </strong>Journal
-    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
+  content: '<p><a href="https://osf.io/preprints/socarxiv/aw7sq" title="The Value
+    of Names - Civil Society, Information, and Governing Multinationals on the Global
+    Periphery"><strong>The Value of Names - Civil Society, Information, and Governing
+    Multinationals on the Global Periphery</strong></a> <strong>(December 2020)</strong>
+    - with David Kreitmeir and Paul Raschky. </p><p>Civil society is essential to
+    governance, especially where laws and authority are weak. We study how a core
+    strategy of international civil society groups - informing and publicizing human
+    rights abuses - impacts those tied to abuse. Our study focuses on a major trend
+    at the center of on-going international media campaigns: the assassination of
+    civil society activists involved in mining activity. Collecting and coding 20
+    years of data on assassination events, we use Event Study Methodology to study
+    how publicity of these events impact the asset prices of firms associated with
+    abuse. We show that publicizing abuses has a significant impact on multinationals.
+    Firm''s associated with an assassination have large, negative abnormal returns
+    following the event. We calculate a median loss in market capitalisation of over
+    100 million USD, ten days following violence. We highlight the role of media publicity
+    in our results. We show negative returns from assassinations are stronger during
+    periods of low media pressure, versus when they coincide with competing newsworthy
+    events. As well, we argue our results are driven by events where companies are
+    explicitly named in media publicity, using a set of placebo events where no firms
+    were identified by news coverage. Furthermore, we reject that our results are
+    driven by other forms of unrest and conflict. Last, we show activist assassinations
+    are positively related to the royalties paid by firms to domestic governments.<br></p><hr><p><strong><br></strong><a
+    href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
+    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (January
+    2020) - </strong>Review article, requested for Dani Rodrik''s volume of<strong>
+    </strong>Journal of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economies through industrial policy.
     Nevertheless, the empirical literature on these interventions is thin, dwarfed
     by the attention these policies receive by policymakers across the world. In this
