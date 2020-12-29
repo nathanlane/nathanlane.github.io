@@ -108,7 +108,9 @@ page_sections:
     <a href=\"https://nathanlane.github.io/assets/papers/VietnamDellLaneQuerubin.pdf\"
     title=\"\">here</a>]<br></p><p>Lane, Nathan. (2020). The New Empirics of Industrial
     Policy. <strong>Journal of Industry, Competition and Trade</strong>, <em>1</em>(2),
-    1–26. <a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"https://doi.org/10.1007/s10842-019-00323-2\">https://doi.org/10.1007/s10842-019-00323-2</a></p>"
+    1–26. <a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"https://doi.org/10.1007/s10842-019-00323-2\">https://doi.org/10.1007/s10842-019-00323-2</a></p><p>[PDF
+    <a href=\"https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf\"
+    title=\"\">here</a>]</p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
