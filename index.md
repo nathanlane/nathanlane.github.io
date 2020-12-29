@@ -112,9 +112,7 @@ page_sections:
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
     the Rise of the Digital State </em>- with Weijia Li</p><p></p></li><li><p><em>Mapping
     the Digital State</em> - with Klaus Ackerman, Simon Angus, Weijia Li, and Paul
-    Raschky [And related projects.]<br></p></li><li><p><em>Market Returns and Assassinations
-    of Environmental Activists - Evidence from the Developing World - with </em>David
-    Kreitmeir and Paul Raschky<br></p></li><li><p><em>Managing Export-led Industrialization
+    Raschky [And related projects.]<br></p></li><li><p><em>Managing Export-led Industrialization
     - Evidence from South Korea's Export Promotion Meetings</em> - with Changkeun
     Lee<br></p></li><li><p><em>Labor Repression, Democracy, and Growth in South Korea</em>
     - with Daron Acemoglu and Changkeun Lee<br></p></li></ul>"
