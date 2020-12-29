@@ -121,12 +121,10 @@ page_sections:
   headline: Work in Progress
 - template: detail-content
   block: text-1
-  headline: Upcoming Talks
-  content: "<ul><li><p>UNSW Dept. of Economics - October 3rd</p></li><li><p>OzClio
-    2019 - Sydney October 4th</p></li><li><p>University of Technology Sydney - October
-    9th.</p></li><li><p>European Bank for Reconstruction and Development (EBRD) -
-    Nov. 20th.</p></li><li><p>Oxford University - Nov. 21st</p></li><li><p>ANU, Research
-    School of Economics - Nov. 25th</p></li><li><p>ANU, ACDE - Nov. 26th.</p></li></ul>"
+  headline: Advising & Research Assistantships?
+  content: "<p>If you're interested in data science oriented research assistant opportunities
+    and more, feel free to shoot me an email. </p><p>I am currently accepting graduate
+    students interested in industrial policy.</p>"
 - template: 2-column-text
   block: two-column-1
   col_1:
