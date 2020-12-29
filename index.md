@@ -106,7 +106,9 @@ page_sections:
     title=\"\">The Historical State, Local Collective Action, and Economic Development
     in Vietnam</a>.\x03\" <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).<br><br>[PDF
     <a href=\"https://nathanlane.github.io/assets/papers/VietnamDellLaneQuerubin.pdf\"
-    title=\"\">here</a>]</p>"
+    title=\"\">here</a>]<br></p><p>Lane, Nathan. (2020). The New Empirics of Industrial
+    Policy. <strong>Journal of Industry, Competition and Trade</strong>, <em>1</em>(2),
+    1–26. <a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"https://doi.org/10.1007/s10842-019-00323-2\">https://doi.org/10.1007/s10842-019-00323-2</a></p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
