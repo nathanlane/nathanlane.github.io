@@ -89,8 +89,8 @@ page_sections:
     more serious evaluations of past policy, but also a reevaluation of prior empirical
     work and consensus.</p><p></p><hr><p><a href="https://nathanlane.github.io/assets/papers/ManufacturingRevolutions_Lane_Live.pdf"
     title=""><strong>Manufacturing Revolutions - Industrial Policy and Industrialization
-    in South Korea</strong></a><strong> (2019)<br></strong><br>[Previously titled:
-    Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
+    in South Korea</strong></a><strong> (2021)<br></strong><br>[Previously titled:
+    Manufacturing Revolutions - Industrial Policy and Networks in South Korea, 2016]</p><p><strong><br>Abstract</strong>
     - I study the impact of industrial policy on industrial development by considering
     a canonical intervention. Following a political crisis, South Korea dramatically
     altered its development strategy with a sector-specific industrial policy: the
