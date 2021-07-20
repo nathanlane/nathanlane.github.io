@@ -91,19 +91,21 @@ page_sections:
     title=""><strong>Manufacturing Revolutions - Industrial Policy and Industrialization
     in South Korea</strong></a><strong> (2019)<br></strong><br>[Previously titled:
     Manufacturing Revolutions - Industrial Policy and Networks in South Korea]</p><p><strong><br>Abstract</strong>
-    - I study the impact of industrial policy on industrial development through a
-    canonical intervention. Following a political crisis in 1972, South Korea dramatically
-    altered its development strategy with a new sector-specific policy: the Heavy
-    Chemical and Industry (HCI) drive. With newly digitized data, I use the sharp
-    introduction and withdrawal of HCI trade policy and investment incentives to study
-    its impacts. (1) I show HCI successfully promoted the evolution of directly treated
-    industries. Next I provide evidence for two key justifications of industrial policy:
-    network and dynamic externalities. (2) Using variation in exposure to policies
-    through the input-output network, I show HCI indirectly benefited (non-treated)
-    downstream industry. (3) Finally, I show both direct and indirect benefits of
-    HCI persist even after the policy is withdrawn, following the 1979 assassination
-    of President Park. Together, my findings suggest that the temporary drive helped
-    shift the economy into higher value-added activity.<br></p>'
+    - I study the impact of industrial policy on industrial development by considering
+    a canonical intervention. Following a political crisis, South Korea dramatically
+    altered its development strategy with a sector-specific industrial policy: the
+    Heavy Chemical and Industry (HCI) drive, 1973-1979. With newly assembled historical
+    data, I use the sharp introduction and withdrawal of industrial policies to study
+    the impacts of industrial policy—during and after the intervention period. I show
+    (1) HCI promoted the expansion and dynamic comparative advantage of directly targeted
+    industries. (2) Using variation in exposure to policies through the input-output
+    network, I show HCI indirectly benefited downstream users of targeted intermediates.
+    (3) I find direct and indirect benefits of HCI persisted even after the end of
+    HCI, following the 1979 assassination of the president. These effects include
+    the eventual development of directly targeted exporters and their downstream counterparts.
+    Together, my findings suggest that the temporary drive shifted Korea manufacturing
+    into more advanced markets and created durable industrial change. These findings
+    clarify lessons drawn from South Korea and the East Asian growth miracle.</p>'
   headline: Current Work
 - template: detail-content
   block: text-1
