@@ -93,9 +93,9 @@ page_sections:
     into more advanced markets and created durable industrial change. These findings
     clarify lessons drawn from South Korea and the East Asian growth miracle.</p><hr><p><strong><br></strong><a
     href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (January
-    2020) - </strong>Review article, requested for Dani Rodrik''s volume of<strong>
-    </strong>Journal of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
+    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
+    - </strong>Review article, requested for Dani Rodrik''s volume of<strong> </strong>Journal
+    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economies through industrial policy.
     Nevertheless, the empirical literature on these interventions is thin, dwarfed
     by the attention these policies receive by policymakers across the world. In this
