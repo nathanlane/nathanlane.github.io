@@ -106,7 +106,8 @@ page_sections:
     these policies. This review is a proposal to take industrial interventions, along
     with all their complexities, more seriously as objects of inquiry. Doing so requires
     more serious evaluations of past policy, but also a reevaluation of prior empirical
-    work and consensus.</p>'
+    work and consensus.</p><p></p><p>Ungated version: <a href="https://osf.io/preprints/socarxiv/tnxg6/"
+    title="SocArXiv working paper version.">SocArXiv</a></p>'
   headline: Current Work
 - template: detail-content
   block: text-1
