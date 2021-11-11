@@ -136,9 +136,10 @@ page_sections:
 - template: detail-content
   block: text-1
   headline: Advising & Research Assistantships?
-  content: "<p>If you're interested in data science oriented research assistant opportunities
-    and more, feel free to shoot me an email. </p><p>I am currently accepting graduate
-    students interested in industrial policy.</p>"
+  content: "<p>If you're interested in data science research assistant opportunities
+    and more, feel free to shoot me an email. Some programming knowledge required.</p><p>I
+    am currently accepting graduate students (economics doctoral and masters) interested
+    in industrial policy and political economy of development.</p>"
 - template: 2-column-text
   block: two-column-1
   col_1:
