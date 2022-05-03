@@ -64,30 +64,7 @@ page_sections:
     Korea and the East Asian growth miracle.<br></p><hr><p><br><strong>The Who, What,
     When, and How of Industrial Policy: A Text-Based Approach (2022) - </strong><em>Réka
     Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong> <em>Working
-    Paper coming in June.</em><br></strong><br><br><strong>Abstract</strong> - Whether
-    industrial policy (IP) can promote economic change is an age-old question in economic
-    development and growth. Yet, outside a handful of case studies, we understand
-    little about these policies—including basic facts. Two key reasons for this deficit
-    are lack of measurement and lack of data. Our paper addresses these issues by
-    creating a text-based approach to measuring industrial policy and providing a
-    global view of practice in the 21st century. We use machine learning to construct
-    a classifier for coding instances of IP from textual summaries of policy. We then
-    apply our tool to a comprehensive, English-language database of international
-    economic policy. In doing so, we create a new dataset of industrial policy at
-    the country-product-year level, and establish five fundamental facts about global
-    industrial policy from 2009 to 2020. First, IP is practiced by a very limited
-    set of countries. Second, the countries engaged most in IP tend to be wealthier
-    (in the top income quintile) liberal democracies, and IP is rare among the poorest
-    nations (bottom quintile). Third, when countries use IP, they do so selectively:
-    policies tend to be highly targeted towards a small set of industries. Rich and
-    poor countries target similar sectors, with the exception of green IP (wealthier
-    countries) and textiles (poorer countries). Fourth, industrial policy has indeed
-    returned, and practice has trended upward since the 2010s. Fifth, countries use
-    very specific tools for IP aims. Many trade policies are not industrial policy
-    measures, and among the many potential instruments, the bulk of IP are subsidies
-    and export-promotion measures. Thus, we find contemporary practice is a far cry
-    from industrial policy’s past, and tends toward specific, selective, export-oriented
-    policies used by the world’s more developed economies.<br><br></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
+    Paper coming in June.</em><br></strong></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
     title="The Value of Names - Civil Society, Information, and Governing Multinationals
     on the Global Periphery"><strong>The Value of Names - Civil Society, Information,
     and Governing Multinationals on the Global Periphery</strong></a> <strong>(2022)</strong>
