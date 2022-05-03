@@ -118,21 +118,7 @@ page_sections:
     events where no firms were identified by news coverage. Furthermore, we reject
     that our results are driven by other forms of unrest and conflict. Last, we show
     activist assassinations are positively related to the royalties paid by firms
-    to domestic governments.<br></p><hr><p><strong><br></strong><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
-    - </strong>Journal of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
-    - Nations have and will continue to shape their economies through industrial policy.
-    Nevertheless, the empirical literature on these interventions is thin, dwarfed
-    by the attention these policies receive by policymakers across the world. In this
-    paper, I discuss the difficulties of empirically studying industrial policy, and
-    review how new econometric work is confronting these issues. Through careful research
-    design and attention to institutional detail, I argue that emergent evaluations
-    are rapidly expanding what we know—and updating what we thought we knew—about
-    these policies. This review is a proposal to take industrial interventions, along
-    with all their complexities, more seriously as objects of inquiry. Doing so requires
-    more serious evaluations of past policy, but also a reevaluation of prior empirical
-    work and consensus.</p><p></p><p>Ungated version: <a href="https://osf.io/preprints/socarxiv/tnxg6/"
-    title="SocArXiv working paper version.">SocArXiv</a></p>'
+    to domestic governments.<br></p>'
   headline: Current Work
 - template: detail-content
   block: text-1
