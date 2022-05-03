@@ -1,7 +1,7 @@
 ---
 layout: blocks
 title: Nathanlane.info
-date: 2017-11-22T23:00:00.000+00:00
+date: 2017-11-22 23:00:00 +0000
 page_sections:
 - template: navigation-header
   block: header-1
@@ -61,12 +61,38 @@ page_sections:
     exporters and their downstream counterparts. Together, my findings suggest that
     the temporary drive shifted Korea manufacturing into more advanced markets and
     created durable industrial change. These findings clarify lessons drawn from South
-    Korea and the East Asian growth miracle.</p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
+    Korea and the East Asian growth miracle.<br></p><hr><p><br><strong>The Who, What,
+    When, and How of Industrial Policy: A Text-Based Approach (2022) - </strong><em>Réka
+    Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong> <em>Working
+    Paper coming in June.</em><br></strong><br><br><strong>Abstract</strong> - Whether
+    industrial policy (IP) can promote economic change is an age-old question in economic
+    development and growth. Yet, outside a handful of case studies, we understand
+    little about these policies—including basic facts. Two key reasons for this deficit
+    are lack of measurement and lack of data. Our paper addresses these issues by
+    creating a text-based approach to measuring industrial policy and providing a
+    global view of practice in the 21st century. We use machine learning to construct
+    a classifier for coding instances of IP from textual summaries of policy. We then
+    apply our tool to a comprehensive, English-language database of international
+    economic policy. In doing so, we create a new dataset of industrial policy at
+    the country-product-year level, and establish five fundamental facts about global
+    industrial policy from 2009 to 2020. First, IP is practiced by a very limited
+    set of countries. Second, the countries engaged most in IP tend to be wealthier
+    (in the top income quintile) liberal democracies, and IP is rare among the poorest
+    nations (bottom quintile). Third, when countries use IP, they do so selectively:
+    policies tend to be highly targeted towards a small set of industries. Rich and
+    poor countries target similar sectors, with the exception of green IP (wealthier
+    countries) and textiles (poorer countries). Fourth, industrial policy has indeed
+    returned, and practice has trended upward since the 2010s. Fifth, countries use
+    very specific tools for IP aims. Many trade policies are not industrial policy
+    measures, and among the many potential instruments, the bulk of IP are subsidies
+    and export-promotion measures. Thus, we find contemporary practice is a far cry
+    from industrial policy’s past, and tends toward specific, selective, export-oriented
+    policies used by the world’s more developed economies.<br><br></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
     title="The Value of Names - Civil Society, Information, and Governing Multinationals
     on the Global Periphery"><strong>The Value of Names - Civil Society, Information,
-    and Governing Multinationals on the Global Periphery</strong></a> <strong>(December
-    2020)</strong> - with David Kreitmeir and Paul Raschky.<br><br><em>Media: </em><br>Quartz
-    (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
+    and Governing Multinationals on the Global Periphery</strong></a> <strong>(2022)</strong>
+    - with David Kreitmeir and Paul Raschky - <strong>Under Submission</strong>.<br><br><em>Media:
+    </em><br>Quartz (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
     title="Mongabay">Environmental assassinations bad for business, new research shows</a>).
@@ -94,8 +120,7 @@ page_sections:
     activist assassinations are positively related to the royalties paid by firms
     to domestic governments.<br></p><hr><p><strong><br></strong><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
     title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
-    - </strong>Review article, requested for Dani Rodrik''s volume of<strong> </strong>Journal
-    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
+    - </strong>Journal of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
     - Nations have and will continue to shape their economies through industrial policy.
     Nevertheless, the empirical literature on these interventions is thin, dwarfed
     by the attention these policies receive by policymakers across the world. In this
