@@ -44,7 +44,7 @@ page_sections:
   block: text-1
   content: '<p><br><a href="https://osf.io/preprints/socarxiv/6tqax/" title=""><strong>Manufacturing
     Revolutions - Industrial Policy and Industrialization in South Korea</strong></a><strong>
-    (2021) - <em>Revise and Resubmit, Quarterly Journal of Economics </em><br></strong><br>[Previously
+    (2022) - <em>Revise and Resubmit, Quarterly Journal of Economics </em><br></strong><br>[Previously
     titled: Manufacturing Revolutions - Industrial Policy and Networks in South Korea,
     2016]</p><p><strong><br>Abstract</strong> - I study the impact of industrial policy
     on industrial development by considering a canonical intervention. Following a
