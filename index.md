@@ -64,11 +64,11 @@ page_sections:
     Korea and the East Asian growth miracle.<br></p><hr><p><br><strong>The Who, What,
     When, and How of Industrial Policy: A Text-Based Approach (2022) - </strong><em>Réka
     Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong> <em>Working
-    Paper coming in June.</em><br></strong></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
+    Paper coming in August.</em><br></strong></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
     title="The Value of Names - Civil Society, Information, and Governing Multinationals
     on the Global Periphery"><strong>The Value of Names - Civil Society, Information,
     and Governing Multinationals on the Global Periphery</strong></a> <strong>(2022)</strong>
-    - with David Kreitmeir and Paul Raschky - <strong>Under Submission</strong>.<br><br><em>Media:
+    - with David Kreitmeir and Paul Raschky - <strong>Under Review</strong>.<br><br><em>Media:
     </em><br>Quartz (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
