@@ -99,23 +99,22 @@ page_sections:
   headline: Current Work
 - template: detail-content
   block: text-1
-  headline: 'Publications and Accepted '
+  headline: Publications and Accepted Work
   content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"<a href=\"https://doi-org.ezproxy.lib.monash.edu.au/10.3982/ECTA15122\"
     title=\"\">The Historical State, Local Collective Action, and Economic Development
     in Vietnam</a>.\x03\" <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).
     <strong>[PDF </strong><a href=\"https://nathanlane.github.io/assets/papers/VietnamDellLaneQuerubin.pdf\"
-    title=\"\"><strong>here</strong></a><strong>]</strong><br></p><p>Lane, Nathan.
-    (2020). The New Empirics of Industrial Policy. <strong>Journal of Industry, Competition
-    and Trade</strong>, <em>1</em>(2), 1–26. <a href=\"https://doi.org/10.1007/s10842-019-00323-2\"
-    title=\"https://doi.org/10.1007/s10842-019-00323-2\">https://doi.org/10.1007/s10842-019-00323-2</a>.<br><strong>[Publisher's
+    title=\"\"><strong>here</strong></a><strong>]<br><br></strong>Lane, Nathan. (2022).
+    <a href=\"https://osf.io/preprints/socarxiv/6tqax/\" title=\"\">Manufacturing
+    Revolutions - Industrial Policy and Industrialization in South Korea</a> -<strong>
+    </strong><em>Conditionally Accepted,</em><strong><em> </em>Quarterly Journal of
+    Economics<br><br></strong>Lane, Nathan. (2020). The New Empirics of Industrial
+    Policy. <strong>Journal of Industry, Competition and Trade</strong>, <em>1</em>(2),
+    1–26. <a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"https://doi.org/10.1007/s10842-019-00323-2\">https://doi.org/10.1007/s10842-019-00323-2</a>.<br><strong>[Publisher's
     version: </strong><a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"\"><strong>here</strong></a><strong>]</strong><br><strong>[Un-gated
     SocArXiv version: </strong><a href=\"https://osf.io/preprints/socarxiv/tnxg6/\"
     title=\"Author's un-gated pre-print version of The New Empirics of Industrial
-    Policy\"><strong>here</strong></a><strong> ]<br><br><br></strong>Lane, Nathan.
-    (2022). <a href=\"https://osf.io/preprints/socarxiv/6tqax/\" title=\"\">Manufacturing
-    Revolutions - Industrial Policy and Industrialization in South Korea</a> -<strong>
-    </strong><em>Conditionally Accepted,</em><strong><em> </em>Quarterly Journal of
-    Economics </strong></p>"
+    Policy\"><strong>here</strong></a><strong> ]<br><br><br></strong></p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
