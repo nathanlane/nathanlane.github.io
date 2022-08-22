@@ -44,7 +44,7 @@ page_sections:
   block: text-1
   content: '<p><br><a href="https://osf.io/preprints/socarxiv/6tqax/" title=""><strong>Manufacturing
     Revolutions - Industrial Policy and Industrialization in South Korea</strong></a><strong>
-    (2022) - <em>Revise and Resubmit, Quarterly Journal of Economics </em><br></strong><br>[Previously
+    (2022) - <em>Conditionally Accepted, Quarterly Journal of Economics </em><br></strong><br>[Previously
     titled: Manufacturing Revolutions - Industrial Policy and Networks in South Korea,
     2016]</p><p><strong><br>Abstract</strong> - I study the impact of industrial policy
     on industrial development by considering a canonical intervention. Following a
@@ -80,7 +80,7 @@ page_sections:
     </strong>- Civil society is essential to governance, especially where laws and
     authority are weak. We study how a core strategy of international civil society
     groups - informing and publicizing human rights abuses - impacts those tied to
-    abuse. Our study focuses on a major trend at the center of on-going international
+    abuse. Our study focuses on a major trend at the center of ongoing international
     media campaigns: the assassination of civil society activists involved in mining
     activity. Collecting and coding 20 years of data on assassination events, we use
     Event Study Methodology to study how publicity of these events impact the asset
@@ -111,7 +111,7 @@ page_sections:
     version: </strong><a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"\"><strong>here</strong></a><strong>]</strong><br><strong>[Un-gated
     SocArXiv version: </strong><a href=\"https://osf.io/preprints/socarxiv/tnxg6/\"
     title=\"Author's un-gated pre-print version of The New Empirics of Industrial
-    Policy\"><strong>here</strong></a><strong> ]</strong></p>"
+    Policy\"><strong>here</strong></a><strong> ]<br><br></strong></p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
