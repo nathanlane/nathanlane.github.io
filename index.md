@@ -1,7 +1,7 @@
 ---
 layout: blocks
 title: Nathanlane.info
-date: 2017-11-22T23:00:00.000+00:00
+date: 
 page_sections:
 - template: navigation-header
   block: header-1
@@ -44,7 +44,7 @@ page_sections:
   block: text-1
   content: '<p><br><a href="https://osf.io/preprints/socarxiv/6tqax/" title=""><strong>Manufacturing
     Revolutions - Industrial Policy and Industrialization in South Korea</strong></a><strong>
-    (2021) - <em>Revise and Resubmit, Quarterly Journal of Economics </em><br></strong><br>[Previously
+    (2022) - <em>Conditionally Accepted, Quarterly Journal of Economics </em><br></strong><br>[Previously
     titled: Manufacturing Revolutions - Industrial Policy and Networks in South Korea,
     2016]</p><p><strong><br>Abstract</strong> - I study the impact of industrial policy
     on industrial development by considering a canonical intervention. Following a
@@ -61,12 +61,15 @@ page_sections:
     exporters and their downstream counterparts. Together, my findings suggest that
     the temporary drive shifted Korea manufacturing into more advanced markets and
     created durable industrial change. These findings clarify lessons drawn from South
-    Korea and the East Asian growth miracle.</p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
+    Korea and the East Asian growth miracle.<br></p><hr><p><br><strong>The Who, What,
+    When, and How of Industrial Policy: A Text-Based Approach (2022) - </strong><em>Réka
+    Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong> <em>Working
+    Paper coming in August.</em><br></strong></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
     title="The Value of Names - Civil Society, Information, and Governing Multinationals
     on the Global Periphery"><strong>The Value of Names - Civil Society, Information,
-    and Governing Multinationals on the Global Periphery</strong></a> <strong>(December
-    2020)</strong> - with David Kreitmeir and Paul Raschky.<br><br><em>Media: </em><br>Quartz
-    (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
+    and Governing Multinationals on the Global Periphery</strong></a> <strong>(2022)</strong>
+    - with David Kreitmeir and Paul Raschky - <strong>Under Review</strong>.<br><br><em>Media:
+    </em><br>Quartz (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
     title="Mongabay">Environmental assassinations bad for business, new research shows</a>).
@@ -77,7 +80,7 @@ page_sections:
     </strong>- Civil society is essential to governance, especially where laws and
     authority are weak. We study how a core strategy of international civil society
     groups - informing and publicizing human rights abuses - impacts those tied to
-    abuse. Our study focuses on a major trend at the center of on-going international
+    abuse. Our study focuses on a major trend at the center of ongoing international
     media campaigns: the assassination of civil society activists involved in mining
     activity. Collecting and coding 20 years of data on assassination events, we use
     Event Study Methodology to study how publicity of these events impact the asset
@@ -92,26 +95,11 @@ page_sections:
     events where no firms were identified by news coverage. Furthermore, we reject
     that our results are driven by other forms of unrest and conflict. Last, we show
     activist assassinations are positively related to the royalties paid by firms
-    to domestic governments.<br></p><hr><p><strong><br></strong><a href="https://nathanlane.github.io/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf"
-    title=""><strong>The New Empirics of Industrial Policy</strong></a><strong> (2020)
-    - </strong>Review article, requested for Dani Rodrik''s volume of<strong> </strong>Journal
-    of Industry, Competition and Trade.<strong><br></strong><br><strong>Abstract</strong>
-    - Nations have and will continue to shape their economies through industrial policy.
-    Nevertheless, the empirical literature on these interventions is thin, dwarfed
-    by the attention these policies receive by policymakers across the world. In this
-    paper, I discuss the difficulties of empirically studying industrial policy, and
-    review how new econometric work is confronting these issues. Through careful research
-    design and attention to institutional detail, I argue that emergent evaluations
-    are rapidly expanding what we know—and updating what we thought we knew—about
-    these policies. This review is a proposal to take industrial interventions, along
-    with all their complexities, more seriously as objects of inquiry. Doing so requires
-    more serious evaluations of past policy, but also a reevaluation of prior empirical
-    work and consensus.</p><p></p><p>Ungated version: <a href="https://osf.io/preprints/socarxiv/tnxg6/"
-    title="SocArXiv working paper version.">SocArXiv</a></p>'
+    to domestic governments.<br></p>'
   headline: Current Work
 - template: detail-content
   block: text-1
-  headline: Publications
+  headline: 'Publications and Accepted '
   content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"<a href=\"https://doi-org.ezproxy.lib.monash.edu.au/10.3982/ECTA15122\"
     title=\"\">The Historical State, Local Collective Action, and Economic Development
     in Vietnam</a>.\x03\" <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).
@@ -123,7 +111,11 @@ page_sections:
     version: </strong><a href=\"https://doi.org/10.1007/s10842-019-00323-2\" title=\"\"><strong>here</strong></a><strong>]</strong><br><strong>[Un-gated
     SocArXiv version: </strong><a href=\"https://osf.io/preprints/socarxiv/tnxg6/\"
     title=\"Author's un-gated pre-print version of The New Empirics of Industrial
-    Policy\"><strong>here</strong></a><strong> ]</strong></p>"
+    Policy\"><strong>here</strong></a><strong> ]<br><br><br></strong>Lane, Nathan.
+    (2022). <a href=\"https://osf.io/preprints/socarxiv/6tqax/\" title=\"\">Manufacturing
+    Revolutions - Industrial Policy and Industrialization in South Korea</a> -<strong>
+    </strong><em>Conditionally Accepted,</em><strong><em> </em>Quarterly Journal of
+    Economics </strong></p>"
 - template: detail-content
   block: text-1
   content: "<ul><li><p><em>Information is Power - Monopoly Power, Technology, and
