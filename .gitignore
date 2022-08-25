@@ -8,3 +8,6 @@ site/public/
 dist/
 .tmp/
 _site/
+*.docx
+CV_Nathaniel_Lane.docx
+*.docx
