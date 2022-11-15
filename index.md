@@ -63,15 +63,32 @@ page_sections:
     exporters and their downstream counterparts. Together, my findings suggest that
     the temporary drive shifted Korea manufacturing into more advanced markets and
     created durable industrial change. These findings clarify lessons drawn from South
-    Korea and the East Asian growth miracle.<br></p><hr><p><br><strong>The Who, What,
-    When, and How of Industrial Policy: A Text-Based Approach (2022) - </strong><em>Réka
-    Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong> <em>Working
-    Paper coming in August.</em><br></strong></p><hr><p><a href="https://osf.io/preprints/socarxiv/aw7sq"
-    title="The Value of Names - Civil Society, Information, and Governing Multinationals
-    on the Global Periphery"><strong>The Value of Names - Civil Society, Information,
-    and Governing Multinationals on the Global Periphery</strong></a> <strong>(2022)</strong>
-    - with David Kreitmeir and Paul Raschky - <strong>Under Review</strong>.<br><br><em>Media:
-    </em><br>Quartz (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
+    Korea and the East Asian growth miracle.<br></p><hr><p><br><a href="The Who, What,
+    When, and How of Industrial Policy: A Text-Based Approach (2022)" title=""><strong>The
+    Who, What, When, and How of Industrial Policy: A Text-Based Approach (2022)</strong></a><strong>
+    - </strong><em>Réka Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong>
+    </strong><a href="https://osf.io/preprints/socarxiv/uyxh9/" title="https://osf.io/preprints/socarxiv/uyxh9/">https://osf.io/preprints/socarxiv/uyxh9/</a><br><strong><br></strong>Since
+    the 18th century, policymakers have debated the merits of industrial policy (IP).
+    Yet, economists lack measures and data on its use. We provide a new approach to
+    measuring industrial policy from text and study its global patterns. We create
+    an automated classification algorithm and categorize policies from a global database
+    of commercial policy descriptions, 2009 - 2020. By quantifying policy at the country,
+    industry, and year levels, we provide a first disaggregate analysis of international
+    industrial policies. We highlight four findings. First, IP is common (25% of policies
+    in our database) and has expanded since 2010. Second, instead of blunt tariffs,
+    IP is granular and technocratic. Countries tend to use subsidies and export promotion
+    measures, often targeted at individual firms. Third, the countries engaged most
+    in IP tend to be wealthier (top income quintile) liberal democracies. In our data,
+    IP is rarer among the poorest nations (bottom quintile). Fourth, IP is targeted
+    toward a small set of industries and is highly correlated with an industry’s revealed
+    comparative advantage. Our approach to measuring industrial policy shows that
+    contemporary practice is likely much different from the past.<br></p><hr><p><a
+    href="https://osf.io/preprints/socarxiv/aw7sq" title="The Value of Names - Civil
+    Society, Information, and Governing Multinationals on the Global Periphery"><strong>The
+    Value of Names - Civil Society, Information, and Governing Multinationals on the
+    Global Periphery</strong></a> <strong>(2022)</strong> - with David Kreitmeir and
+    Paul Raschky - <strong>Under Review</strong>.<br><br><em>Media: </em><br>Quartz
+    (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
     title="Mongabay">Environmental assassinations bad for business, new research shows</a>).
