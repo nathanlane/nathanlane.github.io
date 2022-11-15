@@ -12,6 +12,8 @@ page_sections:
     link_text: CV
   - link: nathaniel.lane@economics.ox.ac.uk
     link_text: nathaniel.lane@economics.ox.ac.uk
+  - link: https://www.industrialpolicygroup.com
+    link_text: The Industrial Policy Group
   logo: ''
 - template: hero-banner-w-image
   block: hero-2
