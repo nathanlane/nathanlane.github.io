@@ -67,10 +67,10 @@ page_sections:
     When, and How of Industrial Policy: A Text-Based Approach (2022)" title=""><strong>The
     Who, What, When, and How of Industrial Policy: A Text-Based Approach (2022)</strong></a><strong>
     - </strong><em>Réka Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong>
-    </strong><a href="https://osf.io/preprints/socarxiv/uyxh9/" title="https://osf.io/preprints/socarxiv/uyxh9/">https://osf.io/preprints/socarxiv/uyxh9/</a><br><strong><br></strong>Since
-    the 18th century, policymakers have debated the merits of industrial policy (IP).
-    Yet, economists lack measures and data on its use. We provide a new approach to
-    measuring industrial policy from text and study its global patterns. We create
+    </strong><a href="https://osf.io/preprints/socarxiv/uyxh9/" title="https://osf.io/preprints/socarxiv/uyxh9/">https://osf.io/preprints/socarxiv/uyxh9/</a><br><strong><br>Abstract</strong>
+    - Since the 18th century, policymakers have debated the merits of industrial policy
+    (IP). Yet, economists lack measures and data on its use. We provide a new approach
+    to measuring industrial policy from text and study its global patterns. We create
     an automated classification algorithm and categorize policies from a global database
     of commercial policy descriptions, 2009 - 2020. By quantifying policy at the country,
     industry, and year levels, we provide a first disaggregate analysis of international
