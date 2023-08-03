@@ -34,8 +34,8 @@ page_sections:
   background_image: ''
 - template: text-only-hero-banner
   block: hero-1
-  heading: <strong>I study comparative economic development, focusing on the role
-    of politics, history and the state. I'm particularly interested in </strong><a
+  heading: <strong>I study economic and industrial development, focusing on the role
+    of politics, history, and the state. I'm particularly interested in </strong><a
     href="" title=""><strong>industrial policy</strong></a><strong>.<br><br>I enjoy
     using<span class="Apple-converted-space"> </span></strong><a href="" title=""><strong>statistical
     learning</strong></a><strong><span class="Apple-converted-space"> </span>and<span
@@ -87,7 +87,7 @@ page_sections:
     Society, Information, and Governing Multinationals on the Global Periphery"><strong>The
     Value of Names - Civil Society, Information, and Governing Multinationals on the
     Global Periphery</strong></a> <strong>(2022)</strong> - with David Kreitmeir and
-    Paul Raschky - <strong>Under Review</strong>.<br><br><em>Media: </em><br>Quartz
+    Paul Raschky - <strong>R&R J. European Economic Assoc.</strong>.<br><br><em>Media: </em><br>Quartz
     (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
