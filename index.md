@@ -87,7 +87,7 @@ page_sections:
     Society, Information, and Governing Multinationals on the Global Periphery"><strong>The
     Value of Names - Civil Society, Information, and Governing Multinationals on the
     Global Periphery</strong></a> <strong>(2022)</strong> - with David Kreitmeir and
-    Paul Raschky - <strong>R&R J. European Economic Assoc.</strong>.<br><br><em>Media: </em><br>Quartz
+    Paul Raschky - <strong>R&R J. European Economic Assoc.</strong><br><br><em>Media: </em><br>Quartz
     (<a href=" https://qz.com/1954869/markets-hold-companies-accountable-for-human-rights-violations/"
     title="Quartz coverage">DEEP IN THE HOLE -Markets are actually holding companies
     accountable for human rights violations</a>). Mongabay (<a href="https://news.mongabay.com/2021/01/environmental-assassinations-bad-for-business-new-research-shows/?utm_medium=Social&amp;utm_source=Twitter#Echobox=1611418949"
@@ -121,7 +121,7 @@ page_sections:
   headline: Publications and Accepted Work
   content: "<p>with Melissa Dell and Pablo Querubin. (2018). \"<a href=\"https://doi-org.ezproxy.lib.monash.edu.au/10.3982/ECTA15122\"
     title=\"\">The Historical State, Local Collective Action, and Economic Development
-    in Vietnam</a>.\x03\" <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).
+    in Vietnam</a>." <strong>Econometrica</strong>, 2018, Vol.86(6), p.2083(39).
     <strong>[PDF </strong><a href=\"https://nathanlane.github.io/assets/papers/VietnamDellLaneQuerubin.pdf\"
     title=\"\"><strong>here</strong></a><strong>]<br><br></strong>Lane, Nathan. (2022).
     <a href=\"https://osf.io/preprints/socarxiv/6tqax/\" title=\"\">Manufacturing
