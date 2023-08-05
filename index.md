@@ -63,11 +63,11 @@ page_sections:
     exporters and their downstream counterparts. Together, my findings suggest that
     the temporary drive shifted Korea manufacturing into more advanced markets and
     created durable industrial change. These findings clarify lessons drawn from South
-    Korea and the East Asian growth miracle.<br></p><hr><p><br><a href="https://osf.io/preprints/socarxiv/uyxh9/"
-    title=""><strong>The Who, What, When, and How of Industrial Policy: A Text-Based
-    Approach (2022)</strong></a><strong> - </strong><em>Réka Juhász, Nathan Lane,
-    Emily Oehlsen, and Verónica C Pérez</em>.<strong> </strong><a href="https://osf.io/preprints/socarxiv/uyxh9/"
-    title="https://osf.io/preprints/socarxiv/uyxh9/">https://osf.io/preprints/socarxiv/uyxh9/</a><br><strong><br>Abstract</strong>
+    Korea and the East Asian growth miracle.<br></p><hr><p><br><a href="The Who, What,
+    When, and How of Industrial Policy: A Text-Based Approach (2022)" title=""><strong>The
+    Who, What, When, and How of Industrial Policy: A Text-Based Approach (2022)</strong></a><strong>
+    - </strong><em>Réka Juhász, Nathan Lane, Emily Oehlsen, and Verónica C Pérez</em>.<strong>
+    </strong><a href="https://osf.io/preprints/socarxiv/uyxh9/" title="https://osf.io/preprints/socarxiv/uyxh9/">https://osf.io/preprints/socarxiv/uyxh9/</a><br><strong><br>Abstract</strong>
     - Since the 18th century, policymakers have debated the merits of industrial policy
     (IP). Yet, economists lack measures and data on its use. We provide a new approach
     to measuring industrial policy from text and study its global patterns. We create
