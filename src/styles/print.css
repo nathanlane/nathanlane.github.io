@@ -1,0 +1,53 @@
+/* Print Styles for Accessibility */
+
+@media print {
+  /* High contrast for printing */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  /* Ensure good contrast */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  /* Show link URLs */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.9em;
+    opacity: 0.7;
+  }
+  
+  /* But not for internal links */
+  a[href^="/"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  
+  /* Page breaks */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  
+  img, figure {
+    page-break-inside: avoid;
+  }
+  
+  /* Hide non-essential elements */
+  nav,
+  .skip-link,
+  button,
+  .social-links,
+  footer {
+    display: none !important;
+  }
+  
+  /* Expand abbreviations */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+}

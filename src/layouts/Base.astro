@@ -1,0 +1,63 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import ThemeProvider from "@/components/ThemeProvider.astro";
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
+import StructuredData from "@/components/StructuredData.astro";
+import { siteConfig } from "@/site.config";
+import type { SiteMeta } from "@/types";
+
+interface Props {
+	meta: SiteMeta;
+	structuredData?: {
+		type: 'article' | 'breadcrumb';
+		data: Record<string, any>;
+	}[];
+}
+
+const {
+	meta: { articleDate, description = siteConfig.description, ogImage, title },
+	structuredData = []
+} = Astro.props;
+
+// Determine if this is the homepage
+const isHomepage = Astro.url.pathname === '/';
+const isArticle = articleDate !== undefined;
+---
+
+<html
+	class="overflow-x-hidden grid scroll-pt-space-xl scroll-smooth font-sans text-textColor text-xl md:text-base antialiased"
+	lang={siteConfig.lang}
+>
+	<head>
+		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} />
+		{/* Website structured data for all pages */}
+		<StructuredData type="website" />
+		{/* Additional structured data passed from child layouts */}
+		{structuredData.map((sd) => (
+			<StructuredData type={sd.type} data={sd.data} />
+		))}
+	</head>
+	<body class="min-w-4xl relative m-auto min-h-screen w-full max-w-6xl grow bg-bgColor">
+		<ThemeProvider />
+		<SkipLink />
+
+		<!-- Simplified background - removed decorative gradient orbs for minimal aesthetic -->
+	
+		<div class="relative flex min-h-screen w-full">
+			<!-- Sidebar for Docs Series -->
+			<slot name="sidebar" />
+			<!-- Main container for the page content -->
+			<div id="container" class="min-w-3xl relative m-auto max-w-4xl grow">
+				<div class="m-auto grid min-h-screen md:grid-rows-[auto_auto_1fr] px-component md:pt-component">
+					<Header />
+					<main id="main" class="relative flex-grow mt-space-xl md:mt-space-m">
+						<slot />
+					</main>
+					<Footer />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

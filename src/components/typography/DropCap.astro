@@ -1,0 +1,134 @@
+---
+export interface Props {
+  variant?: 'classic' | 'modern' | 'outline';
+  lines?: 2 | 3 | 4;
+  letter?: string;
+  class?: string;
+}
+
+const { 
+  variant = 'classic', 
+  lines = 3, 
+  letter,
+  class: className = '' 
+} = Astro.props;
+
+// Extract first letter if not provided
+const content = await Astro.slots.render('default');
+const firstLetter = letter || content.trim().charAt(0);
+const restOfContent = letter ? content : content.trim().substring(1);
+
+// Calculate size based on lines
+const sizeMap = {
+  2: '2.86rem',
+  3: '3.58rem',
+  4: '4.5rem'
+};
+
+const lineHeightMap = {
+  2: '2.4em',
+  3: '3.6em',
+  4: '4.8em'
+};
+---
+
+<p class={`drop-cap drop-cap--${variant} drop-cap--${lines}-lines ${className}`}>
+  <span 
+    class="drop-cap__letter" 
+    aria-hidden="true"
+    style={`font-size: ${sizeMap[lines]}; line-height: ${lineHeightMap[lines]};`}
+  >
+    {firstLetter}
+  </span>
+  <span class="drop-cap__content">
+    <span class="sr-only">{firstLetter}</span>
+    <Fragment set:html={restOfContent} />
+  </span>
+</p>
+
+<style>
+  .drop-cap {
+    position: relative;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .drop-cap__letter {
+    float: left;
+    margin: 0 0.5rem 0 0;
+    @apply font-headline;
+    font-weight: 400;
+    color: var(--theme-text);
+    font-variation-settings: "wght" 400;
+  }
+
+  /* Classic variant */
+  .drop-cap--classic .drop-cap__letter {
+    padding: 0.25rem 0.5rem;
+    background: var(--theme-color-100);
+    border-radius: 0.25rem;
+  }
+
+  /* Modern variant */
+  .drop-cap--modern .drop-cap__letter {
+    font-weight: 600;
+    font-variation-settings: "wght" 600;
+    color: var(--theme-accent);
+  }
+
+  /* Outline variant */
+  .drop-cap--outline .drop-cap__letter {
+    padding: 0.25rem 0.5rem;
+    border: 2px solid var(--theme-text);
+    background: transparent;
+    border-radius: 0.25rem;
+  }
+
+  /* Line height adjustments for baseline grid */
+  .drop-cap--2-lines .drop-cap__letter {
+    height: calc(1.6em * 2);
+    line-height: calc(1.6em * 2);
+  }
+
+  .drop-cap--3-lines .drop-cap__letter {
+    height: calc(1.6em * 3);
+    line-height: calc(1.6em * 3);
+  }
+
+  .drop-cap--4-lines .drop-cap__letter {
+    height: calc(1.6em * 4);
+    line-height: calc(1.6em * 4);
+  }
+
+  .drop-cap__content {
+    display: inline;
+  }
+
+  /* Dark mode adjustments */
+  :global([data-theme="dark"]) .drop-cap--outline .drop-cap__letter {
+    border-color: var(--theme-text);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 640px) {
+    .drop-cap__letter {
+      font-size: 2.29rem !important;
+      height: calc(1.6em * 2) !important;
+      line-height: calc(1.6em * 2) !important;
+    }
+  }
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>

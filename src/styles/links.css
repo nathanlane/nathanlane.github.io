@@ -1,0 +1,113 @@
+/**
+ * Link Typography System
+ * Following Tim Brown's modular scale and Jost Hochuli's principles for texture and readability
+ */
+
+/* Inline links inside prose - inherit body font for seamless reading flow */
+/* Hochuli: maintain consistent texture within body text */
+.inline-link {
+  @apply underline underline-offset-2 transition-all duration-200;
+  /* Sophisticated neutral gray underline */
+  text-decoration-color: hsl(0deg 0% 70%);
+  text-decoration-thickness: 1px;
+  /* Subtle tracking adjustment for better readability */
+  letter-spacing: -0.003em;
+  /* Enable variable font weights */
+  font-variation-settings: 'wght' 400;
+}
+
+.inline-link:hover {
+  /* Darken underline on hover for subtle feedback */
+  text-decoration-color: hsl(0deg 0% 40%);
+  text-decoration-thickness: 1.5px;
+  /* Slightly heavier weight on hover */
+  font-variation-settings: 'wght' 450;
+  /* Micro expansion for tactile feedback */
+  letter-spacing: 0.002em;
+}
+
+/* Navigation and footer links - IBM Plex Sans for UI consistency */
+/* Medium weight provides clear hierarchy without overwhelming */
+.nav-link {
+  @apply font-sans text-sm no-underline transition-all duration-200;
+  /* Variable font weight for subtle transitions */
+  font-variation-settings: 'wght' 450;
+  /* Wider tracking for small text improves legibility */
+  letter-spacing: 0.02em;
+  /* Smooth rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.nav-link:hover {
+  @apply text-accent;
+  /* Slightly heavier weight on hover */
+  font-variation-settings: 'wght' 500;
+  /* Expand letter spacing for tactile feedback */
+  letter-spacing: 0.03em;
+}
+
+/* Active navigation link */
+.nav-link[aria-current="page"] {
+  @apply text-accent-base;
+  font-variation-settings: 'wght' 550;
+}
+
+/* Highlighted navigation link (e.g., Docs) */
+.nav-link--highlight {
+  @apply text-accent-base;
+  font-variation-settings: 'wght' 500;
+  /* Uppercase with wider tracking */
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+}
+
+.nav-link--highlight:hover {
+  font-variation-settings: 'wght' 550;
+  letter-spacing: 0.05em;
+}
+
+/* Focus states for accessibility - WCAG AA compliant */
+.inline-link:focus,
+.nav-link:focus {
+  @apply outline-2 outline-offset-2 outline-accent-base rounded-sm;
+}
+
+/* Dark mode optimizations */
+:root[data-theme="dark"] .inline-link {
+  text-decoration-color: hsl(0deg 0% 40%);
+}
+
+:root[data-theme="dark"] .inline-link:hover {
+  text-decoration-color: hsl(0deg 0% 60%);
+}
+
+/* Feature links - for prominent headings and titles */
+.feature-link {
+  @apply no-underline transition-all duration-200;
+  /* Variable font weight */
+  font-variation-settings: 'wght' 500;
+  letter-spacing: -0.01em;
+}
+
+.feature-link:hover {
+  @apply text-accent;
+  /* Heavier weight on hover */
+  font-variation-settings: 'wght' 550;
+  /* Subtle expansion */
+  letter-spacing: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .inline-link {
+    text-decoration-color: currentColor;
+    text-decoration-thickness: 2px;
+  }
+  
+  .nav-link,
+  .feature-link {
+    font-weight: 600;
+  }
+}

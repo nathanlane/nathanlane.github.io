@@ -1,0 +1,128 @@
+---
+import { Image } from "astro:assets";
+import { type CollectionEntry, getCollection } from "astro:content";
+import Badge from '@/components/Badge.astro';
+import FormattedDate from "@/components/FormattedDate.astro";
+import UpdatedBadge from "@/components/UpdatedBadge.astro";
+import { Icon } from "astro-icon/components";
+import Separator from "../Separator.astro";
+
+interface Props {
+	content: CollectionEntry<"post">;
+}
+
+const {
+	content,
+
+} = Astro.props;
+
+// console.log("data:", data); // Debug
+// console.log("headings:", content.rendered?.metadata?.headings); // Debug
+// console.log("Post frontmatter:", content.rendered?.metadata?.frontmatter); // Debug
+
+const dateTimeOptions: Intl.DateTimeFormatOptions = {
+	month: "long",
+};
+
+const postSeries = content.data.seriesId
+    ? await getCollection("series")
+          .then(series => series.find(s => s.id === content.data.seriesId))
+          .catch(err => {
+            console.error("Failed to find series:", err);
+            return null;
+          })
+    : null;
+---
+
+<div class="flex items-center">
+	{
+		postSeries ? (
+			<button
+				id="toggle-panel"
+				class="hidden md:flex mr-space-2xs btn-icon-nav"
+				aria-label="Toggle Series Panel"
+				aria-controls="series-panel"
+			>
+				<Icon aria-hidden="true" class="flex-shrink-0 icon-action" focusable="false" name="lucide:file-text" />
+			</button>
+		) : null 
+	}
+
+	{
+		!!(content.rendered?.metadata?.headings as unknown[] | undefined)?.length && (
+			<button
+				id="toggle-toc"
+				class="hidden md:flex btn-icon-nav"
+				aria-label="Table of Contents"
+			>	
+				<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
+			</button>
+		)
+	}
+
+	<h1 
+		class="text-4 title ml-space-2xs line-clamp-none"
+		title={content.data.title}
+	>
+		{content.data.title}
+	</h1>
+</div>
+
+<div class="flex flex-wrap items-center text-lightest text-body-sm mt-space-s mx-space-2xs mb-space-2xs">
+	<span class="flex items-center h-space-m">
+		<Icon aria-hidden="true" class="flex items-center icon-base me-space-1" focusable="false" name="lucide:calendar" />
+		<FormattedDate date={content.data.publishDate} dateTimeOptions={dateTimeOptions} class="flex flex-shrink-0" />
+	</span>
+	{
+		content.data.updatedDate && (
+			<>
+				<Separator type="dot" />
+				<UpdatedBadge date={content.data.updatedDate} dateTimeOptions={dateTimeOptions} />
+			</>
+		)
+	}
+</div>
+
+{content.data.draft ? <span class="text-base text-red-500 ml-space-2xs">(Draft)</span> : null}
+
+{
+	content.data.coverImage && (
+		<div class="mb-space-s mt-space-2xs overflow-auto rounded-lg">
+			<Image
+				alt={content.data.coverImage.alt}
+				class="object-cover"
+				fetchpriority="high"
+				loading="lazy"
+				src={content.data.coverImage.src}
+			/>
+		</div>
+	)
+}
+
+<p 
+	class="prose max-w-none text-textColor mx-space-2xs"
+>
+	{content.data.description}
+</p>
+
+<div class="mt-space-s flex flex-wrap items-center gap-space-2xs mx-space-1">
+	{
+		postSeries ? (
+			<div class="flex items-center gap-space-2xs">
+				<Icon aria-hidden="true" class="flex-shrink-0 inline-block icon-base text-accent-base" focusable="false" name="solar:notes-line-duotone" />
+				<a 
+					aria-label={`About ${postSeries.data.title} series`} 
+					href={`/series/${postSeries.id}`}
+					class="flex items-center gap-space-2xs flex-wrap"
+				>
+					<Badge variant="accent-base" showHash={false} title={postSeries.data.title} />
+				</a>
+			</div>	
+		) : (
+			<div class="flex items-center gap-space-2xs">
+				<Icon aria-hidden="true" class="flex-shrink-0 inline-block icon-base text-lightest" focusable="false" name="solar:notes-line-duotone" />
+				<span class="text-body-sm text-lightest">Not in series</span>
+			</div>
+		)
+	}
+</div>

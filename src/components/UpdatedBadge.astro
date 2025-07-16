@@ -1,0 +1,87 @@
+---
+import FormattedDate from "@/components/FormattedDate.astro";
+
+export interface Props {
+  date: Date;
+  dateTimeOptions?: Intl.DateTimeFormatOptions;
+  class?: string;
+}
+
+const { 
+  date, 
+  dateTimeOptions = { 
+    year: "numeric", 
+    month: "short", 
+    day: "2-digit" 
+  },
+  class: className = ""
+} = Astro.props;
+---
+
+<span class={`updated-badge ${className}`}>
+  <span class="updated-label">Updated</span>
+  <span class="updated-separator">:</span>
+  <FormattedDate 
+    class="updated-date" 
+    date={date} 
+    dateTimeOptions={dateTimeOptions} 
+  />
+</span>
+
+<style>
+  .updated-badge {
+    @apply h-6 flex items-center flex-shrink-0;
+    @apply rounded-sm bg-color-100 text-accent;
+    @apply py-1 px-2 text-xs gap-x-1;
+    @apply transition-all duration-200;
+    @apply border border-color-200;
+    
+    /* Typography refinements */
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .updated-label {
+    /* Variable font weight */
+    font-variation-settings: 'wght' 500;
+    /* Subtle uppercase */
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 0.04em;
+  }
+  
+  .updated-separator {
+    /* Lighter weight for separator */
+    font-variation-settings: 'wght' 400;
+    opacity: 0.6;
+    margin: 0 0.1em;
+  }
+  
+  .updated-date {
+    /* Regular weight for date */
+    font-variation-settings: 'wght' 450;
+    letter-spacing: 0.01em;
+  }
+  
+  /* Hover state */
+  .updated-badge:hover {
+    @apply bg-color-150;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+  
+  .updated-badge:hover .updated-label {
+    font-variation-settings: 'wght' 550;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Dark mode */
+  :root[data-theme="dark"] .updated-badge {
+    @apply bg-color-200 border-color-300;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  :root[data-theme="dark"] .updated-badge:hover {
+    @apply bg-color-250;
+  }
+</style>

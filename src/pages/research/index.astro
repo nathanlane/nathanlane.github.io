@@ -1,0 +1,159 @@
+---
+import { getCollection } from "astro:content";
+import CompactList from "@/components/CompactList.astro";
+import ResearchCard from "@/components/ResearchCard.astro";
+import BaseLayout from "@/layouts/Base.astro";
+import { siteConfig } from "@/site.config";
+
+const allResearch = await getCollection("research");
+
+// Group by status and featured
+const featuredPapers = allResearch.filter(paper => paper.data.featured === true);
+const publishedPapers = allResearch.filter(paper => paper.data.status === "published");
+const workingPapers = allResearch.filter(paper => paper.data.status === "working-paper");
+const worksInProgress = allResearch.filter(paper => paper.data.status === "work-in-progress");
+
+// Sort by year (newest first)
+const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.data.paperDate.localeCompare(a.data.paperDate));
+---
+
+<BaseLayout meta={{ title: "Research", description: "Academic research on economics, technology, and digital transformation." }}>
+	
+	<!-- Research Overview -->
+	<section class="mb-4">
+		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+			<!-- Left Column: Research heading and description -->
+			<div class="lg:col-span-2">
+				<h1>Research</h1>
+				<div class="text-body max-w-2xl">
+					<p class="mb-4">
+						My research focuses on the intersection of economics, technology, and digital transformation. 
+						I examine how technological change affects markets, productivity, and economic outcomes.
+					</p>
+					
+					{featuredPapers.length > 0 && (
+						<div class="mt-6">
+							<h4 class="text-sm font-medium mb-2">Recent and Updated</h4>
+							<ul class="space-y-1">
+								{sortByYear(featuredPapers).map((paper) => (
+									<li class="text-body flex items-baseline justify-between">
+										<span class="flex-1 mr-2">{paper.data.title}</span>
+										<a href={`/research/${paper.id}/`} class="inline-link text-xs flex items-center gap-1 whitespace-nowrap text-light hover:text-textColor">
+											link here
+											<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+												<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+												<polyline points="15 3 21 3 21 9"></polyline>
+												<line x1="10" y1="14" x2="21" y2="3"></line>
+											</svg>
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					)}
+				</div>
+			</div>
+			
+			<!-- Right Column: Quick Links -->
+			<div class="lg:col-span-1 lg:mt-14">
+				<div class="bg-color-75 dark:bg-color-100 rounded-md p-3">
+					<h3 class="text-xs font-medium mb-2 text-textColor dark:text-gray-200">On This Page</h3>
+					<ul class="space-y-0 mb-3">
+						<li>
+							<a href="#published" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Published Papers</a>
+						</li>
+						<li>
+							<a href="#working" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Working Papers</a>
+						</li>
+						<li>
+							<a href="#wip" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Works in Progress</a>
+						</li>
+					</ul>
+					
+					<h3 class="text-xs font-medium mb-0 mt-3 pt-3 border-t border-color-200 dark:border-gray-700 text-textColor dark:text-gray-200">Other Pages</h3>
+					<ul class="space-y-0">
+						<li>
+							<a href="/projects/" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Projects</a>
+						</li>
+						<li>
+							<a href={siteConfig.resumeUrl} class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">CV</a>
+						</li>
+						<li>
+							<a href="/writing/" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Writing</a>
+						</li>
+						<li>
+							<a href="https://linktr.ee/nathanlane" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">LinkTree</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Published Papers -->
+	{publishedPapers.length > 0 && (
+		<section id="published" class="mb-4">
+			<h2 class="mb-4">Published Papers</h2>
+			<div class="grid gap-4">
+				{sortByYear(publishedPapers).map((paper) => (
+					<ResearchCard
+						title={paper.data.title}
+						authors={paper.data.authors}
+						year={paper.data.paperDate}
+						description={paper.data.description}
+						{...(paper.data.publication && { publication: paper.data.publication })}
+						url={`/research/${paper.id}/`}
+						{...(paper.data.link && { link: paper.data.link })}
+						{...(paper.data.download && { download: paper.data.download })}
+					/>
+				))}
+			</div>
+		</section>
+	)}
+
+	<!-- Working Papers -->
+	{workingPapers.length > 0 && (
+		<section id="working" class="mb-4">
+			<h2 class="mb-4">Working Papers</h2>
+			<div class="grid gap-4">
+				{sortByYear(workingPapers).map((paper) => (
+					<ResearchCard
+						title={paper.data.title}
+						authors={paper.data.authors}
+						year={paper.data.paperDate}
+						description={paper.data.description}
+						{...(paper.data.publication && { publication: paper.data.publication })}
+						url={`/research/${paper.id}/`}
+						{...(paper.data.link && { link: paper.data.link })}
+						{...(paper.data.download && { download: paper.data.download })}
+					/>
+				))}
+			</div>
+		</section>
+	)}
+
+	<!-- Works in Progress -->
+	{worksInProgress.length > 0 && (
+		<section id="wip" class="mb-4">
+			<h2 class="!mt-0">Works in Progress</h2>
+			<CompactList 
+				items={sortByYear(worksInProgress).map((paper) => ({
+					title: paper.data.title,
+					description: `${paper.data.authors} • ${paper.data.paperDate}`,
+					url: `/research/${paper.id}/`,
+				}))}
+			/>
+		</section>
+	)}
+
+	<!-- Bottom Navigation -->
+	<section class="mt-16b pt-8b border-t border-color-200">
+		<nav class="flex gap-8 justify-center text-lg">
+			<a href="/writing/" class="nav-link">Writing</a>
+			<a href={siteConfig.resumeUrl} class="nav-link">CV</a>
+			<a href="/about/" class="nav-link">About</a>
+		</nav>
+	</section>
+
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import { getCollection } from "astro:content";
+
+import Note from "@/components/note/Note.astro";
+import PageLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+// If you're using an adaptor in SSR mode, getStaticPaths wont work -> https://docs.astro.build/en/guides/routing/#modifying-the-slug-example-for-ssr
+export const getStaticPaths = (async () => {
+	const allNotes = await getCollection("note");
+	return allNotes.map((note) => ({
+		params: { slug: note.id },
+		props: { note },
+	}));
+}) satisfies GetStaticPaths;
+
+export type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { note } = Astro.props;
+
+const meta = {
+	description:
+		note.data.description ||
+		`Read about my note posted on: ${note.data.publishDate.toLocaleDateString()}`,
+	title: note.data.title,
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="fixed left-0 top-0 z-10 flex h-14 md:h-16 w-full bg-bgColor overflow-hidden">
+		<!-- Simplified background - removed decorative gradient orbs for minimal aesthetic -->
+	</div>
+	<Note as="h1" note={note} />
+</PageLayout>
+
+<script>
+	// Wait for the content to fully load
+	document.addEventListener("DOMContentLoaded", () => {
+		const buttonsPanel = document.getElementById("buttons-panel");
+		
+		if (buttonsPanel) {
+			buttonsPanel.classList.add("fixed");
+			console.log("Class 'fixed' added to the buttons-panel element.");
+		} else {
+			console.error("Element with ID 'buttons-panel' not found.");
+		}
+	});
+</script>

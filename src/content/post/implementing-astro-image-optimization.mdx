@@ -1,0 +1,188 @@
+---
+title: "Implementing Astro Image Optimization: A Step-by-Step Guide"
+description: "How to migrate from native HTML images to Astro's optimized Image component for better performance and user experience."
+publishDate: 2024-01-15
+tags: ["astro", "performance", "images", "optimization", "tutorial"]
+draft: false
+---
+
+Following our best practices audit, the first priority is implementing Astro's Image component throughout the site. This guide documents the process and patterns for optimal image handling.
+
+## Why Astro Image?
+
+The Astro Image component provides:
+- **Automatic format conversion** to modern formats (WebP, AVIF)
+- **Responsive image generation** at multiple sizes
+- **Lazy loading** with native browser support
+- **CLS prevention** with automatic width/height
+- **Build-time optimization** for static images
+
+## Implementation Pattern
+
+### Step 1: Import the Image Component
+
+```astro
+---
+import { Image } from 'astro:assets';
+---
+```
+
+### Step 2: For Local Images
+
+Place images in `src/assets/images/` and import them:
+
+```astro
+---
+import { Image } from 'astro:assets';
+import profilePhoto from '../assets/images/headshot.jpg';
+---
+
+<Image 
+  src={profilePhoto}
+  alt="Nathan Lane headshot"
+  width={400}
+  height={400}
+  class="rounded-lg"
+/>
+```
+
+### Step 3: For Remote Images
+
+Use the URL directly with explicit dimensions:
+
+```astro
+<Image 
+  src="https://example.com/photo.jpg"
+  alt="Example image showing Astro's image optimization features"
+  width={800}
+  height={600}
+  inferSize={true} // Optional: fetch dimensions at build time
+/>
+```
+
+### Step 4: For Content Collection Images
+
+Define image fields in your schema:
+
+```typescript
+// content.config.ts
+import { defineCollection, z, image } from 'astro:content';
+
+const blogCollection = defineCollection({
+  schema: ({ image }) => z.object({
+    title: z.string(),
+    coverImage: image().optional(),
+    coverImageAlt: z.string().optional(),
+  }),
+});
+```
+
+Then use in your templates:
+
+```astro
+---
+import { Image } from 'astro:assets';
+const { coverImage, coverImageAlt } = post.data;
+---
+
+{coverImage && (
+  <Image 
+    src={coverImage}
+    alt={coverImageAlt || ''}
+    widths={[400, 800, 1200]}
+    sizes="(max-width: 800px) 100vw, 800px"
+  />
+)}
+```
+
+## Migration Checklist
+
+### About Page
+- [x] Import Image component
+- [x] Convert profile photo to Image component
+- [ ] Move headshot.jpg to src/assets/images/
+- [ ] Update aboutConfig to use imported image
+
+### Blog Post Images
+- [ ] Update schema to use image() helper
+- [ ] Migrate existing post images to src/assets/
+- [ ] Update image references in MDX files
+
+### Social/OG Images
+- [ ] Keep in public/ for meta tag URLs
+- [ ] Consider generating with @astrojs/og for dynamic OG images
+
+### Icon Management
+- [ ] Keep SVG icons as-is (already optimized)
+- [ ] Use astro-icon for icon components
+
+## Best Practices
+
+### 1. Responsive Images
+
+```astro
+<Image 
+  src={heroImage}
+  alt="Example of optimized hero image implementation"
+  widths={[400, 800, 1600]}
+  sizes="(max-width: 400px) 400px, (max-width: 800px) 800px, 1600px"
+  class="w-full h-auto"
+/>
+```
+
+### 2. Art Direction
+
+```astro
+<picture>
+  <source
+    srcset={mobileImage.src}
+    media="(max-width: 768px)"
+  />
+  <Image 
+    src={desktopImage}
+    alt="Responsive design"
+    width={1600}
+    height={900}
+  />
+</picture>
+```
+
+### 3. Background Images
+
+```astro
+---
+import { getImage } from 'astro:assets';
+import backgroundImage from '../assets/hero-bg.jpg';
+
+const optimizedBackground = await getImage({
+  src: backgroundImage,
+  format: 'webp',
+  width: 1920,
+  quality: 80
+});
+---
+
+<section 
+  style={`background-image: url('${optimizedBackground.src}')`}
+  class="hero"
+>
+  <!-- Content -->
+</section>
+```
+
+## Performance Impact
+
+Expected improvements:
+- **30-50% reduction** in image payload
+- **Improved LCP** (Largest Contentful Paint)
+- **Zero CLS** (Cumulative Layout Shift) from images
+- **Better mobile performance** with responsive sizing
+
+## Next Steps
+
+1. Create `src/assets/images/` directory
+2. Move existing images from `public/`
+3. Update all image references to use Image component
+4. Test build output and verify optimization
+
+This migration sets the foundation for a faster, more efficient site that delivers the best possible image for each user's device and connection.

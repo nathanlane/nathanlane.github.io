@@ -1,0 +1,154 @@
+---
+title: "Content System Improvements Roadmap"
+description: "Making our content predictable, type-safe, and future-proof with enhanced schemas, media handling, and SEO optimization."
+publishDate: 2024-01-15
+tags: ["content-management", "astro", "seo", "best-practices"]
+draft: false
+---
+
+Following a comprehensive audit of our content system, here's the roadmap for improvements to make our content more predictable, type-safe, and future-proof.
+
+## Current Strengths
+
+- ✅ **Content Collections**: All markdown properly organized in `src/content/{collection}/`
+- ✅ **Schema Validation**: Every collection has comprehensive Zod schemas
+- ✅ **Tailwind Prose**: Well-configured with custom typography and dark mode
+
+## Areas for Improvement
+
+### 1. Front-matter Contract Enhancement
+
+Current gaps in our content validation:
+- Description field lacks 160-character SEO limit
+- No ogImage support in most collections
+- Draft field only in posts collection
+
+**Proposed Schema Improvements:**
+
+```typescript
+// Common SEO schema for all public content
+const seoSchema = z.object({
+  description: z.string()
+    .min(50, "Description should be at least 50 characters")
+    .max(160, "Description must be ≤160 characters for SEO"),
+  ogImage: z.string().optional(),
+  canonical: z.string().url().optional(),
+  draft: z.boolean().default(false),
+  lang: z.string().default("en-GB"),
+});
+
+// Enhanced base schema with slug generation
+const baseSchema = z.object({
+  title: z.string().max(60),
+  slug: z.string().optional(),
+}).transform((data) => ({
+  ...data,
+  slug: data.slug || generateSlug(data.title),
+}));
+```
+
+### 2. Slug Generation for URL Safety
+
+Implement automatic slug generation to prevent duplicate URLs:
+
+```typescript
+import { slug as githubSlug } from "github-slugger";
+
+function generateSlug(title: string): string {
+  return githubSlug(title);
+}
+
+// Add to build process
+function checkSlugUniqueness(collections: Collection[]) {
+  const slugMap = new Map<string, string[]>();
+  // Validate no duplicate slugs across collections
+}
+```
+
+### 3. Media Strategy Implementation
+
+Create proper image organization and optimization pipeline:
+
+```
+src/
+  assets/
+    original/       # High-res source images
+      blog/         # Blog post images
+      projects/     # Project screenshots
+      research/     # Research figures
+    images/         # Optimized versions (generated)
+```
+
+**Image Component Pattern:**
+
+```astro
+---
+import { Image } from 'astro:assets';
+import originalImage from '@/assets/original/blog/example.jpg';
+---
+
+<Image 
+  src={originalImage}
+  alt="Descriptive alt text"
+  widths={[400, 800, 1200]}
+  sizes="(max-width: 800px) 100vw, 800px"
+  format="avif"
+  quality={80}
+  loading={priority ? "eager" : "lazy"}
+/>
+```
+
+### 4. Required Fields by Collection Type
+
+Different content types need different required fields:
+
+| Collection | Required Fields | Optional Fields |
+|------------|----------------|-----------------|
+| post | title, description, publishDate, draft | ogImage, tags, series, canonical |
+| research | title, description, authors, year, status | publication, link, download |
+| projects | title, description, publishDate | featured, technologies, demo |
+| writing | title, description, publishDate | genre, wordCount |
+| note | title, publishDate | description, featured |
+
+### 5. Build-time Validations
+
+Add these checks to the build process:
+
+1. **Slug Uniqueness**: No duplicate URLs across collections
+2. **Description Length**: Enforce SEO-friendly lengths
+3. **Image Optimization**: Ensure all images use Image component
+4. **Draft Filtering**: Exclude drafts from production builds
+5. **Required Media**: Verify ogImage exists for featured content
+
+## Implementation Priority
+
+1. **Phase 1**: Enhanced front-matter schemas (1 day)
+   - Add SEO schema to all collections
+   - Implement description length validation
+   - Add draft field universally
+
+2. **Phase 2**: Slug generation and validation (1 day)
+   - Install github-slugger
+   - Add slug transformation
+   - Build-time uniqueness check
+
+3. **Phase 3**: Media organization (2-3 days)
+   - Create directory structure
+   - Migrate existing images
+   - Implement Image component usage
+   - Add priority loading for LCP
+
+4. **Phase 4**: Collection-specific enhancements (1 day)
+   - Add specialized fields per collection
+   - Implement cross-collection references
+   - Add build-time validations
+
+## Expected Outcomes
+
+- **Predictable**: Consistent content structure across all collections
+- **Type-safe**: Build fails on invalid content, catching errors early
+- **Future-proof**: Easy to add new content types or fields
+- **SEO-optimized**: Proper meta descriptions and image handling
+- **Performance**: Optimized images with modern formats
+
+This roadmap transforms our already solid content system into a best-in-class implementation that scales with future needs.

@@ -1,0 +1,66 @@
+---
+import { getCollection } from "astro:content";
+import CompactList from "@/components/CompactList.astro";
+import BaseLayout from "@/layouts/Base.astro";
+
+const allWriting = await getCollection("writing");
+const sortedWriting = allWriting.sort((a, b) => 
+	b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+
+const writingItems = sortedWriting.map(writing => ({
+	title: writing.data.title,
+	description: writing.data.description,
+	url: `/writing/${writing.id}/`,
+	date: writing.data.publishDate,
+}));
+
+const featuredWriting = sortedWriting.filter(writing => writing.data.featured);
+const recentWriting = sortedWriting.slice(0, 6);
+---
+
+<BaseLayout meta={{ title: "Writing", description: "Creative writing, storytelling, and narrative explorations across various forms and genres." }}>
+	<h1>Writing</h1>
+	
+	<p class="text-body mb-8b max-w-2xl">
+		Creative writing pieces, storytelling experiments, and narrative explorations across various forms and genres.
+	</p>
+
+	{featuredWriting.length > 0 && (
+		<section class="mb-12b">
+			<h2>Featured Writing</h2>
+			<div class="space-y-6b">
+				{featuredWriting.map((writing) => (
+					<article class="border-l-4 border-accent-base/20 pl-6 py-4">
+						<h3>
+							<a href={`/writing/${writing.id}/`} class="hover:text-accent-two">
+								{writing.data.title}
+							</a>
+						</h5>
+						<p class="text-body-sm mb-2">{writing.data.description}</p>
+						<time class="text-body-sm text-light">
+							{writing.data.publishDate.toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric'
+							})}
+						</time>
+					</article>
+				))}
+			</div>
+		</section>
+	)}
+
+	<section>
+		<h3 class="heading-3">All Writing</h3>
+		<CompactList items={writingItems} />
+	</section>
+
+	<div class="mt-16 p-10 bg-color-75 rounded-lg">
+		<h4 class="heading-4">About This Writing</h4>
+		<p class="text-xs leading-relaxed mt-3">
+			This collection showcases creative writing pieces across various forms and genres, from short stories and essays to experimental narratives. 
+			Each piece explores different voices, themes, and storytelling techniques as part of an ongoing creative journey.
+		</p>
+	</div>
+</BaseLayout>

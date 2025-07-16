@@ -1,0 +1,138 @@
+---
+title: "Advanced Typography Components Demo"
+description: "Showcasing drop caps, pull quotes, and sidenotes for enhanced readability"
+publishDate: 2025-01-12
+tags: ["typography", "design", "components"]
+draft: false
+---
+
+import DropCap from '../../components/typography/DropCap.astro';
+import PullQuote from '../../components/typography/PullQuote.astro';
+import Sidenote from '../../components/typography/Sidenote.astro';
+
+This post demonstrates the advanced typography components available in this Astro project. These components enhance the reading experience while maintaining accessibility and responsive design.
+
+## Drop Caps
+
+Drop caps add visual interest to the beginning of articles or sections. They're particularly effective for long-form content.
+
+### Classic Drop Cap
+
+<DropCap variant="classic" lines={3}>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. The classic variant provides a subtle background that helps the letter stand out while maintaining harmony with the text.
+</DropCap>
+
+### Modern Drop Cap
+
+<DropCap variant="modern" lines={2}>
+Typography is the craft of endowing human language with a durable visual form. This modern variant uses color and weight to create emphasis without additional decoration. It works particularly well with contemporary designs and sans-serif body text.
+</DropCap>
+
+### Outline Drop Cap
+
+<DropCap variant="outline" lines={4}>
+When we think about typography, we often focus on choosing fonts, but the real art lies in how we use them. The outline variant creates a bold statement while maintaining a light, airy feel. This style is perfect for editorial pieces or when you want to add sophistication without overwhelming the text.
+</DropCap>
+
+## Pull Quotes
+
+Pull quotes emphasize key passages and break up long sections of text. They can be aligned left, right, or center, with multiple style variants.
+
+### Center-Aligned Default
+
+The following example shows a centered pull quote with standard styling:
+
+<PullQuote align="center" variant="default" attribution="Robert Bringhurst">
+Typography exists to honor content.
+</PullQuote>
+
+This simple yet powerful statement captures the essence of good typographic design. The default variant maintains readability while drawing attention.
+
+### Left-Aligned Accent
+
+<PullQuote align="left" variant="accent" attribution="Ellen Lupton" cite="https://example.com">
+Typography is what language looks like.
+</PullQuote>
+
+The accent variant uses color and background to create stronger visual emphasis. When floated left or right, pull quotes integrate seamlessly with body text on larger screens while remaining readable on mobile devices.
+
+### Right-Aligned Large
+
+<PullQuote align="right" variant="large" attribution="Jan Tschichold">
+The purpose of typography is to make the reading experience as pleasant and efficient as possible.
+</PullQuote>
+
+Large pull quotes make a bold statement and work particularly well for impactful quotes or key takeaways. The increased size demands attention while the right alignment creates dynamic text flow.
+
+## Sidenotes
+
+Sidenotes provide supplementary information without interrupting the main text flow. They appear in the margin on desktop and inline on mobile devices.
+
+### Basic Numbered Sidenotes
+
+Typography has a rich history spanning over 500 years<Sidenote number={1}>The invention of movable type by Gutenberg around 1450 marked the beginning of modern typography.</Sidenote>, evolving from handwritten manuscripts to digital typefaces. The development of web fonts<Sidenote number={2}>Web fonts became widely supported around 2010, revolutionizing digital typography.</Sidenote> has dramatically expanded our typographic possibilities.
+
+### Hover Sidenotes
+
+Sometimes you want sidenotes to appear only on hover to reduce visual clutter. This approach works well for optional clarifications<Sidenote hover>Hover sidenotes are hidden by default and appear when the reader shows interest.</Sidenote> or additional context that might not be essential to understanding the main text.
+
+### Unnumbered Sidenotes
+
+Not all sidenotes need numbers<Sidenote>Unnumbered sidenotes work well for brief asides or clarifications that don't require specific referencing.</Sidenote>. These work particularly well for conversational asides or brief clarifications that enhance rather than supplement the main content.
+
+## Best Practices
+
+### When to Use Drop Caps
+
+1. **Article openings**: Start long-form content with visual impact
+2. **Chapter breaks**: Mark new sections in lengthy pieces
+3. **Special features**: Highlight editorial or magazine-style content
+4. **Avoid overuse**: Limit to one per article or major section
+
+### Pull Quote Guidelines
+
+- **Content selection**: Choose impactful, self-contained statements
+- **Attribution**: Always credit the source when quoting others
+- **Placement**: Position near related content for context
+- **Length**: Keep concise—aim for 1-3 sentences maximum
+- **Frequency**: Space them out to avoid overwhelming the layout
+
+### Sidenote Recommendations
+
+- **Desktop consideration**: Ensure adequate margin space (1280px+ viewport)
+- **Mobile fallback**: Test inline appearance on smaller screens
+- **Content type**: Use for definitions, clarifications, or interesting asides
+- **Numbering**: Use numbers when referencing specific points
+- **Accessibility**: Always include proper ARIA labels
+
+## Technical Implementation
+
+All components use the existing CSS custom properties from the design system:
+
+- **Typography scale**: Variables like `--step-0`, `--step-1`, etc.
+- **Spacing system**: Consistent with `--space-*` tokens
+- **Color system**: Theme-aware with light/dark mode support
+- **Baseline grid**: Aligned to the 6px grid system
+
+The components are built with:
+- **Semantic HTML**: Proper use of `<figure>`, `<blockquote>`, `<figcaption>`
+- **ARIA attributes**: Screen reader support with roles and labels
+- **Responsive design**: Mobile-first with progressive enhancement
+- **Print styles**: Optimized output for physical media
+
+## Performance Considerations
+
+These typography components are designed to be lightweight:
+
+1. **No JavaScript required**: Pure CSS implementation
+2. **Minimal markup**: Clean, semantic HTML
+3. **Efficient selectors**: Optimized for rendering performance
+4. **Font loading**: Leverages existing font stack
+
+## Conclusion
+
+<DropCap variant="modern" lines={2}>
+These advanced typography components provide the tools needed to create engaging, readable content. By combining drop caps for visual interest, pull quotes for emphasis, and sidenotes for supplementary information, you can craft articles that are both beautiful and functional.
+</DropCap>
+
+Remember that good typography serves the content<Sidenote number={3}>As Beatrice Warde said, typography should be "invisible"—drawing attention to the message, not itself.</Sidenote>. Use these components thoughtfully to enhance readability and create a pleasant reading experience across all devices.

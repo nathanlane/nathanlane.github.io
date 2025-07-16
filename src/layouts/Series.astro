@@ -1,0 +1,260 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import SeriesPanel from "@/components/SeriesPanel.astro";
+import TOC from "@/components/blog/TOC.astro";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "./Base.astro";
+
+interface Props {
+	series: CollectionEntry<"series">;
+}
+
+const { series } = Astro.props;
+const { title, description } = series.data;
+
+const { headings } = await render(series);
+---
+
+<BaseLayout meta={{ description, title }}>
+	<div class="fixed left-0 top-0 z-10 flex h-12 md:h-16 w-full bg-bgColor overflow-hidden">
+		<!-- Simplified background - removed decorative gradient orbs for minimal aesthetic -->
+	</div>
+
+	<!-- SeriesPanel is inserted into named slot "sidebar" -->
+	{series.id && (<SeriesPanel slot="sidebar" seriesId={series.id} />)}
+
+	<div class="flex items-center">
+		<button
+			id="toggle-panel"
+			class="hidden md:flex z-30 mr-2 btn-icon-nav"
+			aria-label="Toggle Series Panel"
+			aria-controls="series-panel"
+		>
+			<Icon aria-hidden="true" class="flex-shrink-0 icon-action" focusable="false" name="lucide:file-text" />
+		</button>
+		<button
+			id="toggle-toc"
+			class="hidden md:flex z-30 mr-2 btn-icon-nav"
+			aria-label="Table of Contents"
+		>	
+			<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
+		</button>
+
+		<h1 class="text-5 title line-clamp-none md:line-clamp-1 md:max-w-lg lg:max-w-xl">
+			{title}
+		</h1>
+	</div>
+	<p class="prose prose-lane max-w-none mt-4">
+		{description}
+	</p>
+
+	<div class="mt-6 flex sm:grid-cols-[auto_1fr] md:items-start gap-x-12">
+		<article class="grid flex-grow grid-cols-1 break-words pt-4">
+			<div class="prose prose-lane prose-serif max-w-none flex-grow prose-headings:text-accent-base">
+				<slot />
+			</div>
+		</article>
+		{
+			!!headings.length && (
+				<aside 
+					id="toc-panel" 
+					class="z-10 hidden md:w-[16rem] md:min-w-[16rem] rounded-lg md:block"
+				>
+					<TOC headings={headings} />
+				</aside>
+			)
+		}
+	</div>
+
+	<div class="left-0 right-12 z-50 ml-auto w-fit md:absolute">
+		<button
+			id="to-top-button"
+			class="fixed bottom-12 flex size-12 text-light translate-y-28 items-center justify-center rounded-full border border-special-lighter bg-bgColor text-4xl shadow-sm transition-all duration-300 hover:text-accent-two hover:shadow-md data-[show=true]:translate-y-0 data-[show=true]:opacity-100"
+			aria-label="Back to Top"
+			data-show="false"
+		>	
+			<span class="absolute inset-0 rounded-full bg-special-light flex items-center justify-center" aria-hidden="true">
+				<Icon class="size-8" name="lucide:chevron-up" />
+			</span>
+		</button>
+	</div>
+
+	<!-- Series button for mobile screens -->
+	<mobile-button
+		id="toggle-panel-mobile"
+		class="btn-icon-fab block sm:hidden fixed bottom-4 right-4 z-50"
+		aria-label="Toggle Series Panel"
+	>
+		<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
+			<Icon class="icon-action" name="lucide:file-text"/>
+		</span>
+	</mobile-button>
+</BaseLayout>
+
+<script>
+	const ANIMATION_DURATION = 300;
+	// Get button and panel elements
+	const togglePanelBtn = document.getElementById("toggle-panel");
+	const closePanelBtn = document.getElementById("close-panel");
+	const seriesPanel = document.getElementById("series-panel");
+	const togglePanelMobileBtn = document.getElementById("toggle-panel-mobile");
+
+	// Ensure seriesPanel exists
+	if (!seriesPanel) {
+		console.error("Element series-panel not found");
+		throw new Error("series-panel is required");
+	}
+
+	// Function to check if the panel is visible
+	const isPanelVisible = () => {
+		const isScreenLg = window.matchMedia("(min-width: 1024px)").matches; // Large screens
+		return (
+			(isScreenLg && seriesPanel.classList.contains("lg:block")) ||
+			(!isScreenLg && !seriesPanel.classList.contains("hidden"))
+		);
+	};
+
+	// Function to hide the panel
+	const hidePanel = () => {
+		seriesPanel.classList.add("opacity-0", "-translate-x-full");
+		setTimeout(() => {
+			seriesPanel.classList.remove("block", "lg:block");
+			seriesPanel.classList.add("hidden");
+		}, ANIMATION_DURATION);
+	};
+
+	// Function to show the panel
+	const showPanel = () => {
+		seriesPanel.classList.remove("hidden");
+		seriesPanel.classList.add("block", "lg:block");
+		setTimeout(() => {
+			seriesPanel.classList.remove("opacity-0", "-translate-x-full");
+		}, 10);
+	};
+
+	// Common handler for both buttons
+	const togglePanel = () => {
+		if (isPanelVisible()) {
+			hidePanel(); // If visible, hide it
+		} else {
+			showPanel(); // If hidden, show it
+		}
+	};
+
+	// Event handlers for both buttons
+	if (togglePanelBtn) {
+		togglePanelBtn.addEventListener("click", togglePanel);
+	} else {
+		console.error("Element toggle-panel not found");
+	}
+
+	if (togglePanelMobileBtn) {
+		togglePanelMobileBtn.addEventListener("click", togglePanel);
+	} else {
+		console.error("Element toggle-panel-mobile not found");
+	}
+
+	if (closePanelBtn) {
+		closePanelBtn.addEventListener("click", hidePanel);
+	} else {
+		console.error("Element close-panel not found");
+	}
+</script>
+
+<script>
+	// Get button and panel elements
+	const toggleTocBtn = document.getElementById('toggle-toc');
+	const closeTocBtn = document.getElementById('close-toc');
+	const tocPanel = document.getElementById('toc-panel');
+	const toggleTocMobileBtn = document.getElementById("toggle-toc-mobile");
+
+	// Check for panel existence (required for operation)
+	if (!tocPanel) {
+		console.error('Element toc-panel not found');
+		throw new Error('toc-panel is required');
+	}
+
+	// Function to check if the table of contents is visible
+	const isTocVisible = () => {
+		const isScreenMd = window.matchMedia("(min-width: 768px)").matches;
+		return (
+			(isScreenMd && tocPanel.classList.contains("md:block")) ||
+			(!isScreenMd && !tocPanel.classList.contains("hidden"))
+		);
+	};
+
+	// Function to hide the panel
+	const hideToc = () => {
+		tocPanel.classList.add('hidden');
+		tocPanel.classList.remove('md:block');
+	};
+
+	// Function to show the panel
+	const showToc = () => {
+		tocPanel.classList.remove('hidden');
+		tocPanel.classList.add('md:block');
+	};
+
+	// Common handler for both buttons
+	const toggleToc = () => {
+		if (isTocVisible()) {
+			hideToc(); // If visible, hide it
+		} else {
+			showToc(); // If hidden, show it
+		}
+	};
+	
+	// Add handler for toggle button
+	if (toggleTocBtn) {
+		toggleTocBtn.addEventListener("click", toggleToc);
+	} else {
+		console.error('Element toggle-toc not found');
+	}
+
+	// Add handler for toggle button
+	if (toggleTocMobileBtn) {
+		toggleTocMobileBtn.addEventListener("click", toggleToc);
+	} else {
+		console.error('Element toggle-toc-mobile not found');
+	}
+
+	// Add handler for close button
+	if (closeTocBtn) {
+		closeTocBtn.addEventListener('click', hideToc);
+	} else {
+		console.error('Element close-toc not found');
+	}
+</script>
+
+<script>
+  // Wait for content to load
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttonsPanel = document.getElementById("buttons-panel");
+    
+    if (buttonsPanel) {
+      buttonsPanel.classList.add("fixed");
+      console.log("Class 'fixed' added to buttons-panel element.");
+    } else {
+      console.error("Element with ID 'buttons-panel' not found.");
+    }
+  });
+</script>
+
+<script>
+	const scrollBtn = document.getElementById("to-top-button") as HTMLButtonElement;
+	const targetHeader = document.querySelector("header") as HTMLElement;
+
+	function callback(entries: IntersectionObserverEntry[]) {
+		entries.forEach((entry) => {
+			// Show the scroll to top button when the <header> is out of view
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+		});
+	}
+
+	scrollBtn.addEventListener("click", () => {
+		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
+	});
+
+	const observer = new IntersectionObserver(callback);
+	observer.observe(targetHeader);
+</script>

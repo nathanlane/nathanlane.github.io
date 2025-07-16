@@ -1,0 +1,99 @@
+---
+title: "Fixing Heading Hierarchy Without Breaking Typography"
+description: "How I solved the semantic HTML vs visual design dilemma by rebasing heading styles"
+publishDate: "2025-07-16"
+tags: ["accessibility", "typography", "html", "css", "web-development"]
+draft: false
+---
+
+I just ran into an interesting dilemma while auditing my site's accessibility. The issue? My carefully crafted typography system was using the wrong HTML heading tags for screen readers and SEO.
+
+## The Problem
+
+When I originally designed this site's typography, I made what seemed like a reasonable decision:
+
+```html
+<!-- Main page title styled as a second-level heading -->
+<h2 class="heading-2">Writing</h2>
+
+<!-- Section headers -->
+<h3 class="heading-3">Featured Writing</h3>
+```
+
+Visually, this looked perfect. The `heading-2` class gave me the exact typography I wanted for page titles—not too large, perfectly balanced with the rest of the design.
+
+But here's the problem: screen readers and search engines expect a proper heading hierarchy:
+- `<h1>` for the main page title
+- `<h2>` for major sections
+- `<h3>` for subsections
+
+My visual design started at "level 2," breaking this semantic structure.
+
+## Why Not Just Change the Classes?
+
+My first thought was to simply update the HTML:
+
+```html
+<h1 class="heading-2">Writing</h1>
+```
+
+This would work, but it felt wrong. Why should I have to write `<h1 class="heading-2">` everywhere? It's confusing—the semantic level (h1) doesn't match the visual level (heading-2).
+
+## The Solution: Rebasing the Heading Styles
+
+Then it hit me: what if I "rebased" my heading styles? Instead of forcing semantic tags to use mismatched classes, I could make the default `<h1>` look like my current `heading-2`.
+
+Here's what I did:
+
+```css
+/* Semantic heading mapping - proper HTML tags with visual styles */
+h1:not([class]) { @apply heading-2; }
+h2:not([class]) { @apply heading-3; }
+h3:not([class]) { @apply heading-4; }
+h4:not([class]) { @apply heading-5; }
+h5:not([class]) { @apply heading-6; }
+h6:not([class]) { @apply text-sm font-semibold; }
+```
+
+Now I can write clean, semantic HTML:
+
+```html
+<h1>Writing</h1>
+<h2>Featured Writing</h2>
+<h3>Article Title</h3>
+```
+
+And it automatically gets the visual styling I want. No more confusing class names!
+
+## The Benefits
+
+1. **Clean HTML**: No more `<h2 class="heading-2">` redundancy
+2. **Proper semantics**: Screen readers get the correct document outline
+3. **Better SEO**: Search engines understand the page structure
+4. **Flexibility**: I can still use `class="heading-1"` when I need a larger heading
+
+## Edge Cases
+
+For those rare times when I need something bigger than my default h1 styling, I can still use:
+
+```html
+<h1 class="heading-1">Extra Large Title</h1>
+```
+
+The `:not([class])` selector ensures that only classless headings get the rebased styles.
+
+## Lessons Learned
+
+This experience reinforced an important principle: semantic HTML and visual design don't have to be at odds. With thoughtful CSS architecture, you can have both:
+
+- Semantic markup that makes sense to machines
+- Visual design that looks exactly how you want
+- Clean, maintainable code
+
+Sometimes the best solution isn't to fight the platform but to embrace it and make it work for your design system.
+
+The web has conventions for good reasons. When we work with them rather than against them, everyone benefits—screen reader users, search engines, and developers who have to maintain the code.
+
+---
+
+*Technical note: This approach uses Tailwind's `@apply` directive to map utility classes to semantic elements. The `:not([class])` selector ensures we only affect plain heading tags, preserving the ability to override with explicit classes when needed.*

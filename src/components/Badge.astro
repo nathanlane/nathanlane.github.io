@@ -1,0 +1,118 @@
+---
+export interface Props {
+	variant?: "default" | "accent" | "accent-base" | "accent-one" | "accent-two" | "muted" | "outline" | "inactive";
+	showHash?: boolean;
+	title?: string;
+	class?: string;
+}
+
+const { variant = "default", showHash = true, title, class: className = "" } = Astro.props as Props;
+
+// Badge base with typography refinements
+const badgeClasses = {
+	base: `
+		inline-flex items-center
+		rounded-sm transition-all duration-200
+		h-6 px-3 text-xs
+		font-medium tracking-wider
+		${className}
+	`,
+	variants: {
+		default: "bg-textColor text-bgColor hover:opacity-90",
+		accent: "bg-accent text-bgColor hover:opacity-90",
+		"accent-base": "bg-accent-base text-bgColor hover:opacity-90",
+		"accent-one": "bg-accent-base text-bgColor hover:opacity-90",
+		"accent-two": "bg-accent-base text-bgColor hover:opacity-90",
+		muted: "bg-color-100 text-textColor hover:bg-color-150 border border-color-200",
+		outline: "border border-color-300 text-textColor hover:bg-color-50",
+		inactive: "text-lighter bg-color-50 opacity-75",
+	},
+};
+
+const variantClasses = badgeClasses.variants[variant];
+---
+
+<span 
+	class={`badge ${badgeClasses.base} ${variantClasses}`}
+	data-badge-variant={variant}
+>
+	{showHash && <span class="badge-hash opacity-70">#</span>}
+	<span class="badge-text">
+		{title}
+		<slot />
+	</span>
+</span>
+
+<style>
+	/* Badge typography refinements */
+	.badge {
+		/* Enable font features */
+		font-feature-settings: 'kern' 1, 'liga' 1, 'ss01' 1;
+		/* Variable font weight */
+		font-variation-settings: 'wght' 500;
+		/* Smooth rendering */
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		/* Uppercase for small text */
+		text-transform: uppercase;
+		/* Base letter spacing */
+		letter-spacing: 0.04em;
+		/* Remove default shadow */
+		box-shadow: none;
+	}
+	
+	/* Hover state typography */
+	.badge:hover {
+		/* Slightly heavier weight */
+		font-variation-settings: 'wght' 550;
+		/* Expand letter spacing */
+		letter-spacing: 0.05em;
+		/* Subtle shadow */
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+	
+	/* Active state */
+	.badge:active {
+		/* Quick transition */
+		transition-duration: 50ms;
+		/* Compress spacing */
+		letter-spacing: 0.035em;
+		/* Remove shadow */
+		box-shadow: none;
+	}
+	
+	/* Hash symbol refinement */
+	.badge-hash {
+		/* Slightly lighter weight */
+		font-variation-settings: 'wght' 400;
+		/* Tighter spacing */
+		margin-right: 0.1em;
+	}
+	
+	/* Dark mode adjustments */
+	:root[data-theme="dark"] .badge {
+		/* Subtle text shadow for depth */
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	}
+	
+	/* Muted variant specifics */
+	[data-badge-variant="muted"] {
+		/* Lighter weight for muted */
+		font-variation-settings: 'wght' 450;
+		/* Normal case for muted */
+		text-transform: none;
+		/* Tighter tracking */
+		letter-spacing: 0.02em;
+	}
+	
+	[data-badge-variant="muted"]:hover {
+		font-variation-settings: 'wght' 500;
+		letter-spacing: 0.03em;
+	}
+	
+	/* Size adjustments for readability */
+	.badge {
+		font-size: 0.68rem;
+		line-height: 1.2;
+	}
+</style>

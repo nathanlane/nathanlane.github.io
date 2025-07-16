@@ -1,0 +1,27 @@
+---
+import { menuLinks, siteConfig } from "@/site.config";
+
+const year = new Date().getFullYear();
+---
+
+<footer
+	class="footer mt-auto pt-12 border-t border-color-150 w-full"
+>
+	<div class="footer-content mx-auto flex h-full w-full max-w-5xl flex-col items-center justify-between gap-space-s px-space-s sm:flex-row">
+		<div class="footer-copyright">
+			&copy; {year} {siteConfig.author}{siteConfig.footerText && <span class="inline-block">&nbsp;• {siteConfig.footerText}</span>}
+		</div>
+		<nav
+			aria-label="More on this site"
+			class="footer-nav flex items-center gap-space-m"
+		>
+			{
+				menuLinks.map((link) => (
+					<a class="footer-link" href={link.path}>
+						{link.title}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+</footer>

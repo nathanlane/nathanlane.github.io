@@ -1,0 +1,224 @@
+---
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import { menuLinks, siteConfig, socialLinks } from "@/site.config";
+import { Icon } from "astro-icon/components";
+
+// Filter resume link from social links
+const resumeLink = socialLinks.find(link => link.isDownload);
+// Filter email link from social links
+const emailLink = socialLinks.find(link => link.friendlyName === "Email");
+---
+
+<header
+	id="main-header"
+	class="header fixed md:relative top-0 left-0 z-20 w-full bg-bgColor/95 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none"
+>	
+	<div class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s">
+		<!-- Left side: Logo and Title -->
+		<div class="flex items-center">
+			<a
+				aria-label={siteConfig.title}
+				aria-current={Astro.url.pathname === "/" ? "page" : false}
+				class="group flex h-space-l items-center hover:filter-none sm:relative"
+				href="/"
+			>	
+				{siteConfig.showLogo && (
+					<div title={siteConfig.title}>
+						<svg class="inline-block size-space-l fill-current text-accent-base dark:text-accent-two drop-shadow-[0px_2.5px_2.5px_rgba(0,0,0,0.35)]">
+							<use href="/brand.svg#lane"></use>
+						</svg>
+					</div>
+				)}
+				
+				{siteConfig.showTitle && (
+					<span class="site-title hidden xs:block">
+						{siteConfig.title}
+					</span>
+				)}
+			</a>
+		</div>
+		
+		<!-- Right side: Navigation and Actions -->
+		<div class="flex items-center">
+			<nav
+				aria-label="Main navigation"
+				class="nav-desktop hidden md:flex items-center"
+			>	
+				{
+					menuLinks.map((link) => (
+						<a
+							aria-current={Astro.url.pathname === link.path ? "page" : false}
+							class="nav-link"
+							data-astro-prefetch
+							href={link.path}
+						>
+							{link.title}
+						</a>
+					))
+				}
+				
+				{resumeLink && (
+					<a
+						href={resumeLink.link}
+						target="_blank"
+						class="nav-link"
+						aria-label={`Download ${resumeLink.friendlyName}`}
+					>
+						{resumeLink.friendlyName}
+					</a>
+				)}
+				
+				<a
+					class="nav-link nav-link--highlight"
+					data-astro-prefetch
+					href="/series/lane-docs/"
+				>
+					Docs
+				</a>
+			</nav>
+			
+			<div class="nav-actions flex items-center">
+					{emailLink && (
+						<a
+							href={emailLink.link}
+							class="nav-icon-link"
+							aria-label={`Send email to ${siteConfig.author}`}
+						>
+							<Icon aria-hidden="true" class="nav-icon" name={emailLink.name} />
+						</a>
+					)}
+					<ThemeToggle />
+				</div>
+			</div>
+		</div>	
+			
+			<button
+				aria-expanded="false"
+				aria-haspopup="menu"
+				aria-label="Open navigation menu"
+				class="mobile-menu-toggle md:hidden"
+				id="toggle-nav-menu-mobile"
+				type="button"
+			>
+				<Icon
+					id="open-nav-menu-icon"
+					aria-hidden="true"
+					class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
+					focusable="false"
+					name="lucide:menu"
+				/>
+				<Icon
+					id="close-nav-menu-icon"
+					aria-hidden="true"
+					class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0"
+					focusable="false"
+					name="lucide:x"
+				/>
+			</button>
+		</div>
+	</div>
+</header>
+
+<div id="drawer" class="fixed inset-0 z-10 hidden" aria-hidden="true">
+	<div
+		id="drawer-body"
+		class="absolute inset-0 -translate-y-full transform bg-bgColor transition-all duration-300 ease-in-out"
+	>
+		<div class="fixed top-0 left-1/2 -ml-[50vw] w-screen pointer-events-none min-h-screen overflow-x-hidden overflow-y-visible blur-2xl">
+				<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+				<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+				<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+				<div class="absolute top-[-85%] left-[25%] w-[55%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+				<div class="absolute top-[-75%] left-[-25%] w-[65%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
+				<div class="absolute top-[-75%] right-[-25%] w-[65%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
+				<div class="absolute top-[-85%] left-[-30%] w-[85%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
+				<div class="absolute top-[-85%] right-[-30%] w-[85%] h-full bg-gradient-to-b from-orange-300 via-indigo-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
+		
+		</div>	
+		
+		<nav
+			aria-label="Mobile navigation menu"
+			class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center text-accent-two"
+			id="nav-menu-mobile"
+		>
+			{
+				menuLinks.map((link) => (
+					<a
+						aria-current={Astro.url.pathname === link.path ? "page" : false}
+						class="nav-link text-lg"
+						data-astro-prefetch
+						href={link.path}
+					>
+						{link.title}
+					</a>
+				))
+			}
+			<a
+				class="nav-link nav-link--highlight"
+				data-astro-prefetch
+				href="/series/lane-docs/"
+			>
+				Docs
+			</a>
+		</nav>
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const toggleNavMenuMobileButton = document.getElementById("toggle-nav-menu-mobile");
+		const openMenuIcon = document.getElementById("open-nav-menu-icon");
+		const closeMenuIcon = document.getElementById("close-nav-menu-icon");
+		const drawer = document.getElementById("drawer");
+
+		// Check if elements exist
+		if (!toggleNavMenuMobileButton || !openMenuIcon || !closeMenuIcon || !drawer) {
+			console.error("One or more required elements are missing in the DOM.");
+			return;
+		}
+
+		const drawerBody = document.getElementById("drawer-body");
+		if (!drawerBody) {
+			console.error("Drawer body element is missing in the DOM.");
+			return;
+		}
+
+		toggleNavMenuMobileButton.addEventListener("click", () => {
+			const isOpen = toggleNavMenuMobileButton.getAttribute("aria-expanded") === "true";
+
+			if (isOpen) {
+				// Close menu
+				drawerBody.classList.add("opacity-0", "-translate-y-full");
+				drawerBody.classList.remove("translate-y-0");
+
+				// Remove after animation
+				setTimeout(() => {
+					drawer.classList.add("hidden");
+					drawer.classList.remove("open");
+				}, 300);
+
+				// Switch icons
+				openMenuIcon.classList.add("scale-100", "opacity-100");
+				closeMenuIcon.classList.add("scale-0", "opacity-0");
+				closeMenuIcon.classList.remove("scale-100", "opacity-100");
+			} else {
+				// Show menu
+				drawer.classList.remove("hidden");
+				drawer.classList.add("open");
+				drawerBody.classList.add("translate-y-0");
+				drawerBody.classList.remove("opacity-0", "-translate-y-full");
+
+				// Switch icons
+				openMenuIcon.classList.add("scale-0", "opacity-0");
+				closeMenuIcon.classList.add("scale-100", "opacity-100");
+				openMenuIcon.classList.remove("scale-100", "opacity-100");
+			}
+
+			// Update button state
+			toggleNavMenuMobileButton.setAttribute("aria-expanded", (!isOpen).toString());
+		});
+	});
+</script>
+
+
+

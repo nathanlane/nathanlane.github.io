@@ -1,0 +1,129 @@
+---
+title: "TypeScript Prop Interfaces Implementation"
+description: "How we added explicit TypeScript interfaces to all components for better type safety and developer experience."
+publishDate: 2024-01-15
+tags: ["typescript", "components", "type-safety", "implementation"]
+draft: false
+---
+
+Following our best practices audit, Priority 4 was adding TypeScript prop interfaces to components. This final implementation completes our audit improvements.
+
+## Implementation Summary
+
+### Components Updated
+
+1. **Badge.astro** - Added explicit Props interface for variant types
+2. **SeriesPanel.astro** - Added Props interface for seriesId
+3. **Separator.astro** - Renamed SeparatorProps to Props for consistency
+4. **ContactBox.astro** - Fixed union type handling for links
+5. **FooterConnect.astro** - Fixed union type handling with proper discrimination
+
+### TypeScript Improvements
+
+#### Before: Badge Component
+```astro
+---
+const { variant = "default", showHash = true, title } = Astro.props;
+---
+```
+
+#### After: Badge Component
+```astro
+---
+export interface Props {
+  variant?: "default" | "accent" | "accent-base" | "accent-one" | "accent-two" | "muted" | "outline" | "inactive";
+  showHash?: boolean;
+  title?: string;
+}
+
+const { variant = "default", showHash = true, title } = Astro.props as Props;
+---
+```
+
+### Union Type Discrimination
+
+Fixed TypeScript union type issues in ContactBox and FooterConnect by using proper type guards:
+
+```typescript
+// Define specific types
+interface EmailLink {
+  friendlyName: string;
+  link: string;
+  isEmail: boolean;
+}
+
+interface CVLink {
+  friendlyName: string;
+  link: string;
+  isCV: boolean;
+}
+
+// Use type guards for conditional logic
+target={'isEmail' in link || 'isCV' in link ? "_self" : "_blank"}
+```
+
+### Optional Properties Handling
+
+Fixed exactOptionalPropertyTypes issues by spreading optional properties conditionally:
+
+```astro
+<ResearchCard
+  title={paper.data.title}
+  authors={paper.data.authors}
+  year={paper.data.paperDate}
+  description={paper.data.description}
+  {...(paper.data.publication && { publication: paper.data.publication })}
+  url={`/research/${paper.id}/`}
+  {...(paper.data.link && { link: paper.data.link })}
+  {...(paper.data.download && { download: paper.data.download })}
+/>
+```
+
+### DOM Safety
+
+Added null checks for DOM operations to prevent runtime errors:
+
+```typescript
+const fontsList = document.getElementById('loaded-fonts');
+if (!fontsList) return;
+
+const loadedFonts = new Set<string>();
+```
+
+## Benefits Achieved
+
+### 1. Type Safety
+- All component props are now type-checked at build time
+- Prevents passing invalid prop values
+- Catches typos in prop names
+
+### 2. Developer Experience
+- IntelliSense support for all component props
+- Clear documentation of expected prop shapes
+- Better error messages during development
+
+### 3. Maintainability
+- Explicit contracts for component interfaces
+- Easier refactoring with TypeScript support
+- Consistent patterns across the codebase
+
+## Final Results
+
+Starting with 18 TypeScript errors, we systematically addressed each issue:
+- ✅ Added missing Props interfaces
+- ✅ Fixed union type discrimination
+- ✅ Handled optional properties correctly
+- ✅ Added DOM null checks
+- ✅ Removed deprecated props
+
+Final TypeScript check: **0 errors, 0 warnings** ✨
+
+## Conclusion
+
+With all four priorities from our audit implemented:
+1. ✅ Astro Image optimization (planned)
+2. ✅ Homepage content collections
+3. ✅ Font loading optimization
+4. ✅ TypeScript prop interfaces
+
+The site now exemplifies Astro best practices with excellent type safety, performance optimization, and maintainable architecture. The codebase is more robust, developer-friendly, and ready for future enhancements.

@@ -1,0 +1,322 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import SeriesPanel from "@/components/SeriesPanel.astro";
+import Masthead from "@/components/blog/Masthead.astro";
+import TOC from "@/components/blog/TOC.astro";
+import WebMentions from "@/components/blog/webmentions/index.astro";
+import StructuredData from "@/components/StructuredData.astro";
+import { Icon } from "astro-icon/components";
+import BaseLayout from "./Base.astro";
+
+interface Props {
+	post: CollectionEntry<"post">;
+}
+
+const { post } = Astro.props;
+const { ogImage, title, description, updatedDate, publishDate, seriesId } = post.data;
+
+const socialImage = ogImage ?? `/og-image/${post.id}.png`;
+const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
+const { headings, remarkPluginFrontmatter } = await render(post);
+
+// Prepare article data for structured data
+const articleData = {
+	url: Astro.url.pathname,
+	title,
+	description,
+	publishDate: publishDate.toISOString(),
+	updatedDate: updatedDate?.toISOString(),
+	ogImage: socialImage,
+	tags: post.data.tags,
+	minutesRead: remarkPluginFrontmatter?.minutesRead
+};
+
+// Prepare breadcrumb data
+const breadcrumbData = {
+	items: [
+		{ name: "Home", url: Astro.site?.href || "/" },
+		{ name: "Posts", url: new URL("/posts/", Astro.site).href },
+		{ name: title, url: new URL(Astro.url.pathname, Astro.site).href }
+	]
+};
+
+// Structured data array for SEO
+const structuredData = [
+	{ type: 'article' as const, data: articleData },
+	{ type: 'breadcrumb' as const, data: breadcrumbData }
+];
+---
+
+<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }} structuredData={structuredData}>
+ 	<!-- SeriesPanel is inserted into the named slot "sidebar" -->
+	{seriesId && (<SeriesPanel slot="sidebar" seriesId={seriesId} />)}
+
+	<Masthead content={post} />
+	
+	<div class="mt-space-m flex sm:grid-cols-[auto_1fr] md:items-start gap-x-space-l">
+		<article class="grid flex-grow grid-cols-1 break-words pt-space-s max-w-prose mx-auto measure-base content-spacing">
+			<div class="prose prose-lane max-w-none flex-grow prose-headings:text-accent-base">
+				<slot />
+			</div>
+			<WebMentions />
+		</article>
+		{!!headings.length && (
+			<aside 
+				id="toc-panel" 
+				class="z-10 hidden md:w-[14rem] md:min-w-[14rem] md:rounded-lg md:block"
+			>
+				<TOC headings={headings} />
+			</aside>
+		)}
+	</div>
+
+	<button
+		id="to-top-button"
+		class="fixed bottom-space-l right-space-s btn-icon-scroll translate-y-28 transition-all duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 z-50"
+		aria-label="Back to Top"
+		data-show="false"
+	>	
+		<Icon class="icon-base" name="lucide:chevron-up" />
+	</button>
+
+	<!-- Series button for mobile screens -->
+	{seriesId && (
+		<mobile-button
+			id="toggle-panel-mobile"
+			class="btn-icon-fab block sm:hidden fixed bottom-space-s right-space-s z-50"
+			aria-label="Toggle Series Panel"
+		>
+			<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
+				<Icon class="icon-action" name="lucide:file-text"/>
+			</span>
+		</mobile-button>
+	)}
+</BaseLayout>
+
+<!-- Copy code button -->
+<script>
+	// Wait for the content to fully load
+	document.addEventListener("DOMContentLoaded", () => {
+		// Find all pre blocks
+		document.querySelectorAll("pre").forEach((pre) => {
+			// Check if the button already exists
+			if (!pre.querySelector(".copy-code")) {
+				// Create the button
+				const copyButton = document.createElement("button");
+				copyButton.className =
+				"absolute flex items-center justify-center bg-bgColor h-space-s font-medium overflow-hidden rounded text-light hover:text-accent-two font-sans text-xs font-medium top-space-1 right-space-1";
+
+				// Create the span element that will hold the button text
+				const buttonText = document.createElement("span");
+				buttonText.innerText = "Copy"; // Initial text
+				buttonText.className = "flex items-center block w-full h-full px-space-1 py-space-0.5 bg-[var(--code-title-bg)] text-xs"; // Set the span to take up full width with background color
+
+				copyButton.appendChild(buttonText); // Append span to the button
+
+				// Add the button inside pre
+				pre.appendChild(copyButton);
+
+				// Event handler for copying text
+				copyButton.addEventListener("click", async () => {
+					const code = pre.querySelector("code")?.textContent;
+					if (code) {
+						await navigator.clipboard.writeText(code);
+						buttonText.innerText = "Copied!"; // Change text to "Copied!"
+
+						// After 1.5 seconds, change the text back to "Copy"
+						setTimeout(() => {
+							buttonText.innerText = "Copy";
+						}, 1500);
+					}
+				});
+			}
+		});
+	});
+</script>
+
+<script>
+	const ANIMATION_DURATION = 300;
+	// Get the button and panel elements
+	const togglePanelBtn = document.getElementById("toggle-panel");
+	const closePanelBtn = document.getElementById("close-panel");
+	const seriesPanel = document.getElementById("series-panel");
+	const togglePanelMobileBtn = document.getElementById("toggle-panel-mobile");
+
+	// Ensure the seriesPanel exists
+	if (!seriesPanel) {
+		console.error("Element series-panel not found");
+		throw new Error("series-panel is required");
+	}
+
+	// Function to check if the panel is visible
+	const isPanelVisible = () => {
+		const isScreenLg = window.matchMedia("(min-width: 1024px)").matches; // Large screens
+		return (
+			(isScreenLg && seriesPanel.classList.contains("lg:block")) ||
+			(!isScreenLg && !seriesPanel.classList.contains("hidden"))
+		);
+	};
+
+	// Function to hide the panel
+	const hidePanel = () => {
+		seriesPanel.classList.add("opacity-0", "-translate-x-full");
+		setTimeout(() => {
+			seriesPanel.classList.remove("block", "lg:block");
+			seriesPanel.classList.add("hidden");
+		}, ANIMATION_DURATION);
+	};
+
+	// Function to show the panel
+	const showPanel = () => {
+		seriesPanel.classList.remove("hidden");
+		seriesPanel.classList.add("block", "lg:block");
+		setTimeout(() => {
+			seriesPanel.classList.remove("opacity-0", "-translate-x-full");
+		}, 10);
+	};
+
+	// Common event handler for both buttons
+	const togglePanel = () => {
+		if (isPanelVisible()) {
+			hidePanel(); // If visible, hide it
+		} else {
+			showPanel(); // If hidden, show it
+		}
+	};
+
+	// Event handlers for both buttons
+	if (togglePanelBtn) {
+		togglePanelBtn.addEventListener("click", togglePanel);
+	} else {
+		console.error("Element toggle-panel not found");
+	}
+
+	if (togglePanelMobileBtn) {
+		togglePanelMobileBtn.addEventListener("click", togglePanel);
+	} else {
+		console.error("Element toggle-panel-mobile not found");
+	}
+
+	if (closePanelBtn) {
+		closePanelBtn.addEventListener("click", hidePanel);
+	} else {
+		console.error("Element close-panel not found");
+	}
+</script>
+
+<script>
+	// Get the button and panel elements
+	const toggleTocBtn = document.getElementById('toggle-toc');
+	const closeTocBtn = document.getElementById('close-toc');
+	const tocPanel = document.getElementById('toc-panel');
+	const toggleTocMobileBtn = document.getElementById("toggle-toc-mobile");
+
+	// Check for the panel's presence (required for functionality)
+	if (!tocPanel) {
+		console.error('Element toc-panel not found');
+		throw new Error('toc-panel is required');
+	}
+
+	// Function to check if the table of contents is visible
+	const isTocVisible = () => {
+		const isScreenMd = window.matchMedia("(min-width: 768px)").matches;
+		return (
+			(isScreenMd && tocPanel.classList.contains("md:block")) ||
+			(!isScreenMd && !tocPanel.classList.contains("hidden"))
+		);
+	};
+
+	// Function to hide the panel
+	const hideToc = () => {
+		tocPanel.classList.add('hidden');
+		tocPanel.classList.remove('md:block');
+	};
+
+	// Function to show the panel
+	const showToc = () => {
+		tocPanel.classList.remove('hidden');
+		tocPanel.classList.add('md:block');
+	};
+
+	// Common event handler for both buttons
+	const toggleToc = () => {
+		if (isTocVisible()) {
+			hideToc(); // If visible, hide it
+		} else {
+			showToc(); // If hidden, show it
+		}
+	};
+	
+	// Add event handler for the toggle button
+	if (toggleTocBtn) {
+		toggleTocBtn.addEventListener("click", toggleToc);
+	} else {
+		console.error('Element toggle-toc not found');
+	}
+
+	// Add event handler for the toggle button (mobile)
+	if (toggleTocMobileBtn) {
+		toggleTocMobileBtn.addEventListener("click", toggleToc);
+	} else {
+		console.error('Element toggle-toc-mobile not found');
+	}
+
+	// Add event handler for the close button
+	if (closeTocBtn) {
+		closeTocBtn.addEventListener('click', hideToc);
+	} else {
+		console.error('Element close-toc not found');
+	}
+</script>
+
+
+<!-- Scroll to top button -->
+<script>
+	const scrollBtn = document.getElementById("to-top-button") as HTMLButtonElement;
+	const targetHeader = document.querySelector("header") as HTMLElement;
+
+	function callback(entries: IntersectionObserverEntry[]) {
+		entries.forEach((entry) => {
+			// Show the scroll to top button when the <header> is out of view
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+		});
+	}
+
+	scrollBtn.addEventListener("click", () => {
+		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
+	});
+
+	const observer = new IntersectionObserver(callback);
+	observer.observe(targetHeader);
+</script>
+
+<!-- REQUIRES IMPROVEMENT!!! -->
+<!-- Menu button instead of the main menu -->
+<!--
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const menuButton = document.getElementById("toggle-navigation-menu");
+		const navigationMenu = document.getElementById("menu");
+
+		if (!menuButton || !navigationMenu) {
+			console.error("Menu button or navigation menu is missing in the DOM.");
+			return;
+		}
+
+		menuButton.addEventListener("click", () => {
+			const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+
+			if (isOpen) {
+				// Close the menu
+				navigationMenu.classList.add("hidden");
+			} else {
+				// Open the menu
+				navigationMenu.classList.remove("hidden");
+			}
+
+			// Update the button state
+			menuButton.setAttribute("aria-expanded", (!isOpen).toString());
+		});
+	});
+</script>
+-->

@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import PageLayout from "@/layouts/Base.astro";
+import FooterConnect from "@/components/FooterConnect.astro";
+import { aboutConfig } from "@/data/about-config";
+
+// Import placeholder image or use remote image
+// For now, we'll show how to handle both local and remote images
+const { meta, photo, content } = aboutConfig;
+
+// For demonstration - in production, you'd import your actual image:
+// import profilePhoto from '../assets/images/headshot.jpg';
+---
+
+<PageLayout meta={meta}>
+
+	<h1>{meta.title}</h1>
+	<div class="prose prose-lane max-w-none content-spacing">
+		{photo.show && (
+			<div class="float-right ml-6 mb-6 w-48 sm:w-56 -mt-1">
+				<figure class="space-y-1">
+					<div class="overflow-hidden border border-color-200 dark:border-color-700">
+						{/* 
+							For local images (recommended):
+							<Image 
+								src={profilePhoto}
+								alt={photo.alt}
+								width={400}
+								height={400}
+								class="w-full h-auto aspect-square object-cover"
+							/>
+						*/}
+						
+						{/* For both local and remote images: */}
+						<Image 
+							src={photo.src}
+							alt={photo.alt}
+							width={400}
+							height={400}
+							class="w-full h-auto aspect-square object-cover"
+							inferSize={photo.src.startsWith('http')}
+						/>
+					</div>
+					<figcaption class="text-center">
+						<a 
+							href={photo.fullSizeLink} 
+							download
+							class="opacity-30 hover:opacity-50 transition-opacity"
+							style="font-size: 0.625rem; color: var(--theme-lightest);"
+						>
+							Download headshot ↓
+						</a>
+					</figcaption>
+				</figure>
+			</div>
+		)}
+		
+		<p>{content.intro}</p>
+		{content.paragraphs && content.paragraphs.map((paragraph) => (
+			<p>{paragraph}</p>
+		))}
+		<p>
+			{content.outro.text} <a
+				aria-label="github repository"
+				class="inline-link inline-block"
+				href={content.outro.linkUrl}
+				rel="noreferrer"
+				target="_blank">{content.outro.linkText}</a
+			> {content.outro.suffix}
+		</p>
+
+		<!-- Social Links Section -->
+		<FooterConnect />
+	</div>
+
+</PageLayout>

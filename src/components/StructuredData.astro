@@ -1,0 +1,115 @@
+---
+// This component adds JSON-LD structured data to help search engines understand your content
+export interface Props {
+  type: 'website' | 'article' | 'person' | 'breadcrumb';
+  data?: Record<string, any>;
+}
+
+import { siteConfig } from '@/site.config';
+
+const { type, data } = Astro.props;
+
+// Helper to create Person schema (reused in multiple schemas)
+const personSchema = {
+  "@type": "Person",
+  "@id": `${Astro.site}/#author`,
+  "name": siteConfig.author,
+  "url": Astro.site?.toString() || "",
+  "image": siteConfig.profileImage ? `${Astro.site}${siteConfig.profileImage}` : undefined,
+  "sameAs": siteConfig.socialProfiles || [],
+  "jobTitle": siteConfig.jobTitle,
+  "worksFor": siteConfig.organization ? {
+    "@type": "Organization",
+    "name": siteConfig.organization
+  } : undefined
+};
+
+// Generate appropriate schema based on type
+let schema: Record<string, any>;
+
+switch (type) {
+  case 'website':
+    // WebSite schema - tells Google about your site structure and enables sitelinks search box
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${Astro.site}/#website`,
+      "url": Astro.site?.toString() || "",
+      "name": siteConfig.title,
+      "description": siteConfig.description,
+      "author": personSchema,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": `${Astro.site}/tags/{search_term_string}/`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    };
+    break;
+
+  case 'article':
+    // Article schema - rich snippets for blog posts
+    if (!data) break;
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": `${Astro.site}${data.url}#article`,
+      "headline": data.title,
+      "description": data.description,
+      "datePublished": data.publishDate,
+      "dateModified": data.updatedDate || data.publishDate,
+      "author": personSchema,
+      "publisher": personSchema,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `${Astro.site}${data.url}`
+      },
+      "image": data.ogImage || `${Astro.site}/og-image${data.url.replace(/\/$/, '')}.png`,
+      "keywords": data.tags?.join(', '),
+      "wordCount": data.minutesRead ? Math.round(data.minutesRead * 200) : undefined
+    };
+    break;
+
+  case 'person':
+    // Person schema - establishes your identity
+    schema = {
+      "@context": "https://schema.org",
+      ...personSchema,
+      "description": "Assistant Professor of Economics at the University of Oxford. Empirical economist and data scientist studying how economies change.",
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Harvard University"
+        }
+      ],
+      "knowsAbout": [
+        "Economics",
+        "Industrial Policy",
+        "Economic Development",
+        "Data Science"
+      ]
+    };
+    break;
+
+  case 'breadcrumb':
+    // BreadcrumbList schema - helps Google understand site hierarchy
+    if (!data?.items) break;
+    schema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": data.items.map((item: Record<string, any>, index: number) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item.name,
+        "item": item.url
+      }))
+    };
+    break;
+}
+---
+
+{schema && (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+)}

@@ -1,0 +1,126 @@
+---
+title: "Font Loading Optimization Implementation"
+description: "How we optimized font loading performance with preconnect hints and font-display strategies for better Core Web Vitals."
+publishDate: 2024-01-15
+tags: ["performance", "fonts", "optimization", "web-development"]
+draft: false
+---
+
+Following our best practices audit, Priority 3 was optimizing font loading to improve performance and reduce Cumulative Layout Shift (CLS). Here's how we implemented font optimization strategies.
+
+## Font Loading Challenges
+
+Our site uses multiple font families:
+- **Newsreader Variable** - Serif headers with optical sizing
+- **IBM Plex Sans** - Body text across multiple weights
+- **IBM Plex Serif** - Alternative serif option
+- **IBM Plex Mono** - Code blocks and technical content
+
+With fonts loaded via `@fontsource`, they're bundled by Vite with hashed filenames, making traditional preload strategies challenging.
+
+## Implementation Strategy
+
+### 1. Preconnect to Font Origins
+
+Added preconnect hints to speed up font loading:
+
+```html
+<!-- Preconnect to speed up font loading -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- DNS prefetch as fallback for browsers that don't support preconnect -->
+<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+```
+
+### 2. Critical Font Face Declarations
+
+Inline critical font-face declarations to minimize Flash of Unstyled Text (FOUT):
+
+```html
+<style>
+  /* Preload critical font faces to minimize FOUT */
+  @font-face {
+    font-family: 'Newsreader';
+    font-weight: 200 800;
+    font-display: swap;
+    src: local('Newsreader Variable');
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-weight: 400;
+    font-display: swap;
+    src: local('IBM Plex Sans Regular');
+  }
+</style>
+```
+
+### 3. Font Loading Best Practices
+
+#### Font Display Strategy
+
+Using `font-display: swap` ensures:
+- Text remains visible during font load (no FOIT)
+- Graceful swap when custom fonts arrive
+- Better perceived performance
+
+#### Local Font Fallbacks
+
+The `src: local()` directive allows:
+- Instant loading if user has fonts installed
+- Zero network requests for some users
+- Fallback to web fonts if not available locally
+
+## Performance Impact
+
+### Before Optimization
+- Potential FOUT on slow connections
+- No optimization hints for font loading
+- Render-blocking font requests
+
+### After Optimization
+- Faster font connection establishment
+- Reduced time to first paint
+- Better CLS scores with font-display: swap
+- Progressive enhancement with local fonts
+
+## Technical Details
+
+### Vite Bundle Integration
+
+Since `@fontsource` fonts are bundled by Vite:
+- Font files get hashed names (e.g., `newsreader-latin-wght-normal.CCVVNp6i.woff2`)
+- Traditional preload with exact paths isn't feasible
+- Our approach works around this limitation
+
+### Critical CSS Inlining
+
+By inlining critical font-face rules:
+- Browser knows about fonts immediately
+- Can make better loading decisions
+- Reduces render-blocking CSS
+
+## Future Enhancements
+
+1. **Resource Hints API**: Use Astro's resource hints for automatic preloading
+2. **Font Subsetting**: Create custom subsets for critical text
+3. **Variable Font Optimization**: Load only needed weight ranges
+4. **Service Worker**: Cache fonts for offline use
+
+## Monitoring Performance
+
+To verify improvements:
+
+```bash
+# Run Lighthouse CI
+npx lighthouse https://yoursite.com --view
+
+# Check specific metrics
+- First Contentful Paint (FCP)
+- Cumulative Layout Shift (CLS)
+- Font load timing in Network tab
+```
+
+## Conclusion
+
+Font optimization is crucial for typography-focused sites. Our implementation balances performance with maintainability, ensuring beautiful typography doesn't come at the cost of user experience.
+
+Next up: Priority 4 - Adding TypeScript prop interfaces to components for better type safety.

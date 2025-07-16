@@ -1,0 +1,1545 @@
+/* Import Utopia fluid type scale - GENERATED FROM Utopia step-map */
+/* Utopia fluid scale now provided via tailwindcss-fluid-type plugin — import disabled */
+/* @import "./utopia.css";  Migrated to fluid-type plugin */
+
+/* Import font definitions */
+@import "./fonts.css";
+
+/* Import link typography system */
+@import "./links.css";
+
+/* Import motion preferences */
+@import "./motion.css";
+
+/* Import print styles */
+@import "./print.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Old font declarations removed - now using @fontsource packages */
+
+@layer base {
+  :root,
+  :root[data-theme="light"] {
+    color-scheme: light;
+
+    /* Refined neutral palette with minimal warmth */
+    --hue: 0deg; /* Neutral base */
+    --saturation: 0%; /* Pure grayscale for most elements */
+
+    /* Background - pure white */
+    --bg-hue: 0deg;
+    --bg-saturation: 0%;
+    --bg-brightness: 100%; /* #ffffff - pure white */
+
+    /* Refined accent colors - neutral with micro warmth */
+    --theme-accent-base: 0deg 0% 15%; /* Near black #262626 */
+    --theme-accent-one: 0deg 0% 25%; /* Dark gray #404040 */
+    --theme-accent-two: 0deg 0% 20%; /* Medium dark #333333 */
+
+    /* Text colors - subtle warm black */
+    --fg-hue: 30deg;
+    --fg-saturation: 2%;
+    --fg-brightness: 10%; /* #1a1918 - very subtle warm black */
+    --theme-text: hsl(30deg 2% 10% / 0.95);
+
+    /* Sophisticated secondary colors */
+    --theme-link: 220deg 35% 40%; /* Sophisticated blue #365880 */
+    --theme-accent: var(--theme-color-600);
+    --theme-quote: hsl(40deg 5% 35%);
+
+    /* Neutral gray scale */
+    --theme-lightest: hsl(0deg 0% 45%); /* #737373 */
+    --theme-lighter: hsl(0deg 0% 35%); /* #595959 */
+    --theme-light: hsl(0deg 0% 30%); /* #4d4d4d */
+
+    /* Near-white special colors */
+    --theme-special-lightest: hsl(0deg 0% 99%); /* #fcfcfc */
+    --theme-special-lighter: hsl(0deg 0% 97%); /* #f7f7f7 */
+    --theme-special-light: hsl(0deg 0% 95%); /* #f2f2f2 */
+    --theme-special: hsl(0deg 0% 0% / 0.03);
+
+    /* Подсветка синтаксиса rehype-pretty-code */
+    pre code span {
+      color: var(--shiki-light) !important;
+      font-style: var(--shiki-light-font-style) !important;
+      font-weight: var(--shiki-light-font-weight) !important;
+      text-decoration: var(--shiki-light-text-decoration) !important;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    /* Refined warm dark theme */
+    --hue: 40deg; /* Warm hue maintained */
+    --saturation: 4%; /* Subtle warmth */
+
+    /* Background - warm black */
+    --bg-hue: 40deg;
+    --bg-saturation: 10%;
+    --bg-brightness: 6%; /* #0d0c0b - warm black */
+
+    /* Warm light accents */
+    --theme-accent-base: 40deg 5% 88%; /* Warm white #e8e6e3 */
+    --theme-accent-one: 40deg 5% 75%; /* Warm light gray */
+    --theme-accent-two: 40deg 5% 80%; /* Warm accent */
+
+    /* Text colors - warm whites */
+    --fg-hue: 40deg;
+    --fg-saturation: 5%;
+    --fg-brightness: 88%; /* #e8e6e3 - warm white */
+    --theme-text: hsl(40deg 5% 88% / 0.9);
+
+    /* Sophisticated secondary colors */
+    --theme-link: 220deg 25% 70%; /* Muted blue for dark */
+    --theme-accent: var(--theme-color-600);
+    --theme-quote: hsl(40deg 5% 75%);
+
+    /* Warm gray scale for dark */
+    --theme-lightest: hsl(40deg 5% 75%); /* Better contrast - WCAG AA */
+    --theme-lighter: hsl(40deg 5% 70%); /* 4.5:1 contrast minimum */
+    --theme-light: hsl(40deg 5% 65%); /* For less important text */
+
+    /* Warm special colors for dark */
+    --theme-special-lightest: hsl(40deg 5% 20%);
+    --theme-special-lighter: hsl(40deg 5% 15%);
+    --theme-special-light: hsl(40deg 5% 12%);
+    --theme-special: hsl(40deg 5% 100% / 0.06);
+
+    /* Подсветка синтаксиса */
+    pre code span {
+      color: var(--shiki-dark) !important;
+      font-style: var(--shiki-dark-font-style) !important;
+      font-weight: var(--shiki-dark-font-weight) !important;
+      text-decoration: var(--shiki-dark-text-decoration) !important;
+    }
+  }
+
+  /* Общие переменные */
+  :root {
+    --theme-bg: var(--bg-hue) var(--bg-saturation) var(--bg-brightness); /* Цвет фона */
+    --theme-fg: var(--fg-hue) var(--fg-saturation) var(--fg-brightness); /* Базовый цвет для рассчета градации цветов */
+
+    /* Grid System Foundation */
+    --base-font-size: 1rem; /* 16px */
+    --base-line-height: 1.5;
+    --baseline: 1.5rem; /* 24px = 16px × 1.5 */
+    --grid-unit: 0.375rem; /* 6px = 24px ÷ 4 */
+
+    /* Utopia Fluid Type Scale Variables */
+    --step--2: clamp(0.64rem, 0.62rem + 0.09vw, 0.72rem);
+    --step--1: clamp(0.80rem, 0.77rem + 0.14vw, 0.90rem);
+    --step-0: clamp(0.8125rem, 0.7875rem + 0.125vw, 0.875rem);
+    --step-1: clamp(0.975rem, 0.9125rem + 0.3125vw, 1.125rem);
+    --step-2: clamp(1.17rem, 1.095rem + 0.375vw, 1.35rem);
+    --step-3: clamp(1.40rem, 1.315rem + 0.425vw, 1.62rem);
+    --step-4: clamp(1.69rem, 1.58rem + 0.55vw, 1.94rem);
+    --step-5: clamp(2.02rem, 1.895rem + 0.625vw, 2.33rem);
+    --step-6: clamp(2.43rem, 2.275rem + 0.775vw, 2.80rem);
+
+    /* Golden ratio heights for header */
+    --header-height-mobile: 60px; /* 37.08px × φ ≈ 60px */
+    --header-height-desktop: 81px; /* 50px × φ ≈ 81px */
+
+    /* Musical interval spacing */
+    --space-major-third: 3rem; /* 48px - Major third interval */
+    --space-minor-third: 2.25rem; /* 36px - Minor third interval */
+    --space-perfect-fourth: 1rem; /* 16px - Perfect fourth scaled */
+
+    /* Spacing Scale - Grid Aligned */
+    --space-1: calc(var(--grid-unit) * 1); /* 6px - hairline */
+    --space-2: calc(var(--grid-unit) * 2); /* 12px - tight */
+    --space-3: calc(var(--grid-unit) * 3); /* 18px - compact */
+    --space-4: calc(var(--grid-unit) * 4); /* 24px - base (1 baseline) */
+    --space-6: calc(var(--grid-unit) * 6); /* 36px - flow (1.5 baselines) */
+    --space-8: calc(var(--grid-unit) * 8); /* 48px - section (2 baselines) */
+    --space-12: calc(var(--grid-unit) * 12); /* 72px - large (3 baselines) */
+    --space-16: calc(var(--grid-unit) * 16); /* 96px - huge (4 baselines) */
+    --space-24: calc(var(--grid-unit) * 24); /* 144px - massive (6 baselines) */
+
+    /* Градации базового цвета для текста и элементов */
+    --theme-color-900: hsl(var(--theme-fg) / 1);
+    --theme-color-850: hsl(var(--theme-fg) / 0.9675);
+    --theme-color-800: hsl(var(--theme-fg) / 0.935);
+    --theme-color-750: hsl(var(--theme-fg) / 0.88);
+    --theme-color-700: hsl(var(--theme-fg) / 0.825);
+    --theme-color-650: hsl(var(--theme-fg) / 0.785);
+    --theme-color-600: hsl(var(--theme-fg) / 0.745);
+    --theme-color-550: hsl(var(--theme-fg) / 0.675);
+    --theme-color-500: hsl(var(--theme-fg) / 0.605);
+    --theme-color-450: hsl(var(--theme-fg) / 0.5);
+    --theme-color-400: hsl(var(--theme-fg) / 0.45);
+    --theme-color-350: hsl(var(--theme-fg) / 0.29);
+    --theme-color-300: hsl(var(--theme-fg) / 0.185);
+    --theme-color-250: hsl(var(--theme-fg) / 0.15);
+    --theme-color-200: hsl(var(--theme-fg) / 0.115);
+    --theme-color-150: hsl(var(--theme-fg) / 0.08);
+    --theme-color-100: hsl(var(--theme-fg) / 0.045);
+    --theme-color-75: hsl(var(--theme-fg) / 0.03375);
+    --theme-color-50: hsl(var(--theme-fg) / 0.0225);
+
+    /* Переменные подсветки блоков кода rehype-pretty-code */
+    --code-inline-bg: var(--theme-color-100); /* Subtle warm gray */
+    --code-bg: var(--theme-special);
+    --code-title-bg: var(--theme-color-200);
+    --code-line-highlight: hsl(40deg 10% 0% / 0.04);
+    --code-line-diff-add: hsl(120deg 30% 93% / 0.5);
+    --code-line-diff-remove: hsl(0deg 40% 93% / 0.5);
+
+    --font-mono:
+      "IBM Plex Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo,
+      Courier, monospace;
+  }
+
+  html {
+    letter-spacing: 0.025em;
+  }
+
+  /* Text rendering optimizations for IBM Plex */
+  body {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Enable OpenType features for IBM Plex */
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1,
+      "ss01" 1;
+    /* ss01 enables IBM Plex's simplified 'a' for better readability */
+
+    /* Use optimal font weight for body text */
+    font-weight: 400;
+
+    /* Responsive line-height for optimal readability */
+    line-height: 1.65; /* Mobile: more space for smaller screens */
+  }
+
+  /* Tighter line-height for larger screens */
+  @media (min-width: 768px) {
+    body {
+      line-height: 1.55;
+    }
+  }
+
+  /* Optimal bold weight for screens */
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  /* Light weight for accents */
+  .font-light {
+    font-weight: 300;
+  }
+
+  /* Micro-contrast adjustments for different contexts */
+  /* Small text needs higher contrast */
+  .text-sm,
+  .text-xs,
+  .caption,
+  .footnote {
+    color: hsl(0deg 0% 30%); /* Darker gray for readability */
+  }
+
+  /* Dark mode micro-adjustments */
+  :root[data-theme="dark"] .text-sm,
+  :root[data-theme="dark"] .text-xs,
+  :root[data-theme="dark"] .caption,
+  :root[data-theme="dark"] .footnote {
+    color: hsl(40deg 5% 75%); /* Muted for hierarchy */
+  }
+
+  /* Selection colors - refined */
+  ::selection {
+    background: hsl(220deg 40% 92%); /* Light blue for selection */
+    color: hsl(0deg 0% 10%);
+  }
+
+  :root[data-theme="dark"] ::selection {
+    background: hsl(220deg 30% 25%);
+    color: hsl(0deg 0% 95%);
+  }
+
+  /* Focus states - accessible but refined */
+  :focus {
+    outline: 1.5px solid hsl(220deg 35% 40%); /* Match link color */
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  :root[data-theme="dark"] :focus {
+    outline-color: hsl(220deg 25% 70%);
+  }
+
+  /* Button and interactive element hover states */
+  button:hover,
+  a[role="button"]:hover {
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Header-specific rendering optimizations for Newsreader */
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .heading-4,
+  .heading-5,
+  .heading-6,
+  .title,
+  .font-headline {
+    text-rendering: optimizeLegibility; /* Better kerning for large text */
+    -webkit-font-smoothing: antialiased; /* Sharper rendering for headers */
+    -moz-osx-font-smoothing: grayscale; /* Consistent weight across browsers */
+    font-optical-sizing: auto; /* Enable optical sizing if supported */
+
+    /* Refined OpenType features for headers */
+    font-feature-settings:
+      "kern" 1,
+      /* Kerning - critical at display sizes */ "liga" 1,
+      /* Common ligatures improve readability */ "dlig" 0,
+      /* No discretionary ligatures */ "calt" 1,
+      /* Contextual alternates for better fit */ "lnum" 1,
+      /* Lining figures for headers */ "case" 1,
+      /* Case-sensitive forms */ "cpsp" 1; /* Capital spacing */
+
+    /* Multi-line optimization */
+    text-wrap: balance; /* Better line breaks for headers */
+    hyphens: none; /* No hyphenation in headers */
+  }
+
+  [data-theme="dark"] {
+    /* Base text adjustments for better readability */
+    body {
+      /* Slightly reduce contrast to prevent eye strain */
+      color: hsl(0deg 0% 92%); /* Not pure white */
+      /* Optimize rendering for dark backgrounds */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Body text optimizations */
+    p {
+      /* Slightly increase line height for better readability */
+      line-height: 1.65;
+      /* Reduce paragraph opacity very slightly */
+      opacity: 0.9;
+    }
+
+    /* List items with better contrast */
+    li {
+      opacity: 0.88;
+    }
+
+    /* Links with better visibility */
+    a {
+      /* Increase brightness for better visibility */
+      filter: brightness(1.1);
+      /* Subtle hover effect without glow */
+      &:hover {
+        filter: brightness(1.15);
+        /* Removed text-shadow for cleaner look */
+      }
+    }
+
+    /* Strong emphasis adjustments */
+    strong,
+    b {
+      font-weight: 500; /* Reduce from 600 */
+      color: hsl(0deg 0% 98%); /* Brighter than body */
+    }
+
+    /* Italic adjustments */
+    em,
+    i {
+      /* Slightly increase letter spacing for readability */
+      letter-spacing: 0.02em;
+    }
+
+    /* Blockquote optimizations */
+    blockquote {
+      opacity: 0.85;
+      /* Add subtle glow to border */
+      border-left-color: hsl(0deg 0% 60%);
+    }
+  }
+
+  /* Utopia Spacing Rules for Optimal Vertical Rhythm */
+  /* Based on research from Tim Brown, Jost Hochuli, and modern web typography */
+
+  /* Paragraph spacing - aligned to baseline grid */
+  p + p {
+    margin-top: var(--space-4); /* 24px = 1 baseline */
+  }
+
+  /* Mobile-optimized viewport settings */
+  @media (max-width: 640px) {
+    /* Adjusted grid for mobile */
+    :root {
+      --baseline: 1.375rem; /* 22px */
+      --grid-unit: 0.34375rem; /* 5.5px = 22px ÷ 4 */
+    }
+
+    /* Prevent horizontal scroll on mobile */
+    html {
+      overflow-x: hidden;
+    }
+
+    body {
+      /* Better text rendering on mobile */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      /* Optimize for legibility on small screens */
+      text-rendering: optimizeLegibility;
+      /* Smoother font rendering */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Better code block handling on mobile */
+    pre {
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    /* Optimize images for mobile */
+    img,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Responsive optical sizing for headers on mobile */
+    h1 { font-variation-settings: "opsz" 48, "wght" 450; }
+    h2 { font-variation-settings: "opsz" 36, "wght" 475; }
+    h3 { font-variation-settings: "opsz" 28, "wght" 500; }
+    h4 { font-variation-settings: "opsz" 24, "wght" 525; }
+    h5 { font-variation-settings: "opsz" 20, "wght" 550; }
+    h6 { font-variation-settings: "opsz" 18, "wght" 600; }
+
+    /* Dark mode mobile optical sizing */
+    :root[data-theme="dark"] h1 { font-variation-settings: "opsz" 48, "wght" 425; }
+    :root[data-theme="dark"] h2 { font-variation-settings: "opsz" 36, "wght" 450; }
+    :root[data-theme="dark"] h3 { font-variation-settings: "opsz" 28, "wght" 475; }
+    :root[data-theme="dark"] h4 { font-variation-settings: "opsz" 24, "wght" 500; }
+    :root[data-theme="dark"] h5 { font-variation-settings: "opsz" 20, "wght" 525; }
+    :root[data-theme="dark"] h6 { font-variation-settings: "opsz" 18, "wght" 575; }
+  }
+
+  /* Heading spacing - aligned to new grid system */
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .heading-4,
+  .heading-5,
+  .heading-6 {
+    margin-bottom: var(--space-2); /* 12px = 0.5 baseline */
+    margin-top: 0; /* Reset default margins */
+  }
+
+  /* Spacing before headings - proportional to level */
+  * + .heading-1 {
+    margin-top: var(--space-8); /* 48px = 2 baselines */
+  }
+  * + .heading-2 {
+    margin-top: var(--space-8); /* 48px = 2 baselines */
+  }
+  * + .heading-3 {
+    margin-top: var(--space-6); /* 36px = 1.5 baselines */
+  }
+  * + .heading-4,
+  * + .heading-5,
+  * + .heading-6 {
+    margin-top: var(--space-4); /* 24px = 1 baseline */
+  }
+
+  /* Semantic heading mapping - proper HTML tags with visual styles */
+  h1:not([class]) { @apply heading-2; }
+  h2:not([class]) { @apply heading-3; }
+  h3:not([class]) { @apply heading-4; }
+  h4:not([class]) { @apply heading-5; }
+  h5:not([class]) { @apply heading-6; }
+  h6:not([class]) { @apply text-sm font-semibold; }
+
+  /* Section spacing - using space pairs for responsive scaling */
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Major sections (e.g., hero, footer) */
+  section.section-large {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* List spacing - aligned to grid */
+  ul,
+  ol {
+    margin-top: var(--space-4); /* 24px = 1 baseline */
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-4);
+  }
+
+  /* List item spacing */
+  li + li {
+    margin-top: var(--space-1); /* 6px = 1 grid unit */
+  }
+
+  /* Nested lists */
+  li > ul,
+  li > ol {
+    margin-top: var(--space-2); /* 12px = 0.5 baseline */
+    margin-bottom: var(--space-2);
+  }
+
+  /* Blockquote spacing - aligned to grid */
+  blockquote {
+    margin-top: var(--space-6); /* 36px = 1.5 baselines */
+    margin-bottom: var(--space-6);
+    padding: var(--space-4); /* 24px = 1 baseline */
+    border-left-width: var(--space-1); /* 6px */
+  }
+
+  /* Pre/code block spacing - aligned to grid */
+  pre {
+    margin-top: var(--space-6); /* 36px = 1.5 baselines */
+    margin-bottom: var(--space-6);
+    padding: var(--space-4); /* 24px = 1 baseline */
+  }
+
+  /* Figure/image spacing - aligned to grid */
+  figure {
+    margin-top: var(--space-8); /* 48px = 2 baselines */
+    margin-bottom: var(--space-8);
+  }
+
+  figcaption {
+    margin-top: var(--space-2); /* 12px = 0.5 baseline */
+    font-size: 0.875rem; /* text-sm */
+  }
+
+  /* Table spacing - aligned to grid */
+  table {
+    margin-top: var(--space-6); /* 36px = 1.5 baselines */
+    margin-bottom: var(--space-6);
+  }
+
+  /* Horizontal rule spacing - aligned to grid */
+  hr {
+    margin-top: var(--space-12); /* 72px = 3 baselines */
+    margin-bottom: var(--space-12);
+  }
+
+  /* Prevent image and icon distortion */
+  img,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Ensure icons maintain aspect ratio */
+  svg.icon,
+  [astro-icon],
+  [data-icon] {
+    width: auto;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  /* Fix for inline SVG icons */
+  svg:not([width]):not([height]) {
+    width: 1em;
+    height: 1em;
+  }
+
+  /* Ultra-minimal stroke width for all icons with additional optimizations */
+  svg {
+    stroke-width: 1 !important; /* Clean minimal stroke */
+    vector-effect: non-scaling-stroke; /* Maintains stroke width at all sizes */
+    stroke-linecap: square !important; /* Sharp, precise endings */
+    stroke-linejoin: miter !important; /* Sharp, precise corners */
+  }
+
+  /* Target all stroke attributes within SVGs - highest specificity override */
+  svg * {
+    stroke-width: 1 !important;
+    stroke-linecap: square !important;
+    stroke-linejoin: miter !important;
+  }
+
+  /* Target specific hardcoded attributes */
+  svg [stroke-width] {
+    stroke-width: 1 !important;
+  }
+
+  svg [stroke-linecap] {
+    stroke-linecap: square !important;
+  }
+
+  svg [stroke-linejoin] {
+    stroke-linejoin: miter !important;
+  }
+
+  /* Нужно для кнопки копирования кода при отключенном rehype-pretty-code */
+  /*
+	pre {
+		@apply relative;
+	}
+	*/
+}
+
+:root {
+  /* Enhanced code block typography with baseline grid alignment */
+  figure[data-rehype-pretty-code-figure] {
+    @apply relative m-0 rounded-lg overflow-hidden;
+    /* Baseline grid aligned margins */
+    margin-top: 1.5rem; /* 6b */
+    margin-bottom: 1.5rem; /* 6b */
+    box-shadow:
+      0 1px 3px 0 rgba(0, 0, 0, 0.1),
+      0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
+    figcaption {
+      @apply m-0;
+    }
+
+    /* Enhanced code block titles */
+    [data-rehype-pretty-code-title] {
+      @apply break-words bg-[var(--code-title-bg)] border-b border-color-200 text-textColor flex items-center;
+      padding: 0 1rem; /* 4b horizontal padding */
+      height: 2rem; /* 8b - baseline aligned */
+      font-size: 0.8125rem; /* Slightly smaller */
+      font-family: var(--font-mono);
+      font-weight: 500;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+
+      & + pre {
+        @apply m-0 rounded-t-none;
+      }
+    }
+
+    /* Enhanced code block styling */
+    pre {
+      @apply m-0 static px-0 text-sm;
+      padding-top: 0.75rem; /* 3b */
+      padding-bottom: 0.75rem; /* 3b */
+      max-height: 36rem; /* 144b - generous but limited */
+      overflow-x: auto;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+
+      /* Font optimization for code */
+      font-family: var(--font-mono);
+      font-size: 0.8125rem; /* 13px - optimal for code */
+      letter-spacing: 0.02em;
+      font-variant-ligatures: contextual;
+
+      /* Custom scrollbar styling */
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-300) transparent;
+
+      &::-webkit-scrollbar {
+        width: 0.5rem; /* 2b */
+        height: 0.5rem; /* 2b */
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--color-300);
+        border-radius: 0.25rem; /* 1b */
+
+        &:hover {
+          background-color: var(--color-400);
+        }
+      }
+
+      /* Стиль для содержимого кода */
+      > code {
+        counter-reset: line;
+
+        /* Enhanced line numbers with better typography */
+        &[data-line-numbers] {
+          > [data-line] {
+            padding-left: 3rem; /* 12b - space for line numbers */
+
+            &::before {
+              counter-increment: line;
+              content: counter(line);
+              @apply text-lightest;
+              position: absolute;
+              left: 0;
+              width: 2.5rem; /* 10b */
+              text-align: right;
+              padding-right: 1rem; /* 4b */
+              font-size: 0.75rem; /* Smaller line numbers */
+              opacity: 0.5;
+              user-select: none; /* Prevent selection */
+            }
+          }
+
+          /* Active line number */
+          > [data-line]:hover::before {
+            opacity: 1;
+          }
+        }
+
+        /* Enhanced line styling with baseline grid */
+        > [data-line] {
+          @apply bg-transparent flex items-center;
+          padding-left: 1rem; /* 4b */
+          padding-right: 1rem; /* 4b */
+          /* Baseline grid aligned line height */
+          line-height: 1.5;
+          min-height: 1.5rem; /* 6b - comfortable touch target */
+
+          /* Subtle hover effect for better code navigation */
+          &:hover {
+            background-color: var(--color-50);
+          }
+        }
+
+        /* Enhanced highlighted lines */
+        [data-highlighted-line] {
+          background-color: var(--code-line-highlight);
+          box-shadow: inset 3px 0 0 var(--accent-base); /* Left border accent */
+
+          &:hover {
+            background-color: var(--code-line-highlight);
+          }
+        }
+
+        [data-highlighted-line-id="add"] {
+          background-color: var(--code-line-diff-add);
+        }
+
+        [data-highlighted-line-id="remove"] {
+          background-color: var(--code-line-diff-remove);
+        }
+
+        /* Для выделенных символов */
+        [data-highlighted-chars] > span {
+          @apply py-[4px];
+        }
+
+        /* Для различий в строках (реализовано выше) */
+        /*
+				.diff {
+					&.add {
+						background-color: var(--code-line-diff-add);
+					}
+					&.remove {
+						background-color: var(--code-line-diff-remove);
+					}
+				}
+				*/
+      }
+    }
+  }
+
+  /* Enhanced base pre block styling */
+  pre {
+    @apply bg-[var(--code-bg)] text-[var(--theme-text)] rounded-lg m-0;
+    /* Typography optimization */
+    line-height: 1.5;
+    tab-size: 2; /* Consistent tab width */
+    /* Enable all programming font features */
+    font-feature-settings:
+      "liga" 1,
+      /* Standard ligatures */ "calt" 1,
+      /* Contextual alternates */ "tnum" 1,
+      /* Tabular numbers */ "zero" 1,
+      /* Slashed zero */ "ss01" 1,
+      /* Stylistic set 1 (varies by font) */ "ss02" 1; /* Stylistic set 2 (varies by font) */
+    /* Optimal letter spacing */
+    letter-spacing: 0.02em;
+    /* Prevent text size adjustment on mobile */
+    -webkit-text-size-adjust: 100%;
+
+    /* Mobile optimization */
+    @media (max-width: 640px) {
+      font-size: 0.75rem; /* 12px on mobile */
+      letter-spacing: 0.015em;
+
+      /* Horizontal scroll indicator */
+      &::-webkit-scrollbar {
+        height: 0.375rem; /* 1.5b - thinner on mobile */
+      }
+    }
+  }
+
+  /* Enhanced inline code typography */
+  :not(pre) > code {
+    @apply bg-[var(--code-inline-bg)] rounded-sm border border-color-100;
+    /* Baseline grid aligned padding */
+    padding: 0.125rem 0.375rem; /* 0.5b 1.5b */
+    /* Typography optimization */
+    font-family: var(--font-mono);
+    font-size: 0.875em; /* Slightly smaller than 0.9em */
+    font-weight: 400;
+    /* Enable programming ligatures and features */
+    font-feature-settings:
+      "liga" 1,
+      "calt" 1,
+      "ss01" 1,
+      "zero" 1;
+    /* Optimal letter spacing for inline code */
+    letter-spacing: 0.025em;
+    /* Prevent breaking */
+    white-space: nowrap;
+    /* Subtle shadow for depth */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+    /* Dark mode optimizations */
+    :root[data-theme="dark"] & {
+      background-color: hsl(0deg 0% 12%); /* Slightly lighter than pure black */
+      border-color: hsl(0deg 0% 20%);
+      color: hsl(0deg 0% 88%); /* Not pure white */
+      box-shadow: none;
+      font-weight: 450; /* Slightly heavier in dark mode */
+      letter-spacing: 0.03em; /* More spacing for clarity */
+    }
+  }
+
+  /* Enhanced copy button for code blocks */
+  .copy-code-button {
+    @apply absolute bg-color-100 text-accent-base rounded-md transition-all duration-200;
+    top: 0.5rem; /* 2b */
+    right: 0.5rem; /* 2b */
+    width: 2rem; /* 8b */
+    height: 2rem; /* 8b */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.9);
+
+    /* Show on hover */
+    figure[data-rehype-pretty-code-figure]:hover & {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &:hover {
+      @apply bg-color-200;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    /* Success state */
+    &.copied {
+      @apply bg-green-100 text-green-700;
+    }
+
+    /* Icon size */
+    svg {
+      width: 1rem; /* 4b */
+      height: 1rem; /* 4b */
+    }
+  }
+
+  /* Dark mode code block enhancements */
+  :root[data-theme="dark"] {
+    /* Enhanced code block styling for dark mode */
+    figure[data-rehype-pretty-code-figure] {
+      background-color: hsl(0deg 0% 6%);
+      border: 1px solid hsl(0deg 0% 15%);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+
+      /* Title bar adjustments */
+      [data-rehype-pretty-code-title] {
+        background-color: hsl(0deg 0% 10%);
+        border-bottom-color: hsl(0deg 0% 20%);
+        color: hsl(0deg 0% 75%);
+        font-weight: 450;
+      }
+
+      /* Pre block adjustments */
+      pre {
+        background-color: hsl(0deg 0% 6%);
+
+        /* Line hover in dark mode */
+        > code > [data-line]:hover {
+          background-color: hsl(0deg 0% 10%);
+        }
+
+        /* Highlighted lines in dark mode */
+        [data-highlighted-line] {
+          background-color: hsl(0deg 0% 12%);
+          box-shadow: inset 3px 0 0 hsl(0deg 0% 60%);
+        }
+
+        /* Line numbers in dark mode */
+        [data-line]::before {
+          color: hsl(0deg 0% 40%);
+          opacity: 0.7;
+        }
+      }
+    }
+
+    /* Copy button in dark mode */
+    .copy-code-button {
+      background-color: hsl(0deg 0% 15%);
+      color: hsl(0deg 0% 70%);
+
+      &:hover {
+        background-color: hsl(0deg 0% 20%);
+        color: hsl(0deg 0% 85%);
+      }
+
+      &.copied {
+        background-color: hsl(120deg 40% 20%);
+        color: hsl(120deg 40% 80%);
+      }
+    }
+
+    /* Language badge in dark mode */
+    figure[data-rehype-pretty-code-figure][data-language]::before {
+      background-color: hsl(0deg 0% 20%);
+      color: hsl(0deg 0% 70%);
+      opacity: 0.8;
+    }
+  }
+
+  /* Language indicators for code blocks */
+  figure[data-rehype-pretty-code-figure] {
+    /* Language badge */
+    &[data-language]::before {
+      content: attr(data-language);
+      position: absolute;
+      top: 0.5rem; /* 2b */
+      left: 0.5rem; /* 2b */
+      padding: 0.125rem 0.5rem; /* 0.5b 2b */
+      background-color: var(--color-800);
+      color: var(--color-100);
+      font-size: 0.625rem; /* 10px */
+      font-family: var(--font-mono);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 0.25rem; /* 1b */
+      opacity: 0.7;
+      z-index: 1;
+    }
+
+    /* Hide when title is present */
+    &:has([data-rehype-pretty-code-title])::before {
+      display: none;
+    }
+  }
+
+  /* Enhanced syntax highlighting token styles */
+  .token {
+    /* Comments with better readability */
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    /* Keywords with proper weight */
+    &.keyword,
+    &.tag,
+    &.boolean,
+    &.constant,
+    &.symbol {
+      font-weight: 500;
+    }
+
+    /* Strings with subtle style */
+    &.string,
+    &.char,
+    &.builtin,
+    &.inserted {
+      font-style: normal;
+    }
+
+    /* Functions with emphasis */
+    &.function,
+    &.class-name {
+      font-weight: 500;
+    }
+
+    /* Operators and punctuation */
+    &.operator,
+    &.entity,
+    &.url,
+    &.punctuation {
+      font-weight: 400;
+    }
+  }
+}
+
+/* ПЕРЕПРОВЕРИТЬ !!! */
+@layer components {
+  /* Переопределение стилей для <mark> в статье */
+  article mark {
+    @apply bg-transparent;
+  }
+}
+
+/* === Header & Navigation Refinements === */
+@layer components {
+  /* Site title with optical adjustments */
+  .site-title {
+    font-family: "Newsreader Variable", serif;
+    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+    font-weight: 380;
+    /* Enhanced variable font settings for elegance */
+    font-variation-settings:
+      "opsz" 28,
+      "wght" 380;
+    letter-spacing: -0.02em;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 0,
+      "calt" 1;
+    text-indent: -0.04em; /* Optical adjustment for capitals */
+    line-height: 1;
+    color: var(--theme-text);
+    /* Smooth transition for hover breathing effect */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+  }
+
+  /* Site title hover - subtle breathing effect */
+  .site-title:hover {
+    /* Increase optical size and adjust weight for sophistication */
+    font-variation-settings:
+      "opsz" 32,
+      "wght" 360;
+    letter-spacing: -0.015em;
+  }
+
+  /* Site title link container */
+  a:has(.site-title) {
+    display: inline-block;
+  }
+
+  a:has(.site-title):hover .site-title {
+    transform: scale(1.02);
+  }
+
+  a:has(.site-title):active .site-title {
+    transform: scale(0.98);
+  }
+
+  /* Navigation link refinements */
+  .nav-link {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.025em; /* Wider spacing for elegance */
+    font-feature-settings:
+      "kern" 1,
+      "ss01" 1;
+    line-height: 1;
+    transform: translateY(0.08em); /* Optical baseline alignment */
+    position: relative;
+    text-decoration: none;
+    color: var(--theme-color-600);
+    transition: color 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Invisible hitbox expansion for better UX */
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    inset: -4px -8px; /* Reduced from -8px -12px */
+  }
+
+  /* Sophisticated underline animation */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .nav-link:hover {
+    color: var(--theme-text);
+  }
+
+  /* Active navigation state */
+  .nav-link[aria-current="page"] {
+    color: var(--theme-accent-base);
+    font-weight: 600;
+  }
+
+  .nav-link[aria-current="page"]::after {
+    /* No underline animation for active state */
+    display: none;
+  }
+
+  /* Highlighted nav link (Docs) */
+  .nav-link--highlight {
+    color: var(--accent-base);
+    font-weight: 500;
+  }
+
+  .nav-link--highlight:hover {
+    color: var(--accent-two);
+  }
+
+  /* Icon links in navigation */
+  .nav-icon-link {
+    position: relative;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .nav-icon-link:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.5;
+  }
+
+  /* Mobile menu toggle refinements */
+  .mobile-menu-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Enhanced theme toggle button */
+  .btn-icon-toggle {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--theme-color-100);
+    border: 1px solid var(--theme-color-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .btn-icon-toggle:hover {
+    background: var(--theme-color-150);
+    transform: scale(1.05);
+  }
+
+  .btn-icon-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .icon-toggle {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.5;
+    transition: all 200ms ease-out;
+  }
+
+  /* Icon buttons with typography-inspired transitions */
+  .btn-icon-nav,
+  .btn-icon-scroll,
+  .btn-icon-fab {
+    @apply relative inline-flex items-center justify-center;
+    @apply transition-all duration-200;
+    @apply cursor-pointer;
+    /* Enable smooth rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Navigation icon buttons */
+  .btn-icon-nav {
+    @apply w-9 h-9 rounded-md;
+    @apply bg-color-100 hover:bg-color-150;
+    @apply text-accent-base;
+  }
+
+  .btn-icon-nav:active {
+    @apply translate-y-px;
+    transition-duration: 50ms;
+  }
+
+  /* Scroll to top button */
+  .btn-icon-scroll {
+    @apply w-12 h-12 rounded-full;
+    @apply bg-bgColor border border-color-200;
+    @apply shadow-sm hover:shadow-md;
+    @apply text-light hover:text-accent-base;
+  }
+
+  /* Floating action button */
+  .btn-icon-fab {
+    @apply w-14 h-14 rounded-lg;
+    @apply bg-accent-base text-bgColor;
+    @apply shadow-lg hover:shadow-xl;
+    @apply hover:bg-accent-one;
+  }
+
+  .btn-icon-fab:active {
+    @apply translate-y-px shadow-md;
+    transition-duration: 50ms;
+  }
+
+  /* Mobile navigation refinements */
+  #drawer-body {
+    background: var(--theme-bg);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Remove gradient decorations from mobile nav */
+  #drawer .pointer-events-none {
+    display: none;
+  }
+
+  /* Mobile nav link styling */
+  #nav-menu-mobile .nav-link {
+    font-size: 1.125rem;
+    padding: var(--space-2) var(--space-3);
+    display: block;
+    text-align: center;
+  }
+
+  /* Stagger animation for mobile menu items */
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  #drawer.open #nav-menu-mobile a {
+    animation: slideIn 300ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  #drawer.open #nav-menu-mobile a:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  #drawer.open #nav-menu-mobile a:nth-child(2) {
+    animation-delay: 50ms;
+  }
+  #drawer.open #nav-menu-mobile a:nth-child(3) {
+    animation-delay: 100ms;
+  }
+  #drawer.open #nav-menu-mobile a:nth-child(4) {
+    animation-delay: 150ms;
+  }
+  #drawer.open #nav-menu-mobile a:nth-child(5) {
+    animation-delay: 200ms;
+  }
+}
+
+/* === Link System Refinements === */
+@layer components {
+  /* Universal link improvements */
+  a {
+    position: relative;
+    min-height: 24px;
+    transition:
+      color 180ms ease-out,
+      opacity 180ms ease-out,
+      text-decoration-color 180ms ease-out;
+    text-underline-offset: 0.1em;
+    text-decoration-thickness: 0.05em;
+    text-decoration-skip-ink: auto;
+  }
+
+  /* Remove default focus outline */
+  a:focus {
+    outline: none;
+  }
+
+  /* Accessible focus state */
+  a:focus-visible {
+    outline: 2px solid var(--accent-base);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  /* Content links with refined underline */
+  .inline-link,
+  .prose a:not(.nav-link):not(.footer-link) {
+    color: var(--theme-text);
+    text-decoration-color: var(--theme-color-300);
+    text-decoration-thickness: 0.06em;
+  }
+
+  .inline-link:hover,
+  .prose a:not(.nav-link):not(.footer-link):hover {
+    text-decoration-color: var(--theme-color-600);
+    text-decoration-thickness: 0.08em;
+  }
+
+  .inline-link:visited,
+  .prose a:not(.nav-link):not(.footer-link):visited {
+    color: var(--theme-color-700);
+    text-decoration-color: var(--theme-color-200);
+  }
+
+  /* Footer links with subtle animation */
+  .footer-link {
+    color: var(--theme-color-600);
+    text-decoration: none;
+    background-image: linear-gradient(
+      to right,
+      currentColor 0%,
+      currentColor 100%
+    );
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-size 200ms ease-out;
+  }
+
+  .footer-link:hover {
+    background-size: 100% 1px;
+  }
+
+}
+
+/* === Header Spacing Refinements === */
+@layer components {
+  .header {
+    /* Golden ratio heights */
+    height: var(--header-height-desktop);
+    padding: var(--space-3) var(--space-5);
+    padding-top: calc(var(--space-3) - 1px); /* Optical centering */
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      height: var(--header-height-mobile);
+      padding: var(--space-2) var(--space-4);
+    }
+  }
+
+  /* Header content alignment */
+  .header-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* Logo to title spacing */
+  .site-title {
+    margin-left: var(--space-perfect-fourth); /* Musical interval */
+  }
+
+  /* Navigation desktop spacing */
+  .nav-desktop {
+    gap: var(--space-minor-third); /* Musical interval */
+  }
+
+  /* Navigation actions spacing */
+  .nav-actions {
+    gap: var(--space-3); /* 18px */
+    margin-left: var(--space-major-third); /* Echo the major third */
+  }
+}
+
+/* === Footer Refinements === */
+@layer components {
+  .footer {
+    /* More reasonable spacing from content */
+    margin-top: var(--space-16); /* 96px - reduced from ~140px */
+
+    /* Subtle top border using CSS instead of gradient for simplicity */
+    border-color: var(--theme-color-150);
+  }
+
+  /* Footer content container */
+  .footer-content {
+    min-height: var(--space-12); /* 72px - reduced from 96px */
+    padding-top: var(--space-5); /* 30px */
+    padding-bottom: var(--space-6); /* 36px */
+  }
+
+  /* Copyright text - smaller, lighter */
+  .footer-copyright {
+    font-size: var(--text--1);
+    font-weight: 400;
+    opacity: 0.64;
+    letter-spacing: 0.02em;
+    color: var(--theme-color-600);
+  }
+
+  /* Footer navigation - slightly larger */
+  .footer-nav {
+    font-size: var(--text-0);
+    font-weight: 450;
+  }
+
+  /* Mobile: Stack with hierarchy */
+  @media (max-width: 640px) {
+    .footer {
+      text-align: center;
+    }
+
+    .footer-content {
+      gap: var(--space-4);
+    }
+
+    /* Navigation first on mobile */
+    .footer-nav {
+      order: -1;
+    }
+
+    /* Copyright last, smaller */
+    .footer-copyright {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+/* === Page Transition Animations === */
+@layer components {
+  /* Fade-in animation for page content */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Apply to main content */
+  main {
+    animation: fadeIn 300ms ease-out;
+  }
+
+  /* Stagger animation for list items */
+  .animate-list > * {
+    opacity: 0;
+    animation: fadeIn 300ms ease-out forwards;
+  }
+
+  .animate-list > *:nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .animate-list > *:nth-child(2) {
+    animation-delay: 50ms;
+  }
+  .animate-list > *:nth-child(3) {
+    animation-delay: 100ms;
+  }
+  .animate-list > *:nth-child(4) {
+    animation-delay: 150ms;
+  }
+  .animate-list > *:nth-child(5) {
+    animation-delay: 200ms;
+  }
+  .animate-list > *:nth-child(6) {
+    animation-delay: 250ms;
+  }
+  .animate-list > *:nth-child(7) {
+    animation-delay: 300ms;
+  }
+  .animate-list > *:nth-child(8) {
+    animation-delay: 350ms;
+  }
+  .animate-list > *:nth-child(9) {
+    animation-delay: 400ms;
+  }
+  .animate-list > *:nth-child(10) {
+    animation-delay: 450ms;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* === Debug Helpers === */
+@layer utilities {
+  /* Grid overlay for development */
+  .show-grid {
+    position: relative;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 0, 0, 0.1) 0,
+      rgba(255, 0, 0, 0.1) 1px,
+      transparent 1px,
+      transparent var(--grid-unit)
+    );
+    background-size: 100% var(--grid-unit);
+  }
+
+  /* Baseline overlay for development */
+  .show-baseline {
+    position: relative;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 255, 0.1) 0,
+      rgba(0, 0, 255, 0.1) 2px,
+      transparent 2px,
+      transparent var(--baseline)
+    );
+    background-size: 100% var(--baseline);
+  }
+
+  /* Combined grid and baseline */
+  .show-grid-baseline {
+    position: relative;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.05) 0,
+        rgba(255, 0, 0, 0.05) 1px,
+        transparent 1px,
+        transparent var(--grid-unit)
+      ),
+      repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 255, 0.1) 0,
+        rgba(0, 0, 255, 0.1) 2px,
+        transparent 2px,
+        transparent var(--baseline)
+      );
+    background-size:
+      100% var(--grid-unit),
+      100% var(--baseline);
+  }
+}
