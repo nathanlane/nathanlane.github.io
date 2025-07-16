@@ -23,4 +23,5 @@ Thumbs.db
 
 # Private files
 PRIVATE_*.md
-# Note: CLAUDE.md and private_notes/ are not ignored on private-dev branch
+# Note: CLAUDE.md, private_notes/, and dev files are not ignored on private-dev branch
+# These files are organized in private_notes/ on private-dev branch only

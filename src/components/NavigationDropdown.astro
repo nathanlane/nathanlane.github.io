@@ -1,0 +1,249 @@
+---
+import type { NavLink } from '@/config/navigation.config';
+
+export interface Props {
+  title: string;
+  href?: string;
+  items: NavLink[];
+  class?: string;
+}
+
+const { title, href, items, class: className = '' } = Astro.props;
+const id = `dropdown-${title.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<div class={`dropdown ${className}`} data-dropdown>
+  <button
+    class="dropdown-trigger"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-controls={id}
+    data-dropdown-trigger
+  >
+    {href ? (
+      <a href={href} class="dropdown-title-link" onclick="event.stopPropagation()">
+        {title}
+      </a>
+    ) : (
+      <span class="dropdown-title">{title}</span>
+    )}
+    <svg 
+      class="dropdown-chevron" 
+      width="12" 
+      height="12" 
+      viewBox="0 0 24 24" 
+      fill="none"
+      aria-hidden="true"
+    >
+      <path 
+        d="M6 9l6 6 6-6" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+  
+  <div 
+    id={id}
+    class="dropdown-menu" 
+    hidden
+    data-dropdown-menu
+  >
+    <div class="dropdown-menu-inner">
+      {items.map((item) => (
+        <a href={item.href} class="dropdown-item">
+          <span class="dropdown-item-title">{item.title}</span>
+          {item.description && (
+            <span class="dropdown-item-description">{item.description}</span>
+          )}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) 0;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: color 200ms;
+  }
+
+  .dropdown-trigger:hover {
+    color: var(--color-text-muted);
+  }
+
+  .dropdown-title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .dropdown-title-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .dropdown-chevron {
+    transition: transform 200ms;
+  }
+
+  .dropdown-trigger[aria-expanded="true"] .dropdown-chevron {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: var(--space-2);
+    min-width: 220px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md, 8px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 200ms, visibility 200ms;
+  }
+
+  .dropdown-menu:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .dropdown-menu-inner {
+    padding: var(--space-2);
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    margin: 0 calc(var(--space-2) * -1);
+    text-decoration: none;
+    color: var(--color-text);
+    border-radius: var(--radius-sm, 4px);
+    transition: background-color 150ms;
+  }
+
+  .dropdown-item:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  .dropdown-item-title {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--space-1);
+  }
+
+  .dropdown-item-description {
+    display: block;
+    font-size: var(--text--1);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      position: fixed;
+      top: var(--header-height, 72px);
+      left: 0;
+      right: 0;
+      transform: none;
+      margin-top: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      max-height: calc(100vh - var(--header-height, 72px));
+      overflow-y: auto;
+    }
+
+    .dropdown-menu-inner {
+      padding: var(--space-4);
+    }
+
+    .dropdown-item {
+      padding: var(--space-3) var(--space-4);
+      margin: 0 calc(var(--space-4) * -1);
+    }
+  }
+</style>
+
+<script>
+  // Handle dropdown interactions
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('[data-dropdown]');
+    
+    dropdowns.forEach(dropdown => {
+      const trigger = dropdown.querySelector('[data-dropdown-trigger]') as HTMLButtonElement;
+      const menu = dropdown.querySelector('[data-dropdown-menu]') as HTMLElement;
+      
+      if (!trigger || !menu) return;
+      
+      // Toggle on click
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other dropdowns
+        dropdowns.forEach(otherDropdown => {
+          if (otherDropdown !== dropdown) {
+            const otherTrigger = otherDropdown.querySelector('[data-dropdown-trigger]') as HTMLButtonElement;
+            const otherMenu = otherDropdown.querySelector('[data-dropdown-menu]') as HTMLElement;
+            if (otherTrigger && otherMenu) {
+              otherTrigger.setAttribute('aria-expanded', 'false');
+              otherMenu.hidden = true;
+            }
+          }
+        });
+        
+        // Toggle current dropdown
+        trigger.setAttribute('aria-expanded', (!isOpen).toString());
+        menu.hidden = isOpen;
+      });
+      
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target as Node)) {
+          trigger.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+        }
+      });
+      
+      // Keyboard navigation
+      dropdown.addEventListener('keydown', (e) => {
+        const key = e.key;
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        
+        if (key === 'Escape' && isOpen) {
+          trigger.setAttribute('aria-expanded', 'false');
+          menu.hidden = true;
+          trigger.focus();
+        }
+        
+        if (key === 'ArrowDown' && !isOpen) {
+          e.preventDefault();
+          trigger.setAttribute('aria-expanded', 'true');
+          menu.hidden = false;
+          const firstLink = menu.querySelector('a');
+          if (firstLink) firstLink.focus();
+        }
+      });
+    });
+  });
+</script>
