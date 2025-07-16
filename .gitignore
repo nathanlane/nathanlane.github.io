@@ -25,3 +25,19 @@ Thumbs.db
 PRIVATE_*.md
 CLAUDE.md
 private_notes/
+
+# Private development files (kept on private-dev branch only)
+COLOR_SYSTEM.md
+DESIGN_SYSTEM.md
+FONTS.md
+GRID-OPTIMIZATION-PLAN.md
+NEWSREADER-OPTIMIZATION-PLAN.md
+TYPOGRAPHY.md
+REFINEMENT-PLAN.md
+Changelog.md
+CONTENT.md
+WEBMASTER_GUIDE.md
+UPGRADE_DEPENDENCIES.md
+DEPENDENCY_FIX.md
+PRIVATE_PRODUCTION_CHECKLIST.md
+accessibility-test-results.md
