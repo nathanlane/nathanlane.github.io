@@ -1,0 +1,124 @@
+---
+import { getAllPosts, getUniqueTags } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+
+const allPosts = await getAllPosts();
+const uniqueTags = getUniqueTags(allPosts);
+
+// Group posts by category based on tags
+const economicsPosts = allPosts.filter(p => 
+  p.data.tags?.some(tag => ["economics", "industrial-policy", "globalization", "political-economy"].includes(tag))
+);
+
+const technicalPosts = allPosts.filter(p => 
+  p.data.tags?.some(tag => ["programming", "r", "python", "data-science", "tutorials", "code"].includes(tag))
+);
+
+const researchPosts = allPosts.filter(p => 
+  p.data.tags?.some(tag => ["bibliographies", "big-push", "research", "academic"].includes(tag))
+);
+
+const recentPosts = allPosts.slice(0, 5);
+
+const meta = {
+  title: "Blog Index",
+  description: "Quick navigation for all blog posts organized by category"
+};
+---
+
+<PageLayout meta={meta}>
+  <div class="prose">
+    <h1>Blog Index</h1>
+    <p>Quick access to posts organized by category and recency.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8b mt-8b">
+    <!-- Recent Posts -->
+    <section>
+      <h2 class="heading-2 mb-4b">Recent Posts</h2>
+      <ul class="space-y-2b">
+        {recentPosts.map(post => (
+          <li>
+            <a href={`/posts/${post.slug}`} class="inline-link">
+              {post.data.title}
+            </a>
+            <span class="text-sm text-light ml-2b">
+              ({new Date(post.data.publishDate).getFullYear()})
+            </span>
+          </li>
+        ))}
+      </ul>
+      <a href="/posts" class="inline-link text-sm mt-4b block">View all posts →</a>
+    </section>
+
+    <!-- Economics & Policy -->
+    <section>
+      <h2 class="heading-2 mb-4b">Economics & Policy</h2>
+      <ul class="space-y-2b">
+        {economicsPosts.slice(0, 5).map(post => (
+          <li>
+            <a href={`/posts/${post.slug}`} class="inline-link">
+              {post.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {economicsPosts.length > 5 && (
+        <span class="text-sm text-light">...and {economicsPosts.length - 5} more</span>
+      )}
+    </section>
+
+    <!-- Technical Tutorials -->
+    <section>
+      <h2 class="heading-2 mb-4b">Technical Tutorials</h2>
+      <ul class="space-y-2b">
+        {technicalPosts.slice(0, 5).map(post => (
+          <li>
+            <a href={`/posts/${post.slug}`} class="inline-link">
+              {post.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {technicalPosts.length > 5 && (
+        <span class="text-sm text-light">...and {technicalPosts.length - 5} more</span>
+      )}
+    </section>
+
+    <!-- Research & Bibliography -->
+    <section>
+      <h2 class="heading-2 mb-4b">Research & Bibliography</h2>
+      <ul class="space-y-2b">
+        {researchPosts.slice(0, 5).map(post => (
+          <li>
+            <a href={`/posts/${post.slug}`} class="inline-link">
+              {post.data.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+      {researchPosts.length > 5 && (
+        <span class="text-sm text-light">...and {researchPosts.length - 5} more</span>
+      )}
+    </section>
+  </div>
+
+  <!-- Navigation Options -->
+  <div class="mt-12b p-6b bg-bgColor/50 rounded-lg">
+    <h3 class="heading-3 mb-4b">More Ways to Browse</h3>
+    <div class="grid sm:grid-cols-3 gap-4b">
+      <a href="/posts/archive" class="block p-4b bg-pageBg rounded hover:bg-accent/10 transition-colors">
+        <h4 class="font-semibold">Full Archive</h4>
+        <p class="text-sm text-light">All {allPosts.length} posts by year</p>
+      </a>
+      <a href="/tags" class="block p-4b bg-pageBg rounded hover:bg-accent/10 transition-colors">
+        <h4 class="font-semibold">Browse by Tag</h4>
+        <p class="text-sm text-light">{uniqueTags.length} topics</p>
+      </a>
+      <a href="/posts/1" class="block p-4b bg-pageBg rounded hover:bg-accent/10 transition-colors">
+        <h4 class="font-semibold">Paginated View</h4>
+        <p class="text-sm text-light">10 posts per page</p>
+      </a>
+    </div>
+  </div>
+</PageLayout>

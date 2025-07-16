@@ -1,0 +1,137 @@
+---
+import Badge from "@/components/Badge.astro";
+import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
+import { Icon } from "astro-icon/components";
+
+const allPosts = await getAllPosts();
+const uniqueTags = getUniqueTags(allPosts);
+const groupedByYear = groupPostsByYear(allPosts);
+const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
+
+// Create tag categories
+const tagCategories = {
+  topics: ["economics", "industrial-policy", "history", "globalization", "political-economy"],
+  technical: ["programming", "r", "python", "data-science", "tutorials", "code"],
+  research: ["bibliographies", "big-push", "research", "academic"],
+  other: uniqueTags.filter(tag => 
+    !["economics", "industrial-policy", "history", "globalization", "political-economy",
+      "programming", "r", "python", "data-science", "tutorials", "code",
+      "bibliographies", "big-push", "research", "academic"].includes(tag)
+  )
+};
+
+const postCount = allPosts.length;
+const yearCount = descYearKeys.length;
+
+const meta = {
+  title: "Blog Archive",
+  description: `Browse all ${postCount} blog posts organized by year and topic`
+};
+---
+
+<PageLayout meta={meta}>
+  <div class="prose">
+    <h1>Blog Archive</h1>
+    <p class="text-light">
+      {postCount} posts spanning {yearCount} years ({descYearKeys[descYearKeys.length - 1]}–{descYearKeys[0]})
+    </p>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4b my-8b">
+    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
+      <div class="text-2xl font-bold">{postCount}</div>
+      <div class="text-sm text-light">Total Posts</div>
+    </div>
+    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
+      <div class="text-2xl font-bold">{uniqueTags.length}</div>
+      <div class="text-sm text-light">Topics</div>
+    </div>
+    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
+      <div class="text-2xl font-bold">{yearCount}</div>
+      <div class="text-sm text-light">Years</div>
+    </div>
+    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
+      <div class="text-2xl font-bold">{Math.round(postCount / yearCount)}</div>
+      <div class="text-sm text-light">Posts/Year</div>
+    </div>
+  </div>
+
+  <!-- Browse by Topic -->
+  <section class="my-8b">
+    <h2 class="heading-2 mb-4b">Browse by Topic</h2>
+    
+    {Object.entries(tagCategories).map(([category, tags]) => (
+      tags.length > 0 && (
+        <div class="mb-4b">
+          <h3 class="heading-4 capitalize mb-2b">{category}</h3>
+          <div class="flex flex-wrap gap-2b">
+            {tags.map(tag => (
+              <a href={`/tags/${tag}`} class="inline-block">
+                <Badge>{tag} ({allPosts.filter(p => p.data.tags?.includes(tag)).length})</Badge>
+              </a>
+            ))}
+          </div>
+        </div>
+      )
+    ))}
+  </section>
+
+  <!-- Posts by Year -->
+  <section class="my-8b">
+    <h2 class="heading-2 mb-4b">Posts by Year</h2>
+    
+    <!-- Year Navigation -->
+    <div class="flex flex-wrap gap-2b mb-6b">
+      {descYearKeys.map(year => (
+        <a 
+          href={`#year-${year}`} 
+          class="px-3b py-1b bg-bgColor/50 rounded hover:bg-accent/20 transition-colors"
+        >
+          {year} ({groupedByYear[year].length})
+        </a>
+      ))}
+    </div>
+
+    <!-- Posts List -->
+    {descYearKeys.map(year => (
+      <div id={`year-${year}`} class="mb-8b scroll-mt-16">
+        <h3 class="heading-3 mb-4b sticky top-0 bg-pageBg py-2b z-10">
+          {year}
+          <span class="text-sm text-light ml-2b">({groupedByYear[year].length} posts)</span>
+        </h3>
+        <ul class="space-y-2b">
+          {groupedByYear[year].map(post => (
+            <li class="flex flex-col sm:flex-row sm:items-baseline gap-2b">
+              <time class="text-sm text-light whitespace-nowrap">
+                {new Date(post.data.publishDate).toLocaleDateString('en-US', { 
+                  month: 'short', 
+                  day: 'numeric' 
+                })}
+              </time>
+              <a 
+                href={`/posts/${post.slug}`} 
+                class="inline-link hover:text-accent"
+              >
+                {post.data.title}
+              </a>
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="flex gap-2b flex-wrap">
+                  {post.data.tags.slice(0, 3).map(tag => (
+                    <span class="text-xs text-light">#{tag}</span>
+                  ))}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <!-- Back to top -->
+  <div class="text-center mt-12b">
+    <a href="#top" class="inline-link">↑ Back to top</a>
+  </div>
+</PageLayout>

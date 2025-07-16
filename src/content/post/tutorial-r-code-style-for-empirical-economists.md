@@ -1,9 +1,16 @@
 ---
-title: "Tutorial: R Code Style for Empirical Economists"
-description: "Best practices and coding norms for social scientists using R, emphasizing readability and reproducibility over writing slick code."
-publishDate: 2015-12-20
-tags: ["code", "programming", "r", "tutorials", "data-science"]
-draft: false
+title: 'Tutorial: R Code Style for Empirical Economists'
+description: >-
+  Best practices and coding norms for social scientists using R, emphasizing
+  readability and reproducibility over writing slick code.
+publishDate: 2015-12-20T00:00:00.000Z
+tags:
+  - code
+  - programming
+  - r
+  - tutorials
+  - data-science
+draft: true
 ---
 
 ![IBM's data center in the 1960s](/images/blog/assets/ibm_1280.jpg)
@@ -71,3 +78,27 @@ source() and library() statements
 Function definitions
 Executed statements, if applicable (e.g., print, plot)
 ```
+
+**Write D.R.Y. Code (Don't Repeat Yourself).**
+
+Avoid repetition and duplicated code. The habit of pasting giant chunks of code is ubiquitous in economics. However, this practice is a cardinal sin among developers. Errors propagate and multiply. Fixing errors becomes complicated.
+
+Consider a bastardization of the famous "rule of three", from Martin Fowler's seminal book on refactoring: First, we write code to get the job done. Second, we shudder and duplicate what we did. The third time, we think a little more deeply about how to rework (in coding parlance, "refactor") and streamline out code. In other words, ask yourself: can I generalize what I'm doing in a concise way?
+
+**Modularize.**
+
+Breaking code into re-usable, independent chunks will make code easier to read and debug.
+
+Functions play a key role in modularization. Use them often, keeping them short and specific to a task. *(Note: I recommend [Cosma Shalizi's notes on writing good R functions](http://www.stat.cmu.edu/~cshalizi/402/programming/writing-functions.pdf) and the [Clean Code github's function tutorial](http://nicercode.github.io/guides/functions/))*
+
+Limit your *actual script files*. Split them into two files if necessary. At minimum, you should divide analysis and data preparation. Jonathan Nagler of NYU Polisci. [explains why](http://www.nyu.edu/classes/nagler/quant2/coding_style.html):
+
+> "Separating data-manipulation and data-analysis is an example of modularity. ... The logic for this is simple. Lots of things can go wrong. You want to be able to isolate what went wrong. You also want to be able to isolate what went right."
+
+**Refine and Refactor.**
+
+Code should improve through time. Clean code gurus repeat a code of conduct adopted from the U.S. Boy Scout dictum:
+
+> "Leave the ~~campground~~ code cleaner than you found it"
+>
+> -[Bob Martin's "Clean Code: A Handbook of Agile Software Craftsmanship"](http://amzn.com/0132350882)

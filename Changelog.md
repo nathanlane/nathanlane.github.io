@@ -1,5 +1,72 @@
 # Changelog
 
+## Jekyll to Astro Migration & Blog Navigation (January 2025)
+
+### Jekyll Archive Migration
+- **Successfully migrated ~70 Jekyll posts** from nathanlane_github_io_archive to Astro format
+- **Created comprehensive migration script** (`scripts/migration/migrate-jekyll-archive.js`):
+  - Converts Jekyll frontmatter to Astro-compatible format
+  - Updates image paths from `/uploads/` and `/assets/` to `/images/blog/`
+  - Generates descriptions from content if missing
+  - Preserves tags and categories (normalized to lowercase)
+  - Copies all images to public directory
+- **Fixed truncated posts** with detection and repair scripts
+- **Marked pre-2017 posts as drafts** for content curation
+
+### Content Validation System
+- **Created pre-flight validation** (`scripts/content/validate-content.js`):
+  - Checks title length (max 60 chars)
+  - Validates description length (20-300 chars)
+  - Ensures required fields exist
+  - Reports all issues before build fails
+- **Auto-fix script** (`scripts/content/fix-content.js`):
+  - Intelligently truncates long titles
+  - Fixes description lengths
+  - Removes HTML from descriptions
+  - Generates missing descriptions from content
+- **npm scripts integration**:
+  - `npm run validate` - Check all content
+  - `npm run fix-content` - Auto-fix issues
+  - `predev` hook runs validation automatically
+
+### Enhanced Blog Navigation
+- **Main Posts Page** (`/posts`):
+  - Increased posts per page from 5 to 10
+  - Added client-side search functionality
+  - Shows popular tags on first page
+  - Links to archive and tags pages
+- **Blog Archive Page** (`/posts/archive`):
+  - Shows ALL posts on single page (no pagination)
+  - Quick stats dashboard (total posts, topics, years)
+  - Browse by topic with categorized tags
+  - Jump links to specific years
+  - Sticky year headers for easy navigation
+- **Blog Index Page** (`/posts/index`):
+  - Category-based navigation (Economics, Technical, Research)
+  - Recent posts section
+  - Multiple browsing options
+
+### Script Organization
+- **Created organized script structure**:
+  - `scripts/migration/` - Jekyll to Astro migration tools
+  - `scripts/content/` - Content validation and fixing
+  - `scripts/maintenance/` - General maintenance scripts
+- **Comprehensive documentation** in `scripts/README.md`
+- **Added detailed headers** to all scripts explaining:
+  - Purpose and functionality
+  - Usage instructions
+  - Prerequisites and dependencies
+  - Expected output
+- **Shell scripts for common tasks**:
+  - `batch-migrate.sh` - Run full migration
+  - `fix-dependencies.sh` - Resolve npm issues
+  - `check-titles.sh` - Find long titles
+
+### Documentation Updates
+- **Updated CLAUDE.md** with Jekyll migration information
+- **Created scripts README** with detailed usage for all utilities
+- **Added migration notes** to development documentation
+
 ## Production Readiness Improvements - Technical Debt (July 2025)
 
 ### Security & Build Improvements
