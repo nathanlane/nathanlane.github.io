@@ -5,10 +5,36 @@ This directory contains private development notes, experiments, and documentatio
 ## Contents
 
 - `CLAUDE.md` - Main development conversation log (symlinked from root)
-- `experiments/` - Experimental code and features
 - `todo.md` - Development todo items
+- `experiments/` - Experimental code and features
 - `research/` - Research notes and references
 - `meeting-notes/` - Meeting notes and discussions
+
+### Documentation
+- `documentation/` - Technical documentation and guides
+  - `WEBMASTER_GUIDE.md` - Website maintenance guide
+  - `UPGRADE_DEPENDENCIES.md` - Dependency upgrade instructions
+  - `DEPENDENCY_FIX.md` - Dependency troubleshooting
+
+### Design System
+- `design-system/` - Design system documentation
+  - `COLOR_SYSTEM.md` - Color palette and usage
+  - `DESIGN_SYSTEM.md` - Overall design system guide
+  - `FONTS.md` - Typography and font documentation
+  - `GRID-OPTIMIZATION-PLAN.md` - Grid system optimization
+  - `NEWSREADER-OPTIMIZATION-PLAN.md` - Typography optimization
+  - `TYPOGRAPHY.md` - Typography guidelines
+
+### Planning
+- `planning/` - Project planning and development history
+  - `REFINEMENT-PLAN.md` - Website refinement roadmap
+  - `Changelog.md` - Development changelog
+  - `CONTENT.md` - Content strategy and planning
+
+### Checklists
+- `checklists/` - Quality assurance and production checklists
+  - `PRIVATE_PRODUCTION_CHECKLIST.md` - Production deployment checklist
+  - `accessibility-test-results.md` - Accessibility testing results
 
 ## Note
 
