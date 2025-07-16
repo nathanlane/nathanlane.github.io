@@ -10,7 +10,10 @@
     "format": "pnpm run format:code && pnpm run format:imports",
     "format:code": "biome format . --write && prettier -w \"**/*\" \"!**/*.{md,mdx}\" --ignore-unknown --cache",
     "format:imports": "biome check --formatter-enabled=false --write",
-    "check": "astro check"
+    "check": "astro check",
+    "validate": "node scripts/content/validate-content.js",
+    "fix-content": "node scripts/content/fix-content.js",
+    "predev": "node scripts/content/validate-content.js || node scripts/content/fix-content.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.6",
