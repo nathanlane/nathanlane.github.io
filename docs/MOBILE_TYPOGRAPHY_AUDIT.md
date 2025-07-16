@@ -1,6 +1,6 @@
 # Mobile Typography Optimization Audit
 
-**Project:** Astro Citrus (lanewebsite)  
+**Project:** Astro Citrus (nathanlane.github.io)  
 **Date:** November 2024  
 **Focus:** Mobile Typography Performance & Usability
 

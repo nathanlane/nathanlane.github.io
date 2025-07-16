@@ -76,7 +76,7 @@ Clone this repository to get started.
 
 ```bash
 # Clone the repository
-git clone https://github.com/nathanlane/lanewebsite.git
+git clone https://github.com/nathanlane/nathanlane.github.io.git
 
 # Install dependencies
 pnpm install
@@ -106,7 +106,7 @@ Replace npm with your choice of npm / yarn / pnpm
 1. **Clone and install dependencies:**
    ```bash
    git clone <your-repo-url>
-   cd lanewebsite
+   cd nathanlane.github.io
    npm install
    ```
 

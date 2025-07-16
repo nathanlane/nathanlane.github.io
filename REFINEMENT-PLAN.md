@@ -361,7 +361,7 @@ a:focus-visible {
 }
 
 /* External links - subtle indicator */
-a[href^="http"]:not([href*="lanewebsite.com"])::after {
+a[href^="http"]:not([href*="nathanlane.github.io"])::after {
   content: '↗';
   font-size: 0.75em;
   margin-left: 0.25em;
@@ -370,7 +370,7 @@ a[href^="http"]:not([href*="lanewebsite.com"])::after {
   transition: transform 150ms ease-out;
 }
 
-a[href^="http"]:not([href*="lanewebsite.com"]):hover::after {
+a[href^="http"]:not([href*="nathanlane.github.io"]):hover::after {
   transform: translate(1px, -1px);
   opacity: 0.8;
 }
