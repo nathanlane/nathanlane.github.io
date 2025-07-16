@@ -1,0 +1,70 @@
+/* Homepage Link Typography System */
+
+/* Section Title Links - Quiet but discoverable */
+.section-title-link {
+  /* No underline by default */
+  text-decoration: none;
+  
+  /* Subtle transition */
+  transition: color 150ms ease-in-out;
+  
+  /* Slightly tighter tracking for headlines */
+  letter-spacing: -0.01em;
+}
+
+.section-title-link:hover {
+  /* Color change is enough */
+  color: var(--accent);
+}
+
+/* View All Links - Clear but unobtrusive */
+.view-all-link {
+  /* Smaller, secondary text */
+  font-size: var(--step--1);
+  
+  /* Muted color */
+  color: var(--light);
+  opacity: 0.8;
+  
+  /* No underline */
+  text-decoration: none;
+  
+  /* Smooth transitions */
+  transition: all 150ms ease-in-out;
+}
+
+.view-all-link:hover {
+  /* Increase prominence on hover */
+  opacity: 1;
+  color: var(--textColor);
+  
+  /* Subtle expansion */
+  letter-spacing: 0.02em;
+}
+
+/* Arrow icon animation */
+.view-all-link svg {
+  transition: transform 150ms ease-in-out;
+}
+
+.view-all-link:hover svg {
+  transform: translateX(2px);
+}
+
+/* Alternative: Underline reveal pattern */
+.subtle-link {
+  text-decoration: none;
+  background-image: linear-gradient(
+    to right,
+    currentColor 0%,
+    currentColor 100%
+  );
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 200ms ease-in-out;
+}
+
+.subtle-link:hover {
+  background-size: 100% 1px;
+}

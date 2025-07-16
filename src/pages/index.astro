@@ -147,9 +147,7 @@ const allMediaItems = Object.entries(mediaData)
 		
 		{/* Recent Papers Grid */}
 		<div class="mb-4">
-			<h3>
-				<a href={researchConfig.viewAllUrl} class="font-headline font-medium hover:text-accent hover:opacity-80 transition-colors">{researchConfig.title}</a>
-			</h4>
+			<h3 class="font-headline font-medium mb-3">{researchConfig.title}</h3>
 			<SectionGrid columns="3" gap="md">
 				{featuredResearch.map((paper) => (
 					<ProjectCard 
@@ -159,23 +157,11 @@ const allMediaItems = Object.entries(mediaData)
 					/>
 				))}
 			</SectionGrid>
-			<div class="mt-3">
-				<a href={researchConfig.viewAllUrl} class="inline-link text-xs text-light hover:text-textColor">
-					{researchConfig.viewAllText}
-					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-						<polyline points="15 3 21 3 21 9"></polyline>
-						<line x1="10" y1="14" x2="21" y2="3"></line>
-					</svg>
-				</a>
-			</div>
 		</div>
 
 		{/* Writing Cards */}
 		<div class="mb-4">
-			<h3>
-				<a href={writingConfig.viewAllUrl} class="font-headline font-medium hover:text-accent hover:opacity-80 transition-colors">{writingConfig.title}</a>
-			</h4>
+			<h3 class="font-headline font-medium mb-3">{writingConfig.title}</h3>
 			<SectionGrid columns="2" gap="md">
 				{latestWriting.map((piece) => (
 					<WritingCard 
@@ -186,46 +172,22 @@ const allMediaItems = Object.entries(mediaData)
 					/>
 				))}
 			</SectionGrid>
-			<div class="mt-3">
-				<a href={writingConfig.viewAllUrl} class="inline-link text-xs text-light hover:text-textColor">
-					{writingConfig.viewAllText}
-					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-						<polyline points="15 3 21 3 21 9"></polyline>
-						<line x1="10" y1="14" x2="21" y2="3"></line>
-					</svg>
-				</a>
-			</div>
 		</div>
 
 		{/* Media Appearances */}
 		<div class="mb-4">
-			<h3>
-				<a href={mediaConfig.viewAllUrl} class="font-headline font-medium hover:text-accent hover:opacity-80 transition-colors">{mediaConfig.title}</a>
-			</h4>
+			<h3 class="font-headline font-medium mb-3">{mediaConfig.title}</h3>
 			<CompactList items={allMediaItems.map(item => ({
 				title: item.title,
 				description: `${item.outlet} • ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`,
 				url: item.link
 			}))} />
-			<div class="mt-3">
-				<a href={mediaConfig.viewAllUrl} class="inline-link text-xs text-light hover:text-textColor">
-					{mediaConfig.viewAllText}
-					<svg xmlns="http://www.w3.org/2000/svg" class="inline h-3 w-3 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-						<polyline points="15 3 21 3 21 9"></polyline>
-						<line x1="10" y1="14" x2="21" y2="3"></line>
-					</svg>
-				</a>
-			</div>
 		</div>
 	</section>
 
 	<!-- Posts Section -->
 	<section aria-label="Blog post list" class="mt-2">
-		<h2>
-			<a href="/posts/" class="font-headline font-medium hover:text-accent hover:opacity-80 transition-colors">{postsConfig.title}</a>
-		</h3>
+		<h2 class="font-headline font-medium mb-3">{postsConfig.title}</h2>
 		<ul class="space-y-6 md:space-y-2" role="list">
 			{
 				allPostsByDate.map((p) => (

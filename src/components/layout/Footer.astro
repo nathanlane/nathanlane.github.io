@@ -1,27 +1,198 @@
 ---
-import { menuLinks, siteConfig } from "@/site.config";
+import { navigationConfig } from "@/config/navigation.config";
 
-const year = new Date().getFullYear();
+const { footer } = navigationConfig;
+const currentYear = new Date().getFullYear();
 ---
 
-<footer
-	class="footer mt-auto pt-12 border-t border-color-150 w-full"
->
-	<div class="footer-content mx-auto flex h-full w-full max-w-5xl flex-col items-center justify-between gap-space-s px-space-s sm:flex-row">
-		<div class="footer-copyright">
-			&copy; {year} {siteConfig.author}{siteConfig.footerText && <span class="inline-block">&nbsp;• {siteConfig.footerText}</span>}
-		</div>
-		<nav
-			aria-label="More on this site"
-			class="footer-nav flex items-center gap-space-m"
-		>
-			{
-				menuLinks.map((link) => (
-					<a class="footer-link" href={link.path}>
-						{link.title}
-					</a>
-				))
-			}
-		</nav>
-	</div>
+<footer class="site-footer">
+  <!-- Main Footer Content -->
+  <div class="footer-content">
+    <!-- Navigation Grid -->
+    <nav class="footer-nav" aria-label="Footer navigation">
+      {footer.sections.map(section => (
+        <div class="footer-section">
+          <h3 class="footer-section-title">{section.title}</h3>
+          <ul class="footer-links">
+            {section.links.map(link => (
+              <li>
+                <a href={link.href} class="footer-link">
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  </div>
+  
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <p class="footer-copyright">
+      © {currentYear}
+    </p>
+    <nav class="footer-utility" aria-label="Utility links">
+      <a href="/privacy">Privacy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+      <a href="/rss.xml">RSS</a>
+    </nav>
+  </div>
 </footer>
+
+<style>
+  /* Minimal, typography-focused footer design */
+  .site-footer {
+    margin-top: var(--space-32, 12rem);
+    padding-top: var(--space-16, 6rem);
+    font-size: var(--step--1, 0.875rem);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    background: var(--color-bg-subtle);
+    position: relative;
+  }
+  
+  /* Optional subtle separator line */
+  .site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 1px;
+    background: var(--color-border);
+    opacity: 0.2;
+  }
+
+  .footer-content {
+    max-width: var(--container-max, 80rem);
+    margin: 0 auto;
+    padding: 0 var(--space-4, 1.5rem) var(--space-12, 4.5rem);
+  }
+
+  /* Clean navigation grid */
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-8, 3rem);
+  }
+
+  .footer-section-title {
+    font-family: "Newsreader Variable", "Newsreader", serif;
+    font-size: var(--step--1, 0.875rem);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-2, 0.75rem);
+    color: var(--color-text);
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: var(--space-1, 0.375rem);
+  }
+  
+  .footer-links li:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer-link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 200ms;
+    display: inline-block;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .footer-link:hover {
+    color: var(--color-text);
+  }
+
+
+  /* Minimal bottom bar */
+  .footer-bottom {
+    max-width: var(--container-max, 80rem);
+    margin: 0 auto;
+    padding: var(--space-6, 2.25rem) var(--space-4, 1.5rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--step--3, 0.65rem);
+  }
+
+  @media (max-width: 640px) {
+    .footer-bottom {
+      flex-direction: column;
+      gap: var(--space-3, 1.125rem);
+      text-align: center;
+    }
+  }
+
+  .footer-copyright {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .footer-utility {
+    display: flex;
+    gap: var(--space-4, 1.5rem);
+    align-items: center;
+  }
+
+  .footer-utility a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 200ms;
+  }
+
+  .footer-utility a:hover {
+    color: var(--color-text);
+  }
+
+  /* Refined spacing and alignment */
+  @media (min-width: 768px) {
+    .footer-nav {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 100%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .footer-nav {
+      grid-template-columns: repeat(3, minmax(0, 200px));
+      justify-content: start;
+      gap: var(--space-12, 4.5rem);
+    }
+  }
+
+  /* Subtle hover effects */
+  .footer-link {
+    position: relative;
+    opacity: 0.85;
+  }
+  
+  .footer-link:hover {
+    opacity: 1;
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 0.5px;
+    background-color: var(--color-text-muted);
+    transition: width 200ms ease-out;
+  }
+
+  .footer-link:hover::after {
+    width: 100%;
+  }
+</style>
