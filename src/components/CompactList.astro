@@ -1,0 +1,52 @@
+---
+export interface Props {
+	items: Array<{
+		title: string;
+		description?: string;
+		url?: string;
+		date?: Date;
+	}>;
+	class?: string;
+}
+
+const { items, class: className = "" } = Astro.props;
+---
+
+<div class={`space-y-space-1 ${className}`}>
+	{items.map((item) => (
+		<div class="group flex items-center justify-between py-space-2xs border-b border-color-150 last:border-b-0">
+			{item.url ? (
+				<a href={item.url} class="flex-1 min-w-0">
+					<div class="flex items-baseline gap-space-xs">
+						<h3 class="font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two truncate transition-colors">
+							{item.title}
+						</h3>
+						{item.description && (
+							<p class="text-body-sm text-light truncate flex-shrink-0 max-w-xs">
+								{item.description}
+							</p>
+						)}
+					</div>
+				</a>
+			) : (
+				<div class="flex-1 min-w-0">
+					<div class="flex items-baseline gap-space-xs">
+						<h3 class="font-medium text-0 leading-tight text-accent-base truncate">
+							{item.title}
+						</h3>
+						{item.description && (
+							<p class="text-body-sm text-light truncate flex-shrink-0 max-w-xs">
+								{item.description}
+							</p>
+						)}
+					</div>
+				</div>
+			)}
+			{item.date && (
+				<time class="text-body-sm text-lightest flex-shrink-0 ml-space-s">
+					{item.date.getFullYear()}
+				</time>
+			)}
+		</div>
+	))}
+</div>

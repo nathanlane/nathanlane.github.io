@@ -1,0 +1,102 @@
+---
+title: "Performance & Accessibility Audit Plan"
+description: "A systematic approach to fixing font loading, image optimization, contrast issues, and heading hierarchy"
+publishDate: "2025-07-16"
+tags: ["performance", "accessibility", "web-development", "optimization"]
+draft: false
+---
+
+I've been running performance audits on this site and found several areas that need attention. As someone who believes the web should be fast and accessible to everyone, I'm documenting my plan to fix these issues systematically.
+
+## The Problems
+
+After running Lighthouse and accessibility audits, I identified four critical areas:
+
+1. **Font loading causing layout shifts** - Users see invisible text while fonts load
+2. **Images in blog posts loading eagerly** - Wasting bandwidth on below-the-fold images
+3. **Dark mode contrast failures** - Some text combinations don't meet WCAG standards
+4. **Heading hierarchy violations** - Breaking screen reader navigation
+
+Let me walk through how I'm planning to fix each of these.
+
+## 1. Font Loading Performance
+
+The issue: Without `font-display: swap`, browsers hide text while custom fonts download. This creates a poor user experience, especially on slower connections.
+
+My fix:
+- Add `font-display: swap` to all `@font-face` declarations
+- This tells browsers to show fallback fonts immediately, then swap when ready
+- Should eliminate the "flash of invisible text" (FOIT)
+
+Expected impact: Better perceived performance and reduced Cumulative Layout Shift (CLS).
+
+## 2. Image Lazy Loading in MDX
+
+Currently, all images in my blog posts load immediately, even if they're far down the page. This wastes bandwidth and slows initial page load.
+
+My approach:
+- Create a custom MDX Image component with lazy loading by default
+- Configure Astro to use this component for all MDX images
+- Add proper `loading="lazy"` and `decoding="async"` attributes
+
+This should significantly improve page load times, especially for image-heavy posts.
+
+## 3. Dark Mode Contrast Issues
+
+I've been prioritizing aesthetics over accessibility in dark mode. Several text/background combinations fail WCAG contrast requirements.
+
+Areas to fix:
+- Light gray text on dark backgrounds (needs to be brighter)
+- Link colors in dark mode
+- Secondary button states
+- Code syntax highlighting colors
+
+Target: All text must meet WCAG AA standards (4.5:1 for normal text, 3:1 for large text).
+
+## 4. Heading Hierarchy
+
+Screen readers rely on proper heading structure for navigation. I've been guilty of:
+- Skipping heading levels (h1 → h3)
+- Using headings for visual styling rather than document structure
+- Having multiple h1s on some pages
+
+The fix:
+- Audit all pages for heading violations
+- Create strict hierarchy rules: one h1 per page, no skipped levels
+- Update components to accept heading level props
+- Use CSS classes for styling, not heading levels
+
+## Implementation Plan
+
+### Phase 1: Quick Wins
+1. Add `font-display: swap` across the codebase
+2. Fix obvious heading violations
+3. Run Lighthouse to measure impact
+
+### Phase 2: Systematic Improvements
+1. Build and integrate the MDX image component
+2. Audit and fix all contrast issues with proper tooling
+3. Complete heading hierarchy refactor
+
+### Testing Protocol
+- Lighthouse scores (target: 95+ accessibility)
+- axe DevTools (target: zero violations)
+- Manual keyboard navigation
+- Screen reader testing
+- Cross-browser dark mode verification
+
+## Why This Matters
+
+Performance and accessibility aren't just nice-to-haves. They're fundamental to good web development. Fast sites respect users' time and data. Accessible sites ensure everyone can access information regardless of ability.
+
+These fixes will make the site:
+- Load faster on all devices
+- Work better with assistive technology
+- Score higher in search rankings
+- Provide a better experience for all users
+
+I'll be implementing these changes over the next few days and documenting the results. The web should be fast and inclusive—let's make sure this site lives up to that standard.
+
+---
+
+*Update: Implementation is in progress. Check back for results and metrics.*

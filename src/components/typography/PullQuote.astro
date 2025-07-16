@@ -1,0 +1,139 @@
+---
+export interface Props {
+  align?: 'left' | 'center' | 'right';
+  variant?: 'default' | 'accent' | 'large';
+  attribution?: string;
+  cite?: string;
+  class?: string;
+}
+
+const { 
+  align = 'center', 
+  variant = 'default',
+  attribution,
+  cite,
+  class: className = '' 
+} = Astro.props;
+---
+
+<figure class={`pull-quote pull-quote--${align} pull-quote--${variant} ${className}`}>
+  <blockquote class="pull-quote__text" cite={cite}>
+    <slot />
+  </blockquote>
+  {attribution && (
+    <figcaption class="pull-quote__attribution">
+      — {attribution}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .pull-quote {
+    margin: 2rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--theme-color-200);
+    border-bottom: 1px solid var(--theme-color-200);
+    @apply font-headline;
+  }
+
+  /* Alignment variants */
+  .pull-quote--left {
+    float: left;
+    width: 50%;
+    margin-right: 1.5rem;
+    margin-left: -1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .pull-quote--right {
+    float: right;
+    width: 50%;
+    margin-left: 1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .pull-quote--center {
+    text-align: center;
+    clear: both;
+  }
+
+  .pull-quote__text {
+    margin: 0;
+    font-size: 1.46rem;
+    line-height: 1.4;
+    color: var(--theme-text);
+    font-weight: 300;
+    font-variation-settings: "wght" 300;
+    font-style: italic;
+    quotes: """ """ "'" "'";
+  }
+
+  .pull-quote__text::before {
+    content: open-quote;
+  }
+
+  .pull-quote__text::after {
+    content: close-quote;
+  }
+
+  /* Variant: Accent */
+  .pull-quote--accent {
+    border-color: var(--theme-accent);
+    background: var(--theme-color-100);
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    border-width: 2px;
+  }
+
+  .pull-quote--accent .pull-quote__text {
+    color: var(--theme-accent);
+  }
+
+  /* Variant: Large */
+  .pull-quote--large .pull-quote__text {
+    font-size: 1.83rem;
+    font-weight: 400;
+    font-variation-settings: "wght" 400;
+  }
+
+  .pull-quote__attribution {
+    margin-top: 1rem;
+    font-size: 0.80rem;
+    @apply font-sans;
+    font-style: normal;
+    color: var(--theme-color-500);
+    font-weight: 500;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .pull-quote--left,
+    .pull-quote--right {
+      float: none;
+      width: 100%;
+      margin: 1.5rem 0;
+      padding: 1rem 0;
+    }
+
+    .pull-quote__text {
+      font-size: 1.17rem;
+    }
+
+    .pull-quote--large .pull-quote__text {
+      font-size: 1.46rem;
+    }
+  }
+
+  /* Clear floats */
+  .pull-quote::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Dark mode adjustments */
+  :global([data-theme="dark"]) .pull-quote--accent {
+    background: var(--theme-color-150);
+  }
+</style>

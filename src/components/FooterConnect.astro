@@ -1,0 +1,72 @@
+---
+import { socialLinks, siteConfig } from "@/site.config";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+	email?: string;
+	cvLink?: string;
+	title?: string;
+	class?: string;
+}
+
+const { 
+	email = siteConfig.email,
+	cvLink = siteConfig.resumeUrl,
+	title = "Connect",
+	class: className = ""
+} = Astro.props;
+
+// Define types for our custom links
+interface EmailLink {
+	friendlyName: string;
+	link: string;
+	name: string;
+	isEmail: boolean;
+}
+
+interface CVLink {
+	friendlyName: string;
+	link: string;
+	name: string;
+	isCV: boolean;
+}
+
+// Create email link object
+const emailLink: EmailLink = {
+	friendlyName: "Email",
+	link: `mailto:${email}`,
+	name: "lucide:mail",
+	isEmail: true
+};
+
+// Create CV link object
+const cvLinkObj: CVLink = {
+	friendlyName: "CV",
+	link: cvLink || "/cv.pdf",
+	name: "lucide:file-text",
+	isCV: true
+};
+
+// Combine all links with Email first, then CV, then social (excluding any existing Email link)
+type AllLinkTypes = EmailLink | CVLink | typeof socialLinks[number];
+const allLinks: AllLinkTypes[] = [emailLink, cvLinkObj, ...socialLinks.filter(link => !link.isDownload && link.friendlyName !== "Email")];
+---
+
+<div class={`mt-8b pt-6b border-t border-special-light ${className}`}>
+	<h3 class="heading-3">{title}</h3>
+	<ul class="flex flex-wrap gap-6 list-none">
+		{allLinks.map((link) => (
+			<li>
+				<a
+					class="flex items-center gap-2 text-xs hover:text-accent-base transition-colors duration-200"
+					href={link.link}
+					rel={'isEmail' in link || 'isCV' in link ? "" : `noreferrer ${'isWebmention' in link && link.isWebmention ? "me authn" : ""}`}
+					target={'isEmail' in link || 'isCV' in link ? "_self" : "_blank"}
+				>
+					<Icon aria-hidden="true" class="icon-base opacity-40 hover:opacity-60 transition-opacity" focusable="false" name={link.name} />
+					{link.friendlyName}
+				</a>
+			</li>
+		))}
+	</ul>
+</div>

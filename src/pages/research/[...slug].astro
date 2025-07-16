@@ -1,0 +1,106 @@
+---
+import { render } from "astro:content";
+import { getCollection } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import BaseLayout from "@/layouts/Base.astro";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+
+export const getStaticPaths = (async () => {
+	const essays = await getCollection("research");
+	return essays.map((essay) => ({
+		params: { slug: essay.id },
+		props: { essay },
+	}));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { essay } = Astro.props;
+const { Content } = await render(essay);
+
+// Prepare structured data for the research paper
+const articleData = {
+	url: Astro.url.pathname,
+	title: essay.data.title,
+	description: essay.data.description,
+	publishDate: `${essay.data.paperDate}-01-01`, // Convert year to full date
+	ogImage: essay.data.ogImage || `/og-image/research/${essay.id}.png`,
+	tags: essay.data.tags || [],
+};
+
+const breadcrumbData = {
+	items: [
+		{ name: "Home", url: Astro.site?.href || "/" },
+		{ name: "Research", url: new URL("/research/", Astro.site).href },
+		{ name: essay.data.title, url: new URL(Astro.url.pathname, Astro.site).href }
+	]
+};
+
+const structuredData = [
+	{ type: 'article' as const, data: articleData },
+	{ type: 'breadcrumb' as const, data: breadcrumbData }
+];
+---
+
+<BaseLayout meta={{ title: essay.data.title, description: essay.data.description }} structuredData={structuredData}>
+	<div class="gap-x-8b lg:flex lg:items-start">
+		<article class="flex-grow break-words max-w-prose mx-auto measure-base content-spacing">
+			<header class="mb-8">
+				<h1 class="heading-1 mb-4">{essay.data.title}</h1>
+				
+				<div class="space-y-3">
+					<p class="text-body font-medium text-accent-base">{essay.data.authors}</p>
+					
+					<div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
+						<span>{essay.data.paperDate}</span>
+						{essay.data.publication && (
+							<>
+								<span class="text-lighter">•</span>
+								<span>{essay.data.publication}</span>
+							</>
+						)}
+						{essay.data.status === "working-paper" && (
+							<>
+								<span class="text-lighter">•</span>
+								<span class="text-accent-two">Working Paper</span>
+							</>
+						)}
+					</div>
+					
+					<div class="flex flex-wrap gap-3 mt-4">
+						{essay.data.link && (
+							<a href={essay.data.link} class="inline-link text-sm" target="_blank" rel="noopener noreferrer">
+								View Paper →
+							</a>
+						)}
+						{essay.data.download && (
+							<a href={essay.data.download} class="inline-link text-sm" target="_blank" rel="noopener noreferrer">
+								Download PDF
+							</a>
+						)}
+					</div>
+				</div>
+			</header>
+
+			<div class="prose-summary bg-warm-50 dark:bg-warm-800 p-6 rounded-lg mb-8">
+				<p class="text-body leading-relaxed">{essay.data.description}</p>
+			</div>
+
+			<div class="prose prose-lane max-w-none">
+				<Content />
+			</div>
+			
+			{essay.data.tags && essay.data.tags.length > 0 && (
+				<footer class="mt-12 pt-6 border-t border-color-200">
+					<div class="flex flex-wrap gap-2">
+						{essay.data.tags.map((tag) => (
+							<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-color-100 text-color-700 dark:bg-color-800 dark:text-color-300">
+								{tag}
+							</span>
+						))}
+					</div>
+				</footer>
+			)}
+		</article>
+	</div>
+</BaseLayout>

@@ -1,0 +1,83 @@
+---
+export interface Props {
+	title: string;
+	authors: string;
+	year: string;
+	description: string;
+	publication?: string;
+	url?: string;
+	download?: string;
+	link?: string;
+	featured?: boolean;
+}
+
+const { title, authors, year, description, publication, url, download, link, featured = false } = Astro.props;
+
+// Truncate description to 80 characters
+const excerpt = description.length > 80 ? `${description.substring(0, 80)}...` : description;
+---
+
+<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${featured ? 'border-l-space-s border-accent-two' : ''} p-space-s`}>
+	
+	<div class="flex flex-col gap-space-2xs">
+		
+		<!-- Title -->
+		{url ? (
+			<h3 class="font-headline font-medium text-1 leading-tight">
+				<a href={url} class="text-accent-base group-hover:text-accent-two transition-colors">
+					{title}
+				</a>
+			</h3>
+		) : (
+			<h3 class="font-headline font-medium text-1 leading-tight text-accent-base group-hover:text-accent-two">
+				{title}
+			</h3>
+		)}
+		
+		<!-- Authors and Year -->
+		<div class="text-body-sm text-lightest">
+			{authors} • {year}
+		</div>
+		
+		<!-- Publication -->
+		{publication && (
+			<div class="text-body-sm text-accent-base font-medium">
+				{publication}
+			</div>
+		)}
+		
+		<!-- Description -->
+		<p class="text-body-sm text-light leading-relaxed">
+			{excerpt}
+		</p>
+		
+		<!-- Links -->
+		{url && (
+			<div class="flex items-center justify-between text-body-sm">
+				<a href={url} class="inline-link text-xs flex items-center gap-1 text-light hover:text-textColor">
+					Data, bibtex, more here
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+						<polyline points="15 3 21 3 21 9"></polyline>
+						<line x1="10" y1="14" x2="21" y2="3"></line>
+					</svg>
+				</a>
+				{(download || link) && (
+					<div class="flex gap-space-s">
+						{download && (
+							<a href={download} class="inline-link text-xs" target="_blank" rel="noopener">
+								PDF
+							</a>
+						)}
+						{link && (
+							<a href={link} class="inline-link text-xs" target="_blank" rel="noopener">
+								Journal
+							</a>
+						)}
+					</div>
+				)}
+			</div>
+		)}
+		
+	</div>
+</article>

@@ -1,0 +1,77 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Button from "@/components/Button.astro";
+
+export interface Props {
+	seriesId: string;
+}
+
+const { seriesId } = Astro.props as Props;
+const currentPath = Astro.url.pathname;
+
+const posts = await getCollection("post");
+const series = await getCollection("series");
+
+// Find series by the passed `seriesId` specified in the post
+const postsSeries = series.find((s) => s.id === seriesId);
+if (!postsSeries) {
+  	throw new Error(`Post(s) with Series ID '${seriesId}' not found.`);
+}
+// console.log("Post(s) Series:", postsSeries); // Debug. Log the found series
+
+let seriesPosts: CollectionEntry<"post">[] = [];
+if (seriesId) {
+	seriesPosts = posts
+		.filter((p) => p.data.seriesId === seriesId)
+		.sort((a, b) => (a.data.orderInSeries || 0) - (b.data.orderInSeries || 0));
+}
+---
+
+<aside
+	id="series-panel"
+	class="hidden grid lg:block z-40 min-h-screen fixed lg:relative shadow-[5px_0px_10px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out bg-bgColor"
+>	
+	<div class="flex h-full flex-col px-4 pt-4 md:pt-12 w-full md:w-72 md:min-w-72 md:max-w-72 bg-accent-base/5 border-r border-special-light relative">
+		<div class="flex gap-x-1 relative">
+			<h4 class="text-1 flex items-center title mb-6">
+				Docs Series panel
+			</h4>
+			<button
+				id="close-panel"
+				class="absolute top-0 right-0 btn-icon-close-sm"
+				aria-label="Close Series Panel"
+			>
+				<Icon class="icon-close" name="lucide:x" />
+			</button>
+		</div>
+		<div>
+			{postsSeries.id ? (
+				<Button
+					href={`/series/${postsSeries.id}`} 
+					variant="primary"
+					size="sm"
+					class="w-full"
+				>
+					{postsSeries.data.title}
+				</Button>
+
+				<ul class="mt-4 text-body-sm text-light">
+					{seriesPosts.map((p) => {
+						const isActive = currentPath === `/posts/${p.id}/`;
+						return (
+							<li class={`px-4 flex items-center line-clamp-2 py-1 ${isActive ? "rounded-lg bg-color-100" : ""}`}>
+								<a
+									href={`/posts/${p.id}/`}
+									class={`hover:text-accent-two ${isActive ? "text-accent cursor-default pointer-events-none" : ""}`}
+								>
+									{p.data.title}
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			) : null}
+		</div>
+	</div>
+</aside>

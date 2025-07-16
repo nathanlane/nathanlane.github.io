@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface Props {
+  src: string | ImageMetadata;
+  alt: string;
+  caption?: string;
+  priority?: boolean;
+  class?: string;
+  sizes?: string;
+  widths?: number[];
+}
+
+const {
+  src,
+  alt,
+  caption,
+  priority = false,
+  class: className = "",
+  sizes = "(max-width: 800px) 100vw, 800px",
+  widths = [400, 800, 1200, 1600]
+} = Astro.props;
+
+// Default quality settings
+const quality = 80;
+---
+
+<figure class={`image-figure ${className}`}>
+  {/* @ts-ignore - Type mismatch with Image component props */}
+  <Image
+    src={src}
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    quality={quality}
+    loading={priority ? "eager" : "lazy"}
+    decoding={priority ? "sync" : "async"}
+    class="w-full h-auto"
+  />
+  {caption && (
+    <figcaption class="text-sm text-light mt-2 text-center italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>
+
+<style>
+  .image-figure {
+    margin: var(--space-m) 0;
+  }
+  
+  .image-figure img {
+    border-radius: var(--radius-sm);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .image-figure img {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+</style>

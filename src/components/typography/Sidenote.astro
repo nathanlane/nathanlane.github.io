@@ -1,0 +1,197 @@
+---
+export interface Props {
+  number?: number;
+  hover?: boolean;
+  class?: string;
+}
+
+const { 
+  number,
+  hover = false,
+  class: className = '' 
+} = Astro.props;
+
+// Generate unique ID for ARIA relationships
+const noteId = `sidenote-${number || Math.random().toString(36).substr(2, 9)}`;
+---
+
+<span class={`sidenote-wrapper ${hover ? 'sidenote-wrapper--hover' : ''} ${className}`}>
+  {number !== undefined && (
+    <sup class="sidenote__ref">
+      <a 
+        href={`#${noteId}`} 
+        id={`${noteId}-ref`}
+        aria-describedby={noteId}
+        class="sidenote__ref-link"
+      >
+        {number}
+      </a>
+    </sup>
+  )}
+  <span 
+    class="sidenote" 
+    id={noteId}
+    role="note"
+    aria-label={number ? `Sidenote ${number}` : 'Sidenote'}
+  >
+    <span class="sidenote__content">
+      {number !== undefined && (
+        <span class="sidenote__number">{number}.</span>
+      )}
+      <slot />
+    </span>
+  </span>
+</span>
+
+<style>
+  /* Wrapper for positioning context */
+  .sidenote-wrapper {
+    position: relative;
+  }
+
+  /* Reference number in text */
+  .sidenote__ref {
+    position: relative;
+    font-size: 0.75em;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  .sidenote__ref-link {
+    text-decoration: none;
+    color: var(--theme-accent);
+    font-weight: 600;
+    padding: 0 0.125rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .sidenote__ref-link:hover,
+  .sidenote__ref-link:focus {
+    background: var(--theme-color-100);
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+  }
+
+  /* Sidenote content */
+  .sidenote {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 200px;
+    margin-right: calc((100vw - var(--content-width)) / 2 + 1.5rem);
+    font-size: 0.80rem;
+    line-height: 1.5;
+    color: var(--theme-color-500);
+  }
+
+  .sidenote__content {
+    display: block;
+    padding: 0.5rem;
+    background: var(--theme-color-100);
+    border-radius: 0.25rem;
+    border: 1px solid var(--theme-color-200);
+  }
+
+  .sidenote__number {
+    font-weight: 600;
+    color: var(--theme-text);
+    margin-right: 0.25rem;
+  }
+
+  /* Desktop: Show sidenotes in margin */
+  @media (min-width: 1280px) {
+    .sidenote {
+      display: block;
+      top: 0;
+      transform: translateY(-0.25rem);
+    }
+
+    /* Hover variant - only show on hover */
+    .sidenote-wrapper--hover .sidenote {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .sidenote-wrapper--hover:hover .sidenote,
+    .sidenote-wrapper--hover .sidenote__ref-link:focus ~ .sidenote {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* Tablet and mobile: Inline display */
+  @media (max-width: 1279px) {
+    .sidenote {
+      display: inline;
+      position: static;
+      width: auto;
+      margin: 0;
+      font-size: 0.94rem;
+    }
+
+    .sidenote__content {
+      display: inline;
+      padding: 0.125rem 0.25rem;
+      margin-left: 0.25rem;
+      background: var(--theme-color-100);
+      border-radius: 0.25rem;
+      border: 1px solid var(--theme-color-200);
+    }
+
+    .sidenote__ref-link {
+      color: var(--theme-text);
+      background: var(--theme-color-100);
+    }
+
+    /* Hide hover behavior on mobile */
+    .sidenote-wrapper--hover .sidenote {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .sidenote {
+      display: inline;
+      position: static;
+      width: auto;
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .sidenote__content {
+      display: inline;
+      padding: 0;
+      margin-left: 0.25rem;
+      background: none;
+      border: none;
+    }
+
+    .sidenote__content::before {
+      content: " [";
+    }
+
+    .sidenote__content::after {
+      content: "]";
+    }
+  }
+
+  /* Dark mode adjustments */
+  :global([data-theme="dark"]) .sidenote__content {
+    background: var(--theme-color-150);
+    border-color: var(--theme-color-300);
+  }
+
+  :global([data-theme="dark"]) .sidenote__ref-link:hover,
+  :global([data-theme="dark"]) .sidenote__ref-link:focus {
+    background: var(--theme-color-150);
+  }
+
+  /* Content width variable fallback */
+  .sidenote {
+    --content-width: 65ch;
+  }
+</style>

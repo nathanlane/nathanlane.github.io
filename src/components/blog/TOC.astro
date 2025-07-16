@@ -1,0 +1,39 @@
+---
+import { generateToc } from "@/utils/generateToc";
+import type { MarkdownHeading } from "astro";
+import { Icon } from "astro-icon/components";
+import TOCHeading from "./TOCHeading.astro";
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const toc = generateToc(headings);
+---
+
+<div class="rounded-t-lg">
+	<div class="bg-bgColor rounded-t-lg">
+		<div class="flex py-2 px-4 items-center title rounded-t-lg bg-color-75 gap-x-2 border-t border-l border-r border-special-light">
+			<h4 class="text-1 title">Table of Contents</h4>
+			<button
+				id="close-toc"
+				class="absolute top-2 right-2 btn-icon-close"
+				aria-label="Close TOC"
+			>
+				<Icon aria-hidden="true" class="icon-close size-4" focusable="false" name="lucide:x" />
+			</button>
+			
+		</div>
+	</div>
+	<div class="bg-bgColor rounded-b-lg">
+		<div class="rounded-b-lg pb-3 bg-color-75 border-b border-l border-r border-special-light">
+			<div class="px-4 py-2">
+				<ul class="text-body-sm text-textColor">
+					{toc.map((heading) => <TOCHeading heading={heading} />)}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

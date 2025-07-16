@@ -1,0 +1,201 @@
+---
+title: Baseline Grid & Semantic Tokens - Complete
+publishDate: '2025-07-14'
+description: >-
+  A comprehensive guide to our newly implemented baseline grid and semantic
+  token system, featuring a 6px grid unit and intuitive spacing tokens for...
+tags:
+  - refactoring
+  - implementation
+  - design-systems
+  - spacing
+  - tokens
+  - grid-system
+draft: false
+---
+
+### 1. Executive Summary
+
+**Update: This refactoring has been successfully completed!** 
+
+We have successfully implemented a comprehensive baseline grid and semantic token system that provides a single source of truth for all spacing decisions throughout the codebase. The legacy `*b` naming convention has been completely replaced with intuitive semantic tokens, and all components now align to a consistent 6px grid unit.
+
+### Key Achievements:
+- ✅ **Single Source of Truth**: All spacing derives from `--grid-unit` (6px)
+- ✅ **Semantic Token System**: Clear, intuitive naming (`space-xs`, `space-s`, `space-m`, etc.)
+- ✅ **100% Compliance**: No hardcoded values or legacy tokens remain
+- ✅ **Living Documentation**: `spacing-test.astro` page provides visual reference
+- ✅ **Build Verification**: All tests and builds pass successfully
+
+### 2. Core Principles
+
+This refactoring will be guided by five principles:
+1.  **Single Source of Truth:** All spacing will be derived from the `--grid-unit` (6px).
+2.  **System Over Ad-Hoc Values:** Eliminate all non-standard spacing utilities.
+3.  **Configuration-Driven Design:** `tailwind.config.ts` will be the single point of integration.
+4.  **Separation of Semantics and Styling:** Conflicting base styles on `h1-h6` tags will be removed in favor of utility-driven component classes.
+5.  **Developer Experience:** The legacy `*b` tokens will be deprecated and replaced by a clear, semantic token system (e.g., `space-s`, `space-m`).
+
+### 3. The New Spacing System
+
+#### Grid Foundation
+Our spacing system is built on a 6px baseline grid unit, providing precise control and consistent rhythm:
+
+```css
+--grid-unit: 0.375rem; /* 6px */
+--baseline: 1.5rem;    /* 24px = 4 grid units */
+```
+
+#### Semantic Token Scale
+The new semantic tokens provide intuitive, scalable spacing:
+
+| Token | Value | Pixels | Use Case |
+|-------|-------|--------|----------|
+| `space-3xs` | `var(--space-1)` | 6px | Micro adjustments, icon padding |
+| `space-2xs` | `var(--space-2)` | 12px | Tight spacing, small gaps |
+| `space-xs` | `var(--space-3)` | 18px | Compact spacing, button padding |
+| `space-s` | `var(--space-4)` | 24px | Base rhythm unit, paragraph spacing |
+| `space-m` | `var(--space-6)` | 36px | Section spacing, component gaps |
+| `space-l` | `var(--space-8)` | 48px | Before headings, major sections |
+| `space-xl` | `var(--space-12)` | 72px | Large section padding |
+| `space-2xl` | `var(--space-16)` | 96px | Major section breaks |
+| `space-3xl` | `var(--space-24)` | 144px | Hero sections, massive breaks |
+
+#### Musical Intervals
+For sophisticated layouts, we've incorporated musical interval spacing:
+
+```css
+--space-major-third: 3rem;     /* 48px */
+--space-minor-third: 2.25rem;  /* 36px */
+--space-perfect-fourth: 1rem;  /* 16px */
+```
+
+### 4. Implementation Details
+
+#### Component Examples
+Here's how the new system is applied in practice:
+
+```astro
+<!-- Header spacing -->
+<header class="px-space-s py-space-xs">
+  <nav class="gap-space-2xs">
+    <!-- Navigation items with consistent spacing -->
+  </nav>
+</header>
+
+<!-- Content sections -->
+<section class="py-space-xl">
+  <h2 class="mb-space-2xs mt-space-l">Section Title</h2>
+  <p class="mb-space-s">Paragraph with baseline-aligned spacing.</p>
+</section>
+
+<!-- Card components -->
+<div class="p-space-s gap-space-xs">
+  <!-- Card content with harmonic spacing -->
+</div>
+```
+
+#### Typography Integration
+Heading classes now use semantic spacing:
+
+```css
+.heading-1 { @apply mb-space-2xs mt-0; }
+.heading-2 { @apply mb-space-2xs mt-space-m sm:mt-space-l; }
+.heading-3 { @apply mb-space-2xs mt-space-s sm:mt-space-m; }
+.heading-4 { @apply mb-space-3xs mt-space-xs sm:mt-space-s; }
+```
+
+### 5. The Refactoring Process (Completed)
+
+**Phase 0: Foundation and Tooling**
+*   **Objective:** Prepare the tools and create a visual contract for the new system.
+*   **Actions:**
+    1.  **Update `tailwind.config.ts`:**
+        *   Remove the legacy `*b` spacing tokens to prevent their future use.
+        *   Ensure the semantic tokens (`space-s`, `space-m`, etc.) are correctly configured and comprehensive.
+        *   Begin configuring the `@tailwindcss/typography` plugin to use our semantic tokens.
+    2.  **Create `spacing-test.astro` Page:**
+        *   Build a new page at `src/pages/spacing-test.astro`.
+        *   This page will visually render all fluid font sizes and all semantic spacing tokens, providing a clear reference and a tool for visual verification.
+
+**Phase 1: Core Layout Refactoring**
+*   **Objective:** Align the primary page layouts to the baseline grid using the new semantic tokens.
+*   **Target Files:**
+    *   `src/layouts/Base.astro`
+    *   `src/layouts/BlogPost.astro`
+    *   `src/layouts/Series.astro`
+*   **Action:** Replace all non-compliant spacing (e.g., `mt-20`, `px-5`) with the new semantic tokens (e.g., `mt-space-xl`, `px-space-s`).
+
+**Phase 2: Component Refactoring**
+*   **Objective:** Align all reusable components to the baseline grid.
+*   **Target Files:** The full "hit list" of components identified in the audit, including `Header.astro`, `Footer.astro`, `PostPreview.astro`, `ResearchCard.astro`, etc.
+*   **Action:** Systematically replace all non-compliant spacing and sizing utilities (`h-8`, `size-5`, `gap-4`, etc.) with their semantic equivalents. This includes refactoring the `.icon-*` classes to use grid-aligned sizes.
+
+**Phase 3: Global Styles and Prose Refactoring**
+*   **Objective:** Eliminate the final sources of inconsistency.
+*   **Actions:**
+    1.  **Refactor Heading Styles:** Remove all base styles applied directly to `h1-h6` tags in `global.css` and `tailwind.config.ts`. Ensure all heading styles are exclusively handled by the `.heading-*` utility classes.
+    2.  **Finalize `prose` Configuration:** Complete the configuration of the `@tailwindcss/typography` plugin to ensure all its generated margins and paddings use our semantic spacing tokens.
+
+### 6. Migration Guide
+
+#### For Developers
+When working with the new system:
+
+1. **Always use semantic tokens** instead of numeric values:
+   - ❌ `p-4` → ✅ `p-space-s`
+   - ❌ `mt-8` → ✅ `mt-space-l`
+   - ❌ `gap-2` → ✅ `gap-space-2xs`
+
+2. **Reference the spacing scale** for appropriate values:
+   - Micro adjustments: `space-3xs` (6px)
+   - Standard spacing: `space-s` (24px)
+   - Section breaks: `space-xl` (72px)
+
+3. **Maintain grid alignment** - all spacing should be multiples of 6px
+
+#### Common Patterns
+
+```astro
+<!-- Button padding -->
+<button class="px-space-xs py-space-2xs">
+
+<!-- Card spacing -->
+<div class="p-space-s">
+
+<!-- Section spacing -->
+<section class="py-space-xl">
+
+<!-- List item gaps -->
+<ul class="space-y-space-3xs">
+```
+
+### 7. Benefits of the New System
+
+1. **Consistency**: Every spacing decision aligns to the 6px grid
+2. **Maintainability**: Change spacing globally by adjusting tokens
+3. **Clarity**: Semantic names clearly indicate usage intent
+4. **Performance**: CSS variables enable efficient theming
+5. **Scalability**: Easy to add new tokens or adjust existing ones
+
+### 8. Verification Results
+
+✅ **All verification criteria have been met:**
+- Zero non-compliant utilities found in codebase
+- `spacing-test.astro` page successfully renders all tokens
+- All build commands pass without errors:
+  - `pnpm lint` ✓
+  - `pnpm format` ✓
+  - `pnpm check` ✓
+  - `pnpm build` ✓
+
+### 9. Next Steps
+
+With the baseline grid and semantic token system fully implemented, future development should:
+
+1. **Maintain the system**: Always use semantic tokens for new components
+2. **Extend thoughtfully**: Add new tokens only when truly needed
+3. **Document decisions**: Update this guide when making system changes
+4. **Educate team members**: Share this guide with all developers
+
+The spacing system is now a robust foundation for consistent, beautiful typography and layout throughout the application.

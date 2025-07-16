@@ -1,0 +1,358 @@
+---
+title: 'Fixing Tiny Headers: Fluid Typography Debugging'
+description: >-
+  How a seemingly simple issue of 'headers appearing as small as body text'
+  revealed deeper problems with fluid type scales, font weight implementation,
+  and...
+publishDate: '2024-01-17'
+tags:
+  - typography
+  - fonts
+  - debugging
+  - tailwind
+  - design-systems
+draft: false
+---
+
+import DropCap from '@/components/typography/DropCap.astro';
+import PullQuote from '@/components/typography/PullQuote.astro';
+import Sidenote from '@/components/typography/Sidenote.astro';
+
+<DropCap variant="serif">
+"The headers look quite tiny, the headers for Newsreader are as large as the body font." This simple observation triggered a deep investigation into our typography system, revealing issues with fluid type scales, font configuration, and the subtle interplay between Tailwind's default sizing and custom fluid typography plugins.
+</DropCap>
+
+## The Problem: Headers Without Hierarchy
+
+When headers appear the same size as body text, you lose one of typography's most fundamental tools: visual hierarchy. Without clear size distinction, readers can't scan content effectively, document structure becomes unclear, and the overall reading experience suffers.
+
+The issue manifested in several ways:
+- H1 headers appeared barely larger than paragraphs
+- H2 and H3 were virtually indistinguishable from body text
+- Font weights seemed too light, lacking visual impact
+- The entire header system felt "flat" and undifferentiated
+
+<PullQuote>
+Typography hierarchy isn't just about aesthetics—it's about creating a visual system that guides readers through content effortlessly.
+</PullQuote>
+
+## Initial Investigation: Understanding the Stack
+
+Our typography system consisted of several interconnected parts:
+
+1. **Newsreader**: A serif font for headings (h1-h3)
+2. **IBM Plex Sans**: A sans-serif for body text and smaller headings (h4-h6)
+3. **Tailwind CSS**: For utility classes and base styles
+4. **tailwindcss-fluid-type plugin**: For responsive, fluid typography
+5. **Custom CSS**: Additional refinements in `global.css`
+
+The complexity meant the issue could originate from multiple sources.
+
+## Discovery #1: The Fluid Type Scale Misconfiguration
+
+The first breakthrough came when examining the Tailwind configuration:
+
+```typescript
+// What was broken:
+h1: {
+  fontSize: theme('fontSize.4')[0], // Wrong!
+  // This accessed Tailwind's default sizes, not fluid sizes
+}
+
+h2: {
+  fontSize: theme('fontSize.xl')[0], // Also wrong!
+  // 'xl' is a standard Tailwind size, not from fluid type
+}
+```
+
+The problem? We were mixing sizing systems:
+- The fluid type plugin created sizes like `0`, `1`, `2`, `3`, `4`
+- But headers were using Tailwind's default sizes like `xl`, `lg`
+- This bypassed the fluid scaling entirely!
+
+<Sidenote number={1}>
+When using custom type scales, ensure all components reference the same system. Mixing default and custom scales leads to inconsistent sizing.
+</Sidenote>
+
+### The Fix: Proper Scale References
+
+```typescript
+// Corrected configuration:
+h1: {
+  fontSize: theme('fontSize.4'), // Now uses fluid scale
+  // Maps to: minSize: "2.29rem", maxSize: "2.59rem"
+}
+
+h2: {
+  fontSize: theme('fontSize.3'), // Fluid scale size 3
+  // Maps to: minSize: "1.83rem", maxSize: "2.08rem"
+}
+
+h3: {
+  fontSize: theme('fontSize.2'), // Fluid scale size 2
+  // Maps to: minSize: "1.46rem", maxSize: "1.66rem"
+}
+```
+
+## Discovery #2: Font Weight Implementation
+
+Headers appeared weak not just due to size, but also weight. Newsreader was loading with:
+
+```typescript
+fontWeight: 'normal', // Too light for headers!
+```
+
+This mapped to weight 400, which is fine for body text but lacks the visual weight needed for headers.
+
+### Understanding Variable Font Weights
+
+Newsreader supports variable weights, allowing fine-tuned control:
+
+```css
+/* Light mode weights */
+h1 {
+  font-weight: 400;
+  font-variation-settings: "opsz" 72, "wght" 400;
+}
+
+/* Dark mode needs heavier weights */
+:root[data-theme="dark"] h1 {
+  font-weight: 450;
+  font-variation-settings: "opsz" 72, "wght" 450;
+}
+```
+
+<Sidenote number={2}>
+Variable fonts allow weight adjustments in increments of 1, not just the standard 100-unit jumps. This enables precise optical corrections.
+</Sidenote>
+
+## Discovery #3: Conflicting Class Hierarchy
+
+The most insidious issue was the use of semantic classes like `.heading-1` that were overriding base styles:
+
+```html
+<!-- This applies BOTH h1 base styles AND .heading-1 class styles -->
+<h1 class="heading-1">Site Hero</h1>
+```
+
+The `.heading-1` class was applying `text-3 sm:text-4` which maps to smaller sizes:
+- `text-3`: 1.83-2.08rem (~29-33px)
+- `text-4`: 2.29-2.59rem (~37-41px)
+
+But for a hero, we need:
+- `text-5`: 2.86-3.24rem (~46-52px)
+- `text-6`: 3.58-4.05rem (~57-65px)
+
+## Discovery #4: Letter Spacing Adjustments
+
+Large text benefits from tighter letter spacing. Our headers were using default spacing, making them appear loose and less impactful:
+
+```css
+/* Before: No letter-spacing adjustment */
+h1 { letter-spacing: normal; }
+
+/* After: Tighter spacing for display text */
+h1 { letter-spacing: -0.02em; }
+h2 { letter-spacing: -0.015em; }
+h3 { letter-spacing: -0.01em; }
+```
+
+## The Complete Solution
+
+Here's the comprehensive fix that transformed our headers:
+
+### 1. Base Typography Configuration
+
+After deeper investigation, I discovered the `tailwindcss-fluid-type` plugin doesn't populate the theme object - it only generates utility classes! This meant `theme('fontSize.4')` was trying to access non-existent values.
+
+```typescript
+// WRONG - The plugin doesn't add these to theme!
+addBase({
+  h1: {
+    fontSize: theme('fontSize.4'), // Error: fontSize.4 doesn't exist!
+  }
+});
+
+// FIXED - Let utility classes handle sizing
+addBase({
+  h1: {
+    fontFamily: theme('fontFamily.headline'),
+    // fontSize handled by utility classes
+    lineHeight: '1.15',
+    fontWeight: '400',
+    fontVariationSettings: '"opsz" 72, "wght" 400',
+    letterSpacing: '-0.02em',
+    color: theme('colors.accent-base'),
+  },
+  h2: {
+    fontFamily: theme('fontFamily.headline'),
+    // fontSize handled by utility classes
+    lineHeight: '1.2',
+    fontWeight: '425',
+    fontVariationSettings: '"opsz" 48, "wght" 425',
+    letterSpacing: '-0.015em',
+    color: theme('colors.accent-base'),
+  },
+  // ... continue for h3-h6
+});
+```
+
+### 2. Semantic Class Updates
+
+```typescript
+// Update .heading-1 through .heading-6 classes to use proper sizes
+addComponents({
+  ".heading-1": {
+    "@apply text-4 sm:text-5 font-headline font-normal text-accent-base mb-space-2xs mt-0": {},
+    // Now uses text-5 (2.86-3.24rem) on larger screens!
+    fontWeight: "400",
+    fontVariationSettings: '"opsz" 72, "wght" 400',
+    letterSpacing: "-0.02em",
+  },
+  ".heading-2": {
+    "@apply text-3 sm:text-4 font-headline font-normal text-accent-two mb-space-2xs mt-space-m sm:mt-space-l": {},
+    // Properly sized at text-4 (2.29-2.59rem) on desktop
+    fontWeight: "425",
+    fontVariationSettings: '"opsz" 48, "wght" 425',
+    letterSpacing: "-0.015em",
+  },
+  // ... continue with proper sizing
+});
+```
+
+### 3. Dark Mode Enhancements
+
+```css
+/* global.css - Dark mode weight adjustments */
+@media (prefers-color-scheme: dark),
+[data-theme="dark"] {
+  h1 {
+    font-weight: 450; /* +50 for better contrast */
+    font-variation-settings: "opsz" 72, "wght" 450;
+    opacity: 0.95; /* Slight reduction for comfort */
+  }
+  
+  h2 {
+    font-weight: 475; /* +50 adjustment */
+    font-variation-settings: "opsz" 48, "wght" 475;
+    opacity: 0.93;
+  }
+}
+```
+
+### 4. Responsive Considerations
+
+The fluid type scale ensures headers scale smoothly:
+
+```typescript
+// Fluid type configuration
+textSizes: {
+  "6": { 
+    minSize: "3.58rem",  // ~57px on mobile
+    maxSize: "4.05rem",  // ~65px on desktop
+    lineHeight: "1.05" 
+  },
+  "5": { 
+    minSize: "2.86rem",  // ~46px on mobile
+    maxSize: "3.24rem",  // ~52px on desktop
+    lineHeight: "1.10" 
+  },
+  "4": { 
+    minSize: "2.29rem",  // ~36px on mobile
+    maxSize: "2.59rem",  // ~41px on desktop
+    lineHeight: "1.15" 
+  },
+  "3": { 
+    minSize: "1.83rem",  // ~29px on mobile
+    maxSize: "2.08rem",  // ~33px on desktop
+    lineHeight: "1.25" 
+  }
+}
+```
+
+## Lessons Learned
+
+### 1. Understand Your Type System
+
+When using plugins or custom configurations, understand exactly what they provide:
+- What size names are available?
+- How do they map to actual pixel/rem values?
+- Are you consistently using one system?
+
+### 2. Test Across Contexts
+
+Headers need testing in multiple scenarios:
+- Light and dark modes
+- Different viewport sizes
+- With varying content lengths
+- Against body text for proper hierarchy
+
+### 3. Variable Fonts Need Variable Thinking
+
+Don't just set a weight and forget it. Consider:
+- Optical sizing for different header levels
+- Weight adjustments for dark mode
+- Fine-tuning with single-digit increments
+
+### 4. Document Your Decisions
+
+Future developers (including yourself) need to understand:
+- Why specific weights were chosen
+- How the type scale works
+- Which system provides which values
+
+<PullQuote variant="large">
+Typography bugs often reveal architectural issues. What seems like a simple sizing problem can expose misaligned systems, mixed configurations, and assumptions about how tools work together.
+</PullQuote>
+
+## Implementation Checklist
+
+When diagnosing similar issues:
+
+- [ ] Verify which sizing system is being used
+- [ ] Check if sizes reference the correct theme values
+- [ ] Confirm font weights are appropriate for the context
+- [ ] Test optical adjustments for different sizes
+- [ ] Verify dark mode weight compensations
+- [ ] Check letter-spacing for large text
+- [ ] Test the complete hierarchy visually
+- [ ] Document the fix for future reference
+
+## The Result
+
+After implementing these fixes:
+- Site hero (`.heading-1`) now commands attention at 2.86-3.24rem (text-5)
+- H1 headers display prominently at 2.29-2.59rem (text-4)
+- H2 provides clear section breaks at 1.83-2.08rem (text-3)
+- H3 offers subsection clarity at 1.46-1.66rem (text-2)
+- Each level has distinct visual weight and appropriate sizing
+- Dark mode maintains readability with +25-50 weight adjustments
+- The hierarchy guides readers naturally through content
+
+## Conclusion
+
+What started as "headers look tiny" became a masterclass in typography systems. The issue wasn't just about making text bigger—it was about understanding how modern web typography tools interact, ensuring consistent system usage, and fine-tuning optical details that make reading effortless.
+
+Remember: great typography is invisible when it works, but painfully obvious when it doesn't. Take time to understand your tools, test thoroughly, and document your decisions. Your readers—and future self—will thank you.
+
+---
+
+## Technical Summary
+
+**Problem**: Headers appeared same size as body text due to incorrect theme value references
+
+**Root Causes**:
+1. Mixing Tailwind default sizes with fluid type plugin sizes
+2. Plugin doesn't populate theme object, causing `theme('fontSize.4')` to fail
+3. Semantic classes (`.heading-1`) using wrong size scale
+4. Insufficient font weights for visual hierarchy
+5. Missing optical adjustments for display text
+
+**Solution**:
+1. Remove fontSize from base styles, let utility classes handle sizing
+2. Update semantic classes to use larger sizes (text-4/5 for heroes)
+3. Implement progressive font weights (400→425→450→500)
+4. Add letter-spacing adjustments (-0.02em to -0.005em)
+5. Include dark mode weight compensations (+25-50 units)
+
+**Key Insight**: Typography systems are only as strong as their weakest integration point. Ensure all components speak the same language.

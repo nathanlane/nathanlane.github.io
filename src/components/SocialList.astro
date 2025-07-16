@@ -1,0 +1,37 @@
+---
+import { socialLinks } from "@/site.config";
+import { Icon } from "astro-icon/components";
+
+/** 
+	Uses https://www.astroicon.dev/getting-started/
+	Find icons via guide: https://www.astroicon.dev/guides/customization/#open-source-icon-sets
+	Installed icon packs: @iconify-json/hugeicons, @iconify-json/solar
+	
+	Social links are now configured in src/site.config.ts for centralized management
+	Only shows links where showInHero: true
+*/
+
+// Filter links for hero banner display
+const heroSocialLinks = socialLinks.filter(link => link.showInHero);
+---
+
+<div class="flex flex-wrap items-center gap-x-2">
+	<p>Find me on</p>
+	<ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
+		{
+			heroSocialLinks.map(({ friendlyName, isWebmention, link, name }) => (
+				<li class="flex">
+					<a
+						class="inline-block hover:text-link drop-shadow-[0px_2.5px_2.5px_rgba(0,0,0,0.175)]"
+						href={link}
+						rel={`noreferrer ${isWebmention ? "me authn" : ""}`}
+						target="_blank"
+					>
+						<Icon aria-hidden="true" class="icon-base" focusable="false" name={name} />
+						<span class="sr-only">{friendlyName}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>

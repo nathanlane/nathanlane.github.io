@@ -1,0 +1,234 @@
+---
+title: "Documentation Audit Plan: Updating After Major Refactoring"
+description: "A comprehensive plan to audit and update all documentation after major typography system, baseline grid, and spacing refactoring in the codebase."
+publishDate: "2025-07-15T12:00:00Z"
+tags: ["documentation", "refactoring", "maintenance", "planning"]
+draft: false
+---
+
+## Executive Summary
+
+After implementing significant refactoring across the typography system, baseline grid, spacing tokens, and navigation structure, our documentation needs a thorough audit and update. This post outlines a systematic plan to identify outdated sections and bring all documentation in sync with the current codebase.
+
+## Scope of Recent Changes
+
+Before diving into the audit plan, let's recap the major changes that have impacted our documentation:
+
+### 1. Typography System Overhaul
+- Migrated from standalone Utopia CSS to `tailwindcss-fluid-type` plugin
+- Implemented semantic typography classes (`heading-1` through `heading-6`)
+- Added fluid type scale with 9 steps (-2 to 6)
+- Changed fonts: Newsreader for headlines, IBM Plex Sans for body
+- Fixed header sizing issues with proper utility class usage
+
+### 2. Baseline Grid System
+- Established 4px grid unit (`1b` = 0.25rem)
+- Refactored all spacing to align with baseline grid
+- Updated component spacing to use grid multiples (4b, 6b, 8b, etc.)
+- Enforced vertical rhythm throughout the site
+
+### 3. Spacing System Refactoring
+- Replaced hardcoded values with semantic spacing tokens
+- Implemented typography-first spacing approach
+- Added moderate scaling progression (25-40%)
+- Created semantic aliases for clearer intent
+
+### 4. Navigation & Content Structure
+- Renamed sections: Projects/Essays/Experiments → Research/Projects/Writing
+- Added new Media section
+- Restructured content collections to match URL paths
+- Updated all internal links and references
+
+### 5. Component Updates
+- New components: Button, Badge, ContactBox, MediaCard
+- Reduced icon sizes throughout (h-8 → h-7, h-6 → h-5)
+- Removed sticky/fixed positioning from blog headers
+- Updated prose styling and code block formatting
+
+## Documentation Audit Plan
+
+### Phase 1: Primary Documentation Files
+
+#### 1.1 README.md
+**Current State**: Partially updated with new typography features
+**Required Updates**:
+- [ ] Update "Typography System Features" section with current implementation
+- [ ] Revise font stack information (remove Cascadia Code reference)
+- [ ] Update command examples (ensure `pnpm` consistency)
+- [ ] Add Media section to navigation structure
+- [ ] Update development server port (3000 → 4321)
+- [ ] Add baseline grid information to features
+- [ ] Update spacing system description
+
+#### 1.2 CLAUDE.md
+**Current State**: Mix of old and new information
+**Required Updates**:
+- [ ] Update Typography Enhancement Focus section completely
+- [ ] Remove references to old Utopia CSS approach
+- [ ] Update Typography Scale section with new fluid type values
+- [ ] Revise Spacing System to reflect 4px baseline grid
+- [ ] Update Typography Implementation Examples
+- [ ] Add Media section to Content Collections
+- [ ] Update Recent System Changes to be current
+- [ ] Fix outdated CSS variable examples
+
+#### 1.3 Changelog.md
+**Current State**: Ends at July 14, 2025
+**Required Updates**:
+- [ ] Add entry for `tailwindcss-fluid-type` migration
+- [ ] Document semantic typography class implementation
+- [ ] Add Media section implementation
+- [ ] Document component updates (Button, Badge, ContactBox)
+- [ ] Add spacing system refactoring details
+
+### Phase 2: Design System Documentation
+
+#### 2.1 DESIGN_SYSTEM.md
+**Current State**: Contains deprecated Utopia CSS references
+**Required Updates**:
+- [ ] Remove "deprecated" notice and update to current implementation
+- [ ] Update token cheatsheet with new utilities
+- [ ] Revise spacing configuration examples
+- [ ] Update semantic typography classes section
+- [ ] Add baseline grid utilities documentation
+- [ ] Update migration examples with current approach
+
+#### 2.2 TYPOGRAPHY.md (root)
+**Current State**: Describes complete system but may have outdated details
+**Required Updates**:
+- [ ] Verify all fluid type scale values match current config
+- [ ] Update semantic component class listings
+- [ ] Ensure dark mode optimizations are current
+- [ ] Add new typography components if any
+- [ ] Update code examples to use current classes
+
+#### 2.3 docs/TYPOGRAPHY.md
+**Current State**: Comprehensive but needs verification
+**Required Updates**:
+- [ ] Sync with root TYPOGRAPHY.md changes
+- [ ] Ensure all class names match current implementation
+- [ ] Update spacing values to use baseline grid
+- [ ] Verify all code examples work with current system
+
+### Phase 3: Specialized Documentation
+
+#### 3.1 FONTS.md
+**Current State**: Appears current
+**Required Updates**:
+- [ ] Verify font weight ranges are accurate
+- [ ] Ensure monospace font information is correct
+- [ ] Update any code examples if needed
+
+#### 3.2 COLOR_SYSTEM.md
+**Current State**: Likely current but needs verification
+**Required Updates**:
+- [ ] Verify all color values match global.css
+- [ ] Check if any new semantic colors were added
+- [ ] Update usage examples if component classes changed
+
+#### 3.3 CONTENT.md
+**Current State**: Unknown, needs creation or update
+**Required Updates**:
+- [ ] Document Media content collection
+- [ ] Update navigation structure (Research/Projects/Writing)
+- [ ] Document content collection alignment with URLs
+- [ ] Add frontmatter requirements for new collections
+
+### Phase 4: Remove Outdated References
+
+#### 4.1 Old System References
+- [ ] Remove all references to `src/styles/utopia.css` (deprecated)
+- [ ] Update any examples using `theme('fontSize.4')` pattern
+- [ ] Remove references to SF Pro fonts
+- [ ] Update Cascadia Code references to IBM Plex Mono
+
+#### 4.2 Outdated Commands
+- [ ] Ensure all commands use `pnpm` consistently
+- [ ] Update localhost:3000 → localhost:4321
+- [ ] Verify all build commands are current
+
+#### 4.3 Deprecated Features
+- [ ] Remove references to sticky/fixed blog headers (headers now scroll naturally)
+- [ ] Update icon size documentation (reduced from h-8 w-8 to h-7 w-7)
+- [ ] Remove old spacing value references (now using 6px baseline grid)
+
+### Phase 5: Add Missing Documentation
+
+#### 5.1 New Features
+- [ ] Document Media section implementation
+- [ ] Add Button component documentation
+- [ ] Add Badge component documentation
+- [ ] Add ContactBox component documentation
+- [ ] Document semantic spacing tokens
+
+#### 5.2 Migration Guides
+- [ ] Create migration guide from old typography to semantic classes
+- [ ] Document baseline grid adoption process
+- [ ] Add spacing token migration examples
+
+#### 5.3 Best Practices
+- [ ] Add baseline grid alignment guidelines
+- [ ] Document semantic class usage patterns
+- [ ] Add performance considerations for new system
+
+## Implementation Strategy
+
+### Priority Order
+
+1. **Critical Updates** (Week 1)
+   - README.md - First impression for new developers
+   - CLAUDE.md - AI assistant guidance
+   - DESIGN_SYSTEM.md - Core system documentation
+
+2. **System Documentation** (Week 2)
+   - TYPOGRAPHY.md files - Complete typography reference
+   - Changelog.md - Historical record
+   - Migration guides - Help existing users
+
+3. **Supporting Documentation** (Week 3)
+   - FONTS.md - Font system details
+   - COLOR_SYSTEM.md - Color implementation
+   - Component documentation - New components
+
+### Testing Each Update
+
+For each documentation update:
+1. Verify all code examples compile and run
+2. Test all commands and build steps
+3. Ensure internal links work
+4. Validate against current codebase
+5. Check for consistency across documents
+
+### Documentation Standards
+
+- Use current class names and utilities
+- Include "why" explanations for design decisions
+- Provide before/after examples for migrations
+- Keep examples minimal but complete
+- Test all code snippets
+
+## Success Criteria
+
+The documentation audit will be considered complete when:
+
+1. All files accurately reflect the current codebase
+2. No references to deprecated systems remain
+3. All code examples work with current implementation
+4. New features are fully documented
+5. Migration paths are clear for existing users
+6. Documentation is internally consistent
+
+## Next Steps
+
+1. Create a tracking issue for documentation updates
+2. Begin with critical updates (README, CLAUDE, DESIGN_SYSTEM)
+3. Work through each phase systematically
+4. Test all documentation changes
+5. Get review from team members
+6. Deploy updated documentation
+
+## Conclusion
+
+This documentation audit is essential for maintaining a healthy, understandable codebase. By systematically updating our documentation to reflect the recent refactoring, we ensure that new developers can quickly understand the system, existing developers can adapt to changes, and our AI assistant (Claude) has accurate information for helping with development tasks.
+
+The investment in documentation now will pay dividends in reduced confusion, faster onboarding, and more consistent implementation across the project.

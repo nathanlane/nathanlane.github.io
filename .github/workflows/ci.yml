@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main, feat/dramatic-edits]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [20.x]
+    
+    steps:
+      # Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      # Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+      
+      # Get pnpm store directory for caching
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+      
+      # Cache pnpm dependencies
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      
+      # Install dependencies
+      - name: Install dependencies
+        run: pnpm install
+      
+      # Run type checking
+      - name: Type check
+        run: pnpm run check
+      
+      # Run linting
+      - name: Lint code
+        run: pnpm biome lint .
+      
+      # Build the project
+      - name: Build project
+        run: pnpm run build
+      
+      # Run security audit
+      - name: Security audit
+        run: pnpm audit --prod --audit-level=moderate
+        continue-on-error: true # Don't fail the build on audit issues for now
+      
+      # Upload build artifacts (optional)
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7

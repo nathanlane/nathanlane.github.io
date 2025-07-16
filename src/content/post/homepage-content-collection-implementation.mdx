@@ -1,0 +1,197 @@
+---
+title: "Homepage Content Collection Implementation"
+description: "How we migrated hardcoded homepage content to Astro's content collections for better maintainability and non-developer editing capabilities."
+publishDate: 2024-01-15
+tags: ["astro", "content-collections", "static-site", "implementation"]
+draft: false
+---
+
+Following our best practices audit, Priority 2 was implementing content collections for the homepage. This guide documents the migration from hardcoded content to a YAML-based content collection.
+
+## Why Content Collections for Homepage?
+
+Moving homepage content to content collections provides:
+- **Non-developer editing** - Content lives in YAML files instead of Astro components
+- **Type safety** - Zod schemas validate all content at build time
+- **Version control** - Track content changes separately from code changes
+- **Consistency** - Single source of truth for all homepage content
+- **Flexibility** - Easy to add new sections or modify existing ones
+
+## Implementation Steps
+
+### Step 1: Create Homepage Collection Schema
+
+We added a comprehensive schema to `content.config.ts`:
+
+```typescript
+const homepage = defineCollection({
+  loader: glob({ base: "./src/content/homepage", pattern: "**/*.yaml" }),
+  schema: z.object({
+    hero: z.object({
+      title: z.string(),
+      description: z.string(),
+      buttons: z.array(z.object({
+        text: z.string(),
+        href: z.string(),
+        variant: z.enum(["primary", "secondary"]),
+      })),
+    }),
+    currentProjects: z.object({
+      title: z.string(),
+      projects: z.array(z.object({
+        title: z.string(),
+        description: z.string(),
+        url: z.string(),
+      })),
+    }),
+    contact: z.object({
+      title: z.string(),
+      email: z.string().email(),
+    }),
+    showcase: z.object({
+      title: z.string(),
+      sections: z.array(z.object({
+        title: z.string(),
+        type: z.enum(["projects", "writing", "compact"]),
+        items: z.array(z.object({
+          title: z.string(),
+          description: z.string().optional(),
+          excerpt: z.string().optional(),
+          date: z.string().optional(),
+          url: z.string(),
+        })),
+      })),
+    }),
+    posts: z.object({
+      title: z.string(),
+      maxPosts: z.number(),
+    }),
+  }),
+});
+```
+
+### Step 2: Create YAML Content File
+
+Created `/src/content/homepage/index.yaml`:
+
+```yaml
+hero:
+  title: "Nathan Lane"
+  description: "Economist and Data Scientist exploring the intersection of technology, markets, and economic systems."
+  buttons:
+    - text: "Read Blog"
+      href: "/posts/"
+      variant: "primary"
+    - text: "View Research"
+      href: "/research/"
+      variant: "secondary"
+
+currentProjects:
+  title: "Current Projects"
+  projects:
+    - title: "Economic Policy Research"
+      description: "Analyzing the impact of trade policies on regional economic development and labor markets."
+      url: "/research/trade-policy"
+    # ... more projects
+
+contact:
+  title: "Get In Touch"
+  email: "drnathanlane@gmail.com"
+
+showcase:
+  title: "New Components"
+  sections:
+    - title: "Projects Grid"
+      type: "projects"
+      items:
+        - title: "SectionGrid.astro"
+          description: "Flexible grid container with responsive columns"
+          url: "#section-grid"
+    # ... more sections
+
+posts:
+  title: "Posts"
+  maxPosts: 10
+```
+
+### Step 3: Update index.astro
+
+Modified the homepage to use content collection data:
+
+```astro
+---
+import { getEntry } from "astro:content";
+
+// Get homepage content from content collection
+const homepageContent = await getEntry("homepage", "index");
+const { hero, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;
+---
+
+<!-- Use content in template -->
+<h1 class="heading-2 text-center">
+  {hero.title}
+</h1>
+<p class="text-body mt-4 mb-4">
+  {hero.description}
+</p>
+
+<!-- Dynamic button rendering -->
+<div class="flex justify-center gap-3 mt-6">
+  {hero.buttons.map((button) => (
+    <a 
+      href={button.href} 
+      class={button.variant === "primary" 
+        ? "inline-flex items-center px-3 py-1.5 text-xs font-medium text-bgColor bg-accent-base rounded hover:opacity-90 transition-all"
+        : "inline-flex items-center px-3 py-1.5 text-xs font-medium text-accent-base bg-color-100 hover:bg-color-150 rounded transition-colors"
+      }
+    >
+      {button.text}
+    </a>
+  ))}
+</div>
+```
+
+## Key Benefits Realized
+
+### 1. Content Editing Workflow
+
+Non-developers can now edit homepage content by:
+1. Opening `/src/content/homepage/index.yaml`
+2. Modifying text, links, or structure
+3. Committing changes via Git or web interface
+4. Automatic validation ensures content integrity
+
+### 2. Type Safety Throughout
+
+The Zod schema provides:
+- Build-time validation of all content
+- TypeScript types for all content access
+- Clear documentation of content structure
+- Prevention of missing or malformed data
+
+### 3. Flexible Content Structure
+
+The schema supports:
+- Multiple showcase section types (projects, writing, compact)
+- Optional fields where appropriate
+- Extensible structure for future needs
+- Consistent data shapes across sections
+
+## Migration Patterns
+
+For other static pages, follow this pattern:
+
+1. **Define content schema** in `content.config.ts`
+2. **Create YAML/JSON file** in appropriate content directory
+3. **Import with getEntry()** in your Astro component
+4. **Replace hardcoded values** with content collection data
+5. **Test build** to ensure schema validation passes
+
+## Next Steps
+
+With homepage content collections complete, the remaining priorities are:
+
+1. **Priority 3**: Add font preloading to BaseHead.astro
+2. **Priority 4**: Add TypeScript prop interfaces to components
+
+This implementation demonstrates how content collections can transform static content management while maintaining type safety and developer experience.

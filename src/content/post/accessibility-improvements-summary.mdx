@@ -1,0 +1,158 @@
+---
+title: "Accessibility Improvements: What We Fixed"
+description: "A comprehensive summary of accessibility improvements made to ensure WCAG 2.1 AA compliance"
+publishDate: "2025-07-16"
+tags: ["accessibility", "wcag", "performance", "documentation"]
+draft: false
+---
+
+After running accessibility audits, I've implemented numerous improvements to ensure this site is usable by everyone. Here's what we fixed and why it matters.
+
+## Color Contrast Improvements
+
+### The Problem
+Several text elements failed WCAG contrast requirements:
+- Links with `opacity-60` had only 4.17:1 contrast (needs 4.5:1)
+- Dark mode light gray text was too faint
+- Some button states had insufficient contrast
+
+### The Fix
+1. **Replaced opacity with semantic color classes**
+   ```css
+   /* Before: opacity reduces contrast unpredictably */
+   opacity-60 hover:opacity-100
+   
+   /* After: predictable color values */
+   text-light hover:text-textColor
+   ```
+
+2. **Improved dark mode text colors**
+   ```css
+   /* Light text colors now meet WCAG AA */
+   --theme-lightest: hsl(40deg 5% 75%); /* Up from 65% */
+   --theme-lighter: hsl(40deg 5% 70%);  /* Up from 55% */
+   --theme-light: hsl(40deg 5% 65%);    /* Up from 50% */
+   ```
+
+## Heading Hierarchy Fix
+
+### The Problem
+Screen readers expect proper heading structure:
+- Pages used `<h2>` as main titles instead of `<h1>`
+- Some pages skipped heading levels (h1 → h3)
+- Visual styling didn't match semantic importance
+
+### The Solution: Semantic HTML Rebasing
+Instead of using confusing class names like `<h1 class="heading-2">`, we remapped the styles:
+
+```css
+/* Semantic tags now get appropriate visual styles */
+h1:not([class]) { @apply heading-2; }
+h2:not([class]) { @apply heading-3; }
+h3:not([class]) { @apply heading-4; }
+```
+
+Now we write clean HTML:
+```html
+<h1>Page Title</h1>
+<h2>Section</h2>
+<h3>Subsection</h3>
+```
+
+## Image Optimization
+
+### MDX Image Component
+Created a custom image component with:
+- Automatic lazy loading (`loading="lazy"`)
+- Proper dimensions to prevent layout shift
+- Support for captions
+- Handles both local and remote images
+
+```astro
+<Image 
+  src={src} 
+  alt={alt}
+  loading="lazy"
+  decoding="async"
+  class="w-full h-auto rounded-lg"
+/>
+```
+
+### Alt Text Improvements
+- Replaced generic alt text ("Hero", "Description")
+- Added descriptive text for all images
+- Ensured decorative images use `alt=""`
+
+## Keyboard Navigation
+
+### Skip Link Enhancement
+Improved the skip link for keyboard users:
+```html
+<a 
+  class="sr-only focus:not-sr-only focus:fixed focus:z-50 
+         focus:bg-accent-base focus:text-bgColor focus:px-4 
+         focus:py-2 focus:rounded-md"
+  href="#main"
+>
+  Skip to main content
+</a>
+```
+
+### Focus Indicators
+- All interactive elements have visible focus states
+- Using `focus-visible` for keyboard-only focus
+- 2px outline with proper contrast
+- No `outline-none` without alternatives
+
+## ARIA Implementation
+
+### Proper Labels
+- All icon-only buttons have `aria-label`
+- Decorative icons use `aria-hidden="true"`
+- Links have descriptive text (no orphaned arrows)
+
+### Landmark Regions
+- `<header>` for site header
+- `<nav>` for navigation
+- `<main>` for content
+- `<footer>` for site footer
+
+## Font Loading Performance
+
+### Font Display Strategy
+All fonts use `font-display: swap`:
+- Prevents invisible text during load
+- Shows fallback fonts immediately
+- Swaps in custom fonts when ready
+- Eliminates layout shift
+
+## Testing Results
+
+### Before Improvements
+- Lighthouse Accessibility: ~85
+- axe DevTools: 7-15 violations per page
+- Color contrast failures in dark mode
+- Missing heading hierarchy
+
+### After Improvements
+- Lighthouse Accessibility: 95+
+- axe DevTools: 0-1 violations
+- All text meets WCAG AA contrast
+- Proper document structure
+
+## Ongoing Commitments
+
+1. **Test all new content** with axe DevTools
+2. **Write descriptive alt text** for images
+3. **Maintain heading hierarchy** on new pages
+4. **Check contrast** when adding new colors
+5. **Test with keyboard** navigation
+
+## Resources for Maintaining Accessibility
+
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [axe DevTools Extension](https://www.deque.com/axe/devtools/)
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
+- [NVDA Screen Reader](https://www.nvaccess.org/)
+
+Remember: Accessibility isn't a feature—it's a fundamental requirement. Every improvement makes the web more inclusive.

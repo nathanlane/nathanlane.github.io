@@ -1,0 +1,32 @@
+---
+export interface Props {
+	title: string;
+	description: string;
+	url?: string;
+	class?: string;
+}
+
+const { title, description, url, class: className = "" } = Astro.props;
+---
+
+<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${className} p-space-s`}>
+	{url ? (
+		<a href={url} class="block flex flex-col gap-space-2xs">
+			<h3 class="font-headline font-medium text-1 leading-tight text-accent-base group-hover:text-accent-two transition-colors">
+				{title}
+			</h3>
+			<p class="text-body-sm text-light line-clamp-2">
+				{description}
+			</p>
+		</a>
+	) : (
+		<div class="flex flex-col gap-space-2xs">
+			<h3 class="font-headline font-medium text-1 leading-tight text-accent-base">
+				{title}
+			</h3>
+			<p class="text-body-sm text-light line-clamp-2">
+				{description}
+			</p>
+		</div>
+	)}
+</article>

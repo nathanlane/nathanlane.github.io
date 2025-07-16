@@ -1,0 +1,148 @@
+---
+export interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { 
+  href, 
+  variant = 'secondary', 
+  size = 'md',
+  class: className = '' 
+} = Astro.props;
+
+// Size mappings with refined typography
+const sizeClasses = {
+  sm: 'px-4 py-1.5 text-xs',
+  md: 'px-5 py-2 text-sm',
+  lg: 'px-6 py-2.5 text-base'
+};
+
+// Base button classes with typographic refinements
+const baseClasses = `
+  inline-flex items-center justify-center
+  font-body
+  rounded-sm transition-all duration-200
+  ${sizeClasses[size]}
+  ${className}
+`;
+
+// Variant-specific classes with nuanced typography
+const variantClasses = {
+  primary: `
+    text-bgColor bg-accent-base
+    hover:bg-accent-one
+    active:translate-y-px
+  `,
+  secondary: `
+    text-accent-base bg-color-100 dark:bg-color-100 dark:text-gray-200
+    hover:bg-color-150 dark:hover:bg-color-150 dark:hover:text-white
+    active:bg-color-200 dark:active:bg-color-200
+    border border-color-200 dark:border-gray-700
+  `
+};
+
+const classes = `${baseClasses} ${variantClasses[variant]}`;
+---
+
+<a 
+  href={href} 
+  class={classes}
+  data-button-variant={variant}
+>
+  <slot />
+</a>
+
+<style>
+  /* Button typography refinements */
+  [data-button-variant] {
+    /* Enable font features for optimal rendering */
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'ss01' 1;
+    font-variant-numeric: tabular-nums;
+    
+    /* Refined text rendering */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Custom letter-spacing values */
+    --letter-spacing-tight: 0.02em;
+    --letter-spacing-normal: 0.03em;
+    --letter-spacing-wide: 0.045em;
+    
+    /* Base typography */
+    letter-spacing: var(--letter-spacing-normal);
+    font-weight: 500;
+  }
+  
+  /* Primary button refinements */
+  [data-button-variant="primary"] {
+    font-variation-settings: 'wght' 500;
+    text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.08);
+  }
+  
+  [data-button-variant="primary"]:hover {
+    letter-spacing: var(--letter-spacing-wide);
+    font-variation-settings: 'wght' 520;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Secondary button refinements */
+  [data-button-variant="secondary"] {
+    font-variation-settings: 'wght' 450;
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  [data-button-variant="secondary"]:hover {
+    letter-spacing: var(--letter-spacing-normal);
+    font-variation-settings: 'wght' 480;
+  }
+  
+  /* Active state micro-animation */
+  [data-button-variant]:active {
+    transition-duration: 50ms;
+    letter-spacing: var(--letter-spacing-tight);
+  }
+  
+  /* Focus state with typographic emphasis */
+  [data-button-variant]:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    font-variation-settings: 'wght' 500;
+  }
+  
+  /* Size-specific typography adjustments */
+  [data-button-variant] {
+    &.text-xs {
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      font-variation-settings: 'wght' 550;
+    }
+    
+    &.text-sm {
+      font-variation-settings: 'wght' 480;
+    }
+    
+    &.text-base {
+      font-variation-settings: 'wght' 450;
+    }
+  }
+  
+  /* Dark mode adjustments */
+  :root[data-theme="dark"] [data-button-variant="primary"] {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  }
+  
+  :root[data-theme="dark"] [data-button-variant="primary"]:hover {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  }
+  
+  /* Optical adjustments for all-caps text */
+  [data-button-variant].text-xs {
+    /* Slightly reduce font size for uppercase */
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+</style>

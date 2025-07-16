@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import type { HTMLTag, Polymorphic } from "astro/types";
+
+type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
+	post: CollectionEntry<"post">;
+	withDesc?: boolean;
+};
+
+const { as: Tag = "div", post, withDesc = false } = Astro.props;
+---
+
+<div class={withDesc ? "flex flex-col" : "flex flex-col grow sm:flex-row sm:items-center sm:justify-between"}>
+	{!withDesc ? (
+		<>
+			<Tag class="font-sans font-normal text-0 text-accent-base md:line-clamp-1 hover:underline flex-grow">
+				<a data-astro-prefetch href={`/posts/${post.id}/`}>
+					{post.data.draft && <span class="text-red-500">(Draft) </span>}
+					{post.data.title}
+				</a>
+			</Tag>
+			<FormattedDate
+				class="shrink-0 text-lightest text--1 ml-4"
+				date={post.data.publishDate}
+				dateTimeOptions={{
+					year: "numeric",
+					month: "short",
+					day: "2-digit",
+				}}
+			/>
+		</>
+	) : (
+		<>
+			<FormattedDate 
+				class="text-body-sm shrink-0 text-lightest" 
+				date={post.data.publishDate}
+				dateTimeOptions={{
+					year: "numeric",
+					month: "long",
+					day: "2-digit",
+				}}
+			/>
+			<Tag class="font-sans font-normal text-0 text-accent-base mt-space-2xs hover:underline">
+				<a data-astro-prefetch href={`/posts/${post.id}/`}>
+					{post.data.title}
+				</a>
+			</Tag>
+			<p class="mt-space-1 line-clamp-2">{post.data.description}</p>
+		</>
+	)}
+</div>

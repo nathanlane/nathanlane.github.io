@@ -1,0 +1,32 @@
+---
+export interface Props {
+	type?: "horizontal" | "vertical" | "dot";
+	className?: string;
+}
+
+const { type = "horizontal", className = "" } = Astro.props as Props;
+
+// Классы для разделителей в зависимости от типа
+const separatorClasses = {
+	base: "flex-shrink-0 bg-lighter mx-space-2xs", // Общие стили
+	types: {
+		horizontal: "h-px w-full", // Горизонтальный разделитель
+		vertical: "h-full w-px", // Вертикальный разделитель
+		dot: "w-space-1 h-space-1 rounded-full", // Кружок для dot
+	} as const, // Указываем, что типы здесь конкретные строки
+};
+
+const typeClass = separatorClasses.types[type];
+---
+
+{
+	type === "dot" ? (
+		<span class={`${separatorClasses.base} ${typeClass} ${className}`} />
+	) : (
+		<span
+			role="separator"
+			aria-orientation={type === "horizontal" ? "horizontal" : "vertical"}
+			class={`${separatorClasses.base} ${typeClass} ${className}`}
+		/>
+	)
+}

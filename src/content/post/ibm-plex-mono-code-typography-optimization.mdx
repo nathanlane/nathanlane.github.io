@@ -1,0 +1,694 @@
+---
+title: Perfecting Code Typography with IBM Plex Mono
+description: >-
+  A comprehensive guide to optimizing IBM Plex Mono for code blocks and inline
+  code.
+publishDate: '2024-01-16'
+tags:
+  - typography
+  - fonts
+  - code
+  - design-systems
+  - IBM Plex
+  - performance
+draft: false
+---
+
+import DropCap from '@/components/typography/DropCap.astro';
+import PullQuote from '@/components/typography/PullQuote.astro';
+import Sidenote from '@/components/typography/Sidenote.astro';
+
+<DropCap variant="outline">
+Code is poetry for machines, but it must be readable by humans. The choice of monospace font can make the difference between effortless comprehension and cognitive strain. IBM Plex Mono, with its carefully crafted letterforms and extensive OpenType features, provides an exceptional foundation for code typography—but only when properly optimized.
+</DropCap>
+
+## The Unique Challenges of Code Typography
+
+Unlike body text, code presents unique typographic challenges:
+
+1. **Character Disambiguation**: Distinguishing between `0` and `O`, `1` and `l`, `I` and `|`
+2. **Alignment Precision**: Maintaining vertical alignment across lines
+3. **Density Management**: Balancing information density with readability
+4. **Syntax Clarity**: Supporting visual parsing through weight and style variations
+5. **Cross-Platform Consistency**: Ensuring identical rendering across environments
+
+IBM Plex Mono addresses these challenges through thoughtful design decisions, but realizing its full potential requires careful implementation.
+
+## Understanding IBM Plex Mono's Design
+
+<PullQuote attribution="Mike Abbink, IBM Design">
+In Plex Mono, we focused on making characters unambiguous while maintaining the humanity that makes code feel less mechanical.
+</PullQuote>
+
+### Key Design Features
+
+```css
+/* IBM Plex Mono's distinctive features */
+.plex-mono-features {
+  /* Slashed zero for clear distinction */
+  font-feature-settings: "zero" 1;
+  
+  /* Alternative character forms */
+  font-feature-settings: "ss01" 1; /* alt a */
+  font-feature-settings: "ss02" 1; /* alt g */
+  
+  /* Tabular numbers always enabled */
+  font-variant-numeric: tabular-nums;
+}
+```
+
+The typeface includes several stylistic sets that enhance code readability:
+
+<Sidenote number={1}>
+IBM Plex Mono's stylistic sets can dramatically improve character recognition. SS01 provides a more open 'a', while SS02 offers a single-story 'g' that's easier to distinguish in dense code.
+</Sidenote>
+
+## Establishing a Baseline Grid System
+
+Code benefits from strict vertical rhythm. Here's how to implement a proper grid system:
+
+### 1. Define the Grid Unit
+
+```css
+:root {
+  /* 4px baseline grid for precise alignment */
+  --code-grid-unit: 0.25rem; /* 4px */
+  
+  /* Derive all measurements from the grid */
+  --code-line-height: calc(var(--code-grid-unit) * 5); /* 20px */
+  --code-padding-block: calc(var(--code-grid-unit) * 4); /* 16px */
+  --code-padding-inline: calc(var(--code-grid-unit) * 6); /* 24px */
+  
+  /* Character-based measurements */
+  --code-char-width: 0.6ch; /* IBM Plex Mono character width */
+  --code-indent: calc(var(--code-char-width) * 2); /* 2-space indent */
+}
+```
+
+### 2. Apply Grid-Aligned Typography
+
+```css
+/* Grid-aligned code blocks */
+pre {
+  /* Perfect line height for scanning */
+  line-height: var(--code-line-height);
+  
+  /* Grid-aligned padding */
+  padding: var(--code-padding-block) var(--code-padding-inline);
+  
+  /* Ensure consistent character spacing */
+  letter-spacing: 0; /* IBM Plex Mono is well-spaced by default */
+  
+  /* Standardize tab rendering */
+  tab-size: 2;
+  -moz-tab-size: 2;
+  
+  /* Optimize rendering */
+  text-rendering: optimizeSpeed; /* Prioritize consistency over ligatures */
+  font-smooth: always;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+}
+
+/* Maintain grid with different font sizes */
+.code-small {
+  font-size: 0.75rem; /* 12px */
+  line-height: calc(var(--code-grid-unit) * 4); /* 16px */
+}
+
+.code-large {
+  font-size: 1rem; /* 16px */
+  line-height: calc(var(--code-grid-unit) * 6); /* 24px */
+}
+```
+
+## Optimizing Character Recognition
+
+### 1. OpenType Feature Configuration
+
+```css
+/* Optimal feature settings for code */
+code {
+  /* Disable ligatures - they harm code readability */
+  font-variant-ligatures: none;
+  font-feature-settings: 
+    "liga" 0,    /* No ligatures */
+    "clig" 0,    /* No contextual ligatures */
+    "calt" 1,    /* Keep contextual alternates */
+    "zero" 1,    /* Slashed zero - critical for code */
+    "ss01" 1,    /* Alternative 'a' - more open */
+    "ss02" 0,    /* Keep default 'g' for clarity */
+    "tnum" 1,    /* Tabular numbers */
+    "case" 1;    /* Case-sensitive punctuation */
+}
+
+/* Language-specific adjustments */
+.language-haskell code,
+.language-elm code {
+  /* Functional languages can benefit from some ligatures */
+  font-feature-settings: 
+    "liga" 1,    /* Enable for operators like => */
+    "calt" 1,
+    "zero" 1,
+    "tnum" 1;
+}
+
+.language-python code {
+  /* Python's significant whitespace needs clear spaces */
+  word-spacing: 0.1em; /* Slightly wider spaces */
+}
+```
+
+### 2. Weight Optimization
+
+```css
+/* Weight adjustments for different contexts */
+:root {
+  /* Base weights */
+  --code-weight-normal: 400;
+  --code-weight-medium: 500;
+  --code-weight-bold: 600;
+  
+  /* Context-specific weights */
+  --code-weight-comment: 400;
+  --code-weight-keyword: 500;
+  --code-weight-string: 400;
+  --code-weight-function: 500;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  /* Increase weights slightly for better contrast */
+  --code-weight-normal: 425;
+  --code-weight-medium: 525;
+  --code-weight-bold: 625;
+  
+  /* Comments need special attention in dark mode */
+  --code-weight-comment: 450;
+}
+
+/* Apply weights semantically */
+.token.comment {
+  font-weight: var(--code-weight-comment);
+  font-style: italic; /* IBM Plex Mono italic for comments */
+  opacity: 0.8;
+}
+
+.token.keyword,
+.token.operator {
+  font-weight: var(--code-weight-keyword);
+}
+
+.token.function {
+  font-weight: var(--code-weight-function);
+}
+```
+
+## Responsive Code Typography
+
+Code must remain readable across all devices:
+
+### 1. Fluid Sizing Strategy
+
+```css
+/* Responsive code sizing with constraints */
+:root {
+  /* Size scale based on viewport */
+  --code-size-base: clamp(
+    0.75rem,  /* 12px minimum */
+    0.7rem + 0.25vw, /* Fluid scaling */
+    0.9375rem /* 15px maximum */
+  );
+  
+  /* Inline code is slightly smaller */
+  --code-size-inline: calc(var(--code-size-base) * 0.9);
+}
+
+/* Breakpoint-based adjustments */
+@media (max-width: 640px) {
+  pre {
+    /* Smaller size on mobile */
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.5rem; /* 24px */
+    
+    /* Tighter spacing */
+    letter-spacing: 0;
+    
+    /* Reduced padding */
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  pre {
+    /* Larger size on big screens */
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.5625rem; /* 25px */
+  }
+}
+```
+
+### 2. Horizontal Scroll Optimization
+
+```css
+/* Enhanced horizontal scrolling */
+pre {
+  overflow-x: auto;
+  overflow-y: hidden;
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  
+  /* Visual scroll indicators */
+  background-image: 
+    linear-gradient(to right, 
+      var(--code-bg) 0%, 
+      transparent 2rem),
+    linear-gradient(to left, 
+      var(--code-bg) 0%, 
+      transparent 2rem);
+  background-attachment: local, local;
+  background-size: 2rem 100%, 2rem 100%;
+  background-repeat: no-repeat;
+  background-position: left center, right center;
+}
+
+/* Custom scrollbar styling */
+pre::-webkit-scrollbar {
+  height: 0.5rem;
+  background: var(--code-scrollbar-track);
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: var(--code-scrollbar-thumb);
+  border-radius: 0.25rem;
+  
+  &:hover {
+    background: var(--code-scrollbar-thumb-hover);
+  }
+}
+
+/* Mobile-specific scroll enhancements */
+@media (max-width: 768px) {
+  pre {
+    /* Momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    
+    /* Larger touch area for scrollbar */
+    &::-webkit-scrollbar {
+      height: 0.75rem;
+    }
+  }
+}
+```
+
+## Syntax Highlighting with Optimal Contrast
+
+Color choices must work with IBM Plex Mono's weight and spacing:
+
+### 1. Light Theme Colors
+
+```css
+/* High-contrast light theme */
+:root {
+  /* Base colors */
+  --syntax-fg: hsl(0deg 0% 10%);
+  --syntax-bg: hsl(0deg 0% 98%);
+  
+  /* Syntax colors - WCAG AA compliant */
+  --syntax-comment: hsl(0deg 0% 45%);
+  --syntax-keyword: hsl(280deg 70% 40%);
+  --syntax-string: hsl(140deg 70% 30%);
+  --syntax-number: hsl(30deg 80% 40%);
+  --syntax-function: hsl(220deg 70% 40%);
+  --syntax-variable: hsl(0deg 70% 40%);
+  --syntax-operator: hsl(0deg 0% 25%);
+  --syntax-punctuation: hsl(0deg 0% 40%);
+  
+  /* Special states */
+  --syntax-highlight-bg: hsl(60deg 70% 95%);
+  --syntax-selection-bg: hsl(220deg 70% 90%);
+}
+```
+
+### 2. Dark Theme Optimization
+
+```css
+/* Optimized dark theme for reduced eye strain */
+[data-theme="dark"] {
+  /* Softer contrast to prevent glare */
+  --syntax-fg: hsl(0deg 0% 85%);
+  --syntax-bg: hsl(0deg 0% 7%);
+  
+  /* Adjusted colors for dark backgrounds */
+  --syntax-comment: hsl(0deg 0% 55%);
+  --syntax-keyword: hsl(280deg 60% 70%);
+  --syntax-string: hsl(140deg 50% 60%);
+  --syntax-number: hsl(30deg 70% 65%);
+  --syntax-function: hsl(220deg 60% 70%);
+  --syntax-variable: hsl(0deg 60% 70%);
+  --syntax-operator: hsl(0deg 0% 75%);
+  --syntax-punctuation: hsl(0deg 0% 60%);
+  
+  /* States */
+  --syntax-highlight-bg: hsl(60deg 30% 15%);
+  --syntax-selection-bg: hsl(220deg 40% 20%);
+}
+
+/* Apply colors with proper weights */
+.token.comment {
+  color: var(--syntax-comment);
+  font-style: italic;
+  font-weight: 425; /* Slightly heavier in dark mode */
+}
+
+.token.keyword {
+  color: var(--syntax-keyword);
+  font-weight: 525;
+}
+
+.token.string {
+  color: var(--syntax-string);
+  font-weight: 425;
+}
+```
+
+## Inline Code Excellence
+
+Inline code requires special attention to maintain baseline alignment:
+
+### 1. Perfect Vertical Alignment
+
+```css
+/* Inline code with precise alignment */
+:not(pre) > code {
+  /* Font configuration */
+  font-family: var(--font-mono);
+  font-size: 0.875em; /* 87.5% of parent */
+  font-weight: 450;
+  
+  /* Visual design */
+  background: var(--code-inline-bg);
+  border: 1px solid var(--code-inline-border);
+  border-radius: 0.25rem;
+  
+  /* Grid-aligned padding */
+  padding: 0.125rem 0.375rem; /* 2px 6px */
+  
+  /* Perfect baseline alignment */
+  display: inline-block;
+  line-height: 1;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.05em; /* Optical adjustment */
+  
+  /* Prevent wrapping */
+  white-space: nowrap;
+  
+  /* Features */
+  font-feature-settings: "zero" 1, "tnum" 1, "case" 1;
+}
+
+/* Context-specific adjustments */
+p code {
+  /* In paragraphs */
+  margin: 0 0.125em;
+}
+
+h1 code, h2 code, h3 code {
+  /* In headings */
+  font-size: 0.85em;
+  font-weight: inherit;
+  background: transparent;
+  border-color: currentColor;
+  opacity: 0.8;
+}
+
+li code {
+  /* In lists */
+  font-size: 0.9em;
+}
+```
+
+### 2. Responsive Inline Code
+
+```css
+/* Mobile optimizations for inline code */
+@media (max-width: 640px) {
+  :not(pre) > code {
+    /* Slightly larger on mobile for touch */
+    font-size: 0.9em;
+    padding: 0.1875rem 0.4375rem; /* 3px 7px */
+    
+    /* Allow breaking on mobile */
+    white-space: normal;
+    word-break: break-word;
+    hyphens: none;
+  }
+}
+
+/* High DPI adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), 
+       (min-resolution: 192dpi) {
+  :not(pre) > code {
+    /* Crisper rendering on retina */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+```
+
+## Advanced Features
+
+### 1. Line Numbers with Grid Alignment
+
+```css
+/* Grid-perfect line numbers */
+.line-numbers {
+  display: grid;
+  grid-template-columns: minmax(2rem, max-content) 1fr;
+  gap: 1rem;
+}
+
+.line-number {
+  /* Right-aligned numbers */
+  text-align: right;
+  color: var(--code-line-number);
+  font-size: 0.875em;
+  font-feature-settings: "tnum" 1;
+  opacity: 0.5;
+  user-select: none;
+  
+  /* Maintain baseline */
+  line-height: inherit;
+  padding-right: 0.5rem;
+}
+
+/* Highlighted lines */
+.line-highlight {
+  background: var(--syntax-highlight-bg);
+  display: block;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  /* Maintain grid */
+  min-height: var(--code-line-height);
+}
+```
+
+### 2. Smart Copy Button
+
+```css
+/* Accessible copy button */
+.code-copy {
+  /* Positioning */
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  
+  /* Size for touch targets */
+  min-width: 2.75rem; /* 44px */
+  min-height: 2.75rem; /* 44px */
+  
+  /* Visual design */
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 0.375rem;
+  
+  /* Typography */
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  
+  /* States */
+  &:hover {
+    background: var(--code-hover-bg);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+  
+  &[data-copied] {
+    &::after {
+      content: "Copied!";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      background: var(--code-tooltip-bg);
+      color: var(--code-tooltip-fg);
+      border-radius: 0.25rem;
+      white-space: nowrap;
+    }
+  }
+}
+```
+
+## Performance Optimization
+
+### 1. Font Loading Strategy
+
+```javascript
+// Progressive enhancement for code fonts
+class CodeFontOptimizer {
+  constructor() {
+    this.fonts = {
+      primary: 'IBM Plex Mono',
+      weights: ['400', '400 italic', '500', '600']
+    };
+  }
+  
+  async init() {
+    // Check if fonts API is available
+    if (!('fonts' in document)) return;
+    
+    try {
+      // Load critical weight first
+      await document.fonts.load(`400 1em ${this.fonts.primary}`);
+      document.documentElement.classList.add('mono-400-loaded');
+      
+      // Load other weights asynchronously
+      this.loadSecondaryWeights();
+    } catch (error) {
+      console.warn('Font loading failed:', error);
+      this.applyFallbackMetrics();
+    }
+  }
+  
+  async loadSecondaryWeights() {
+    const loads = this.fonts.weights.slice(1).map(weight => 
+      document.fonts.load(`${weight} 1em ${this.fonts.primary}`)
+    );
+    
+    await Promise.all(loads);
+    document.documentElement.classList.add('mono-all-loaded');
+  }
+  
+  applyFallbackMetrics() {
+    // Adjust metrics for system fonts
+    document.documentElement.style.setProperty('--code-fallback-scale', '0.95');
+    document.documentElement.style.setProperty('--code-fallback-spacing', '0.02em');
+  }
+}
+
+// Initialize on load
+new CodeFontOptimizer().init();
+```
+
+### 2. Render Performance
+
+```css
+/* Performance optimizations */
+pre {
+  /* Reduce repaints */
+  will-change: transform;
+  contain: layout style paint;
+  
+  /* Hardware acceleration for scrolling */
+  transform: translateZ(0);
+  
+  /* Efficient text rendering */
+  text-rendering: optimizeSpeed;
+  
+  /* Prevent font boosting on mobile */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Lazy load syntax highlighting */
+pre:not(.highlighted) {
+  /* Basic styling before JS loads */
+  color: var(--syntax-fg);
+  
+  /* Show loading state */
+  &::before {
+    content: "Loading syntax highlighting...";
+    display: block;
+    opacity: 0.5;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+}
+```
+
+## Testing and Validation
+
+To ensure optimal rendering:
+
+### Visual Tests
+1. Character disambiguation: `0O 1lI |`
+2. Alignment test: ASCII art and tables
+3. Density test: Minified code readability
+4. Syntax variety: Multiple languages
+
+### Performance Tests
+1. Font loading time < 200ms
+2. Syntax highlighting < 50ms
+3. Horizontal scroll smoothness
+4. Copy interaction < 100ms
+
+### Accessibility Tests
+1. WCAG contrast ratios (minimum AA)
+2. Screen reader code navigation
+3. Keyboard-only interaction
+4. 200% zoom functionality
+
+<PullQuote variant="large">
+Code typography is not just about monospace fonts—it's about creating an environment where complex logic becomes visually parseable and maintainable.
+</PullQuote>
+
+## Conclusion
+
+IBM Plex Mono, when properly optimized, transforms code from mere text into a structured, readable document. Through careful attention to grid alignment, OpenType features, responsive scaling, and performance optimization, we create a code reading experience that reduces cognitive load and increases comprehension.
+
+The techniques presented here—from baseline grids to syntax highlighting—work together to showcase code as both functional and beautiful. Whether viewing a simple snippet or analyzing complex algorithms, properly implemented IBM Plex Mono ensures that the typography enhances rather than hinders understanding.
+
+Remember: great code deserves great typography.
+
+---
+
+## Implementation Checklist
+
+- [ ] Load all necessary font weights and styles
+- [ ] Implement 4px baseline grid system
+- [ ] Configure OpenType features appropriately
+- [ ] Set up responsive sizing scales
+- [ ] Optimize syntax highlighting colors
+- [ ] Add horizontal scroll enhancements
+- [ ] Implement line numbering system
+- [ ] Create accessible copy functionality
+- [ ] Test across devices and browsers
+- [ ] Monitor performance metrics
+
+## Resources
+
+- [IBM Plex Repository](https://github.com/IBM/plex)
+- [OpenType Feature Tags](https://docs.microsoft.com/typography/opentype/spec/featuretags)
+- [Prism.js Themes](https://prismjs.com/themes/)
+- [Code Typography Best Practices](https://ia.net/topics/in-search-of-the-perfect-writing-font)
+- [WCAG Contrast Checker](https://webaim.org/resources/contrastchecker/)

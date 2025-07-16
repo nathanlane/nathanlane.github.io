@@ -1,0 +1,77 @@
+---
+title: "A Comprehensive Design System Audit and Refactoring Plan"
+publishDate: "2025-07-13"
+description: "A formal prompt for guiding a senior UI/UX engineer through a full audit and refactoring of a project's design system, based on five core principles."
+tags: ["planning", "refactoring", "design-systems", "audit", "architecture"]
+draft: false
+---
+
+### Objective
+
+You are a senior UI/UX engineer and front-end architect. Your mission is to perform a comprehensive audit of this project's front-end architecture and produce a prioritized, actionable refactoring plan to establish a robust, maintainable, and consistent design system.
+
+The final plan must be guided by these five core principles:
+
+1.  **Single Source of Truth (SSoT):** All design decisions (spacing, color, typography) should originate from a single, authoritative source.
+2.  **System Over Ad-Hoc Values:** The system must eliminate "magic numbers" and inconsistent one-off values.
+3.  **Configuration-Driven Design:** The project's tools, especially Tailwind CSS, must be configured to enforce the design system.
+4.  **Separation of Semantics and Styling:** The visual presentation of elements should be decoupled from their underlying HTML tags.
+5.  **Developer Experience (DX):** The system should be intuitive and easy for developers to use correctly.
+
+Execute this mission in two phases.
+
+---
+
+### Phase 1: Comprehensive Audit
+
+Use the available tools (`read_file`, `search_file_content`) to investigate the codebase and answer the following questions. Document your findings for each point.
+
+1.  **Audit the Single Source of Truth (SSoT):**
+    *   **Action:** Analyze `src/styles/global.css`.
+    *   **Goal:** Identify the core design tokens. Does a system of CSS Custom Properties exist for the baseline grid (`--baseline`, `--grid-unit`), spacing scale (`--space-*`), and color palette? Document this as the foundational "source of truth."
+
+2.  **Audit for Systemic Consistency (System vs. Ad-Hoc):**
+    *   **Action:** Use `search_file_content` across all `*.astro` and `*.mdx` files.
+    *   **Goal:** Identify all instances of spacing, sizing, and color values that deviate from the established SSoT.
+        *   Search for hardcoded values (e.g., `p-[13px]`, `h-[50px]`).
+        *   Search for default Tailwind utilities that are not part of our grid-aligned system (e.g., `p-3`, `p-5`, `mt-10`, `h-8`, `w-12`).
+        *   Create a list of files containing these non-compliant values.
+
+3.  **Audit the Configuration Layer (`tailwind.config.ts`):**
+    *   **Action:** Read and analyze `tailwind.config.ts`.
+    *   **Goal:** Determine how well the configuration enforces the SSoT. Does the `theme.extend.spacing` object correctly map utility names (e.g., `1b`, `2b`) to the CSS variables (`var(--space-1)`)? Is the same true for `colors` and `fontSize`? Identify any gaps in this configuration.
+
+4.  **Audit the Separation of Semantics and Styling:**
+    *   **Action:** Review `src/styles/global.css` and any other CSS files.
+    *   **Goal:** Identify styles applied directly to raw HTML elements (e.g., `h1 { font-size: 2rem; }`, `p { margin-top: 1em; }`). Assess whether these global styles create conflicts with the intended utility-class-driven approach.
+
+5.  **Audit the Developer Experience (DX):**
+    *   **Action:** Review the naming conventions found in the SSoT and the Tailwind configuration.
+    *   **Goal:** Evaluate the clarity of the token names. Is the `*b` convention (e.g., `p-4b`) clear, or would a more semantic approach (e.g., `p-space-m`) be more intuitive for the development team?
+
+---
+
+### Phase 2: The Refactoring Plan
+
+Based on your audit findings, produce a formal, prioritized refactoring plan. Structure your response in three distinct sections:
+
+**A. Audit Summary:**
+
+*   Provide a high-level assessment of the current system's health.
+*   Briefly summarize the key strengths (e.g., "A foundational SSoT exists") and the primary weaknesses (e.g., "Systemic inconsistency and configuration gaps are prevalent").
+
+**B. Prioritized List of Issues:**
+
+*   Organize the problems you discovered into three categories: **High Priority**, **Medium Priority**, and **Low Priority**.
+*   **High Priority:** Issues that fundamentally break the system's integrity (e.g., widespread use of hardcoded values in key components).
+*   **Medium Priority:** Issues that cause inconsistency but are less critical (e.g., `prose` styles not fully aligned with the grid, non-standard icon sizes).
+*   **Low Priority:** Cosmetic or DX improvements that can be addressed after the core system is stable (e.g., renaming utility classes).
+
+**C. Step-by-Step Refactoring Strategy:**
+
+*   Provide a clear, actionable plan to resolve the identified issues, starting with the highest priority.
+*   **Step 1: Solidify the Foundation.** If needed, specify changes to `global.css` or `tailwind.config.ts` to ensure the SSoT is complete and correctly integrated.
+*   **Step 2: Systematic Value Replacement.** Detail the process for replacing all non-compliant values. Provide a list of files to be modified and give concrete examples (e.g., "In `Header.astro`, replace `px-5` with `px-4b`.").
+*   **Step 3: Address Semantic Styling.** Propose a plan to refactor conflicting global styles, likely by migrating them to utility classes or component-specific styles.
+*   **Step 4: Propose DX Enhancements.** As a final, optional step, outline a strategy for any recommended naming convention changes.
+*   **Step 5: Verification.** Conclude the plan with a list of commands (`pnpm lint`, `pnpm check`, `pnpm build`) that must be run to verify the successful completion of the refactoring.

@@ -1,0 +1,71 @@
+---
+import { socialLinks, siteConfig } from "@/site.config";
+
+export interface Props {
+	email?: string;
+	class?: string;
+	showPageLinks?: boolean;
+}
+
+const { 
+	email = siteConfig.email,
+	class: className = "",
+	showPageLinks = true
+} = Astro.props;
+
+// Define page type links
+const pageLinks = [
+	{ title: "Research", href: "/research/" },
+	{ title: "Projects", href: "/projects/" },
+	{ title: "Writing", href: "/writing/" },
+	{ title: "Blog", href: "/posts/" },
+	{ title: "Documentation", href: "/series/lane-docs/" },
+	{ title: "Media", href: "/media/" }
+];
+
+// Filter social links (remove LinkedIn)
+const filteredSocialLinks = socialLinks.filter(link => 
+	!link.isDownload && 
+	link.friendlyName !== "Email" && 
+	link.friendlyName !== "Hugging Face" &&
+	link.friendlyName !== "LinkedIn"
+);
+---
+
+<div class={`space-y-3 p-4 bg-warm-50 dark:bg-warm-800 rounded-lg border border-warm-100 dark:border-warm-700 ${className}`}>
+	{showPageLinks && (
+		<nav aria-label="Page sections">
+			<h5 class="text-xs font-medium text-light mb-2">More writing and content</h5>
+			<ul class="space-y-0.5">
+				{pageLinks.map((link) => (
+					<li>
+						<a 
+							href={link.href} 
+							class="block text-xs nav-link py-0.5"
+							data-astro-prefetch
+						>
+							{link.title}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	)}
+
+	<div class="pt-3 border-t border-warm-200 dark:border-warm-600">
+		<ul class="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+			{filteredSocialLinks.map((link) => (
+				<li class="text-xs">
+					<a 
+						href={link.link} 
+						class="inline-link" 
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						{link.friendlyName}
+					</a>
+				</li>
+			))}
+		</ul>
+	</div>
+</div>

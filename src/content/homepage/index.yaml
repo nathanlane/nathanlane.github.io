@@ -1,0 +1,58 @@
+hero:
+  title: "Nathan Lane, PhD"
+  description: "Assistant Professor of Economics at the University of Oxford. I am empirical economist and data scientist studying how economies change. I am also co-PI of the Industrial Policy Group lab."
+  buttons:
+    - text: "Research"
+      href: "/research/"
+      variant: "primary"
+    - text: "Industrial Policy Group"
+      href: "https://www.industrialpolicygroup.com/"
+      variant: "secondary"
+
+currentProjects:
+  title: "Current Projects"
+  projects:
+    - title: "Research Papers"
+      description: "My research papers."
+      url: "/research/"
+    
+    - title: "Industrial Policy Data"
+      description: "A database of industrial policy interventions across the world."
+      url: "https://www.industrialpolicydata.com/"
+    
+    - title: "Industrial Policy Group lab"
+      description: "The Industrial Policy Group is a research lab at the University of Oxford and UBC."
+      url: "https://www.industrialpolicygroup.com/"
+
+    - title: "LaTeX Template"
+      description: "A LaTeX template for research papers."
+      url: "https://github.com/nathanlane/lane_latex_template"
+
+contact:
+  title: "More"
+  email: "drnathanlane@gmail.com"
+
+showcase:
+  title: "What I'm Working On"
+  # Configuration for content sections displayed on homepage
+  contentSections:
+    research:
+      title: "Recent Papers"
+      itemCount: 3  # Number of papers to show
+      viewAllText: "View all research papers"
+      viewAllUrl: "/research/"
+    writing:
+      title: "Recent Writing"
+      itemCount: 2  # Number of writing pieces to show
+      viewAllText: "View all writing"
+      viewAllUrl: "/writing/"
+    media:
+      title: "Recent Media"
+      itemCount: 5  # Number of media items to show
+      viewAllText: "View all media coverage"
+      viewAllUrl: "/media/"
+  sections: []  # Empty sections array to satisfy schema
+
+posts:
+  title: "Posts"
+  maxPosts: 10

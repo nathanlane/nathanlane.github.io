@@ -1,0 +1,101 @@
+---
+title: "Track 3: Final Cleanup and Verification Plan"
+publishDate: "2025-07-13"
+description: "Detailed action plan for the final agent to perform a global cleanup of all remaining non-standard spacing and sizing utilities, ensuring 100% baseline grid compliance."
+tags: ["refactoring", "planning", "track-3", "cleanup", "verification"]
+draft: true
+---
+
+## 1. Objective
+
+Your mission is to perform the final, critical sweep of the entire codebase to eliminate **all remaining non-compliant spacing and sizing utilities**. This task ensures that every component, layout, and icon adheres strictly to the project's established baseline grid, completing the refactoring initiative.
+
+## 2. Prerequisites
+
+**CRITICAL:** Do not begin this task until you have confirmed that both **Track 1 (Core Layout)** and **Track 2 (Content System)** have been fully completed and verified by their respective agents. This plan assumes that the foundational layouts and the `prose` system are already grid-aligned.
+
+## 3. The Baseline Grid System: Final Reference
+
+All replacements must map to this system. There are no exceptions.
+
+-   **Baseline:** `1.5rem` (24px)
+-   **Grid Unit:** `0.375rem` (6px)
+-   **Spacing Scale (and `*b` classes):**
+    -   `1b` = 6px
+    -   `2b` = 12px
+    -   `3b` = 18px
+    -   `4b` = 24px
+    -   `5b` = 30px
+    -   `6b` = 36px
+    -   `8b` = 48px
+    -   `10b` = 60px
+    -   `12b` = 72px
+    -   `13b` = 78px
+    -   `14b` = 84px
+    -   `16b` = 96px
+
+## 4. Step-by-Step Execution Plan
+
+This phase is methodical: search, replace, verify. Repeat.
+
+### Task 3.A: Global Search for Non-Compliant Utilities
+
+Your first action is to identify all remaining files that use incorrect spacing. You will use the `search_file_content` tool with regular expressions to find offending Tailwind classes.
+
+**Search Patterns:**
+
+Use these regex patterns to find classes that use Tailwind's default numeric scale instead of our `*b` scale. The patterns look for spacing prefixes (`p-`, `m-`, `h-`, etc.) followed by a number that is not a `*b` suffix.
+
+1.  `"(p|px|py|pt|pb|pl|pr)-[0-9.]+"`
+2.  `"(m|mx|my|mt|mb|ml|mr)-[0-9.]+"`
+3.  `"(h|w)-[0-9.]+"`
+4.  `"size-[0-9.]+"`
+5.  `"gap-[0-9.]+"`
+6.  `"space-y-[0-9.]+"`
+7.  `"space-x-[0-9.]+"`
+
+**Execution:**
+
+-   Run `search_file_content` for each pattern across all `*.astro` and `*.mdx` files.
+-   Compile a list of all files that contain one or more matches. This is your hit list.
+
+### Task 3.B: Systematic Refactoring and Replacement
+
+For each file on your hit list, perform the following:
+
+1.  **Read the file** to get its full content.
+2.  **Identify each incorrect class** (e.g., `p-5`, `h-10`, `gap-3`).
+3.  **Calculate the pixel value** of the incorrect class (e.g., `p-5` = `1.25rem` = `20px`).
+4.  **Find the closest grid-aligned value** from the reference scale (e.g., `20px` is closest to `18px` (`3b`) or `24px` (`4b`)). Choose the value that makes the most sense in the design context. When in doubt, choose the larger value for better spacing.
+5.  **Replace the class** (e.g., `p-5` → `p-3b` or `p-4b`).
+6.  **Use the `replace` tool** to apply the change.
+7.  **Visually Verify:** After modifying a file, run `pnpm dev` and visually inspect the component you just changed. Ensure the new spacing looks correct and does not break the layout.
+
+### Task 3.C: Specific Focus on Icon Sizing
+
+Icons are a common source of non-grid values. Pay special attention to them.
+
+-   **Action:** Search for all instances of `size-*` (e.g., `size-4`, `size-5`, `size-10`).
+-   **Replacement:** Replace them with the closest `*b` equivalent (e.g., `size-4` (16px) → `size-3b` (18px); `size-5` (20px) → `size-3b` (18px)). The goal is consistency, not exact pixel matching.
+
+## 5. Final Project-Wide Verification
+
+Once you have cleared your entire hit list and no more non-compliant classes are found, you must perform the final verification for the whole project.
+
+-   **Action:** Run the following commands in order.
+    1.  `pnpm lint`
+    2.  `pnpm format`
+    3.  `pnpm check`
+    4.  `pnpm build`
+-   **Verification:** All commands must complete successfully without any errors. The `pnpm build` command succeeding is the final confirmation that the refactoring is complete and the site is stable.
+
+## 6. Final Checklist
+
+-   [ ] A global search for all non-compliant spacing utilities has been performed.
+-   [ ] All identified files have been refactored to use `*b` spacing tokens.
+-   [ ] All `size-*` classes for icons have been mapped to `*b` equivalents.
+-   [ ] Each change has been visually verified using `pnpm dev`.
+-   [ ] `pnpm lint` passes without errors.
+-   [ ] `pnpm format` has been run.
+-   [ ] `pnpm check` passes without errors.
+-   [ ] `pnpm build` completes successfully.

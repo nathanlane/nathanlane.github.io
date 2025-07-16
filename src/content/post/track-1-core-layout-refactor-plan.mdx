@@ -1,0 +1,76 @@
+---
+title: "Track 1: Core Layout Refactoring Plan"
+publishDate: "2025-07-13"
+description: "Detailed action plan for Agent 1 to refactor core layout components (Header, Footer, Base) to align with the project's baseline grid."
+tags: ["refactoring", "planning", "track-1", "layout"]
+draft: false
+---
+
+## 1. Objective
+
+Your mission is to refactor the core layout components of this website to strictly enforce the established baseline grid system. This involves identifying all hardcoded or non-compliant spacing and sizing values and replacing them with the correct grid-aligned Tailwind utilities.
+
+**Primary Guiding Document:** All work must adhere to the principles and systems defined in **`baseline-grid-refactoring-plan.mdx`**.
+
+## 2. The Baseline Grid System: A Recap
+
+The entire vertical and horizontal rhythm of the site is based on the following values. You must use the `*b` utility classes or semantic tokens that map to this scale.
+
+-   **Baseline:** `1.5rem` (24px)
+-   **Grid Unit:** `0.375rem` (6px)
+-   **Spacing Scale:**
+    -   `1b` / `space-1` = **6px**
+    -   `2b` / `space-2` = **12px**
+    -   `3b` / `space-3` = **18px**
+    -   `4b` / `space-4` = **24px** (1 baseline)
+    -   `5b` = **30px**
+    -   `6b` / `space-6` = **36px**
+    -   `8b` / `space-8` = **48px**
+
+## 3. Step-by-Step Execution Plan
+
+### Task 1.A: Refactor `src/components/layout/Header.astro`
+
+-   **Action:** Replace all non-grid-aligned spacing and sizing values.
+    -   `px-5` (20px) → `px-4b` (24px)
+    -   `h-8` (32px) → `h-5b` (30px)
+    -   `size-8` (32px) → `size-5b` (30px)
+    -   `gap-8` (32px) → `gap-5b` (30px)
+    -   `ml-8` (32px) → `ml-5b` (30px)
+    -   `gap-4` (16px) → `gap-3b` (18px)
+    -   `ms-3` (12px) → `ms-2b` (12px)
+-   **Verification:**
+    1.  Run `pnpm dev`.
+    2.  Use browser developer tools to inspect the header.
+    3.  Measure the padding, gaps, and heights to confirm they match the new pixel values derived from the `*b` classes (e.g., `padding-left` is `24px`).
+    4.  Check for any visual regressions in alignment or layout.
+
+### Task 1.B: Refactor `src/components/layout/Footer.astro`
+
+-   **Action:** Replace `px-5` (20px) with `px-4b` (24px).
+-   **Verification:**
+    1.  Visually inspect the footer in the browser.
+    2.  Confirm the left and right padding is now `24px`.
+
+### Task 1.C: Refactor `src/layouts/Base.astro`
+
+-   **Action:**
+    -   `mt-20` (80px) → `mt-13b` (78px)
+    -   `md:mt-8` (32px) → `md:mt-5b` (30px)
+-   **Verification:**
+    1.  Visually inspect the main content area's top margin on both mobile (`<768px`) and desktop (`>768px`) viewports.
+    2.  Confirm the new margins are applied correctly.
+
+## 4. Final Checklist
+
+-   [x] `Header.astro` has been fully refactored and verified.
+-   [x] `Footer.astro` has been fully refactored and verified.
+-   [x] `Base.astro` has been fully refactored and verified.
+-   [x] All changes have been checked for visual regressions.
+-   [x] The site has been checked with `pnpm dev` and builds successfully with `pnpm build`.
+
+## 5. Completion Status
+
+**✅ COMPLETED on July 14, 2025**
+
+All core layout components have been successfully refactored to align with the 6px baseline grid system. The refactoring ensures consistent spacing throughout the site's main structural elements.
