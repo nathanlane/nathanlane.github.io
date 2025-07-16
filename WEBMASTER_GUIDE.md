@@ -1,4 +1,4 @@
-# Webmaster Guide - lanewebsite
+# Webmaster Guide - nathanlane.github.io
 
 This guide covers everything you need to know to manage and deploy this website after the production readiness improvements.
 
