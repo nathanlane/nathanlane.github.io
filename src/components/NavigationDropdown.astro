@@ -67,17 +67,19 @@ const id = `dropdown-${title.toLowerCase().replace(/\s+/g, '-')}`;
 <style>
   .dropdown {
     position: relative;
+    z-index: 50;
   }
 
   .dropdown-trigger {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    padding: var(--space-2) 0;
+    padding: var(--space-xs) var(--space-xs);
     background: none;
     border: none;
-    font-family: inherit;
+    font-family: var(--font-body);
     font-size: inherit;
+    font-weight: normal;
     color: var(--color-text);
     cursor: pointer;
     transition: color 200ms;
@@ -115,10 +117,12 @@ const id = `dropdown-${title.toLowerCase().replace(/\s+/g, '-')}`;
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md, 8px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     opacity: 0;
     visibility: hidden;
     transition: opacity 200ms, visibility 200ms;
+    backdrop-filter: none;
+    z-index: 999;
   }
 
   .dropdown-menu:not([hidden]) {
@@ -128,6 +132,8 @@ const id = `dropdown-${title.toLowerCase().replace(/\s+/g, '-')}`;
 
   .dropdown-menu-inner {
     padding: var(--space-2);
+    background: var(--color-bg);
+    border-radius: inherit;
   }
 
   .dropdown-item {
@@ -181,6 +187,24 @@ const id = `dropdown-${title.toLowerCase().replace(/\s+/g, '-')}`;
       padding: var(--space-3) var(--space-4);
       margin: 0 calc(var(--space-4) * -1);
     }
+  }
+
+  /* Ensure proper contrast in dark mode */
+  :global(.dark) .dropdown-menu {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Light mode specific styles */
+  :global(:not(.dark)) .dropdown-menu {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Make dropdown font size consistent */
+  .dropdown-trigger {
+    font-size: var(--step--1);
   }
 </style>
 

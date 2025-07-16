@@ -1,12 +1,9 @@
 ---
 import ThemeToggle from "@/components/ThemeToggle.astro";
-import { menuLinks, siteConfig, socialLinks } from "@/site.config";
+import { navigationConfig } from "@/config/navigation.config";
 import { Icon } from "astro-icon/components";
 
-// Filter resume link from social links
-const resumeLink = socialLinks.find(link => link.isDownload);
-// Filter email link from social links
-const emailLink = socialLinks.find(link => link.friendlyName === "Email");
+const { header } = navigationConfig;
 ---
 
 <header
@@ -14,155 +11,204 @@ const emailLink = socialLinks.find(link => link.friendlyName === "Email");
 	class="header fixed md:relative top-0 left-0 z-20 w-full bg-bgColor/95 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none"
 >	
 	<div class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s">
-		<!-- Left side: Logo and Title -->
-		<div class="flex items-center">
-			<a
-				aria-label={siteConfig.title}
-				aria-current={Astro.url.pathname === "/" ? "page" : false}
-				class="group flex h-space-l items-center hover:filter-none sm:relative"
-				href="/"
-			>	
-				{siteConfig.showLogo && (
-					<div title={siteConfig.title}>
-						<svg class="inline-block size-space-l fill-current text-accent-base dark:text-accent-two drop-shadow-[0px_2.5px_2.5px_rgba(0,0,0,0.35)]">
-							<use href="/brand.svg#lane"></use>
-						</svg>
-					</div>
-				)}
-				
-				{siteConfig.showTitle && (
-					<span class="site-title hidden xs:block">
-						{siteConfig.title}
+		<!-- Left side: Logo (if shown) -->
+		{header.logo.show && (
+			<div class="flex items-center">
+				<a
+					aria-label={header.logo.text}
+					aria-current={Astro.url.pathname === "/" ? "page" : false}
+					class="group flex h-space-l items-center hover:filter-none sm:relative"
+					href={header.logo.href}
+				>	
+					<span class="site-title text-base font-heading font-light">
+						{header.logo.text}
 					</span>
-				)}
-			</a>
-		</div>
+				</a>
+			</div>
+		)}
+		
+		<!-- If no logo, add spacer div to maintain layout -->
+		{!header.logo.show && <div />}
 		
 		<!-- Right side: Navigation and Actions -->
-		<div class="flex items-center">
+		<div class="flex items-center gap-space-xs">
 			<nav
 				aria-label="Main navigation"
-				class="nav-desktop hidden md:flex items-center"
+				class="nav-desktop hidden md:flex items-center gap-space-s"
 			>	
-				{
-					menuLinks.map((link) => (
-						<a
-							aria-current={Astro.url.pathname === link.path ? "page" : false}
-							class="nav-link"
-							data-astro-prefetch
-							href={link.path}
-						>
-							{link.title}
-						</a>
-					))
-				}
-				
-				{resumeLink && (
+				{header.primary.map((link) => (
 					<a
-						href={resumeLink.link}
-						target="_blank"
+						aria-current={Astro.url.pathname === link.href ? "page" : false}
 						class="nav-link"
-						aria-label={`Download ${resumeLink.friendlyName}`}
+						data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
+						href={link.href}
 					>
-						{resumeLink.friendlyName}
+						{link.title}
 					</a>
-				)}
-				
-				<a
-					class="nav-link nav-link--highlight"
-					data-astro-prefetch
-					href="/series/lane-docs/"
-				>
-					Docs
-				</a>
+				))}
 			</nav>
 			
-			<div class="nav-actions flex items-center">
-					{emailLink && (
-						<a
-							href={emailLink.link}
-							class="nav-icon-link"
-							aria-label={`Send email to ${siteConfig.author}`}
-						>
-							<Icon aria-hidden="true" class="nav-icon" name={emailLink.name} />
-						</a>
-					)}
-					<ThemeToggle />
-				</div>
+			<div class="nav-actions flex items-center gap-space-xs">
+				<ThemeToggle />
+				
+				<!-- Mobile menu toggle -->
+				<button
+					aria-expanded="false"
+					aria-haspopup="menu"
+					aria-label="Open navigation menu"
+					class="mobile-menu-toggle md:hidden"
+					id="toggle-nav-menu-mobile"
+					type="button"
+				>
+					<Icon
+						id="open-nav-menu-icon"
+						aria-hidden="true"
+						class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
+						focusable="false"
+						name="lucide:menu"
+					/>
+					<Icon
+						id="close-nav-menu-icon"
+						aria-hidden="true"
+						class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0"
+						focusable="false"
+						name="lucide:x"
+					/>
+				</button>
 			</div>
-		</div>	
-			
-			<button
-				aria-expanded="false"
-				aria-haspopup="menu"
-				aria-label="Open navigation menu"
-				class="mobile-menu-toggle md:hidden"
-				id="toggle-nav-menu-mobile"
-				type="button"
-			>
-				<Icon
-					id="open-nav-menu-icon"
-					aria-hidden="true"
-					class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100"
-					focusable="false"
-					name="lucide:menu"
-				/>
-				<Icon
-					id="close-nav-menu-icon"
-					aria-hidden="true"
-					class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0"
-					focusable="false"
-					name="lucide:x"
-				/>
-			</button>
 		</div>
 	</div>
 </header>
 
+<!-- Mobile drawer menu -->
 <div id="drawer" class="fixed inset-0 z-10 hidden" aria-hidden="true">
 	<div
 		id="drawer-body"
 		class="absolute inset-0 -translate-y-full transform bg-bgColor transition-all duration-300 ease-in-out"
 	>
 		<div class="fixed top-0 left-1/2 -ml-[50vw] w-screen pointer-events-none min-h-screen overflow-x-hidden overflow-y-visible blur-2xl">
-				<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-				<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-				<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-				<div class="absolute top-[-85%] left-[25%] w-[55%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-				<div class="absolute top-[-75%] left-[-25%] w-[65%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
-				<div class="absolute top-[-75%] right-[-25%] w-[65%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
-				<div class="absolute top-[-85%] left-[-30%] w-[85%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
-				<div class="absolute top-[-85%] right-[-30%] w-[85%] h-full bg-gradient-to-b from-orange-300 via-indigo-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
-		
+			<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+			<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+			<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+			<div class="absolute top-[-85%] left-[25%] w-[55%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
+			<div class="absolute top-[-75%] left-[-25%] w-[65%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
+			<div class="absolute top-[-75%] right-[-25%] w-[65%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
+			<div class="absolute top-[-85%] left-[-30%] w-[85%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
+			<div class="absolute top-[-85%] right-[-30%] w-[85%] h-full bg-gradient-to-b from-orange-300 via-indigo-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
 		</div>	
 		
 		<nav
 			aria-label="Mobile navigation menu"
-			class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center text-accent-two"
+			class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center"
 			id="nav-menu-mobile"
 		>
-			{
-				menuLinks.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="nav-link text-lg"
-						data-astro-prefetch
-						href={link.path}
-					>
-						{link.title}
-					</a>
-				))
-			}
-			<a
-				class="nav-link nav-link--highlight"
-				data-astro-prefetch
-				href="/series/lane-docs/"
-			>
-				Docs
-			</a>
+			{header.primary.map((link) => (
+				<a
+					aria-current={Astro.url.pathname === link.href ? "page" : false}
+					class="nav-link text-lg"
+					data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
+					href={link.href}
+				>
+					{link.title}
+				</a>
+			))}
 		</nav>
 	</div>
 </div>
+
+<style>
+	/* Header styles */
+	.header {
+		--header-height: 72px;
+		height: var(--header-height);
+	}
+
+	.site-title {
+		color: var(--color-text);
+		transition: color 200ms;
+	}
+
+	.site-title:hover {
+		color: var(--color-text-muted);
+	}
+
+	/* Navigation link styles */
+	.nav-link {
+		display: inline-block;
+		padding: var(--space-xs) var(--space-xs);
+		color: var(--color-text);
+		text-decoration: none;
+		transition: color 200ms;
+		position: relative;
+		font-size: var(--step--1);
+		font-family: var(--font-body);
+		font-weight: normal;
+	}
+
+	.nav-link:hover {
+		color: var(--color-text-muted);
+	}
+
+	.nav-link[aria-current="page"] {
+		color: var(--color-accent);
+	}
+
+	/* Mobile menu toggle */
+	.mobile-menu-toggle {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: var(--space-l);
+		height: var(--space-l);
+		padding: 0;
+		background: transparent;
+		border: none;
+		color: var(--color-text);
+		cursor: pointer;
+		transition: color 200ms;
+	}
+
+	.mobile-menu-toggle:hover {
+		color: var(--color-text-muted);
+	}
+
+	.icon-nav {
+		width: 24px;
+		height: 24px;
+		transition: all 200ms ease-in-out;
+	}
+
+	/* Mobile drawer styles */
+	#drawer {
+		backdrop-filter: blur(8px);
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	#drawer-body {
+		height: 100vh;
+		overflow-y: auto;
+	}
+
+	.mobile-nav-section {
+		margin-bottom: var(--space-m);
+	}
+
+	.mobile-nav-heading {
+		font-size: var(--text--1);
+		font-weight: 500;
+		color: var(--color-text-muted);
+		margin-bottom: var(--space-xs);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.mobile-nav-items {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+	}
+</style>
 
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
@@ -217,8 +263,31 @@ const emailLink = socialLinks.find(link => link.friendlyName === "Email");
 			// Update button state
 			toggleNavMenuMobileButton.setAttribute("aria-expanded", (!isOpen).toString());
 		});
+
+		// Close drawer when clicking on a link
+		const mobileNavLinks = document.querySelectorAll("#nav-menu-mobile a");
+		mobileNavLinks.forEach(link => {
+			link.addEventListener("click", () => {
+				// Close the drawer
+				if (toggleNavMenuMobileButton && drawerBody && drawer) {
+					drawerBody.classList.add("opacity-0", "-translate-y-full");
+					drawerBody.classList.remove("translate-y-0");
+					
+					setTimeout(() => {
+						drawer.classList.add("hidden");
+						drawer.classList.remove("open");
+					}, 300);
+
+					// Reset icons
+					if (openMenuIcon && closeMenuIcon) {
+						openMenuIcon.classList.add("scale-100", "opacity-100");
+						closeMenuIcon.classList.add("scale-0", "opacity-0");
+						closeMenuIcon.classList.remove("scale-100", "opacity-100");
+					}
+
+					toggleNavMenuMobileButton.setAttribute("aria-expanded", "false");
+				}
+			});
+		});
 	});
 </script>
-
-
-
