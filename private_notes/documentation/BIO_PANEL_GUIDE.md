@@ -127,6 +127,7 @@ bio:
 
 ## Related Documentation
 
+- [Blog System Guide](./BLOG_GUIDE.md) - Craig Mod-inspired blog management
 - [Homepage Configuration Guide](./HOMEPAGE_CONFIGURATION.md)
 - [Typography System](./TYPOGRAPHY_SYSTEM.md)
 - [Design System Overview](./DESIGN_SYSTEM.md) 
