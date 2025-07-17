@@ -7,46 +7,226 @@ export interface Props {
 		date?: Date;
 	}>;
 	class?: string;
+	showDescriptions?: boolean;
 }
 
-const { items, class: className = "" } = Astro.props;
+const { items, class: className = "", showDescriptions = true } = Astro.props;
 ---
 
-<div class={`space-y-3b ${className}`}>
-	{items.map((item) => (
-		<div class="group flex items-center justify-between py-2b border-b border-color-150 last:border-b-0">
-			{item.url ? (
-				<a href={item.url} class="flex-1 min-w-0">
-					<div class="flex items-baseline gap-3b">
-						<h3 class="font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two truncate">
+<ul class={`compact-list ${className}`} role="list">
+	{items.map((item, index) => (
+		<li class="compact-entry">
+			<div class="entry-content">
+				{item.url ? (
+					<a href={item.url} class="entry-link">
+						<h3 class="entry-title">
 							{item.title}
 						</h3>
-						{item.description && (
-							<p class="text--1 text-light truncate flex-shrink-0 max-w-xs">
-								{item.description}
-							</p>
-						)}
-					</div>
-				</a>
-			) : (
-				<div class="flex-1 min-w-0">
-					<div class="flex items-baseline gap-3b">
-						<h3 class="font-medium text-0 leading-tight text-accent-base truncate">
-							{item.title}
-						</h3>
-						{item.description && (
-							<p class="text--1 text-light truncate flex-shrink-0 max-w-xs">
-								{item.description}
-							</p>
-						)}
-					</div>
-				</div>
+					</a>
+				) : (
+					<h3 class="entry-title">
+						{item.title}
+					</h3>
+				)}
+				
+				{item.date && (
+					<time class="entry-date" datetime={item.date.toISOString()}>
+						{item.date.getFullYear()}
+					</time>
+				)}
+			</div>
+			
+			{showDescriptions && item.description && (
+				<p class="entry-description">
+					{item.description}
+				</p>
 			)}
-			{item.date && (
-				<time class="text--1 text-lighter flex-shrink-0 ml-4b">
-					{item.date.getFullYear()}
-				</time>
-			)}
-		</div>
+		</li>
 	))}
-</div>
+</ul>
+
+<style>
+	/* Remove default list styling */
+	.compact-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	/* Entry container with refined spacing */
+	.compact-entry {
+		/* Generous vertical padding for comfortable scanning */
+		padding-top: var(--space-3); /* 18px */
+		padding-bottom: var(--space-3); /* 18px */
+		
+		/* Subtle separator line */
+		border-bottom: 1px solid var(--theme-color-150);
+		
+		/* Remove transition for cleaner interaction */
+		position: relative;
+	}
+
+	/* Remove border from last item */
+	.compact-entry:last-child {
+		border-bottom: none;
+	}
+
+	/* Main content row */
+	.entry-content {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-4); /* 24px - comfortable spacing */
+	}
+
+	/* Title styling following Hochuli's principles */
+	.entry-title {
+		/* Typography */
+		font-family: var(--font-sans);
+		font-size: var(--step-0); /* 15.6-17px - body size */
+		font-weight: 450; /* Slightly heavier for hierarchy */
+		line-height: 1.4; /* Tighter leading for single lines */
+		
+		/* Color and hierarchy */
+		color: var(--theme-text);
+		
+		/* Prevent wrapping on very long titles */
+		margin: 0;
+		flex: 1 1 auto;
+	}
+
+	/* Link styling - subtle and integrated */
+	.entry-link {
+		/* Remove default link styling */
+		text-decoration: none;
+		color: inherit;
+		
+		/* Expand click target for better UX */
+		display: block;
+		
+		/* Subtle underline on hover only */
+		position: relative;
+	}
+
+	/* Refined hover state following Butterick's restraint */
+	.entry-link:hover .entry-title,
+	.entry-link:focus .entry-title {
+		color: var(--theme-accent-base);
+		/* Micro-expansion for tactile feedback */
+		letter-spacing: 0.002em;
+	}
+
+	/* Underline animation - minimal and elegant */
+	.entry-link::after {
+		content: "";
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 1px;
+		background: var(--theme-accent-base);
+		opacity: 0;
+	}
+
+	.entry-link:hover::after,
+	.entry-link:focus::after {
+		width: 100%;
+		opacity: 0.5;
+	}
+
+	/* Date styling - metadata hierarchy */
+	.entry-date {
+		/* Typography following site's metadata pattern */
+		font-family: var(--font-sans);
+		font-size: var(--step--1); /* 12.8-14.4px */
+		font-variant-numeric: lining-nums; /* Align numbers */
+		color: var(--theme-color-500);
+		
+		/* Prevent shrinking */
+		flex: 0 0 auto;
+		
+		/* Refined spacing */
+		margin-left: var(--space-4); /* 24px */
+	}
+
+	/* Description styling - secondary information */
+	.entry-description {
+		/* Typography for comfortable reading */
+		font-family: var(--font-sans);
+		font-size: var(--step--1); /* 12.8-14.4px */
+		line-height: 1.5; /* Generous leading for small text */
+		color: var(--theme-color-600);
+		
+		/* Spacing */
+		margin-top: var(--space-1); /* 6px - tight coupling */
+		margin-bottom: 0;
+		
+		/* Prevent overly long descriptions */
+		max-width: var(--measure-base); /* 75ch */
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 640px) {
+		/* Stack content on mobile */
+		.entry-content {
+			flex-direction: column;
+			gap: var(--space-1); /* 6px */
+			align-items: flex-start;
+		}
+		
+		.entry-date {
+			margin-left: 0;
+			margin-top: var(--space-1); /* 6px */
+		}
+		
+		/* Slightly reduce padding on mobile */
+		.compact-entry {
+			padding-top: var(--space-2); /* 12px */
+			padding-bottom: var(--space-2); /* 12px */
+		}
+	}
+
+	/* Dark mode refinements */
+	:global([data-theme="dark"]) .compact-entry {
+		border-bottom-color: var(--theme-color-250);
+	}
+	
+	:global([data-theme="dark"]) .entry-date {
+		color: var(--theme-color-400);
+	}
+	
+	:global([data-theme="dark"]) .entry-description {
+		color: var(--theme-color-400);
+	}
+
+	/* High contrast mode support */
+	@media (prefers-contrast: high) {
+		.compact-entry {
+			border-bottom-width: 2px;
+		}
+		
+		.entry-link:focus {
+			outline: 2px solid var(--theme-accent-base);
+			outline-offset: 2px;
+		}
+	}
+
+	/* Print optimization */
+	@media print {
+		.compact-entry {
+			padding: var(--space-2) 0;
+			border-bottom: 1px solid #ccc;
+		}
+		
+		.entry-link {
+			color: #000;
+			text-decoration: underline;
+		}
+		
+		.entry-link::after {
+			content: " (" attr(href) ")";
+			font-size: 0.875em;
+			color: #666;
+		}
+	}
+</style>
