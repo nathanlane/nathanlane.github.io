@@ -70,14 +70,14 @@ const currentYear = new Date().getFullYear();
   .footer-content {
     max-width: var(--container-max, 80rem);
     margin: 0 auto;
-    padding: 0 var(--space-s) var(--space-xl);
+    padding: 0 var(--space-4) var(--space-8); /* 0 24px 48px */
   }
 
   /* Clean navigation grid */
   .footer-nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-l);
+    gap: var(--space-6); /* 36px - flow spacing between sections */
   }
 
   .footer-section-title {
@@ -121,7 +121,7 @@ const currentYear = new Date().getFullYear();
   .footer-bottom {
     max-width: var(--container-max, 80rem);
     margin: 0 auto;
-    padding: var(--space-xl) var(--space-s) var(--space-l);
+    padding: var(--space-8) var(--space-4) var(--space-6); /* 48px 24px 36px */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -131,7 +131,7 @@ const currentYear = new Date().getFullYear();
   @media (max-width: 640px) {
     .footer-bottom {
       flex-direction: column;
-      gap: var(--space-xs);
+      gap: var(--space-2); /* 12px - tight spacing on mobile */
       text-align: center;
     }
   }
@@ -143,7 +143,7 @@ const currentYear = new Date().getFullYear();
 
   .footer-utility {
     display: flex;
-    gap: var(--space-s);
+    gap: var(--space-3); /* 18px - compact spacing between links */
     align-items: center;
   }
 
@@ -169,7 +169,7 @@ const currentYear = new Date().getFullYear();
     .footer-nav {
       grid-template-columns: repeat(3, minmax(0, 200px));
       justify-content: start;
-      gap: var(--space-xl);
+      gap: var(--space-8); /* 48px - section spacing on large screens */
     }
   }
 
