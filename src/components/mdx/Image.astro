@@ -26,7 +26,7 @@ const isRemote = src.startsWith('http://') || src.startsWith('https://');
 ---
 
 {caption ? (
-  <figure class="my-8">
+  <figure class="my-8b">
     {isRemote ? (
       <img 
         src={src} 
@@ -48,7 +48,7 @@ const isRemote = src.startsWith('http://') || src.startsWith('https://');
         class={className || "w-full h-auto rounded-lg"}
       />
     )}
-    <figcaption class="mt-2 text-sm text-light text-center">
+    <figcaption class="mt-2b text-sm text-light text-center">
       {caption}
     </figcaption>
   </figure>
@@ -61,7 +61,7 @@ const isRemote = src.startsWith('http://') || src.startsWith('https://');
       height={height}
       loading={loading}
       decoding="async"
-      class={className || "w-full h-auto rounded-lg my-8"}
+      class={className || "w-full h-auto rounded-lg my-8b"}
     />
   ) : (
     <AstroImage 
@@ -71,7 +71,7 @@ const isRemote = src.startsWith('http://') || src.startsWith('https://');
       height={height || 600}
       loading={loading}
       decoding="async"
-      class={className || "w-full h-auto rounded-lg my-8"}
+      class={className || "w-full h-auto rounded-lg my-8b"}
     />
   )
 )}

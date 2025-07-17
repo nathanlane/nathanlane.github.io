@@ -26,7 +26,7 @@ const { headings } = await render(series);
 	<div class="flex items-center">
 		<button
 			id="toggle-panel"
-			class="hidden md:flex z-30 mr-2 btn-icon-nav"
+			class="hidden md:flex z-30 mr-2b btn-icon-nav"
 			aria-label="Toggle Series Panel"
 			aria-controls="series-panel"
 		>
@@ -34,7 +34,7 @@ const { headings } = await render(series);
 		</button>
 		<button
 			id="toggle-toc"
-			class="hidden md:flex z-30 mr-2 btn-icon-nav"
+			class="hidden md:flex z-30 mr-2b btn-icon-nav"
 			aria-label="Table of Contents"
 		>	
 			<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
@@ -44,12 +44,12 @@ const { headings } = await render(series);
 			{title}
 		</h1>
 	</div>
-	<p class="prose prose-lane max-w-none mt-4">
+	<p class="prose prose-lane max-w-none mt-4b">
 		{description}
 	</p>
 
-	<div class="mt-6 flex sm:grid-cols-[auto_1fr] md:items-start gap-x-12">
-		<article class="grid flex-grow grid-cols-1 break-words pt-4">
+	<div class="mt-6b flex sm:grid-cols-[auto_1fr] md:items-start gap-x-12">
+		<article class="grid flex-grow grid-cols-1 break-words pt-4b">
 			<div class="prose prose-lane prose-serif max-w-none flex-grow prose-headings:text-accent-base">
 				<slot />
 			</div>

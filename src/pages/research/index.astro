@@ -20,24 +20,24 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 <BaseLayout meta={{ title: "Research", description: "Academic research on economics, technology, and digital transformation." }}>
 	
 	<!-- Research Overview -->
-	<section class="mb-4">
+	<section class="mb-4b">
 		<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 			<!-- Left Column: Research heading and description -->
 			<div class="lg:col-span-2">
 				<h1>Research</h1>
 				<div class="text-body max-w-2xl">
-					<p class="mb-4">
+					<p class="mb-4b">
 						My research focuses on the intersection of economics, technology, and digital transformation. 
 						I examine how technological change affects markets, productivity, and economic outcomes.
 					</p>
 					
 					{featuredPapers.length > 0 && (
-						<div class="mt-6">
-							<h4 class="text-sm font-medium mb-2">Recent and Updated</h4>
+						<div class="mt-6b">
+							<h4 class="text-sm font-medium mb-2b">Recent and Updated</h4>
 							<ul class="space-y-1">
 								{sortByYear(featuredPapers).map((paper) => (
 									<li class="text-body flex items-baseline justify-between">
-										<span class="flex-1 mr-2">{paper.data.title}</span>
+										<span class="flex-1 mr-2b">{paper.data.title}</span>
 										<a href={`/research/${paper.id}/`} class="inline-link text-xs flex items-center gap-1 whitespace-nowrap text-light hover:text-textColor">
 											link here
 											<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -55,10 +55,10 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 			</div>
 			
 			<!-- Right Column: Quick Links -->
-			<div class="lg:col-span-1 lg:mt-14">
-				<div class="bg-color-75 dark:bg-color-100 rounded-md p-3">
-					<h3 class="text-xs font-medium mb-2 text-textColor dark:text-gray-200">On This Page</h3>
-					<ul class="space-y-0 mb-3">
+			<div class="lg:col-span-1 lg:mt-16b">
+				<div class="bg-color-75 dark:bg-color-100 rounded-md p-3b">
+					<h3 class="text-xs font-medium mb-2b text-textColor dark:text-gray-200">On This Page</h3>
+					<ul class="space-y-0 mb-3b">
 						<li>
 							<a href="#published" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Published Papers</a>
 						</li>
@@ -70,7 +70,7 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 						</li>
 					</ul>
 					
-					<h3 class="text-xs font-medium mb-0 mt-3 pt-3 border-t border-color-200 dark:border-gray-700 text-textColor dark:text-gray-200">Other Pages</h3>
+					<h3 class="text-xs font-medium mb-0 mt-3b pt-3b border-t border-color-200 dark:border-gray-700 text-textColor dark:text-gray-200">Other Pages</h3>
 					<ul class="space-y-0">
 						<li>
 							<a href="/projects/" class="inline-link text-xs text-textColor dark:text-gray-300 dark:hover:text-white">Projects</a>
@@ -93,8 +93,8 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 
 	<!-- Published Papers -->
 	{publishedPapers.length > 0 && (
-		<section id="published" class="mb-4">
-			<h2 class="mb-4">Published Papers</h2>
+		<section id="published" class="mb-4b">
+			<h2 class="mb-4b">Published Papers</h2>
 			<div class="grid gap-4">
 				{sortByYear(publishedPapers).map((paper) => (
 					<ResearchCard
@@ -114,8 +114,8 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 
 	<!-- Working Papers -->
 	{workingPapers.length > 0 && (
-		<section id="working" class="mb-4">
-			<h2 class="mb-4">Working Papers</h2>
+		<section id="working" class="mb-4b">
+			<h2 class="mb-4b">Working Papers</h2>
 			<div class="grid gap-4">
 				{sortByYear(workingPapers).map((paper) => (
 					<ResearchCard
@@ -135,7 +135,7 @@ const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.
 
 	<!-- Works in Progress -->
 	{worksInProgress.length > 0 && (
-		<section id="wip" class="mb-4">
+		<section id="wip" class="mb-4b">
 			<h2 class="!mt-0">Works in Progress</h2>
 			<CompactList 
 				items={sortByYear(worksInProgress).map((paper) => ({

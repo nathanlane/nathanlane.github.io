@@ -32,9 +32,9 @@ if (seriesId) {
 	id="series-panel"
 	class="hidden grid lg:block z-40 min-h-screen fixed lg:relative shadow-[5px_0px_10px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out bg-bgColor"
 >	
-	<div class="flex h-full flex-col px-4 pt-4 md:pt-12 w-full md:w-72 md:min-w-72 md:max-w-72 bg-accent-base/5 border-r border-special-light relative">
+	<div class="flex h-full flex-col px-4b pt-4b md:pt-12b w-full md:w-72 md:min-w-72 md:max-w-72 bg-accent-base/5 border-r border-special-light relative">
 		<div class="flex gap-x-1 relative">
-			<h4 class="text-1 flex items-center title mb-6">
+			<h4 class="text-1 flex items-center title mb-6b">
 				Docs Series panel
 			</h4>
 			<button
@@ -56,11 +56,11 @@ if (seriesId) {
 					{postsSeries.data.title}
 				</Button>
 
-				<ul class="mt-4 text-body-sm text-light">
+				<ul class="mt-4b text-body-sm text-light">
 					{seriesPosts.map((p) => {
 						const isActive = currentPath === `/posts/${p.id}/`;
 						return (
-							<li class={`px-4 flex items-center line-clamp-2 py-1 ${isActive ? "rounded-lg bg-color-100" : ""}`}>
+							<li class={`px-4b flex items-center line-clamp-2 py-1b ${isActive ? "rounded-lg bg-color-100" : ""}`}>
 								<a
 									href={`/posts/${p.id}/`}
 									class={`hover:text-accent-two ${isActive ? "text-accent cursor-default pointer-events-none" : ""}`}

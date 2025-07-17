@@ -25,8 +25,8 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
 
 <PageLayout meta={meta}>
   <div class="max-w-3xl mx-auto">
-    <header class="mb-8">
-      <h1 class="heading-1 mb-4">Media</h1>
+    <header class="mb-8b">
+      <h1 class="heading-1 mb-4b">Media</h1>
       <p class="text-light">
         Interviews, podcasts, talks, and press coverage
       </p>
@@ -35,7 +35,7 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
     <div class="space-y-8">
       {years.map(year => (
         <section>
-          <h2 class="text-lg font-medium text-light mb-4">{year}</h2>
+          <h2 class="text-lg font-medium text-light mb-4b">{year}</h2>
           <ul class="space-y-3">
             {mediaData[Number(year)]
               ?.sort((a: MediaItem, b: MediaItem) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -43,7 +43,7 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
               <li class="flex gap-3 group">
                 <Icon 
                   name={mediaIcons[item.type] || "lucide:link"} 
-                  class="w-3 h-3 mt-1.5 text-light opacity-50 flex-shrink-0"
+                  class="w-3 h-3 mt-1b text-light opacity-50 flex-shrink-0"
                 />
                 <div class="flex-grow">
                   <a 
@@ -62,7 +62,7 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
                     {item.outlet} • {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </div>
                   {item.description && (
-                    <p class="text-sm text-textColor mt-1">{item.description}</p>
+                    <p class="text-sm text-textColor mt-1b">{item.description}</p>
                   )}
                 </div>
               </li>
@@ -77,7 +77,7 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
 <style>
   /* Simple hover effect */
   li:hover {
-    @apply bg-color-50 -mx-3 px-3 py-2 rounded-sm;
+    @apply bg-color-50 -mx-3b px-3b py-2b rounded-sm;
   }
   
   :root[data-theme="dark"] li:hover {
