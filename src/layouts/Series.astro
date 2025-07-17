@@ -89,7 +89,6 @@ const { headings } = await render(series);
 
 	// Ensure seriesPanel exists
 	if (!seriesPanel) {
-		console.error("Element series-panel not found");
 		throw new Error("series-panel is required");
 	}
 
@@ -132,20 +131,14 @@ const { headings } = await render(series);
 	// Event handlers for both buttons
 	if (togglePanelBtn) {
 		togglePanelBtn.addEventListener("click", togglePanel);
-	} else {
-		console.error("Element toggle-panel not found");
 	}
 
 	if (togglePanelMobileBtn) {
 		togglePanelMobileBtn.addEventListener("click", togglePanel);
-	} else {
-		console.error("Element toggle-panel-mobile not found");
 	}
 
 	if (closePanelBtn) {
 		closePanelBtn.addEventListener("click", hidePanel);
-	} else {
-		console.error("Element close-panel not found");
 	}
 </script>
 
@@ -158,7 +151,6 @@ const { headings } = await render(series);
 
 	// Check for panel existence (required for operation)
 	if (!tocPanel) {
-		console.error('Element toc-panel not found');
 		throw new Error('toc-panel is required');
 	}
 
@@ -195,22 +187,16 @@ const { headings } = await render(series);
 	// Add handler for toggle button
 	if (toggleTocBtn) {
 		toggleTocBtn.addEventListener("click", toggleToc);
-	} else {
-		console.error('Element toggle-toc not found');
 	}
 
 	// Add handler for toggle button
 	if (toggleTocMobileBtn) {
 		toggleTocMobileBtn.addEventListener("click", toggleToc);
-	} else {
-		console.error('Element toggle-toc-mobile not found');
 	}
 
 	// Add handler for close button
 	if (closeTocBtn) {
 		closeTocBtn.addEventListener('click', hideToc);
-	} else {
-		console.error('Element close-toc not found');
 	}
 </script>
 
@@ -221,9 +207,6 @@ const { headings } = await render(series);
     
     if (buttonsPanel) {
       buttonsPanel.classList.add("fixed");
-      console.log("Class 'fixed' added to buttons-panel element.");
-    } else {
-      console.error("Element with ID 'buttons-panel' not found.");
     }
   });
 </script>

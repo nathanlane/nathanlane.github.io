@@ -416,22 +416,23 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Enable OpenType features for IBM Plex */
+    /* Enhanced OpenType features for IBM Plex body text */
     font-feature-settings:
-      "kern" 1,
-      "liga" 1,
-      "calt" 1,
-      "ss01" 1;
-    /* ss01 enables IBM Plex's simplified 'a' for better readability */
+      "kern" 1,      /* Kerning */
+      "liga" 1,      /* Standard ligatures */
+      "calt" 1,      /* Contextual alternates */
+      "ss01" 1,      /* Simplified 'a' for readability */
+      "tnum" 0,      /* Proportional numbers for prose */
+      "onum" 1;      /* Old-style figures for text */
 
-    /* Use optimal font weight for body text */
-    font-weight: 400;
+    /* Optimized font weight for extended reading comfort */
+    font-weight: 380; /* Reduced from 400 for less fatigue */
 
     /* Responsive line-height for optimal readability */
     line-height: 1.65; /* Mobile: more space for smaller screens */
     
-    /* Subtle letter-spacing for improved word-shape recognition */
-    letter-spacing: 0.005em;
+    /* Enhanced letter-spacing for improved word recognition */
+    letter-spacing: 0.008em; /* Increased from 0.005em */
   }
 
   /* Tighter line-height for larger screens */
@@ -443,8 +444,8 @@
   
   /* Dark mode body text adjustments */
   [data-theme="dark"] body {
-    /* Slightly lighter font weight to compensate for halation effect */
-    font-weight: 380; /* Reduced from 400 */
+    /* Further reduced weight to compensate for halation effect */
+    font-weight: 365; /* Reduced from 380 for better dark mode comfort */
   }
 
   /* Typography optimization: Prevent widows and orphans */
@@ -475,6 +476,78 @@
   /* Light weight for accents */
   .font-light {
     font-weight: 300;
+  }
+
+  /* Enhanced semantic typography classes - grid-aligned */
+  .text-body-sm {
+    /* Uses existing text--1 (12.8-14.4px, 24px line-height) */
+    font-weight: 410; /* Slightly heavier at small size */
+    letter-spacing: 0.01em; /* More space for legibility */
+  }
+
+  .text-lead {
+    /* Uses existing text-1 (18.8-21.3px, 30px line-height) */
+    font-weight: 375; /* Lighter for prominence */
+    letter-spacing: 0.004em; /* Tighter at larger size */
+    font-feature-settings:
+      "kern" 1, "liga" 1, "calt" 1, "ss01" 1, "onum" 1;
+  }
+
+  .text-meta {
+    /* Uses existing text--1 (12.8-14.4px, 24px line-height) */
+    font-weight: 425; /* Heavier for small size */
+    letter-spacing: 0.05em; /* Wide tracking for caps */
+    text-transform: uppercase;
+    font-feature-settings:
+      "kern" 1, "liga" 0, "case" 1, "lnum" 1;
+  }
+
+  .text-caption {
+    /* Uses existing text--1 baseline */
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0.008em;
+    color: var(--theme-text-lighter);
+  }
+
+  /* Context-sensitive typography adjustments - preserve grid */
+  .prose body {
+    letter-spacing: 0.006em; /* Tighter for long-form reading */
+  }
+
+  .sidebar body,
+  .caption body {
+    letter-spacing: 0.012em; /* More space for scanning */
+  }
+
+  /* Container query optimizations within existing measure system */
+  .measure-base {
+    container-type: inline-size;
+  }
+
+  @container (min-width: 60ch) {
+    body {
+      /* Slightly tighter tracking at optimal width */
+      letter-spacing: 0.006em;
+    }
+  }
+
+  @container (max-width: 45ch) {
+    body {
+      /* More spacing in narrow contexts */
+      letter-spacing: 0.012em;
+    }
+  }
+
+  /* High-DPI display optimization */
+  @media (-webkit-min-device-pixel-ratio: 2) {
+    body {
+      font-weight: 375; /* Can go lighter on sharp displays */
+    }
+    
+    [data-theme="dark"] body {
+      font-weight: 360; /* Further reduced for dark mode */
+    }
   }
 
   /* Micro-contrast adjustments for different contexts */
@@ -514,6 +587,64 @@
 
   :root[data-theme="dark"] :focus {
     outline-color: hsl(220deg 25% 70%);
+  }
+
+  /* Enhanced accessibility - grid-compliant spacing */
+  :focus-visible {
+    outline: 3px solid var(--theme-accent);
+    outline-offset: var(--space-1); /* 6px = 1 grid unit */
+    border-radius: var(--space-1); /* 6px radius */
+  }
+
+  /* High contrast mode - maintains baseline alignment */
+  @media (prefers-contrast: high) {
+    body {
+      font-weight: 425; /* Heavier weight */
+      letter-spacing: 0.015em; /* More spacing */
+      /* Line height unchanged - preserves grid */
+    }
+  }
+
+  /* Reduced motion - preserve grid */
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  /* Variable font progressive enhancement */
+  @supports (font-variation-settings: normal) {
+    body {
+      font-family: 'IBM Plex Sans Variable', 'IBM Plex Sans', sans-serif;
+      font-variation-settings: "wght" 380;
+    }
+    
+    [data-theme="dark"] body {
+      font-variation-settings: "wght" 365;
+    }
+    
+    .text-body-sm {
+      font-variation-settings: "wght" 410;
+    }
+
+    .text-lead {
+      font-variation-settings: "wght" 375;
+    }
+
+    .text-meta {
+      font-variation-settings: "wght" 425;
+    }
+
+    /* High-DPI adjustments with variable font */
+    @media (-webkit-min-device-pixel-ratio: 2) {
+      body {
+        font-variation-settings: "wght" 375;
+      }
+      
+      [data-theme="dark"] body {
+        font-variation-settings: "wght" 360;
+      }
+    }
   }
 
   /* Button and interactive element hover states */

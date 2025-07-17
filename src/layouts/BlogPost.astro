@@ -130,7 +130,6 @@ const structuredData = [
 
 	// Ensure the seriesPanel exists
 	if (!seriesPanel) {
-		console.error("Element series-panel not found");
 		throw new Error("series-panel is required");
 	}
 
@@ -167,20 +166,14 @@ const structuredData = [
 	// Event handlers for both buttons
 	if (togglePanelBtn) {
 		togglePanelBtn.addEventListener("click", togglePanel);
-	} else {
-		console.error("Element toggle-panel not found");
 	}
 
 	if (togglePanelMobileBtn) {
 		togglePanelMobileBtn.addEventListener("click", togglePanel);
-	} else {
-		console.error("Element toggle-panel-mobile not found");
 	}
 
 	if (closePanelBtn) {
 		closePanelBtn.addEventListener("click", hidePanel);
-	} else {
-		console.error("Element close-panel not found");
 	}
 </script>
 
@@ -193,7 +186,6 @@ const structuredData = [
 
 	// Check for the panel's presence (required for functionality)
 	if (!tocPanel) {
-		console.error('Element toc-panel not found');
 		throw new Error('toc-panel is required');
 	}
 
@@ -230,54 +222,16 @@ const structuredData = [
 	// Add event handler for the toggle button
 	if (toggleTocBtn) {
 		toggleTocBtn.addEventListener("click", toggleToc);
-	} else {
-		console.error('Element toggle-toc not found');
 	}
 
 	// Add event handler for the toggle button (mobile)
 	if (toggleTocMobileBtn) {
 		toggleTocMobileBtn.addEventListener("click", toggleToc);
-	} else {
-		console.error('Element toggle-toc-mobile not found');
 	}
 
 	// Add event handler for the close button
 	if (closeTocBtn) {
 		closeTocBtn.addEventListener('click', hideToc);
-	} else {
-		console.error('Element close-toc not found');
 	}
 </script>
 
-
-
-<!-- REQUIRES IMPROVEMENT!!! -->
-<!-- Menu button instead of the main menu -->
-<!--
-<script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const menuButton = document.getElementById("toggle-navigation-menu");
-		const navigationMenu = document.getElementById("menu");
-
-		if (!menuButton || !navigationMenu) {
-			console.error("Menu button or navigation menu is missing in the DOM.");
-			return;
-		}
-
-		menuButton.addEventListener("click", () => {
-			const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-
-			if (isOpen) {
-				// Close the menu
-				navigationMenu.classList.add("hidden");
-			} else {
-				// Open the menu
-				navigationMenu.classList.remove("hidden");
-			}
-
-			// Update the button state
-			menuButton.setAttribute("aria-expanded", (!isOpen).toString());
-		});
-	});
-</script>
--->
