@@ -1,6 +1,97 @@
 # Changelog
 
-## Bio Panel Component Implementation (January 2025)
+## Codebase Simplification - Animation & Visual Effects Removal (January 2025)
+
+### Final Animation Cleanup
+- **Removed remaining transitions from homepage-links.css**:
+  - Removed color transition from section title links
+  - Removed all transitions from view-all links
+  - Removed transform transition from arrow icons
+- **Simplified BlogPost.astro panel animations**:
+  - Removed opacity and translate transforms from series panel show/hide
+  - Removed setTimeout delays and ANIMATION_DURATION constant
+  - Panels now show/hide instantly without visual transitions
+
+## Animation Removal Summary (January 2025)
+
+### Phase 1: Component Cleanup
+- **Removed unused NavigationDropdown component** (`/src/components/NavigationDropdown.astro`)
+  - Completely unused in the codebase
+  - Removed to reduce complexity and maintenance burden
+
+### Phase 2: Animation Removal
+- **Removed all animations and transitions from global.css**:
+  - Removed `@keyframes` slideIn and fadeIn animations
+  - Removed page transition animations (main content fadeIn)
+  - Removed staggered list animations (`animate-list`)
+  - Removed all `transition` properties from buttons and links
+  - Removed transform effects (scale, translateY)
+  - Removed hover breathing effects from site title
+  - Removed navigation link underline animations
+- **Simplified link styles** (`/src/styles/links.css`):
+  - Removed all transition properties
+  - Maintained hover states without animations
+- **Updated motion.css** to enforce no animations:
+  - Set all elements to `animation: none` and `transition: none`
+  - Disabled smooth scrolling globally
+  - Removed transform effects on hover
+
+### Phase 3: Component Simplification
+- **Simplified ThemeToggle component**:
+  - Replaced scale/opacity transitions with simple show/hide (block/hidden)
+  - Icons now instantly switch without animation
+- **Simplified mobile navigation in Header.astro**:
+  - Removed drawer slide animations
+  - Removed setTimeout delays for menu transitions
+  - Menu now opens/closes instantly
+- **Removed scroll-to-top buttons**:
+  - Removed from BlogPost.astro and Series.astro
+  - Removed associated JavaScript and IntersectionObserver code
+- **Simplified copy buttons**:
+  - Removed setTimeout that reverted "Copied!" text back to "Copy"
+  - Button now permanently shows "Copied!" after use
+
+### Phase 4: Visual Effects Removal
+- **Removed shadows**:
+  - Removed box-shadow from code blocks, buttons, and cards
+  - Replaced `box-shadow: inset` with `border-left` for highlighted code lines
+- **Removed blur effects**:
+  - Removed backdrop-filter blur from Header mobile drawer
+  - Removed decorative gradient orbs from mobile navigation
+  - Changed mobile drawer to solid background
+- **Fixed positioning changes**:
+  - Header changed from `fixed` to `relative` positioning
+  - SkipLink changed from `fixed` to `absolute` positioning
+  - Series panel mobile button changed from `fixed` to `absolute`
+  - Removed all sticky positioning
+
+### Phase 5: Typography-First Replacements
+- **Simplified gradients**:
+  - Replaced gradient link underlines with simple borders
+  - Footer links now use border-bottom instead of background-image gradient
+- **Reduced rounded corners**:
+  - Removed rounded corners from code blocks (rounded-lg → none)
+  - Removed rounded corners from buttons (rounded-md → none)
+  - Maintained some rounded corners where semantically appropriate (badges, avatars)
+- **Simplified visual hierarchy**:
+  - Replaced complex visual effects with typography-based hierarchy
+  - Focus on text weight, size, and spacing for visual distinction
+
+### Phase 6: Testing & Verification
+- **Successful build**: All 185 pages built without errors
+- **No JavaScript errors**: All interactive elements still functional
+- **Improved maintainability**: Simpler codebase with fewer moving parts
+- **Better accessibility**: No motion-triggered issues
+- **Cleaner aesthetics**: Typography-first approach aligns with site goals
+
+### Impact
+- **Reduced complexity**: ~500 lines of animation/transition code removed
+- **Better performance**: No CPU cycles spent on animations
+- **Improved accessibility**: Respects prefers-reduced-motion by default
+- **Simplified maintenance**: Fewer browser compatibility concerns
+- **Typography focus**: Visual hierarchy now entirely typography-driven
+
+## Bio Panel Component Implementation (July 2025)
 
 ### New Homepage Bio Panel
 - **Created elegant bio panel component** inspired by Jason Santa Maria and Craig Mod's sites:

@@ -8,7 +8,7 @@ const { header } = navigationConfig;
 
 <header
 	id="main-header"
-	class="header fixed md:relative top-0 left-0 z-20 w-full bg-bgColor/95 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none"
+	class="header relative top-0 left-0 z-20 w-full bg-bgColor"
 >	
 	<div class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s">
 		<!-- Left side: Logo (if shown) -->
@@ -87,16 +87,7 @@ const { header } = navigationConfig;
 		id="drawer-body"
 		class="absolute inset-0 -translate-y-full transform bg-bgColor transition-all duration-300 ease-in-out"
 	>
-		<div class="fixed top-0 left-1/2 -ml-[50vw] w-screen pointer-events-none min-h-screen overflow-x-hidden overflow-y-visible blur-2xl">
-			<div class="absolute top-[-90%] right-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-			<div class="absolute top-[-90%] left-[25%] w-[75%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-			<div class="absolute top-[-85%] right-[25%] w-[55%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-			<div class="absolute top-[-85%] left-[25%] w-[55%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-40 dark:opacity-5"></div>
-			<div class="absolute top-[-75%] left-[-25%] w-[65%] h-full bg-gradient-to-b from-blue-300 via-pink-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
-			<div class="absolute top-[-75%] right-[-25%] w-[65%] h-full bg-gradient-to-b from-purple-300 via-blue-300 to-transparent rounded-full opacity-30 dark:opacity-5"></div>
-			<div class="absolute top-[-85%] left-[-30%] w-[85%] h-full bg-gradient-to-b from-indigo-300 via-orange-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
-			<div class="absolute top-[-85%] right-[-30%] w-[85%] h-full bg-gradient-to-b from-orange-300 via-indigo-300 to-transparent rounded-full opacity-60 dark:opacity-5"></div>
-		</div>	
+	
 		
 		<nav
 			aria-label="Mobile navigation menu"
@@ -178,8 +169,7 @@ const { header } = navigationConfig;
 
 	/* Mobile drawer styles */
 	#drawer {
-		backdrop-filter: blur(8px);
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: var(--theme-bg);
 	}
 
 	#drawer-body {

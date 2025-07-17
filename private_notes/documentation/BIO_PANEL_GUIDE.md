@@ -11,31 +11,25 @@ The bio panel content is managed through the `src/content/homepage/index.yaml` f
 ```yaml
 bio:
   # Section title (optional, defaults to "About")
-  title: "About"
+  title: "Nathan Lane, PhD"  # Can be customized: "About Me", "Bio", "Background", etc.
   
   # Primary intro - the hook (1-2 sentences)
-  tagline: "Empirical economist and data scientist studying how economies transform"
+  tagline: "Empirical economist, professor of economics, University of Oxford"
   
   # Main narrative (supports markdown)
   narrative: |
-    Your main bio text here. Supports markdown formatting including:
-    - Links: [text](url)
-    - Bold: **text**
-    - Italic: *text*
-    - Multiple paragraphs
-  
-  # Current focus - what you're working on now (optional)
-  currently:
-    - "First current activity"
-    - "Second current activity"
-    - "Third current activity"
+    I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems. My research combines rigorous econometric analysis with historical perspective to understand how governments shape economic outcomes.
+
+    Beyond research, I'm passionate about making economic analysis more accessible. I contribute to open-source tools, teach data science methods to graduate students, and occasionally write about the [intersection of economics and technology](/posts).
+
+    I am also co-Principal Investigator of the [Industrial Policy Group](https://www.industrialpolicygroup.com/) lab, where we are building comprehensive datasets and developing new methodologies to evaluate how industrial strategies affect economic transformation.
   
   # Brief credentials or affiliations (optional)
   affiliations:
-    - title: "Institution Name"
-      role: "Your Role"
-    - title: "Another Institution"
-      role: "Another Role"
+    - title: "Oxford University"
+      role: "Assistant Professor of Economics"
+    - title: "Industrial Policy Group"
+      role: "Co-Principal Investigator"
   
   # Photo configuration (completely optional - delete this section if no photo)
   # photo:
@@ -58,11 +52,10 @@ The bio panel is automatically included in the homepage when bio content is pres
 - `narrative`: The main bio text (markdown supported)
 
 ### Optional Fields
-- `title`: Section heading (defaults to "About" if not provided)
-- `tagline`: Short introductory text
-- `currently`: Array of current activities/projects
-- `affiliations`: Array of institutional affiliations
-- `photo`: Photo configuration object
+- `title`: Section heading (defaults to "About" if not provided) - can be customized to your name, "About Me", "Bio", etc.
+- `tagline`: Short introductory text or professional title
+- `affiliations`: Array of institutional affiliations with title and role
+- `photo`: Photo configuration object (completely optional)
 
 ### Photo Management
 
@@ -101,21 +94,20 @@ bio:
 ### Full Bio with All Options
 ```yaml
 bio:
-  title: "About Me"  # or "Bio", "Background", etc.
-  tagline: "Economic researcher and data scientist"
+  title: "Nathan Lane, PhD"  # or "About Me", "Bio", "Background", etc.
+  tagline: "Empirical economist, professor of economics, University of Oxford"
   narrative: |
-    I study how economies transform through industrial policy...
+    I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems.
     
-    My work combines econometric analysis with historical perspective...
-  currently:
-    - "Writing a book on industrial strategy"
-    - "Teaching graduate econometrics"
+    Beyond research, I'm passionate about making economic analysis more accessible. I contribute to open-source tools and teach data science methods to graduate students.
   affiliations:
     - title: "Oxford University"
-      role: "Assistant Professor"
+      role: "Assistant Professor of Economics"
+    - title: "Industrial Policy Group"
+      role: "Co-Principal Investigator"
   photo:
     src: "/images/bio/profile.jpg"
-    alt: "Your Name"
+    alt: "Nathan Lane"
     display: true
 ```
 
