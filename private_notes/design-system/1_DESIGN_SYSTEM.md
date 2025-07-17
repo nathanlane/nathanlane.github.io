@@ -374,6 +374,14 @@ p + p {
 3. **Respect baseline grid** for consistent rhythm
 4. **Test across themes** to ensure accessibility
 
+### Recent Optimization: IBM Plex Sans Body Text
+
+**New optimized weights** (January 2025):
+- Light mode: 380 (down from 400) - reduces reading fatigue
+- Dark mode: 365 (down from 380) - compensates for halation
+- Enhanced letter-spacing: 0.008em for improved word recognition
+- New semantic classes: `.text-body-sm`, `.text-lead`, `.text-meta`, `.text-caption`
+
 For detailed documentation, see [docs/TYPOGRAPHY.md](docs/TYPOGRAPHY.md).
 
 ### Link Typography System

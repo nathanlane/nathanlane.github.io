@@ -36,10 +36,16 @@ For non-heading elements that need the headline font:
 ```
 
 #### Body Text
-Default font is IBM Plex Sans:
+Default font is IBM Plex Sans with optimized settings:
 ```html
 <p>This is in IBM Plex Sans</p>
 ```
+
+**Body Text Optimization Features:**
+- Font weight: 380 (light mode) / 365 (dark mode) for reduced reading fatigue
+- Enhanced letter-spacing: 0.008em for improved word recognition
+- OpenType features: old-style figures, kerning, ligatures, contextual alternates
+- Variable font support with progressive enhancement
 
 #### Long-form Prose
 For article content or long-form text:

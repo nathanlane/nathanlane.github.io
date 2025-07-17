@@ -1,6 +1,31 @@
 # Changelog
 
-## IBM Plex Sans Body Font Optimization (January 2025)
+## JavaScript Optimization - Phase 1 (January 2025)
+
+### Removed Superfluous JavaScript
+- **Removed commented-out navigation menu code** from BlogPost.astro
+  - Deleted 24 lines of unused code that was already commented out
+- **Removed all console.log statements** from production code:
+  - Series.astro: Removed "Class 'fixed' added..." log
+  - Notes[...slug].astro: Removed similar console.log
+- **Removed all console.error statements** from layout files:
+  - BlogPost.astro: Removed 8 console.error statements
+  - Series.astro: Removed 9 console.error statements  
+  - Notes[...slug].astro: Removed 1 console.error statement
+  - Header.astro: Removed 2 console.error statements
+  - Masthead.astro: Simplified error handler
+- **Removed unnecessary buttons-panel scripts**:
+  - Deleted entire script blocks from Series.astro and Notes[...slug].astro
+  - These scripts tried to add "fixed" class to non-existent elements
+  - Removed ~20 lines of dead code
+
+### Impact
+- **Total lines removed**: ~80 lines of JavaScript
+- **Cleaner console**: No debug messages in production
+- **Reduced complexity**: Removed code that had no effect
+- **Zero functionality loss**: All removed code was either commented out, debug logs, or targeting non-existent elements
+
+## IBM Plex Sans Body Font Optimization (July 16 2025)
 
 ### Typography Enhancement Implementation
 - **Core Weight Optimization**:

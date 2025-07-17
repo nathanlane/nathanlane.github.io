@@ -33,13 +33,3 @@ const meta = {
 	<Note as="h1" note={note} />
 </PageLayout>
 
-<script>
-	// Wait for the content to fully load
-	document.addEventListener("DOMContentLoaded", () => {
-		const buttonsPanel = document.getElementById("buttons-panel");
-		
-		if (buttonsPanel) {
-			buttonsPanel.classList.add("fixed");
-		}
-	});
-</script>
