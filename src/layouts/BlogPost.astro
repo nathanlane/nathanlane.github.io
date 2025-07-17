@@ -19,6 +19,19 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 
+// Calculate reading time and word count
+const readingTime = remarkPluginFrontmatter?.minutesRead || 5;
+const wordCount = remarkPluginFrontmatter?.words || 1000;
+
+// Format date for display
+const formatDate = (date: Date) => {
+	return date.toLocaleDateString("en-US", { 
+		year: "numeric", 
+		month: "long", 
+		day: "numeric" 
+	}).toUpperCase();
+};
+
 // Prepare article data for structured data
 const articleData = {
 	url: Astro.url.pathname,
@@ -51,25 +64,42 @@ const structuredData = [
  	<!-- SeriesPanel is inserted into the named slot "sidebar" -->
 	{seriesId && (<SeriesPanel slot="sidebar" seriesId={seriesId} />)}
 
-	<Masthead content={post} />
-	
-	<div class="mt-space-m flex sm:grid-cols-[auto_1fr] md:items-start gap-x-space-l">
-		<article class="grid flex-grow grid-cols-1 break-words pt-space-s max-w-prose mx-auto measure-base space-y-4" data-content-type="long-form">
-			<div class="prose prose-lane max-w-none flex-grow prose-headings:text-accent-base">
-				<slot />
+	<!-- Craig Mod-inspired essay layout -->
+	<article class="essay-wrapper" data-content-type="long-form">
+		<!-- Back navigation -->
+		<nav class="essay-nav-inline">
+			<a href="/posts" class="back-link">← All Essays</a>
+		</nav>
+
+		<!-- Essay header with metadata -->
+		<header class="essay-header">
+			<h1 class="essay-title">{title}</h1>
+			<hr class="essay-separator" />
+			<div class="essay-metadata">
+				ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS • {readingTime} MIN READ
 			</div>
+		</header>
+
+		<!-- Essay content with prose styling -->
+		<div class="essay-content prose prose-lane max-w-none">
+			<slot />
+		</div>
+
+		<!-- WebMentions -->
+		<div class="essay-webmentions">
 			<WebMentions />
-		</article>
+		</div>
+
+		<!-- Table of Contents - positioned absolutely on desktop -->
 		{!!headings.length && (
 			<aside 
 				id="toc-panel" 
-				class="z-10 hidden md:w-[14rem] md:min-w-[14rem] md:rounded-lg md:block"
+				class="essay-toc hidden md:block"
 			>
 				<TOC headings={headings} />
 			</aside>
 		)}
-	</div>
-
+	</article>
 
 	<!-- Series button for mobile screens -->
 	{seriesId && (
@@ -122,116 +152,26 @@ const structuredData = [
 </script>
 
 <script>
-	// Get the button and panel elements
-	const togglePanelBtn = document.getElementById("toggle-panel");
-	const closePanelBtn = document.getElementById("close-panel");
-	const seriesPanel = document.getElementById("series-panel");
-	const togglePanelMobileBtn = document.getElementById("toggle-panel-mobile");
-
-	// Ensure the seriesPanel exists
-	if (!seriesPanel) {
-		throw new Error("series-panel is required");
-	}
-
-	// Function to check if the panel is visible
-	const isPanelVisible = () => {
-		const isScreenLg = window.matchMedia("(min-width: 1024px)").matches; // Large screens
-		return (
-			(isScreenLg && seriesPanel.classList.contains("lg:block")) ||
-			(!isScreenLg && !seriesPanel.classList.contains("hidden"))
-		);
-	};
-
-	// Function to hide the panel
-	const hidePanel = () => {
-		seriesPanel.classList.remove("block", "lg:block");
-		seriesPanel.classList.add("hidden");
-	};
-
-	// Function to show the panel
-	const showPanel = () => {
-		seriesPanel.classList.remove("hidden");
-		seriesPanel.classList.add("block", "lg:block");
-	};
-
-	// Common event handler for both buttons
-	const togglePanel = () => {
-		if (isPanelVisible()) {
-			hidePanel(); // If visible, hide it
-		} else {
-			showPanel(); // If hidden, show it
-		}
-	};
-
-	// Event handlers for both buttons
-	if (togglePanelBtn) {
-		togglePanelBtn.addEventListener("click", togglePanel);
-	}
-
-	if (togglePanelMobileBtn) {
-		togglePanelMobileBtn.addEventListener("click", togglePanel);
-	}
-
-	if (closePanelBtn) {
-		closePanelBtn.addEventListener("click", hidePanel);
-	}
-</script>
-
-<script>
-	// Get the button and panel elements
-	const toggleTocBtn = document.getElementById('toggle-toc');
-	const closeTocBtn = document.getElementById('close-toc');
-	const tocPanel = document.getElementById('toc-panel');
-	const toggleTocMobileBtn = document.getElementById("toggle-toc-mobile");
-
-	// Check for the panel's presence (required for functionality)
-	if (!tocPanel) {
-		throw new Error('toc-panel is required');
-	}
-
-	// Function to check if the table of contents is visible
-	const isTocVisible = () => {
-		const isScreenMd = window.matchMedia("(min-width: 768px)").matches;
-		return (
-			(isScreenMd && tocPanel.classList.contains("md:block")) ||
-			(!isScreenMd && !tocPanel.classList.contains("hidden"))
-		);
-	};
-
-	// Function to hide the panel
-	const hideToc = () => {
-		tocPanel.classList.add('hidden');
-		tocPanel.classList.remove('md:block');
-	};
-
-	// Function to show the panel
-	const showToc = () => {
-		tocPanel.classList.remove('hidden');
-		tocPanel.classList.add('md:block');
-	};
-
-	// Common event handler for both buttons
-	const toggleToc = () => {
-		if (isTocVisible()) {
-			hideToc(); // If visible, hide it
-		} else {
-			showToc(); // If hidden, show it
-		}
-	};
+	import { initializePanelToggle } from '@/utils/panelToggle';
 	
-	// Add event handler for the toggle button
-	if (toggleTocBtn) {
-		toggleTocBtn.addEventListener("click", toggleToc);
-	}
-
-	// Add event handler for the toggle button (mobile)
-	if (toggleTocMobileBtn) {
-		toggleTocMobileBtn.addEventListener("click", toggleToc);
-	}
-
-	// Add event handler for the close button
-	if (closeTocBtn) {
-		closeTocBtn.addEventListener('click', hideToc);
-	}
+	// Initialize Series Panel toggle
+	initializePanelToggle({
+		panelId: 'series-panel',
+		toggleButtonId: 'toggle-panel',
+		mobileToggleButtonId: 'toggle-panel-mobile',
+		closeButtonId: 'close-panel',
+		breakpoint: 'lg',
+		visibleClass: 'lg:block'
+	});
+	
+	// Initialize TOC Panel toggle
+	initializePanelToggle({
+		panelId: 'toc-panel',
+		toggleButtonId: 'toggle-toc',
+		mobileToggleButtonId: 'toggle-toc-mobile',
+		closeButtonId: 'close-toc',
+		breakpoint: 'md',
+		visibleClass: 'md:block'
+	});
 </script>
 

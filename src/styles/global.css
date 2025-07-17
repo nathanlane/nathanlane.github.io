@@ -1353,6 +1353,197 @@
   article mark {
     @apply bg-transparent;
   }
+
+  /* Craig Mod-inspired Essay Layout */
+  .essay-wrapper {
+    max-width: 65ch;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-4); /* 48px 24px */
+    position: relative;
+  }
+
+  /* Back navigation */
+  .essay-nav-inline {
+    margin-bottom: var(--space-8); /* 48px */
+  }
+
+  .back-link {
+    font-family: var(--font-sans);
+    @apply text--1; /* 12.8-14.4px */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--theme-color-600);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .back-link:hover {
+    color: var(--theme-text);
+  }
+
+  /* Essay header */
+  .essay-header {
+    margin-bottom: var(--space-8); /* 48px */
+  }
+
+  .essay-title {
+    @apply heading-3; /* 29.3-33.2px - more modest than heading-5 */
+    margin-bottom: var(--space-4); /* 24px */
+    font-family: var(--font-newsreader);
+  }
+
+  .essay-separator {
+    border: none;
+    border-top: 1px solid rgb(0 0 0 / 0.15);
+    margin: var(--space-4) 0; /* 24px */
+    width: 100%;
+  }
+
+  .essay-metadata {
+    font-family: var(--font-sans);
+    @apply text--1; /* 12.8-14.4px */
+    font-variant: small-caps;
+    letter-spacing: 0.075em;
+    color: var(--theme-color-600);
+    font-weight: 500;
+  }
+
+  /* Essay content refinements */
+  .essay-content {
+    margin-bottom: var(--space-12); /* 72px */
+  }
+
+  /* Essay-specific prose overrides */
+  .essay-wrapper .prose {
+    max-width: none;
+  }
+  
+  /* Drop cap for first paragraph */
+  .essay-wrapper .prose > p:first-of-type {
+    @apply text-1; /* 18.8-21.3px */
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: var(--space-6); /* 36px */
+  }
+  
+  .essay-wrapper .prose > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-newsreader);
+    font-size: calc(var(--step-5) * 1.2); /* ~55-62px */
+    line-height: 0.8;
+    margin-right: var(--space-1); /* 6px */
+    margin-top: 0.1em;
+    font-weight: 400;
+    color: var(--theme-text);
+  }
+
+  /* Horizontal rules as gentle punctuation */
+  .essay-wrapper .prose hr:not(.essay-separator) {
+    border: none;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+    margin: var(--space-8) auto; /* 48px */
+    width: 30%;
+  }
+
+  /* Paragraph spacing aligned to grid */
+  .essay-wrapper .prose p {
+    margin-bottom: var(--space-4); /* 24px = baseline */
+  }
+
+  /* Pull quotes */
+  .essay-wrapper .prose blockquote.pull-quote {
+    margin: var(--space-10) 0; /* 60px */
+    padding: 0 var(--space-8); /* 0 48px */
+    text-align: center;
+    font-style: italic;
+    @apply text-2; /* 23.4-26.6px */
+    line-height: 1.4;
+    font-weight: 300;
+    border: none;
+    background: none;
+  }
+
+  /* Asterism styles moved to component - see src/components/typography/Asterism.astro */
+
+  /* Images with breathing room */
+  .essay-wrapper .prose img {
+    margin: var(--space-12) calc(-1 * var(--space-4)); /* 72px -24px */
+    max-width: calc(100% + 2 * var(--space-4));
+    height: auto;
+  }
+
+  /* Image captions */
+  .essay-wrapper .prose figcaption {
+    @apply text--1; /* 12.8-14.4px */
+    text-align: center;
+    margin-top: var(--space-2); /* 12px */
+    color: var(--theme-color-600);
+    font-style: italic;
+  }
+
+  /* WebMentions styling */
+  .essay-webmentions {
+    margin-top: var(--space-12); /* 72px */
+    padding-top: var(--space-8); /* 48px */
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  /* Table of Contents positioning */
+  .essay-toc {
+    position: fixed;
+    top: 50%;
+    right: var(--space-6); /* 36px */
+    transform: translateY(-50%);
+    width: 14rem;
+    min-width: 14rem;
+    z-index: 10;
+  }
+
+  /* Dark mode adjustments */
+  :root[data-theme="dark"] {
+    .essay-separator,
+    .essay-wrapper .prose hr:not(.essay-separator),
+    .essay-webmentions {
+      border-color: rgb(255 255 255 / 0.1);
+    }
+
+    .essay-metadata,
+    .back-link {
+      color: var(--theme-color-400);
+    }
+
+    .back-link:hover {
+      color: var(--theme-text);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .essay-wrapper {
+      padding: var(--space-6) var(--space-3); /* 36px 18px */
+    }
+
+    .essay-wrapper .prose > p:first-of-type::first-letter {
+      font-size: calc(var(--step-4) * 1.1); /* Smaller on mobile */
+    }
+
+    .essay-wrapper .prose img {
+      margin-left: calc(-1 * var(--space-3)); /* -18px */
+      margin-right: calc(-1 * var(--space-3)); /* -18px */
+      max-width: calc(100% + 2 * var(--space-3));
+    }
+
+    .essay-toc {
+      display: none !important; /* Hide TOC on mobile */
+    }
+  }
+
+  /* Wide screen optimization */
+  @media (min-width: 1400px) {
+    .essay-toc {
+      right: calc((100vw - 65ch) / 4); /* Position relative to content width */
+    }
+  }
 }
 
 /* === Header & Navigation Refinements === */
