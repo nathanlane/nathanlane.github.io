@@ -86,13 +86,13 @@ const allMediaItems = Object.entries(mediaData)
 			<h1 class="text-center">
 				{hero.title}
 			</h1>
-			<p class="text-body mt-4 mb-4">
+			<p class="text-body mt-4b mb-4b">
 				{hero.description}
 			</p>
-			<div class="flex justify-center mb-4">
+			<div class="flex justify-center mb-4b">
 				<SocialList />
 			</div>
-			<div class="flex justify-center gap-3 mt-6">
+			<div class="flex justify-center gap-3 mt-6b">
 				{hero.buttons.map((button) => (
 					<Button 
 						href={button.href} 
@@ -107,12 +107,12 @@ const allMediaItems = Object.entries(mediaData)
 	</section>
 
 	<!-- Current Work & Contact Section -->
-	<section class="mt-2">
+	<section class="mt-2b">
 		<h2>
 			Current Work & Contact
 		</h2>
 		
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 content-spacing items-start">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 space-y-4 items-start">
 			<!-- Left Column: Current Projects -->
 			<div>
 				<h3>{currentProjects.title}</h3>
@@ -140,14 +140,14 @@ const allMediaItems = Object.entries(mediaData)
 	</section>
 
 	<!-- Component Showcase Section -->
-	<section class="mt-2">
+	<section class="mt-2b">
 		<h2>
 			{showcase.title}
 		</h2>
 		
 		{/* Recent Papers Grid */}
-		<div class="mb-4">
-			<h3 class="font-headline font-medium mb-3">{researchConfig.title}</h3>
+		<div class="mb-4b">
+			<h3 class="font-headline font-medium mb-3b">{researchConfig.title}</h3>
 			<SectionGrid columns="3" gap="md">
 				{featuredResearch.map((paper) => (
 					<ProjectCard 
@@ -160,8 +160,8 @@ const allMediaItems = Object.entries(mediaData)
 		</div>
 
 		{/* Writing Cards */}
-		<div class="mb-4">
-			<h3 class="font-headline font-medium mb-3">{writingConfig.title}</h3>
+		<div class="mb-4b">
+			<h3 class="font-headline font-medium mb-3b">{writingConfig.title}</h3>
 			<SectionGrid columns="2" gap="md">
 				{latestWriting.map((piece) => (
 					<WritingCard 
@@ -175,8 +175,8 @@ const allMediaItems = Object.entries(mediaData)
 		</div>
 
 		{/* Media Appearances */}
-		<div class="mb-4">
-			<h3 class="font-headline font-medium mb-3">{mediaConfig.title}</h3>
+		<div class="mb-4b">
+			<h3 class="font-headline font-medium mb-3b">{mediaConfig.title}</h3>
 			<CompactList items={allMediaItems.map(item => ({
 				title: item.title,
 				description: `${item.outlet} • ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`,
@@ -186,8 +186,8 @@ const allMediaItems = Object.entries(mediaData)
 	</section>
 
 	<!-- Posts Section -->
-	<section aria-label="Blog post list" class="mt-2">
-		<h2 class="font-headline font-medium mb-3">{postsConfig.title}</h2>
+	<section aria-label="Blog post list" class="mt-2b">
+		<h2 class="font-headline font-medium mb-3b">{postsConfig.title}</h2>
 		<ul class="space-y-6 md:space-y-2" role="list">
 			{
 				allPostsByDate.map((p) => (
@@ -202,7 +202,7 @@ const allMediaItems = Object.entries(mediaData)
 
 	<!-- Debug -->
 	<!--
-	<div class="flex justify-between flex-wrap gap-y-1.5 mt-6 text-sm font-medium">
+	<div class="flex justify-between flex-wrap gap-y-1.5 mt-6b text-sm font-medium">
 		<div class="text-center content-center h-10 w-10 bg-color-50"><span class="text-textColor">50</span></div>
 		<div class="text-center content-center h-10 w-10 bg-color-75"><span class="text-textColor">75</span></div>
 		<div class="text-center content-center h-10 w-10 bg-color-100"><span class="text-textColor">100</span></div>

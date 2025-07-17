@@ -13,7 +13,7 @@ const badgeClasses = {
 	base: `
 		inline-flex items-center
 		rounded-sm transition-all duration-200
-		h-6 px-3 text-xs
+		h-6 px-3b text-xs
 		font-medium tracking-wider
 		${className}
 	`,
@@ -55,8 +55,8 @@ const variantClasses = badgeClasses.variants[variant];
 		-moz-osx-font-smoothing: grayscale;
 		/* Uppercase for small text */
 		text-transform: uppercase;
-		/* Base letter spacing */
-		letter-spacing: 0.04em;
+		/* Base letter spacing - matches .tracking-nav utility */
+		letter-spacing: 0.05em;
 		/* Remove default shadow */
 		box-shadow: none;
 	}

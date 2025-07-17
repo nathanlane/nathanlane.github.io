@@ -4,6 +4,8 @@
 
 This audit analyzes the website's typography based on the provided design documents and the `tailwind.config.ts` file.
 
+Finished JULY 16 2025
+
 ### 1.1. Type Scale & Hierarchy
 
 **Findings:**
@@ -16,8 +18,8 @@ This audit analyzes the website's typography based on the provided design docume
 - **Semantic Classes:** The use of semantic classes like `.heading-1` and `.text-body` is excellent for maintainability. The application of `font-variation-settings` within these classes shows a sophisticated level of control.
 
 **Assessment:**
-- **CRITICAL:** The base font size is too small and contradicts the design system's goals.
-- **MAJOR:** The lack of a consistent mathematical ratio in the type scale weakens the hierarchy's coherence.
+- **🚨 CRITICAL:** The base font size is too small and contradicts the design system's goals.
+- **🚨 MAJOR:** The lack of a consistent mathematical ratio in the type scale weakens the hierarchy's coherence.
 
 ### 1.2. Vertical Rhythm & Spacing
 
@@ -27,8 +29,8 @@ This audit analyzes the website's typography based on the provided design docume
 - **Complex Utilities:** Spacing is controlled through a complex web of utilities like `.content-spacing`, which makes maintenance difficult and error-prone.
 
 **Assessment:**
-- **CRITICAL:** The vertical rhythm is broken due to line heights that are incompatible with the documented baseline grid.
-- **MAJOR:** The inconsistent use of spacing tokens and hardcoded values makes achieving a consistent rhythm impossible.
+- **🚨 CRITICAL:** The vertical rhythm is broken due to line heights that are incompatible with the documented baseline grid.
+- **⚠️ MAJOR:** The inconsistent use of spacing tokens and hardcoded values makes achieving a consistent rhythm impossible.
 
 ### 1.3. Measure & Readability
 
@@ -36,19 +38,27 @@ This audit analyzes the website's typography based on the provided design docume
 - **Measure:** The use of `ch` units for reading measure (`.measure-base: 65ch`) is a best practice and is well-implemented.
 - **Font Weight:** The use of precise `font-variation-settings` for weights and optical sizes is excellent. Dark mode adjustments show great attention to detail.
 - **Contrast:** While dark mode weights are adjusted, the small base font size (13-14px) inherently reduces readability and makes passing accessibility contrast ratios more challenging, especially for lighter text colors.
+- **⚠️ Mobile weight issues:** Newsreader 300 weight renders poorly below 480px, affecting readability on small screens.
 
 **Assessment:**
-- **GOOD:** Excellent control over measure and font-weights.
-- **MINOR:** Accessibility for contrast should be re-evaluated after the base font size is corrected.
+- **✅ GOOD:** Excellent control over measure and font-weights.
+- **⚠️ MINOR:** Accessibility for contrast should be re-evaluated after the base font size is corrected.
 
 ### 1.4. Typographic Details
 
 **Findings:**
 - **Letter Spacing & Features:** The use of negative tracking on display headings and advanced OpenType features (`kern`, `liga`, `calt`) is sophisticated and well-executed.
 - **Widows & Orphans:** This cannot be assessed from the config file alone and requires a visual review of the live site.
+- **Component-specific issues:**
+  - **Letter-spacing gaps:** Newsreader at optical size 48 causes "fi", "ffl" collisions
+  - **Uppercase navigation:** Needs +0.05em letter-spacing for readability
+  - **Font features:** `font-feature-settings: "kern" "liga"` not explicitly enabled (Safari requires manual enabling)
+  - **Widows/orphans:** CSS property `p { widows: 2; orphans: 2; }` absent
+  - **Hyphenation:** `hyphens: auto;` disabled → long German/CJK words overflow in narrow columns
 
 **Assessment:**
-- **EXCELLENT:** The implementation of fine typographic details is a major strength.
+- **✅ EXCELLENT:** The implementation of fine typographic details is a major strength.
+- **💡 QUICK WINS:** Several small improvements available (letter-spacing, font-features, widow control)
 
 ### 1.5. Visual Harmony & Code Structure
 
@@ -57,7 +67,18 @@ This audit analyzes the website's typography based on the provided design docume
 - **Redundancy:** There are multiple competing systems for typography (e.g., `text-responsive`, `text-mobile-base`, `text-fluid-viewport` and the fluid-type plugin). This creates confusion and inconsistency.
 
 **Assessment:**
-- **MAJOR:** The configuration's complexity and redundancy make the design system difficult to maintain, scale, and for new developers to understand. It violates the principle of a single source of truth.
+- **⚠️ MAJOR:** The configuration's complexity and redundancy make the design system difficult to maintain, scale, and for new developers to understand. It violates the principle of a single source of truth.
+
+### 1.6. Platform-Specific Considerations
+
+**Findings:**
+- **Safari:** Requires explicit font-feature-settings for some OpenType features
+- **Mobile weight switching:** Newsreader 300 weight renders poorly below 480px
+- **Wide viewports:** Scale locks at >1280px, may feel undersized on ultrawide monitors  
+- **Print styles:** Need explicit overrides for 65ch measure and adjusted line-height
+
+**Assessment:**
+- **⚠️ MODERATE:** These edge cases need attention but don't block the core typography improvements.
 
 ### Summary of Critical Issues:
 
@@ -195,9 +216,30 @@ This is a step-by-step guide to implementing the new typography and spacing syst
 4.  **Verify Text Sizes:** Ensure that elements are using the correct `text-*` utility classes.
 5.  **Repeat** this process for all major components (`Header.astro`, `Footer.astro`, `PostPreview.astro`, etc.) and pages.
 
+**Step 3.5: Audit Helpers**
+Search patterns to find legacy code:
+- Non-semantic text: `grep -r "text-xl\|text-2xl\|text-sm" src/`
+- Hard-coded spacing: `grep -r "p-[0-9]\|m-[0-9]" src/`
+- Pixel values: `grep -r "[0-9]px" src/styles/`
+
 **Step 4: Update Documentation**
 1.  Go through the design system documents (`DESIGN_SYSTEM.md`, etc.).
 2.  Update them to reflect the new type scale, spacing system, and simplified configuration. This is crucial for future maintainability.
+
+### 3.5 Component Migration Reference
+| Component | Current util | Replace with |
+|-----------|-------------|--------------|
+| Badge     | `px-2 py-1` | `px-2b py-1b` |
+| Button    | `px-4 py-2` | `px-4b py-2b` |
+| NavLink   | `text-sm`   | `text--1 tracking-wideUpper` |
+| Card      | `p-6`       | `p-6b` |
+
+### 3.6 Quick Wins
+💡 **Immediate improvements while planning the full refactor:**
+- Add letter-spacing to display sizes: `.text-5 { letter-spacing: -0.015em; }`
+- Fix uppercase nav: `.nav-link { letter-spacing: 0.05em; }`
+- Enable font features globally: `body { font-feature-settings: "kern" 1, "liga" 1; }`
+- Add widow/orphan control: `p { widows: 2; orphans: 2; }`
 
 ## 4. Testing Checklist
 
@@ -214,6 +256,12 @@ Use this checklist to verify the implementation.
 - [ ] Does the baseline of each line of text (especially in paragraphs) align with the grid lines?
 - [ ] Do headings and other elements start and end in alignment with the grid?
 
+### Visual Testing Methods
+- [ ] **Baseline Grid Overlay:** Use `.baseline-grid` class or browser extension
+- [ ] **Print Preview:** Verify 65ch measure and 1.2 line-height override
+- [ ] **Viewport Testing:** Test at 320px, 360px, 768px, 1280px, 1920px breakpoints
+- [ ] **Component Screenshots:** Before/after for key components
+
 ### Readability & Accessibility
 - [ ] **Run a contrast check** (using browser dev tools) on the new body text size. Does it meet WCAG AA standards?
 - [ ] Is the reading experience comfortable? Is the line length still respected?
@@ -222,4 +270,10 @@ Use this checklist to verify the implementation.
 ### Consistency
 - [ ] Is the spacing between similar elements consistent across different pages? (e.g., space below H2s).
 - [ ] Are there any remaining old spacing classes or hardcoded pixel values in the CSS?
-- [ ] Does the site look correct in both light and dark modes? 
+- [ ] Does the site look correct in both light and dark modes?
+
+### Platform-Specific Testing
+- [ ] **Safari:** Verify font features (ligatures, kerning) render correctly
+- [ ] **Mobile <480px:** Check that Newsreader weight switches appropriately
+- [ ] **Ultrawide >1920px:** Ensure text doesn't feel undersized
+- [ ] **Print styles:** Test print preview for proper formatting

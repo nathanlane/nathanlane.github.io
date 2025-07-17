@@ -154,8 +154,10 @@
     --space-2: calc(var(--grid-unit) * 2); /* 12px - tight */
     --space-3: calc(var(--grid-unit) * 3); /* 18px - compact */
     --space-4: calc(var(--grid-unit) * 4); /* 24px - base (1 baseline) */
+    --space-5: calc(var(--grid-unit) * 5); /* 30px - comfortable */
     --space-6: calc(var(--grid-unit) * 6); /* 36px - flow (1.5 baselines) */
     --space-8: calc(var(--grid-unit) * 8); /* 48px - section (2 baselines) */
+    --space-10: calc(var(--grid-unit) * 10); /* 60px - large (2.5 baselines) */
     --space-12: calc(var(--grid-unit) * 12); /* 72px - large (3 baselines) */
     --space-16: calc(var(--grid-unit) * 16); /* 96px - huge (4 baselines) */
     --space-24: calc(var(--grid-unit) * 24); /* 144px - massive (6 baselines) */
@@ -223,6 +225,25 @@
     body {
       line-height: 1.55;
     }
+  }
+
+  /* Typography optimization: Prevent widows and orphans */
+  p, li, blockquote {
+    widows: 2;
+    orphans: 2;
+  }
+
+  /* Hyphenation for narrow columns and long words */
+  p, li, blockquote, .prose {
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 3; /* minimum word length, before break, after break */
+    hyphenate-limit-lines: 2; /* max consecutive hyphenated lines */
+    hyphenate-limit-last: always; /* allow hyphenation at end of paragraphs */
+  }
+
+  /* Disable hyphenation for headings and short text */
+  h1, h2, h3, h4, h5, h6, .heading-1, .heading-2, .heading-3, .heading-4, .heading-5, .heading-6 {
+    hyphens: none;
   }
 
   /* Optimal bold weight for screens */
@@ -309,6 +330,11 @@
     /* Multi-line optimization */
     text-wrap: balance; /* Better line breaks for headers */
     hyphens: none; /* No hyphenation in headers */
+  }
+  
+  /* Typography refinement for heading-1 */
+  .heading-1 { 
+    letter-spacing: -0.015em; 
   }
 
   [data-theme="dark"] {
@@ -1041,7 +1067,7 @@
     font-family: "IBM Plex Sans", system-ui, sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
-    letter-spacing: 0.025em; /* Wider spacing for elegance */
+    letter-spacing: 0.05em; /* Uppercase navigation spacing */
     font-feature-settings:
       "kern" 1,
       "ss01" 1;
@@ -1543,5 +1569,14 @@
     background-size:
       100% var(--grid-unit),
       100% var(--baseline);
+  }
+  
+  /* Visual baseline grid for development - 24px repeating */
+  .show-baseline {
+    background-image: repeating-linear-gradient(
+      transparent,
+      transparent 23px,
+      hsla(204, 8%, 76%, 0.25) 24px
+    );
   }
 }

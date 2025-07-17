@@ -25,15 +25,15 @@ export default {
       minScreen: "320px",
       maxScreen: "1280px",
       textSizes: {
-        "-2": { minSize: "0.64rem", maxSize: "0.72rem", lineHeight: "1.45" },
-        "-1": { minSize: "0.80rem", maxSize: "0.90rem", lineHeight: "1.50" },
-        "0": { minSize: "0.8125rem", maxSize: "0.875rem", lineHeight: "1.6" },
-        "1": { minSize: "0.975rem", maxSize: "1.125rem", lineHeight: "1.5" },
-        "2": { minSize: "1.17rem", maxSize: "1.35rem", lineHeight: "1.4" },
-        "3": { minSize: "1.40rem", maxSize: "1.62rem", lineHeight: "1.35" },
-        "4": { minSize: "1.69rem", maxSize: "1.94rem", lineHeight: "1.3" },
-        "5": { minSize: "2.02rem", maxSize: "2.33rem", lineHeight: "1.25" },
-        "6": { minSize: "2.43rem", maxSize: "2.80rem", lineHeight: "1.2" },
+        "-2": { minSize: "0.768rem", maxSize: "0.864rem", lineHeight: "1.3889" }, // -> 18px LH
+        "-1": { minSize: "0.80rem", maxSize: "0.90rem", lineHeight: "1.6667" }, // -> 24px LH
+        "0": { minSize: "0.9375rem", maxSize: "1.0625rem", lineHeight: "1.4118" }, // -> 24px LH
+        "1": { minSize: "1.172rem", maxSize: "1.328rem", lineHeight: "1.5385" }, // -> 30px LH
+        "2": { minSize: "1.465rem", maxSize: "1.66rem", lineHeight: "1.6364" }, // -> 42px LH
+        "3": { minSize: "1.831rem", maxSize: "2.075rem", lineHeight: "1.3103" }, // -> 42px LH
+        "4": { minSize: "2.289rem", maxSize: "2.594rem", lineHeight: "1.3125" }, // -> 54px LH
+        "5": { minSize: "2.861rem", maxSize: "3.242rem", lineHeight: "1.25" }, // -> 66px LH
+        "6": { minSize: "3.576rem", maxSize: "4.053rem", lineHeight: "1.1667" }, // -> 78px LH
       },
     }),
     require("@tailwindcss/typography"),
@@ -41,6 +41,7 @@ export default {
       // Custom utilities for fine-tuned typography
       addUtilities({
         ".tracking-tight-display": { letterSpacing: "-0.015em" },
+        ".tracking-nav": { letterSpacing: "0.05em" }, // For uppercase navigation
 
         // Reading measure utilities for optimal line length
         ".measure-narrow": {
@@ -68,36 +69,9 @@ export default {
           },
         },
 
-        // Responsive typography utilities
-        ".text-responsive": {
-          fontSize: "1rem",
-          "@screen sm": {
-            fontSize: "1.0625rem",
-          },
-          "@screen lg": {
-            fontSize: "1.125rem",
-          },
-        },
 
-        // Mobile-first typography sizing
-        ".text-mobile-sm": {
-          fontSize: "0.875rem", // 14px
-          "@screen sm": {
-            fontSize: "1rem", // 16px
-          },
-        },
-        ".text-mobile-base": {
-          fontSize: "1rem", // 16px
-          "@screen sm": {
-            fontSize: "1.125rem", // 18px
-          },
-        },
-        ".text-mobile-lg": {
-          fontSize: "1.25rem", // 20px
-          "@screen sm": {
-            fontSize: "1.5rem", // 24px
-          },
-        },
+
+
 
         // Touch-friendly spacing for mobile
         ".touch-target": {
@@ -115,27 +89,7 @@ export default {
           },
         },
 
-        // Context-aware spacing with mobile adjustments
-        ".content-spacing": {
-          "& > * + *": {
-            marginTop: "0.75rem", // 3b - tighter on mobile
-            "@screen sm": {
-              marginTop: "1rem", // 4b - normal on desktop
-            },
-          },
-          "& > h2": {
-            marginTop: "1.5rem", // 6b mobile
-            "@screen sm": {
-              marginTop: "2rem", // 8b desktop
-            },
-          },
-          "& > h3": {
-            marginTop: "1.25rem", // 5b mobile
-            "@screen sm": {
-              marginTop: "1.5rem", // 6b desktop
-            },
-          },
-        },
+
 
         // Mobile-optimized line heights
         ".leading-mobile": {
@@ -145,23 +99,10 @@ export default {
           },
         },
 
-        // Viewport-based typography for extreme responsiveness
-        ".text-fluid-viewport": {
-          fontSize: "clamp(1rem, 4vw, 1.125rem)",
-        },
-        ".heading-fluid-viewport": {
-          fontSize: "clamp(1.5rem, 6vw, 2.5rem)",
-          lineHeight: "1.2",
-        },
+
 
         // Dark mode specific utilities
-        ".dark-text-enhanced": {
-          ':root[data-theme="dark"] &': {
-            color: "hsl(0deg 0% 92%)",
-            opacity: "0.90",
-            fontWeight: "425",
-          },
-        },
+
         ".dark-heading-enhanced": {
           ':root[data-theme="dark"] &': {
             fontWeight: "450",
@@ -208,7 +149,7 @@ export default {
 
         // Heading system with consistent spacing and baseline grid alignment
         ".heading-1": {
-          "@apply font-headline text-accent-base mb-space-2xs mt-0": {},
+          "@apply font-headline text-accent-base": {},
           fontSize: "var(--step-5)",
           "scroll-margin-top": "4rem", // For anchor links
           lineHeight: "1.25",
@@ -235,8 +176,7 @@ export default {
           },
         },
         ".heading-2": {
-          "@apply font-headline text-accent-two mb-space-2xs mt-space-m sm:mt-space-l":
-            {},
+          "@apply font-headline text-accent-two": {},
           fontSize: "var(--step-4)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.3",
@@ -260,8 +200,7 @@ export default {
           },
         },
         ".heading-3": {
-          "@apply font-headline text-accent-base mb-space-2xs mt-space-s sm:mt-space-m":
-            {},
+          "@apply font-headline text-accent-base": {},
           fontSize: "var(--step-3)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.35",
@@ -285,8 +224,7 @@ export default {
           },
         },
         ".heading-4": {
-          "@apply font-headline text-accent-base mb-space-3xs mt-space-xs sm:mt-space-s":
-            {},
+          "@apply font-headline text-accent-base": {},
           fontSize: "var(--step-2)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.4",
@@ -310,8 +248,7 @@ export default {
           },
         },
         ".heading-5": {
-          "@apply font-headline text-accent-base mb-space-3xs mt-space-2xs sm:mt-space-xs":
-            {},
+          "@apply font-headline text-accent-base": {},
           fontSize: "var(--step-1)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.5",
@@ -335,7 +272,7 @@ export default {
           },
         },
         ".heading-6": {
-          "@apply font-headline text-accent-base mb-space-3xs mt-space-2xs": {},
+          "@apply font-headline text-accent-base": {},
           fontSize: "var(--step-0)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.6",
@@ -511,35 +448,35 @@ export default {
         ".font-headline": {
           fontFamily: theme("fontFamily.headline"),
         },
-        // Consistent header spacing using Utopia variables
+        // Consistent header spacing using grid variables
         ".heading-spacing": {
-          marginTop: "2rem",
-          marginBottom: "0.5rem",
+          marginTop: "var(--space-8)",
+          marginBottom: "var(--space-2)",
         },
         ".heading-spacing-before": {
-          marginTop: "2rem",
+          marginTop: "var(--space-8)",
         },
         ".heading-spacing-after": {
-          marginBottom: "0.5rem",
+          marginBottom: "var(--space-2)",
         },
         // Section spacing utilities
         ".section-spacing": {
-          paddingTop: "2rem",
-          paddingBottom: "2rem",
+          paddingTop: "var(--space-8)",
+          paddingBottom: "var(--space-8)",
         },
         ".section-spacing-large": {
-          paddingTop: "3rem",
-          paddingBottom: "3rem",
+          paddingTop: "var(--space-12)",
+          paddingBottom: "var(--space-12)",
         },
         ".component-spacing": {
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
+          paddingTop: "var(--space-4)",
+          paddingBottom: "var(--space-4)",
         },
 
         // Code block utilities
         ".code-block": {
           "@apply bg-color-900 text-color-100 rounded-lg overflow-hidden": {},
-          padding: "1rem", // 4b
+          padding: "var(--space-4)",
           fontSize: "0.8125rem", // 13px
           lineHeight: "1.5",
           fontFamily: theme("fontFamily.mono"),
@@ -668,6 +605,14 @@ export default {
         xs: "320px", // Add xs size
         // xl: '1200px',
       },
+      letterSpacing: {
+        tightest: "-0.02em",
+        tighter: "-0.015em", 
+        wideUpper: "0.05em",
+      },
+      fontWeight: {
+        h1: "400",
+      },
       maxWidth: {
         lg: "32rem", // default 32rem (512px)
         xl: "36rem", // default 36rem (576px)
@@ -710,11 +655,25 @@ export default {
         "2": "var(--space-2)", // 12px (2 grid units)
         "3": "var(--space-3)", // 18px (3 grid units)
         "4": "var(--space-4)", // 24px (4 grid units = 1 baseline)
+        "5": "var(--space-5)", // 30px (5 grid units)
         "6": "var(--space-6)", // 36px (6 grid units = 1.5 baselines)
         "8": "var(--space-8)", // 48px (8 grid units = 2 baselines)
         "12": "var(--space-12)", // 72px (12 grid units = 3 baselines)
         "16": "var(--space-16)", // 96px (16 grid units = 4 baselines)
         "24": "var(--space-24)", // 144px (24 grid units = 6 baselines)
+        
+        // New baseline-unit naming convention
+        "1b": "var(--space-1)", // 6px (1 grid unit)
+        "2b": "var(--space-2)", // 12px (2 grid units)
+        "3b": "var(--space-3)", // 18px (3 grid units)
+        "4b": "var(--space-4)", // 24px (4 grid units = 1 baseline)
+        "5b": "var(--space-5)", // 30px (5 grid units)
+        "6b": "var(--space-6)", // 36px (6 grid units = 1.5 baselines)
+        "8b": "var(--space-8)", // 48px (8 grid units = 2 baselines)
+        "10b": "var(--space-10)", // 60px (10 grid units = 2.5 baselines)
+        "12b": "var(--space-12)", // 72px (12 grid units = 3 baselines)
+        "16b": "var(--space-16)", // 96px (16 grid units = 4 baselines)
+        "24b": "var(--space-24)", // 144px (24 grid units = 6 baselines)
 
         // Legacy mappings for gradual migration - DEPRECATED
         // baseline: "var(--grid-unit)",
@@ -952,7 +911,7 @@ export default {
             // Code blocks aligned to grid
             pre: {
               marginTop: "var(--space-4)",
-              marginBottom: "var(--space-m)",
+              marginBottom: "var(--space-4)",
               padding: "var(--space-3)",
               borderRadius: "var(--space-1)",
               fontSize: "0.8125rem",
@@ -982,7 +941,7 @@ export default {
             // Blockquote aligned to grid
             blockquote: {
               marginTop: "var(--space-4)",
-              marginBottom: "var(--space-m)",
+              marginBottom: "var(--space-4)",
               paddingLeft: "var(--space-4)",
               borderLeftWidth: "var(--space-1)",
               borderLeftColor: theme("colors.accent-base"),
@@ -1003,7 +962,7 @@ export default {
             // Table spacing aligned to grid
             table: {
               marginTop: "var(--space-6)",
-              marginBottom: "var(--space-l)",
+              marginBottom: "var(--space-6)",
               width: "100%",
               fontSize: theme("fontSize.-1"),
             },
@@ -1040,7 +999,7 @@ export default {
             // Horizontal rules
             hr: {
               marginTop: "var(--space-6)",
-              marginBottom: "var(--space-l)",
+              marginBottom: "var(--space-6)",
               "@apply border-t border-solid border-color-200": "",
             },
             // Strong emphasis
@@ -1069,7 +1028,7 @@ export default {
               marginRight: "-1rem",
               "@screen sm": {
                 marginTop: "var(--space-6)",
-                marginBottom: "var(--space-l)",
+                marginBottom: "var(--space-6)",
                 marginLeft: "0",
                 marginRight: "0",
               },
@@ -1102,7 +1061,7 @@ export default {
               height: "auto",
               "@screen sm": {
                 marginTop: "var(--space-4)",
-                marginBottom: "var(--space-m)",
+                marginBottom: "var(--space-4)",
               },
             },
             video: {
@@ -1113,7 +1072,7 @@ export default {
               height: "auto",
               "@screen sm": {
                 marginTop: "var(--space-4)",
-                marginBottom: "var(--space-m)",
+                marginBottom: "var(--space-4)",
               },
             },
 

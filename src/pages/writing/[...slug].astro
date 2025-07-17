@@ -21,13 +21,13 @@ const { Content } = await render(writingPiece);
 
 <BaseLayout meta={{ title: writingPiece.data.title, description: writingPiece.data.description }}>
 	<div class="gap-x-8b lg:flex lg:items-start">
-		<article class="flex-grow break-words max-w-prose mx-auto measure-base content-spacing">
-			<header class="mb-8">
-				<h1 class="heading-1 mb-4">{writingPiece.data.title}</h1>
+		<article class="flex-grow break-words max-w-prose mx-auto measure-base space-y-4">
+			<header class="mb-8b">
+				<h1 class="heading-1 mb-4b">{writingPiece.data.title}</h1>
 				
 				<p class="text-body leading-relaxed text-light">{writingPiece.data.description}</p>
 
-				<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
+				<div class="mt-4b flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
 					<FormattedDate
 						date={writingPiece.data.publishDate}
 						dateTimeOptions={{

@@ -31,13 +31,13 @@ const recentWriting = sortedWriting.slice(0, 6);
 			<h2>Featured Writing</h2>
 			<div class="space-y-6b">
 				{featuredWriting.map((writing) => (
-					<article class="border-l-4 border-accent-base/20 pl-6 py-4">
+					<article class="border-l-4 border-accent-base/20 pl-6b py-4b">
 						<h3>
 							<a href={`/writing/${writing.id}/`} class="hover:text-accent-two">
 								{writing.data.title}
 							</a>
 						</h5>
-						<p class="text-body-sm mb-2">{writing.data.description}</p>
+						<p class="text-body-sm mb-2b">{writing.data.description}</p>
 						<time class="text-body-sm text-light">
 							{writing.data.publishDate.toLocaleDateString('en-US', {
 								year: 'numeric',
@@ -52,13 +52,13 @@ const recentWriting = sortedWriting.slice(0, 6);
 	)}
 
 	<section>
-		<h3 class="heading-3">All Writing</h3>
+		<h3 class="heading-3 mt-8b mb-4b">All Writing</h3>
 		<CompactList items={writingItems} />
 	</section>
 
-	<div class="mt-16 p-10 bg-color-75 rounded-lg">
-		<h4 class="heading-4">About This Writing</h4>
-		<p class="text-xs leading-relaxed mt-3">
+	<div class="mt-16b p-10b bg-color-75 rounded-lg">
+		<h4 class="heading-4 mt-6b mb-3b">About This Writing</h4>
+		<p class="text-xs leading-relaxed mt-3b">
 			This collection showcases creative writing pieces across various forms and genres, from short stories and essays to experimental narratives. 
 			Each piece explores different voices, themes, and storytelling techniques as part of an ongoing creative journey.
 		</p>

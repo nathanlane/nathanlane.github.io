@@ -44,9 +44,9 @@ const structuredData = [
 
 <BaseLayout meta={{ title: essay.data.title, description: essay.data.description }} structuredData={structuredData}>
 	<div class="gap-x-8b lg:flex lg:items-start">
-		<article class="flex-grow break-words max-w-prose mx-auto measure-base content-spacing">
-			<header class="mb-8">
-				<h1 class="heading-1 mb-4">{essay.data.title}</h1>
+		<article class="flex-grow break-words max-w-prose mx-auto measure-base space-y-4">
+			<header class="mb-8b">
+				<h1 class="heading-1 mb-4b">{essay.data.title}</h1>
 				
 				<div class="space-y-3">
 					<p class="text-body font-medium text-accent-base">{essay.data.authors}</p>
@@ -67,7 +67,7 @@ const structuredData = [
 						)}
 					</div>
 					
-					<div class="flex flex-wrap gap-3 mt-4">
+					<div class="flex flex-wrap gap-3 mt-4b">
 						{essay.data.link && (
 							<a href={essay.data.link} class="inline-link text-sm" target="_blank" rel="noopener noreferrer">
 								View Paper →
@@ -82,7 +82,7 @@ const structuredData = [
 				</div>
 			</header>
 
-			<div class="prose-summary bg-warm-50 dark:bg-warm-800 p-6 rounded-lg mb-8">
+			<div class="prose-summary bg-warm-50 dark:bg-warm-800 p-6b rounded-lg mb-8b">
 				<p class="text-body leading-relaxed">{essay.data.description}</p>
 			</div>
 
@@ -91,10 +91,10 @@ const structuredData = [
 			</div>
 			
 			{essay.data.tags && essay.data.tags.length > 0 && (
-				<footer class="mt-12 pt-6 border-t border-color-200">
+				<footer class="mt-12b pt-6b border-t border-color-200">
 					<div class="flex flex-wrap gap-2">
 						{essay.data.tags.map((tag) => (
-							<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-color-100 text-color-700 dark:bg-color-800 dark:text-color-300">
+							<span class="inline-flex items-center px-3b py-1b rounded-full text-xs font-medium bg-color-100 text-color-700 dark:bg-color-800 dark:text-color-300">
 								{tag}
 							</span>
 						))}

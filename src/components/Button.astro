@@ -15,9 +15,9 @@ const {
 
 // Size mappings with refined typography
 const sizeClasses = {
-  sm: 'px-4 py-1.5 text-xs',
-  md: 'px-5 py-2 text-sm',
-  lg: 'px-6 py-2.5 text-base'
+  sm: 'px-4b py-1b text-xs',
+  md: 'px-5b py-2b text-sm',
+  lg: 'px-6b py-2b text-base'
 };
 
 // Base button classes with typographic refinements
@@ -116,7 +116,7 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   /* Size-specific typography adjustments */
   [data-button-variant] {
     &.text-xs {
-      letter-spacing: var(--letter-spacing-wide);
+      letter-spacing: 0.05em; /* matches .tracking-nav utility */
       text-transform: uppercase;
       font-variation-settings: 'wght' 550;
     }

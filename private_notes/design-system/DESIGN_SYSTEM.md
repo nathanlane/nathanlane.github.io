@@ -7,28 +7,35 @@ The design system now uses the `tailwindcss-fluid-type` plugin for all typograph
 
 | Utility | Output (min→max) | Typical use |
 |---------|------------------|-------------|
-| `text--2` | 10-11px | Small text, captions |
-| `text--1` | 12-14px | Secondary text |
-| `text-0` | 15-17px | Body text |
-| `text-1` | 18-21px | Large text |
-| `text-2` | 23-26px | H4-H5 headings |
-| `text-3` | 29-33px | H3 headings |
-| `text-4` | 37-41px | H2 headings |
-| `text-5` | 46-52px | H1 headings |
-| `text-6` | 58-65px | Display text |
+| `text--2` | 12.3-13.8px | Small text, captions |
+| `text--1` | 12.8-14.4px | Secondary text |
+| `text-0` | 15.6-17px | Body text (CORRECTED) |
+| `text-1` | 18.8-21.3px | Large text |
+| `text-2` | 23.4-26.6px | H4-H5 headings |
+| `text-3` | 29.3-33.2px | H3 headings |
+| `text-4` | 36.6-41.5px | H2 headings |
+| `text-5` | 45.8-51.9px | H1 headings |
+| `text-6` | 57.2-64.9px | Display text |
 
 ### Baseline Grid Utilities
 
-| Utility | Value | Use case |
-|---------|-------|----------|
-| `1b` | 6px | Micro-spacing |
-| `2b` | 12px | Small gaps |
-| `3b` | 18px | Component spacing |
-| `4b` | 24px | Paragraph/baseline spacing |
-| `5b` | 30px | Section spacing |
-| `8b` | 48px | Large gaps |
-| `10b` | 60px | Major sections |
-| `12b` | 72px | Hero/footer spacing |
+The new `*b` convention replaces old numeric spacing. All values align with the 6px grid.
+
+| Utility | Value | Use case | Replaces |
+|---------|-------|----------|----------|
+| `1b` | 6px | Micro-spacing | `1` |
+| `2b` | 12px | Small gaps | `2` |
+| `3b` | 18px | Component spacing | `3` |
+| `4b` | 24px | Paragraph/baseline spacing | `4` |
+| `5b` | 30px | Section spacing | `5` |
+| `6b` | 36px | Section gaps | `6` |
+| `8b` | 48px | Large gaps | `8` |
+| `10b` | 60px | Major sections | `10` |
+| `12b` | 72px | Hero/footer spacing | `12` |
+| `16b` | 96px | Page sections | `16` |
+| `24b` | 144px | Massive spacing | `24` |
+
+**Migration:** Use `mt-4b`, `p-6b`, `gap-8b` instead of `mt-4`, `p-6`, `gap-8`.
 
 ## Typography System Overview
 
@@ -51,17 +58,17 @@ This design system implements a fluid type scale based on typography principles 
 
 ### Type Scale
 
-| Step | Min (320px) | Max (1280px) | Usage | Line Height |
-|------|-------------|--------------|-------|-------------|
-| `-2` | 10.24px | 11.52px | Small text, captions | 1.35 |
-| `-1` | 12.80px | 14.40px | Secondary text | 1.35 |
-| `0` | 15.00px | 17.00px | Body text (base) | 1.6 |
-| `1` | 20.00px | 22.50px | Large text, H4 | 1.2 |
-| `2` | 25.00px | 28.13px | H3 headings | 1.2 |
-| `3` | 31.25px | 35.16px | H2 headings | 1.15 |
-| `4` | 39.06px | 43.95px | H1 headings | 1.1 |
-| `5` | 48.83px | 54.93px | Display headings | 1.1 |
-| `6` | 61.04px | 68.66px | Hero text | 1.05 |
+| Step | Min (320px) | Max (1280px) | Usage | Line Height | Baseline Grid |
+|------|-------------|--------------|-------|-------------|---------------|
+| `-2` | 12.29px | 13.82px | Small text, captions | 1.3889 | 18px |
+| `-1` | 12.80px | 14.40px | Secondary text | 1.6667 | 24px |
+| `0` | 15.00px | 17.00px | Body text (base) | 1.4118 | 24px |
+| `1` | 18.75px | 21.25px | Large text, H4 | 1.5385 | 30px |
+| `2` | 23.44px | 26.56px | H3 headings | 1.6364 | 42px |
+| `3` | 29.30px | 33.20px | H2 headings | 1.3103 | 42px |
+| `4` | 36.60px | 41.50px | H1 headings | 1.3125 | 54px |
+| `5` | 45.78px | 51.87px | Display headings | 1.25 | 66px |
+| `6` | 57.22px | 64.85px | Hero text | 1.1667 | 78px |
 
 #### Spacing Configuration
 ```css
@@ -86,18 +93,33 @@ This design system implements a fluid type scale based on typography principles 
 ```
 
 ```typescript
-// tailwind.config.ts
+// tailwind.config.ts - Updated with 'b' convention
 spacing: {
+  // Traditional numeric (legacy support)
   '1': 'var(--space-1)',
   '2': 'var(--space-2)',
   '3': 'var(--space-3)',
   '4': 'var(--space-4)',
+  '5': 'var(--space-5)',
   '6': 'var(--space-6)',
   '8': 'var(--space-8)',
   '10': 'var(--space-10)',
   '12': 'var(--space-12)',
   '16': 'var(--space-16)',
   '24': 'var(--space-24)',
+  
+  // New baseline-unit naming convention (preferred)
+  '1b': 'var(--space-1)',
+  '2b': 'var(--space-2)', 
+  '3b': 'var(--space-3)',
+  '4b': 'var(--space-4)',
+  '5b': 'var(--space-5)',
+  '6b': 'var(--space-6)',
+  '8b': 'var(--space-8)',
+  '10b': 'var(--space-10)',
+  '12b': 'var(--space-12)',
+  '16b': 'var(--space-16)',
+  '24b': 'var(--space-24)',
 }
 
 ### Spacing Rules
