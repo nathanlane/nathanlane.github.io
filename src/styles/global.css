@@ -88,10 +88,10 @@
     --theme-accent-two: 40deg 5% 80%; /* Warm accent */
 
     /* Text colors - warm whites */
-    --fg-hue: 40deg;
-    --fg-saturation: 5%;
-    --fg-brightness: 88%; /* #e8e6e3 - warm white */
-    --theme-text: hsl(40deg 5% 88% / 0.9);
+    --fg-hue: 30deg;
+    --fg-saturation: 10%;
+    --fg-brightness: 95%; /* Slightly off-white for reduced eye strain */
+    --theme-text: hsl(30deg 10% 95% / 0.95); /* Very light, slightly warm gray */
 
     /* Sophisticated secondary colors */
     --theme-link: 220deg 25% 70%; /* Muted blue for dark */
@@ -218,6 +218,9 @@
 
     /* Responsive line-height for optimal readability */
     line-height: 1.65; /* Mobile: more space for smaller screens */
+    
+    /* Subtle letter-spacing for improved word-shape recognition */
+    letter-spacing: 0.005em;
   }
 
   /* Tighter line-height for larger screens */
@@ -225,6 +228,12 @@
     body {
       line-height: 1.55;
     }
+  }
+  
+  /* Dark mode body text adjustments */
+  [data-theme="dark"] body {
+    /* Slightly lighter font weight to compensate for halation effect */
+    font-weight: 380; /* Reduced from 400 */
   }
 
   /* Typography optimization: Prevent widows and orphans */
@@ -1522,6 +1531,14 @@
 
 /* === Debug Helpers === */
 @layer utilities {
+  /* True small caps for refined typography */
+  .text-small-caps {
+    font-feature-settings: "smcp" 1, "c2sc" 1, "kern" 1;
+    /* smcp: Small Caps, c2sc: Small Caps From Capitals */
+    text-transform: none; /* Disable uppercase transform */
+    letter-spacing: 0.075em; /* Small caps require generous spacing */
+  }
+  
   /* Grid overlay for development */
   .show-grid {
     position: relative;

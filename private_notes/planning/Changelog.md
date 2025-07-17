@@ -434,3 +434,38 @@ Spacing utilities maintain compatibility:
 - **Spacing Tokens**: All components now use *b notation (1b = 6px, 4b = 24px, etc.)
 - **Build Status**: Successfully built with all changes, no errors
 - **Impact**: Perfect vertical rhythm maintained throughout the entire site
+
+## January 17, 2025 - Optical Typography Refinements
+
+### Phase 1: Body Text Refinements (IBM Plex Sans & Serif)
+- **Subtle Letter-Spacing Enhancement**
+  - Added `letter-spacing: 0.005em` to body text for improved word-shape recognition
+  - Enhances readability and reduces reader fatigue in long passages
+- **Dark Mode Text Color Optimization**
+  - Updated from `hsl(40deg 5% 88% / 0.9)` to `hsl(30deg 10% 95% / 0.95)`
+  - Very light, slightly warm gray prevents eye strain from pure white text
+  - Added font-weight reduction to 380 (from 400) to compensate for halation effect
+
+### Phase 2: Decorative & UI Text Refinements
+- **Expanded Letter-Spacing Utilities**
+  - Added `nav: 0.05em` for navigation elements
+  - Added `caps-generous: 0.075em` for generous uppercase spacing
+  - Added `caps-loose: 0.1em` for maximum uppercase clarity
+- **True Small Caps Utility**
+  - Created `.text-small-caps` class using proper OpenType features
+  - Uses `smcp` (Small Caps) and `c2sc` (Small Caps From Capitals)
+  - Includes generous letter-spacing of 0.075em for optimal legibility
+- **Uppercase Text Audit**
+  - Verified all components with uppercase text have proper letter-spacing
+  - Badge, Button, UpdatedBadge, and Header components all correctly configured
+
+### Phase 3: Grid Verification
+- **Build Verification**: All changes compile without errors
+- **Grid Alignment**: Maintained perfect 24px baseline grid alignment
+- **No Corrective Adjustments Needed**: Optical refinements preserve vertical rhythm
+
+### Technical Implementation
+- **OpenType Features**: Confirmed `kern`, `liga`, `calt`, and `ss01` enabled
+- **Variable Font Support**: Newsreader optical sizing and weight variations maintained
+- **Performance**: Minimal impact - only CSS properties added
+- **Accessibility**: Improved legibility across all text sizes and themes

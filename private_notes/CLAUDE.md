@@ -564,6 +564,18 @@ The codebase uses a context-aware link styling system:
    - All components aligned to 6px grid unit
    - Perfect vertical rhythm maintained
 
+### Typography System Grid Alignment (January 17, 2025)
+- **Visual Development Tools**: Added `.show-baseline` class for 24px grid visualization
+- **Component Updates**: All components now use grid-aligned *b tokens
+- **Prose Spacing**: @tailwindcss/typography plugin refactored with CSS variables
+- **Letter-Spacing Utilities**: Added tightest, tighter, wideUpper
+
+### Optical Typography Refinements (January 17, 2025)
+- **Body Text**: 0.005em letter-spacing for improved readability
+- **Dark Mode**: Off-white text color `hsl(30deg 10% 95% / 0.95)`, reduced font weight (380)
+- **Typography Utilities**: caps-generous (0.075em), caps-loose (0.1em), text-small-caps
+- **OpenType Features**: Full utilization of font capabilities (kern, liga, calt, ss01)
+
 ## Resources
 - [Tailwind Typography Plugin](https://tailwindcss.com/docs/typography-plugin)
 - [Fluid Type Scale Calculator](https://www.fluid-type-scale.com/)

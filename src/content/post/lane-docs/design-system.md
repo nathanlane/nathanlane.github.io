@@ -11,6 +11,13 @@ tags: ["documentation", "design-systems", "typography", "css"]
 
 ## Recent Updates
 
+### Optical Typography Refinements (January 17, 2025)
+Micro-typographic refinements for enhanced readability:
+- **Body Text**: Added 0.005em letter-spacing for improved word-shape recognition
+- **Dark Mode**: Optimized text color to off-white, reduced font weight to 380
+- **Typography Utilities**: New caps-generous, caps-loose, and text-small-caps classes
+- **Grid Preservation**: All refinements maintain perfect baseline alignment
+
 ### Typography System Grid Alignment (January 17, 2025)
 Complete grid alignment of all typography and spacing elements:
 - **Visual Development Tools**: Added `.show-baseline` class for 24px grid visualization

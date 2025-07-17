@@ -609,6 +609,9 @@ export default {
         tightest: "-0.02em",
         tighter: "-0.015em", 
         wideUpper: "0.05em",
+        nav: "0.05em",
+        "caps-generous": "0.075em",
+        "caps-loose": "0.1em",
       },
       fontWeight: {
         h1: "400",
