@@ -126,7 +126,6 @@ const { header } = navigationConfig;
 
 	.site-title {
 		color: var(--color-text);
-		transition: color 200ms;
 	}
 
 	.site-title:hover {
@@ -139,7 +138,6 @@ const { header } = navigationConfig;
 		padding: var(--space-xs) var(--space-xs);
 		color: var(--color-text);
 		text-decoration: none;
-		transition: color 200ms;
 		position: relative;
 		font-size: var(--step--1);
 		font-family: var(--font-body);
@@ -167,7 +165,6 @@ const { header } = navigationConfig;
 		border: none;
 		color: var(--color-text);
 		cursor: pointer;
-		transition: color 200ms;
 	}
 
 	.mobile-menu-toggle:hover {
@@ -177,7 +174,6 @@ const { header } = navigationConfig;
 	.icon-nav {
 		width: 24px;
 		height: 24px;
-		transition: all 200ms ease-in-out;
 	}
 
 	/* Mobile drawer styles */
@@ -235,30 +231,24 @@ const { header } = navigationConfig;
 
 			if (isOpen) {
 				// Close menu
-				drawerBody.classList.add("opacity-0", "-translate-y-full");
+				drawer.classList.add("hidden");
+				drawer.classList.remove("open");
+				drawerBody.classList.add("-translate-y-full");
 				drawerBody.classList.remove("translate-y-0");
 
-				// Remove after animation
-				setTimeout(() => {
-					drawer.classList.add("hidden");
-					drawer.classList.remove("open");
-				}, 300);
-
 				// Switch icons
-				openMenuIcon.classList.add("scale-100", "opacity-100");
+				openMenuIcon.classList.remove("scale-0", "opacity-0");
 				closeMenuIcon.classList.add("scale-0", "opacity-0");
-				closeMenuIcon.classList.remove("scale-100", "opacity-100");
 			} else {
 				// Show menu
 				drawer.classList.remove("hidden");
 				drawer.classList.add("open");
 				drawerBody.classList.add("translate-y-0");
-				drawerBody.classList.remove("opacity-0", "-translate-y-full");
+				drawerBody.classList.remove("-translate-y-full");
 
 				// Switch icons
 				openMenuIcon.classList.add("scale-0", "opacity-0");
-				closeMenuIcon.classList.add("scale-100", "opacity-100");
-				openMenuIcon.classList.remove("scale-100", "opacity-100");
+				closeMenuIcon.classList.remove("scale-0", "opacity-0");
 			}
 
 			// Update button state
@@ -271,19 +261,15 @@ const { header } = navigationConfig;
 			link.addEventListener("click", () => {
 				// Close the drawer
 				if (toggleNavMenuMobileButton && drawerBody && drawer) {
-					drawerBody.classList.add("opacity-0", "-translate-y-full");
+					drawer.classList.add("hidden");
+					drawer.classList.remove("open");
+					drawerBody.classList.add("-translate-y-full");
 					drawerBody.classList.remove("translate-y-0");
-					
-					setTimeout(() => {
-						drawer.classList.add("hidden");
-						drawer.classList.remove("open");
-					}, 300);
 
 					// Reset icons
 					if (openMenuIcon && closeMenuIcon) {
-						openMenuIcon.classList.add("scale-100", "opacity-100");
+						openMenuIcon.classList.remove("scale-0", "opacity-0");
 						closeMenuIcon.classList.add("scale-0", "opacity-0");
-						closeMenuIcon.classList.remove("scale-100", "opacity-100");
 					}
 
 					toggleNavMenuMobileButton.setAttribute("aria-expanded", "false");

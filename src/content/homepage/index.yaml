@@ -9,6 +9,43 @@ hero:
       href: "https://www.industrialpolicygroup.com/"
       variant: "secondary"
 
+# Bio panel configuration
+bio:
+  # Section title (optional, defaults to "About")
+  title: "About"
+  
+  # Primary intro - the hook
+  tagline: "Empirical economist and data scientist studying how economies transform"
+  
+  # Main narrative (supports markdown)
+  narrative: |
+    I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems. My research combines rigorous econometric analysis with historical perspective to understand how governments shape economic outcomes.
+    
+    As co-Principal Investigator of the [Industrial Policy Group](https://www.industrialpolicygroup.com/) lab, I lead collaborative research on targeted interventions across 70+ countries. We're building comprehensive datasets and developing new methodologies to evaluate how industrial strategies affect economic transformation.
+    
+    Beyond research, I'm passionate about making economic analysis more accessible. I contribute to open-source tools, teach data science methods to graduate students, and occasionally write about the [intersection of economics and technology](/posts).
+  
+  # Current focus - what I'm working on now
+  currently:
+    - "Mapping global industrial policy interventions across 70+ countries"
+    - "Writing a book on the new economics of industrial strategy"
+    - "Teaching data science methods to economics graduate students"
+    - "Developing open-source tools for economic research"
+  
+  # Brief credentials or affiliations
+  affiliations:
+    - title: "Oxford Economics"
+      role: "Assistant Professor"
+    - title: "Industrial Policy Group"
+      role: "Co-Principal Investigator"
+  
+  # Photo configuration (optional - remove this entire section if no photo)
+  # photo:
+  #   src: "/images/bio/nathan-lane.jpg"
+  #   alt: "Nathan Lane"
+  #   caption: "Photo by [photographer name](link)"  # optional
+  #   display: true  # Must be true to show photo
+
 currentProjects:
   title: "Current Projects"
   projects:

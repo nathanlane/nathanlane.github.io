@@ -73,7 +73,7 @@ const pageTitle = `Homepage Mockup | ${siteConfig.title}`;
 <Base meta={{ title: pageTitle }}>
 	<main class="mx-auto max-w-prose px-4b">
 		<header class="py-12b text-center">
-			<h1 class="heading-1 mb-2b">The Curated Document</h1>
+			<h1 class="heading-1 mb-2b">Nathan Lane, PhD</h1>
 			<p class="text-lg text-pretty">
 				A digital garden of thoughts, research, and experiments. This is a living document, structured by typography
 				and whitespace, not by boxes and containers.
@@ -128,28 +128,11 @@ const pageTitle = `Homepage Mockup | ${siteConfig.title}`;
 			</div>
 		</section>
 
-		<Separator />
+		<footer class="py-8b text-center">
+			<a href="/about" class="text-link text-lg hover:underline focus-visible:underline">
+				More about me
+			</a>
+		</footer>
 
-		<section class="py-8b">
-			<header class="mb-6b">
-				<h2 class="heading-2">Ongoing Projects</h2>
-			</header>
-			<div class="space-y-8b">
-				{
-					MOCK_PROJECTS.map((project) => (
-						<article>
-							<a href={project.slug} class="text-link no-underline hover:underline focus-visible:underline">
-								<h3 class="heading-3 mb-1b">{project.title}</h3>
-							</a>
-							<p class="mb-2b text-pretty">{project.description}</p>
-							<div class="flex items-center gap-x-4b gap-y-2b text-sm text-fg-muted">
-								<span class="italic">Active Since:</span>
-								<FormattedDate date={project.date} />
-							</div>
-						</article>
-					))
-				}
-			</div>
-		</section>
 	</main>
 </Base> 

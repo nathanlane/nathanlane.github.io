@@ -6,7 +6,7 @@
 /* Inline links inside prose - inherit body font for seamless reading flow */
 /* Hochuli: maintain consistent texture within body text */
 .inline-link {
-  @apply underline underline-offset-2 transition-all duration-200;
+  @apply underline underline-offset-2;
   /* Sophisticated neutral gray underline */
   text-decoration-color: hsl(0deg 0% 70%);
   text-decoration-thickness: 1px;
@@ -29,7 +29,7 @@
 /* Navigation and footer links - IBM Plex Sans for UI consistency */
 /* Medium weight provides clear hierarchy without overwhelming */
 .nav-link {
-  @apply font-sans text-sm no-underline transition-all duration-200;
+  @apply font-sans text-sm no-underline;
   /* Variable font weight for subtle transitions */
   font-variation-settings: 'wght' 450;
   /* Wider tracking for small text improves legibility */
@@ -85,7 +85,7 @@
 
 /* Feature links - for prominent headings and titles */
 .feature-link {
-  @apply no-underline transition-all duration-200;
+  @apply no-underline;
   /* Variable font weight */
   font-variation-settings: 'wght' 500;
   letter-spacing: -0.01em;
