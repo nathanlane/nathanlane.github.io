@@ -206,13 +206,11 @@ const { header } = navigationConfig;
 
 		// Check if elements exist
 		if (!toggleNavMenuMobileButton || !openMenuIcon || !closeMenuIcon || !drawer) {
-			console.error("One or more required elements are missing in the DOM.");
 			return;
 		}
 
 		const drawerBody = document.getElementById("drawer-body");
 		if (!drawerBody) {
-			console.error("Drawer body element is missing in the DOM.");
 			return;
 		}
 

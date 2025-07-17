@@ -1,29 +1,19 @@
-# Typography-First Website Development Constraints
+# CONTRAINTS AND RULES
 
-## 🚫 FORBIDDEN ACTIONS (Never Do These)
+- PART I. FORBIDDEN ACTIONS (AND EXCEPTIONS)
+- PART II. MANDITORY CONSTRAINTS 
+
+## PART I. : FORBIDDEN ACTIONS (Never Do These)
 
 ### Visual Design Prohibitions
 
-#### 1. **NO CONTAINERS OR BOXES**
-```css
-/* FORBIDDEN */
-.card { border: 1px solid #eee; padding: 20px; }
-.box { background: #f5f5f5; border-radius: 8px; }
-.panel { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-
-/* FORBIDDEN HTML */
-<div class="card">...</div>
-<section class="content-box">...</section>
-```
-
-#### 2. **NO DECORATIVE ELEMENTS**
+#### 1. **NO EXTRANEIOUS DECORATIVE ELEMENTS**
 - ❌ No icons (except essential UI like search)
 - ❌ No hero images
 - ❌ No background
-- ❌ No separators beyond simple borders
 - ❌ No brand logos beyond simple text
 
-#### 3. **SINGLE COLUMN LAYOUTS**
+#### 2. **NO MORE THAN TWO COLUMNS**
 
 **Exception**: Sidenotes in margins on wide screens only
 **Exception**: Navigation boxes
@@ -31,40 +21,27 @@
 
 ### Typography Violations
 
-#### 4. **NO MULTIPLE FONT FAMILIES**
-```css
-/* FORBIDDEN */
-h1 { font-family: "Playfair Display"; }
-h2 { font-family: "Montserrat"; }
-.feature { font-family: "Raleway"; }
-```
-**Rule**: Maximum 2 families (serif/sans + mono for code)
+#### 3. **MINMIMAL MULTIPLE FONT FAMILIES**
+**Rule**: Maximum 4 families (serif/sans + mono for code)
 
-#### 5. **NO FONT WEIGHTS BEYOND NECESSARY**
-- ❌ No ultra-light (100-200)
-- ❌ No ultra-bold (800-900)
-- ✅ Allowed: 400, 500, 600, 700 only
-
-#### 6. **NO ARBITRARY TYPE SIZES**
+#### 4. **NO ARBITRARY TYPE SIZES**
+**Rule**: Strict modular scale only
 ```css
 /* FORBIDDEN */
 .random-size { font-size: 17.5px; }
 .another-size { font-size: 1.13rem; }
 ```
-**Rule**: Strict modular scale only
-
-
 ### Layout Transgressions
 
-#### 7. **NO CENTERED TEXT BLOCKS**
+#### 5. **NO CENTERED TEXT BLOCKS**
+**Exception**: headings or navigation only or announcements only
 ```css
 /* FORBIDDEN */
 .hero { text-align: center; }
 article { text-align: center; }
 ```
-**Exception**: headings or navigation only
 
-#### 9. **NO STICKY/FIXED ELEMENTS**
+#### 6. **NO STICKY/FIXED ELEMENTS**
 ```css
 /* FORBIDDEN */
 .sticky-nav { position: sticky; top: 0; }
@@ -72,7 +49,7 @@ article { text-align: center; }
 .floating-button { position: fixed; bottom: 20px; }
 ```
 
-#### 8. **NO ANIMATIONS OR TRANSITIONS**
+#### 7. **NO ANIMATIONS OR TRANSITIONS**
 ```css
 /* FORBIDDEN */
 @keyframes fadeIn { ... }
@@ -83,7 +60,7 @@ article { text-align: center; }
 
 ### Spacing Crimes
 
-#### 9. **NO ARBITRARY SPACING**
+#### 8. **NO ARBITRARY SPACING**
 **Rule**: Use baseline grid units
 ```css
 /* FORBIDDEN */
@@ -91,14 +68,15 @@ article { text-align: center; }
 .weird-padding { padding: 13px 27px 19px 31px; }
 ```
 
-#### 12. **NO CRAMPED CONTENT**
+#### 9. **NO CRAMPED CONTENT IN BODY**
 - ❌ Line height < 1.5 for body text
 - ❌ Paragraph spacing < 1 baseline unit
 - ❌ Content touching viewport edges
 
 ### Interactive Elements
+**Exception**: Code, footnotes, margin notes, footer content.
 
-#### 13. **NO JAVASCRIPT UI LIBRARIES**
+#### 10. **MINIMAL JAVASCRIPT UI LIBRARIES**
 ```javascript
 // FORBIDDEN
 import React from 'react';
@@ -106,21 +84,14 @@ import Vue from 'vue';
 import { Modal, Carousel, Tabs } from 'ui-library';
 ```
 
-#### 14. **NO MODALS OR OVERLAYS**
+#### 11. **NO MODALS OR OVERLAYS**
 - ❌ No popups
 - ❌ No lightboxes
 - ❌ No toast notifications
 - ❌ No dropdown menus
 
-#### 15. **NO FORM STYLING**
-```css
-/* FORBIDDEN */
-input { border-radius: 25px; background: linear-gradient(...); }
-button { box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-```
-**Rule**: Default browser styling or minimal enhancement only
 
-## ✅ MANDATORY CONSTRAINTS
+## PARTR II. ✅ MANDATORY CONSTRAINTS
 
 ### Typography Requirements
 

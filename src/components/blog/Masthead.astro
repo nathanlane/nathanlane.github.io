@@ -27,10 +27,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 const postSeries = content.data.seriesId
     ? await getCollection("series")
           .then(series => series.find(s => s.id === content.data.seriesId))
-          .catch(err => {
-            console.error("Failed to find series:", err);
-            return null;
-          })
+          .catch(() => null)
     : null;
 ---
 

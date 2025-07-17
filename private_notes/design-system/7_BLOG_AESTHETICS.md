@@ -1,201 +1,44 @@
-Based on the Craig Mod essay structure and your design system, here's a comprehensive guide for formatting blog posts that captures the full essence:
+# Craig Mod-Inspired Blog Post Design System
+## Aligned with Grid System & Typography Scale
 
-I want to refactor and adjust the blog post layouts to look like the following
+Based on the established design system (6px baseline grid, 1.25 type ratio, fluid typography), here's a comprehensive guide for formatting blog posts in Craig Mod's editorial style while maintaining system compliance.
 
-## Comprehensive Essay Formatting Instructions
+## Core Design Principles
 
-Format this essay following Craig Mod's typographic essay style:
+1. **Grid Alignment**: All spacing uses the established grid tokens (`space-*b`)
+2. **Typography Scale**: Uses the fluid type system (`text-*` utilities)  
+3. **Baseline Grid**: All vertical spacing aligns to 6px increments
+4. **Document-Centric**: Text-first, minimal decoration, generous whitespace
+5. **Monochrome Palette**: Subtle grays for rules and secondary text
 
-### Core Structure Elements:
+## Comprehensive Essay Structure
 
-1. **Navigation Bar**
-   - Minimal top nav: site name (left) + 2-3 links (right)
-   - Subtle horizontal rule below (1px, 10% opacity)
-   - Fixed or static, never sticky scrolling
-
-2. **Essay Header Block**
-   ```
-   [Subtle back link - text--1, uppercase, tracked]
-   
-   TITLE IN NEWSREADER
-   [Large, commanding presence]
-   
-   ─────────────── [thin horizontal rule] ───────────────
-   
-   ESSAY TYPE • MONTH YEAR • X,XXX WORDS • X MIN READ
-   [Small caps metadata]
-   ```
-
-3. **Opening Flourish**
-   - First paragraph: Larger size (text-1), light weight
-   - Drop cap: First letter spans 3-4 lines
-   - Optional: Opening epigraph or scene-setting in italics
-
-4. **Body Rhythm**
-   - Paragraphs separated by space-4b (24px)
-   - Section breaks: thin horizontal rule + space-8b
-   - Occasional pull quotes breaking the flow
-   - Images as breathing moments (full-bleed)
-
-5. **Horizontal Rules as Punctuation**
-   - Thin lines (1px, 15% opacity) for minor breaks
-   - Centered "* * *" or "• • •" for major transitions
-   - Never heavy or decorative
-
-6. **Footer Coda**
-   ```
-   ─────────────── [thin rule] ───────────────
-   
-   [Author bio or essay metadata]
-   [Related essays]
-   [Simple newsletter signup]
-   ```
-
-### Specific Formatting Rules:
-
-**Typography Cascade:**
-- Title: heading-4 or heading-5 (2.43–2.80rem)
-- Opening: text-1 (0.975–1.125rem, light)
-- Body: text-0 (0.8125–0.875rem)
-- Captions: text--1 (0.80–0.90rem)
-- Footnotes: text--2 (0.64–0.72rem)
-
-**Spacing Rhythm:**
-- Use multiples of baseline (6px)
-- Paragraph breaks: 24px (space-4b)
-- Section breaks: 48px (space-8b) 
-- Around images: 72px (space-12b)
-- Pull quotes: 60px (space-10b) above/below
-
-**Special Elements:**
-- Pull quotes: Centered, text-2, italic, generous margins
-- Images: Edge-to-edge on mobile, generous margins on desktop
-- Footnotes: Superscript numbers, notes at bottom
-- Code blocks: IBM Plex Mono, subtle background
-
-**Constraints:**
-- Max line length: 65-70 characters
-- No sidebars, no cards, no boxes
-- Let typography breathe with whitespace
-- Horizontal rules are thin whispers, not shouts
-```
-
-## Detailed Agent Command Structure
-
-```yaml
-Task: Format essay in Craig Mod style
-Input: Raw markdown or text
-Output: Formatted Astro/MDX component
-
-Process:
-  1. Structure Analysis
-     - Identify natural section breaks
-     - Find quotable moments for pull quotes
-     - Determine essay type (narrative/technical/hybrid)
-  
-  2. Header Construction
-     - Generate metadata (word count, read time)
-     - Create subtle navigation structure
-     - Add thin horizontal separator
-  
-  3. Opening Treatment
-     - First paragraph gets special sizing
-     - Add drop cap to first letter
-     - Consider epigraph if appropriate
-  
-  4. Body Formatting
-     - Insert horizontal rules at transitions
-     - Create pull quotes from key insights
-     - Ensure images have breathing room
-     - Add thin rules between major sections
-  
-  5. Micro-typography
-     - Smart quotes and proper dashes
-     - Hanging punctuation for quotes
-     - Careful justification (no rivers)
-     - Widow/orphan control
-
-Visual Markers:
-  - Horizontal rules: 1px solid rgb(0 0 0 / 0.1)
-  - Section breaks: <hr class="section-break" />
-  - Major breaks: <div class="asterism">* * *</div>
-  - Pull quotes: <blockquote class="pull-quote">
-```
-
-## Complete Essay Template
-
+### 1. Navigation Bar
 ```astro
----
-// /src/layouts/EssayLayout.astro
-import BaseLayout from './BaseLayout.astro';
-import { formatDate, calculateReadTime } from '../utils';
-
-const { title, date, wordCount, type = "ESSAY", status } = Astro.props;
-const readingTime = calculateReadTime(wordCount);
----
-
-<BaseLayout>
-  <!-- Subtle top navigation -->
-  <nav class="essay-nav">
-    <a href="/" class="site-name">Nathan Lane</a>
-    <div class="nav-links">
-      <a href="/essays">Essays</a>
-      <a href="/research">Research</a>
-      <a href="/about">About</a>
-    </div>
-  </nav>
-  <hr class="nav-separator" />
-
-  <article class="essay-wrapper">
-    <!-- Back link -->
-    <div class="back-link">
-      <a href="/essays">← All Essays</a>
-    </div>
-
-    <!-- Essay header -->
-    <header class="essay-header">
-      <h1 class="essay-title">{title}</h1>
-      <hr class="title-separator" />
-      <div class="essay-metadata">
-        {type} • {formatDate(date)} • {wordCount.toLocaleString()} WORDS • {readingTime} MIN READ
-      </div>
-    </header>
-
-    <!-- Essay content with special first paragraph -->
-    <div class="essay-content">
-      <div class="opening-paragraph">
-        <slot name="opening" />
-      </div>
-      
-      <div class="essay-body">
-        <slot />
-      </div>
-    </div>
-
-    <!-- Essay footer -->
-    <footer class="essay-footer">
-      <hr class="footer-separator" />
-      <div class="essay-endnote">
-        <slot name="endnote" />
-      </div>
-    </footer>
-  </article>
-</BaseLayout>
+<!-- Minimal top navigation -->
+<nav class="essay-nav">
+  <a href="/" class="site-name">Nathan Lane</a>
+  <div class="nav-links">
+    <a href="/posts">Essays</a>
+    <a href="/research">Research</a>
+    <a href="/about">About</a>
+  </div>
+</nav>
+<hr class="nav-separator" />
 
 <style>
-  /* Navigation */
   .essay-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-4b) var(--space-6b);
+    padding: var(--space-4b) var(--space-6b); /* 24px 36px */
     font-family: var(--font-sans);
-    font-size: var(--text--1);
+    font-size: var(--text--1); /* 12.8-14.4px */
   }
 
   .nav-links {
     display: flex;
-    gap: var(--space-6b);
+    gap: var(--space-6b); /* 36px */
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 500;
@@ -206,166 +49,329 @@ const readingTime = calculateReadTime(wordCount);
     border-top: 1px solid rgb(0 0 0 / 0.1);
     margin: 0;
   }
+</style>
+```
 
-  /* Essay wrapper */
+### 2. Essay Header Block
+```astro
+<article class="essay-wrapper">
+  <!-- Back link -->
+  <div class="back-link">
+    <a href="/posts">← All Essays</a>
+  </div>
+
+  <!-- Essay header -->
+  <header class="essay-header">
+    <h1 class="essay-title">{title}</h1>
+    <hr class="title-separator" />
+    <div class="essay-metadata">
+      {type} • {formatDate(date)} • {wordCount.toLocaleString()} WORDS • {readingTime} MIN READ
+    </div>
+  </header>
+
+<style>
   .essay-wrapper {
     max-width: 65ch;
     margin: 0 auto;
-    padding: var(--space-8b) var(--space-4b);
+    padding: var(--space-8b) var(--space-4b); /* 48px 24px */
   }
 
-  /* Back link */
   .back-link {
-    margin-bottom: var(--space-8b);
+    margin-bottom: var(--space-8b); /* 48px */
     font-family: var(--font-sans);
-    font-size: var(--text--1);
+    @apply text--1; /* 12.8-14.4px */
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
 
-  /* Header */
-  .essay-header {
-    margin-bottom: var(--space-8b);
-  }
-
   .essay-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--text-5);
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-    margin-bottom: var(--space-4b);
+    @apply heading-3; /* 29.3-33.2px - more modest than suggested heading-5 */
+    margin-bottom: var(--space-4b); /* 24px */
   }
 
   .title-separator {
     border: none;
     border-top: 1px solid rgb(0 0 0 / 0.15);
-    margin: var(--space-4b) 0;
+    margin: var(--space-4b) 0; /* 24px */
   }
 
   .essay-metadata {
     font-family: var(--font-sans);
-    font-size: var(--text--1);
+    @apply text--1; /* 12.8-14.4px */
     font-variant: small-caps;
     letter-spacing: 0.075em;
-    color: var(--text-secondary);
-  }
-
-  /* Opening paragraph with drop cap */
-  .opening-paragraph {
-    font-family: var(--font-serif);
-    font-size: var(--text-1);
-    font-weight: 300;
-    line-height: 1.6;
-    text-align: justify;
-    margin-bottom: var(--space-6b);
-  }
-
-  .opening-paragraph::first-letter {
-    float: left;
-    font-family: var(--font-newsreader);
-    font-size: calc(var(--text-6) * 1.2);
-    line-height: 0.8;
-    margin-right: var(--space-1b);
-    margin-top: 0.1em;
-  }
-
-  /* Essay body */
-  .essay-body {
-    font-family: var(--font-serif);
-    font-size: var(--text-0);
-    line-height: 1.6;
-    text-align: justify;
-    letter-spacing: 0.005em;
-  }
-
-  /* Spacing for body elements */
-  .essay-body p {
-    margin-bottom: var(--space-4b);
-  }
-
-  .essay-body hr {
-    border: none;
-    border-top: 1px solid rgb(0 0 0 / 0.1);
-    margin: var(--space-8b) auto;
-    width: 30%;
-  }
-
-  /* Pull quotes */
-  .essay-body blockquote.pull-quote {
-    margin: var(--space-10b) 0;
-    padding: 0 var(--space-8b);
-    text-align: center;
-    font-style: italic;
-    font-size: var(--text-2);
-    line-height: 1.4;
-    font-weight: 300;
-    border: none;
-  }
-
-  /* Asterism for major breaks */
-  .asterism {
-    text-align: center;
-    margin: var(--space-12b) 0;
-    font-size: var(--text-1);
-    letter-spacing: 0.5em;
-    color: var(--text-secondary);
-  }
-
-  /* Images */
-  .essay-body img {
-    margin: var(--space-12b) calc(-1 * var(--space-4b));
-    max-width: calc(100% + 2 * var(--space-4b));
-    height: auto;
-  }
-
-  /* Footer */
-  .footer-separator {
-    border: none;
-    border-top: 1px solid rgb(0 0 0 / 0.1);
-    margin: var(--space-12b) 0 var(--space-6b);
-  }
-
-  .essay-endnote {
-    font-family: var(--font-sans);
-    font-size: var(--text--1);
     color: var(--text-secondary);
   }
 </style>
 ```
 
-## Natural Language Instructions for Agents
+### 3. Opening Flourish with Drop Cap
+```astro
+<div class="essay-content">
+  <div class="opening-paragraph">
+    <slot name="opening" />
+  </div>
+  
+  <div class="essay-body">
+    <slot />
+  </div>
+</div>
 
+<style>
+  .opening-paragraph {
+    font-family: var(--font-serif);
+    @apply text-1; /* 18.8-21.3px */
+    font-weight: 300;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: var(--space-6b); /* 36px */
+  }
+
+  .opening-paragraph::first-letter {
+    float: left;
+    font-family: var(--font-newsreader);
+    font-size: calc(var(--step-5) * 1.2); /* ~55-62px */
+    line-height: 0.8;
+    margin-right: var(--space-1b); /* 6px */
+    margin-top: 0.1em;
+  }
+
+  .essay-body {
+    font-family: var(--font-serif);
+    @apply text-0; /* 15.6-17px - actual body size */
+    line-height: 1.6;
+    text-align: justify;
+    letter-spacing: 0.005em;
+  }
+</style>
 ```
-Transform this content into a Craig Mod-style essay with these characteristics:
 
-STRUCTURE:
-1. Minimal navigation bar with thin separator line below
-2. Subtle "← All Essays" back link
-3. Large, commanding title in Newsreader
-4. Thin horizontal rule under title
-5. Metadata in small caps (type, date, word count, read time)
-6. Opening paragraph with drop cap, slightly larger text
-7. Body text in justified serif with generous spacing
-8. Thin horizontal rules as section breaks (centered, 30% width)
-9. Use "* * *" for major transitions
-10. Footer with thin rule and related content
+### 4. Body Rhythm & Spacing
+```css
+/* Paragraph spacing aligned to grid */
+.essay-body p {
+  margin-bottom: var(--space-4b); /* 24px = baseline */
+}
 
-TYPOGRAPHY RHYTHM:
-- Let the text breathe with ample whitespace
-- Use horizontal rules as gentle punctuation, not barriers
-- Pull quotes should float in space, centered and italic
-- Images need massive breathing room (12 grid units)
-- Every element should feel considered and placed
+/* Section breaks with horizontal rules */
+.essay-body hr {
+  border: none;
+  border-top: 1px solid rgb(0 0 0 / 0.1);
+  margin: var(--space-8b) auto; /* 48px */
+  width: 30%;
+}
 
-MOOD:
-- Quiet confidence without ostentation
-- Editorial elegance meets digital craft
-- The page should feel like holding a beautifully printed essay
-- Horizontal rules are whispers, not shouts
-- Everything in service of readability and contemplation
+/* Major transitions with asterisms */
+.asterism {
+  text-align: center;
+  margin: var(--space-12b) 0; /* 72px */
+  @apply text-1; /* 18.8-21.3px */
+  letter-spacing: 0.5em;
+  color: var(--text-secondary);
+}
 
-The goal is to create a reading experience that feels both timeless and contemporary, where every typographic choice enhances rather than distracts from the content.
+/* Usage in markdown */
+<div class="asterism">* * *</div>
 ```
 
-This captures the full essence of Craig Mod's essay style—the careful use of horizontal rules as breathing marks, the rhythm of spacing, and the overall sense of crafted editorial design.
+### 5. Pull Quotes
+```css
+.essay-body blockquote.pull-quote {
+  margin: var(--space-10b) 0; /* 60px */
+  padding: 0 var(--space-8b); /* 0 48px */
+  text-align: center;
+  font-style: italic;
+  @apply text-2; /* 23.4-26.6px */
+  line-height: 1.4;
+  font-weight: 300;
+  border: none;
+}
+```
+
+### 6. Images with Breathing Room
+```css
+.essay-body img {
+  margin: var(--space-12b) calc(-1 * var(--space-4b)); /* 72px -24px */
+  max-width: calc(100% + 2 * var(--space-4b));
+  height: auto;
+}
+
+/* Image captions */
+.essay-body figcaption {
+  @apply text--1; /* 12.8-14.4px */
+  text-align: center;
+  margin-top: var(--space-2b); /* 12px */
+  color: var(--text-secondary);
+}
+```
+
+### 7. Footer Coda
+```astro
+<footer class="essay-footer">
+  <hr class="footer-separator" />
+  <div class="essay-endnote">
+    <slot name="endnote" />
+  </div>
+</footer>
+
+<style>
+  .footer-separator {
+    border: none;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+    margin: var(--space-12b) 0 var(--space-6b); /* 72px 0 36px */
+  }
+
+  .essay-endnote {
+    font-family: var(--font-sans);
+    @apply text--1; /* 12.8-14.4px */
+    color: var(--text-secondary);
+  }
+</style>
+```
+
+## Typography Cascade (Grid-Aligned)
+
+| Element | Class | Size | Line Height | Spacing |
+|---------|-------|------|-------------|---------|
+| **Title** | `heading-3` | 29.3-33.2px | 1.35 | margin-bottom: 24px |
+| **Opening** | `text-1` | 18.8-21.3px | 1.6 | margin-bottom: 36px |
+| **Body** | `text-0` | 15.6-17px | 1.6 | margin-bottom: 24px |
+| **Pull Quote** | `text-2` | 23.4-26.6px | 1.4 | margin: 60px 0 |
+| **Captions** | `text--1` | 12.8-14.4px | 1.67 | margin-top: 12px |
+| **Metadata** | `text--1` | 12.8-14.4px | 1.67 | - |
+
+## Spacing Rhythm (Grid Units)
+
+All spacing uses the established grid tokens:
+
+```css
+/* Micro spacing */
+--space-1b: 6px    /* Drop cap margins */
+--space-2b: 12px   /* Caption spacing */
+--space-3b: 18px   /* Inline element gaps */
+
+/* Content spacing */
+--space-4b: 24px   /* Paragraph breaks (baseline) */
+--space-6b: 36px   /* Section gaps */
+--space-8b: 48px   /* Major breaks */
+
+/* Breathing room */
+--space-10b: 60px  /* Pull quotes */
+--space-12b: 72px  /* Images, major sections */
+--space-16b: 96px  /* Hero spacing */
+```
+
+## Implementation Guidelines
+
+### 1. Modify Current BlogPost.astro
+```astro
+<!-- Add Craig Mod styling classes -->
+<article class="essay-wrapper" data-content-type="long-form">
+  <!-- Back navigation -->
+  <nav class="essay-nav-inline">
+    <a href="/posts" class="back-link">← All Essays</a>
+  </nav>
+
+  <!-- Essay header with metadata -->
+  <header class="essay-header">
+    <h1 class="essay-title">{title}</h1>
+    <hr class="essay-separator" />
+    <div class="essay-metadata">
+      ESSAY • {publishDate} • {readingTime} MIN READ
+    </div>
+  </header>
+
+  <!-- Content with opening flourish -->
+  <div class="essay-content prose prose-lane">
+    <slot />
+  </div>
+</article>
+```
+
+### 2. CSS Additions to global.css
+```css
+/* Essay-specific overrides */
+.essay-wrapper {
+  /* Remove default prose max-width */
+  .prose {
+    max-width: none;
+  }
+  
+  /* Horizontal rules as gentle punctuation */
+  hr:not(.essay-separator) {
+    border: none;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+    margin: var(--space-8b) auto;
+    width: 30%;
+  }
+  
+  /* First paragraph treatment */
+  .prose > p:first-of-type {
+    @apply text-1;
+    font-weight: 300;
+    
+    &::first-letter {
+      float: left;
+      font-family: var(--font-newsreader);
+      font-size: calc(var(--step-5) * 1.2);
+      line-height: 0.8;
+      margin-right: var(--space-1b);
+      margin-top: 0.1em;
+    }
+  }
+}
+```
+
+### 3. Markdown Extensions for Essays
+```markdown
+<!-- Section break -->
+---
+
+<!-- Major transition -->
+<div class="asterism">* * *</div>
+
+<!-- Pull quote -->
+> {.pull-quote}
+> The goal is to create a reading experience that feels both 
+> timeless and contemporary
+
+<!-- Full-bleed image -->
+![Alt text](image.jpg){.full-bleed}
+```
+
+## Migration Checklist
+
+- [ ] Update BlogPost.astro with essay classes
+- [ ] Add essay-specific CSS to global.css
+- [ ] Create remark plugin for pull quotes
+- [ ] Add horizontal rule styling
+- [ ] Implement drop cap for first paragraph
+- [ ] Add essay metadata component
+- [ ] Create image caption support
+- [ ] Test responsive behavior
+- [ ] Validate grid alignment
+- [ ] Ensure dark mode compatibility
+
+## Key Differences from Original Plan
+
+1. **Typography sizes adjusted to actual scale**:
+   - Title uses `heading-3` (29.3-33.2px) not `heading-5` (45.8-51.9px)
+   - Body uses `text-0` (15.6-17px) not custom sizes
+   - All sizes from established fluid type system
+
+2. **Spacing uses grid tokens**:
+   - Replaced arbitrary rem values with grid-aligned tokens
+   - All spacing in 6px increments
+   - Consistent with design system
+
+3. **Simplified implementation**:
+   - Works within existing BlogPost.astro structure
+   - Uses established utility classes
+   - Maintains compatibility with current prose styles
+
+4. **Performance considerations**:
+   - No new fonts needed
+   - Reuses existing CSS variables
+   - Minimal additional CSS weight
+
+This approach maintains Craig Mod's editorial aesthetic while fully complying with your established grid system and design constraints.
