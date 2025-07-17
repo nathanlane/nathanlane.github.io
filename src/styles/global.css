@@ -1360,7 +1360,7 @@
     @apply bg-transparent;
   }
 
-  /* Craig Mod-inspired Essay Layout */
+  /* Editorial Essay Layout */
   .essay-wrapper {
     	max-width: var(--measure-base);
     margin: 0 auto;
@@ -1496,10 +1496,9 @@
 
   /* Table of Contents positioning */
   .essay-toc {
-    position: fixed;
-    top: 50%;
+    position: absolute;
+    top: var(--space-8); /* 48px */
     right: var(--space-6); /* 36px */
-    transform: translateY(-50%);
     width: 14rem;
     min-width: 14rem;
     z-index: 10;

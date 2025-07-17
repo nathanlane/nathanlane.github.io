@@ -24,7 +24,7 @@ const sizeClasses = {
 const baseClasses = `
   inline-flex items-center justify-center
   font-body
-  rounded-sm transition-all duration-200
+  rounded-sm
   ${sizeClasses[size]}
   ${className}
 `;
@@ -34,7 +34,6 @@ const variantClasses = {
   primary: `
     text-bgColor bg-accent-base
     hover:bg-accent-one
-    active:translate-y-px
   `,
   secondary: `
     text-accent-base bg-color-100 dark:bg-color-100 dark:text-gray-200
@@ -84,7 +83,6 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   }
   
   [data-button-variant="primary"]:hover {
-    letter-spacing: var(--letter-spacing-wide);
     font-variation-settings: 'wght' 520;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   }
@@ -96,13 +94,11 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   }
   
   [data-button-variant="secondary"]:hover {
-    letter-spacing: var(--letter-spacing-normal);
     font-variation-settings: 'wght' 480;
   }
   
-  /* Active state micro-animation */
+  /* Active state */
   [data-button-variant]:active {
-    transition-duration: 50ms;
     letter-spacing: var(--letter-spacing-tight);
   }
   

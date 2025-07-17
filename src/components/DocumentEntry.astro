@@ -27,7 +27,7 @@ const metadataParts = [
 ---
 
 <article class="document-entry">
-  <h3 class="entry-title">
+  <h3 class="heading-3">
     <a href={href} class="feature-link">{title}</a>
   </h3>
   
@@ -35,7 +35,7 @@ const metadataParts = [
     {metadataParts.join(' • ')}
   </div>
   
-  <p class="entry-description">{description}</p>
+  <p class="text-body">{description}</p>
 </article>
 
 <style>
@@ -43,14 +43,7 @@ const metadataParts = [
     margin-bottom: var(--space-8); /* 48px - generous separation */
   }
 
-  .entry-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--step-1); /* 18.8-21.3px */
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    margin-bottom: var(--space-1); /* 6px - tight coupling */
-    line-height: 1.3;
-  }
+
 
   .entry-metadata {
     font-family: var(--font-sans);
@@ -62,12 +55,7 @@ const metadataParts = [
     font-weight: 500;
   }
 
-  .entry-description {
-    font-size: var(--step-0); /* 15.6-17px */
-    line-height: 1.6;
-    color: var(--theme-text);
-    margin-bottom: 0;
-  }
+
 
   /* Dark mode adjustments */
   :global([data-theme="dark"]) .entry-metadata {

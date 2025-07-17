@@ -63,7 +63,7 @@ const noteId = `sidenote-${number || Math.random().toString(36).substr(2, 9)}`;
     font-weight: 600;
     padding: 0 0.125rem;
     border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
+    /* transition removed */
   }
 
   .sidenote__ref-link:hover,
@@ -104,13 +104,13 @@ const noteId = `sidenote-${number || Math.random().toString(36).substr(2, 9)}`;
     .sidenote {
       display: block;
       top: 0;
-      transform: translateY(-0.25rem);
+      /* transform removed */
     }
 
     /* Hover variant - only show on hover */
     .sidenote-wrapper--hover .sidenote {
       opacity: 0;
-      transition: opacity 0.2s ease;
+      /* transition removed */
       pointer-events: none;
     }
 

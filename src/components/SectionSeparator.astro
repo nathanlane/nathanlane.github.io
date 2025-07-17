@@ -1,0 +1,51 @@
+---
+export interface Props {
+  variant?: 'line' | 'text' | 'asterism' | 'full-width';
+  spacing?: 'normal' | 'large';
+  class?: string;
+}
+
+const { 
+  variant = 'line', 
+  spacing = 'normal',
+  class: className = '' 
+} = Astro.props;
+
+const spacingClass = spacing === 'large' ? 'my-16b' : 'my-12b';
+---
+
+{variant === 'line' && (
+  <div class={`section-separator ${spacingClass} ${className}`}>
+    <hr class="w-20 border-0 border-t-2 border-color-300 mx-auto" />
+  </div>
+)}
+
+{variant === 'full-width' && (
+  <div class={`section-separator-full ${spacingClass} ${className}`}>
+    <hr class="w-full border-0 border-t border-color-300" />
+  </div>
+)}
+
+{variant === 'text' && (
+  <div class={`text-center ${spacingClass} ${className}`}>
+    <span class="text-lighter">━━━━━━━</span>
+  </div>
+)}
+
+{variant === 'asterism' && (
+  <div class={`text-center ${spacingClass} ${className}`}>
+    <span class="text-lighter text-2">⁂</span>
+  </div>
+)}
+
+<style>
+  .section-separator hr {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Ensure consistent baseline alignment */
+  .section-separator {
+    /* No additional styles needed - spacing handled by classes */
+  }
+</style> 

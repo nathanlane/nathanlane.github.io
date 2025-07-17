@@ -1,6 +1,6 @@
 ---
 // Asterism component for major transitions in essays
-// Follows Craig Mod's editorial style with refined typography
+// Editorial style section break with refined typography
 ---
 
 <div class="asterism">
@@ -36,10 +36,9 @@
     font-weight: 400;
   }
 
-  /* Subtle hover state for interactive feel */
+  /* Subtle hover state for interactive feel - transition removed */
   .asterism:hover {
     color: var(--theme-color-500);
-    transition: color 0.2s ease;
   }
 
   /* Dark mode adjustments */
@@ -64,12 +63,7 @@
     }
   }
 
-  /* Reduced motion respect */
-  @media (prefers-reduced-motion: reduce) {
-    .asterism {
-      transition: none;
-    }
-  }
+  /* Reduced motion respect - no longer needed */
 
   /* Fine-tuned responsive scaling */
   @media (max-width: 640px) {

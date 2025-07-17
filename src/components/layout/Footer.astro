@@ -106,7 +106,6 @@ const currentYear = new Date().getFullYear();
   .footer-link {
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 200ms;
     display: inline-block;
     font-weight: 300;
     letter-spacing: 0.01em;
@@ -150,7 +149,6 @@ const currentYear = new Date().getFullYear();
   .footer-utility a {
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 200ms;
   }
 
   .footer-utility a:hover {
@@ -188,13 +186,13 @@ const currentYear = new Date().getFullYear();
     position: absolute;
     bottom: -1px;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 0.5px;
     background-color: var(--color-text-muted);
-    transition: width 200ms ease-out;
+    opacity: 0;
   }
 
   .footer-link:hover::after {
-    width: 100%;
+    opacity: 1;
   }
 </style>

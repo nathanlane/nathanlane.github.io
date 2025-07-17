@@ -17,14 +17,14 @@ const { title, authors, year, description, publication, url, download, link, fea
 const excerpt = description.length > 80 ? `${description.substring(0, 80)}...` : description;
 ---
 
-<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${featured ? 'border-l-space-s border-accent-two' : ''} p-space-s card`} data-context="component">
+<article class={`group rounded-lg bg-color-75 hover:bg-color-100 ${featured ? 'border-l-space-s border-accent-two' : ''} p-space-s card`} data-context="component">
 	
 	<div class="flex flex-col gap-space-2xs">
 		
 		<!-- Title -->
 		{url ? (
 			<h3 class="font-headline font-medium text-1 leading-tight">
-				<a href={url} class="text-accent-base group-hover:text-accent-two transition-colors">
+				<a href={url} class="text-accent-base group-hover:text-accent-two">
 					{title}
 				</a>
 			</h3>
