@@ -56,6 +56,7 @@ monochrome, serif/sans-serif contrast, optimized typography, generous whitespace
 
 ### Typography choices:* Body text to enhance readability, and clean sans-serif fonts for headings. 
 * Line heights typically range from 1.2-1.5, with line lengths optimized around 50-75 characters for comfortable reading.
+* **Reading Measure**: Single source of truth via CSS custom properties (--measure-base: 75ch)
 * Use fluid typography.
 
 
@@ -134,3 +135,4 @@ Tim Brown, Jost Hochuli, Bringhurst, Swiss Modernism, Edward Tufte
 1. Changes must should be within the grid system and typographic hierarchy
 2. Follow the color scheme first.
 3. Swapping the primary font is off-limits.
+4. **Reading measure must use CSS custom properties** (--measure-base, --measure-narrow, --measure-wide) - never hardcode ch values.

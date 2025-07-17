@@ -1,8 +1,8 @@
-# Blog System Guide - Craig Mod-Inspired Design
+# Blog Post System Guide
 
 ## Overview
 
-The blog system implements Craig Mod's editorial aesthetic with a 65-character reading measure, generous whitespace, and typography-first design. All spacing follows the 6px baseline grid and uses the established design system.
+The blog post system implements editorial aesthetic with a 65-character reading measure, generous whitespace, and typography-first design. All spacing follows the 6px baseline grid and uses the established design system.
 
 ## Blog Post Structure
 

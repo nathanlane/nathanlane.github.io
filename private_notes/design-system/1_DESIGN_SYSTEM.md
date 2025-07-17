@@ -54,7 +54,7 @@ This design system implements a fluid type scale based on typography principles 
 | **Base Font Size** | 15px → 17px | Reduced for better readability |
 | **Body Line Height** | 1.35 (135%) | Middle of Hochuli's 120-140% range |
 | **Heading Line Height** | 1.05–1.2 | Tighter leading for display sizes (Hochuli) |
-| **Optimal Line Length** | 65ch | Within Hochuli's 60-70ch recommendation |
+| **Optimal Line Length** | var(--measure-base) = 75ch | Single source of truth, within optimal range |
 
 ### Type Scale
 
@@ -248,7 +248,7 @@ fontSize: {
    - Maintains proportional relationships
 
 2. **Optimal Measure** (Jost Hochuli)
-   - `max-w-prose` enforces ~65ch line length
+   - `max-w-prose` enforces var(--measure-base) line length (75ch)
    - Prevents reader fatigue from long lines
    - Improves reading comprehension
 
@@ -321,16 +321,40 @@ The design system now uses semantic typography classes instead of size-based nam
 | `.text-caption` | `text--1` | 1.5 | Image captions, italic |
 | `.text-quote` | `text-1` | 1.45 | Pull quotes, serif italic |
 
-#### Reading Measure Classes
+#### Reading Measure - Single Source of Truth
 
-Optimal line length based on Jost Hochuli's research:
+**Implementation Philosophy:**
+All content width constraints use CSS custom properties defined in `src/styles/global.css`. This ensures consistency across the entire codebase and makes global adjustments simple.
 
-| Class | Max Width | Character Count | Use Case |
-|-------|-----------|-----------------|----------|
-| `.measure-narrow` | `45ch` | ~45 characters | Sidebars, narrow columns |
-| `.measure-base` | `65ch` | ~65 characters | **Optimal for body text** |
-| `.measure-wide` | `80ch` | ~80 characters | Wide layouts, technical content |
-| `.measure-full` | `none` | Unlimited | Full-width content |
+**CSS Variables (defined in `:root`):**
+```css
+/* Reading Measure - Single Source of Truth */
+--measure-narrow: 45ch; /* Sidebars, narrow columns */
+--measure-base: 75ch;   /* Optimal for body text, document layouts */
+--measure-wide: 85ch;   /* Wide layouts, technical content */
+--measure-full: none;   /* Full-width content */
+```
+
+**Usage Classes:**
+
+| Class | Max Width | CSS Variable | Character Count | Use Case |
+|-------|-----------|--------------|-----------------|----------|
+| `.measure-narrow` | `var(--measure-narrow)` | `--measure-narrow: 45ch` | ~45 characters | Sidebars, narrow columns |
+| `.measure-base` | `var(--measure-base)` | `--measure-base: 75ch` | ~75 characters | **Optimal for body text** |
+| `.measure-wide` | `var(--measure-wide)` | `--measure-wide: 85ch` | ~85 characters | Wide layouts, technical content |
+| `.measure-full` | `var(--measure-full)` | `--measure-full: none` | Unlimited | Full-width content |
+
+**Integration Points:**
+- **Tailwind config**: `prose: "var(--measure-base)"` 
+- **Homepage**: `max-width: var(--measure-base)`
+- **Blog posts**: `max-width: var(--measure-base)`
+- **Print styles**: `max-width: var(--measure-base)`
+- **Typography components**: `--content-width: var(--measure-base)`
+
+**Best Practice Rules:**
+1. ✅ **Always use CSS variables**: `max-width: var(--measure-base)`
+2. ❌ **Never hardcode ch values**: `max-width: 75ch` 
+3. 🔄 **To change site-wide width**: Update only the CSS custom property in `global.css`
 
 ### Baseline Grid Integration
 

@@ -1,18 +1,12 @@
 ---
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
-import Button from "@/components/Button.astro";
 import BioPanel from "@/components/BioPanel.astro";
-import CompactList from "@/components/CompactList.astro";
-import ContactBox from "@/components/ContactBox.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
-import SectionGrid from "@/components/SectionGrid.astro";
-import SocialList from "@/components/SocialList.astro";
-import WritingCard from "@/components/WritingCard.astro";
-import PostPreview from "@/components/blog/PostPreview.astro";
-import Note from "@/components/note/Note.astro";
+import DocumentEntry from "@/components/DocumentEntry.astro";
+import DocumentSection from "@/components/DocumentSection.astro";
+import MediaList from "@/components/MediaList.astro";
+import ContactInfo from "@/components/ContactInfo.astro";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
-import { socialLinks, siteConfig } from "@/site.config";
 import { collectionDateSort } from "@/utils/date";
 import { mediaData } from "@/data/media";
 
@@ -21,223 +15,169 @@ const homepageContent = await getEntry("homepage", "index");
 if (!homepageContent) {
 	throw new Error("Homepage content not found");
 }
-const { hero, bio, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;
-
-// Get content section configs with defaults
-const researchConfig = showcase.contentSections?.research || {
-	title: "Recent Papers",
-	itemCount: 3,
-	viewAllText: "View all research papers",
-	viewAllUrl: "/research/"
-};
-const writingConfig = showcase.contentSections?.writing || {
-	title: "Recent Writing",
-	itemCount: 2,
-	viewAllText: "View all writing",
-	viewAllUrl: "/writing/"
-};
-const mediaConfig = showcase.contentSections?.media || {
-	title: "Recent Media",
-	itemCount: 5,
-	viewAllText: "View all media coverage",
-	viewAllUrl: "/media/"
-};
-
-// Posts
-const allPosts = await getAllPosts();
-const allPostsByDate = allPosts
-	.sort(collectionDateSort)
-	.slice(0, postsConfig.maxPosts) as CollectionEntry<"post">[];
-
-// Notes
-const MAX_NOTES = 2;
-const allNotes = await getCollection("note");
-const latestNotes = allNotes.sort(collectionDateSort).slice(0, MAX_NOTES);
-
-// Get showcase sections for component demos
-const projectsSection = showcase.sections.find(s => s.type === "projects");
-const writingSection = showcase.sections.find(s => s.type === "writing");
-const compactSection = showcase.sections.find(s => s.type === "compact");
+const { hero, bio } = homepageContent.data;
 
 // Get featured research papers
 const allResearch = await getCollection("research");
 const featuredResearch = allResearch
 	.filter(paper => paper.data.featured)
 	.sort((a, b) => Number.parseInt(b.data.paperDate) - Number.parseInt(a.data.paperDate))
-	.slice(0, researchConfig.itemCount);
+	.slice(0, 3);
+
+// Get recent posts/essays
+const allPosts = await getAllPosts();
+const recentPosts = allPosts
+	.sort(collectionDateSort)
+	.slice(0, 3) as CollectionEntry<"post">[];
 
 // Get latest writing pieces
 const allWriting = await getCollection("writing");
 const latestWriting = allWriting
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, writingConfig.itemCount);
+	.slice(0, 2);
 
 // Get latest media appearances
 const allMediaItems = Object.entries(mediaData)
 	.flatMap(([year, items]) => items)
 	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-	.slice(0, mediaConfig.itemCount);
+	.slice(0, 5);
 ---
 
 <PageLayout meta={{ title: "Home" }}>
-	<!-- Hero section -->
-	<!-- Simplified background - removed decorative gradient orbs for minimal aesthetic -->
-	<section class="max-w-xl mx-auto relative flex items-center justify-center min-h-[40vh]">
-		<div class="w-full text-center">
-			<h1 class="text-center">
-				{hero.title}
-			</h1>
-			<p class="text-body mt-4b mb-4b">
+	<div class="homepage-document">
+		
+		<!-- Document Masthead -->
+		<header class="document-masthead">
+			<h1 class="site-title">{hero.title}</h1>
+			<p class="site-description">
 				{hero.description}
 			</p>
-			<div class="flex justify-center mb-4b">
-				<SocialList />
-			</div>
-			<div class="flex justify-center gap-3 mt-6b">
-				{hero.buttons.map((button) => (
-					<Button 
-						href={button.href} 
-						variant={button.variant as "primary" | "secondary"}
-						size="sm"
-					>
-						{button.text}
-					</Button>
-				))}
-			</div>
-		</div>
-	</section>
+		</header>
 
-	<!-- Bio Panel -->
-	{bio && (
-		<BioPanel bio={bio} class="mt-16b mb-16b" />
-	)}
+		<!-- Bio Panel Integration -->
+		{bio && (
+			<BioPanel bio={bio} class="mb-16b" />
+		)}
 
-	<!-- Current Work & Contact Section -->
-	<section class="mt-2b">
-		<h2>
-			Current Work & Contact
-		</h2>
+		<!-- Research Section -->
+		<DocumentSection 
+			title="Research" 
+			viewAllText="View all papers" 
+			viewAllHref="/research/"
+		>
+			{featuredResearch.map((paper) => (
+				<DocumentEntry
+					title={paper.data.title}
+					href={`/research/${paper.data.slug || paper.id}/`}
+					type="research"
+					date={paper.data.paperDate}
+					status={paper.data.status}
+					description={paper.data.description}
+					metadata={paper.data.authors}
+				/>
+			))}
+		</DocumentSection>
+
+		<!-- Recent Essays -->
+		<DocumentSection 
+			title="Recent Essays" 
+			viewAllText="View all posts" 
+			viewAllHref="/posts/"
+		>
+			{recentPosts.map((post) => (
+				<DocumentEntry
+					title={post.data.title}
+					href={`/posts/${post.slug}/`}
+					type="post"
+					date={post.data.publishDate.toISOString()}
+					description={post.data.description}
+				/>
+			))}
+		</DocumentSection>
+
+		<!-- Writing -->
+		<DocumentSection 
+			title="Writing" 
+			viewAllText="View all writing" 
+			viewAllHref="/writing/"
+		>
+			{latestWriting.map((piece) => (
+				<DocumentEntry
+					title={piece.data.title}
+					href={`/writing/${piece.data.slug || piece.id}/`}
+					type="writing"
+					date={piece.data.publishDate.toISOString()}
+					description={piece.data.description}
+				/>
+			))}
+		</DocumentSection>
+
+		<!-- Media & Appearances -->
+		<DocumentSection title="Media & Appearances">
+			<MediaList items={allMediaItems} />
+		</DocumentSection>
+
+		<!-- Contact Information -->
+		<ContactInfo />
 		
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 space-y-4 items-start">
-			<!-- Left Column: Current Projects -->
-			<div>
-				<h3>{currentProjects.title}</h3>
-				<div class="space-y-6">
-					{currentProjects.projects.map((project) => (
-						<article class="space-y-2">
-							<h4>
-								<a href={project.url} class="inline-link hover:text-accent-base">
-									{project.title}
-								</a>
-							</h5>
-							<p class="text-body-sm leading-relaxed">
-								{project.description}
-							</p>
-						</article>
-					))}
-				</div>
-			</div>
-
-			<!-- Right Column: More Content -->
-			<div>
-				<ContactBox />
-			</div>
-		</div>
-	</section>
-
-	<!-- Component Showcase Section -->
-	<section class="mt-2b">
-		<h2>
-			{showcase.title}
-		</h2>
-		
-		{/* Recent Papers Grid */}
-		<div class="mb-4b">
-			<h3 class="font-headline font-medium mb-3b">{researchConfig.title}</h3>
-			<SectionGrid columns="3" gap="md">
-				{featuredResearch.map((paper) => (
-					<ProjectCard 
-						title={paper.data.title}
-						description={paper.data.description}
-						url={`/research/${paper.data.slug || paper.id}/`}
-					/>
-				))}
-			</SectionGrid>
-		</div>
-
-		{/* Writing Cards */}
-		<div class="mb-4b">
-			<h3 class="font-headline font-medium mb-3b">{writingConfig.title}</h3>
-			<SectionGrid columns="2" gap="md">
-				{latestWriting.map((piece) => (
-					<WritingCard 
-						title={piece.data.title}
-						excerpt={piece.data.description}
-						date={piece.data.publishDate}
-						url={`/writing/${piece.data.slug || piece.id}/`}
-					/>
-				))}
-			</SectionGrid>
-		</div>
-
-		{/* Media Appearances */}
-		<div class="mb-4b">
-			<h3 class="font-headline font-medium mb-3b">{mediaConfig.title}</h3>
-			<CompactList items={allMediaItems.map(item => ({
-				title: item.title,
-				description: `${item.outlet} • ${new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`,
-				url: item.link
-			}))} />
-		</div>
-	</section>
-
-	<!-- Posts Section -->
-	<section aria-label="Blog post list" class="mt-2b">
-		<h2 class="font-headline font-medium mb-3b">{postsConfig.title}</h2>
-		<ul class="space-y-6 md:space-y-2" role="list">
-			{
-				allPostsByDate.map((p) => (
-					<li class="gap-2 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
-					</li>
-				))
-			}
-		</ul>
-	</section>
-
-
-	<!-- Debug -->
-	<!--
-	<div class="flex justify-between flex-wrap gap-y-1.5 mt-6b text-sm font-medium">
-		<div class="text-center content-center h-10 w-10 bg-color-50"><span class="text-textColor">50</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-75"><span class="text-textColor">75</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-100"><span class="text-textColor">100</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-150"><span class="text-textColor">150</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-200"><span class="text-textColor">200</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-250"><span class="text-textColor">250</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-300"><span class="text-textColor">300</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-350"><span class="text-textColor">350</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-400">
-			<span class="text-textColor">400</span>
-			<span class="text-bgColor">400</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-450">
-			<span class="text-textColor">450</span>
-			<span class="text-bgColor">450</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-500">
-			<span class="text-textColor">500</span>
-			<span class="text-bgColor">500</span>
-		</div>
-		<div class="text-center content-center h-10 w-10 bg-color-550"><span class="text-bgColor">550</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-600"><span class="text-bgColor">600</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-650"><span class="text-bgColor">650</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-700"><span class="text-bgColor">700</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-750"><span class="text-bgColor">750</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-800"><span class="text-bgColor">800</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-850"><span class="text-bgColor">850</span></div>
-		<div class="text-center content-center h-10 w-10 bg-color-900"><span class="text-bgColor">900</span></div>
 	</div>
-	-->
 </PageLayout>
+
+<style>
+	/* Homepage document container */
+	.homepage-document {
+		max-width: var(--measure-base); /* Single source of truth */
+		margin: 0 auto;
+		padding: var(--space-8) var(--space-4); /* 48px 24px */
+	}
+
+	/* Document masthead */
+	.document-masthead {
+		margin-bottom: var(--space-16); /* 96px - major break */
+		text-align: left; /* Left-aligned for document feel */
+	}
+
+	.site-title {
+		font-family: var(--font-newsreader);
+		font-size: var(--step-3); /* 29.3-33.2px */
+		font-weight: 400;
+		letter-spacing: -0.025em;
+		margin-bottom: var(--space-4); /* 24px */
+		line-height: 1.2;
+		color: var(--theme-text);
+	}
+
+	.site-description {
+		font-size: var(--step-1); /* 18.8-21.3px */
+		line-height: 1.6;
+		color: var(--theme-text);
+		margin-bottom: 0;
+		font-weight: 300;
+		max-width: var(--measure-narrow); /* Slightly narrower than container for readability */
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 768px) {
+		.homepage-document {
+			padding: var(--space-6) var(--space-3); /* 36px 18px */
+		}
+		
+		.site-title {
+			font-size: var(--step-2); /* Smaller on mobile */
+		}
+		
+		.site-description {
+			font-size: var(--step-0); /* Standard body size */
+		}
+	}
+
+	/* Dark mode adjustments */
+	:global([data-theme="dark"]) .site-title {
+		font-weight: 425; /* Slightly heavier for dark mode */
+	}
+
+	:global([data-theme="dark"]) .site-description {
+		color: var(--theme-color-100);
+	}
+</style>
 

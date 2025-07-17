@@ -192,6 +192,6 @@ const noteId = `sidenote-${number || Math.random().toString(36).substr(2, 9)}`;
 
   /* Content width variable fallback */
   .sidenote {
-    --content-width: 65ch;
+    --content-width: var(--measure-base);
   }
 </style>
