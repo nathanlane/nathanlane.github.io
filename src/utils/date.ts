@@ -21,3 +21,19 @@ export function collectionDateSort(
 ) {
   return b.data.publishDate.getTime() - a.data.publishDate.getTime();
 }
+
+// Helper functions for writing page
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+export function formatMonthYear(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: '2-digit'
+  });
+}

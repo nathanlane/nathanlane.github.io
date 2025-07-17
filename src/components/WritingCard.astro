@@ -12,7 +12,7 @@ export interface Props {
 const { title, excerpt, date, url, class: className = "" } = Astro.props;
 ---
 
-<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${className} p-space-s`}>
+<article class={`group rounded-lg bg-color-75 hover:bg-color-100 ${className} p-space-s`}>
 	{url ? (
 		<a href={url} class="block flex flex-col gap-space-2xs">
 			<FormattedDate
@@ -24,7 +24,7 @@ const { title, excerpt, date, url, class: className = "" } = Astro.props;
 					day: "2-digit",
 				}}
 			/>
-			<h3 class="font-headline font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two transition-colors">
+			<h3 class="font-headline font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two">
 				{title}
 			</h3>
 			{excerpt && (

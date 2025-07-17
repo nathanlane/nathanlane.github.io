@@ -10,7 +10,7 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 
 <section class="document-section">
   <header class="section-header">
-    <h2 class="section-title">{title}</h2>
+    <h2 class="heading-2">{title}</h2>
     {viewAllHref && viewAllText && (
       <a href={viewAllHref} class="section-link">{viewAllText}</a>
     )}
@@ -23,31 +23,21 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 
 <style>
   .document-section {
-    border-top: 1px solid var(--border-special);
-    padding-top: var(--space-8); /* 48px */
-    margin-top: var(--space-8);  /* 48px */
+    border-bottom: 1px solid var(--theme-color-300);
+    padding-bottom: var(--space-8); /* 48px */
     margin-bottom: var(--space-8); /* 48px - reduced from 96px, baseline aligned */
   }
 
-  .document-section:first-child {
-    border-top: none;
-    padding-top: 0;
-    margin-top: 0;
+  .document-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
   .section-header {
     margin-bottom: var(--space-8); /* 48px */
   }
 
-  .section-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--step-2); /* 23.4-26.6px */
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-3); /* 18px */
-    line-height: 1.25;
-    color: var(--theme-text);
-  }
+
 
   .section-link {
     font-family: var(--font-sans);
@@ -58,8 +48,7 @@ const { title, viewAllText, viewAllHref } = Astro.props;
     text-decoration: none;
     font-weight: 500;
     
-    /* Subtle hover effect */
-    transition: color 200ms ease-out;
+    /* Subtle hover effect - transition removed */
   }
 
   .section-link:hover {
@@ -75,9 +64,6 @@ const { title, viewAllText, viewAllHref } = Astro.props;
   }
 
   /* Dark mode adjustments */
-  :global([data-theme="dark"]) .section-title {
-    font-weight: 425; /* Slightly heavier for dark mode */
-  }
 
   :global([data-theme="dark"]) .section-link {
     color: var(--theme-color-400);

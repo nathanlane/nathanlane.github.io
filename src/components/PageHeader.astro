@@ -1,0 +1,57 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  additionalInfo?: string;
+  class?: string;
+}
+
+const { title, description, additionalInfo, class: className } = Astro.props;
+---
+
+<header class:list={[
+  "mb-12b", 
+  className
+]}>
+  <!-- Main title - left aligned, clean typography -->
+  <h1 class="heading-1 mb-4b text-left">{title}</h1>
+  
+  <!-- Body description text - baseline size, generous reading measure -->
+  {description && (
+    <div class="text-0 text-base leading-relaxed measure-base mb-2b">
+      <p>{description}</p>
+    </div>
+  )}
+  
+  <!-- Left-justified horizontal rule - stronger visual punctuation -->
+  <div class="mb-2b">
+    <hr class="w-48 border-0 border-t-2 border-color-300 text-left ml-0" />
+  </div>
+  
+  <!-- Additional info - baseline text size, muted, connected to rule -->
+  {additionalInfo && (
+    <div class="text-0 text-light leading-relaxed mb-4b">
+      <p>{additionalInfo}</p>
+    </div>
+  )}
+</header>
+
+<style>
+  /* Ensure horizontal rule is left-aligned */
+  hr {
+    margin-left: 0;
+    margin-right: auto;
+  }
+  
+  /* Enhanced typography for description */
+  header p {
+    margin: 0; /* Reset default margins for clean spacing */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .measure-base {
+      max-width: 100%;
+    }
+  }
+</style> 

@@ -87,7 +87,7 @@ const meta = {
       {descYearKeys.map(year => (
         <a 
           href={`#year-${year}`} 
-          class="px-3b py-1b bg-bgColor/50 rounded hover:bg-accent/20 transition-colors"
+          class="px-3b py-1b bg-bgColor/50 rounded hover:bg-accent/20"
         >
           {year} ({groupedByYear[year].length})
         </a>
@@ -97,7 +97,7 @@ const meta = {
     <!-- Posts List -->
     {descYearKeys.map(year => (
       <div id={`year-${year}`} class="mb-8b scroll-mt-16b">
-        <h3 class="heading-3 mb-4b sticky top-0 bg-pageBg py-2b z-10">
+        <h3 class="heading-3 mb-4b bg-pageBg py-2b">
           {year}
           <span class="text-sm text-light ml-2b">({groupedByYear[year].length} posts)</span>
         </h3>

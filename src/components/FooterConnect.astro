@@ -58,12 +58,12 @@ const allLinks: AllLinkTypes[] = [emailLink, cvLinkObj, ...socialLinks.filter(li
 		{allLinks.map((link) => (
 			<li>
 				<a
-					class="flex items-center gap-2b text-xs hover:text-accent-base transition-colors duration-200"
+					class="flex items-center gap-2b text-xs hover:text-accent-base"
 					href={link.link}
 					rel={'isEmail' in link || 'isCV' in link ? "" : `noreferrer ${'isWebmention' in link && link.isWebmention ? "me authn" : ""}`}
 					target={'isEmail' in link || 'isCV' in link ? "_self" : "_blank"}
 				>
-					<Icon aria-hidden="true" class="icon-base opacity-40 hover:opacity-60 transition-opacity" focusable="false" name={link.name} />
+					<Icon aria-hidden="true" class="icon-base opacity-40 hover:opacity-60" focusable="false" name={link.name} />
 					{link.friendlyName}
 				</a>
 			</li>

@@ -16,9 +16,6 @@ const { headings } = await render(series);
 ---
 
 <BaseLayout meta={{ description, title }}>
-	<div class="fixed left-0 top-0 z-10 flex h-12 md:h-16 w-full bg-bgColor overflow-hidden">
-		<!-- Simplified background - removed decorative gradient orbs for minimal aesthetic -->
-	</div>
 
 	<!-- SeriesPanel is inserted into named slot "sidebar" -->
 	{series.id && (<SeriesPanel slot="sidebar" seriesId={series.id} />)}
@@ -70,7 +67,7 @@ const { headings } = await render(series);
 	<!-- Series button for mobile screens -->
 	<mobile-button
 		id="toggle-panel-mobile"
-		class="btn-icon-fab block sm:hidden fixed bottom-4 right-4 z-50"
+		class="btn-icon-fab block sm:hidden absolute bottom-4 right-4 z-50"
 		aria-label="Toggle Series Panel"
 	>
 		<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">

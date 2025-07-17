@@ -1,304 +1,266 @@
-Based on your design philosophy and the essay style, here's how I'd create a main blog page that complements the spirit:
 
-## ASCII Art Structure
+## WRITING PAGE STRUCTURE - DESIGN SYSTEM COMPLIANT
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Nathan Lane                              Essays  Research  About │
+.... HEADER....
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
-│                          E S S A Y S                              │
+│                         W R I T I N G                             │
 │                                                                   │
-│  A collection of thoughts on economics, technology, and the       │
-│  intersections between. Each piece grows from seedling to         │
-│  evergreen at its own pace.                                       │
+│  Essays, notes, and occasional thoughts on economics,             │
+│  technology, and the craft of research. Some pieces are          │
+│  evergreen, others capture thoughts in motion.                   │
 │                                                                   │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
 │                     Current Thinking                              │
 │                                                                   │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ The Grammar of Economic Models                           │    │
-│  │ ESSAY • JANUARY 2025 • 3,421 WORDS • EVERGREEN          │    │
-│  │                                                           │    │
-│  │ How the mathematical language we choose shapes not just  │    │
-│  │ our models but our very conception of economic reality.  │    │
-│  │ An exploration of notation as ideology.                   │    │
-│  └─────────────────────────────────────────────────────────┘    │
+│  The Grammar of Economic Models                                   │
+│  ESSAY • JANUARY 2025 • 3,421 WORDS                              │
 │                                                                   │
+│  How the mathematical language we choose shapes not just         │
+│  our models but our very conception of economic reality.         │
+│  An exploration of notation as ideology.                         │
 │                                                                   │
-│  ┌─────────────────────────────────────────────────────────┐    │
-│  │ Notes on Building a Personal Research Infrastructure     │    │
-│  │ TECHNICAL NOTE • DECEMBER 2024 • 2,156 WORDS • BUDDING  │    │
-│  │                                                           │    │
-│  │ After five years of iteration, some thoughts on the      │    │
-│  │ tools and workflows that support independent research    │    │
-│  │ in the age of large language models.                     │    │
-│  └─────────────────────────────────────────────────────────┘    │
+│                          ━━━━━━━                                  │
 │                                                                   │
-│                          * * *                                    │
+│  Weekend Notes: LLMs and Literature Reviews                      │
+│  BLOG POST • JANUARY 2025 • 823 WORDS                            │
 │                                                                   │
-│                     From the Archive                              │
+│  Some quick thoughts on using Claude to map academic             │
+│  literature. The tools are impressive but the epistemic          │
+│  questions remain thorny.                                        │
 │                                                                   │
-│  Wage Stickiness in Silicon Valley .................. 2024-11    │
-│  A Statistical Method for Parsing Fed Speeches ....... 2024-10    │
-│  The Invisible Infrastructure of Academic Publishing . 2024-09    │
-│  Economic Folklore and Empirical Reality ............ 2024-08    │
-│  Tools for Thought: An Economist's Perspective ...... 2024-07    │
-│  Market Design in Digital Spaces .................... 2024-06    │
+│                          ━━━━━━━                                  │
 │                                                                   │
-│  → View complete archive                                          │
+│                     Recent Writing                                │
+│                                                                   │
+│  Notes on Building a Personal Research Infrastructure  2024-12   │
+│  The Invisible Hand in Neural Networks .............. 2024-11    │
+│  Wage Stickiness in Silicon Valley .................. 2024-10    │
+│  Economic Folklore and Empirical Reality ............ 2024-09    │
+│  A Statistical Method for Parsing Fed Speeches ...... 2024-08    │
+│                                                                   │
+│  → View writing archive                                           │
+│                                                                   │
+│                          ━━━━━━━                                  │
+│                                                                   │
+│                     Recent Blog Posts                             │
+│                                                                   │
+│  Configuring Zotero for Economic Research ........... 2025-01    │
+│  Quick Fix: Python Environment Management ........... 2024-12    │
+│  Links: December Reading ........................... 2024-12    │
+│  The Sublime Horror of Excel Spreadsheets .......... 2024-11    │
+│  Tools I'm Thankful For ........................... 2024-11    │
+│                                                                   │
+│  → View blog archive                                              │
 │                                                                   │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                   │
-│  This site is built with Astro and typography.                   │
-│  Subscribe via RSS or monthly digest.                            │
+.... FOOTER ....
 │                                                                   │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-## Detailed Component Structure
-
-```
-ESSAYS PAGE LAYOUT
-==================
-
-1. HEADER (Persistent)
-   ├── Site Name (left)
-   └── Navigation (right, spaced)
-       └── Thin horizontal rule below
-
-2. PAGE TITLE BLOCK
-   ├── "ESSAYS" (centered, Newsreader, heading-3)
-   └── Subtitle/description (IBM Plex Serif, text-1, light)
-       └── 2-3 lines explaining the collection
-
-3. HORIZONTAL SEPARATOR
-   └── Thin rule with generous margins (space-8b)
-
-4. FEATURED SECTION
-   ├── Section title: "Current Thinking" (heading-2, normal weight)
-   └── 2-3 recent/featured essays
-       └── Each essay card (NO BORDERS):
-           ├── Title (heading-4, Newsreader)
-           ├── Metadata line (small caps, muted)
-           ├── 3-line excerpt (serif, justified)
-           └── Bottom margin: space-8b
-
-5. SECTION BREAK
-   └── Centered asterism (* * *) with space-12b
-
-6. ARCHIVE SECTION  
-   ├── Section title: "From the Archive"
-   └── Condensed list format:
-       ├── Title ............... Date
-       ├── Dotted leader between
-       └── Monospace dates aligned right
-
-7. FOOTER
-   ├── Thin rule separator
-   └── Minimal site info + RSS link
-```
-
-## Implementation Guide
+## Implementation - Design System Compliant
 
 ```astro
 ---
-// /src/pages/essays.astro
+// /src/pages/writing.astro
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CompactList from '@/components/CompactList.astro';
 import { getCollection } from 'astro:content';
 
-const essays = await getCollection('essays');
-const featured = essays.filter(e => e.data.featured).slice(0, 3);
-const archive = essays.filter(e => !e.data.featured);
+const writing = await getCollection('writing');
+const blogPosts = await getCollection('post');
+
+// Get most recent of each type for Current Thinking
+const latestWriting = writing
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())[0];
+const latestBlog = blogPosts
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())[0];
+
+// Get recent items for archive sections (excluding featured ones)
+const recentWriting = writing
+  .filter(w => w.id !== latestWriting?.id)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 5);
+const recentBlog = blogPosts
+  .filter(p => p.id !== latestBlog?.id)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 5);
 ---
 
-<BaseLayout title="Essays">
-  <div class="essays-container">
+<BaseLayout meta={{ title: "Writing", description: "Essays, notes, and thoughts on economics, technology, and research." }}>
+  <div class="measure-base mx-auto px-4b py-8b">
     <!-- Page header -->
-    <header class="page-header">
-      <h1 class="page-title">Essays</h1>
-      <p class="page-description">
-        A collection of thoughts on economics, technology, and the 
-        intersections between. Each piece grows from seedling to 
-        evergreen at its own pace.
+    <header class="text-center mb-12b">
+      <h1 class="heading-2 mb-4b">Writing</h1>
+      <p class="text-1 text-light leading-relaxed measure-narrow mx-auto">
+        Essays, notes, and occasional thoughts on economics, 
+        technology, and the craft of research. Some pieces are 
+        evergreen, others capture thoughts in motion.
       </p>
     </header>
 
-    <hr class="section-separator" />
-
-    <!-- Featured essays -->
-    <section class="featured-section">
-      <h2 class="section-title">Current Thinking</h2>
+    <!-- Current Thinking - Latest writing + latest blog -->
+    <section class="mb-16b">
+      <h2 class="heading-3 mb-8b text-center">Current Thinking</h2>
       
-      {featured.map(essay => (
-        <article class="essay-entry">
-          <h3 class="essay-title">
-            <a href={`/essays/${essay.slug}`}>{essay.data.title}</a>
+      <!-- Latest Writing -->
+      {latestWriting && (
+        <article class="mb-12b">
+          <h3 class="heading-4 mb-2b">
+            <a href={`/writing/${latestWriting.slug}`} class="feature-link">
+              {latestWriting.data.title}
+            </a>
           </h3>
-          <div class="essay-metadata">
-            {essay.data.type} • {formatDate(essay.data.date)} • 
-            {essay.data.wordCount.toLocaleString()} WORDS • 
-            {essay.data.status}
+          <div class="text-meta mb-3b uppercase tracking-wide text-light">
+            {latestWriting.data.type || 'ESSAY'} • {formatDate(latestWriting.data.publishDate)} • 
+            {latestWriting.data.wordCount?.toLocaleString() || 'N/A'} WORDS
           </div>
-          <p class="essay-excerpt">{essay.data.excerpt}</p>
+          <p class="text-body leading-relaxed">{latestWriting.data.description}</p>
         </article>
-      ))}
+      )}
+
+      <!-- Subtle separator -->
+      <div class="text-center mb-12b">
+        <span class="text-light">━━━━━━━</span>
+      </div>
+
+      <!-- Latest Blog Post -->
+      {latestBlog && (
+        <article class="mb-12b">
+          <h3 class="heading-4 mb-2b">
+            <a href={`/posts/${latestBlog.slug}`} class="feature-link">
+              {latestBlog.data.title}
+            </a>
+          </h3>
+          <div class="text-meta mb-3b uppercase tracking-wide text-light">
+            BLOG POST • {formatDate(latestBlog.data.publishDate)} • 
+            {latestBlog.data.wordCount?.toLocaleString() || 'N/A'} WORDS
+          </div>
+          <p class="text-body leading-relaxed">{latestBlog.data.description}</p>
+        </article>
+      )}
     </section>
 
-    <div class="asterism">* * *</div>
+    <!-- Monochrome separator -->
+    <div class="text-center mb-16b">
+      <span class="text-lighter">━━━━━━━</span>
+    </div>
 
-    <!-- Archive -->
-    <section class="archive-section">
-      <h2 class="section-title">From the Archive</h2>
+    <!-- Recent Writing -->
+    <section class="mb-16b">
+      <h2 class="heading-3 mb-8b">Recent Writing</h2>
       
-      <ul class="archive-list">
-        {archive.map(essay => (
-          <li class="archive-item">
-            <a href={`/essays/${essay.slug}`}>
-              <span class="archive-title">{essay.data.title}</span>
-              <span class="archive-dots"></span>
-              <span class="archive-date">{formatDate(essay.data.date)}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <CompactList 
+        items={recentWriting.map(item => ({
+          title: item.data.title,
+          description: item.data.description,
+          url: `/writing/${item.slug}`,
+          date: item.data.publishDate
+        }))}
+      />
       
-      <a href="/essays/archive" class="archive-link">
-        → View complete archive
-      </a>
+      <div class="mt-6b">
+        <a href="/writing/archive" class="nav-link text-body-sm uppercase tracking-wide">
+          → View writing archive
+        </a>
+      </div>
+    </section>
+
+    <!-- Monochrome separator -->
+    <div class="text-center mb-16b">
+      <span class="text-lighter">━━━━━━━</span>
+    </div>
+
+    <!-- Recent Blog Posts -->
+    <section class="mb-16b">
+      <h2 class="heading-3 mb-8b">Recent Blog Posts</h2>
+      
+      <CompactList 
+        items={recentBlog.map(post => ({
+          title: post.data.title,
+          description: post.data.description,
+          url: `/posts/${post.slug}`,
+          date: post.data.publishDate
+        }))}
+      />
+      
+      <div class="mt-6b">
+        <a href="/posts/archive" class="nav-link text-body-sm uppercase tracking-wide">
+          → View blog archive
+        </a>
+      </div>
     </section>
   </div>
 </BaseLayout>
 
-<style>
-  .essays-container {
-    max-width: 65ch;
-    margin: 0 auto;
-    padding: var(--space-8b) var(--space-4b);
-  }
-
-  /* Page header */
-  .page-header {
-    text-align: center;
-    margin-bottom: var(--space-8b);
-  }
-
-  .page-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--text-3);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--space-4b);
-  }
-
-  .page-description {
-    font-family: var(--font-serif);
-    font-size: var(--text-1);
-    font-weight: 300;
-    line-height: 1.6;
-    max-width: 45ch;
-    margin: 0 auto;
-  }
-
-  /* Separators */
-  .section-separator {
-    border: none;
-    border-top: 1px solid rgb(0 0 0 / 0.1);
-    margin: var(--space-8b) auto;
-    width: 100%;
-  }
-
-  .asterism {
-    text-align: center;
-    margin: var(--space-12b) 0;
-    font-size: var(--text-1);
-    letter-spacing: 0.5em;
-    color: var(--text-secondary);
-  }
-
-  /* Section titles */
-  .section-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--text-2);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    margin-bottom: var(--space-6b);
-  }
-
-  /* Essay entries */
-  .essay-entry {
-    margin-bottom: var(--space-8b);
-  }
-
-  .essay-title {
-    font-family: var(--font-newsreader);
-    font-size: var(--text-4);
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    margin-bottom: var(--space-1b);
-  }
-
-  .essay-metadata {
-    font-family: var(--font-sans);
-    font-size: var(--text--1);
-    font-variant: small-caps;
-    letter-spacing: 0.075em;
-    color: var(--text-secondary);
-    margin-bottom: var(--space-2b);
-  }
-
-  .essay-excerpt {
-    font-family: var(--font-serif);
-    font-size: var(--text-0);
-    line-height: 1.6;
-    text-align: justify;
-  }
-
-  /* Archive list */
-  .archive-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  .archive-item {
-    margin-bottom: var(--space-3b);
-  }
-
-  .archive-item a {
-    display: flex;
-    align-items: baseline;
-    text-decoration: none;
-    font-family: var(--font-sans);
-    font-size: var(--text--1);
-  }
-
-  .archive-title {
-    flex-shrink: 0;
-  }
-
-  .archive-dots {
-    flex-grow: 1;
-    margin: 0 var(--space-2b);
-    border-bottom: 1px dotted rgb(0 0 0 / 0.3);
-  }
-
-  .archive-date {
-    flex-shrink: 0;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-feature-settings: 'tnum';
-  }
-
-  .archive-link {
-    display: inline-block;
-    margin-top: var(--space-4b);
-    font-family: var(--font-sans);
-    font-size: var(--text--1);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-</style>
+<!-- No additional styles needed - CompactList handles all formatting -->
 ```
 
-This design maintains the same spirit as the individual essay pages while creating a calm, scannable index that lets the content hierarchy speak for itself through typography and spacing alone.
+## Key Design System Corrections
+
+### 1. **Fixed Spacing Violations**
+- **BEFORE**: `var(--space-8b)` (non-existent)
+- **AFTER**: `py-8b` (proper Tailwind utility using defined grid)
+
+### 2. **Reading Measure Compliance**
+- **BEFORE**: `max-width: 65ch` (hardcoded, violates constraint #3)
+- **AFTER**: `measure-base` (uses CSS custom property `--measure-base`)
+
+### 3. **Typography Hierarchy**
+- **Page title**: `heading-2` (proper semantic hierarchy)
+- **Section headers**: `heading-3` 
+- **Entry titles**: `heading-4` with `feature-link` class
+- **Metadata**: `text-meta` with proper small caps styling
+
+### 4. **Monochrome Palette Compliance**
+- **Separators**: Text-based `━━━━━━━` using existing text color utilities
+- **No heavy borders or cards**: Relies on whitespace and typography
+- **Color restraint**: Uses `text-light`, `text-lighter` within monochrome system
+
+### 5. **Semantic Link Classes**
+- **Feature links**: `feature-link` for titles
+- **Inline links**: `inline-link` for archive items  
+- **Navigation**: `nav-link` for archive navigation
+
+### 6. **Content Organization**
+- **Unified approach**: Treats all content as "writing" with type distinction
+- **Clear hierarchy**: Current → Recent → Archives
+- **Minimal decoration**: Typography and space create structure
+- **Reusable components**: Uses CompactList for consistent archive formatting
+
+## Responsive Behavior
+
+```css
+/* Mobile adjustments in Tailwind */
+@media (max-width: 768px) {
+  .measure-base { 
+    padding-left: var(--space-3); 
+    padding-right: var(--space-3); 
+  }
+  
+  .heading-2 { 
+    font-size: var(--text-3); /* Scale down on mobile */
+  }
+}
+```
+
+## Content Strategy
+
+### Current Thinking Section
+- **Purpose**: Showcase 1-2 most recent substantial pieces
+- **Types**: Essays, research notes, substantial blog posts
+- **Presentation**: Full titles, descriptions, metadata
+- **Goal**: Demonstrate current intellectual focus
+
+### Archive Sections  
+- **Recent Writing**: Substantial, evergreen pieces
+- **Recent Blog Posts**: Shorter, timely content
+- **Format**: Title + date in clean list format
+- **Navigation**: Clear paths to full archives
+
+This implementation maintains the editorial feel while strictly following design system constraints and aesthetic principles.

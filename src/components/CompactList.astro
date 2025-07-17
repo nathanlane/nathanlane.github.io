@@ -12,17 +12,17 @@ export interface Props {
 const { items, class: className = "" } = Astro.props;
 ---
 
-<div class={`space-y-space-1 ${className}`}>
+<div class={`space-y-3b ${className}`}>
 	{items.map((item) => (
-		<div class="group flex items-center justify-between py-space-2xs border-b border-color-150 last:border-b-0">
+		<div class="group flex items-center justify-between py-2b border-b border-color-150 last:border-b-0">
 			{item.url ? (
 				<a href={item.url} class="flex-1 min-w-0">
-					<div class="flex items-baseline gap-space-xs">
-						<h3 class="font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two truncate transition-colors">
+					<div class="flex items-baseline gap-3b">
+						<h3 class="font-medium text-0 leading-tight text-accent-base group-hover:text-accent-two truncate">
 							{item.title}
 						</h3>
 						{item.description && (
-							<p class="text-body-sm text-light truncate flex-shrink-0 max-w-xs">
+							<p class="text--1 text-light truncate flex-shrink-0 max-w-xs">
 								{item.description}
 							</p>
 						)}
@@ -30,12 +30,12 @@ const { items, class: className = "" } = Astro.props;
 				</a>
 			) : (
 				<div class="flex-1 min-w-0">
-					<div class="flex items-baseline gap-space-xs">
+					<div class="flex items-baseline gap-3b">
 						<h3 class="font-medium text-0 leading-tight text-accent-base truncate">
 							{item.title}
 						</h3>
 						{item.description && (
-							<p class="text-body-sm text-light truncate flex-shrink-0 max-w-xs">
+							<p class="text--1 text-light truncate flex-shrink-0 max-w-xs">
 								{item.description}
 							</p>
 						)}
@@ -43,7 +43,7 @@ const { items, class: className = "" } = Astro.props;
 				</div>
 			)}
 			{item.date && (
-				<time class="text-body-sm text-lightest flex-shrink-0 ml-space-s">
+				<time class="text--1 text-lighter flex-shrink-0 ml-4b">
 					{item.date.getFullYear()}
 				</time>
 			)}

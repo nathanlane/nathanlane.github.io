@@ -12,7 +12,7 @@ const { variant = "default", showHash = true, title, class: className = "" } = A
 const badgeClasses = {
 	base: `
 		inline-flex items-center
-		rounded-sm transition-all duration-200
+		rounded-sm
 		h-6 px-3b text-xs
 		font-medium tracking-wider
 		${className}
@@ -67,14 +67,10 @@ const variantClasses = badgeClasses.variants[variant];
 		font-variation-settings: 'wght' 550;
 		/* Expand letter spacing */
 		letter-spacing: 0.05em;
-		/* Subtle shadow */
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 	
 	/* Active state */
 	.badge:active {
-		/* Quick transition */
-		transition-duration: 50ms;
 		/* Compress spacing */
 		letter-spacing: 0.035em;
 		/* Remove shadow */
@@ -107,7 +103,6 @@ const variantClasses = badgeClasses.variants[variant];
 	
 	[data-badge-variant="muted"]:hover {
 		font-variation-settings: 'wght' 500;
-		letter-spacing: 0.03em;
 	}
 	
 	/* Size adjustments for readability */

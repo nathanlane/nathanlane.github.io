@@ -125,7 +125,7 @@ const narrativeHtml = await marked.parse(bio.narrative);
     text-decoration: underline;
     text-decoration-thickness: 0.0625em;
     text-underline-offset: 0.125em;
-    transition: all 0.2s ease;
+    /* transition removed */
   }
   
   .narrative :global(a:hover) {
@@ -154,10 +154,7 @@ const narrativeHtml = await marked.parse(bio.narrative);
     }
   }
 
-  /* Subtle hover effects */
-  .affiliations {
-    transition: opacity 0.2s ease;
-  }
+  /* Subtle hover effects - transitions removed */
 
   /* Print styles */
   @media print {

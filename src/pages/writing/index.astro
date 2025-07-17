@@ -1,66 +1,143 @@
 ---
-import { getCollection } from "astro:content";
-import CompactList from "@/components/CompactList.astro";
-import BaseLayout from "@/layouts/Base.astro";
+import BaseLayout from '@/layouts/Base.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import SectionSeparator from '@/components/SectionSeparator.astro';
+import CompactList from '@/components/CompactList.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, formatMonthYear } from '@/utils/date';
 
-const allWriting = await getCollection("writing");
-const sortedWriting = allWriting.sort((a, b) => 
-	b.data.publishDate.getTime() - a.data.publishDate.getTime()
-);
+const writing = await getCollection('writing');
+const blogPosts = await getCollection('post');
 
-const writingItems = sortedWriting.map(writing => ({
-	title: writing.data.title,
-	description: writing.data.description,
-	url: `/writing/${writing.id}/`,
-	date: writing.data.publishDate,
-}));
+// Get the last 3 writing pieces for Current Thinking
+const latestWriting = writing
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
 
-const featuredWriting = sortedWriting.filter(writing => writing.data.featured);
-const recentWriting = sortedWriting.slice(0, 6);
+// Get remaining writing for archive section (excluding featured ones)
+const recentWriting = writing
+  .filter(w => !latestWriting.some(featured => featured.id === w.id))
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 5);
+
+// Get recent blog posts for archive section
+const recentBlog = blogPosts
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 5);
 ---
 
-<BaseLayout meta={{ title: "Writing", description: "Creative writing, storytelling, and narrative explorations across various forms and genres." }}>
-	<h1>Writing</h1>
-	
-	<p class="text-body mb-8b max-w-2xl">
-		Creative writing pieces, storytelling experiments, and narrative explorations across various forms and genres.
-	</p>
+<BaseLayout meta={{ title: "Writing", description: "Essays, notes, and thoughts on economics, technology, and research." }}>
+  <div class="measure-base mx-auto px-4b py-8b">
+    
+    <!-- Reusable Page Header - 12b bottom margin (72px) -->
+    <PageHeader 
+      title="Writing"
+      description="Essays, notes, and occasional thoughts on economics, technology, and the craft of research. Some pieces are evergreen, others capture thoughts in motion."
+      additionalInfo="Browse all writing • View by topic • Subscribe to updates"
+    />
 
-	{featuredWriting.length > 0 && (
-		<section class="mb-12b">
-			<h2>Featured Writing</h2>
-			<div class="space-y-6b">
-				{featuredWriting.map((writing) => (
-					<article class="border-l-4 border-accent-base/20 pl-6b py-4b">
-						<h3>
-							<a href={`/writing/${writing.id}/`} class="hover:text-accent-two">
-								{writing.data.title}
-							</a>
-						</h5>
-						<p class="text-body-sm mb-2b">{writing.data.description}</p>
-						<time class="text-body-sm text-light">
-							{writing.data.publishDate.toLocaleDateString('en-US', {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric'
-							})}
-						</time>
-					</article>
-				))}
-			</div>
-		</section>
-	)}
+    <!-- Current Thinking - Last 3 writing pieces -->
+    <!-- Section spacing: 16b between sections (96px) -->
+    <section class="mb-16b">
+      <!-- Left-justified heading-2, reduced bottom margin -->
+      <h2 class="heading-2 mb-6b text-left">Current Thinking</h2>
+      
+      <!-- Reduced spacing between pieces for grouping -->
+      {latestWriting.map((piece, index) => (
+        <article class="mb-8b last:mb-0">
+          <h3 class="heading-4 mb-2b">
+            <a href={`/writing/${piece.id}`} class="feature-link">
+              {piece.data.title}
+            </a>
+          </h3>
+          <div class="text-meta mb-3b uppercase tracking-wide text-light">
+            {piece.data.type || 'ESSAY'} • {formatDate(piece.data.publishDate)}
+            {piece.data.genre && ` • ${piece.data.genre.toUpperCase()}`}
+            {piece.data.featured && ' • FEATURED'}
+          </div>
+          <p class="text-body leading-relaxed">{piece.data.description}</p>
+          
+          {/* Subtle separator between pieces (not after last one) */}
+          {index < latestWriting.length - 1 && (
+            <div class="text-center mt-6b">
+            </div>
+          )}
+        </article>
+      ))}
+    </section>
 
-	<section>
-		<h3 class="heading-3 mt-8b mb-4b">All Writing</h3>
-		<CompactList items={writingItems} />
-	</section>
+    <!-- Wide Full Header Line Separator -->
+    <SectionSeparator variant="full-width" spacing="normal" />
 
-	<div class="mt-16b p-10b bg-color-75 rounded-lg">
-		<h4 class="heading-4 mt-6b mb-3b">About This Writing</h4>
-		<p class="text-xs leading-relaxed mt-3b">
-			This collection showcases creative writing pieces across various forms and genres, from short stories and essays to experimental narratives. 
-			Each piece explores different voices, themes, and storytelling techniques as part of an ongoing creative journey.
-		</p>
-	</div>
+    <!-- Recent Writing -->
+    <section class="mb-16b">
+      <h2 class="heading-3 mb-8b">Recent Writing</h2>
+      
+      <CompactList 
+        items={recentWriting.map(item => ({
+          title: item.data.title,
+          description: item.data.description,
+          url: `/writing/${item.id}`,
+          date: item.data.publishDate
+        }))}
+      />
+      
+      <div class="mt-6b">
+        <a href="/writing/archive" class="nav-link text-body-sm uppercase tracking-wide">
+          → View writing archive
+        </a>
+      </div>
+    </section>
+
+    <!-- Wide Full Header Line Separator -->
+    <SectionSeparator variant="full-width" spacing="normal" />
+
+    <!-- Recent Blog Posts -->
+    <section class="mb-16b">
+      <h2 class="heading-3 mb-8b">Recent Blog Posts</h2>
+      
+      <CompactList 
+        items={recentBlog.map(post => ({
+          title: post.data.title,
+          description: post.data.description,
+          url: `/posts/${post.id}`,
+          date: post.data.publishDate
+        }))}
+      />
+      
+      <div class="mt-6b">
+        <a href="/posts/archive" class="nav-link text-body-sm uppercase tracking-wide">
+          → View blog archive
+        </a>
+      </div>
+    </section>
+  </div>
 </BaseLayout>
+
+<!-- SPACING HIERARCHY DOCUMENTATION:
+
+## BASELINE GRID ALIGNMENT ✅
+- All spacing uses proper grid units (2b, 3b, 4b, 6b, 8b, 12b, 16b)
+- 6px base unit, 24px baseline maintained throughout
+
+## SPACING HIERARCHY:
+1. **Page Container**: py-8b (48px) - comfortable page padding
+2. **PageHeader**: mb-12b (72px) - major section separation
+3. **Section Separation**: 16b between sections (96px) - clear content zones
+4. **Section Headers**: mb-6b/8b (36px/48px) - proportional to importance
+5. **Article Separation**: mb-8b (48px) - reduced for grouping Current Thinking
+6. **Element Spacing**: mb-2b/3b (12px/18px) - tight element relationships
+7. **Archive Links**: mt-6b (36px) - breathing room from content
+
+## TYPOGRAPHY HIERARCHY:
+- H1 (PageHeader): heading-1 (largest)
+- H2 (Current Thinking): heading-2 (left-aligned, prominent)
+- H2 (Sections): heading-3 (secondary sections)
+- H3 (Articles): heading-4 (individual pieces)
+
+## REUSABLE COMPONENTS:
+- PageHeader: Standardized header with HR line
+- SectionSeparator: Consistent separators across site
+- CompactList: Archive listings
+
+-->

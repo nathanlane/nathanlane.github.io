@@ -375,7 +375,7 @@ export default {
           "stroke-linejoin": "round !important",
         },
         ".icon-close": {
-          "@apply size-3 aspect-square hover:scale-110 transition-transform":
+          "@apply size-3 aspect-square hover:scale-110":
             {},
           "stroke-width": "1 !important",
           "vector-effect": "non-scaling-stroke",
@@ -383,7 +383,7 @@ export default {
           "stroke-linejoin": "round !important",
         },
         ".icon-rss": {
-          "@apply size-3 aspect-square opacity-70 hover:opacity-100 transition-opacity":
+          "@apply size-3 aspect-square opacity-70 hover:opacity-100":
             {},
           "stroke-width": "1 !important",
           "vector-effect": "non-scaling-stroke",
@@ -391,14 +391,14 @@ export default {
           "stroke-linejoin": "round !important",
         },
         ".icon-toggle": {
-          "@apply size-3 aspect-square transition-all": {},
+          "@apply size-3 aspect-square": {},
           "stroke-width": "1 !important",
           "vector-effect": "non-scaling-stroke",
           "stroke-linecap": "round !important",
           "stroke-linejoin": "round !important",
         },
         ".icon-action": {
-          "@apply size-3 aspect-square hover:text-accent-two transition-colors":
+          "@apply size-3 aspect-square hover:text-accent-two":
             {},
           "stroke-width": "1 !important",
           "vector-effect": "non-scaling-stroke",
@@ -408,7 +408,7 @@ export default {
 
         // Unified Button System - Consistent icon button containers
         ".btn-icon": {
-          "@apply flex items-center justify-center transition-colors": {},
+          "@apply flex items-center justify-center": {},
         },
         ".btn-icon-sm": {
           "@apply btn-icon size-4 bg-transparent hover:bg-color-75 text-accent rounded-lg":

@@ -1,5 +1,125 @@
 # Changelog
 
+## Codebase Simplification - Complete Animation & Interactive Removal (July 17, 2025)
+
+### Phase 1: CSS Transition and Animation Removal
+- **Removed all CSS transitions** except for link underline thickness changes:
+  - Removed from MediaCard, Button, Badge, UpdatedBadge components
+  - Removed from Footer links and utility navigation
+  - Removed from Header mobile drawer
+  - Removed from Tailwind icon classes (icon-close, icon-rss, icon-toggle, icon-action, btn-icon)
+  - Removed from page-level transitions (about.astro, posts/archive.astro, posts/index.astro)
+  - Removed from all typography components (Sidenote, Asterism, DocumentSection, etc.)
+- **Simplified hover states**: Kept color changes and underlines but removed smooth transitions
+- **Total impact**: ~50+ transition properties removed across 20+ files
+
+### Phase 2: Sticky and Fixed Positioning Removal
+- **Removed sticky positioning**:
+  - ThemeToggle component (was sticky top-0)
+  - Archive page year headers (was sticky top-0 with z-10)
+- **Removed fixed positioning**:
+  - Notes page header overlay (removed entire fixed header div)
+  - Series page header overlay (removed entire fixed header div)
+  - Series layout mobile FAB button (changed from fixed to absolute)
+  - Essay TOC positioning (changed from fixed centered to absolute top)
+- **Kept mobile drawer fixed**: Navigation drawer remains fixed for functionality
+
+### Phase 3: Modal and Overlay Compliance
+- **No modals found**: No popups, lightboxes, or toast notifications in codebase
+- **No dropdowns**: Only mobile navigation drawer exists (necessary for mobile UX)
+- **Mobile drawer simplified**: Removed transition animations, instant show/hide
+
+### Allowed Exceptions Verified
+- **Code blocks**: Copy functionality remains (allowed exception)
+- **Footnotes**: Not implemented in current codebase
+- **Margin notes**: Not implemented in current codebase
+- **Footer content**: All links and content remain functional
+- **Link underlines**: Subtle thickness changes on hover preserved
+
+### Build Verification
+- **Successful build**: 185 pages built without errors
+- **No JavaScript errors**: All interactive elements functional
+- **Cleaner codebase**: Typography-driven hierarchy without visual effects
+
+### Impact Summary
+- **Performance**: No CPU cycles on animations or transitions
+- **Accessibility**: Better for users with motion sensitivity
+- **Maintainability**: Simpler CSS with fewer browser quirks
+- **Visual clarity**: Pure typography-driven design aesthetic
+
+## JavaScript Optimization & Editorial Reference Updates (July 17, 2025)
+
+### Phase 1: Superfluous JavaScript Removal
+- **Removed commented-out navigation code** from Header.astro (24 lines)
+- **Removed all console statements** from production code
+- **Deleted unused panel toggle scripts** that targeted non-existent elements
+- **Cleaned up dead code** from BlogPost and Series layouts
+- **Total impact**: ~80 lines of unnecessary JavaScript removed
+
+### Phase 2: Panel Toggle Consolidation
+- **Created reusable TypeScript utility** (`src/utils/panelToggle.ts`):
+  - Configuration-based initialization with interface
+  - Supports responsive breakpoints (md/lg)
+  - Handles multiple toggle buttons (desktop/mobile)
+  - Single source of truth for panel behavior
+- **Replaced duplicate code** in BlogPost.astro and Series.astro:
+  - Removed ~236 lines of duplicate panel toggle JavaScript
+  - Replaced with single utility function call
+  - Maintained all existing functionality
+- **Type safety**: Added TypeScript interface for configuration
+
+### Phase 3: Editorial Reference Updates
+- **Removed "Craig Mod" mentions from production code**:
+  - BlogPost.astro: Changed "Craig Mod-inspired essay layout" to "Essay layout with editorial aesthetic"
+  - global.css: Changed "Craig Mod-inspired Essay Layout" to "Editorial Essay Layout"  
+  - Asterism.astro: Changed "Craig Mod's editorial style" to "Editorial style section break"
+- **Preserved in documentation**: All references kept in documentation files for historical context
+- **Maintained design aesthetic**: No visual changes, only text updates
+
+### Documentation Updates
+- **Created comprehensive BLOG_AND_WRITING_GUIDE.md** combining:
+  - Complete system architecture documentation
+  - Content collections and routing details
+  - Visual design principles from original guide
+  - Technical implementation details
+  - Troubleshooting and best practices
+- **Updated CLAUDE.md** with panel toggle utility documentation
+- **Proper dates**: All changelog entries now use correct date (July 17, 2025)
+
+### Impact
+- **Code reduction**: ~316 lines of JavaScript removed/consolidated
+- **Better maintainability**: Single utility for all panel toggles
+- **Type safety**: TypeScript configuration interface
+- **Cleaner codebase**: No commented code or console statements
+- **Professional references**: Editorial terminology without specific attributions
+
+## Comprehensive Blog & Writing Documentation (July 17, 2025)
+
+### Documentation Created
+- **New Guide**: `BLOG_AND_WRITING_GUIDE.md` - Complete system documentation
+  - System architecture overview with content collections
+  - Detailed routing and page structure
+  - Content discovery methods and navigation
+  - Technical implementation details
+  - Combines aesthetic guide with system documentation
+  - Comprehensive troubleshooting section
+  - Best practices for content creation and SEO
+
+### Content Covered
+- **Content Collections**: All 8 collection types documented
+- **Blog System**: Routes, data management, organization features
+- **Writing System**: Separate collection with unique features
+- **Navigation**: Multiple discovery paths and browse methods
+- **Advanced Features**: Series, TOC, WebMentions, custom components
+- **Technical Details**: Build process, performance, SEO implementation
+- **Visual Design**: Craig Mod-inspired typography and spacing
+
+### Purpose
+- Provides complete reference for content creators and developers
+- Documents system architecture for maintenance
+- Ensures consistent content creation practices
+- Facilitates onboarding for new contributors
+
 ## Homepage Redesign: Document-Centric Transformation (January 2025)
 
 ### Complete Visual & Structural Overhaul
