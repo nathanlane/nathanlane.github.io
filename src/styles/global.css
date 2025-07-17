@@ -360,6 +360,12 @@
     --space-minor-third: 2.25rem; /* 36px - Minor third interval */
     --space-perfect-fourth: 1rem; /* 16px - Perfect fourth scaled */
 
+    /* Reading Measure - Single Source of Truth */
+    --measure-narrow: 45ch; /* Sidebars, narrow columns */
+    --measure-base: 75ch; /* Optimal for body text, document layouts */
+    --measure-wide: 85ch; /* Wide layouts, technical content */
+    --measure-full: none; /* Full-width content */
+
     /* Spacing Scale - Grid Aligned */
     --space-1: calc(var(--grid-unit) * 1); /* 6px - hairline */
     --space-2: calc(var(--grid-unit) * 2); /* 12px - tight */
@@ -1356,7 +1362,7 @@
 
   /* Craig Mod-inspired Essay Layout */
   .essay-wrapper {
-    max-width: 65ch;
+    	max-width: var(--measure-base);
     margin: 0 auto;
     padding: var(--space-8) var(--space-4); /* 48px 24px */
     position: relative;

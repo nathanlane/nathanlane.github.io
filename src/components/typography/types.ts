@@ -77,7 +77,7 @@ export interface TypographyConfig {
 export const defaultTypographyConfig: TypographyConfig = {
   baseFontSize: "var(--step-0)",
   baseLineHeight: 1.6,
-  contentWidth: "65ch",
+  contentWidth: "var(--measure-base)",
   spacingScale: {
     "3xs": "var(--space-3xs)",
     "2xs": "var(--space-2xs)",

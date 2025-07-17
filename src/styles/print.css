@@ -13,7 +13,7 @@
   body {
     font-size: 12pt;
     line-height: 1.4; /* Tighter for print */
-    max-width: 65ch; /* Optimal line length for print */
+    max-width: var(--measure-base); /* Optimal line length for print */
     margin: 0 auto;
     padding: 1in; /* Standard print margins */
   }

@@ -638,7 +638,7 @@ export default {
         "4xl": "54rem", // !!! // default 56rem (896px)
         "5xl": "64rem", // default 64rem (1024px)
         "6xl": "76rem", // !!! // default 72rem (1152px)
-        prose: "65ch", // Hochuli: optimal 60-70ch line length
+        prose: "var(--measure-base)", // Single source of truth for reading measure
       },
       // GENERATED FROM Utopia step-map
       fontSize: {
