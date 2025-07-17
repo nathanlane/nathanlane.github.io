@@ -151,6 +151,48 @@ Every component should:
 - Minimal specificity for easy overrides
 - Efficient cascade usage
 
+## Phase 6: Grid Alignment Refinement (January 17, 2025)
+
+### Goals Achieved
+- ✅ Perfect alignment of all components to 6px baseline grid
+- ✅ Visual baseline grid test class for development
+- ✅ Typography quick wins (letter-spacing utilities)
+- ✅ Complete prose spacing refactor
+
+### Key Changes
+
+#### Visual Development Tools
+- Added `.show-baseline` class for 24px grid visualization
+- Creates horizontal lines every 24px for vertical rhythm testing
+- Can be applied to `<body>` tag during development
+
+#### Typography Enhancements
+- Added letter-spacing utilities:
+  - `tightest`: -0.02em
+  - `tighter`: -0.015em
+  - `wideUpper`: 0.05em
+- Updated nav-link letter-spacing to 0.05em
+- Applied -0.015em letter-spacing to heading-1
+
+#### Component Updates
+All components now use grid-aligned spacing:
+- Comments.astro: `gap-x-5` → `gap-x-5b`, `h-12 w-12` → `h-8b w-8b`
+- Likes.astro: `ps-2` → `ps-2b`, `-ms-2` → `-ms-2b`
+- PostSearch.astro: `right-3` → `right-3b`, `w-5 h-5` → `w-3b h-3b`
+- TOC.astro: `top-2 right-2` → `top-2b right-2b`
+- SkipLink.astro: `focus:start-1 focus:top-1.5` → `focus:start-1b focus:top-2b`
+- ResearchCard.astro: `gap-1` → `gap-1b`, `h-3 w-3` → `h-2b w-2b`
+
+#### Layout Refinements
+- Footer.astro: All spacing now uses semantic tokens (--space-s, --space-l)
+- Prose plugin: Updated to use grid-aligned CSS variables
+- Verified negative margins are intentional for hover effects
+
+### Grid System Reference
+- **Unit**: 6px (`--grid-unit: 0.375rem`)
+- **Baseline**: 24px (`--baseline: 1.5rem`)
+- **Notation**: `*b` (1b = 6px, 4b = 24px, etc.)
+
 ## Future Enhancements
 
 ### Planned Improvements
