@@ -153,21 +153,26 @@ export default {
           fontSize: "var(--step-5)",
           "scroll-margin-top": "4rem", // For anchor links
           lineHeight: "1.25",
-          fontWeight: "400",
-          fontVariationSettings: '"opsz" 72, "wght" 400',
-          letterSpacing: "-0.03em",
+          fontWeight: "375", // Lighter = more elegant, prominent
+          fontVariationSettings: '"opsz" 72, "wght" 375',
+          letterSpacing: "-0.025em", // Refined tracking for editorial feel
           // Professional polish with OpenType features
-          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "ss01" 1',
+          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
           // Subtle text enhancement
           textShadow: "0 0 1px rgba(0, 0, 0, 0.1)",
           "@media (max-width: 640px)": {
-            fontVariationSettings: '"opsz" 48, "wght" 400',
-            letterSpacing: "-0.025em",
+            fontVariationSettings: '"opsz" 48, "wght" 400', // Slightly heavier on mobile
+            letterSpacing: "-0.02em",
+          },
+          // High-DPI displays: Can go lighter
+          "@media (-webkit-min-device-pixel-ratio: 2)": {
+            fontVariationSettings: '"opsz" 72, "wght" 350',
+            letterSpacing: "-0.03em",
           },
           // Dark mode optimizations
           ":root[data-theme='dark'] &": {
-            fontWeight: "375",
-            fontVariationSettings: '"opsz" 72, "wght" 375',
+            fontWeight: "400", // +25 weight units for dark mode
+            fontVariationSettings: '"opsz" 72, "wght" 400',
             opacity: "0.95",
             textShadow: "0 0 2px rgba(255, 255, 255, 0.05)",
             "@media (max-width: 640px)": {
@@ -180,22 +185,27 @@ export default {
           fontSize: "var(--step-4)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.3",
-          fontWeight: "400",
-          fontVariationSettings: '"opsz" 52, "wght" 400',
+          fontWeight: "425", // Better distinction from H1
+          fontVariationSettings: '"opsz" 60, "wght" 425', // Enhanced optical size
           letterSpacing: "-0.02em",
           // Enhanced OpenType features for section headers
-          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "ss02" 1',
+          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
           textShadow: "0 0 1px rgba(0, 0, 0, 0.08)",
           "@media (max-width: 640px)": {
-            fontVariationSettings: '"opsz" 36, "wght" 475',
+            fontVariationSettings: '"opsz" 40, "wght" 450', // Mobile optimization
+          },
+          // High-DPI displays: Can go lighter
+          "@media (-webkit-min-device-pixel-ratio: 2)": {
+            fontVariationSettings: '"opsz" 60, "wght" 400',
+            letterSpacing: "-0.025em",
           },
           ":root[data-theme='dark'] &": {
-            fontWeight: "450",
-            fontVariationSettings: '"opsz" 52, "wght" 450',
+            fontWeight: "450", // +25 weight units for dark mode
+            fontVariationSettings: '"opsz" 60, "wght" 450',
             opacity: "0.93",
             textShadow: "0 0 1px rgba(255, 255, 255, 0.04)",
             "@media (max-width: 640px)": {
-              fontVariationSettings: '"opsz" 36, "wght" 450',
+              fontVariationSettings: '"opsz" 40, "wght" 475',
             },
           },
         },
@@ -204,22 +214,26 @@ export default {
           fontSize: "var(--step-3)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.35",
-          fontWeight: "500",
-          fontVariationSettings: '"opsz" 36, "wght" 500',
+          fontWeight: "475", // Smoother progression from H2
+          fontVariationSettings: '"opsz" 48, "wght" 475', // Enhanced optical size
           letterSpacing: "-0.015em",
-          // Subsection header refinement
-          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1',
+          // Subsection header refinement with enhanced features
+          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
           textShadow: "0 0 1px rgba(0, 0, 0, 0.06)",
           "@media (max-width: 640px)": {
-            fontVariationSettings: '"opsz" 28, "wght" 500',
+            fontVariationSettings: '"opsz" 32, "wght" 500', // Mobile optimization
+          },
+          // High-DPI displays: Can go lighter
+          "@media (-webkit-min-device-pixel-ratio: 2)": {
+            fontVariationSettings: '"opsz" 48, "wght" 450',
           },
           ":root[data-theme='dark'] &": {
-            fontWeight: "475",
-            fontVariationSettings: '"opsz" 36, "wght" 475',
+            fontWeight: "500", // +25 weight units for dark mode
+            fontVariationSettings: '"opsz" 48, "wght" 500',
             opacity: "0.92",
             textShadow: "0 0 1px rgba(255, 255, 255, 0.03)",
             "@media (max-width: 640px)": {
-              fontVariationSettings: '"opsz" 28, "wght" 475',
+              fontVariationSettings: '"opsz" 32, "wght" 525',
             },
           },
         },
@@ -228,22 +242,22 @@ export default {
           fontSize: "var(--step-2)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.4",
-          fontWeight: "600",
-          fontVariationSettings: '"opsz" 28, "wght" 600',
+          fontWeight: "525", // Reduce visual heaviness
+          fontVariationSettings: '"opsz" 36, "wght" 525', // Enhanced optical size
           letterSpacing: "-0.01em",
-          // Detail header optimization
-          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "ss03" 1',
+          // Detail header optimization - disable ligatures at smaller sizes
+          fontFeatureSettings: '"kern" 1, "liga" 0, "clig" 0, "calt" 1, "lnum" 1',
           textShadow: "0 0 1px rgba(0, 0, 0, 0.04)",
           "@media (max-width: 640px)": {
-            fontVariationSettings: '"opsz" 24, "wght" 525',
+            fontVariationSettings: '"opsz" 28, "wght" 550', // Mobile optimization
           },
           ":root[data-theme='dark'] &": {
-            fontWeight: "500",
-            fontVariationSettings: '"opsz" 28, "wght" 500',
+            fontWeight: "550", // +25 weight units for dark mode
+            fontVariationSettings: '"opsz" 36, "wght" 550',
             opacity: "0.90",
             textShadow: "0 0 1px rgba(255, 255, 255, 0.02)",
             "@media (max-width: 640px)": {
-              fontVariationSettings: '"opsz" 24, "wght" 500',
+              fontVariationSettings: '"opsz" 28, "wght" 575',
             },
           },
         },
@@ -252,22 +266,22 @@ export default {
           fontSize: "var(--step-1)",
           "scroll-margin-top": "4rem",
           lineHeight: "1.5",
-          fontWeight: "700",
-          fontVariationSettings: '"opsz" 24, "wght" 700',
-          letterSpacing: "0",
-          // Fine detail header
-          fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1',
+          fontWeight: "575", // More readable at small sizes
+          fontVariationSettings: '"opsz" 28, "wght" 575', // Enhanced optical size
+          letterSpacing: "-0.005em", // Subtle negative tracking
+          // Fine detail header - disable ligatures at small sizes
+          fontFeatureSettings: '"kern" 1, "liga" 0, "clig" 0, "calt" 1, "lnum" 1',
           textShadow: "0 0 1px rgba(0, 0, 0, 0.03)",
           "@media (max-width: 640px)": {
-            fontVariationSettings: '"opsz" 20, "wght" 550',
+            fontVariationSettings: '"opsz" 24, "wght" 600', // Mobile optimization
           },
           ":root[data-theme='dark'] &": {
-            fontWeight: "525",
-            fontVariationSettings: '"opsz" 24, "wght" 525',
+            fontWeight: "600", // +25 weight units for dark mode
+            fontVariationSettings: '"opsz" 28, "wght" 600',
             opacity: "0.90",
             textShadow: "0 0 1px rgba(255, 255, 255, 0.015)",
             "@media (max-width: 640px)": {
-              fontVariationSettings: '"opsz" 20, "wght" 525',
+              fontVariationSettings: '"opsz" 24, "wght" 625',
             },
           },
         },

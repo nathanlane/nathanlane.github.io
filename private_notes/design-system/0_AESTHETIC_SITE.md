@@ -2,12 +2,12 @@
 
 Give the model everything it needs to “see” both the current state and your goals:
 
-## 1.	Code or URL: 
+## 1.   Code or URL: 
 
 /@nathanlane.github.io
 Current codebase
 
-## 2.	Font stack: 
+## 2.   Font stack: 
 
 ### Newsreader Header + IBM Plex Sans Body:
 
@@ -21,22 +21,45 @@ Current codebase
 ## 3. Design intent
 
 ### A. Purpose: 
-Academic research portfolio and digital garden	•	Core identity: typographic-forward, academic-technologist, thoughtful, document-centered, minimalist
+Academic research portfolio and digital garden  •   Core identity: typographic-forward, academic-technologist, thoughtful, document-centered, minimalist
 
 ### B. Keywords: 
 ```document-centric, text-first, minimal, calm-editorial, typographic, content-first, indie-research-lab, technologist/diy, accessible, monochrome, handcrafted```
 
-### Tone & voice: 
+### C. Tone & voice: 
 Thoughtful, academic but approachable, DIY-craft
 
-### Visual palette: 
-monochrome, serif/sans-serif contrast, optimized typographic, generous whitespace, tiny accent icons, minimize cards/boxes
+### D. Visual palette: 
+monochrome, serif/sans-serif contrast, optimized typography, generous whitespace, tiny accent icons, minimize cards/boxes
 
-## Elevator pitch:
+### E. Elevator pitch:
 “An indie economist-technologist running a one-person research lab, publishing document-centric, minimal, typographic-first interface that feels more like a quiet, handcrafted typographic than a modern website.”
 
-## 4. Modular scale rules and baseline grid:
+## 4. Style Guide
 
+### Use the grid and systematically: 
+* Additions and edits should align with the grid, hierarchy, and the design philosophy
+
+### Content hierarchy through typography
+* Let typography and space create visual hierarchy, use minimal boxes, cards, or containers.
+* Generous whitespace as the primary design element
+* Type size and weight define importance, not decor or borders.
+* Single column reading optimized for focus and comprehension
+
+### Navigation* Navigation philosophy: Minimal, unobtrusive navigation that doesn't compete with content. Use simple text links. Opt for clear information architecture over hamburger menus or complex navigation patterns.
+* Inline text links within content flow
+* Minimal header: Site name + 2-3 essential links
+* No hamburger menus - everything is visible
+* Breadcrumbs for deep content only
+
+### Spatial design: * Generous margins and mathematical proportions for text blocks create breathing room. These sites treat whitespace as an active design element rather than empty space to be filled.
+
+### Typography choices:* Body text to enhance readability, and clean sans-serif fonts for headings. 
+* Line heights typically range from 1.2-1.5, with line lengths optimized around 50-75 characters for comfortable reading.
+* Use fluid typography.
+
+
+## 5. Modular scale rules and baseline grid:
 Modular Scale & Baseline Grid:
 
 - Type-ratio: 1.25 (Major Third) across nine steps (–2…6), e.g.  
@@ -47,7 +70,10 @@ Modular Scale & Baseline Grid:
 
 Read file: private_notes/design-system/DESIGN_SYSTEM.md
 
-## 5. Design Stack and Fluid-type plugin settings
+
+## 6. Design Stack and Fluid-type plugin settings
+
+### X. Keep it simple and minimize heavy dependencies.
 
 ### A. Design Stack
 
@@ -79,13 +105,32 @@ fluidType({
 })
 ```
 
-## 6. Inspiration: 
+## 7. Inspiration: 
 
-  1. Websites: - https://alexanderobenauer.com/- https://craigmod.com/essays/- https://practicaltypography.com/- https://ia.net/writer- https://maggieappleton.com/garden-history- https://linear.app/- https://gwern.net/
-  2. Typographers and designers- Tim Brown, Jost Hochuli, Bringhurst, Swiss Modernism, Edward Tufte
+### A. Websites:
+https://craigmod.comhttps://alexanderobenauer.com/
+https://craigmod.com/essays/
+https://practicaltypography.com/
+https://amandapinsker.com/
+https://maggieappleton.com/
+https://gwern.net/
+https://salman.io/
+https://linear.app/
+https://jasonsantamaria.com/
+https://gwern.net/design
 
-## 7. Constraints:
 
- 1. Must follow the baseline grid.
- 2. Changes must should within the grid system and typographic hierarchy
- 3.  Swapping the primary font is off-limits.
+ ### B. Typographers and designers:
+Tim Brown, Jost Hochuli, Bringhurst, Swiss Modernism, Edward Tufte
+
+
+## Performance Considerations
+
+* USe a font loading strategy
+
+
+## 9. Constraints:
+
+1. Changes must should be within the grid system and typographic hierarchy
+2. Follow the color scheme first.
+3. Swapping the primary font is off-limits.

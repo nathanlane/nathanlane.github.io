@@ -241,12 +241,6 @@ h2 a:focus-visible {
 3. Verify subset coverage
 4. Test with slow 3G
 
-#### User Testing
-1. A/B test comprehension
-2. Survey aesthetic preference
-3. Monitor engagement metrics
-4. Accessibility user testing
-
 ## Implementation Timeline
 
 ### Week 1: Foundation
