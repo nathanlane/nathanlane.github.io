@@ -391,3 +391,46 @@ Spacing utilities maintain compatibility:
   - Reduced padding from `px-4` to `px-3`
   - Changed from `rounded-lg` to `rounded-md`
   - Added `text-sm` for consistent sizing
+
+## January 17, 2025 - Typography System Grid Alignment
+
+### Phase 1: Global Layout and Prose Refinements
+- **Visual Baseline Grid Test Class**
+  - Added `.show-baseline` class to visualize 24px grid for development
+  - CSS creates repeating horizontal lines every 24px
+  - Can be applied to `<body>` tag for testing vertical rhythm
+- **Typography Quick Wins**
+  - Added missing letter-spacing utilities: `tightest` (-0.02em), `tighter` (-0.015em), `wideUpper` (0.05em)
+  - Updated nav-link letter-spacing to 0.05em for better readability
+  - Added heading-1 letter-spacing of -0.015em for tighter display type
+- **Prose Spacing Refactor**
+  - Updated @tailwindcss/typography plugin to use grid-aligned CSS variables
+  - Replaced hardcoded rem values with semantic spacing tokens
+  - All prose elements now align to 6px baseline grid
+
+### Phase 2: Component-Level Spacing Corrections
+- **Grid-Aligned Component Updates**
+  - Comments.astro: `gap-x-5` → `gap-x-5b`, `h-12 w-12` → `h-8b w-8b`
+  - Likes.astro: `ps-2` → `ps-2b`, `-ms-2` → `-ms-2b`, `h-12 w-12` → `h-8b w-8b`
+  - PostSearch.astro: `right-3` → `right-3b`, `w-5 h-5` → `w-3b h-3b`
+  - TOC.astro: `top-2 right-2` → `top-2b right-2b`
+  - SkipLink.astro: `focus:start-1 focus:top-1.5` → `focus:start-1b focus:top-2b`
+  - ResearchCard.astro: `gap-1` → `gap-1b`, `h-3 w-3` → `h-2b w-2b`
+- **Layout Spacing Updates**
+  - Footer.astro: Replaced all hardcoded spacing values with semantic tokens
+  - Updated margins, padding, and gaps to use CSS variables (--space-s, --space-l, etc.)
+
+### Phase 3: Fine-tuning and Edge Cases
+- **Icon/Text Alignment Review**
+  - Verified MediaCard and other components already using grid-aligned values
+  - Confirmed icon sizes properly aligned (w-2b, h-2b, w-3b, h-3b, etc.)
+- **Negative Margin Evaluation**
+  - Reviewed usage in MediaCard and about page
+  - Confirmed negative margins are intentional for hover effects
+  - No changes needed as they serve specific design purposes
+
+### Technical Details
+- **Grid System**: 6px unit (`--grid-unit: 0.375rem`), 24px baseline (`--baseline: 1.5rem`)
+- **Spacing Tokens**: All components now use *b notation (1b = 6px, 4b = 24px, etc.)
+- **Build Status**: Successfully built with all changes, no errors
+- **Impact**: Perfect vertical rhythm maintained throughout the entire site

@@ -11,6 +11,13 @@ tags: ["documentation", "design-systems", "typography", "css"]
 
 ## Recent Updates
 
+### Typography System Grid Alignment (January 17, 2025)
+Complete grid alignment of all typography and spacing elements:
+- **Visual Development Tools**: Added `.show-baseline` class for 24px grid visualization
+- **Typography Quick Wins**: New letter-spacing utilities (tightest, tighter, wideUpper)
+- **Component Updates**: All components now use grid-aligned *b tokens
+- **Prose Spacing**: @tailwindcss/typography plugin refactored with CSS variables
+
 ### Baseline Grid Refactoring (July 14, 2025)
 All core layout components have been refactored to strictly enforce the 6px baseline grid:
 - **Header**: All spacing now uses grid-aligned values (px-4b, gap-5b, h-5b)
