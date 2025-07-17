@@ -193,6 +193,49 @@ All components now use grid-aligned spacing:
 - **Baseline**: 24px (`--baseline: 1.5rem`)
 - **Notation**: `*b` (1b = 6px, 4b = 24px, etc.)
 
+## Phase 7: Optical Typography Refinements (January 17, 2025)
+
+### Goals Achieved
+- ✅ Enhanced body text readability with micro-adjustments
+- ✅ Optimized dark mode for reduced eye strain
+- ✅ Created advanced typography utilities
+- ✅ Maintained perfect grid alignment
+
+### Body Text Refinements
+
+#### Letter-Spacing Enhancement
+- Applied subtle 0.005em letter-spacing to body text
+- Improves word-shape recognition and reduces reading fatigue
+- Particularly effective for long-form content
+
+#### Dark Mode Optimization
+- Text color: `hsl(30deg 10% 95% / 0.95)` - slightly off-white
+- Font weight: 380 (reduced from 400) to compensate for halation
+- Results in more comfortable extended reading sessions
+
+### UI Text Refinements
+
+#### New Letter-Spacing Utilities
+```css
+letterSpacing: {
+  nav: "0.05em",           // Navigation elements
+  "caps-generous": "0.075em", // Generous uppercase
+  "caps-loose": "0.1em",      // Maximum uppercase clarity
+}
+```
+
+#### True Small Caps
+Created `.text-small-caps` utility class:
+- Uses proper OpenType features (`smcp`, `c2sc`)
+- Includes 0.075em letter-spacing
+- More refined than fake small caps
+
+### Technical Details
+- All uppercase text components verified for proper spacing
+- OpenType features fully utilized (`kern`, `liga`, `calt`, `ss01`)
+- Variable font capabilities preserved
+- Zero impact on baseline grid alignment
+
 ## Future Enhancements
 
 ### Planned Improvements
