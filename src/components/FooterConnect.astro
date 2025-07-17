@@ -54,11 +54,11 @@ const allLinks: AllLinkTypes[] = [emailLink, cvLinkObj, ...socialLinks.filter(li
 
 <div class={`mt-8b pt-6b border-t border-special-light ${className}`}>
 	<h3 class="heading-3 mb-4b">{title}</h3>
-	<ul class="flex flex-wrap gap-6 list-none">
+	<ul class="flex flex-wrap gap-6b list-none">
 		{allLinks.map((link) => (
 			<li>
 				<a
-					class="flex items-center gap-2 text-xs hover:text-accent-base transition-colors duration-200"
+					class="flex items-center gap-2b text-xs hover:text-accent-base transition-colors duration-200"
 					href={link.link}
 					rel={'isEmail' in link || 'isCV' in link ? "" : `noreferrer ${'isWebmention' in link && link.isWebmention ? "me authn" : ""}`}
 					target={'isEmail' in link || 'isCV' in link ? "_self" : "_blank"}
