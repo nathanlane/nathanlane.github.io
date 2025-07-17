@@ -54,19 +54,29 @@ All heading classes include built-in spacing optimized for readability:
 
 ### Primary Text Classes
 
-| Class | Font Size | Line Height | Use Case |
-|-------|-----------|-------------|----------|
-| `.text-body` | `text-0` (0.94–1.06rem) | 1.6 | Primary body text |
-| `.text-body-sm` | `text--1` (0.80–0.90rem) | 1.5 | Secondary text, captions |
-| `.text-lead` | `text-1` (1.17–1.33rem) | 1.45 | Introduction paragraphs |
+| Class | Font Size | Line Height | Font Weight | Use Case |
+|-------|-----------|-------------|-------------|----------|
+| `.text-body` | `text-0` (0.94–1.06rem) | 1.6 | 380 (365 dark) | Primary body text |
+| `.text-body-sm` | `text--1` (0.80–0.90rem) | 1.5 | 410 | Secondary text, captions |
+| `.text-lead` | `text-1` (1.17–1.33rem) | 1.45 | 375 | Introduction paragraphs |
 
 ### Specialized Text Classes
 
-| Class | Font Size | Style | Use Case |
-|-------|-----------|-------|----------|
-| `.text-meta` | `text--1` | Uppercase, letter-spacing | Metadata, dates, tags |
-| `.text-caption` | `text--1` | Italic, light color | Image captions, footnotes |
-| `.text-quote` | `text-1` | Serif, italic | Pull quotes, blockquotes |
+| Class | Font Size | Style | Font Weight | Use Case |
+|-------|-----------|-------|-------------|----------|
+| `.text-meta` | `text--1` | Uppercase, letter-spacing | 425 | Metadata, dates, tags |
+| `.text-caption` | `text--1` | Italic, light color | 400 | Image captions, footnotes |
+| `.text-quote` | `text-1` | Serif, italic | 400 | Pull quotes, blockquotes |
+
+### Typography Optimization Features
+
+**IBM Plex Sans body text includes:**
+- **Optimized weights**: Lighter weights (380/365) reduce reading fatigue
+- **Enhanced letter-spacing**: 0.008em for improved word recognition  
+- **OpenType features**: Old-style figures (`onum`), kerning, ligatures
+- **Context-aware adjustments**: Responsive tracking based on content width
+- **High-DPI optimization**: Lighter weights on sharp displays
+- **Variable font support**: Progressive enhancement with smooth weight transitions
 
 ## Reading Measure Guidelines
 
