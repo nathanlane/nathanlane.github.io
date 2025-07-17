@@ -1,0 +1,90 @@
+---
+// Asterism component for major transitions in essays
+// Follows Craig Mod's editorial style with refined typography
+---
+
+<div class="asterism">
+  <slot>⁂</slot>
+</div>
+
+<style>
+  .asterism {
+    text-align: center;
+    margin: var(--space-16b) 0; /* 96px - more generous spacing */
+    font-size: var(--step-2); /* 23.4-26.6px - slightly larger */
+    line-height: 1;
+    color: var(--theme-color-400);
+    font-family: var(--font-serif);
+    font-weight: 300; /* Lighter weight for elegance */
+    letter-spacing: 0.2em;
+    position: relative;
+    
+    /* Subtle text shadow for depth */
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+    
+    /* Optical alignment - center the symbol perfectly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--space-8b); /* 48px fixed height for consistent spacing */
+  }
+
+  /* Alternative three-asterisk pattern when needed */
+  .asterism[data-variant="triple"] {
+    letter-spacing: 0.75em;
+    font-size: var(--step-1); /* 18.8-21.3px */
+    font-weight: 400;
+  }
+
+  /* Subtle hover state for interactive feel */
+  .asterism:hover {
+    color: var(--theme-color-500);
+    transition: color 0.2s ease;
+  }
+
+  /* Dark mode adjustments */
+  :root[data-theme="dark"] .asterism {
+    color: var(--theme-color-500);
+    text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+  }
+
+  :root[data-theme="dark"] .asterism:hover {
+    color: var(--theme-color-400);
+  }
+
+  /* High contrast mode accessibility */
+  @media (prefers-contrast: high) {
+    .asterism {
+      color: var(--theme-color-600);
+      text-shadow: none;
+    }
+    
+    :root[data-theme="dark"] .asterism {
+      color: var(--theme-color-300);
+    }
+  }
+
+  /* Reduced motion respect */
+  @media (prefers-reduced-motion: reduce) {
+    .asterism {
+      transition: none;
+    }
+  }
+
+  /* Fine-tuned responsive scaling */
+  @media (max-width: 640px) {
+    .asterism {
+      margin: var(--space-12b) 0; /* 72px on mobile */
+      font-size: var(--step-1); /* Slightly smaller on mobile */
+    }
+  }
+
+  /* Print optimization */
+  @media print {
+    .asterism {
+      color: #666;
+      text-shadow: none;
+      margin: var(--space-8b) 0;
+    }
+  }
+</style> 

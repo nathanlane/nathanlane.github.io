@@ -130,3 +130,59 @@ bio:
 - [Homepage Configuration Guide](./HOMEPAGE_CONFIGURATION.md)
 - [Typography System](./TYPOGRAPHY_SYSTEM.md)
 - [Design System Overview](./DESIGN_SYSTEM.md) 
+
+## Asterism Component
+
+The Asterism component provides elegant section breaks for essays and long-form content, following Craig Mod's editorial aesthetic.
+
+### Basic Usage
+
+```astro
+---
+import Asterism from "@/components/typography/Asterism.astro";
+---
+
+Some paragraph content...
+
+<Asterism />
+
+New major section begins here...
+```
+
+### Advanced Usage
+
+**Default (Single Asterism Symbol):**
+```astro
+<Asterism />  <!-- Renders: ⁂ -->
+```
+
+**Triple Asterisk Variant:**
+```astro
+<Asterism data-variant="triple">* * *</Asterism>
+```
+
+**Custom Content:**
+```astro
+<Asterism>• • •</Asterism>
+<Asterism>§</Asterism>
+```
+
+### Design Features
+
+- **Perfect Optical Centering**: Uses flexbox for precise alignment
+- **Grid-Aligned Spacing**: 96px margins (72px on mobile) following baseline grid
+- **Responsive Typography**: Scales appropriately across devices
+- **Dark Mode Support**: Automatic color adjustments
+- **Accessibility**: High contrast mode support and reduced motion compliance
+- **Print Optimization**: Clean appearance in print media
+- **Subtle Interactivity**: Gentle hover state for engagement
+
+### Typography Details
+
+- **Font**: Newsreader (serif) for editorial feel
+- **Size**: `--step-2` (23.4-26.6px desktop scale)
+- **Weight**: 300 (light) for elegant appearance
+- **Color**: `--theme-color-400` with subtle text shadow for depth
+- **Letter Spacing**: 0.2em for the single symbol, 0.75em for triple variant
+
+Use asterisms to mark major transitions, scene changes, or thoughtful pauses in your long-form content. 

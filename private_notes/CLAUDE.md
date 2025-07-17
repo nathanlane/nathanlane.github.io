@@ -249,6 +249,14 @@ When making changes or suggestions:
 - Test with various content lengths
 - Maintain all existing functionality
 
+### Reusable Utilities
+- **Panel Toggle Utility** (`src/utils/panelToggle.ts`):
+  - TypeScript module for managing show/hide panels (TOC, Series, etc.)
+  - Configuration-based initialization with responsive breakpoints
+  - Usage: `initializePanelToggle({ panelId, toggleButtonId, breakpoint, visibleClass })`
+  - Eliminates duplicate JavaScript across layouts
+  - **Why**: DRY principle, type safety, single source of truth for panel behavior
+
 ### Custom MDX Components
 When creating typography MDX components:
 - `<Dropcap>`: Beautiful first letters
@@ -575,6 +583,19 @@ The codebase uses a context-aware link styling system:
 - **Dark Mode**: Off-white text color `hsl(30deg 10% 95% / 0.95)`, reduced font weight (380)
 - **Typography Utilities**: caps-generous (0.075em), caps-loose (0.1em), text-small-caps
 - **OpenType Features**: Full utilization of font capabilities (kern, liga, calt, ss01)
+
+### JavaScript Optimization (July 17, 2025)
+- **Phase 1 - Superfluous Code Removal**:
+  - Removed commented-out navigation menu code (24 lines)
+  - Removed all console.log and console.error statements from production
+  - Deleted scripts that targeted non-existent "buttons-panel" elements
+  - Total: ~80 lines of unnecessary JavaScript removed
+- **Phase 2 - Panel Toggle Consolidation**:
+  - Created reusable `panelToggle.ts` utility with TypeScript configuration
+  - Replaced ~236 lines of duplicate toggle code across BlogPost and Series layouts
+  - Single source of truth for all panel show/hide functionality
+  - Supports responsive breakpoints (md/lg) and visibility classes
+- **Impact**: ~270 lines reduced, cleaner production code, better maintainability
 
 ## Resources
 - [Tailwind Typography Plugin](https://tailwindcss.com/docs/typography-plugin)

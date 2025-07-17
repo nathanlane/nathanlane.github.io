@@ -80,124 +80,27 @@ const { headings } = await render(series);
 </BaseLayout>
 
 <script>
-	const ANIMATION_DURATION = 300;
-	// Get button and panel elements
-	const togglePanelBtn = document.getElementById("toggle-panel");
-	const closePanelBtn = document.getElementById("close-panel");
-	const seriesPanel = document.getElementById("series-panel");
-	const togglePanelMobileBtn = document.getElementById("toggle-panel-mobile");
-
-	// Ensure seriesPanel exists
-	if (!seriesPanel) {
-		throw new Error("series-panel is required");
-	}
-
-	// Function to check if the panel is visible
-	const isPanelVisible = () => {
-		const isScreenLg = window.matchMedia("(min-width: 1024px)").matches; // Large screens
-		return (
-			(isScreenLg && seriesPanel.classList.contains("lg:block")) ||
-			(!isScreenLg && !seriesPanel.classList.contains("hidden"))
-		);
-	};
-
-	// Function to hide the panel
-	const hidePanel = () => {
-		seriesPanel.classList.add("opacity-0", "-translate-x-full");
-		setTimeout(() => {
-			seriesPanel.classList.remove("block", "lg:block");
-			seriesPanel.classList.add("hidden");
-		}, ANIMATION_DURATION);
-	};
-
-	// Function to show the panel
-	const showPanel = () => {
-		seriesPanel.classList.remove("hidden");
-		seriesPanel.classList.add("block", "lg:block");
-		setTimeout(() => {
-			seriesPanel.classList.remove("opacity-0", "-translate-x-full");
-		}, 10);
-	};
-
-	// Common handler for both buttons
-	const togglePanel = () => {
-		if (isPanelVisible()) {
-			hidePanel(); // If visible, hide it
-		} else {
-			showPanel(); // If hidden, show it
-		}
-	};
-
-	// Event handlers for both buttons
-	if (togglePanelBtn) {
-		togglePanelBtn.addEventListener("click", togglePanel);
-	}
-
-	if (togglePanelMobileBtn) {
-		togglePanelMobileBtn.addEventListener("click", togglePanel);
-	}
-
-	if (closePanelBtn) {
-		closePanelBtn.addEventListener("click", hidePanel);
-	}
-</script>
-
-<script>
-	// Get button and panel elements
-	const toggleTocBtn = document.getElementById('toggle-toc');
-	const closeTocBtn = document.getElementById('close-toc');
-	const tocPanel = document.getElementById('toc-panel');
-	const toggleTocMobileBtn = document.getElementById("toggle-toc-mobile");
-
-	// Check for panel existence (required for operation)
-	if (!tocPanel) {
-		throw new Error('toc-panel is required');
-	}
-
-	// Function to check if the table of contents is visible
-	const isTocVisible = () => {
-		const isScreenMd = window.matchMedia("(min-width: 768px)").matches;
-		return (
-			(isScreenMd && tocPanel.classList.contains("md:block")) ||
-			(!isScreenMd && !tocPanel.classList.contains("hidden"))
-		);
-	};
-
-	// Function to hide the panel
-	const hideToc = () => {
-		tocPanel.classList.add('hidden');
-		tocPanel.classList.remove('md:block');
-	};
-
-	// Function to show the panel
-	const showToc = () => {
-		tocPanel.classList.remove('hidden');
-		tocPanel.classList.add('md:block');
-	};
-
-	// Common handler for both buttons
-	const toggleToc = () => {
-		if (isTocVisible()) {
-			hideToc(); // If visible, hide it
-		} else {
-			showToc(); // If hidden, show it
-		}
-	};
+	import { initializePanelToggle } from '@/utils/panelToggle';
 	
-	// Add handler for toggle button
-	if (toggleTocBtn) {
-		toggleTocBtn.addEventListener("click", toggleToc);
-	}
-
-	// Add handler for toggle button
-	if (toggleTocMobileBtn) {
-		toggleTocMobileBtn.addEventListener("click", toggleToc);
-	}
-
-	// Add handler for close button
-	if (closeTocBtn) {
-		closeTocBtn.addEventListener('click', hideToc);
-	}
+	// Initialize Series Panel toggle
+	initializePanelToggle({
+		panelId: 'series-panel',
+		toggleButtonId: 'toggle-panel',
+		mobileToggleButtonId: 'toggle-panel-mobile',
+		closeButtonId: 'close-panel',
+		breakpoint: 'lg',
+		visibleClass: 'lg:block'
+	});
+	
+	// Initialize TOC Panel toggle
+	initializePanelToggle({
+		panelId: 'toc-panel',
+		toggleButtonId: 'toggle-toc',
+		mobileToggleButtonId: 'toggle-toc-mobile',
+		closeButtonId: 'close-toc',
+		breakpoint: 'md',
+		visibleClass: 'md:block'
+	});
 </script>
 
 

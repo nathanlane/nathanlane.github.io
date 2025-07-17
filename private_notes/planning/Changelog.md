@@ -1,8 +1,24 @@
 # Changelog
 
-## JavaScript Optimization - Phase 1 (January 2025)
+## JavaScript Optimization - Phase 1 & 2 (July 17, 2025)
 
-### Removed Superfluous JavaScript
+### Phase 2: Panel Toggle Consolidation
+- **Created reusable panel toggle utility** (`src/utils/panelToggle.ts`):
+  - TypeScript module with configuration-based initialization
+  - Handles both series panel and TOC panel toggles
+  - Supports responsive breakpoints (md/lg)
+  - Single source of truth for toggle logic
+- **Replaced duplicate toggle scripts** in BlogPost.astro and Series.astro:
+  - BlogPost.astro: Reduced from ~116 lines to 22 lines
+  - Series.astro: Reduced from ~120 lines to 22 lines (also removed leftover animation code)
+  - Total reduction: ~192 lines of duplicate code
+- **Benefits**:
+  - DRY principle - no more duplicate logic
+  - Easier maintenance - single file to update
+  - Type-safe with TypeScript interface
+  - Consistent behavior across all panels
+
+### Phase 1: Removed Superfluous JavaScript
 - **Removed commented-out navigation menu code** from BlogPost.astro
   - Deleted 24 lines of unused code that was already commented out
 - **Removed all console.log statements** from production code:
@@ -24,6 +40,14 @@
 - **Cleaner console**: No debug messages in production
 - **Reduced complexity**: Removed code that had no effect
 - **Zero functionality loss**: All removed code was either commented out, debug logs, or targeting non-existent elements
+
+### Combined Impact (Phase 1 & 2)
+- **Total JavaScript reduction**: ~270 lines removed/consolidated
+- **New reusable utility**: 70 lines of type-safe, DRY code
+- **Net reduction**: ~200 lines of JavaScript
+- **Better maintainability**: Single source of truth for panel toggles
+- **Cleaner production**: No console messages, no dead code
+- **Build output**: Successfully generates smaller, cleaner JavaScript bundles
 
 ## IBM Plex Sans Body Font Optimization (July 16 2025)
 
@@ -60,7 +84,7 @@
 - **Performance Optimized**: No additional font files required
 - **Cross-Platform Tested**: Maintains consistency across browsers and devices
 
-## Codebase Simplification - Animation & Visual Effects Removal (January 2025)
+## Codebase Simplification - Animation & Visual Effects Removal (July 17, 2025)
 
 ### Final Animation Cleanup
 - **Removed remaining transitions from homepage-links.css**:
@@ -72,7 +96,7 @@
   - Removed setTimeout delays and ANIMATION_DURATION constant
   - Panels now show/hide instantly without visual transitions
 
-## Animation Removal Summary (January 2025)
+## Animation Removal Summary (July 17, 2025)
 
 ### Phase 1: Component Cleanup
 - **Removed unused NavigationDropdown component** (`/src/components/NavigationDropdown.astro`)
