@@ -70,14 +70,6 @@ const structuredData = [
 		)}
 	</div>
 
-	<button
-		id="to-top-button"
-		class="fixed bottom-space-l right-space-s btn-icon-scroll translate-y-28 transition-all duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 z-50"
-		aria-label="Back to Top"
-		data-show="false"
-	>	
-		<Icon class="icon-base" name="lucide:chevron-up" />
-	</button>
 
 	<!-- Series button for mobile screens -->
 	{seriesId && (
@@ -121,12 +113,7 @@ const structuredData = [
 					const code = pre.querySelector("code")?.textContent;
 					if (code) {
 						await navigator.clipboard.writeText(code);
-						buttonText.innerText = "Copied!"; // Change text to "Copied!"
-
-						// After 1.5 seconds, change the text back to "Copy"
-						setTimeout(() => {
-							buttonText.innerText = "Copy";
-						}, 1500);
+						buttonText.innerText = "Copied!";
 					}
 				});
 			}
@@ -270,25 +257,6 @@ const structuredData = [
 </script>
 
 
-<!-- Scroll to top button -->
-<script>
-	const scrollBtn = document.getElementById("to-top-button") as HTMLButtonElement;
-	const targetHeader = document.querySelector("header") as HTMLElement;
-
-	function callback(entries: IntersectionObserverEntry[]) {
-		entries.forEach((entry) => {
-			// Show the scroll to top button when the <header> is out of view
-			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-		});
-	}
-
-	scrollBtn.addEventListener("click", () => {
-		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
-	});
-
-	const observer = new IntersectionObserver(callback);
-	observer.observe(targetHeader);
-</script>
 
 <!-- REQUIRES IMPROVEMENT!!! -->
 <!-- Menu button instead of the main menu -->

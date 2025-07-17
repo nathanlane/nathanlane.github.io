@@ -33,6 +33,7 @@
     "hastscript": "^9.0.0",
     "js-yaml": "^4.1.0",
     "katex": "^0.16.22",
+    "marked": "^16.1.0",
     "mdast-util-directive": "^3.0.0",
     "mdast-util-to-markdown": "^2.1.2",
     "mdast-util-to-string": "^4.0.0",
@@ -51,8 +52,6 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "@biomejs/biome": "^1.9.4",
-    "vite": "^6.0.0",
-    "vitest": "^2.0.0",
     "@iconify-json/hugeicons": "^1.2.3",
     "@iconify-json/solar": "^1.2.2",
     "@resvg/resvg-js": "^2.6.2",
@@ -65,7 +64,9 @@
     "reading-time": "^1.5.0",
     "tailwindcss": "^3.4.17",
     "tailwindcss-fluid-type": "^2.0.7",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vite": "^6.0.0",
+    "vitest": "^2.0.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

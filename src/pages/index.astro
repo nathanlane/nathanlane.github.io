@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import Button from "@/components/Button.astro";
+import BioPanel from "@/components/BioPanel.astro";
 import CompactList from "@/components/CompactList.astro";
 import ContactBox from "@/components/ContactBox.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
@@ -20,7 +21,7 @@ const homepageContent = await getEntry("homepage", "index");
 if (!homepageContent) {
 	throw new Error("Homepage content not found");
 }
-const { hero, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;
+const { hero, bio, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;
 
 // Get content section configs with defaults
 const researchConfig = showcase.contentSections?.research || {
@@ -105,6 +106,11 @@ const allMediaItems = Object.entries(mediaData)
 			</div>
 		</div>
 	</section>
+
+	<!-- Bio Panel -->
+	{bio && (
+		<BioPanel bio={bio} class="mt-16b mb-16b" />
+	)}
 
 	<!-- Current Work & Contact Section -->
 	<section class="mt-2b">

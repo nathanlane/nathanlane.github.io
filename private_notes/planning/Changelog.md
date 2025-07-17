@@ -1,5 +1,52 @@
 # Changelog
 
+## Bio Panel Component Implementation (January 2025)
+
+### New Homepage Bio Panel
+- **Created elegant bio panel component** inspired by Jason Santa Maria and Craig Mod's sites:
+  - Typography-forward design with text as primary element
+  - Minimal decoration following document-centric aesthetic
+  - Clean, editorial feel with generous whitespace
+- **Enhanced typography with larger, more readable font sizes**:
+  - Section title: heading-2 (was heading-3) for stronger presence
+  - Tagline: text-2 (was text-1) for better prominence
+  - Narrative text: text-1 (was text-body) for comfortable reading
+  - Currently items: text-0 (was text-body-sm) for clarity
+  - Affiliations: text-0 (was text--1) for better legibility
+- **Made section title customizable**:
+  - Title can now be changed from "About" to any preferred text
+  - Defaults to "About" if not specified
+  - Examples: "About Me", "Bio", "Background", "My Story"
+- **Content-driven architecture**:
+  - Bio content managed via `src/content/homepage/index.yaml`
+  - Supports markdown in narrative section for links and formatting
+  - Optional sections: tagline, currently working on, affiliations, photo
+- **Responsive design**:
+  - Desktop: Full-width with optimal 65ch reading measure
+  - Mobile: Stacked layout with appropriate spacing
+  - Photo support with display toggle
+- **Typography details**:
+  - Newsreader heading-3 (475 weight) for section title
+  - IBM Plex Sans for body text with generous line-height
+  - Elegant bullet points for "currently" list items
+  - Subtle separators and meta text for affiliations
+- **Easy editing workflow**:
+  - All content in single YAML file
+  - No code changes needed for updates
+  - Markdown support for rich text formatting
+  - Show/hide entire panel by presence of bio section
+
+### Documentation Updates
+- **Created comprehensive Bio Panel Guide** (`BIO_PANEL_GUIDE.md`):
+  - Complete content structure documentation
+  - Usage instructions and customization options
+  - Best practices and troubleshooting tips
+  - Example configurations from minimal to full-featured
+- **Integration with design system**:
+  - Follows established typography and spacing tokens
+  - Maintains baseline grid alignment
+  - Consistent with site's minimal aesthetic
+
 ## Newsreader Phase 2: Enhanced Optical Sizing & Accessibility (January 2025)
 
 ### Enhanced Context-Aware Typography

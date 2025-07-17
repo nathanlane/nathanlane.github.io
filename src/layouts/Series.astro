@@ -66,18 +66,6 @@ const { headings } = await render(series);
 		}
 	</div>
 
-	<div class="left-0 right-12 z-50 ml-auto w-fit md:absolute">
-		<button
-			id="to-top-button"
-			class="fixed bottom-12 flex size-12 text-light translate-y-28 items-center justify-center rounded-full border border-special-lighter bg-bgColor text-4xl shadow-sm transition-all duration-300 hover:text-accent-two hover:shadow-md data-[show=true]:translate-y-0 data-[show=true]:opacity-100"
-			aria-label="Back to Top"
-			data-show="false"
-		>	
-			<span class="absolute inset-0 rounded-full bg-special-light flex items-center justify-center" aria-hidden="true">
-				<Icon class="size-8" name="lucide:chevron-up" />
-			</span>
-		</button>
-	</div>
 
 	<!-- Series button for mobile screens -->
 	<mobile-button
@@ -240,21 +228,3 @@ const { headings } = await render(series);
   });
 </script>
 
-<script>
-	const scrollBtn = document.getElementById("to-top-button") as HTMLButtonElement;
-	const targetHeader = document.querySelector("header") as HTMLElement;
-
-	function callback(entries: IntersectionObserverEntry[]) {
-		entries.forEach((entry) => {
-			// Show the scroll to top button when the <header> is out of view
-			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-		});
-	}
-
-	scrollBtn.addEventListener("click", () => {
-		document.documentElement.scrollTo({ behavior: "smooth", top: 0 });
-	});
-
-	const observer = new IntersectionObserver(callback);
-	observer.observe(targetHeader);
-</script>

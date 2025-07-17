@@ -218,6 +218,22 @@ const homepage = defineCollection({
         variant: z.enum(["primary", "secondary"]),
       })),
     }),
+    bio: z.object({
+      title: z.string().optional(),
+      tagline: z.string().optional(),
+      narrative: z.string(),
+      currently: z.array(z.string()).optional(),
+      affiliations: z.array(z.object({
+        title: z.string(),
+        role: z.string(),
+      })).optional(),
+      photo: z.object({
+        src: z.string(),
+        alt: z.string(),
+        caption: z.string().optional(),
+        display: z.boolean(),
+      }).optional(),
+    }).optional(),
     currentProjects: z.object({
       title: z.string(),
       projects: z.array(z.object({
