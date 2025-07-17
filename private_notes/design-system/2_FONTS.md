@@ -18,7 +18,7 @@ Fonts are self-hosted using `@fontsource` packages for optimal performance:
 - Using `font-display: swap` for better perceived performance
 
 ### Font Files
-- **Newsreader**: Variable font supporting weights 300-700
+- **Newsreader**: Variable font with optimized weight progression 375-625 (light to semibold)
 - **IBM Plex Sans**: Individual weight files (400, 500, 600, 700)
 - **IBM Plex Serif**: Individual weight files (400, 500, 600, 700)
 

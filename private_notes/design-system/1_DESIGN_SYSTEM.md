@@ -290,7 +290,7 @@ Apply to `<body>` during development to verify vertical rhythm alignment.
 
 ### Font Families
 
-- **Headlines**: Newsreader (variable font, weights 300-500)
+- **Headlines**: Newsreader (variable font, weights 350-650, optimized progression)
 - **Body**: IBM Plex Sans (weights 300, 400, 600)  
 - **Prose**: IBM Plex Serif
 - **Code**: System mono stack
@@ -432,11 +432,12 @@ We use a context-aware link typography system that applies appropriate styles ba
 
 Headers use Newsreader with optical sizing and careful weight adjustments:
 
-- **h1**: Weight 300, optical size 72, tight tracking (-0.02em)
-- **h2**: Weight 400, optical size 48, medium tracking (-0.015em)
-- **h3**: Weight 450, optical size 32, light tracking (-0.01em)
-- **h4**: Weight 500, optical size 24, standard tracking
-- **h5-h6**: IBM Plex Sans, weight 600, uppercase for h6
+- **h1**: Weight 375, optical size 72, refined tracking (-0.025em)
+- **h2**: Weight 425, optical size 60, medium tracking (-0.02em)
+- **h3**: Weight 475, optical size 48, light tracking (-0.015em)
+- **h4**: Weight 525, optical size 36, minimal tracking (-0.01em)
+- **h5**: Weight 575, optical size 28, subtle tracking (-0.005em)
+- **h6**: Weight 625, optical size 24, small caps with generous tracking (0.075em)
 
 Dark mode automatically adjusts weights slightly heavier for better contrast.
 

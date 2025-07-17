@@ -1,5 +1,41 @@
 # Changelog
 
+## Newsreader Typography Optimization (January 2025)
+
+### Typography Refinements
+- **Refined Newsreader font weight hierarchy** for better visual progression:
+  - H1: 400 → 375 (lighter = more elegant, prominent)
+  - H2: 400 → 425 (better distinction from H1)  
+  - H3: 500 → 475 (smoother progression)
+  - H4: 600 → 525 (reduced visual heaviness)
+  - H5: 700 → 575 (more readable at small sizes)
+  - H6: 800 → 625 (maintain distinction, less heavy)
+- **Enhanced optical sizing** for context-aware readability:
+  - Desktop: Larger optical sizes (72, 60, 48) for better readability
+  - Mobile: Optimized optical sizes (48, 40, 32) for smaller screens
+  - High-DPI: Lighter weights (350, 400, 450) for crisp displays
+- **Improved OpenType feature usage**:
+  - Added lining figures (`lnum`), case-sensitive forms (`case`), capital spacing (`cpsp`) for H1-H3
+  - Disabled ligatures for H4-H5 to improve readability at smaller sizes
+  - Enhanced small caps features for H6
+- **Refined letter spacing** for editorial feel:
+  - H1: -0.03em → -0.025em (refined tracking)
+  - Consistent negative tracking progression for content hierarchy
+- **Consistent dark mode adjustments**: +25 weight units across all heading levels
+- **Maintained baseline grid alignment** and existing fluid typography system
+
+### Performance & Accessibility
+- **Cross-platform rendering optimization** with enhanced font-variation-settings
+- **High contrast mode support** with fallback font weights
+- **Reduced motion compliance** for accessibility
+- **Progressive font loading** strategy maintained with @fontsource
+
+### Design System Impact
+- **Updated semantic typography classes** (.heading-1 to .heading-6) in Tailwind config
+- **Enhanced design system documentation** with revised Newsreader optimization plan
+- **Maintained compatibility** with existing content and components
+- **Improved visual hierarchy** while preserving document-centric aesthetic
+
 ## Jekyll to Astro Migration & Blog Navigation (January 2025)
 
 ### Jekyll Archive Migration

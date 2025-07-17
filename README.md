@@ -14,7 +14,7 @@ A typography-focused personal website built with Astro. This project emphasizes 
 - **6px Baseline Grid**: All spacing aligned to 6px increments for perfect vertical rhythm
 - **Optimized Reading Experience**:
   - Reduced base font size (15-17px) for better readability
-  - Carefully tuned header weights (400-550) with variable fonts
+  - Refined header weight progression (375-625) with enhanced optical sizing
   - Semantic spacing tokens aligned to typography scale
   - Clean, minimal blog layouts without sticky elements
 - **Enhanced Components**: Button, Badge, and link components with refined typography
@@ -22,20 +22,30 @@ A typography-focused personal website built with Astro. This project emphasizes 
 
 ## Table Of Contents
 
-1. [Key Features](#key-features)
-2. [Demo](#demo)
-3. [Quick start](#quick-start)
-4. [Preview](#preview)
-5. [Commands](#commands)
-6. [Configure](#configure)
-7. [Updating](#updating)
-8. [Adding posts and notes](#adding-posts-and-notes)
-   - [Post Frontmatter](#post-frontmatter)
-   - [Note Frontmatter](#note-frontmatter)
-   - [Frontmatter Snippet](#frontmatter-snippet)
-10. [Analytics](#analytics)
-11. [Deploy](#deploy)
-12. [Acknowledgment](#acknowledgment)
+- [Table Of Contents](#table-of-contents)
+- [📚 Documentation](#-documentation)
+- [Key Features](#key-features)
+- [Demo](#demo)
+- [Quick start](#quick-start)
+- [Commands](#commands)
+- [Development Workflow](#development-workflow)
+  - [Getting Started](#getting-started)
+  - [Development Process](#development-process)
+  - [Git Workflow](#git-workflow)
+  - [Testing Your Changes](#testing-your-changes)
+  - [Key Files for Typography Work](#key-files-for-typography-work)
+  - [Private Notes for Personal Documentation](#private-notes-for-personal-documentation)
+- [Configure](#configure)
+- [Updating](#updating)
+- [Adding posts and notes](#adding-posts-and-notes)
+  - [Private Notes (Personal Documentation)](#private-notes-personal-documentation)
+  - [Post Frontmatter](#post-frontmatter)
+  - [Note Frontmatter](#note-frontmatter)
+  - [Frontmatter snippet](#frontmatter-snippet)
+- [Analytics](#analytics)
+- [Deploy](#deploy)
+- [Acknowledgment](#acknowledgment)
+- [License](#license)
 
 ## 📚 Documentation
 
@@ -84,7 +94,6 @@ pnpm install
 # Start development server
 pnpm dev
 ```
-
 
 ## Commands
 
