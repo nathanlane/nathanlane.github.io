@@ -29,7 +29,7 @@ const comments = mentions.filter(
 			</p>
 			<ul class="mt-0 divide-y divide-textColor/20 ps-0" role="list">
 				{comments.map((mention) => (
-					<li class="p-comment h-cite my-0 flex items-start gap-x-5 py-5b">
+					<li class="p-comment h-cite my-0 flex items-start gap-x-5b py-5b">
 						{mention.author?.photo && mention.author.photo !== "" ? (
 							mention.author.url && mention.author.url !== "" ? (
 								<a
@@ -41,7 +41,7 @@ const comments = mentions.filter(
 								>
 									<Image
 										alt={mention.author?.name}
-										class="u-photo my-0 h-12 w-12"
+										class="u-photo my-0 h-8b w-8b"
 										height={48}
 										src={mention.author?.photo}
 										width={48}
@@ -50,7 +50,7 @@ const comments = mentions.filter(
 							) : (
 								<Image
 									alt={mention.author?.name}
-									class="u-photo my-0 h-12 w-12 rounded-full"
+									class="u-photo my-0 h-8b w-8b rounded-full"
 									height={48}
 									src={mention.author?.photo}
 									width={48}
@@ -74,7 +74,7 @@ const comments = mentions.filter(
 									</span>
 									<Icon
 										aria-hidden="true"
-										class="h-4 w-4"
+										class="h-4b w-4b"
 										focusable="false"
 										name="hugeicons:link-01"
 									/>
