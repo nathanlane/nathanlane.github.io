@@ -12,25 +12,19 @@ hero:
 # Bio panel configuration
 bio:
   # Section title (optional, defaults to "About")
-  title: "About"
+  title: "Nathan Lane, PhD"
   
   # Primary intro - the hook
-  tagline: "Empirical economist and data scientist studying how economies transform"
+  tagline: "Empirical economist, professor of economics, University of Oxford"
   
   # Main narrative (supports markdown)
   narrative: |
     I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems. My research combines rigorous econometric analysis with historical perspective to understand how governments shape economic outcomes.
-    
-    As co-Principal Investigator of the [Industrial Policy Group](https://www.industrialpolicygroup.com/) lab, I lead collaborative research on targeted interventions across 70+ countries. We're building comprehensive datasets and developing new methodologies to evaluate how industrial strategies affect economic transformation.
-    
+
     Beyond research, I'm passionate about making economic analysis more accessible. I contribute to open-source tools, teach data science methods to graduate students, and occasionally write about the [intersection of economics and technology](/posts).
+
+    I am also co-Principal Investigator of the [Industrial Policy Group](https://www.industrialpolicygroup.com/) lab, where we are building comprehensive datasets and developing new methodologies to evaluate how industrial strategies affect economic transformation.
   
-  # Current focus - what I'm working on now
-  currently:
-    - "Mapping global industrial policy interventions across 70+ countries"
-    - "Writing a book on the new economics of industrial strategy"
-    - "Teaching data science methods to economics graduate students"
-    - "Developing open-source tools for economic research"
   
   # Brief credentials or affiliations
   affiliations:

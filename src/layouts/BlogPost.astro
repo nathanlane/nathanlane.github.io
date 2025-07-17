@@ -75,7 +75,7 @@ const structuredData = [
 	{seriesId && (
 		<mobile-button
 			id="toggle-panel-mobile"
-			class="btn-icon-fab block sm:hidden fixed bottom-space-s right-space-s z-50"
+			class="btn-icon-fab block sm:hidden absolute bottom-space-s right-space-s z-50"
 			aria-label="Toggle Series Panel"
 		>
 			<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
@@ -122,7 +122,6 @@ const structuredData = [
 </script>
 
 <script>
-	const ANIMATION_DURATION = 300;
 	// Get the button and panel elements
 	const togglePanelBtn = document.getElementById("toggle-panel");
 	const closePanelBtn = document.getElementById("close-panel");
@@ -146,20 +145,14 @@ const structuredData = [
 
 	// Function to hide the panel
 	const hidePanel = () => {
-		seriesPanel.classList.add("opacity-0", "-translate-x-full");
-		setTimeout(() => {
-			seriesPanel.classList.remove("block", "lg:block");
-			seriesPanel.classList.add("hidden");
-		}, ANIMATION_DURATION);
+		seriesPanel.classList.remove("block", "lg:block");
+		seriesPanel.classList.add("hidden");
 	};
 
 	// Function to show the panel
 	const showPanel = () => {
 		seriesPanel.classList.remove("hidden");
 		seriesPanel.classList.add("block", "lg:block");
-		setTimeout(() => {
-			seriesPanel.classList.remove("opacity-0", "-translate-x-full");
-		}, 10);
 	};
 
 	// Common event handler for both buttons

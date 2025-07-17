@@ -5,9 +5,6 @@
   /* No underline by default */
   text-decoration: none;
   
-  /* Subtle transition */
-  transition: color 150ms ease-in-out;
-  
   /* Slightly tighter tracking for headlines */
   letter-spacing: -0.01em;
 }
@@ -29,8 +26,8 @@
   /* No underline */
   text-decoration: none;
   
-  /* Smooth transitions */
-  transition: all 150ms ease-in-out;
+  /* No transitions - instant feedback */
+  /* Removed for animation-free design */
 }
 
 .view-all-link:hover {
@@ -42,29 +39,21 @@
   letter-spacing: 0.02em;
 }
 
-/* Arrow icon animation */
+/* Arrow icon - no animation */
 .view-all-link svg {
-  transition: transform 150ms ease-in-out;
+  /* Static positioning */
 }
 
 .view-all-link:hover svg {
-  transform: translateX(2px);
+  /* No transform - removed for simplicity */
 }
 
-/* Alternative: Underline reveal pattern */
+/* Alternative: Simple underline pattern */
 .subtle-link {
   text-decoration: none;
-  background-image: linear-gradient(
-    to right,
-    currentColor 0%,
-    currentColor 100%
-  );
-  background-size: 0% 1px;
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  transition: background-size 200ms ease-in-out;
+  border-bottom: 1px solid transparent;
 }
 
 .subtle-link:hover {
-  background-size: 100% 1px;
+  border-bottom-color: currentColor;
 }

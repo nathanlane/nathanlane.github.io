@@ -145,7 +145,6 @@
     .heading-1, .heading-2, .heading-3, .heading-4, .heading-5, .heading-6 {
       color: var(--theme-text);
       font-weight: 600; /* Standardized weight for accessibility */
-      text-shadow: none; /* Remove subtle shadows for clarity */
       letter-spacing: 0.01em; /* Slightly open for better legibility */
     }
     
@@ -190,7 +189,6 @@
     
     /* Disable text shadows and effects that could cause motion sensitivity */
     .heading-1, .heading-2, .heading-3, .heading-4, .heading-5, .heading-6 {
-      text-shadow: none;
       filter: none;
     }
   }
@@ -588,7 +586,6 @@
       /* Subtle hover effect without glow */
       &:hover {
         filter: brightness(1.15);
-        /* Removed text-shadow for cleaner look */
       }
     }
 
@@ -843,7 +840,7 @@
 :root {
   /* Enhanced code block typography with baseline grid alignment */
   figure[data-rehype-pretty-code-figure] {
-    @apply relative m-0 rounded-lg overflow-hidden;
+    @apply relative m-0 overflow-hidden;
     /* Baseline grid aligned margins */
     margin-top: 1.5rem; /* 6b */
     margin-bottom: 1.5rem; /* 6b */
@@ -954,7 +951,7 @@
         /* Enhanced highlighted lines */
         [data-highlighted-line] {
           background-color: var(--code-line-highlight);
-          box-shadow: inset 3px 0 0 var(--accent-base); /* Left border accent */
+          border-left: 3px solid var(--accent-base); /* Left border accent */
 
           &:hover {
             background-color: var(--code-line-highlight);
@@ -991,7 +988,7 @@
 
   /* Enhanced base pre block styling */
   pre {
-    @apply bg-[var(--code-bg)] text-[var(--theme-text)] rounded-lg m-0;
+    @apply bg-[var(--code-bg)] text-[var(--theme-text)] m-0;
     /* Typography optimization */
     line-height: 1.5;
     tab-size: 2; /* Consistent tab width */
@@ -1022,7 +1019,7 @@
 
   /* Enhanced inline code typography */
   :not(pre) > code {
-    @apply bg-[var(--code-inline-bg)] rounded-sm border border-color-100;
+    @apply bg-[var(--code-inline-bg)] border border-color-100;
     /* Baseline grid aligned padding */
     padding: 0.125rem 0.375rem; /* 0.5b 1.5b */
     /* Typography optimization */
@@ -1052,7 +1049,7 @@
 
   /* Enhanced copy button for code blocks */
   .copy-code-button {
-    @apply absolute bg-color-100 text-accent-base rounded-md;
+    @apply absolute bg-color-100 text-accent-base;
     top: 0.5rem; /* 2b */
     right: 0.5rem; /* 2b */
     width: 2rem; /* 8b */
@@ -1113,7 +1110,7 @@
         /* Highlighted lines in dark mode */
         [data-highlighted-line] {
           background-color: hsl(0deg 0% 12%);
-          box-shadow: inset 3px 0 0 hsl(0deg 0% 60%);
+          border-left: 3px solid hsl(0deg 0% 60%);
         }
 
         /* Line numbers in dark mode */
@@ -1399,7 +1396,7 @@
 
   /* Navigation icon buttons */
   .btn-icon-nav {
-    @apply w-9 h-9 rounded-md;
+    @apply w-9 h-9;
     @apply bg-color-100 hover:bg-color-150;
     @apply text-accent-base;
   }
@@ -1417,7 +1414,7 @@
 
   /* Floating action button */
   .btn-icon-fab {
-    @apply w-14 h-14 rounded-lg;
+    @apply w-14 h-14;
     @apply bg-accent-base text-bgColor;
     @apply hover:bg-accent-one;
   }
@@ -1429,9 +1426,6 @@
   /* Mobile navigation refinements */
   #drawer-body {
     background: var(--theme-bg);
-    backdrop-filter: blur(20px) saturate(1.8);
-    -webkit-backdrop-filter: blur(20px) saturate(1.8);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
   }
 
   /* Remove gradient decorations from mobile nav */
@@ -1500,18 +1494,11 @@
   .footer-link {
     color: var(--theme-color-600);
     text-decoration: none;
-    background-image: linear-gradient(
-      to right,
-      currentColor 0%,
-      currentColor 100%
-    );
-    background-size: 0% 1px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
+    border-bottom: 1px solid transparent;
   }
 
   .footer-link:hover {
-    background-size: 100% 1px;
+    border-bottom-color: currentColor;
   }
 
 }
