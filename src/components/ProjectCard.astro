@@ -9,7 +9,7 @@ export interface Props {
 const { title, description, url, class: className = "" } = Astro.props;
 ---
 
-<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${className} p-space-s`}>
+<article class={`group rounded-lg bg-color-75 transition-colors hover:bg-color-100 ${className} p-space-s card`} data-context="component">
 	<div class="flex flex-col gap-space-2xs">
 		{url ? (
 			<h3 class="font-headline font-medium text-1 leading-tight">
