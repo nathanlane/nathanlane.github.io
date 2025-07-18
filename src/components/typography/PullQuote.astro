@@ -60,7 +60,7 @@ const {
 
   .pull-quote__text {
     margin: 0;
-    font-size: 1.46rem;
+    font-size: var(--step-2);
     line-height: 1.4;
     color: var(--theme-text);
     font-weight: 300;
@@ -92,14 +92,14 @@ const {
 
   /* Variant: Large */
   .pull-quote--large .pull-quote__text {
-    font-size: 1.83rem;
+    font-size: var(--step-3);
     font-weight: 400;
     font-variation-settings: "wght" 400;
   }
 
   .pull-quote__attribution {
     margin-top: 1rem;
-    font-size: 0.80rem;
+    font-size: var(--step--1);
     @apply font-sans;
     font-style: normal;
     color: var(--theme-color-500);
@@ -117,11 +117,11 @@ const {
     }
 
     .pull-quote__text {
-      font-size: 1.17rem;
+      font-size: var(--step-1);
     }
 
     .pull-quote--large .pull-quote__text {
-      font-size: 1.46rem;
+      font-size: var(--step-2);
     }
   }
 

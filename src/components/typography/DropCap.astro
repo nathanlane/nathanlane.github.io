@@ -50,7 +50,7 @@ const lineHeightMap = {
   .drop-cap {
     position: relative;
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--step-0);
     line-height: 1.6;
   }
 
@@ -113,7 +113,7 @@ const lineHeightMap = {
   /* Mobile responsiveness */
   @media (max-width: 640px) {
     .drop-cap__letter {
-      font-size: 2.29rem !important;
+      font-size: var(--step-5) !important;
       height: calc(1.6em * 2) !important;
       line-height: calc(1.6em * 2) !important;
     }

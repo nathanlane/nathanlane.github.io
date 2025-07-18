@@ -109,8 +109,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 	}
 
 	/* Refined hover state following Butterick's restraint */
-	.entry-link:hover .entry-title,
-	.entry-link:focus .entry-title {
+	.entry-link:hover .entry-title {
 		color: var(--theme-accent-base);
 		/* Micro-expansion for tactile feedback */
 		letter-spacing: 0.002em;
@@ -128,8 +127,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		opacity: 0;
 	}
 
-	.entry-link:hover::after,
-	.entry-link:focus::after {
+	.entry-link:hover::after {
 		width: 100%;
 		opacity: 0.5;
 	}
@@ -205,10 +203,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 			border-bottom-width: 2px;
 		}
 		
-		.entry-link:focus {
-			outline: 2px solid var(--theme-accent-base);
-			outline-offset: var(--space-0.5);
-		}
+		/* Focus handled by global system */
 	}
 
 	/* Print optimization */
@@ -225,7 +220,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		
 		.entry-link::after {
 			content: " (" attr(href) ")";
-			font-size: 0.875em;
+			font-size: var(--step--1);
 			color: var(--theme-color-600);
 		}
 	}

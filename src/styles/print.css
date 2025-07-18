@@ -46,7 +46,7 @@
 	/* Show link URLs */
 	a[href^="http"]:after {
 		content: " (" attr(href) ")";
-		font-size: 0.9em;
+		font-size: var(--step--1);
 		opacity: 0.7;
 	}
 
