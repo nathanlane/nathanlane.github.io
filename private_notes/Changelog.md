@@ -1,5 +1,54 @@
 # Changelog
 
+## CSS Refactoring Phase 2 Complete (January 30, 2025)
+
+### Standardized Focus States
+- **Global Focus System**: Implemented consistent focus-visible pattern across entire codebase
+  - Default `:focus` hidden for mouse users (outline: none)
+  - Keyboard navigation uses `:focus-visible` with 2px solid outline
+  - Consistent `outline-offset: var(--space-0.5)` (3px) using grid units
+  - Dark mode adjustment with `--theme-accent-light` color
+  - High contrast mode support with 3px outline and larger offset
+- **Component Updates**: Removed custom focus styles from 15+ components
+  - Button.astro, CompactList.astro, PostSearch.astro, SkipLink.astro
+  - MediaEntry.astro, ArchiveEntry.astro, PageHeader.astro
+  - Sidenote.astro, Likes.astro, Comments.astro
+  - All components now inherit global focus system
+- **Link Focus Cleanup**: Removed conflicting focus styles from links.css and global.css
+
+### Typography Token Migration
+- **Replaced 33 Hardcoded Font Sizes** with design tokens:
+  - Code blocks: `0.75rem`, `0.8125rem` → `var(--step--1)`
+  - Small UI text: `0.625rem`, `0.6875rem` → `var(--step--2)`
+  - Body variations: `0.875rem`, `1rem` → `var(--step-0)` or `var(--step--1)`
+  - Large text: `1.46rem` → `var(--step-2)`, `1.83rem` → `var(--step-3)`
+- **Fixed Undefined Tokens**: 
+  - `var(--text--1)` → `var(--step--1)`
+  - `var(--text-0)` → `var(--step-0)`
+- **Component Updates**:
+  - Button.astro, Badge.astro, UpdatedBadge.astro: Uppercase text uses `--step--2`
+  - Typography components (Sidenote, PullQuote, DropCap): Consistent token usage
+  - CompactList.astro: Print styles use tokens
+  - print.css: Link URLs use `--step--1`
+
+### Dead Code Removal
+- **Cleaned Migration Comments**: Removed 6 "moved to" comments from global.css
+- **Deleted Obsolete Code**:
+  - Old utopia.css import comment
+  - Commented-out pre block for copy button
+  - Duplicate diff implementation (10 lines)
+  - Old font declaration comments
+- **Result**: Cleaner, more maintainable CSS without historical artifacts
+
+### Impact Summary
+- **Zero Visual Changes**: All updates maintain exact visual parity
+- **Improved Consistency**: Single source of truth for focus states and font sizes
+- **Better Maintainability**: Design tokens make future updates easier
+- **Reduced Code**: ~50 lines of dead/duplicate code removed
+- **Accessibility Win**: Consistent focus-visible implementation improves keyboard navigation
+
+## CSS Audit and Phase 1 Improvements (January 29, 2025)
+
 ## CSS Audit and Phase 1 Improvements (January 29, 2025)
 
 ### Phase 1: Zero-Risk CSS Improvements

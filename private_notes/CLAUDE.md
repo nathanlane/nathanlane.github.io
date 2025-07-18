@@ -472,6 +472,26 @@ This ensures all spacing values are multiples of the 6px grid unit for perfect v
 - **System Files**: `tailwind.config.ts` (fluid type plugin), component updates
 - **Documentation**: Interactive test page at `/spacing-test` and audit files available
 
+### CSS Refactoring Phase 2 (Completed January 30, 2025)
+**Major CSS improvements for consistency and maintainability:**
+
+1. **Standardized Focus States**
+   - Global `:focus-visible` system with consistent 2px outlines
+   - Removed custom focus styles from 15+ components
+   - Dark mode and high contrast mode support
+   - All interactive elements now use `outline: 2px solid var(--theme-accent)`
+
+2. **Typography Token Migration**
+   - Replaced 33 hardcoded font sizes with design tokens
+   - Fixed undefined tokens (`var(--text-0)` → `var(--step-0)`)
+   - All components now use fluid typography scale
+   - Consistent token usage: `--step--2` (smallest) through `--step-6` (largest)
+
+3. **Dead Code Removal**
+   - Removed migration comments and obsolete code blocks
+   - Cleaned up ~50 lines of commented-out CSS
+   - Deleted old import statements and duplicate implementations
+
 ### Link Typography System
 The codebase uses a context-aware link styling system:
 - `inline-link`: For links within prose content

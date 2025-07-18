@@ -1,5 +1,7 @@
 # CSS Audit Guide for Astro/Tailwind/Fluid Typography Projects
 
+> **Latest Update**: January 30, 2025 - Phase 2 CSS refactoring complete with standardized focus states, typography tokens, and dead code removal.
+
 ## Audit Prompt Template
 
 Use this prompt to generate a comprehensive CSS audit of your codebase:
@@ -54,6 +56,67 @@ Please provide:
 - Priority rating (High/Medium/Low) for each issue
 - Estimated impact on maintainability and performance
 ```
+
+## Recent Improvements (Phase 2 - January 2025)
+
+### ✅ Standardized Focus States
+Implemented a global focus system that provides consistency across all interactive elements:
+
+```css
+/* Global focus system in src/styles/global.css */
+/* Default focus - hidden for mouse users */
+:focus {
+  outline: none;
+}
+
+/* Keyboard focus - visible and consistent */
+:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: var(--space-0.5); /* 3px = 0.5 grid units */
+}
+
+/* Dark mode focus adjustment */
+:root[data-theme="dark"] :focus-visible {
+  outline-color: var(--theme-accent-light);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :focus-visible {
+    outline-width: 3px;
+    outline-offset: var(--space-1); /* 6px = 1 grid unit */
+  }
+}
+```
+
+**Components updated**: Button, CompactList, PostSearch, SkipLink, MediaEntry, ArchiveEntry, PageHeader, Sidenote, and all webmentions components now use the global system.
+
+### ✅ Typography Token Migration
+Replaced all hardcoded font sizes with fluid typography tokens:
+
+```css
+/* Before */
+font-size: 0.75rem;
+font-size: 0.875rem;
+font-size: 1.46rem;
+
+/* After */
+font-size: var(--step--1);  /* Small text */
+font-size: var(--step-0);   /* Body text */
+font-size: var(--step-2);   /* Large text */
+```
+
+**Token mapping**:
+- `--step--2`: 0.64-0.72rem (smallest UI text)
+- `--step--1`: 0.80-0.90rem (small text, captions)
+- `--step-0`: 0.975-1.125rem (base body text)
+- `--step-1` through `--step-6`: Larger heading sizes
+
+### ✅ Dead Code Removal
+- Removed 6 migration comments
+- Deleted old import statements
+- Removed duplicate CSS implementations
+- Cleaned up ~50 lines of obsolete code
 
 ## CSS Best Practices Checklist
 
