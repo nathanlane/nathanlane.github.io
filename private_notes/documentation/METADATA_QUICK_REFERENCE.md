@@ -102,13 +102,30 @@ Old classes automatically map to new system:
 ## Performance Tips
 
 ✅ **Do:**
-- Use MetadataLine component for all metadata
+- Use MetadataLine component for most metadata (except ResearchEntry which uses custom implementation)
 - Keep items array minimal
 - Use consistent date formatting
 - Link strategically (outlets, authors)
 
 ❌ **Avoid:**
-- Manual span/div construction
+- Manual span/div construction (except for specialized cases like ResearchEntry)
 - Inline styles
 - Excessive linking
-- Mixed separator styles within same context 
+- Mixed separator styles within same context
+
+## Component Exceptions
+
+### ResearchEntry.astro
+Uses custom `.research-metadata-custom` implementation for precise typography control:
+```astro
+<div class="research-metadata-custom mb-2b">
+  {metadataItems.map((item, index) => (
+    <>
+      <span class="metadata-item">{item.text}</span>
+      {index < metadataItems.length - 1 && (
+        <span class="metadata-separator" aria-hidden="true">•</span>
+      )}
+    </>
+  ))}
+</div>
+``` 

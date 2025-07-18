@@ -1,4 +1,4 @@
-import { siteConfig } from "@/site.config";
+import { siteConfig, socialLinks } from "@/site.config";
 
 export interface NavLink {
   title: string;
@@ -39,34 +39,41 @@ export const navigationConfig = {
   },
   
   // Footer configuration - minimal version
+  // To customize footer content, modify the sections below:
+  // - Add new sections by creating new objects with title and links
+  // - Add new links by adding objects with title and href
+  // - Use "#" for href to create non-clickable descriptive text
+  // - Reference siteConfig values like ${siteConfig.email} for dynamic content
   footer: {
     sections: [
       {
-        title: "Explore",
+        title: "Here",
         links: [
           { title: "About", href: "/about" },
           { title: "Research", href: "/research" },
           { title: "Writing", href: "/writing" },
-          { title: "Blog", href: "/posts" }
-        ]
-      },
-      {
-        title: "Browse",
-        links: [
-          { title: "Projects", href: "/projects" },
-          { title: "Notes", href: "/notes" },
-          { title: "Tags", href: "/tags" },
-          { title: "Archive", href: "/archive" }
-        ]
-      },
-      {
-        title: "Connect",
-        links: [
-          { title: "Email", href: `mailto:${siteConfig.email}` },
+          { title: "Blog", href: "/posts" },
           { title: "CV", href: "/cv" },
-          { title: "RSS", href: "/rss.xml" },
           { title: "Sitemap", href: "/sitemap.xml" }
         ]
+      },
+      {
+        title: "Elsewhere",
+        links: socialLinks
+          .filter(social => ['Github', 'LinkedIn', 'Twitter', 'Bluesky'].includes(social.friendlyName))
+          .map(social => ({ title: social.friendlyName, href: social.link }))
+      },
+      {
+        title: "Contact",
+        links: [
+          { title: "Email", href: `mailto:${siteConfig.email}` },
+          { title: "CV", href: "/cv" }
+        ]
+      },
+      {
+        title: "About this site",
+        links: [
+          { title: "Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind. I use Newsreader (headers) and Inter (body) for typography.", href: "#" }        ]
       }
     ]
   }

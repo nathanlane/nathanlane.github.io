@@ -1,5 +1,115 @@
 # Changelog
 
+## Footer Content Management & Sitemap System (January 28, 2025)
+
+### Footer Configuration System
+- **Centralized Footer Management**: Footer content now controlled through `src/config/navigation.config.ts`
+- **Social Media Integration**: Footer social links now use internal `socialLinks` configuration from `src/site.config.ts`
+- **Typography Improvements**: Increased footer text sizes - body text from `--step--2` to `--step--1`, headers from `--step-0` to `--step-1`
+- **RSS Simplification**: Removed specific RSS feeds (research, notes), kept only main RSS feed in footer utility section
+- **Copyright Update**: Added proper copyright notice "© 2025 Nathan Lane"
+- **Styling Refinements**: Removed italics from "About this site" descriptive text for cleaner appearance
+
+### Complete Sitemap System Implementation
+- **Multi-Sitemap Architecture**: Comprehensive sitemap system with main index and content-specific sitemaps
+- **Static Pages Sitemap**: Created `src/pages/sitemap-0.xml.ts` for static pages (home, about, research, etc.)
+- **SEO Optimization**: Proper priority and changefreq settings for different content types
+- **Automatic Generation**: All sitemaps auto-generate during build process with current timestamps
+
+### Configuration Best Practices Established
+- **TypeScript Configuration**: Demonstrated advantages of TypeScript config over YAML (type safety, IntelliSense)
+- **Dynamic Content Support**: Footer can reference other config values like `siteConfig.email`
+- **Single Source of Truth**: Social media links managed centrally, eliminating duplicates and inconsistencies
+
+## Unified Link System & Hover Behavior Centralization (January 28, 2025)
+
+### Complete Link System Overhaul
+- **Centralized Hover Behavior**: Eliminated scattered, conflicting hover effects across 20+ CSS locations
+- **Size Change Prevention**: Added global rules to prevent jarring font-size jumps on hover (e.g., headshot link 30% size increase)
+- **Transform Elimination**: Disabled unnecessary transforms and animations for consistent, predictable interactions
+- **Unified Timing**: Standardized all link transitions to `200ms ease` across the entire site
+
+### 7 Standardized Link Types
+- **`.inline-link`**: Body text links with underline system
+- **`.nav-link`**: Navigation elements with clean color transitions  
+- **`.feature-link`**: Headlines and titles without decoration
+- **`.action-link`**: CTAs, downloads, and external links with arrow support
+- **`.subtle-link`**: Minimal emphasis with opacity changes
+- **`.back-link`**: Navigation back buttons
+- **`.footer-link`**: Simple underline style for footer
+
+### CSS Architecture Improvements
+- **Global Anti-Chaos Rules**: Prevented utility class conflicts with `!important` overrides
+- **CSS Variable System**: Centralized link colors and timing in `:root` for maintainability
+- **Conflict Resolution**: Removed 15+ conflicting hover rules from `global.css`
+- **Scope Limitation**: Restricted brightness filters to `.content` and `.prose` containers only
+
+### Link Behavior Fixes
+- **Headshot Download**: Fixed jarring size jump from `text--2` to `text-base` (30% increase)
+- **Navigation Links**: Removed conflicting `::after` pseudo-element animations
+- **Footer Links**: Unified underline approach replacing scattered border effects
+- **Back Links**: Consistent color progression across all pages
+
+### Developer Experience
+- **Single Source of Truth**: All link behavior defined in `src/styles/links.css`
+- **Automatic Migration**: Existing classes like `.section-title-link` automatically map to new system
+- **Conflict Prevention**: Global rules prevent future utility class conflicts
+- **WCAG Compliance**: Consistent focus states across all link types
+
+### Performance & Maintainability  
+- **Reduced CSS Complexity**: Eliminated redundant hover rules and conflicting transitions
+- **Faster Rendering**: Unified transition system reduces browser recalculation overhead
+- **Future-Proof**: Centralized system prevents regression of scattered hover behaviors
+- **Dark Mode**: Complete theme support for all link types
+
+### Impact
+- **User Experience**: Smooth, predictable hover interactions throughout the site
+- **Visual Consistency**: No more jarring size changes or conflicting animation effects
+- **Accessibility**: Proper focus indicators and high contrast support
+- **Maintainability**: Single file controls all link behavior site-wide
+
+## ResearchEntry Typography Refinement & Simplification (January 28, 2025)
+
+### Typography Hierarchy Optimization
+- **Size Rationalization**: Fixed typography hierarchy following masters' principles:
+  - **Title**: Reduced from `--step-2` (18.7-21.3px) to `--step-1` (14.4-16.2px) for better proportion in entry previews
+  - **Description**: Increased from `--step--1` (12.3-13.9px) to `--step-0` (16px) for comfortable reading
+  - **Publication**: Increased from `--step--2` to `--step--1` for better readability hierarchy
+  - **Metadata**: Reduced to `--step--2` (10.2-11.5px) for proper visual subordination
+  - **Action Links**: Maintained at `--step--2` for consistency
+
+### Publication Styling Improvements
+- **Weight Normalization**: Changed from medium weight (500) to normal weight (400) for cleaner appearance
+- **Style Simplification**: Removed italic styling for more professional, understated look
+- **Enhanced Links**: Improved "Publication Link" and "PDF Download" labeling for clarity
+
+### Description System Overhaul
+- **Optional Descriptions**: Made description prop optional for flexible content entry formats
+- **Truncation Removal**: Eliminated complex text truncation logic and "read more" links for cleaner presentation
+- **Complete Removal**: Simplified to clean title-metadata-publication-links hierarchy without descriptions
+
+### Custom Metadata Implementation
+- **CSS Conflict Resolution**: Replaced MetadataLine component with custom implementation to avoid global `.text-meta` style conflicts
+- **Proper Variable Usage**: Fixed CSS variable error from non-existent `--step--3` to correct `--step--2`
+- **Typography Features**: Maintained OpenType small caps, kerning, and proper letter-spacing
+- **Dark Mode Support**: Complete dark theme compatibility
+
+### Content Filtering
+- **Status Simplification**: Temporarily disabled work-in-progress status display for cleaner metadata
+- **Focus Enhancement**: Streamlined to essential metadata: "RESEARCH", date, and custom metadata only
+
+### Technical Excellence
+- **Performance**: Eliminated complex truncation logic and component dependencies
+- **Maintainability**: Cleaner, more direct CSS without fighting global styles
+- **Typography Standards**: Applied Bringhurst, Hochuli, Ruder, and Butterick principles for optimal academic reading experience
+- **Visual Consistency**: Achieved predictable, scannable research entry layout
+
+### Impact
+- **Improved Scanability**: Consistent entry heights and clear visual rhythm
+- **Better Readability**: Proper typography hierarchy serving academic content
+- **Cleaner Design**: Eliminated visual noise and focused on essential information
+- **Professional Appearance**: Academic-appropriate styling following typography masters' principles
+
 ## Media Page Refactoring & Reusable Archive System (January 28, 2025)
 
 ### Phase 1: Media Page Complete Typography Refactoring

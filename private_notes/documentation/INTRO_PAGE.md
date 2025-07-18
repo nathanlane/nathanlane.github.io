@@ -129,7 +129,7 @@ posts:
 **`ProjectCard.astro`** - Research paper cards
 - Card-based layout with background color
 - Title, description, and optional URL
-- Hover effects and transitions
+- Uses unified link system for consistent interactions
 
 **`WritingCard.astro`** - Writing piece cards
 - Date, title, and excerpt display

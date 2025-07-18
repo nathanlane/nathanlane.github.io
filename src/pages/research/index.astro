@@ -65,7 +65,6 @@ const meta = {
               href={`/research/${paper.id}/`}
               date={paper.data.paperDate}
               status={paper.data.status}
-              description={paper.data.description}
               metadata={paper.data.authors}
               publication={paper.data.publication}
               download={paper.data.download}
@@ -92,7 +91,6 @@ const meta = {
               href={`/research/${paper.id}/`}
               date={paper.data.paperDate}
               status={paper.data.status}
-              description={paper.data.description}
               metadata={paper.data.authors}
               publication={paper.data.publication}
               download={paper.data.download}
@@ -122,39 +120,7 @@ const meta = {
       </section>
     )}
 
-    <!-- Quick Navigation -->
-    <section class="mb-16b p-6b bg-theme-bg/30">
-      <h3 class="heading-4 mb-4b">Quick Navigation</h3>
-      <div class="grid sm:grid-cols-3 gap-4b text-meta">
-        {publishedPapers.length > 0 && (
-          <a href="#published" class="block">
-            <span class="font-semibold">{publishedPapers.length}</span> Published Papers
-          </a>
-        )}
-        {workingPapers.length > 0 && (
-          <a href="#working" class="block">
-            <span class="font-semibold">{workingPapers.length}</span> Working Papers
-          </a>
-        )}
-        {worksInProgress.length > 0 && (
-          <a href="#wip" class="block">
-            <span class="font-semibold">{worksInProgress.length}</span> Works in Progress
-          </a>
-        )}
-      </div>
-    </section>
 
-    <!-- Wide Full Header Line Separator -->
-    <SectionSeparator variant="full-width" spacing="normal" />
-
-    <!-- Bottom Navigation -->
-    <section>
-      <nav class="flex gap-8b justify-center">
-        <a href="/writing/" class="nav-link text-0 uppercase tracking-wide">Writing</a>
-        <a href={siteConfig.resumeUrl} class="nav-link text-0 uppercase tracking-wide">CV</a>
-        <a href="/about/" class="nav-link text-0 uppercase tracking-wide">About</a>
-      </nav>
-    </section>
 
   </div>
 </BaseLayout>

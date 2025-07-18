@@ -13,12 +13,13 @@ const {
 <li class="">
 	<a
 		aria-label={`Scroll to section: ${text}`}
-		class="text-light mt-space-1 line-clamp-2 break-words [padding-left:1ch] [text-indent:-1ch] before:text-accent-two before:content-['#'] hover:text-accent-two"
+		class="text-light block py-0.5 truncate break-words [padding-left:0.75ch] [text-indent:-0.75ch] before:text-accent-two/60 before:content-['#'] before:text-[10px] hover:text-accent-two transition-colors duration-150"
 		href={`#${slug}`}
+		title={text}
 		>{text}
 	</a>
 	{!!children.length && (
-		<ul class="ms-space-2xs">
+		<ul class="ml-3 mt-0.5 space-y-0.5 text-[11px]">
 			{children.map((subheading) => (
 				<Astro.self heading={subheading} />
 			))}

@@ -180,6 +180,13 @@ Full media page entries with enhanced navigation.
 ### Writing Index
 Current Thinking section with streamlined metadata display.
 
+### ResearchEntry.astro *(Custom Implementation)*
+**Note**: ResearchEntry uses a custom metadata implementation instead of MetadataLine component to achieve specific typography hierarchy requirements. Uses `.research-metadata-custom` class with:
+- Font size: `var(--step--2)` (10.2-11.5px) for proper visual subordination
+- OpenType features: Real small caps, kerning, and contextual alternates
+- Custom separator styling with reduced opacity
+- Bypasses global `.text-meta` conflicts for precise control
+
 ## Responsive Behavior
 
 ### Mobile Optimization

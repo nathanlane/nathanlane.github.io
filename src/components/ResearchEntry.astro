@@ -6,9 +6,9 @@ interface Props {
   href: string;
   date?: string | undefined;
   status?: 'published' | 'working-paper' | 'work-in-progress' | 'archived' | undefined;
-  description: string;
   metadata?: string | undefined;
   publication?: string | undefined;
+  paperLink?: string | undefined;  // Main link to the paper
   download?: string | undefined;
   link?: string | undefined;
 }
@@ -18,9 +18,9 @@ const {
   href, 
   date, 
   status, 
-  description, 
   metadata,
   publication,
+  paperLink,
   download,
   link
 } = Astro.props;
@@ -35,9 +35,11 @@ const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
 const metadataItems = [
   { text: 'RESEARCH' },
   ...(formattedDate ? [{ text: formattedDate }] : []),
-  ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []),
+  // ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []), // Temporarily removed work-in-progress status
   ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
+
+
 ---
 
 <article class="research-entry">
@@ -45,10 +47,16 @@ const metadataItems = [
     <a href={href} class="research-link">{title}</a>
   </h3>
   
-  <MetadataLine 
-    items={metadataItems}
-    class="mb-3b"
-  />
+  <div class="research-metadata-custom mb-2b">
+    {metadataItems.map((item, index) => (
+      <>
+        <span class="metadata-item">{item.text}</span>
+        {index < metadataItems.length - 1 && (
+          <span class="metadata-separator" aria-hidden="true">•</span>
+        )}
+      </>
+    ))}
+  </div>
   
   <!-- Publication information - more prominent for research -->
   {publication && (
@@ -57,19 +65,19 @@ const metadataItems = [
     </div>
   )}
   
-  <p class="research-description">{description}</p>
+
   
   <!-- Research-specific action links -->
-  {(download || link) && (
+  {(link || download) && (
     <div class="research-actions">
-      {download && (
-        <a href={download} class="research-action-link" target="_blank" rel="noopener">
-          Download PDF ↗
-        </a>
-      )}
       {link && (
         <a href={link} class="research-action-link" target="_blank" rel="noopener">
-          View Paper ↗
+          <span class="action-label">Publication Link</span> ↗
+        </a>
+      )}
+      {download && (
+        <a href={download} class="research-action-link" target="_blank" rel="noopener">
+          <span class="action-label">PDF Download</span> ↗
         </a>
       )}
     </div>
@@ -79,8 +87,8 @@ const metadataItems = [
 <style>
   /* Research-specific styling - more academic, formal presentation */
   .research-entry {
-    margin-bottom: var(--space-10); /* 60px - more generous spacing for research */
-    padding-bottom: var(--space-6); /* 36px */
+    margin-bottom: var(--space-8); /* 48px - denser spacing for research */
+    padding-bottom: var(--space-4); /* 24px - tighter */
     border-bottom: 1px solid var(--theme-color-200);
   }
   
@@ -89,12 +97,18 @@ const metadataItems = [
     padding-bottom: 0;
   }
   
-  /* Research title - slightly larger, more academic */
+  /* Research title - appropriately sized for entry previews */
   .research-title {
-    font-size: var(--step-1); /* 18.8-21.3px - larger than DocumentEntry */
+    font-size: var(--step-1); /* 14.4-16.2px - reduced from step-2 for better proportion */
     font-weight: 500;
-    line-height: 1.3;
-    margin-bottom: var(--space-2b); /* 12px */
+    line-height: 1.4; /* Slightly tighter for denser presentation */
+    margin-bottom: var(--space-1); /* 6px - tighter, grid-aligned */
+    
+    /* Enhanced OpenType features for research titles */
+    font-feature-settings:
+      "kern" 1,     /* Kerning for better spacing */
+      "liga" 1,     /* Standard ligatures */
+      "calt" 1;     /* Contextual alternates */
   }
   
   .research-link {
@@ -110,46 +124,93 @@ const metadataItems = [
     text-underline-offset: 3px;
   }
   
-  /* Publication styling - more prominent */
+  /* Publication styling - refined and subtle */
   .research-publication {
-    font-size: var(--step--1); /* 12.8-14.4px */
-    font-weight: 600;
-    color: var(--theme-accent-base);
-    margin-bottom: var(--space-3b); /* 18px */
-    font-style: italic;
+    font-size: var(--step--1); /* 12.3-13.9px - increased from step--2 for better readability */
+    font-weight: 400; /* Normal weight for cleaner appearance */
+    color: var(--theme-color-600); /* Muted from accent for subtlety */
+    margin-bottom: var(--space-1); /* 6px - tighter spacing for density */
+    font-style: normal; /* Remove italic for cleaner look */
+    line-height: 1.4; /* Slightly more open for small text legibility */
+    
+    /* Real small caps for publication names */
+    font-feature-settings:
+      "kern" 1,
+      "smcp" 1,     /* Small caps */
+      "c2sc" 1;     /* Caps to small caps */
   }
   
-  /* Description with wider measure for academic content */
-  .research-description {
-    font-size: var(--step-0); /* 15.6-17px */
-    line-height: 1.6;
-    color: var(--theme-text);
-    max-width: 70ch; /* Wider than standard 65ch for detailed descriptions */
-    margin-bottom: var(--space-3b); /* 18px */
-  }
+
   
-  /* Research action links - more prominent */
+  /* Research action links - following Ruder's spacing principles */
   .research-actions {
     display: flex;
-    gap: var(--space-6b); /* 36px */
-    margin-top: var(--space-4b); /* 24px */
+    align-items: baseline;
+    gap: var(--space-3); /* 18px - Ruder: tight but clear separation */
+    margin-top: var(--space-2); /* 12px - more breathing room without border */
   }
   
   .research-action-link {
-    font-size: var(--step--1); /* 12.8-14.4px */
-    font-weight: 600;
-    color: var(--theme-accent-base);
+    font-size: var(--step--2); /* 10.7-12px - smaller for density */
+    font-weight: 450; /* Balanced weight */
+    color: var(--theme-color-600); /* Subtle but discoverable */
     text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: color 0.2s ease;
+    
+    /* Butterick: Clear but not dominant links */
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+    
+    /* Enhanced readability */
+    line-height: 1.3; /* Slightly more open for small text */
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.2em; /* Small space before arrow */
   }
   
   .research-action-link:hover {
-    color: var(--theme-text);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    color: var(--theme-accent-base);
+    border-bottom-color: var(--theme-accent-base);
+    /* Bringhurst: Subtle emphasis, not decoration */
+  }
+  
+  /* Custom research metadata - bypasses global text-meta conflicts */
+  .research-metadata-custom {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    font-size: var(--step--1); /* 10.2-11.5px - smallest available size */
+    font-weight: 400;
+    opacity: 0.8;
+    line-height: 1.4;
+    color: var(--theme-color-500);
+    
+    /* Typography features for metadata */
+    font-feature-settings:
+      "kern" 1,
+      "smcp" 1,
+      "c2sc" 1;
+    letter-spacing: 0.03em;
+  }
+  
+  .metadata-item {
+    /* No additional styling needed - inherits from parent */
+  }
+  
+  .metadata-separator {
+    opacity: 0.6;
+    margin: 0 0.4em;
+    font-weight: 300;
+  }
+  
+  /* Refined action links following masters' spacing principles */
+  .action-label {
+    /* Bringhurst: Real small caps for proper typography */
+    font-feature-settings:
+      "kern" 1,
+      "smcp" 1,     /* Small caps */
+      "c2sc" 1;     /* Caps to small caps */
+    letter-spacing: 0.05em; /* Wider tracking for small caps */
   }
   
   /* Dark mode adjustments */
@@ -163,5 +224,9 @@ const metadataItems = [
   
   :global([data-theme="dark"]) .research-action-link:hover {
     color: var(--theme-color-100);
+  }
+  
+  :global([data-theme="dark"]) .research-metadata-custom {
+    color: var(--theme-color-400);
   }
 </style> 

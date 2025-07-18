@@ -9,8 +9,9 @@ This guide covers everything you need to know to manage and deploy this website 
 4. [Deployment](#deployment)
 5. [Content Management](#content-management)
 6. [Typography & Metadata System](#typography--metadata-system)
-7. [Security Headers](#security-headers)
-8. [Monitoring & Maintenance](#monitoring--maintenance)
+7. [Footer Management & Sitemap System](#footer-management--sitemap-system)
+8. [Security Headers](#security-headers)
+9. [Monitoring & Maintenance](#monitoring--maintenance)
 
 ---
 
@@ -306,6 +307,144 @@ import MetadataLine from '@/components/MetadataLine.astro';
 
 ---
 
+## Footer Management & Sitemap System
+
+### Footer Content Management
+
+The footer is managed through a centralized configuration system for easy maintenance.
+
+#### Primary Configuration File
+
+All footer content is controlled in `src/config/navigation.config.ts`:
+
+```typescript
+export const navigationConfig = {
+  footer: {
+    sections: [
+      {
+        title: "Here",
+        links: [
+          { title: "About", href: "/about" },
+          { title: "Research", href: "/research" },
+          { title: "Writing", href: "/writing" },
+          { title: "Blog", href: "/posts" },
+          { title: "CV", href: "/cv" },
+          { title: "Sitemap", href: "/sitemap.xml" }
+        ]
+      },
+      {
+        title: "Elsewhere", 
+        links: socialLinks
+          .filter(social => ['Github', 'LinkedIn', 'Twitter', 'Bluesky'].includes(social.friendlyName))
+          .map(social => ({ title: social.friendlyName, href: social.link }))
+      },
+      {
+        title: "Contact",
+        links: [
+          { title: "Email", href: `mailto:${siteConfig.email}` },
+          { title: "CV", href: "/cv" }
+        ]
+      },
+      {
+        title: "About this site",
+        links: [
+          { title: "Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind.", href: "#" }
+        ]
+      }
+    ]
+  }
+};
+```
+
+#### Best Practices for Footer Management
+
+1. **Use TypeScript Configuration** (recommended over YAML)
+   - Type safety and IntelliSense support
+   - Auto-completion in your editor
+   - Refactoring support across codebase
+   - Can reference other config values dynamically
+
+2. **Social Media Integration**
+   - Footer social links automatically use `socialLinks` from `src/site.config.ts`
+   - Single source of truth prevents duplicates
+   - Changes to social media URLs update everywhere
+
+3. **Dynamic Content Support**
+   - Reference other config values: `${siteConfig.email}`
+   - Automatically updated copyright year: `© ${currentYear} Nathan Lane`
+   - Non-clickable descriptive text using `href: "#"`
+
+#### Common Footer Customizations
+
+**Adding New Section:**
+```typescript
+{
+  title: "Resources",
+  links: [
+    { title: "Data Sources", href: "/data" },
+    { title: "Publications", href: "/publications" }
+  ]
+}
+```
+
+**Adding Social Links:**
+Edit `src/site.config.ts` `socialLinks` array - changes automatically appear in footer.
+
+### Sitemap System
+
+The site uses a comprehensive multi-sitemap architecture for optimal SEO.
+
+#### Sitemap Structure
+
+1. **Main Sitemap Index** (`/sitemap-index.xml`)
+   - References all other sitemaps
+   - Entry point for search engines
+
+2. **Content-Specific Sitemaps**
+   - `/sitemap-0.xml` - Static pages (home, about, research, etc.)
+   - `/sitemap-posts.xml` - Blog posts
+   - `/sitemap-research.xml` - Research papers
+   - `/sitemap-notes.xml` - Notes
+
+#### Automatic Generation
+
+Sitemaps are automatically generated during build:
+
+```bash
+# Development - view at localhost:4321/sitemap-index.xml
+pnpm dev
+
+# Production build - creates sitemaps in dist/
+pnpm build
+
+# Preview built sitemaps
+pnpm preview
+```
+
+#### SEO Configuration
+
+Each sitemap includes proper SEO metadata:
+
+- **Priority**: Home (1.0), Research (0.9), Posts (0.8), etc.
+- **Change Frequency**: Daily (posts), Weekly (research), Monthly (static pages)
+- **Last Modified**: Automatic timestamps
+
+#### Search Engine Submission
+
+1. **Add to robots.txt** (create in `/public/robots.txt`):
+   ```
+   Sitemap: https://yourdomain.com/sitemap-index.xml
+   ```
+
+2. **Submit to Google Search Console**
+   - Add sitemap URL: `https://yourdomain.com/sitemap-index.xml`
+
+3. **Validate Sitemaps**
+   - [Google Search Console](https://search.google.com/search-console)
+   - [XML Sitemap Validator](https://www.xml-sitemaps.com/validate-xml-sitemap.html)
+
+---
+
 ## Security Headers
 
 ### Understanding the Headers
@@ -456,3 +595,13 @@ pnpm format       # Format code
 4. Keep this guide handy for reference!
 
 Remember: The CI/CD pipeline catches most issues automatically. If the build passes locally with `pnpm build`, it should deploy successfully!
+
+---
+
+## Related Documentation
+
+For more detailed guides on specific topics:
+
+- **[Footer Configuration Guide](FOOTER_CONFIGURATION_GUIDE.md)** - Comprehensive guide to managing footer content
+- **[Metadata System Guide](METADATA_SYSTEM_GUIDE.md)** - Typography and metadata configuration
+- **[Blog and Writing Guide](BLOG_AND_WRITING_GUIDE.md)** - Content creation and management

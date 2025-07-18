@@ -129,12 +129,12 @@ const structuredData = [
 				// Create the button
 				const copyButton = document.createElement("button");
 				copyButton.className =
-				"copy-code absolute flex items-center justify-center bg-bgColor h-5 font-medium rounded text-light hover:text-accent-two font-sans text-xs font-medium top-2 right-2 z-10";
+				"copy-code absolute flex items-center justify-center font-medium rounded-md font-sans text-xs top-3 right-3 z-10 border border-color-200 bg-bgColor/90 backdrop-blur-sm hover:bg-bgColor hover:border-color-300 transition-all duration-150";
 
 				// Create the span element that will hold the button text
 				const buttonText = document.createElement("span");
 				buttonText.innerText = "Copy"; // Initial text
-				buttonText.className = "flex items-center px-2 py-0.5 bg-[var(--code-title-bg)] text-xs rounded"; // Simplified with standard spacing
+				buttonText.className = "flex items-center px-3 py-1 text-xs font-medium text-light"; // Elegant button styling
 
 				copyButton.appendChild(buttonText); // Append span to the button
 
@@ -147,9 +147,13 @@ const structuredData = [
 					if (code) {
 						await navigator.clipboard.writeText(code);
 						buttonText.innerText = "Copied!";
+						copyButton.classList.add("text-accent-base");
+						copyButton.classList.remove("text-light");
 						// Reset after 2 seconds
 						setTimeout(() => {
 							buttonText.innerText = "Copy";
+							copyButton.classList.remove("text-accent-base");
+							copyButton.classList.add("text-light");
 						}, 2000);
 					}
 				});

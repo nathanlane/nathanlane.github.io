@@ -30,63 +30,60 @@ const currentYear = new Date().getFullYear();
   <!-- Bottom Bar -->
   <div class="footer-bottom">
     <p class="footer-copyright">
-      © {currentYear}
+      © {currentYear} Nathan Lane
     </p>
     <nav class="footer-utility" aria-label="Utility links">
       <a href="/privacy">Privacy</a>
       <a href="/sitemap.xml">Sitemap</a>
       <a href="/rss.xml" title="All content RSS feed">RSS</a>
-      <a href="/research/rss.xml" title="Research papers RSS feed">Research RSS</a>
-      <a href="/notes/rss.xml" title="Notes RSS feed">Notes RSS</a>
     </nav>
   </div>
 </footer>
 
 <style>
-  /* Minimal, typography-focused footer design */
+  /* Typography-focused footer following classical principles */
   .site-footer {
-    margin-top: var(--space-32);
-    padding-top: var(--space-16);
-    font-size: var(--step--1, 0.875rem);
-    line-height: 1.6;
+    margin-top: var(--space-16); /* 96px - Generous separation from content */
+    padding-top: var(--space-12); /* 72px - 3 baselines for strong rhythm */
+    font-size: var(--step--1); /* ~11.5-13px - Slightly larger body text size */
+    font-family: "IBM Plex Sans", system-ui, sans-serif; /* IBM Plex Sans for body */
+    line-height: 1.65; /* 165% - Extra generous for very small text */
     color: var(--color-text-muted);
     background: var(--color-bg-subtle);
+    border-top: 1px solid rgba(128, 128, 128, 0.2); /* Full-width separator line */
     position: relative;
-  }
-  
-  /* Optional subtle separator line */
-  .site-footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 1px;
-    background: var(--color-border);
-    opacity: 0.2;
+    /* Optimize IBM Plex Sans for small text rendering */
+    font-variation-settings: "wght" 425; /* Slightly heavier for small IBM Plex */
+    letter-spacing: 0.025em; /* More generous spacing for small sans-serif */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
   }
 
   .footer-content {
     max-width: var(--container-max, 80rem);
     margin: 0 auto;
-    padding: 0 var(--space-4) var(--space-8); /* 0 24px 48px */
+    padding: 0 var(--space-4) var(--space-10); /* 0 24px 60px - 2.5 baselines */
   }
 
-  /* Clean navigation grid */
+  /* Improved navigation grid with musical spacing */
   .footer-nav {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-6); /* 36px - flow spacing between sections */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-major-third); /* 48px - Musical interval for rhythm */
+    align-items: start; /* Better baseline alignment */
   }
 
+  /* Enhanced section titles with proper hierarchy */
   .footer-section-title {
     font-family: "Newsreader Variable", "Newsreader", serif;
-    font-size: var(--step--1, 0.875rem);
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    margin-bottom: var(--space-2xs);
-    color: var(--color-text);
+    font-size: var(--step-1); /* Increased from step-0 to step-1 for better hierarchy */
+    font-weight: 400; /* Slightly heavier for small size legibility */
+    font-variation-settings: "opsz" 14, "wght" 400; /* Optimized for small display */
+    letter-spacing: 0.02em; /* More open spacing for small headers */
+    margin-bottom: var(--space-3); /* 18px - 0.75 baseline */
+    color: var(--color-text); /* Full contrast for section headers */
+    line-height: 1.4; /* Slightly more generous for small headers */
+    padding-bottom: var(--space-1); /* 6px space before line */
+    border-bottom: 1px solid rgba(128, 128, 128, 0.15); /* Subtle underline for each header */
   }
 
   .footer-links {
@@ -96,91 +93,145 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer-links li {
-    margin-bottom: var(--space-3xs);
+    margin-bottom: var(--space-2); /* 12px - 0.5 baseline rhythm */
   }
   
   .footer-links li:last-child {
     margin-bottom: 0;
   }
 
+  /* Improved link typography with proper weight */
   .footer-link {
     color: var(--color-text-muted);
     text-decoration: none;
     display: inline-block;
-    font-weight: 300;
-    letter-spacing: 0.01em;
+    font-family: inherit; /* Use IBM Plex Sans from parent */
+    font-weight: 450; /* Slightly heavier for small IBM Plex links */
+    font-variation-settings: "wght" 450; /* Optimized weight for small IBM Plex */
+    letter-spacing: 0.03em; /* More generous spacing for small sans-serif links */
+    line-height: 1.65; /* Consistent with body line-height */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
+    transition: color 0.2s ease, opacity 0.2s ease;
   }
 
   .footer-link:hover {
     color: var(--color-text);
+    opacity: 1;
   }
 
-
-  /* Minimal bottom bar */
+  /* Refined bottom bar with better spacing rhythm */
   .footer-bottom {
     max-width: var(--container-max, 80rem);
     margin: 0 auto;
-    padding: var(--space-8) var(--space-4) var(--space-6); /* 48px 24px 36px */
+    padding: var(--space-8) var(--space-4) var(--space-8); /* 48px 24px 48px - 2 baselines */
+    border-top: 1px solid var(--color-border);
+    opacity: 0.8; /* Subtle overall tone for bottom section */
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: var(--step--2, 0.75rem);
+    align-items: baseline; /* Better alignment per Bringhurst */
+    font-size: var(--step--1); /* ~11.5-13px - Increased from step--2 for better readability */
+    font-family: inherit; /* Use IBM Plex Sans from parent */
+    /* Optimize IBM Plex Sans for very small text */
+    font-variation-settings: "wght" 500; /* Heavier weight for small IBM Plex */
+    letter-spacing: 0.03em; /* More open for small sans-serif utility text */
+    line-height: 1.5; /* Generous for small text */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
   }
 
   @media (max-width: 640px) {
     .footer-bottom {
       flex-direction: column;
-      gap: var(--space-2); /* 12px - tight spacing on mobile */
+      gap: var(--space-3); /* 18px - More generous than previous 12px */
       text-align: center;
+      align-items: center;
     }
   }
 
   .footer-copyright {
     color: var(--color-text-muted);
     margin: 0;
+    font-family: inherit; /* Use IBM Plex Sans from parent */
+    font-weight: 500; /* Heavier for very small IBM Plex copyright text */
+    font-variation-settings: "wght" 500; /* Optimized for small IBM Plex */
+    letter-spacing: 0.035em; /* Generous spacing for very small sans-serif */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
   }
 
+  /* Improved utility navigation with abbreviation spacing */
   .footer-utility {
     display: flex;
-    gap: var(--space-3); /* 18px - compact spacing between links */
-    align-items: center;
+    gap: var(--space-4); /* 24px - More generous, baseline rhythm */
+    align-items: baseline;
   }
 
   .footer-utility a {
     color: var(--color-text-muted);
     text-decoration: none;
+    font-family: inherit; /* Use IBM Plex Sans from parent */
+    font-weight: 500; /* Heavier weight for very small IBM Plex text */
+    font-variation-settings: "wght" 500; /* Optimized for very small IBM Plex */
+    letter-spacing: 0.045em; /* Extra generous spacing for small sans-serif abbreviations */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
+    transition: color 0.2s ease;
   }
 
   .footer-utility a:hover {
     color: var(--color-text);
   }
 
-  /* Refined spacing and alignment */
+  /* RSS abbreviation styling - per Hochuli's small caps guidance */
+  .footer-utility a[href*="rss"]::before {
+    content: attr(title);
+    position: absolute;
+    opacity: 0;
+    font-size: var(--step--2);
+    background: var(--color-bg);
+    padding: var(--space-1);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transform: translateY(-100%);
+    margin-top: -var(--space-1);
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .footer-utility a[href*="rss"]:hover::before {
+    opacity: 1;
+  }
+
+  /* Enhanced responsive grid with better proportions */
   @media (min-width: 768px) {
     .footer-nav {
-      grid-template-columns: repeat(3, 1fr);
-      max-width: 100%;
+      grid-template-columns: 1fr 1fr 1fr 2fr; /* Clean 2:1 ratio - mathematical relationship */
+      gap: var(--space-6); /* 36px - Minor third interval from design system */
+    }
+    
+    .site-footer {
+      padding-top: var(--space-16); /* 96px - More generous on larger screens */
     }
   }
   
   @media (min-width: 1024px) {
     .footer-nav {
-      grid-template-columns: repeat(3, minmax(0, 200px));
+      grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(200px, 2fr);
+      /* Content-driven with minimum widths, maintains 2:1 ratio */
       justify-content: start;
-      gap: var(--space-8); /* 48px - section spacing on large screens */
+      gap: var(--space-8); /* 48px - Major third interval */
     }
   }
 
-  /* Subtle hover effects */
+  /* Refined hover effects with optical considerations */
   .footer-link {
     position: relative;
-    opacity: 0.85;
+    opacity: 0.9; /* Slightly reduced for better hierarchy */
   }
   
   .footer-link:hover {
     opacity: 1;
   }
 
+  /* Subtle underline following Bringhurst's restraint principles */
   .footer-link::after {
     content: '';
     position: absolute;
@@ -188,11 +239,72 @@ const currentYear = new Date().getFullYear();
     left: 0;
     width: 100%;
     height: 0.5px;
-    background-color: var(--color-text-muted);
+    background-color: currentColor;
     opacity: 0;
+    transition: opacity 0.2s ease;
   }
 
   .footer-link:hover::after {
-    opacity: 1;
+    opacity: 0.3; /* Very subtle - type should not be overwhelmed */
+  }
+
+  /* Special styling for descriptive text in "About this site" */
+  .footer-link[href="#"] {
+    color: var(--color-text-muted);
+    pointer-events: none; /* Not clickable */
+    font-family: inherit; /* Use IBM Plex Sans */
+    font-variation-settings: "wght" 400; /* Regular weight for IBM Plex */
+    letter-spacing: 0.02em; /* Moderate spacing for small sans-serif */
+    line-height: 1.7; /* Extra generous for small descriptive text */
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
+    opacity: 0.8;
+  }
+
+  .footer-link[href="#"]:hover::after {
+    display: none; /* No underline for non-clickable text */
+  }
+
+  /* Typography enhancement for different screen densities */
+  @media (-webkit-min-device-pixel-ratio: 2) {
+    .footer-section-title {
+      font-variation-settings: "opsz" 14, "wght" 375; /* Lighter on crisp displays */
+      letter-spacing: 0.025em; /* More open on sharp screens */
+    }
+    
+    .footer-link {
+      font-variation-settings: "wght" 400; /* Lighter IBM Plex for crisp displays */
+      letter-spacing: 0.035em; /* More open sans-serif spacing */
+    }
+    
+    .footer-utility a {
+      font-variation-settings: "wght" 450; /* Lighter IBM Plex for very small crisp text */
+      letter-spacing: 0.05em; /* Very open spacing for small sans-serif */
+    }
+  }
+
+  /* High contrast mode - accessibility per WCAG */
+  @media (prefers-contrast: high) {
+    .footer-section-title {
+      font-weight: 600;
+      font-variation-settings: "opsz" 14, "wght" 600;
+      letter-spacing: 0.025em; /* More open for small high-contrast text */
+      color: var(--color-text);
+    }
+    
+    .footer-link {
+      font-weight: 550; /* Heavier IBM Plex for high contrast */
+      font-variation-settings: "wght" 550;
+      letter-spacing: 0.04em; /* Extra open for small high-contrast sans-serif */
+    }
+    
+    .footer-utility a {
+      font-weight: 600; /* Very heavy IBM Plex for tiny high-contrast text */
+      font-variation-settings: "wght" 600;
+      letter-spacing: 0.055em; /* Very open for tiny high-contrast sans-serif */
+    }
+    
+    .site-footer::before {
+      opacity: 0.4; /* More visible separator */
+    }
   }
 </style>

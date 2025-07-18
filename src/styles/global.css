@@ -771,8 +771,9 @@
       opacity: 0.88;
     }
 
-    /* Links with better visibility */
-    a {
+    /* Links with better visibility - scoped to avoid conflicts */
+    .content a:not(.no-filter),
+    .prose a:not(.no-filter) {
       /* Increase brightness for better visibility */
       filter: brightness(1.1);
       /* Subtle hover effect without glow */
@@ -1074,15 +1075,17 @@
 
     /* Enhanced code block styling */
     pre {
-      @apply m-0 static px-0 relative; /* Add relative for button positioning */
-      padding-top: 3rem; /* 12b - space for copy button */
-      padding-bottom: 1.5rem; /* 6b */
-      padding-left: 1.25rem; /* 5b */
-      padding-right: 1.25rem; /* 5b */
+      @apply m-0 static relative; /* Add relative for button positioning */
+      font-size: 0.8125rem; /* 13px - consistent smaller size */
+      padding-top: 2.5rem; /* 10b - space for copy button */
+      padding-bottom: 1.25rem; /* 5b */
+      padding-left: 0; /* Let line styles handle horizontal padding */
+      padding-right: 0;
       max-height: 36rem; /* 144b - generous but limited */
       overflow-x: auto;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      background: transparent; /* Use figure background instead */
       /* Subtle background */
       background: var(--theme-color-25);
       border-radius: 0 0 0.5rem 0.5rem;
@@ -1149,15 +1152,15 @@
         /* Enhanced line styling with baseline grid */
         > [data-line] {
           @apply bg-transparent flex items-center;
-          padding-left: 1rem; /* 4b */
-          padding-right: 1rem; /* 4b */
-          /* Baseline grid aligned line height */
-          line-height: 1.5rem; /* 24px - exactly 4 baseline units */
-          min-height: 1.5rem; /* 6b - comfortable touch target */
+          padding-left: 1.25rem; /* 5b */
+          padding-right: 1.25rem; /* 5b */
+          /* Improved line height for readability */
+          line-height: 1.7; /* More generous line spacing */
+          min-height: 1.625rem; /* Comfortable touch target */
 
           /* Subtle hover effect for better code navigation */
           &:hover {
-            background-color: var(--color-50);
+            background-color: var(--theme-color-50);
           }
         }
 
@@ -1201,9 +1204,11 @@
 
   /* Enhanced base pre block styling */
   pre {
-    @apply bg-[var(--code-bg)] text-[var(--theme-text)] m-0;
+    @apply m-0;
+    background-color: var(--theme-color-50);
+    color: var(--theme-text);
     /* Typography optimization */
-    line-height: 1.5;
+    line-height: 1.7;
     tab-size: 2; /* Consistent tab width */
     /* Enable all programming font features */
     font-feature-settings:
@@ -1214,7 +1219,7 @@
       /* Slashed zero */ "ss01" 1,
       /* Stylistic set 1 (varies by font) */ "ss02" 1; /* Stylistic set 2 (varies by font) */
     /* Optimal letter spacing */
-    letter-spacing: 0.02em;
+    letter-spacing: 0.015em;
     /* Prevent text size adjustment on mobile */
     -webkit-text-size-adjust: 100%;
 
@@ -1494,9 +1499,7 @@
     font-weight: 500;
   }
 
-  .back-link:hover {
-    color: var(--theme-text);
-  }
+  /* Back link styles moved to unified links.css system */
 
   /* Essay header */
   .essay-header {
@@ -1611,11 +1614,72 @@
     top: var(--space-8); /* 48px */
     /* Position TOC to the right of content with proper spacing */
     left: calc(50% + (var(--measure-base) / 2) + var(--space-8));
-    width: 14rem;
-    min-width: 14rem;
+    width: 13rem; /* Slightly narrower */
+    min-width: 13rem;
     z-index: 10;
     max-height: calc(100vh - 6rem); /* Prevent TOC from being too tall */
     overflow-y: auto; /* Allow scrolling if needed */
+    
+    /* Custom scrollbar for elegance */
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: var(--theme-color-300);
+      border-radius: 2px;
+    }
+    
+    /* Typography optimizations for TOC */
+    h4 {
+      font-size: 0.8125rem !important; /* 13px - smaller title */
+      font-weight: 600;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+    }
+    
+    /* TOC list styling */
+    ul {
+      font-size: 0.75rem; /* 12px - smaller for dense display */
+      line-height: 1.4; /* Tighter line height */
+    }
+    
+    /* TOC links */
+    a {
+      display: block;
+      padding: 0.125rem 0; /* Minimal vertical padding */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      
+      /* Remove line clamp to prevent cutoff */
+      &.line-clamp-2 {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* Single line only */
+        -webkit-box-orient: vertical;
+        line-height: 1.3;
+      }
+    }
+    
+    /* Nested items */
+    ul ul {
+      font-size: 0.6875rem; /* 11px - even smaller for nested */
+      margin-left: 0.75rem; /* Reduced indent */
+    }
+    
+    /* Reduce spacing */
+    .px-4b {
+      padding-left: 0.75rem; /* 3b instead of 4b */
+      padding-right: 0.75rem;
+    }
+    
+    .py-2b {
+      padding-top: 0.375rem; /* 1.5b instead of 2b */
+      padding-bottom: 0.375rem;
+    }
   }
 
   /* Dark mode adjustments */
@@ -1631,9 +1695,7 @@
       color: var(--theme-color-400);
     }
 
-    .back-link:hover {
-      color: var(--theme-text);
-    }
+      /* Back link styles moved to unified links.css system */
   }
 
   /* Responsive adjustments */
@@ -1676,6 +1738,23 @@
     .essay-toc {
       /* On very wide screens, give more breathing room */
       left: calc(50% + (var(--measure-base) / 2) + var(--space-12));
+    }
+  }
+  
+  /* TOC-specific typography overrides */
+  #toc-panel {
+    /* Ensure consistent small typography */
+    font-size: 0.75rem; /* 12px base */
+    
+    /* Prevent text overflow in nested structures */
+    * {
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+    
+    /* Tighter spacing for dense display */
+    .rounded-t-lg, .rounded-b-lg {
+      margin: 0;
     }
   }
 }
@@ -1754,13 +1833,7 @@
     /* Removed transition */
   }
 
-  .nav-link:hover::after {
-    width: 100%;
-  }
-
-  .nav-link:hover {
-    color: var(--theme-text);
-  }
+  /* Nav link styles moved to unified links.css system */
 
   /* Active navigation state */
   .nav-link[aria-current="page"] {
@@ -1934,11 +2007,7 @@
     text-decoration-thickness: 0.06em;
   }
 
-  .inline-link:hover,
-  .prose a:not(.nav-link):not(.footer-link):hover {
-    text-decoration-color: var(--theme-color-600);
-    text-decoration-thickness: 0.08em;
-  }
+  /* Inline link hover styles moved to unified links.css system */
 
   .inline-link:visited,
   .prose a:not(.nav-link):not(.footer-link):visited {
@@ -1953,9 +2022,7 @@
     border-bottom: 1px solid transparent;
   }
 
-  .footer-link:hover {
-    border-bottom-color: currentColor;
-  }
+  /* Footer link styles moved to unified links.css system */
 
 }
 
