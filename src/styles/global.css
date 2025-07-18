@@ -1,7 +1,6 @@
 /* Fluid type scale provided via tailwindcss-fluid-type plugin */
 
-/* Import font definitions */
-@import "./fonts.css";
+/* Fonts are loaded via @fontsource imports in BaseHead.astro */
 
 /* Import link typography system */
 @import "./links.css";
@@ -16,16 +15,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Motion preferences now handled in links.css */
-/* Minimal motion controls for non-link elements */
+/* ===== CONSOLIDATED MOTION PREFERENCES ===== */
+/* Single @media block for all reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  *:not(a) {
+  /* Disable animations and transitions for all elements */
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable smooth scrolling */
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Specific element overrides */
+  body {
+    transition: none !important;
+  }
+
+  /* Preserve essential functionality while removing motion */
+  a {
     transition-duration: 0.01ms !important;
   }
 
-  html {
-    scroll-behavior: auto;
+  /* Disable text shadows and effects that could cause motion sensitivity */
+  .heading-1,
+  .heading-2,
+  .heading-3,
+  .heading-4,
+  .heading-5,
+  .heading-6 {
+    filter: none !important;
   }
 }
 
@@ -242,25 +267,7 @@
     }
   }
 
-  /* Reduced Motion Compliance */
-  @media (prefers-reduced-motion: reduce) {
-    /* Disable all heading animations and transitions */
-
-    /* Disable smooth scroll behavior */
-    * {
-      scroll-behavior: auto !important;
-    }
-
-    /* Disable text shadows and effects that could cause motion sensitivity */
-    .heading-1,
-    .heading-2,
-    .heading-3,
-    .heading-4,
-    .heading-5,
-    .heading-6 {
-      filter: none;
-    }
-  }
+  /* Reduced Motion Compliance - handled in consolidated block above */
 
   /* Headings use standardized focus system - no custom styles needed */
 
@@ -776,12 +783,7 @@
     }
   }
 
-  /* Reduced motion - preserve grid */
-  @media (prefers-reduced-motion: reduce) {
-    body {
-      transition: none;
-    }
-  }
+  /* Reduced motion - handled in consolidated block above */
 
   /* Variable font progressive enhancement */
   @supports (font-variation-settings: normal) {

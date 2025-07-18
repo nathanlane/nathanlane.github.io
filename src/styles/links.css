@@ -40,12 +40,7 @@ a:focus-visible {
   border-radius: 2px;
 }
 
-/* Motion preferences - respects user settings */
-@media (prefers-reduced-motion: reduce) {
-  a {
-    transition-duration: 0.01ms !important;
-  }
-}
+/* Motion preferences handled in global.css */
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
