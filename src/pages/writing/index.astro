@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '@/layouts/Base.astro';
 import PageHeader from '@/components/PageHeader.astro';
+import RecentContent from '@/components/RecentContent.astro';
 import SectionSeparator from '@/components/SectionSeparator.astro';
 import CompactList from '@/components/CompactList.astro';
-import MetadataLine from '@/components/MetadataLine.astro';
 import { getCollection } from 'astro:content';
-import { formatDate, formatMonthYear } from '@/utils/date';
+import { formatMonthYear } from '@/utils/date';
 
 const writing = await getCollection('writing');
 const blogPosts = await getCollection('post');
@@ -31,46 +31,17 @@ const recentBlog = blogPosts
       additionalInfo={`<a href="/writing/archive">Browse all writing</a> • Also see <a href="/posts">blog posts here</a>`}
     />
 
-    <!-- Current Thinking - Last 5 writing pieces -->
-    <!-- Section spacing: 16b between sections (96px) -->
-    <section class="mb-16b">
-      <!-- Left-justified heading-2, reduced bottom margin -->
-      <h2 class="heading-2 mb-6b text-left">Recent Writing & Notes</h2>
-      
-      <!-- Reduced spacing between pieces for grouping -->
-      {latestWriting.map((piece, index) => (
-        <article class="mb-8b last:mb-0">
-          <h3 class="heading-4 mb-2b">
-            <a href={`/writing/${piece.id}`} class="feature-link">
-              {piece.data.title}
-            </a>
-          </h3>
-          <MetadataLine 
-            items={[
-              { text: piece.data.type || 'ESSAY' },
-              { text: formatDate(piece.data.publishDate) },
-              ...(piece.data.genre ? [{ text: piece.data.genre.toUpperCase() }] : []),
-              ...(piece.data.featured ? [{ text: 'FEATURED', type: 'dark' as const }] : [])
-            ]}
-            variant="light"
-            class="mb-3b"
-          />
-          <p class="text-body leading-relaxed">{piece.data.description}</p>
-          
-          {/* Subtle separator between pieces (not after last one) */}
-          {index < latestWriting.length - 1 && (
-            <div class="text-center mt-6b">
-            </div>
-          )}
-        </article>
-      ))}
-
-		<div class="mt-6b">
-			<a href="/writing/archive" class="nav-link text-body-sm uppercase tracking-wide">
-			→ View all writing
-			</a>
-		</div>  
-    </section>
+    <!-- Recent Writing using reusable component -->
+    <RecentContent 
+      title="Recent Writing & Notes"
+      items={latestWriting}
+      linkBase="/writing"
+      archiveLink="/writing/archive"
+      archiveLinkText="→ View all writing"
+      showMetadata={true}
+      maxItems={3}
+      class="mb-16b"
+    />
 
     <!-- Wide Full Header Line Separator -->
     <SectionSeparator variant="full-width" spacing="normal" />

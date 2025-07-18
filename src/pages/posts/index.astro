@@ -1,124 +1,160 @@
 ---
 import { getAllPosts, getUniqueTags } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import RecentContent from "@/components/RecentContent.astro";
+import SectionSeparator from "@/components/SectionSeparator.astro";
 
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);
 
 // Group posts by category based on tags
 const economicsPosts = allPosts.filter(p => 
-  p.data.tags?.some(tag => ["economics", "industrial-policy", "globalization", "political-economy"].includes(tag))
+  p.data.tags?.some((tag: string) => ["economics", "industrial-policy", "globalization", "political-economy"].includes(tag))
 );
 
 const technicalPosts = allPosts.filter(p => 
-  p.data.tags?.some(tag => ["programming", "r", "python", "data-science", "tutorials", "code"].includes(tag))
+  p.data.tags?.some((tag: string) => ["programming", "r", "python", "data-science", "tutorials", "code"].includes(tag))
 );
 
 const researchPosts = allPosts.filter(p => 
-  p.data.tags?.some(tag => ["bibliographies", "big-push", "research", "academic"].includes(tag))
+  p.data.tags?.some((tag: string) => ["bibliographies", "big-push", "research", "academic"].includes(tag))
 );
 
 const recentPosts = allPosts.slice(0, 5);
 
 const meta = {
-  title: "Blog Index",
-  description: "Quick navigation for all blog posts organized by category"
+  title: "Blog Posts",
+  description: "Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development."
 };
 ---
 
 <PageLayout meta={meta}>
-  <div class="prose">
-    <h1>Blog Index</h1>
-    <p>Quick access to posts organized by category and recency.</p>
-  </div>
+  <div class="measure-base mx-auto px-4b py-8b">
+    <!-- Reusable Page Header with links -->
+    <PageHeader 
+      title="Blog Posts"
+      description="Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development."
+      additionalInfo={`<a href="/posts/archive">Browse all posts</a> • Also see <a href="/writing">writing here</a>`}
+    />
 
-  <div class="grid md:grid-cols-2 gap-8b mt-8b">
-    <!-- Recent Posts -->
-    <section>
-      <h2 class="heading-2 mb-4b">Recent Posts</h2>
-      <ul class="space-y-2b">
-        {recentPosts.map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`} class="inline-link">
-              {post.data.title}
-            </a>
-            <span class="text-sm text-light ml-2b">
-              ({new Date(post.data.publishDate).getFullYear()})
-            </span>
-          </li>
-        ))}
-      </ul>
-      <a href="/posts" class="inline-link text-sm mt-4b block">View all posts →</a>
-    </section>
+    <!-- Recent Posts using reusable component -->
+    <RecentContent 
+      title="Recent Posts"
+      items={recentPosts}
+      linkBase="/posts"
+      archiveLink="/posts/archive"
+      archiveLinkText="→ View all posts"
+      showMetadata={true}
+      maxItems={5}
+      class="mb-16b"
+    />
 
-    <!-- Economics & Policy -->
-    <section>
-      <h2 class="heading-2 mb-4b">Economics & Policy</h2>
-      <ul class="space-y-2b">
-        {economicsPosts.slice(0, 5).map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`} class="inline-link">
-              {post.data.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-      {economicsPosts.length > 5 && (
-        <span class="text-sm text-light">...and {economicsPosts.length - 5} more</span>
+    <!-- Wide Full Header Line Separator -->
+    <SectionSeparator variant="full-width" spacing="normal" />
+
+    <!-- Category Sections with improved typography -->
+    <section class="mb-16b">
+      <h2 class="heading-2 mb-8b">Browse by Category</h2>
+      
+      <div class="grid md:grid-cols-2 gap-12b">
+        <!-- Economics & Policy -->
+        <div>
+          <h3 class="heading-3 mb-4b">Economics & Policy</h3>
+          <ul class="space-y-3b">
+            {economicsPosts.slice(0, 5).map((post: any) => (
+              <li>
+                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {economicsPosts.length > 5 && (
+            <p class="text-meta text-light mt-3b">
+              ...and {economicsPosts.length - 5} more
+            </p>
+          )}
+        </div>
+
+        <!-- Technical Tutorials -->
+        <div>
+          <h3 class="heading-3 mb-4b">Technical Tutorials</h3>
+          <ul class="space-y-3b">
+            {technicalPosts.slice(0, 5).map((post: any) => (
+              <li>
+                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {technicalPosts.length > 5 && (
+            <p class="text-meta text-light mt-3b">
+              ...and {technicalPosts.length - 5} more
+            </p>
+          )}
+        </div>
+      </div>
+
+      <!-- Research & Bibliography (full width if substantial content) -->
+      {researchPosts.length > 0 && (
+        <div class="mt-12b">
+          <h3 class="heading-3 mb-4b">Research & Bibliography</h3>
+          <ul class="space-y-3b max-w-2xl">
+            {researchPosts.slice(0, 5).map((post: any) => (
+              <li>
+                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                  {post.data.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+          {researchPosts.length > 5 && (
+            <p class="text-meta text-light mt-3b">
+              ...and {researchPosts.length - 5} more
+            </p>
+          )}
+        </div>
       )}
     </section>
 
-    <!-- Technical Tutorials -->
-    <section>
-      <h2 class="heading-2 mb-4b">Technical Tutorials</h2>
-      <ul class="space-y-2b">
-        {technicalPosts.slice(0, 5).map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`} class="inline-link">
-              {post.data.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-      {technicalPosts.length > 5 && (
-        <span class="text-sm text-light">...and {technicalPosts.length - 5} more</span>
-      )}
-    </section>
+    <!-- Wide Full Header Line Separator -->
+    <SectionSeparator variant="full-width" spacing="normal" />
 
-    <!-- Research & Bibliography -->
+    <!-- Navigation Options with improved typography -->
     <section>
-      <h2 class="heading-2 mb-4b">Research & Bibliography</h2>
-      <ul class="space-y-2b">
-        {researchPosts.slice(0, 5).map(post => (
-          <li>
-            <a href={`/posts/${post.slug}`} class="inline-link">
-              {post.data.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-      {researchPosts.length > 5 && (
-        <span class="text-sm text-light">...and {researchPosts.length - 5} more</span>
-      )}
+      <h2 class="heading-2 mb-8b">More Ways to Browse</h2>
+      
+      <div class="grid sm:grid-cols-3 gap-6b">
+        <a href="/posts/archive" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200">
+          <h4 class="heading-4 mb-2b">Full Archive</h4>
+          <p class="text-meta text-light">All {allPosts.length} posts by year</p>
+        </a>
+        
+        <a href="/tags" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200">
+          <h4 class="heading-4 mb-2b">Browse by Tag</h4>
+          <p class="text-meta text-light">{uniqueTags.length} topics</p>
+        </a>
+        
+        <a href="/posts/2" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200">
+          <h4 class="heading-4 mb-2b">Paginated View</h4>
+          <p class="text-meta text-light">10 posts per page</p>
+        </a>
+      </div>
     </section>
-  </div>
-
-  <!-- Navigation Options -->
-  <div class="mt-12b p-6b bg-bgColor/50 rounded-lg">
-    <h3 class="heading-3 mb-4b">More Ways to Browse</h3>
-    <div class="grid sm:grid-cols-3 gap-4b">
-      <a href="/posts/archive" class="block p-4b bg-pageBg rounded hover:bg-accent/10">
-        <h4 class="font-semibold">Full Archive</h4>
-        <p class="text-sm text-light">All {allPosts.length} posts by year</p>
-      </a>
-      <a href="/tags" class="block p-4b bg-pageBg rounded hover:bg-accent/10">
-        <h4 class="font-semibold">Browse by Tag</h4>
-        <p class="text-sm text-light">{uniqueTags.length} topics</p>
-      </a>
-      <a href="/posts/1" class="block p-4b bg-pageBg rounded hover:bg-accent/10">
-        <h4 class="font-semibold">Paginated View</h4>
-        <p class="text-sm text-light">10 posts per page</p>
-      </a>
-    </div>
   </div>
 </PageLayout>
+
+<style>
+  /* Feature link styling consistent with Writing page */
+  .feature-link {
+    color: var(--theme-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .feature-link:hover {
+    color: var(--theme-accent-base);
+  }
+</style>

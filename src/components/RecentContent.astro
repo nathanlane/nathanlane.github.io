@@ -1,0 +1,174 @@
+<!--
+# RecentContent Component
+
+A reusable component for displaying recent content from any collection (writing, posts, research, etc.)
+Follows the typography patterns established in the Writing page with proper baseline grid alignment.
+
+## Usage Examples:
+
+### Recent Writing
+```astro
+<RecentContent 
+  title="Current Thinking"
+  items={recentWriting}
+  linkBase="/writing"
+  archiveLink="/writing/archive"
+  archiveLinkText="→ View all writing"
+  showMetadata={true}
+/>
+```
+
+### Recent Posts  
+```astro
+<RecentContent 
+  title="Recent Posts"
+  items={recentPosts}
+  linkBase="/posts"
+  archiveLink="/posts/archive"
+  archiveLinkText="→ View all posts"
+  showMetadata={true}
+/>
+```
+
+## Typography Features:
+- Semantic heading hierarchy with proper spacing
+- MetadataLine integration for structured information
+- Baseline grid alignment (6px system)
+- Subtle separators between items
+- Archive link with consistent styling
+
+-->
+
+---
+import MetadataLine from "@/components/MetadataLine.astro";
+import { formatDate } from "@/utils/date";
+
+export interface Props {
+  title: string;
+  items: any[]; // Content collection items
+  linkBase: string; // e.g. "/writing" or "/posts"
+  archiveLink?: string; // Link to full archive
+  archiveLinkText?: string; // Text for archive link
+  showMetadata?: boolean; // Whether to show metadata lines
+  maxItems?: number; // Maximum items to show (default: 3)
+  class?: string;
+}
+
+const { 
+  title, 
+  items, 
+  linkBase, 
+  archiveLink, 
+  archiveLinkText = "→ View all",
+  showMetadata = true,
+  maxItems = 3,
+  class: className 
+} = Astro.props;
+
+// Limit items to maxItems
+const displayItems = items.slice(0, maxItems);
+
+// Helper function to generate metadata for different content types
+function getMetadataItems(item: any) {
+  const metadata = [];
+  
+  // Handle different content types
+  if (item.data.type) {
+    metadata.push({ text: item.data.type.toUpperCase() });
+  } else if (item.collection === 'post') {
+    metadata.push({ text: 'POST' });
+  } else if (item.collection === 'writing') {
+    metadata.push({ text: 'ESSAY' });
+  }
+  
+  // Add date
+  if (item.data.publishDate) {
+    metadata.push({ text: formatDate(item.data.publishDate) });
+  }
+  
+  // Add genre if available
+  if (item.data.genre) {
+    metadata.push({ text: item.data.genre.toUpperCase() });
+  }
+  
+  // Add featured status
+  if (item.data.featured) {
+    metadata.push({ text: 'FEATURED', type: 'dark' as const });
+  }
+  
+  return metadata;
+}
+---
+
+<section class:list={[className]}>
+  <!-- Section title with left alignment following Writing page pattern -->
+  <h2 class="heading-2 text-left mb-8b">{title}</h2>
+  
+  <!-- Content items with proper spacing and typography -->
+  <div class="space-y-8b">
+    {displayItems.map((item: any, index: number) => (
+      <article class="last:mb-0">
+        <!-- Item title with semantic heading hierarchy -->
+        <h3 class="heading-4 mb-2b">
+          <a href={`${linkBase}/${item.id || item.slug}`} class="feature-link">
+            {item.data.title}
+          </a>
+        </h3>
+        
+        <!-- Metadata line if enabled -->
+        {showMetadata && (
+          <MetadataLine 
+            items={getMetadataItems(item)}
+            variant="light"
+            class="mb-3b"
+          />
+        )}
+        
+        <!-- Description text with optimal reading typography -->
+        {item.data.description && (
+          <p class="text-body leading-relaxed">{item.data.description}</p>
+        )}
+        
+        {/* Subtle separator between items (not after last one) */}
+        {index < displayItems.length - 1 && (
+          <div class="text-center mt-6b">
+            {/* Minimal separation without visual clutter */}
+          </div>
+        )}
+      </article>
+    ))}
+  </div>
+
+  <!-- Archive link following Writing page pattern -->
+  {archiveLink && (
+    <div class="mt-6b">
+      <a href={archiveLink} class="nav-link text-body-sm uppercase tracking-wide">
+        {archiveLinkText}
+      </a>
+    </div>
+  )}
+</section>
+
+<style>
+  /* Ensure consistent link styling */
+  .feature-link {
+    color: var(--theme-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .feature-link:hover {
+    color: var(--theme-accent-base);
+  }
+  
+  .nav-link {
+    color: var(--theme-color-600);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--theme-text);
+  }
+</style> 
