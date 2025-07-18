@@ -39,7 +39,7 @@ const metadataItems = [
 
 <article class="research-entry">
   <h3 class="research-title">
-    <a href={href} class="research-link link-title">{title}</a>
+    <a href={href} class="link-title">{title}</a>
   </h3>
   
   <div class="research-metadata-custom mb-2b">
@@ -106,16 +106,7 @@ const metadataItems = [
       "calt" 1;     /* Contextual alternates */
   }
   
-  /* Using consolidated link system */
-  .research-link {
-    color: var(--theme-text); /* Override to start with text color */
-  }
-  
-  .research-link:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
+  /* Research link now uses consolidated .link-title class - no custom styles needed */
   
   /* Publication styling - refined and subtle */
   .research-publication {

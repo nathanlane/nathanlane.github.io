@@ -13,11 +13,46 @@
   --link-underline-hover: var(--theme-accent-base);
 }
 
-/* Global rule to ensure all links get base behavior */
+/* ===== SINGLE SOURCE OF TRUTH - Base Link Reset ===== */
+/* ALL links inherit these core behaviors */
 a {
+  /* From links.css (keep) */
   font-size: inherit !important;
   transform: none;
   transition: var(--link-transition);
+
+  /* From global.css (moved here) */
+  position: relative;
+  min-height: 24px;
+  text-underline-offset: 0.1em;
+  text-decoration-thickness: 0.05em;
+  text-decoration-skip-ink: auto;
+}
+
+/* Focus states for ALL links - Single source of truth */
+a:focus {
+  outline: none;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: var(--space-0.5);
+  border-radius: 2px;
+}
+
+/* Motion preferences - respects user settings */
+@media (prefers-reduced-motion: reduce) {
+  a {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  a {
+    text-decoration-thickness: 2px !important;
+    font-weight: 600 !important;
+  }
 }
 
 /* Override any conflicting utility classes */
@@ -211,6 +246,28 @@ a[class*="hover:text-"]:hover {
 :root[data-theme="dark"] .link-footer:hover,
 :root[data-theme="dark"] .footer-link:hover {
   color: var(--theme-accent-light);
+}
+
+/* ===== PRINT STYLES - Centralized from all components ===== */
+@media print {
+  /* Base print styles for all links */
+  a {
+    color: var(--theme-text) !important;
+    text-decoration: underline !important;
+  }
+
+  /* Show URLs for external links */
+  a[href^="http"]:not(.no-print-url)::after {
+    content: " (" attr(href) ")";
+    font-size: var(--step--1);
+    opacity: 0.7;
+  }
+
+  /* Hide URLs for internal links */
+  a[href^="/"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
 }
 
 /* ===== HIGH CONTRAST MODE ===== */

@@ -81,7 +81,7 @@ const {
   <h3 class="archive-title">
     <a 
       href={link} 
-      class="archive-link link-title link-underline-thin"
+      class="link-title link-underline-thin"
     >
       {title}
     </a>
@@ -142,17 +142,7 @@ const {
     color: var(--theme-text);
   }
 
-  /* Link styling - Using consolidated link system */
-  .archive-link {
-    /* Archive-specific color override */
-    color: var(--theme-accent-base);
-    
-    /* Hover state - color override */
-    &:hover {
-      color: var(--theme-accent-dark);
-      text-decoration-color: var(--theme-accent-dark);
-    }
-  }
+  /* Archive link now uses consolidated .link-title class - no custom styles needed */
 
   /* Metadata styling - Ambrose-Harris information hierarchy */
   .archive-meta {
@@ -278,17 +268,6 @@ const {
       padding-bottom: var(--space-2b); /* 12px */
     }
     
-    .archive-link {
-      /* Remove underlines for print clarity */
-      text-decoration: none;
-      color: var(--theme-text);
-    }
-    
-    /* Show URLs after links in print */
-    .archive-link::after {
-      content: " (" attr(href) ")";
-      font-size: var(--step--3);
-      color: var(--theme-color-500);
-    }
+    /* Print link styles now handled centrally in links.css */
   }
 </style> 

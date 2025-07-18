@@ -1,23 +1,33 @@
 /* Fluid type scale provided via tailwindcss-fluid-type plugin */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Import font definitions */
 @import "./fonts.css";
 
 /* Import link typography system */
 @import "./links.css";
 
-/* Import motion preferences */
-@import "./motion.css";
-
 /* Import print styles */
 @import "./print.css";
 
 /* Import component classes */
 @import "./components.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Motion preferences now handled in links.css */
+/* Minimal motion controls for non-link elements */
+@media (prefers-reduced-motion: reduce) {
+  *:not(a) {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
 
 /* Enhanced Optical Sizing Context Variants */
 @layer components {
@@ -2114,16 +2124,9 @@
 
 /* === Link System Refinements === */
 @layer components {
-  /* Universal link improvements */
-  a {
-    position: relative;
-    min-height: 24px;
-    text-underline-offset: 0.1em;
-    text-decoration-thickness: 0.05em;
-    text-decoration-skip-ink: auto;
-  }
+  /* Universal link improvements - MOVED TO links.css for SSOT */
 
-  /* Links use standardized focus system - no custom styles needed */
+  /* Links use standardized focus system - handled in links.css */
 
   /* Content links with refined underline */
   .inline-link,
