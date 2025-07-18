@@ -1,6 +1,6 @@
 # CSS Audit Guide for Astro/Tailwind/Fluid Typography Projects
 
-> **Latest Update**: January 30, 2025 - Phase 2 CSS refactoring complete with standardized focus states, typography tokens, and dead code removal.
+> **Latest Update**: January 31, 2025 - TypeScript type safety improvements, build system fixes, and CSS-in-JS @apply resolution complete.
 
 ## Audit Prompt Template
 
@@ -57,7 +57,7 @@ Please provide:
 - Estimated impact on maintainability and performance
 ```
 
-## Recent Improvements (Phase 2 - January 2025)
+## Recent Improvements (Phases 2-4 - January 2025)
 
 ### ✅ Standardized Focus States
 Implemented a global focus system that provides consistency across all interactive elements:
@@ -90,6 +90,42 @@ Implemented a global focus system that provides consistency across all interacti
 ```
 
 **Components updated**: Button, CompactList, PostSearch, SkipLink, MediaEntry, ArchiveEntry, PageHeader, Sidenote, and all webmentions components now use the global system.
+
+### ✅ TypeScript Type Safety & Build Fixes (Phase 4 - January 31, 2025)
+
+Fixed critical build issues related to CSS-in-JS and TypeScript:
+
+#### CSS @apply Directive Issues
+**Problem**: Tailwind's @apply couldn't access custom CSS classes in Astro's scoped components
+```css
+/* ❌ Failed in Astro components */
+.media-link {
+  @apply link-title link-underline-thin;
+}
+```
+
+**Solution**: Move to direct class application in HTML
+```html
+<!-- ✅ Works everywhere -->
+<a href={url} class="link-title link-underline-thin">
+```
+
+**Components Fixed**:
+- MediaEntry, ArchiveEntry, CompactList
+- ResearchEntry, DocumentSection, RecentContent
+- MediaCard, Footer
+
+#### TypeScript Improvements
+- Fixed 10 type errors with proper optional chaining
+- Updated interfaces to handle `Date | undefined`
+- Removed `any` types from codebase
+- Added proper union type handling
+
+**Impact**: 
+- Zero build errors
+- Type-safe codebase
+- Better developer experience
+- Consistent link styling without @apply issues
 
 ### ✅ Link System Consolidation (Phase 3 - January 30, 2025)
 Consolidated and simplified the link styling system for better maintainability:
@@ -193,6 +229,52 @@ font-size: var(--step-2);   /* Large text */
 - Deleted old import statements
 - Removed duplicate CSS implementations
 - Cleaned up ~50 lines of obsolete code
+
+## CSS-in-JS Limitations in Astro
+
+### ⚠️ @apply Directive Constraints
+
+Astro's component scoping prevents @apply from accessing custom CSS classes defined outside the component:
+
+```astro
+<!-- ❌ This will fail in .astro files -->
+<style>
+  .my-link {
+    @apply link-title link-underline-thin; /* Error: class not found */
+  }
+</style>
+```
+
+**Solutions**:
+
+1. **Use classes directly in HTML** (Recommended)
+   ```html
+   <a class="link-title link-underline-thin">
+   ```
+
+2. **Define base styles in global CSS**
+   ```css
+   /* src/styles/global.css or links.css */
+   @layer components {
+     .link-title { /* styles */ }
+   }
+   ```
+
+3. **Use CSS custom properties**
+   ```css
+   /* Component style block */
+   .my-link {
+     color: var(--link-color);
+     font-weight: var(--link-weight);
+   }
+   ```
+
+### 🎯 Astro-Specific CSS Guidelines
+
+- **Scoped by default**: Styles in `<style>` blocks only affect that component
+- **Global styles**: Use `:global()` selector or global CSS files
+- **CSS ordering**: Import order matters - later imports override earlier ones
+- **Build optimization**: Unused CSS is automatically removed in production
 
 ## CSS Best Practices Checklist
 
@@ -408,6 +490,49 @@ font-size: var(--step-2);   /* Large text */
   }
   ```
 
+## Audit Process & Tools
+
+### 🔍 Quick Audit Commands
+
+Run these commands to quickly identify CSS issues:
+
+```bash
+# Find hardcoded colors
+grep -r --include="*.astro" --include="*.css" -E "#[0-9a-fA-F]{3,6}|rgb\(|hsl\(" src/
+
+# Find pixel values (should use design tokens)
+grep -r --include="*.astro" --include="*.css" -E "[0-9]+px" src/
+
+# Find @apply usage in Astro components (potential issues)
+grep -r --include="*.astro" "@apply" src/
+
+# Find repeated class combinations
+grep -r --include="*.astro" -E 'class="[^"]{50,}"' src/
+
+# Check for unused CSS classes
+pnpm dlx purgecss --content "src/**/*.{astro,jsx,tsx}" --css "dist/**/*.css"
+```
+
+### 📊 CSS Metrics to Monitor
+
+1. **File Size**
+   ```bash
+   # Check CSS bundle size after build
+   pnpm build && ls -lh dist/_astro/*.css
+   ```
+
+2. **Specificity Issues**
+   ```bash
+   # Look for overly specific selectors
+   grep -r --include="*.css" -E "(\.|#)[a-zA-Z0-9-_]+ (\.|#)[a-zA-Z0-9-_]+ (\.|#)" src/
+   ```
+
+3. **Custom CSS vs Utilities Ratio**
+   ```bash
+   # Count custom CSS rules
+   grep -r --include="*.css" --include="*.astro" -c "^[[:space:]]*\." src/ | awk -F: '{sum+=$2} END {print sum}'
+   ```
+
 ## Automated Audit Script
 
 Create a script to check for common issues:
@@ -460,4 +585,56 @@ const findRepeatedClasses = (files) => {
 - Specificity graph (should stay flat)
 - Component reuse percentage
 
-This guide provides a structured approach to maintaining clean, efficient CSS in your Astro/Tailwind project while ensuring consistency with your fluid typography system.
+## Lessons Learned from Recent Refactoring
+
+### 💡 Key Insights
+
+1. **@apply Limitations in Astro**
+   - Custom CSS classes must be defined globally to work with @apply
+   - Component-scoped styles can't be referenced by @apply
+   - Direct class application in HTML is more reliable
+
+2. **TypeScript Strictness Pays Off**
+   - `exactOptionalPropertyTypes` catches potential runtime errors
+   - Proper type definitions prevent build failures
+   - Optional chaining (`?.`) is essential for undefined values
+
+3. **Content Collection Best Practices**
+   - Always clear `.astro` cache when removing collections
+   - Update all references (config, validation, pages, RSS)
+   - Use proper terminology: "content collection" not "note of content"
+
+4. **CSS Organization Strategy**
+   - Consolidate similar patterns (7 link types → 4)
+   - Use inheritance with @apply in global CSS only
+   - Maintain single source of truth for each pattern
+
+5. **Build Process Understanding**
+   - `pnpm check`: TypeScript validation (run before commits)
+   - `pnpm lint`: Code quality checks (run during review)
+   - `pnpm build`: Production build (run before deploy)
+
+### 🚀 Recommended Workflow
+
+1. **Before Starting Work**
+   ```bash
+   pnpm check  # Ensure no type errors
+   pnpm lint   # Check code quality
+   ```
+
+2. **During Development**
+   - Use direct classes in HTML, not @apply in components
+   - Follow the 4 primary link types
+   - Check focus states and dark mode
+
+3. **Before Committing**
+   ```bash
+   pnpm check && pnpm lint && pnpm build
+   ```
+
+4. **Regular Audits**
+   - Weekly: Check for hardcoded values
+   - Monthly: Full CSS audit
+   - Per feature: Verify pattern consistency
+
+This guide provides a structured approach to maintaining clean, efficient CSS in your Astro/Tailwind project while ensuring consistency with your fluid typography system and avoiding common pitfalls discovered during refactoring.

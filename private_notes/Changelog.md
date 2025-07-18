@@ -1,5 +1,82 @@
 # Changelog
 
+## TypeScript Type Safety & Build System Fixes (January 31, 2025)
+
+### TypeScript Type Errors Fixed (10 errors → 0)
+- **Optional Chaining Added**:
+  - StructuredData.astro: Added optional chaining for `data.url?.pathname`
+  - Fixed potential undefined access errors throughout components
+- **Type Definitions Updated**:
+  - Updated `CollectionItemBase` interface to handle `Date | undefined` for updatedDate
+  - Fixed type mismatches between component expectations and actual data
+  - Added proper union type handling for StructuredData props
+- **Component Fixes**:
+  - BlogPost.astro: Fixed structuredData type definition with proper imports
+  - Archive pages: Added non-null assertions for filtered post arrays
+  - Removed unused imports across multiple files
+
+### Linting Issues Resolved (2 errors → 0)
+- **Switch Case Block Scoping**:
+  - StructuredData.astro: Added block scoping to switch case statements
+  - Proper variable scoping for union type narrowing
+- **Removed `any` Type Usage**:
+  - content-validation.ts: Removed explicit `any` type annotation
+  - Let TypeScript infer types from Astro content collections
+
+### Note Content Collection Removal
+- **Proper Collection Removal Process**:
+  - Removed "note" from content.config.ts exports
+  - Updated content-validation.ts to remove "note" references
+  - Cleared .astro cache to prevent stale data
+  - Removed /src/pages/notes/ directory
+  - Updated RSS feed generation to exclude notes
+  - Removed unused Note component
+- **Key Learning**: The proper term is "content collection" (not "note of content")
+
+### Build System Fixes (@apply CSS Errors)
+- **Initial Error**: Custom CSS classes not found when used with @apply in Astro components
+- **Root Cause**: Tailwind's @apply directive can't access custom CSS classes in Astro's scoped components
+- **Solution Implemented**:
+  - Moved link styling from @apply directives to HTML class attributes
+  - Updated 9 components to use direct class application:
+    - MediaEntry.astro: Added `link-title link-underline-thin`
+    - ArchiveEntry.astro: Added `link-title link-underline-thin`
+    - CompactList.astro: Added `link-title`
+    - ResearchEntry.astro: Added `link-title` and `link-nav`
+    - DocumentSection.astro: Added `link-nav`
+    - RecentContent.astro: Added `link-title` and `link-nav`
+    - MediaCard.astro: Added `link-title link-underline-thin`
+    - Footer.astro: Added `link-nav`
+- **Alternative Approaches Attempted**:
+  - Wrapping classes in @layer components (didn't work in Astro)
+  - Reordering CSS imports (didn't resolve scoping issue)
+
+### Build Results
+- **Before**: 10 TypeScript errors, 2 linting errors, build failures
+- **After**: 0 errors, 0 warnings, successful build with 182 pages generated
+- **Key Commands Explained**:
+  - `pnpm run check`: Runs Astro's TypeScript type checker
+  - `pnpm run lint`: Runs Biome linter for code quality
+  - `pnpm run build`: Creates production-ready static site in ./dist/
+
+### Developer Education Notes
+- **Run Frequency**:
+  - `pnpm run check`: Before committing, after refactoring, before deploying
+  - `pnpm run lint`: Before committing, during code review
+  - `pnpm run build`: Before deploying, after major changes
+- **TypeScript Strict Mode**: `exactOptionalPropertyTypes` requires explicit undefined handling
+- **Content Collections**: Astro's type-safe content management system
+- **CSS-in-JS Limitations**: Scoped styles in Astro components have different rules than global CSS
+
+### Impact
+- **Type Safety**: All TypeScript errors resolved with proper type handling
+- **Code Quality**: Clean linting output with no warnings
+- **Build Success**: Production build completes without errors
+- **Maintainability**: Better type definitions prevent future errors
+- **Documentation**: Clear understanding of proper content collection management
+
+## Link System Consolidation (January 30, 2025)
+
 ## Link System Consolidation (January 30, 2025)
 
 ### Phase 1 - Link Refactoring Complete
