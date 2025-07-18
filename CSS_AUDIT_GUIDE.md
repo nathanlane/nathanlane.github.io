@@ -1,0 +1,324 @@
+# CSS Audit Guide for Astro/Tailwind/Fluid Typography Projects
+
+## Audit Prompt Template
+
+Use this prompt to generate a comprehensive CSS audit of your codebase:
+
+```
+Please audit the CSS/styling in this Astro project that uses Tailwind CSS and fluid typography. Focus on:
+
+1. **Class Duplication Analysis**
+   - Find repeated utility class combinations that could be extracted into components
+   - Identify patterns like "text-sm font-medium text-gray-600" appearing multiple times
+   - Look for component-specific classes that could be generalized
+
+2. **Maintainability Assessment**
+   - Check for hardcoded values that should use design tokens
+   - Find inline styles that should be utility classes
+   - Identify CSS-in-JS that could be simplified to utilities
+   - Look for complex class strings that need extraction
+
+3. **Fluid Typography Review**
+   - Verify consistent use of fluid type scale (text--2 to text-6)
+   - Check for manual clamp() functions that duplicate the system
+   - Ensure responsive font sizes follow the established scale
+
+4. **Spacing System Consistency**
+   - Audit use of baseline grid units (1b, 2b, 4b, etc.)
+   - Find inconsistent spacing patterns (mixing px, rem, spacing units)
+   - Check for hardcoded margins/paddings vs. design tokens
+
+5. **Component Styling Patterns**
+   - Identify components with similar styling that could share classes
+   - Find opportunities for variant-based component patterns
+   - Check for proper use of Tailwind's component layer
+
+6. **Performance & Bundle Size**
+   - Look for unused CSS classes or utilities
+   - Find overly specific selectors that increase specificity
+   - Check for duplicate CSS declarations
+
+7. **Dark Mode Implementation**
+   - Verify consistent use of CSS variables for theming
+   - Check for hardcoded colors vs. theme colors
+   - Ensure all components support dark mode properly
+
+8. **Accessibility Concerns**
+   - Check color contrast ratios
+   - Verify focus states are properly styled
+   - Ensure interactive elements have appropriate hover/active states
+
+Please provide:
+- Specific file locations and line numbers
+- Before/after code examples
+- Priority rating (High/Medium/Low) for each issue
+- Estimated impact on maintainability and performance
+```
+
+## CSS Best Practices Checklist
+
+### 🎨 Design System Adherence
+
+- [ ] **Use Design Tokens Consistently**
+  ```css
+  /* ❌ Bad */
+  padding: 24px;
+  color: #1a1a1a;
+  
+  /* ✅ Good */
+  padding: var(--space-4);
+  color: var(--theme-text);
+  ```
+
+- [ ] **Follow Fluid Typography Scale**
+  ```html
+  <!-- ❌ Bad -->
+  <h2 class="text-[1.875rem] md:text-[2.25rem]">
+  
+  <!-- ✅ Good -->
+  <h2 class="text-3 heading-2">
+  ```
+
+- [ ] **Use Baseline Grid Spacing**
+  ```html
+  <!-- ❌ Bad -->
+  <div class="mb-6 mt-4 px-5">
+  
+  <!-- ✅ Good -->
+  <div class="mb-4b mt-3b px-4b">
+  ```
+
+### 🔧 Maintainability
+
+- [ ] **Extract Repeated Utility Combinations**
+  ```html
+  <!-- ❌ Bad: Repeated everywhere -->
+  <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+  
+  <!-- ✅ Good: Component class -->
+  <button class="btn-primary">
+  ```
+
+- [ ] **Use Semantic Class Names**
+  ```css
+  /* ❌ Bad */
+  .mt-24-responsive { }
+  
+  /* ✅ Good */
+  .section-spacing { }
+  ```
+
+- [ ] **Organize Custom CSS with @layer**
+  ```css
+  /* ✅ Good */
+  @layer components {
+    .card {
+      @apply bg-white rounded-lg shadow-md p-4;
+    }
+  }
+  ```
+
+### 🚀 Performance
+
+- [ ] **Avoid Arbitrary Values When Possible**
+  ```html
+  <!-- ❌ Bad -->
+  <div class="w-[437px] h-[259px]">
+  
+  <!-- ✅ Good -->
+  <div class="w-full max-w-md aspect-video">
+  ```
+
+- [ ] **Minimize Custom CSS**
+  ```css
+  /* ❌ Bad: Custom CSS for common patterns */
+  .my-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* ✅ Good: Use utilities */
+  class="flex items-center justify-between"
+  ```
+
+- [ ] **Purge Unused Styles**
+  - Ensure Tailwind's purge/content config includes all template files
+  - Remove commented-out styles
+  - Delete unused component variants
+
+### 🎯 Component Patterns
+
+- [ ] **Create Reusable Component Classes**
+  ```css
+  @layer components {
+    /* Typography Components */
+    .heading-1 { @apply text-5 font-newsreader font-light; }
+    .heading-2 { @apply text-4 font-newsreader font-light; }
+    
+    /* Button Components */
+    .btn { @apply px-4b py-2b rounded-md transition-colors; }
+    .btn-primary { @apply btn bg-accent text-white hover:bg-accent-dark; }
+  }
+  ```
+
+- [ ] **Use Data Attributes for State**
+  ```html
+  <!-- ✅ Good -->
+  <div class="tab-panel" data-state="active">
+  ```
+  ```css
+  .tab-panel[data-state="active"] { @apply block; }
+  .tab-panel[data-state="inactive"] { @apply hidden; }
+  ```
+
+### 🌓 Theming
+
+- [ ] **Use CSS Variables for Colors**
+  ```css
+  /* ❌ Bad */
+  color: #3B82F6;
+  background: rgb(59, 130, 246);
+  
+  /* ✅ Good */
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
+  ```
+
+- [ ] **Implement Proper Dark Mode**
+  ```css
+  /* ✅ Good: Using CSS variables that change with theme */
+  .card {
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+  }
+  ```
+
+### 📐 Typography
+
+- [ ] **Use Fluid Type Scale**
+  ```html
+  <!-- ✅ Good -->
+  <p class="text-0">Body text</p>
+  <h3 class="text-2 heading-3">Subheading</h3>
+  ```
+
+- [ ] **Apply Consistent Line Heights**
+  ```css
+  /* Define in system */
+  --line-height-tight: 1.2;
+  --line-height-base: 1.6;
+  --line-height-relaxed: 1.8;
+  ```
+
+- [ ] **Use Proper Font Loading**
+  ```html
+  <!-- ✅ Good -->
+  <link rel="preload" href="/fonts/main.woff2" as="font" crossorigin>
+  ```
+
+### ♿ Accessibility
+
+- [ ] **Ensure Sufficient Color Contrast**
+  - Text: 4.5:1 for normal text, 3:1 for large text
+  - Use tools to verify contrast ratios
+
+- [ ] **Style Focus States**
+  ```css
+  /* ✅ Good */
+  .btn:focus-visible {
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+  }
+  ```
+
+- [ ] **Provide Hover/Active Feedback**
+  ```css
+  .interactive-element {
+    @apply transition-colors;
+  }
+  .interactive-element:hover {
+    @apply bg-gray-100;
+  }
+  ```
+
+### 🧹 Code Quality
+
+- [ ] **Remove Dead Code**
+  - Commented-out styles
+  - Unused class definitions
+  - Old vendor prefixes
+
+- [ ] **Consolidate Similar Styles**
+  ```css
+  /* ❌ Bad */
+  .header-link { color: blue; text-decoration: underline; }
+  .footer-link { color: blue; text-decoration: underline; }
+  
+  /* ✅ Good */
+  .link-primary { color: blue; text-decoration: underline; }
+  ```
+
+- [ ] **Document Complex Patterns**
+  ```css
+  /* Card component with elevated shadow on hover
+     Uses baseline grid spacing (4b = 24px) */
+  .card {
+    @apply p-4b shadow-sm hover:shadow-lg transition-shadow;
+  }
+  ```
+
+## Automated Audit Script
+
+Create a script to check for common issues:
+
+```javascript
+// scripts/audit-css.js
+const glob = require('glob');
+const fs = require('fs');
+
+// Check for hardcoded colors
+const colorPattern = /#[0-9a-fA-F]{3,6}|rgb\(|hsl\(/;
+
+// Check for pixel values
+const pixelPattern = /\d+px/;
+
+// Check for repeated class combinations
+const findRepeatedClasses = (files) => {
+  const classPatterns = new Map();
+  
+  files.forEach(file => {
+    const content = fs.readFileSync(file, 'utf8');
+    const classMatches = content.match(/class="([^"]*)"/g) || [];
+    
+    classMatches.forEach(match => {
+      const classes = match.replace('class="', '').replace('"', '');
+      if (classes.split(' ').length > 3) {
+        classPatterns.set(classes, (classPatterns.get(classes) || 0) + 1);
+      }
+    });
+  });
+  
+  return Array.from(classPatterns.entries())
+    .filter(([_, count]) => count > 2)
+    .sort((a, b) => b[1] - a[1]);
+};
+```
+
+## Regular Audit Schedule
+
+1. **Weekly**: Quick scan for hardcoded values and repeated patterns
+2. **Monthly**: Full audit using the checklist
+3. **Before Major Releases**: Complete CSS optimization pass
+4. **After Adding Features**: Check for consistency with existing patterns
+
+## Key Metrics to Track
+
+- Number of custom CSS rules vs. utility classes
+- Bundle size over time
+- Number of unique color values
+- Specificity graph (should stay flat)
+- Component reuse percentage
+
+This guide provides a structured approach to maintaining clean, efficient CSS in your Astro/Tailwind project while ensuring consistency with your fluid typography system.
