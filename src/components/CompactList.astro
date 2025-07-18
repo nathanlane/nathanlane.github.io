@@ -207,7 +207,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		
 		.entry-link:focus {
 			outline: 2px solid var(--theme-accent-base);
-			outline-offset: 2px;
+			outline-offset: var(--space-0.5);
 		}
 	}
 
@@ -215,18 +215,18 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 	@media print {
 		.compact-entry {
 			padding: var(--space-2) 0;
-			border-bottom: 1px solid #ccc;
+			border-bottom: 1px solid var(--theme-color-300);
 		}
 		
 		.entry-link {
-			color: #000;
+			color: var(--theme-text);
 			text-decoration: underline;
 		}
 		
 		.entry-link::after {
 			content: " (" attr(href) ")";
 			font-size: 0.875em;
-			color: #666;
+			color: var(--theme-color-600);
 		}
 	}
 </style>
