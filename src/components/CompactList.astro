@@ -139,8 +139,8 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		margin-top: var(--space-1); /* 6px - tight coupling */
 		margin-bottom: 0;
 		
-		/* Prevent overly long descriptions */
-		max-width: var(--measure-base); /* 75ch */
+		/* Prevent overly long descriptions - tighter for better readability */
+		max-width: 65ch; /* Reduced from 75ch for better scanning */
 	}
 
 	/* Responsive adjustments */

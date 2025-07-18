@@ -1,0 +1,192 @@
+---
+export interface Props {
+	sections: Array<{
+		title: string;
+		href: string;
+		count?: number;
+	}>;
+	class?: string;
+}
+
+const { sections, class: className = "" } = Astro.props;
+---
+
+<nav class={`table-of-contents ${className}`} role="navigation" aria-label="Research sections">
+	<ul class="toc-list" role="list">
+		{sections.map((section: { title: string; href: string; count?: number }) => (
+			<li class="toc-entry">
+				<a href={section.href} class="toc-link link-nav">
+					<span class="toc-title">{section.title}</span>
+					<span class="toc-dots" aria-hidden="true"></span>
+					{section.count !== undefined && (
+						<span class="toc-count">({section.count})</span>
+					)}
+				</a>
+			</li>
+		))}
+	</ul>
+</nav>
+
+<style>
+	/* Container styling */
+	.table-of-contents {
+		/* Background and border for definition */
+		background: var(--theme-color-50);
+		border: 1px solid var(--theme-color-150);
+		border-radius: 4px;
+		
+		/* Padding for comfortable reading */
+		padding: var(--space-6) var(--space-5); /* 36px 30px */
+		
+		/* Typography foundation */
+		font-family: var(--font-serif);
+	}
+
+	/* Remove default list styling */
+	.toc-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	/* Tight vertical spacing for entries */
+	.toc-entry {
+		margin: 0;
+		padding: 0;
+	}
+
+	.toc-entry + .toc-entry {
+		margin-top: var(--space-2); /* 12px - tight spacing */
+	}
+
+	/* Link container with flex layout for dot leaders */
+	.toc-link {
+		display: flex;
+		align-items: baseline;
+		text-decoration: none;
+		
+		/* Typography */
+		font-size: var(--step-0); /* 15.6-17px */
+		line-height: 1.3; /* Tight leading for clean lines */
+		
+		/* Interactive states */
+		transition: color 200ms ease;
+	}
+
+	/* Title styling - serif with academic feel */
+	.toc-title {
+		/* Serif typography for academic aesthetic */
+		font-family: var(--font-serif);
+		font-weight: 400;
+		color: var(--theme-text);
+		
+		/* Prevent wrapping */
+		flex: 0 0 auto;
+		white-space: nowrap;
+	}
+
+	/* Dot leaders for visual rhythm */
+	.toc-dots {
+		/* Flex fill the space */
+		flex: 1 1 auto;
+		
+		/* Create dot pattern */
+		border-bottom: 1px dotted var(--theme-color-300);
+		margin: 0 var(--space-2); /* 12px spacing from title and count */
+		
+		/* Align with baseline */
+		height: 0.5em;
+		margin-bottom: 0.25em;
+	}
+
+	/* Count styling - parenthetical notation */
+	.toc-count {
+		/* Typography */
+		font-family: var(--font-sans);
+		font-size: var(--step--1); /* 12.8-14.4px - smaller metadata size */
+		font-variant-numeric: lining-nums;
+		color: var(--theme-color-500);
+		
+		/* Prevent shrinking */
+		flex: 0 0 auto;
+	}
+
+	/* Hover states */
+	.toc-link:hover .toc-title {
+		color: var(--theme-accent-base);
+	}
+
+	.toc-link:hover .toc-dots {
+		border-bottom-color: var(--theme-accent-base);
+	}
+
+	.toc-link:hover .toc-count {
+		color: var(--theme-color-600);
+	}
+
+	/* Focus states - using site's consolidated system */
+	.toc-link:focus-visible {
+		outline: 2px solid var(--theme-accent);
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+
+	/* Dark mode adaptations */
+	:global([data-theme="dark"]) .table-of-contents {
+		background: var(--theme-color-950);
+		border-color: var(--theme-color-800);
+	}
+
+	:global([data-theme="dark"]) .toc-dots {
+		border-bottom-color: var(--theme-color-600);
+	}
+
+	:global([data-theme="dark"]) .toc-count {
+		color: var(--theme-color-400);
+	}
+
+	:global([data-theme="dark"]) .toc-link:hover .toc-dots {
+		border-bottom-color: var(--theme-accent-light);
+	}
+
+	:global([data-theme="dark"]) .toc-link:hover .toc-count {
+		color: var(--theme-color-300);
+	}
+
+	/* High contrast mode support */
+	@media (prefers-contrast: high) {
+		.table-of-contents {
+			border-width: 2px;
+		}
+		
+		.toc-dots {
+			border-bottom-width: 2px;
+			border-bottom-style: solid;
+		}
+	}
+
+	/* Print optimization */
+	@media print {
+		.table-of-contents {
+			background: transparent;
+			border: 1px solid var(--theme-color-300);
+		}
+		
+		.toc-dots {
+			border-bottom-color: var(--theme-color-600) !important;
+		}
+		
+		/* Print link styles handled by consolidated system */
+	}
+
+	/* Responsive adjustments */
+	@media (max-width: 640px) {
+		.table-of-contents {
+			padding: var(--space-4) var(--space-3); /* 24px 18px */
+		}
+		
+		.toc-entry + .toc-entry {
+			margin-top: var(--space-1.5); /* 9px - slightly tighter on mobile */
+		}
+	}
+</style> 
