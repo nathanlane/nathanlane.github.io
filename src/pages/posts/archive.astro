@@ -1,137 +1,163 @@
 ---
-import Badge from "@/components/Badge.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
-import { Icon } from "astro-icon/components";
+import PageHeader from "@/components/PageHeader.astro";
+import ArchiveEntry from "@/components/ArchiveEntry.astro";
+import Badge from "@/components/Badge.astro";
 
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);
 const groupedByYear = groupPostsByYear(allPosts);
 const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 
-// Create tag categories
-const tagCategories = {
-  topics: ["economics", "industrial-policy", "history", "globalization", "political-economy"],
-  technical: ["programming", "r", "python", "data-science", "tutorials", "code"],
-  research: ["bibliographies", "big-push", "research", "academic"],
-  other: uniqueTags.filter(tag => 
-    !["economics", "industrial-policy", "history", "globalization", "political-economy",
-      "programming", "r", "python", "data-science", "tutorials", "code",
-      "bibliographies", "big-push", "research", "academic"].includes(tag)
-  )
-};
-
+// Calculate stats for description
 const postCount = allPosts.length;
 const yearCount = descYearKeys.length;
+const oldestYear = descYearKeys[descYearKeys.length - 1];
+const newestYear = descYearKeys[0];
+
+// Create tag categories for better organization
+const tagCategories = {
+  "Economics & Policy": ["economics", "industrial-policy", "history", "globalization", "political-economy", "not-data"],
+  "Technical & Programming": ["programming", "r", "rstats", "python", "data-science", "tutorials", "code", "web-development", "static-site"],
+  "Research & Academic": ["bibliographies", "big-push", "research", "academic"],
+  "Writing & Content": ["blog", "documentation", "guide", "tutorial", "writing"],
+  "Design & Development": ["design", "design-systems", "typography", "css", "astro", "tailwind"],
+  "Other Topics": uniqueTags.filter(tag => 
+    !["economics", "industrial-policy", "history", "globalization", "political-economy", "not-data",
+      "programming", "r", "rstats", "python", "data-science", "tutorials", "code", "web-development", "static-site",
+      "bibliographies", "big-push", "research", "academic",
+      "blog", "documentation", "guide", "tutorial", "writing",
+      "design", "design-systems", "typography", "css", "astro", "tailwind"].includes(tag)
+  ).sort()
+};
 
 const meta = {
   title: "Blog Archive",
-  description: `Browse all ${postCount} blog posts organized by year and topic`
+  description: `${postCount} posts exploring economics, technology, and development from ${oldestYear} to ${newestYear}. Browse by year, topic, or search the complete archive.`
+};
+
+// Helper function to format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric'
+  });
+};
+
+// Helper function to determine post type based on tags and title
+const getPostType = (post: any) => {
+  const tags = post.data.tags || [];
+  const title = post.data.title.toLowerCase();
+  
+  // Check for specific patterns in tags or title
+  if (tags.some((tag: string) => ['tutorial', 'guide', 'how-to'].includes(tag)) || 
+      title.includes('how to') || title.includes('guide')) {
+    return 'Tutorial';
+  }
+  if (tags.some((tag: string) => ['research', 'academic', 'bibliography'].includes(tag))) {
+    return 'Research';
+  }
+  if (tags.some((tag: string) => ['programming', 'code', 'r', 'python'].includes(tag))) {
+    return 'Technical';
+  }
+  if (tags.some((tag: string) => ['essay', 'opinion', 'analysis'].includes(tag))) {
+    return 'Essay';
+  }
+  if (tags.includes('economics') || tags.includes('industrial-policy')) {
+    return 'Economics';
+  }
+  
+  return 'Post';
+};
+
+// Helper function to get primary tag for tertiary metadata
+const getPrimaryTag = (post: any) => {
+  if (!post.data.tags || post.data.tags.length === 0) return undefined;
+  
+  // Prioritize certain tags as "primary"
+  const priorityTags = ['economics', 'programming', 'design-systems', 'typography', 'industrial-policy', 'research'];
+  const foundPriority = post.data.tags.find((tag: string) => priorityTags.includes(tag));
+  
+  if (foundPriority) {
+    return foundPriority.split('-').map((word: string) => 
+      word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+  }
+  
+  // Otherwise return the first tag, formatted nicely
+  return post.data.tags[0].split('-').map((word: string) => 
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ');
 };
 ---
 
 <PageLayout meta={meta}>
-  <div class="prose">
-    <h1>Blog Archive</h1>
-    <p class="text-light">
-      {postCount} posts spanning {yearCount} years ({descYearKeys[descYearKeys.length - 1]}–{descYearKeys[0]})
-    </p>
-  </div>
+  <div class="measure-base mx-auto px-4b py-8b">
+    <!-- Page Header with improved typography and metadata -->
+    <PageHeader 
+      title="Blog Archive"
+      description={`${postCount} posts exploring economics, technology, design, and development spanning ${yearCount} years (${oldestYear}–${newestYear}). A comprehensive collection of tutorials, essays, research notes, and technical documentation.`}
+      additionalInfo={`<a href="/rss.xml">Subscribe to RSS</a> • <a href="/posts/1">Browse latest posts</a> • <a href="/tags">View all tags</a>`}
+    />
 
-  <!-- Quick Stats -->
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4b my-8b">
-    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
-      <div class="text-2xl font-bold">{postCount}</div>
-      <div class="text-sm text-light">Total Posts</div>
-    </div>
-    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
-      <div class="text-2xl font-bold">{uniqueTags.length}</div>
-      <div class="text-sm text-light">Topics</div>
-    </div>
-    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
-      <div class="text-2xl font-bold">{yearCount}</div>
-      <div class="text-sm text-light">Years</div>
-    </div>
-    <div class="text-center p-4b bg-bgColor/50 rounded-lg">
-      <div class="text-2xl font-bold">{Math.round(postCount / yearCount)}</div>
-      <div class="text-sm text-light">Posts/Year</div>
-    </div>
-  </div>
-
-  <!-- Browse by Topic -->
-  <section class="my-8b">
-    <h2 class="heading-2 mb-4b">Browse by Topic</h2>
-    
-    {Object.entries(tagCategories).map(([category, tags]) => (
-      tags.length > 0 && (
-        <div class="mb-4b">
-          <h3 class="heading-4 capitalize mb-2b">{category}</h3>
-          <div class="flex flex-wrap gap-2b">
-            {tags.map(tag => (
-              <a href={`/tags/${tag}`} class="inline-block">
-                <Badge>{tag} ({allPosts.filter(p => p.data.tags?.includes(tag)).length})</Badge>
-              </a>
-            ))}
-          </div>
-        </div>
-      )
-    ))}
-  </section>
-
-  <!-- Posts by Year -->
-  <section class="my-8b">
-    <h2 class="heading-2 mb-4b">Posts by Year</h2>
-    
-    <!-- Year Navigation -->
-    <div class="flex flex-wrap gap-2b mb-6b">
-      {descYearKeys.map(year => (
-        <a 
-          href={`#year-${year}`} 
-          class="px-3b py-1b bg-bgColor/50 rounded hover:bg-accent/20"
-        >
-          {year} ({groupedByYear[year].length})
-        </a>
-      ))}
-    </div>
-
-    <!-- Posts List -->
-    {descYearKeys.map(year => (
-      <div id={`year-${year}`} class="mb-8b scroll-mt-16b">
-        <h3 class="heading-3 mb-4b bg-pageBg py-2b">
-          {year}
-          <span class="text-sm text-light ml-2b">({groupedByYear[year].length} posts)</span>
-        </h3>
-        <ul class="space-y-2b">
-          {groupedByYear[year].map(post => (
-            <li class="flex flex-col sm:flex-row sm:items-baseline gap-2b">
-              <time class="text-sm text-light whitespace-nowrap">
-                {new Date(post.data.publishDate).toLocaleDateString('en-US', { 
-                  month: 'short', 
-                  day: 'numeric' 
+    <!-- Browse by Topic Section -->
+    <section class="mb-12b">
+      <h2 class="heading-2 mb-6b">Browse by Topic</h2>
+      
+      <div class="space-y-6b">
+        {Object.entries(tagCategories).map(([category, tags]) => (
+          tags.length > 0 && (
+            <div>
+              <h3 class="heading-4 mb-3b">{category}</h3>
+              <div class="flex flex-wrap gap-2b">
+                {tags.map(tag => {
+                  const count = allPosts.filter(p => p.data.tags?.includes(tag)).length;
+                  return (
+                    <a href={`/tags/${tag}`} class="inline-block">
+                      <Badge variant="muted">{tag} ({count})</Badge>
+                    </a>
+                  );
                 })}
-              </time>
-              <a 
-                href={`/posts/${post.slug}`} 
-                class="inline-link hover:text-accent"
-              >
-                {post.data.title}
-              </a>
-              {post.data.tags && post.data.tags.length > 0 && (
-                <div class="flex gap-2b flex-wrap">
-                  {post.data.tags.slice(0, 3).map(tag => (
-                    <span class="text-xs text-light">#{tag}</span>
-                  ))}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
+              </div>
+            </div>
+          )
+        ))}
       </div>
-    ))}
-  </section>
+    </section>
 
-  <!-- Back to top -->
-  <div class="text-center mt-12b">
-    <a href="#top" class="inline-link">↑ Back to top</a>
+    <!-- Posts by Year Section -->
+    <section>
+      <h2 class="heading-2 mb-6b">All Posts by Year</h2>
+      
+      <!-- Year-based archive listing -->
+      <div class="space-y-12b">
+        {descYearKeys.map(year => (
+          <section id={`year-${year}`}>
+            <!-- Year heading with post count -->
+            <h3 class="heading-3 text-light mb-6b">
+              {year}
+              <span class="text-meta ml-2b">• {groupedByYear[year].length} posts</span>
+            </h3>
+            
+            <!-- Posts for this year using ArchiveEntry component -->
+            <div class="space-y-6b">
+              {groupedByYear[year]
+                .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+                .map(post => (
+                  <ArchiveEntry 
+                    title={post.data.title}
+                    primaryMeta={getPostType(post)}
+                    secondaryMeta={formatDate(new Date(post.data.publishDate))}
+                    tertiaryMeta={getPrimaryTag(post)}
+                    link={`/posts/${post.id}/`}
+                    description={post.data.description}
+                  />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </section>
   </div>
 </PageLayout>
