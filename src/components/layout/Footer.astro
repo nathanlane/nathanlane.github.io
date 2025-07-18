@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
           <ul class="footer-links">
             {section.links.map(link => (
               <li>
-                <a href={link.href} class="footer-link">
+                <a href={link.href} class="footer-link link-nav">
                   {link.title}
                 </a>
               </li>
@@ -33,9 +33,9 @@ const currentYear = new Date().getFullYear();
       © {currentYear} Nathan Lane
     </p>
     <nav class="footer-utility" aria-label="Utility links">
-      <a href="/privacy">Privacy</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="/rss.xml" title="All content RSS feed">RSS</a>
+      <a href="/privacy" class="link-nav">Privacy</a>
+      <a href="/sitemap.xml" class="link-nav">Sitemap</a>
+      <a href="/rss.xml" class="link-nav" title="All content RSS feed">RSS</a>
     </nav>
   </div>
 </footer>
@@ -102,7 +102,6 @@ const currentYear = new Date().getFullYear();
 
   /* Using consolidated link system */
   .footer-link {
-    @apply link-nav;
     color: var(--color-text-muted);
     font-size: var(--step--1); /* Match footer font size */
     font-variation-settings: "wght" 450; /* Optimized weight for small IBM Plex */
@@ -162,7 +161,6 @@ const currentYear = new Date().getFullYear();
 
   /* Using consolidated link system */
   .footer-utility a {
-    @apply link-nav;
     color: var(--color-text-muted);
     font-weight: 500; /* Heavier weight for very small text */
     font-variation-settings: "wght" 500; /* Optimized for very small IBM Plex */

@@ -70,7 +70,7 @@ const typeLabels: Record<string, string> = {
       href={link} 
       target="_blank" 
       rel="noopener noreferrer"
-      class="media-link"
+      class="media-link link-title link-underline-thin"
     >
       {title}
     </a>
@@ -129,19 +129,15 @@ const typeLabels: Record<string, string> = {
     color: var(--theme-text);
   }
 
-  /* Link styling - Using consolidated link system */
+  /* Media-specific link styling */
   .media-link {
-    /* Inherits from link-title with underline modifier */
-    @apply link-title link-underline-thin;
-    
     /* Media-specific color override */
     color: var(--theme-accent-base);
-    
-    /* Hover state - color override */
-    &:hover {
-      color: var(--theme-accent-dark);
-      text-decoration-color: var(--theme-accent-dark);
-    }
+  }
+  
+  .media-link:hover {
+    color: var(--theme-accent-dark);
+    text-decoration-color: var(--theme-accent-dark);
   }
 
   /* Metadata styling - Ambrose-Harris information hierarchy */

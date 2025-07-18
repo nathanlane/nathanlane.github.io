@@ -18,7 +18,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		<li class="compact-entry">
 			<div class="entry-content">
 				{item.url ? (
-					<a href={item.url} class="entry-link">
+					<a href={item.url} class="entry-link link-title">
 						<h3 class="entry-title">
 							{item.title}
 						</h3>
@@ -97,9 +97,6 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 
 	/* Link styling - using consolidated system */
 	.entry-link {
-		/* Inherits from link-title */
-		@apply link-title;
-		
 		/* Expand click target for better UX */
 		display: block;
 		

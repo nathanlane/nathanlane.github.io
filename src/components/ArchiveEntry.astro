@@ -81,7 +81,7 @@ const {
   <h3 class="archive-title">
     <a 
       href={link} 
-      class="archive-link"
+      class="archive-link link-title link-underline-thin"
     >
       {title}
     </a>
@@ -144,9 +144,6 @@ const {
 
   /* Link styling - Using consolidated link system */
   .archive-link {
-    /* Inherits from link-title with underline modifier */
-    @apply link-title link-underline-thin;
-    
     /* Archive-specific color override */
     color: var(--theme-accent-base);
     

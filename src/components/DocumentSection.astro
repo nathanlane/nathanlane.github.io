@@ -12,7 +12,7 @@ const { title, viewAllText, viewAllHref } = Astro.props;
   <header class="section-header">
     <h2 class="heading-2">{title}</h2>
     {viewAllHref && viewAllText && (
-      <a href={viewAllHref} class="section-link">{viewAllText}</a>
+      <a href={viewAllHref} class="section-link link-nav">{viewAllText}</a>
     )}
   </header>
   
@@ -39,9 +39,8 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 
 
 
-  /* Using consolidated link system */
+  /* Additional section link styling */
   .section-link {
-    @apply link-nav;
     font-family: var(--font-sans);
     font-size: var(--step--1); /* 12.8-14.4px */
     text-transform: uppercase;
