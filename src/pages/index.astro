@@ -15,7 +15,7 @@ const homepageContent = await getEntry("homepage", "index");
 if (!homepageContent) {
 	throw new Error("Homepage content not found");
 }
-const { hero, bio } = homepageContent.data;
+const { bio, contact } = homepageContent.data;
 
 // Get featured research papers
 const allResearch = await getCollection("research");
@@ -46,13 +46,7 @@ const allMediaItems = Object.entries(mediaData)
 <PageLayout meta={{ title: "Home" }}>
 	<div class="homepage-document">
 		
-		<!-- Document Masthead -->
-		<header class="document-masthead">
-			<h1 class="heading-1">{hero.title}</h1>
-			<p class="text-lead site-description">
-				{hero.description}
-			</p>
-		</header>
+
 
 		<!-- Bio Panel Integration -->
 		{bio && (
@@ -97,7 +91,7 @@ const allMediaItems = Object.entries(mediaData)
 
 		<!-- Writing -->
 		<DocumentSection 
-			title="Writing" 
+			title="Recent Writing" 
 			viewAllText="View all writing" 
 			viewAllHref="/writing/"
 		>
@@ -113,13 +107,17 @@ const allMediaItems = Object.entries(mediaData)
 		</DocumentSection>
 
 		<!-- Media & Appearances -->
-		<DocumentSection title="Media & Appearances">
+		<DocumentSection 
+			title="Recent in the News" 
+			viewAllText="View all media" 
+			viewAllHref="/media/"
+		>
 			<MediaList items={allMediaItems} />
 		</DocumentSection>
 
 		<!-- Contact Information -->
-		<DocumentSection title="Contact & Links">
-			<ContactInfo variant="default" />
+		<DocumentSection title={contact?.title || "Links & Contact"}>
+			<ContactInfo variant="default" items={contact?.items} />
 		</DocumentSection>
 		
 	</div>
@@ -133,17 +131,7 @@ const allMediaItems = Object.entries(mediaData)
 		padding: var(--space-8) var(--space-4); /* 48px 24px */
 	}
 
-	/* Document masthead */
-	.document-masthead {
-		margin-bottom: var(--space-16); /* 96px - major break */
-		text-align: left; /* Left-aligned for document feel */
-	}
 
-	.site-description {
-		margin-bottom: 0;
-		font-weight: 300;
-		max-width: var(--measure-narrow); /* Slightly narrower than container for readability */
-	}
 
 	/* Responsive adjustments */
 	@media (max-width: 768px) {

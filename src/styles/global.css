@@ -519,7 +519,7 @@
     
     /* No text-transform needed - using real small caps */
     color: var(--theme-color-500); /* Base metadata color */
-    line-height: 1.4; /* Slightly more generous for small text */
+    line-height: 1.5; /* More generous spacing for small caps readability */
   }
 
   /* Simplified metadata variants - globally reusable */
