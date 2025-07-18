@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/Base.astro';
 import PageHeader from '@/components/PageHeader.astro';
 import SectionSeparator from '@/components/SectionSeparator.astro';
 import CompactList from '@/components/CompactList.astro';
+import MetadataLine from '@/components/MetadataLine.astro';
 import { getCollection } from 'astro:content';
 import { formatDate, formatMonthYear } from '@/utils/date';
 
@@ -11,12 +12,6 @@ const blogPosts = await getCollection('post');
 
 // Get the last 3 writing pieces for Current Thinking
 const latestWriting = writing
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 3);
-
-// Get remaining writing for archive section (excluding featured ones)
-const recentWriting = writing
-  .filter(w => !latestWriting.some(featured => featured.id === w.id))
   .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
   .slice(0, 5);
 
@@ -32,15 +27,15 @@ const recentBlog = blogPosts
     <!-- Reusable Page Header - 12b bottom margin (72px) -->
     <PageHeader 
       title="Writing"
-      description="Essays, notes, and occasional thoughts on economics, technology, and the craft of research. Some pieces are evergreen, others capture thoughts in motion."
-      additionalInfo="Browse all writing • View by topic • Subscribe to updates"
+      description="Non-academic publications, published essays, notes, and occasional thoughts."
+      additionalInfo={`<a href="/writing/archive">Browse all writing</a> • Also see <a href="/posts">blog posts here</a>`}
     />
 
-    <!-- Current Thinking - Last 3 writing pieces -->
+    <!-- Current Thinking - Last 5 writing pieces -->
     <!-- Section spacing: 16b between sections (96px) -->
     <section class="mb-16b">
       <!-- Left-justified heading-2, reduced bottom margin -->
-      <h2 class="heading-2 mb-6b text-left">Current Thinking</h2>
+      <h2 class="heading-2 mb-6b text-left">Recent Writing & Notes</h2>
       
       <!-- Reduced spacing between pieces for grouping -->
       {latestWriting.map((piece, index) => (
@@ -50,11 +45,16 @@ const recentBlog = blogPosts
               {piece.data.title}
             </a>
           </h3>
-          <div class="text-meta mb-3b uppercase tracking-wide text-light">
-            {piece.data.type || 'ESSAY'} • {formatDate(piece.data.publishDate)}
-            {piece.data.genre && ` • ${piece.data.genre.toUpperCase()}`}
-            {piece.data.featured && ' • FEATURED'}
-          </div>
+          <MetadataLine 
+            items={[
+              { text: piece.data.type || 'ESSAY' },
+              { text: formatDate(piece.data.publishDate) },
+              ...(piece.data.genre ? [{ text: piece.data.genre.toUpperCase() }] : []),
+              ...(piece.data.featured ? [{ text: 'FEATURED', type: 'dark' as const }] : [])
+            ]}
+            variant="light"
+            class="mb-3b"
+          />
           <p class="text-body leading-relaxed">{piece.data.description}</p>
           
           {/* Subtle separator between pieces (not after last one) */}
@@ -64,29 +64,12 @@ const recentBlog = blogPosts
           )}
         </article>
       ))}
-    </section>
 
-    <!-- Wide Full Header Line Separator -->
-    <SectionSeparator variant="full-width" spacing="normal" />
-
-    <!-- Recent Writing -->
-    <section class="mb-16b">
-      <h2 class="heading-3 mb-8b">Recent Writing</h2>
-      
-      <CompactList 
-        items={recentWriting.map(item => ({
-          title: item.data.title,
-          description: item.data.description,
-          url: `/writing/${item.id}`,
-          date: item.data.publishDate
-        }))}
-      />
-      
-      <div class="mt-6b">
-        <a href="/writing/archive" class="nav-link text-body-sm uppercase tracking-wide">
-          → View writing archive
-        </a>
-      </div>
+		<div class="mt-6b">
+			<a href="/writing/archive" class="nav-link text-body-sm uppercase tracking-wide">
+			→ View all writing
+			</a>
+		</div>  
     </section>
 
     <!-- Wide Full Header Line Separator -->

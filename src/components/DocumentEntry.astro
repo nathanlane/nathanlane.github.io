@@ -1,4 +1,6 @@
 ---
+import MetadataLine from './MetadataLine.astro';
+
 interface Props {
   title: string;
   href: string;
@@ -17,12 +19,12 @@ const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
   month: 'short' 
 }) : '';
 
-// Build metadata string
-const metadataParts = [
-  type.toUpperCase(),
-  formattedDate,
-  status?.toUpperCase(),
-  metadata
+// Build metadata items using simplified light system
+const metadataItems = [
+  { text: type.toUpperCase() },
+  ...(formattedDate ? [{ text: formattedDate }] : []),
+  ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []),
+  ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
 ---
 
@@ -31,9 +33,10 @@ const metadataParts = [
     <a href={href} class="feature-link">{title}</a>
   </h3>
   
-  <div class="entry-metadata">
-    {metadataParts.join(' • ')}
-  </div>
+  <MetadataLine 
+    items={metadataItems}
+    class="mb-3b"
+  />
   
   <p class="text-body">{description}</p>
 </article>
@@ -41,24 +44,5 @@ const metadataParts = [
 <style>
   .document-entry {
     margin-bottom: var(--space-8); /* 48px - generous separation */
-  }
-
-
-
-  .entry-metadata {
-    font-family: var(--font-sans);
-    font-size: var(--step--1); /* 12.8-14.4px */
-    font-variant: small-caps;
-    letter-spacing: 0.075em;
-    color: var(--theme-color-600);
-    margin-bottom: var(--space-2); /* 12px */
-    font-weight: 500;
-  }
-
-
-
-  /* Dark mode adjustments */
-  :global([data-theme="dark"]) .entry-metadata {
-    color: var(--theme-color-400);
   }
 </style> 

@@ -13,6 +13,8 @@ This directory contains private development notes, experiments, and documentatio
 ### Documentation
 - `documentation/` - Technical documentation and guides
   - `WEBMASTER_GUIDE.md` - Website maintenance guide
+  - `METADATA_SYSTEM_GUIDE.md` - Complete metadata typography system guide
+  - `METADATA_QUICK_REFERENCE.md` - Developer quick reference for metadata
   - `UPGRADE_DEPENDENCIES.md` - Dependency upgrade instructions
   - `DEPENDENCY_FIX.md` - Dependency troubleshooting
 

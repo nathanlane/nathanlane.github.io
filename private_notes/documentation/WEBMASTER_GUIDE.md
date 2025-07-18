@@ -8,8 +8,9 @@ This guide covers everything you need to know to manage and deploy this website 
 3. [GitHub Actions & CI/CD](#github-actions--cicd)
 4. [Deployment](#deployment)
 5. [Content Management](#content-management)
-6. [Security Headers](#security-headers)
-7. [Monitoring & Maintenance](#monitoring--maintenance)
+6. [Typography & Metadata System](#typography--metadata-system)
+7. [Security Headers](#security-headers)
+8. [Monitoring & Maintenance](#monitoring--maintenance)
 
 ---
 
@@ -253,6 +254,55 @@ featured: true # Shows on homepage
 description: "Brief description"
 ---
 ```
+
+---
+
+## Typography & Metadata System
+
+### Overview
+
+The site uses a sophisticated metadata system based on classical typography principles from master typographers (Bringhurst, Ruder, Hochuli, and Butterick).
+
+### Key Documentation
+
+- **[Complete Guide](METADATA_SYSTEM_GUIDE.md)** - Comprehensive documentation
+- **[Quick Reference](METADATA_QUICK_REFERENCE.md)** - Developer cheat sheet
+
+### MetadataLine Component
+
+The unified component for all metadata display:
+
+```astro
+import MetadataLine from '@/components/MetadataLine.astro';
+
+<MetadataLine items={[
+  { text: "RESEARCH" },
+  { text: "Dec 2024" },
+  { text: "Author Name", href: "/about" }
+]} variant="light" />
+```
+
+### Key Features
+
+- **Real small caps** using OpenType features
+- **Flexible line breaking** for long metadata
+- **Responsive design** with mobile optimization
+- **Accessibility support** including high contrast mode
+- **Global reusability** across all content types
+
+### Typography Principles Applied
+
+- **Bringhurst**: Subordinated punctuation, real small caps
+- **Ruder**: Systematic grey values, consistent relationships
+- **Hochuli**: Optimal spacing, optical adjustments
+- **Butterick**: Readability-first approach
+
+### Components Using System
+
+- `DocumentEntry.astro` - Research, writing, projects
+- `MediaList.astro` - Homepage media section
+- `MediaEntry.astro` - Full media pages
+- `Writing index` - All writing sections
 
 ---
 

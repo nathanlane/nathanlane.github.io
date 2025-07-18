@@ -1,0 +1,153 @@
+---
+export interface Props {
+  items: Array<{
+    text: string;
+    type?: 'light' | 'dark' | 'primary' | 'secondary' | 'tertiary'; // Added new types, keep legacy
+    href?: string;
+  }>;
+  class?: string;
+  separator?: string;
+  variant?: 'light' | 'dark'; // Global variant override
+}
+
+const { items, class: className = "", separator = "•", variant = "light" } = Astro.props;
+---
+
+<!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+-->
+
+<div class={`metadata-line text-meta text-meta--${variant} ${className}`}>
+  {items.map((item, index) => (
+    <>
+      {item.href ? (
+        <a 
+          href={item.href} 
+          class={`text-meta--${item.type || variant} no-underline hover:underline`}
+        >
+          {item.text}
+        </a>
+      ) : (
+        <span class={`text-meta--${item.type || variant}`}>
+          {item.text}
+        </span>
+      )}
+      
+      {/* Separator - not after last item, stays with previous item */}
+      {index < items.length - 1 && (
+        <span class="text-meta__separator" aria-hidden="true">
+          {separator}
+        </span>
+      )}
+    </>
+  ))}
+</div>
+
+<style>
+  /* Component-specific enhancements */
+  .metadata-line {
+    /* Better line breaking for long metadata */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0; /* No gap - separators handle spacing */
+    line-height: 1.3; /* Tighter for metadata */
+  }
+  
+  /* Ensure separators stay with their preceding item */
+  .text-meta__separator {
+    white-space: nowrap;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 640px) {
+    .metadata-line {
+      /* Smaller text on mobile for long metadata */
+      font-size: var(--step--2); /* 12.3-13.8px */
+    }
+    
+    .text-meta__separator {
+      /* Tighter separator spacing on mobile */
+      margin: 0 0.3em;
+    }
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .text-meta--light {
+      font-weight: 500;
+      color: var(--theme-color-600);
+    }
+    
+    .text-meta--dark {
+      font-weight: 600;
+      color: var(--theme-text);
+    }
+  }
+  
+  /* Dark mode adjustments */
+  :root[data-theme="dark"] .metadata-line {
+    /* Slightly increase contrast in dark mode */
+    filter: brightness(1.05);
+  }
+</style> 

@@ -1,5 +1,90 @@
 # Changelog
 
+## Media Page Refactoring & Reusable Archive System (January 28, 2025)
+
+### Phase 1: Media Page Complete Typography Refactoring
+- **Typography Alignment**: Replaced all non-semantic classes (`text-lg`, `text-sm`) with semantic design system classes (`text-0`, `text-meta`, `text--1`)
+- **Baseline Grid Compliance**: Converted all spacing to 6px grid system (`space-4b`, `space-6b`, `space-12b`)
+- **Container Optimization**: Changed from `max-w-3xl` to `measure-base` (75ch) for optimal reading measure
+- **Icon Removal**: Eliminated all icon machinery and hover effects for clean document-centric design
+- **Year Headers**: Applied semantic typography (`heading-3`) with proper baseline alignment
+
+### Phase 2: MediaEntry Component Creation
+- **Document-Centric Design**: Clean typography without boxes or heavy decoration following Bringhurst principles
+- **Advanced Typography**: OpenType features, proper text rendering, refined link styling
+- **Optimal Reading**: Description width set to 65ch for comfortable line length
+- **Responsive Design**: Typography scales appropriately across device sizes
+- **Print Optimization**: Enhanced readability for print media
+
+### Phase 3: Reusable Archive System
+- **ArchiveEntry Component**: Generalized MediaEntry patterns for any content type (writing, research, projects)
+- **Flexible Metadata Structure**: primaryMeta, secondaryMeta, tertiaryMeta for various content classifications
+- **Writing Archive Page**: New `/writing/archive/` page using reusable components with chronological organization
+- **Smart Categorization**: Automatic essay type detection and tag-based classification
+- **PageHeader Enhancement**: Added HTML link support with proper underline styling
+
+### Typography Refinements
+- **Body Text Optimization**: Reduced description text from `--step--1` to `--step--2` for better visual hierarchy
+- **Enhanced Link Styling**: Underlined links with `!important` declarations, hover thickness changes, proper focus states
+- **Reading Width**: Expanded description width from 45ch to 65ch for improved readability
+- **Color System**: Consistent accent colors throughout with hover effects
+
+### Documentation & Architecture
+- **Archive System Guide**: Comprehensive documentation for reusable components (`ARCHIVE_SYSTEM_GUIDE.md`)
+- **Usage Examples**: Complete implementation patterns for different content types
+- **Typography Standards**: Advanced OpenType settings and professional link styling
+- **Build Validation**: 186 pages generated successfully, no errors
+
+### Impact
+- **Reusable Design Patterns**: Media page excellence now available for all content types
+- **Professional Typography**: Advanced text rendering following classical typography principles
+- **Better Information Architecture**: Chronological archives with smart categorization
+- **Enhanced User Experience**: Improved readability and navigation with proper link styling
+- **Maintainable Codebase**: Clean component architecture with comprehensive documentation
+
+## Master Typographers' Metadata System Implementation (January 28, 2025)
+
+### Refined Global Metadata Typography
+- **Applied classical typography principles** from Bringhurst, Ruder, Hochuli, and Butterick:
+  - **Real small caps**: Implemented `"smcp" 1, "c2sc" 1` OpenType features instead of `text-transform: uppercase`
+  - **Subordinated punctuation**: Bullets at 60% opacity with lighter font weight (300)
+  - **Optimal letter-spacing**: Reduced from 5% to 3% for improved readability
+  - **Proper sizing**: Using `var(--step--1)` (12.8-14.4px) for metadata comfort
+
+### Unified MetadataLine Component System
+- **Created reusable MetadataLine.astro** component with sophisticated typography:
+  - **Simplified variants**: `light` (default, elegant) and `dark` (emphasis)
+  - **Flexible structure**: Supports links, custom separators, mixed types
+  - **Legacy support**: Maintains backwards compatibility with existing type hierarchy
+  - **Responsive design**: Mobile-optimized sizing and spacing
+
+### Fixed Long Metadata Line Breaking
+- **Solved wrapping issues** for long author lists and complex metadata:
+  - **Flexbox layout**: `display: flex; flex-wrap: wrap` prevents orphaned separators
+  - **Semantic grouping**: Separators stay with preceding items
+  - **Mobile optimization**: Smaller text (`var(--step--2)`) and tighter spacing
+  - **Natural flow**: No more awkward line breaks or separated bullets
+
+### Site-Wide Implementation
+- **Updated all metadata components**:
+  - **DocumentEntry.astro**: Research, writing, and project entries
+  - **MediaList.astro**: Homepage media section with clickable outlets
+  - **MediaEntry.astro**: Full media page entries  
+  - **Writing index**: Current Thinking section
+  - **Global styles**: Enhanced `.text-meta` with OpenType features
+
+### Writing Page Content Reorganization
+- **Streamlined structure**: Merged sections to reduce complexity
+- **Updated descriptions**: "Non-academic publications, published essays, notes, and occasional thoughts"
+- **Improved navigation**: Direct links to archive and blog posts in header
+- **Section consolidation**: Combined "Current Thinking" and "Recent Writing" into unified "Recent Writing & Notes"
+
+### Technical Excellence
+- **OpenType enhancement**: Full kerning, ligatures, and contextual alternates
+- **Accessibility**: High contrast mode support, semantic markup
+- **Performance**: Reduced CSS complexity, faster rendering
+- **Maintainability**: Single source of truth for all metadata styling
+
 ## Codebase Simplification - Complete Animation & Interactive Removal (July 17, 2025)
 
 ### Phase 1: CSS Transition and Animation Removal

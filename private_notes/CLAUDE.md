@@ -22,6 +22,18 @@ pnpm format       # Format code with Biome and Prettier
 pnpm check        # Type-check with Astro
 ```
 
+## Recent Major Improvements (July 17, 2025)
+
+### Media Page Refactoring & Archive System
+- **Complete Media page refactoring** following typography masters' principles
+- **New reusable components**: `MediaEntry.astro` and `ArchiveEntry.astro` for any content type
+- **Writing Archive page**: `/writing/archive/` with chronological organization  
+- **Enhanced PageHeader**: HTML link support with professional underline styling
+- **Typography refinements**: 65ch reading width, semantic classes, OpenType features
+- **Documentation**: `MEDIA_PAGE_REFACTORING_COMPLETE.md` and `ARCHIVE_SYSTEM_GUIDE.md`
+
+See `private_notes/planning/Changelog.md` for complete details.
+
 ## Architecture Overview
 
 ### Content System

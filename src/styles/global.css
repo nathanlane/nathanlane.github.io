@@ -272,7 +272,7 @@
     --theme-special-light: hsl(0deg 0% 95%); /* #f2f2f2 */
     --theme-special: hsl(0deg 0% 0% / 0.03);
 
-    /* Подсветка синтаксиса rehype-pretty-code */
+    /* Syntax highlighting rehype-pretty-code */
     pre code span {
       color: var(--shiki-light) !important;
       font-style: var(--shiki-light-font-style) !important;
@@ -320,7 +320,7 @@
     --theme-special-light: hsl(40deg 5% 12%);
     --theme-special: hsl(40deg 5% 100% / 0.06);
 
-    /* Подсветка синтаксиса */
+    /* Syntax highlighting */
     pre code span {
       color: var(--shiki-dark) !important;
       font-style: var(--shiki-dark-font-style) !important;
@@ -329,10 +329,10 @@
     }
   }
 
-  /* Общие переменные */
+  /* Common variables */
   :root {
-    --theme-bg: var(--bg-hue) var(--bg-saturation) var(--bg-brightness); /* Цвет фона */
-    --theme-fg: var(--fg-hue) var(--fg-saturation) var(--fg-brightness); /* Базовый цвет для рассчета градации цветов */
+    --theme-bg: var(--bg-hue) var(--bg-saturation) var(--bg-brightness); /* Background color */
+    --theme-fg: var(--fg-hue) var(--fg-saturation) var(--fg-brightness); /* Base color for calculating color gradations */
 
     /* Grid System Foundation */
     --base-font-size: 1rem; /* 16px */
@@ -379,7 +379,7 @@
     --space-16: calc(var(--grid-unit) * 16); /* 96px - huge (4 baselines) */
     --space-24: calc(var(--grid-unit) * 24); /* 144px - massive (6 baselines) */
 
-    /* Градации базового цвета для текста и элементов */
+    /* Gradations of base color for text and elements */
     --theme-color-900: hsl(var(--theme-fg) / 1);
     --theme-color-850: hsl(var(--theme-fg) / 0.9675);
     --theme-color-800: hsl(var(--theme-fg) / 0.935);
@@ -400,7 +400,7 @@
     --theme-color-75: hsl(var(--theme-fg) / 0.03375);
     --theme-color-50: hsl(var(--theme-fg) / 0.0225);
 
-    /* Переменные подсветки блоков кода rehype-pretty-code */
+    /* Variables for code block highlighting rehype-pretty-code */
     --code-inline-bg: var(--theme-color-100); /* Subtle warm gray */
     --code-bg: var(--theme-special);
     --code-title-bg: var(--theme-color-200);
@@ -500,12 +500,67 @@
   }
 
   .text-meta {
-    /* Uses existing text--1 (12.8-14.4px, 24px line-height) */
-    font-weight: 425; /* Heavier for small size */
-    letter-spacing: 0.05em; /* Wide tracking for caps */
-    text-transform: uppercase;
+    /* Enhanced metadata typography following the masters' principles */
+    
+    /* Bringhurst: Use proper small caps, not uppercase transform */
     font-feature-settings:
-      "kern" 1, "liga" 0, "case" 1, "lnum" 1;
+      "kern" 1,       /* Kerning essential at small sizes */
+      "smcp" 1,       /* Real small caps */
+      "c2sc" 1,       /* Caps to small caps */
+      "case" 1,       /* Case-sensitive forms */
+      "lnum" 1;       /* Lining figures for metadata */
+    
+    /* Hochuli: Optimal size and weight for metadata readability */
+    font-size: var(--step--1); /* 12.8-14.4px - better than --2 */
+    font-weight: 450; /* Reduced from 425 for better balance */
+    
+    /* Butterick: Reduced tracking for improved readability */
+    letter-spacing: 0.03em; /* Reduced from 0.05em */
+    
+    /* No text-transform needed - using real small caps */
+    color: var(--theme-color-500); /* Base metadata color */
+    line-height: 1.4; /* Slightly more generous for small text */
+  }
+
+  /* Simplified metadata variants - globally reusable */
+  
+  .text-meta--light {
+    /* Default light version - elegant and refined */
+    font-weight: 400; /* Light weight */
+    color: var(--theme-color-400); /* Lighter tone for subtlety */
+  }
+  
+  .text-meta--dark {
+    /* Heavy version for emphasis when needed */
+    font-weight: 500; /* Heavier weight */
+    color: var(--theme-color-600); /* Darker for prominence */
+  }
+  
+  /* Legacy support - map old classes to new system */
+  .text-meta--primary { @apply text-meta--dark; }
+  .text-meta--secondary { @apply text-meta--light; }
+  .text-meta--tertiary { @apply text-meta--light; }
+
+  /* Metadata separators following Bringhurst's "punctuation in background" */
+  .text-meta__separator {
+    opacity: 0.6; /* Subordinate the bullets */
+    margin: 0 0.4em; /* Hair space equivalent around bullets */
+    font-weight: 300; /* Lighter weight for punctuation */
+  }
+
+  /* Metadata containers for proper spacing */
+  .metadata-group {
+    display: flex;
+    align-items: center;
+    gap: 0.2em; /* Tight spacing between elements */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+  }
+
+  .metadata-line {
+    display: flex;
+    align-items: center;
+    gap: 0.1em; /* Very tight for inline metadata */
+    line-height: 1.3; /* Tighter for metadata lines */
   }
 
   .text-caption {
@@ -966,7 +1021,7 @@
     stroke-linejoin: miter !important;
   }
 
-  /* Нужно для кнопки копирования кода при отключенном rehype-pretty-code */
+  /* Needed for code copy button when rehype-pretty-code is disabled */
   /*
 	pre {
 		@apply relative;
@@ -1040,7 +1095,7 @@
         }
       }
 
-      /* Стиль для содержимого кода */
+      /* Style for code content */
       > code {
         counter-reset: line;
 
@@ -1103,12 +1158,12 @@
           background-color: var(--code-line-diff-remove);
         }
 
-        /* Для выделенных символов */
+        /* For highlighted characters */
         [data-highlighted-chars] > span {
           @apply py-[4px];
         }
 
-        /* Для различий в строках (реализовано выше) */
+        /* For differences in lines (implemented above) */
         /*
 				.diff {
 					&.add {
@@ -1353,9 +1408,9 @@
   }
 }
 
-/* ПЕРЕПРОВЕРИТЬ !!! */
+/* RECHECK !!! */
 @layer components {
-  /* Переопределение стилей для <mark> в статье */
+  /* Override styles for <mark> in article */
   article mark {
     @apply bg-transparent;
   }

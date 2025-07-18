@@ -1,0 +1,302 @@
+<!--
+# MediaEntry Component
+
+A refined typographic component for displaying individual media entries.
+Follows classical typography principles from Bringhurst, Ruder, Butterick, and Hochuli.
+
+## Usage:
+```astro
+<MediaEntry 
+  title="Interview Title"
+  outlet="Wall Street Journal"
+  date={new Date('2024-01-15')}
+  type="interview"
+  link="https://example.com"
+  description="Optional description text"
+/>
+```
+
+## Typography Features:
+- Document-centric design without boxes or heavy decoration
+- Semantic HTML structure with proper heading hierarchy  
+- Baseline grid alignment following 6px system
+- Advanced OpenType features for optimal text rendering
+- Refined link styling with accessibility considerations
+- Responsive typography scaling
+
+-->
+
+---
+import type { MediaItem } from "@/data/media";
+import MetadataLine from './MetadataLine.astro';
+
+export interface Props extends MediaItem {
+  class?: string;
+}
+
+const { 
+  title, 
+  outlet, 
+  date, 
+  type, 
+  link, 
+  description, 
+  class: className = "" 
+} = Astro.props;
+
+// Format date for better readability
+const formattedDate = new Date(date).toLocaleDateString('en-US', { 
+  month: 'short', 
+  day: 'numeric',
+  year: 'numeric'
+});
+
+// Type display mapping for better readability
+const typeLabels: Record<string, string> = {
+  interview: "Interview",
+  podcast: "Podcast", 
+  video: "Video",
+  article: "Article",
+  press: "Press",
+  talk: "Talk",
+  panel: "Panel"
+};
+---
+
+<article class={`media-entry ${className}`}>
+  <!-- Title as primary heading with enhanced typography -->
+  <h3 class="media-title">
+    <a 
+      href={link} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="media-link"
+    >
+      {title}
+    </a>
+  </h3>
+  
+  <!-- Metadata with unified typography system -->
+  <MetadataLine 
+    items={[
+      { text: outlet, href: link },
+      { text: formattedDate },
+      { text: typeLabels[type] || type }
+    ]}
+    variant="light"
+    class="mb-2b"
+  />
+  
+  <!-- Description with optimal reading settings -->
+  {description && (
+    <p class="media-description">{description}</p>
+  )}
+</article>
+
+<style>
+  /* Media entry container - document-centric approach */
+  .media-entry {
+    /* Baseline grid alignment - Ruder's systematic spacing */
+    padding-bottom: var(--space-4b); /* 24px - 4 baseline units */
+    
+    /* Subtle structural division - Hochuli's restraint */
+    border-bottom: 1px solid var(--theme-color-100);
+    
+    /* Remove border from last entry for clean ending */
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+  }
+
+  /* Title styling - Bringhurst's hierarchy principles */
+  .media-title {
+    /* Typography scale following modular approach */
+    font-size: var(--step-0); /* Base size for comfortable reading */
+    font-weight: 500; /* Medium weight for distinction without heaviness */
+    line-height: var(--line-height-heading); /* 1.2 for compact headings */
+    
+    /* Spacing following baseline grid */
+    margin: 0 0 var(--space-2b) 0; /* 12px bottom margin */
+    
+    /* OpenType features for optimal text rendering */
+    font-feature-settings: 
+      "kern" 1,     /* Kerning for better letter spacing */
+      "liga" 1,     /* Ligatures for better character combinations */
+      "calt" 1;     /* Contextual alternates */
+    
+    /* Color hierarchy - primary text */
+    color: var(--theme-text);
+  }
+
+  /* Link styling - Butterick's web typography principles */
+  .media-link {
+    /* Color progression for interactive states */
+    color: var(--theme-accent-base);
+    text-decoration: none;
+    
+    /* Underline styling for accessibility */
+    text-decoration: underline;
+    text-decoration-color: var(--theme-accent-base);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    
+    /* Smooth transitions - Hochuli's refinement */
+    transition: all 0.2s ease-in-out;
+    
+    /* Focus accessibility */
+    outline-offset: 2px;
+    
+    /* Hover state */
+    &:hover {
+      color: var(--theme-accent-dark);
+      text-decoration-color: var(--theme-accent-dark);
+      text-decoration-thickness: 2px;
+    }
+    
+    /* Focus state for keyboard navigation */
+    &:focus-visible {
+      outline: 2px solid var(--theme-accent-base);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  /* Metadata styling - Ambrose-Harris information hierarchy */
+  .media-meta {
+    /* Typography scale for secondary information */
+    font-size: var(--step--2); /* Smaller than title but readable */
+    font-weight: 400; /* Normal weight for meta information */
+    line-height: var(--line-height-base); /* Comfortable leading */
+    
+    /* Color hierarchy - secondary text */
+    color: var(--theme-color-500);
+    
+    /* Spacing following baseline grid */
+    margin: 0 0 var(--space-3b) 0; /* 18px bottom margin */
+    
+    /* OpenType features for tabular data */
+    font-feature-settings: 
+      "kern" 1,     /* Kerning */
+      "tnum" 0,     /* Don't force tabular nums for this context */
+      "lnum" 1;     /* Lining numerals for dates */
+    
+    /* Layout for inline elements */
+    display: flex;
+    align-items: center;
+    gap: var(--space-1); /* 6px between elements */
+    flex-wrap: wrap; /* Allow wrapping on narrow screens */
+  }
+
+  /* Individual metadata elements */
+  .outlet {
+    font-weight: 450; /* Slightly heavier for outlet prominence */
+  }
+
+  .separator {
+    opacity: 0.6; /* Subtle visual separation */
+    font-weight: 400;
+  }
+
+  .date {
+    /* Optimized for date display */
+    font-variant-numeric: lining-nums;
+    letter-spacing: 0.01em; /* Slight opening for numbers */
+  }
+
+  .type {
+    /* Type styling with subtle emphasis */
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  /* Description styling - optimized for reading */
+  .media-description {
+    /* Typography for body text - Bringhurst's principles */
+    font-size: var(--step--2); /* More subtle, better hierarchy */
+    font-weight: 400; /* Normal weight for body text */
+    line-height: var(--line-height-relaxed); /* 1.6 for comfortable reading */
+    
+    /* Color hierarchy - body text */
+    color: var(--theme-color-700);
+    
+    /* Spacing and margin */
+    margin: 0;
+    
+    /* Optimal measure for readability - Bringhurst's 45-75 characters */
+    max-width: 65ch; /* Expanded for longer descriptions */
+    
+    /* OpenType features for body text */
+    font-feature-settings: 
+      "kern" 1,     /* Kerning */
+      "liga" 1,     /* Ligatures */
+      "calt" 1,     /* Contextual alternates */
+      "onum" 0;     /* Lining numbers (not oldstyle) for consistency */
+    
+    /* Paragraph refinements */
+    hyphens: auto; /* Automatic hyphenation for better justification */
+    text-rendering: optimizeLegibility; /* Browser optimization */
+  }
+
+  /* Dark mode adjustments */
+  :global([data-theme="dark"]) .media-entry {
+    border-bottom-color: var(--theme-color-200);
+  }
+  
+  :global([data-theme="dark"]) .media-meta {
+    color: var(--theme-color-400);
+  }
+  
+  :global([data-theme="dark"]) .media-description {
+    color: var(--theme-color-600);
+  }
+
+  /* Responsive typography adjustments */
+  @media (max-width: 640px) {
+    .media-entry {
+      /* Tighter spacing on mobile - still following baseline grid */
+      padding-bottom: var(--space-3b); /* 18px - 3 baseline units */
+    }
+    
+    .media-title {
+      /* Slightly smaller on mobile but maintain hierarchy */
+      font-size: var(--step--1);
+      line-height: 1.3; /* Tighter leading for mobile */
+    }
+    
+    .media-meta {
+      /* Stack metadata on very narrow screens if needed */
+      font-size: var(--step--2); /* Smallest available size on mobile */
+    }
+    
+    .media-description {
+      /* Keep same size on mobile since we're already at step--2 */
+      font-size: var(--step--2);
+      line-height: 1.5; /* Slightly tighter for mobile reading */
+    }
+  }
+
+  /* Print styles - Hochuli's media considerations */
+  @media print {
+    .media-entry {
+      /* Remove borders for print */
+      border-bottom: none;
+      
+      /* Tighter spacing for print economy */
+      padding-bottom: var(--space-2b); /* 12px */
+    }
+    
+    .media-link {
+      /* Remove underlines for print clarity */
+      text-decoration: none;
+      color: var(--theme-text);
+    }
+    
+    /* Show URLs after links in print */
+    .media-link::after {
+      content: " (" attr(href) ")";
+      font-size: var(--step--3);
+      color: var(--theme-color-500);
+    }
+  }
+</style> 
