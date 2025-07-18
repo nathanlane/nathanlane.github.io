@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import type { CollectionItemBase } from "@/types";
 import type { CollectionEntry } from "astro:content";
 
 type AnyCollectionEntry =
@@ -21,7 +22,7 @@ export async function validateSlugUniqueness() {
 	for (const collectionName of collections) {
 		const entries = await getCollection(collectionName);
 
-		entries.forEach((entry: any) => {
+		entries.forEach((entry: CollectionItemBase) => {
 			const slug = entry.data.slug || entry.id;
 			const key = `${collectionName}/${slug}`;
 
