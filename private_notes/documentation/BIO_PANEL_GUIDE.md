@@ -14,7 +14,7 @@ bio:
   title: "Nathan Lane, PhD"  # Can be customized: "About Me", "Bio", "Background", etc.
   
   # Primary intro - the hook (1-2 sentences)
-  tagline: "Empirical economist, professor of economics, University of Oxford"
+  tagline: "Economics professor, University of Oxford"
   
   # Main narrative (supports markdown)
   narrative: |
@@ -95,7 +95,7 @@ bio:
 ```yaml
 bio:
   title: "Nathan Lane, PhD"  # or "About Me", "Bio", "Background", etc.
-  tagline: "Empirical economist, professor of economics, University of Oxford"
+  tagline: "Economics professor, University of Oxford"
   narrative: |
     I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems.
     

@@ -1,30 +1,18 @@
-hero:
-  title: "Nathan Lane, PhD"
-  description: "Assistant Professor of Economics at the University of Oxford. I am empirical economist and data scientist studying how economies change. I am also co-PI of the Industrial Policy Group lab."
-  buttons:
-    - text: "Research"
-      href: "/research/"
-      variant: "primary"
-    - text: "Industrial Policy Group"
-      href: "https://www.industrialpolicygroup.com/"
-      variant: "secondary"
-
 # Bio panel configuration
 bio:
   # Section title (optional, defaults to "About")
   title: "Nathan Lane, PhD"
   
   # Primary intro - the hook
-  tagline: "Empirical economist, professor of economics, University of Oxford"
+  tagline: "Economics professor, University of Oxford"
   
   # Main narrative (supports markdown)
   narrative: |
-    I'm an Assistant Professor of Economics at the University of Oxford, where I explore the intersection of industrial policy, economic development, and global manufacturing systems. My research combines rigorous econometric analysis with historical perspective to understand how governments shape economic outcomes.
+    I'm an Associate Professor of Economics at the University of Oxford and co-founder of the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/).
+    
+    My work has been featured in The Economist, The Financial Times, The Wall Street Journal, Trade Talks, and other major outlets.
 
-    Beyond research, I'm passionate about making economic analysis more accessible. I contribute to open-source tools, teach data science methods to graduate students, and occasionally write about the [intersection of economics and technology](/posts).
 
-    I am also co-Principal Investigator of the [Industrial Policy Group](https://www.industrialpolicygroup.com/) lab, where we are building comprehensive datasets and developing new methodologies to evaluate how industrial strategies affect economic transformation.
-  
   
   # Brief credentials or affiliations
   affiliations:
@@ -40,50 +28,62 @@ bio:
   #   caption: "Photo by [photographer name](link)"  # optional
   #   display: true  # Must be true to show photo
 
-currentProjects:
-  title: "Current Projects"
-  projects:
-    - title: "Research Papers"
-      description: "My research papers."
-      url: "/research/"
-    
-    - title: "Industrial Policy Data"
-      description: "A database of industrial policy interventions across the world."
-      url: "https://www.industrialpolicydata.com/"
-    
-    - title: "Industrial Policy Group lab"
-      description: "The Industrial Policy Group is a research lab at the University of Oxford and UBC."
-      url: "https://www.industrialpolicygroup.com/"
-
-    - title: "LaTeX Template"
-      description: "A LaTeX template for research papers."
-      url: "https://github.com/nathanlane/lane_latex_template"
+# Current projects configuration (not currently used on homepage)
+# currentProjects:
+#   title: "Current Projects"
+#   projects:
+#     - title: "Research Papers"
+#       description: "My research papers."
+#       url: "/research/"
+#     
+#     - title: "Industrial Policy Data"
+#       description: "A database of industrial policy interventions across the world."
+#       url: "https://www.industrialpolicydata.com/"
+#     
+#     - title: "Industrial Policy Group lab"
+#       description: "The Industrial Policy Group is a research lab at the University of Oxford and UBC."
+#       url: "https://www.industrialpolicygroup.com/"
+# 
+#     - title: "LaTeX Template"
+#       description: "A LaTeX template for research papers."
+#       url: "https://github.com/nathanlane/lane_latex_template"
 
 contact:
-  title: "More"
+  title: "The Important Stuff"
   email: "drnathanlane@gmail.com"
+  items:
+    - label: "Email"
+      href: "mailto:drnathanlane@gmail.com"
+      text: "drnathanlane@gmail.com"
+    - label: "Research"
+      href: "/research/"
+      text: "Research"
+    - label: "CV"
+      href: "/cv.pdf"
+      text: "Download CV"
+    - label: "GitHub"
+      href: "https://github.com/nathanlane"
+      text: "GitHub"
 
-showcase:
-  title: "What I'm Working On"
-  # Configuration for content sections displayed on homepage
-  contentSections:
-    research:
-      title: "Recent Papers"
-      itemCount: 3  # Number of papers to show
-      viewAllText: "View all research papers"
-      viewAllUrl: "/research/"
-    writing:
-      title: "Recent Writing"
-      itemCount: 2  # Number of writing pieces to show
-      viewAllText: "View all writing"
-      viewAllUrl: "/writing/"
-    media:
-      title: "Recent Media"
-      itemCount: 5  # Number of media items to show
-      viewAllText: "View all media coverage"
-      viewAllUrl: "/media/"
-  sections: []  # Empty sections array to satisfy schema
-
-posts:
-  title: "Posts"
-  maxPosts: 10
+# Homepage sections configuration
+sections:
+  research:
+    title: "Research"
+    itemCount: 3  # Number of papers to show
+    viewAllText: "View all papers"
+    viewAllUrl: "/research/"
+  essays:
+    title: "Recent Essays"
+    itemCount: 3  # Number of posts to show
+    viewAllText: "View all posts"
+    viewAllUrl: "/posts/"
+  writing:
+    title: "Recent Writing"
+    itemCount: 2  # Number of writing pieces to show
+    viewAllText: "View all writing"
+    viewAllUrl: "/writing/"
+  media:
+    title: "Recent in the News"
+    itemCount: 5  # Number of media items to show
+    viewAllText: "View all media"
+    viewAllUrl: "/media/"

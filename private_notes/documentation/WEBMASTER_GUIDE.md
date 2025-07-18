@@ -35,8 +35,9 @@ pnpm preview
 ### Before Deploying
 1. Run `pnpm build` to ensure no errors
 2. Check that all required fields in `src/site.config.ts` are filled
-3. Commit all changes to git
-4. Push to GitHub to trigger automated workflows
+3. Update homepage content in `src/content/homepage/index.yaml` as needed
+4. Commit all changes to git
+5. Push to GitHub to trigger automated workflows
 
 ---
 
@@ -207,6 +208,31 @@ The `public/_headers` file configures security headers for Netlify:
 
 ## Content Management
 
+### Homepage Content
+
+Homepage content is managed through `src/content/homepage/index.yaml`:
+
+```yaml
+bio:
+  title: "Your Name"
+  tagline: "Your professional title"
+  narrative: |
+    Your bio content here...
+
+contact:
+  title: "Contact & Links"
+  items:
+    - label: "Email"
+      href: "mailto:your@email.com"
+      text: "your@email.com"
+```
+
+**Key Features:**
+- Configurable contact section with flexible links
+- Bio panel with markdown support
+- Section display controls (item counts, titles)
+- No hero section (simplified, content-focused approach)
+
 ### Blog Posts
 
 Create new posts in `src/content/post/`:
@@ -328,7 +354,6 @@ export const navigationConfig = {
           { title: "Research", href: "/research" },
           { title: "Writing", href: "/writing" },
           { title: "Blog", href: "/posts" },
-          { title: "CV", href: "/cv" },
           { title: "Sitemap", href: "/sitemap.xml" }
         ]
       },
@@ -602,6 +627,7 @@ Remember: The CI/CD pipeline catches most issues automatically. If the build pas
 
 For more detailed guides on specific topics:
 
+- **[Homepage Configuration Guide](HOMEPAGE_CONFIGURATION_GUIDE.md)** - Complete guide to managing homepage content and layout
 - **[Footer Configuration Guide](FOOTER_CONFIGURATION_GUIDE.md)** - Comprehensive guide to managing footer content
 - **[Metadata System Guide](METADATA_SYSTEM_GUIDE.md)** - Typography and metadata configuration
 - **[Blog and Writing Guide](BLOG_AND_WRITING_GUIDE.md)** - Content creation and management

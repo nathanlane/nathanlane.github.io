@@ -1,33 +1,53 @@
 ---
+interface ContactItem {
+  label: string;
+  href: string;
+  text: string;
+}
+
 interface Props {
   class?: string;
   variant?: 'default' | 'compact' | 'sidebar';
+  items?: ContactItem[];
 }
 
-const { class: className = '', variant = 'default' } = Astro.props;
+const { class: className = '', variant = 'default', items } = Astro.props;
+
+// Default contact items (fallback if no items provided)
+const defaultItems: ContactItem[] = [
+  {
+    label: "Email",
+    href: "mailto:drnathanlane@gmail.com",
+    text: "drnathanlane@gmail.com"
+  },
+  {
+    label: "Research", 
+    href: "/research/",
+    text: "Browse all papers"
+  },
+  {
+    label: "Writing",
+    href: "/posts/",
+    text: "Recent essays"
+  },
+  {
+    label: "Updates",
+    href: "/rss.xml", 
+    text: "RSS feed"
+  }
+];
+
+const contactItems = items || defaultItems;
 ---
 
 <div class={`contact-info contact-info--${variant} ${className}`}>
   <div class="contact-details">
-    <div class="contact-item">
-      <span class="contact-label">Email</span>
-      <a href="mailto:nathanlane@example.com" class="inline-link">nathanlane@example.com</a>
-    </div>
-    
-    <div class="contact-item">
-      <span class="contact-label">Research</span>
-      <a href="/research/" class="inline-link">Browse all papers</a>
-    </div>
-    
-    <div class="contact-item">
-      <span class="contact-label">Writing</span>
-      <a href="/posts/" class="inline-link">Recent essays</a>
-    </div>
-    
-    <div class="contact-item">
-      <span class="contact-label">Updates</span>
-      <a href="/rss.xml" class="inline-link">RSS feed</a>
-    </div>
+    {contactItems.map((item) => (
+      <div class="contact-item">
+        <span class="contact-label">{item.label}</span>
+        <a href={item.href} class="inline-link">{item.text}</a>
+      </div>
+    ))}
   </div>
 </div>
 

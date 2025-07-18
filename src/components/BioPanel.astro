@@ -32,7 +32,7 @@ const narrativeHtml = await marked.parse(bio.narrative);
   <div class="max-w-4xl mx-auto">
     <!-- Header with customizable title -->
     <header class="mb-8b">
-      <h2 class="heading-2 text-accent-base mb-3b">{bio.title || "About"}</h2>
+      <h1 class="heading-1 text-accent-base mb-3b">{bio.title || "About"}</h1>
       {bio.tagline && (
         <p class="text-2 text-light font-body leading-relaxed">
           {bio.tagline}

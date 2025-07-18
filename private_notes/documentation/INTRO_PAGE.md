@@ -25,7 +25,7 @@ This is the primary controller that orchestrates the entire homepage:
 ---
 // Content fetching
 const homepageContent = await getEntry("homepage", "index");
-const { hero, bio, currentProjects, contact, showcase, posts } = homepageContent.data;
+const { bio, contact, sections } = homepageContent.data;
 
 // Data aggregation
 const allPosts = await getAllPosts();
@@ -43,11 +43,12 @@ const allMediaItems = Object.entries(mediaData);
 
 ### Current Section Structure
 
-1. **Hero Section**: Title, description, social links, and CTA buttons
-2. **Bio Panel**: Personal introduction and affiliations
-3. **Current Work & Contact**: Two-column layout with projects and contact info
-4. **Component Showcase**: Research papers, writing samples, media appearances
-5. **Posts Section**: Recent blog posts list
+1. **Bio Panel**: Personal introduction and affiliations (now the opening section)
+2. **Research Section**: Featured research papers
+3. **Essays Section**: Recent blog posts
+4. **Writing Section**: Recent writing pieces
+5. **Media Section**: Latest media appearances
+6. **Contact Section**: Configurable contact links and information
 
 ---
 
@@ -57,53 +58,61 @@ const allMediaItems = Object.entries(mediaData);
 
 This YAML file controls all text content and section configuration:
 
-```yaml
-hero:
-  title: "Nathan Lane, PhD"
-  description: "Assistant Professor of Economics..."
-  buttons:
-    - text: "Research"
-      href: "/research/"
-      variant: "primary"
-
 bio:
   title: "Nathan Lane, PhD"
-  tagline: "Empirical economist, professor..."
+  tagline: "Economics professor, University of Oxford"
   narrative: |
-    I'm an Assistant Professor of Economics...
+    Assistant Professor of Economics at the University of Oxford. I am empirical economist and data scientist studying how economies change. I am also co-PI of the Industrial Policy Group lab.
   affiliations:
     - title: "Oxford Economics"
       role: "Assistant Professor"
+    - title: "Industrial Policy Group"
+      role: "Co-Principal Investigator"
 
-currentProjects:
-  title: "Current Projects"
-  projects:
-    - title: "Research Papers"
-      description: "My research papers."
-      url: "/research/"
+contact:
+  title: "Contact & Links"
+  email: "drnathanlane@gmail.com"
+  items:
+    - label: "Email"
+      href: "mailto:drnathanlane@gmail.com"
+      text: "drnathanlane@gmail.com"
+    - label: "Research"
+      href: "/research/"
+      text: "Browse all papers"
+    - label: "CV"
+      href: "/cv.pdf"
+      text: "Download CV"
+    - label: "Updates"
+      href: "/rss.xml"
+      text: "RSS feed"
 
-showcase:
-  title: "What I'm Working On"
-  contentSections:
-    research:
-      title: "Recent Papers"
-      itemCount: 3
-    writing:
-      title: "Recent Writing" 
-      itemCount: 2
-    media:
-      title: "Recent Media"
-      itemCount: 5
-
-posts:
-  title: "Posts"
-  maxPosts: 10
+sections:
+  research:
+    title: "Research"
+    itemCount: 3
+    viewAllText: "View all papers"
+    viewAllUrl: "/research/"
+  essays:
+    title: "Recent Essays"
+    itemCount: 3
+    viewAllText: "View all posts"
+    viewAllUrl: "/posts/"
+  writing:
+    title: "Recent Writing"
+    itemCount: 2
+    viewAllText: "View all writing"
+    viewAllUrl: "/writing/"
+  media:
+    title: "Recent in the News"
+    itemCount: 5
+    viewAllText: "View all media"
+    viewAllUrl: "/media/"
 ```
 
 **Configuration Options**:
 - **Item counts**: Control how many items appear in each section
 - **Section titles**: Customize headings for each area
-- **Button configuration**: Hero CTA buttons with variants
+- **Contact items**: Configurable contact section with flexible links
 - **Bio content**: Full markdown support for personal narrative
 
 ---
@@ -207,25 +216,35 @@ The homepage automatically:
 
 1. **Update YAML Configuration**:
    ```yaml
-   showcase:
-     contentSections:
-       newSection:
-         title: "New Section Title"
-         itemCount: 5
+   sections:
+     newSection:
+       title: "New Section Title"
+       itemCount: 5
+       viewAllText: "View all items"
+       viewAllUrl: "/new-section/"
    ```
 
 2. **Fetch Content in index.astro**:
    ```astro
    const newSectionData = await getCollection("new-content");
-   const filteredItems = newSectionData.slice(0, newSectionConfig.itemCount);
+   const filteredItems = newSectionData.slice(0, sections.newSection.itemCount);
    ```
 
 3. **Add Component Rendering**:
    ```astro
-   <div class="mb-4b">
-     <h3>{newSectionConfig.title}</h3>
-     <!-- Render items -->
-   </div>
+   <DocumentSection 
+     title={sections.newSection.title}
+     viewAllText={sections.newSection.viewAllText}
+     viewAllHref={sections.newSection.viewAllUrl}
+   >
+     {filteredItems.map((item) => (
+       <DocumentEntry
+         title={item.data.title}
+         href={`/new-section/${item.id}/`}
+         description={item.data.description}
+       />
+     ))}
+   </DocumentSection>
    ```
 
 ### Modifying Layouts
@@ -361,14 +380,14 @@ The homepage automatically:
 
 1. **Content freshness**: Update featured flags on research
 2. **Media appearances**: Add new items to `media.ts`
-3. **Project descriptions**: Keep current projects section updated
+3. **Contact information**: Update contact items in YAML as needed
 4. **Bio narrative**: Refresh personal description quarterly
 
 ### Configuration Management
 
-1. **Item counts**: Adjust based on content volume
+1. **Item counts**: Adjust based on content volume in YAML `sections`
 2. **Section order**: Modify in `index.astro` template
-3. **Display options**: Toggle sections via YAML configuration
+3. **Contact section**: Easily add/remove items through YAML configuration
 4. **Responsive behavior**: Test across device sizes
 
 ---

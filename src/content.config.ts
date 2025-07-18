@@ -209,20 +209,10 @@ const pages = defineCollection({
 const homepage = defineCollection({
   loader: glob({ base: "./src/content/homepage", pattern: "**/*.yaml" }),
   schema: z.object({
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-      buttons: z.array(z.object({
-        text: z.string(),
-        href: z.string(),
-        variant: z.enum(["primary", "secondary"]),
-      })),
-    }),
     bio: z.object({
       title: z.string().optional(),
       tagline: z.string().optional(),
       narrative: z.string(),
-      currently: z.array(z.string()).optional(),
       affiliations: z.array(z.object({
         title: z.string(),
         role: z.string(),
@@ -234,56 +224,41 @@ const homepage = defineCollection({
         display: z.boolean(),
       }).optional(),
     }).optional(),
-    currentProjects: z.object({
-      title: z.string(),
-      projects: z.array(z.object({
-        title: z.string(),
-        description: z.string(),
-        url: z.string(),
-      })),
-    }),
     contact: z.object({
       title: z.string(),
       email: z.string().email(),
-    }),
-    showcase: z.object({
-      title: z.string(),
-      contentSections: z.object({
-        research: z.object({
-          title: z.string(),
-          itemCount: z.number(),
-          viewAllText: z.string(),
-          viewAllUrl: z.string(),
-        }),
-        writing: z.object({
-          title: z.string(),
-          itemCount: z.number(),
-          viewAllText: z.string(),
-          viewAllUrl: z.string(),
-        }),
-        media: z.object({
-          title: z.string(),
-          itemCount: z.number(),
-          viewAllText: z.string(),
-          viewAllUrl: z.string(),
-        }),
-      }).optional(),
-      sections: z.array(z.object({
-        title: z.string(),
-        type: z.enum(["projects", "writing", "compact"]),
-        items: z.array(z.object({
-          title: z.string(),
-          description: z.string().optional(),
-          excerpt: z.string().optional(),
-          date: z.string().optional(),
-          url: z.string(),
-        })),
+      items: z.array(z.object({
+        label: z.string(),
+        href: z.string(),
+        text: z.string(),
       })),
     }),
-    posts: z.object({
-      title: z.string(),
-      maxPosts: z.number(),
-    }),
+    sections: z.object({
+      research: z.object({
+        title: z.string(),
+        itemCount: z.number(),
+        viewAllText: z.string(),
+        viewAllUrl: z.string(),
+      }).optional(),
+      essays: z.object({
+        title: z.string(),
+        itemCount: z.number(),
+        viewAllText: z.string(),
+        viewAllUrl: z.string(),
+      }).optional(),
+      writing: z.object({
+        title: z.string(),
+        itemCount: z.number(),
+        viewAllText: z.string(),
+        viewAllUrl: z.string(),
+      }).optional(),
+      media: z.object({
+        title: z.string(),
+        itemCount: z.number(),
+        viewAllText: z.string(),
+        viewAllUrl: z.string(),
+      }).optional(),
+    }).optional(),
   }),
 });
 

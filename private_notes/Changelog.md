@@ -1,5 +1,28 @@
 # Changelog
 
+## Homepage Structure Simplification & Configuration Management (January 28, 2025)
+
+### Homepage Redesign & Streamlining
+- **Hero Section Removal**: Eliminated redundant document masthead/hero section from homepage for cleaner layout
+- **Direct Bio Panel Focus**: Homepage now starts directly with bio panel, reducing visual clutter
+- **Simplified CSS**: Removed unused masthead and site-description styles for lighter codebase
+
+### Enhanced Configuration Management
+- **Contact Section Configuration**: "Links & Contact" section now fully configurable through YAML
+- **TypeScript Interface Support**: Added `ContactItem` interface for type-safe contact configuration
+- **Flexible Contact Items**: Easy to add, remove, or reorder contact items through `index.yaml`
+- **Fallback Support**: Component gracefully handles missing configuration with sensible defaults
+
+### YAML Configuration Improvements  
+- **Removed Unused Hero**: Cleaned up `index.yaml` by removing obsolete hero configuration
+- **Reorganized Sections**: Updated sections structure to match actual homepage implementation
+- **Commented Unused Config**: Preserved `currentProjects` as commented example for future use
+- **Centralized Contact Management**: All contact section content managed through single YAML configuration
+
+### Bio Panel Refinement
+- **Tagline Optimization**: Simplified tagline from "Empirical economist, professor of economics, University of Oxford" to "Economics professor, University of Oxford"
+- **Improved Content Flow**: Better content hierarchy with bio panel as primary homepage element
+
 ## Footer Content Management & Sitemap System (January 28, 2025)
 
 ### Footer Configuration System
