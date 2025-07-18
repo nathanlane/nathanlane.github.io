@@ -1,0 +1,338 @@
+---
+export interface Props {
+  class?: string;
+  leftColumnTitle?: string;
+  leftColumnItems?: Array<{
+    label: string;
+    href: string;
+    isExternal?: boolean;
+  }>;
+}
+
+const { 
+  class: className = "",
+  leftColumnTitle = "Site Navigation",
+  leftColumnItems = [
+    { label: "Research Papers", href: "/research/" },
+    { label: "Writing & Essays", href: "/writing/" },
+    { label: "Blog Posts", href: "/posts/" },
+    { label: "Media & Talks", href: "/media/" }
+  ]
+} = Astro.props;
+
+// Fixed right column - Contact information
+const contactItems = [
+  { label: "Email", href: "mailto:drnathanlane@gmail.com" },
+  { label: "Curriculum Vitae", href: "/cv.pdf", isExternal: true },
+  { label: "GitHub Profile", href: "https://github.com/nathanlane", isExternal: true }
+];
+---
+
+<!--
+# Marginalia Component
+
+Typography-forward marginalia inspired by classical typeset books.
+Enhanced with master typographers' principles:
+
+- Bringhurst: Subordinate but dignified typography, proper proportional relationships
+- Ruder: Systematic spacing, functional contrast, precise grey values  
+- Hochuli: Optical refinements, careful detail typography
+- Butterick: Practical readability, enhanced comfort
+- Ambrose/Harris: Professional finish, consistent application
+
+## Design Philosophy:
+- Classical typography with refined OpenType features
+- Elegant separation using systematic relationships
+- Minimal decoration - typography creates all hierarchy
+- Sophisticated grey values and optical spacing
+- Hand-crafted attention to micro-typography details
+
+## Usage:
+```astro
+<Marginalia class="mt-12b" />
+<Marginalia 
+  leftColumnTitle="Quick Links"
+  leftColumnItems={[
+    { label: "About", href: "/about/" },
+    { label: "Projects", href: "/projects/" }
+  ]}
+/>
+```
+-->
+
+<aside class={`marginalia ${className}`}>
+  <!-- Left Column: Customizable Navigation -->
+  <div class="marginalia-column">
+    <h3 class="marginalia-heading">{leftColumnTitle}</h3>
+    <nav class="marginalia-nav">
+      <ul class="marginalia-list">
+        {leftColumnItems.map(item => (
+          <li>
+            <a 
+              href={item.href} 
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+              class={`marginalia-link ${item.isExternal ? 'marginalia-link--external' : ''}`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Right Column: Fixed Contact Information -->
+  <div class="marginalia-column">
+    <h3 class="marginalia-heading">Contact</h3>
+    <nav class="marginalia-nav">
+      <ul class="marginalia-list">
+        {contactItems.map(item => (
+          <li>
+            <a 
+              href={item.href}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+              class={`marginalia-link ${item.isExternal ? 'marginalia-link--external' : ''}`}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<style>
+  /* Container with classical marginalia styling */
+  .marginalia {
+    /* Two-column layout with harmonious proportions */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8); /* 48px - more comfortable column separation */
+    
+    /* Classical marginalia positioning - more comfortable spacing */
+    margin-top: var(--space-10); /* 60px - reduced from extreme 96px */
+    padding-top: var(--space-6); /* 36px - proportional to gap */
+    
+    /* Hochuli: Subtle but definite separator */
+    border-top: 1px solid var(--theme-color-100);
+    
+    /* Ruder: Systematic measure relationships */
+    max-width: calc(var(--measure-wide) + var(--space-8)); /* Slightly wider for marginalia */
+  }
+
+  /* Individual columns with careful spacing */
+  .marginalia-column {
+    /* Natural flow with tighter spacing */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2); /* 12px - tighter content grouping */
+  }
+
+  /* Headings - Hochuli's detail typography principles */
+  .marginalia-heading {
+    /* Typography following all masters' guidance */
+    font-family: var(--font-serif); /* Serif to harmonize with body text */
+    font-size: var(--step--1); /* 12.8-14.4px - Butterick's smaller sizing */
+    font-weight: 600; /* Slightly bolder for hierarchy - Ruder */
+    
+    /* OpenType features - Bringhurst/Hochuli precision */
+    font-feature-settings:
+      "kern" 1,           /* Kerning always on */
+      "liga" 1,           /* Standard ligatures */
+      "smcp" 1,           /* Real small caps */
+      "c2sc" 1,           /* Caps to small caps */
+      "case" 1;           /* Case-sensitive forms */
+    
+    /* Sophisticated color and spacing - Ruder's grey values */
+    color: var(--theme-color-700);
+    letter-spacing: 0.04em; /* Reduced for serif and proper case - Hochuli */
+    line-height: 1.25; /* Tighter for headings */
+    /* Removed problematic text-transform: lowercase */
+    
+    /* Bringhurst: Tighter spacing to content */
+    margin-bottom: var(--space-2); /* 12px - reduced from 18px */
+  }
+
+  /* Navigation lists with refined spacing */
+  .marginalia-nav {
+    /* Clean reset */
+    margin: 0;
+    padding: 0;
+  }
+
+  .marginalia-list {
+    /* Hochuli: Systematic list structure */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    /* Ruder: Tighter vertical rhythm */
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2); /* 12px - tighter link spacing */
+  }
+
+  /* Links with master typographer refinements */
+  .marginalia-link {
+    /* Butterick: Optimized readability typography */
+    font-family: var(--font-sans);
+    font-size: var(--step--1); /* 12.8-14.4px */
+    font-weight: 400;
+    line-height: 1.35; /* Slightly more generous - Butterick */
+    
+    /* Ruder: Functional color relationships */
+    color: var(--theme-color-550);
+    text-decoration: none;
+    
+    /* Hochuli: Enhanced micro-typography */
+    letter-spacing: 0.015em; /* Subtle opening for clarity */
+    
+    /* Bringhurst: Elegant transitions */
+    border-bottom: 1px solid transparent;
+    transition: all 0.15s ease-out;
+    
+    /* Improved touch targets */
+    display: inline-block;
+    padding: var(--space-1) 0; /* 6px vertical for better clicking */
+  }
+
+  .marginalia-link:hover,
+  .marginalia-link:focus {
+    /* Ambrose/Harris: Clear but sophisticated emphasis */
+    color: var(--theme-text);
+    border-bottom-color: var(--theme-color-350);
+    
+    /* Subtle transformation for tactile feedback */
+    transform: translateX(2px);
+  }
+
+  /* External link indicator with optical refinement */
+  .marginalia-link--external::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: var(--space-1); /* 6px */
+    
+    /* Hochuli: Subordinate but visible */
+    font-size: 0.75em; /* Smaller but proportional */
+    opacity: 0.65;
+    
+    /* Prevent awkward line breaks */
+    white-space: nowrap;
+    
+    /* Bringhurst: Graceful positioning */
+    vertical-align: text-top;
+    transform: translateY(-0.05em); /* Slight optical adjustment */
+  }
+
+  .marginalia-link--external:hover::after {
+    opacity: 0.85;
+    transform: translateY(-0.05em) translateX(1px); /* Coordinated movement */
+  }
+
+  /* Mobile responsive design - Butterick's practical approach */
+  @media (max-width: 768px) {
+    .marginalia {
+      /* Single column on mobile */
+      grid-template-columns: 1fr;
+      gap: var(--space-6); /* 36px - reduced but proportional */
+      
+      /* Compressed spacing for mobile */
+      margin-top: var(--space-8); /* 48px - more comfortable on mobile */
+      padding-top: var(--space-4); /* 24px - proportional reduction */
+    }
+    
+    .marginalia-heading {
+      /* Slightly larger for mobile readability - Butterick */
+      font-size: var(--step-0); /* 15.6-17px */
+      letter-spacing: 0.06em; /* Reduced tracking at larger size */
+    }
+    
+    .marginalia-link {
+      /* Enhanced mobile interaction */
+      font-size: var(--step-0); /* Larger text */
+      padding: var(--space-2) 0; /* 12px - better touch targets */
+    }
+  }
+
+  /* Dark mode with sophisticated adjustments */
+  :root[data-theme="dark"] .marginalia {
+    border-top-color: var(--theme-color-150);
+  }
+
+  :root[data-theme="dark"] .marginalia-heading {
+    color: var(--theme-color-350);
+  }
+
+  :root[data-theme="dark"] .marginalia-link {
+    color: var(--theme-color-400);
+  }
+
+  :root[data-theme="dark"] .marginalia-link:hover,
+  :root[data-theme="dark"] .marginalia-link:focus {
+    color: var(--theme-text);
+    border-bottom-color: var(--theme-color-500);
+  }
+
+  /* High contrast mode - Accessibility enhancement */
+  @media (prefers-contrast: high) {
+    .marginalia-heading {
+      font-weight: 700;
+      color: var(--theme-text);
+      letter-spacing: 0.1em; /* More space for clarity */
+    }
+    
+    .marginalia-link {
+      font-weight: 500;
+      border-bottom: 1px solid var(--theme-color-300);
+    }
+    
+    .marginalia-link:hover,
+    .marginalia-link:focus {
+      border-bottom-width: 2px;
+    }
+  }
+
+  /* Print styles - Bringhurst inspired */
+  @media print {
+    .marginalia {
+      margin-top: var(--space-8);
+      padding-top: var(--space-4);
+      border-top-color: #000;
+    }
+    
+    .marginalia-heading {
+      color: #000;
+      font-weight: 700;
+    }
+    
+    .marginalia-link {
+      color: #000;
+      text-decoration: underline;
+    }
+    
+    .marginalia-link--external::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      opacity: 0.7;
+    }
+  }
+
+  /* Reduced motion accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .marginalia-link {
+      transition: none;
+    }
+    
+    .marginalia-link:hover,
+    .marginalia-link:focus {
+      transform: none;
+    }
+    
+    .marginalia-link--external:hover::after {
+      transform: translateY(-0.05em);
+    }
+  }
+</style> 

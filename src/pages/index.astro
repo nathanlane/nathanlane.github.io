@@ -87,7 +87,7 @@ const allMediaItems = Object.entries(mediaData)
 			{recentPosts.map((post) => (
 				<DocumentEntry
 					title={post.data.title}
-					href={`/posts/${post.slug}/`}
+					href={`/posts/${post.id}/`}
 					type="post"
 					date={post.data.publishDate.toISOString()}
 					description={post.data.description}
@@ -119,7 +119,7 @@ const allMediaItems = Object.entries(mediaData)
 
 		<!-- Contact Information -->
 		<DocumentSection title="Contact & Links">
-			<ContactInfo />
+			<ContactInfo variant="default" />
 		</DocumentSection>
 		
 	</div>

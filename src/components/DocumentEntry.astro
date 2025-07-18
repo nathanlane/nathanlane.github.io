@@ -6,12 +6,27 @@ interface Props {
   href: string;
   type: 'research' | 'writing' | 'project' | 'post';
   date?: string;
-  status?: 'published' | 'working-paper' | 'in-progress';
+  status?: 'published' | 'working-paper' | 'work-in-progress' | 'archived';
   description: string;
   metadata?: string;
+  // Research-specific props
+  publication?: string;
+  download?: string;
+  link?: string;
 }
 
-const { title, href, type, date, status, description, metadata } = Astro.props;
+const { 
+  title, 
+  href, 
+  type, 
+  date, 
+  status, 
+  description, 
+  metadata,
+  publication,
+  download,
+  link
+} = Astro.props;
 
 // Format date if provided
 const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { 
@@ -38,11 +53,57 @@ const metadataItems = [
     class="mb-3b"
   />
   
+  <!-- Publication information if available -->
+  {publication && (
+    <div class="text-meta text-accent-base font-medium mb-2b">
+      {publication}
+    </div>
+  )}
+  
   <p class="text-body">{description}</p>
+  
+  <!-- Research links if available -->
+  {(download || link) && (
+    <div class="flex items-center gap-4b text-meta pt-2b">
+      {download && (
+        <a href={download} class="nav-link text-meta" target="_blank" rel="noopener">
+          PDF ↗
+        </a>
+      )}
+      {link && (
+        <a href={link} class="nav-link text-meta" target="_blank" rel="noopener">
+          Journal ↗
+        </a>
+      )}
+    </div>
+  )}
 </article>
 
 <style>
   .document-entry {
     margin-bottom: var(--space-8); /* 48px - generous separation */
+  }
+  
+  /* Feature link styling for titles */
+  .feature-link {
+    color: var(--theme-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .feature-link:hover {
+    color: var(--theme-accent-base);
+  }
+  
+  /* Navigation link styling */
+  .nav-link {
+    color: var(--theme-color-600);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: var(--theme-text);
   }
 </style> 

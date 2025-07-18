@@ -12,66 +12,60 @@ export interface Props {
 }
 
 const { title, authors, year, description, publication, url, download, link, featured = false } = Astro.props;
-
-// Truncate description to 80 characters
-const excerpt = description.length > 80 ? `${description.substring(0, 80)}...` : description;
 ---
 
-<article class={`group rounded-lg bg-color-75 hover:bg-color-100 ${featured ? 'border-l-space-s border-accent-two' : ''} p-space-s card`} data-context="component">
+<article class={`${featured ? 'pl-3b border-l-2 border-accent-base' : ''}`}>
 	
-	<div class="flex flex-col gap-space-2xs">
+	<div class="space-y-2b">
 		
-		<!-- Title -->
+		<!-- Title with semantic typography -->
 		{url ? (
-			<h3 class="font-headline font-medium text-1 leading-tight">
-				<a href={url} class="text-accent-base group-hover:text-accent-two">
+			<h3 class="heading-4 mb-1b">
+				<a href={url} class="feature-link">
 					{title}
 				</a>
 			</h3>
 		) : (
-			<h3 class="font-headline font-medium text-1 leading-tight text-accent-base group-hover:text-accent-two">
+			<h3 class="heading-4 mb-1b">
 				{title}
 			</h3>
 		)}
 		
-		<!-- Authors and Year -->
-		<div class="text-body-sm text-lightest">
+		<!-- Metadata line with proper styling -->
+		<div class="text-meta text-light">
 			{authors} • {year}
 		</div>
 		
-		<!-- Publication -->
+		<!-- Publication with accent color -->
 		{publication && (
-			<div class="text-body-sm text-accent-base font-medium">
+			<div class="text-meta text-accent-base font-medium">
 				{publication}
 			</div>
 		)}
 		
-		<!-- Description -->
-		<p class="text-body-sm text-light leading-relaxed">
-			{excerpt}
+		<!-- Description with optimal reading typography -->
+		<p class="text-0 text-light leading-relaxed max-w-prose">
+			{description}
 		</p>
 		
-		<!-- Links -->
-		{url && (
-			<div class="flex items-center justify-between text-body-sm">
-				<a href={url} class="inline-link text-xs flex items-center gap-1b text-light hover:text-textColor">
-					Data, bibtex, more here
-					<svg xmlns="http://www.w3.org/2000/svg" class="h-2b w-2b" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-						<polyline points="15 3 21 3 21 9"></polyline>
-						<line x1="10" y1="14" x2="21" y2="3"></line>
-					</svg>
-				</a>
+		<!-- Links with consistent styling -->
+		{(url || download || link) && (
+			<div class="flex items-center justify-between text-meta pt-2b">
+				{url && (
+					<a href={url} class="nav-link text-meta uppercase tracking-wide">
+						View details →
+					</a>
+				)}
 				{(download || link) && (
-					<div class="flex gap-space-s">
+					<div class="flex gap-4b">
 						{download && (
-							<a href={download} class="inline-link text-xs" target="_blank" rel="noopener">
-								PDF
+							<a href={download} class="nav-link text-meta" target="_blank" rel="noopener">
+								PDF ↗
 							</a>
 						)}
 						{link && (
-							<a href={link} class="inline-link text-xs" target="_blank" rel="noopener">
-								Journal
+							<a href={link} class="nav-link text-meta" target="_blank" rel="noopener">
+								Journal ↗
 							</a>
 						)}
 					</div>
@@ -81,3 +75,35 @@ const excerpt = description.length > 80 ? `${description.substring(0, 80)}...` :
 		
 	</div>
 </article>
+
+<style>
+	/* Feature link styling for titles */
+	.feature-link {
+		color: var(--theme-text);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+	
+	.feature-link:hover {
+		color: var(--theme-accent-base);
+	}
+	
+	/* Navigation link styling */
+	.nav-link {
+		color: var(--theme-color-600);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease;
+	}
+	
+	.nav-link:hover {
+		color: var(--theme-text);
+	}
+	
+	/* External link indicator */
+	a[target="_blank"]::after {
+		content: "";
+		display: inline-block;
+		margin-left: 0.1em;
+	}
+</style>
