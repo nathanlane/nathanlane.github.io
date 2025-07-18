@@ -6,12 +6,13 @@ Practical before/after examples showing how to implement the semantic typography
 
 1. [Blog Post Layout](#blog-post-layout)
 2. [Card Components](#card-components)
-3. [Navigation Elements](#navigation-elements)
-4. [Hero Sections](#hero-sections)
-5. [Form Components](#form-components)
-6. [List Layouts](#list-layouts)
-7. [Modal Dialogs](#modal-dialogs)
-8. [Footer Sections](#footer-sections)
+3. [Unified Link System](#unified-link-system)
+4. [Navigation Elements](#navigation-elements)
+5. [Hero Sections](#hero-sections)
+6. [Form Components](#form-components)
+7. [List Layouts](#list-layouts)
+8. [Modal Dialogs](#modal-dialogs)
+9. [Footer Sections](#footer-sections)
 
 ---
 
@@ -132,7 +133,7 @@ Practical before/after examples showing how to implement the semantic typography
     <span class="text-meta">
       Design System
     </span>
-    <a href="#" class="nav-link text-sm hover:text-accent-two">
+    <a href="#" class="action-link">
       View Project →
     </a>
   </div>
@@ -144,6 +145,185 @@ Practical before/after examples showing how to implement the semantic typography
 - Semantic typography classes for better maintenance
 - Proper text hierarchy within the component
 - Theme-aware color usage
+
+---
+
+## Research/Academic Entry Components
+
+### Before: Conflicting Styles and Poor Hierarchy
+
+```html
+<article class="research-entry">
+  <h3 class="text-lg font-medium mb-1">
+    Digital Transformation and Manufacturing Resilience
+  </h3>
+  <div class="text-meta mb-2">
+    RESEARCH • Dec 2024 • WORKING PAPER
+  </div>
+  <div class="text-sm italic font-medium text-accent mb-2">
+    NBER Working Paper
+  </div>
+  <p class="text-sm text-gray-600 mb-3">
+    This research investigates the role of digital transformation in enhancing manufacturing firm resilience to supply chain disruptions...
+  </p>
+  <div class="flex gap-4 text-xs">
+    <a href="#" class="text-accent">PDF ↗</a>
+    <a href="#" class="text-accent">Publication Link ↗</a>
+  </div>
+</article>
+```
+
+### After: Optimized Academic Typography Hierarchy
+
+```html
+<article class="research-entry">
+  <h3 class="text-1 font-medium leading-tight mb-1b">
+    <a href="/research/digital-transformation" class="research-link">
+      Digital Transformation and Manufacturing Resilience
+    </a>
+  </h3>
+  
+  <!-- Custom metadata implementation for precise control -->
+  <div class="research-metadata-custom mb-2b">
+    <span class="metadata-item">RESEARCH</span>
+    <span class="metadata-separator" aria-hidden="true">•</span>
+    <span class="metadata-item">Dec 2024</span>
+  </div>
+  
+  <div class="research-publication">
+    NBER Working Paper
+  </div>
+  
+  <div class="research-actions">
+    <a href="#" class="research-action-link" target="_blank" rel="noopener">
+      <span class="action-label">PDF Download</span> ↗
+    </a>
+    <a href="#" class="research-action-link" target="_blank" rel="noopener">
+      <span class="action-label">Publication Link</span> ↗
+    </a>
+  </div>
+</article>
+```
+
+**Key Improvements:**
+- **Proper Hierarchy**: Title (`--step-1`) → Publication (`--step--1`) → Actions (`--step--2`) → Metadata (`--step--2`)
+- **Custom Metadata**: Bypasses global `.text-meta` conflicts for precise visual subordination
+- **Publication Clarity**: Normal weight, non-italic for professional appearance
+- **Scannable Layout**: Consistent entry heights without description noise
+- **OpenType Features**: Real small caps, kerning, and proper typography details
+- **Academic Focus**: Typography hierarchy serves research content appropriately
+
+---
+
+## Unified Link System
+
+The site uses a centralized link system that eliminates scattered hover behaviors and provides consistent interactions across all components.
+
+### Before: Scattered Hover Behaviors
+
+```html
+<!-- Multiple conflicting approaches -->
+<a href="#" class="text-sm text-gray-600 hover:text-gray-900 transition-all">Link 1</a>
+<a href="#" class="text-base text-light hover:text-base transform hover:scale-105">Link 2</a>
+<a href="#" class="underline hover:no-underline filter hover:brightness-110">Link 3</a>
+<a href="#" class="border-b hover:border-accent transition-colors">Link 4</a>
+```
+
+**Problems:**
+- Different transition timings (150ms, 200ms, instant)
+- Size changes on hover (jarring user experience)
+- Conflicting transform effects
+- Brightness filters vs color changes
+- Inconsistent underline approaches
+
+### After: Unified Link Types
+
+```html
+<!-- 7 standardized link types -->
+<a href="#" class="inline-link">Body text link with underline</a>
+<a href="#" class="nav-link">Navigation menu item</a>
+<a href="#" class="feature-link">Headline or title link</a>
+<a href="#" class="action-link">Download or CTA link</a>
+<a href="#" class="subtle-link">Minimal emphasis link</a>
+<a href="#" class="back-link">Navigation back button</a>
+<a href="#" class="footer-link">Footer navigation link</a>
+```
+
+### Link Type Usage Guide
+
+| Class | Use Case | Hover Behavior | Example |
+|-------|----------|----------------|---------|
+| `.inline-link` | Body text, articles | Underline darkens, slight weight increase | Reading content links |
+| `.nav-link` | Navigation menus | Color to accent, weight increase | Header navigation |
+| `.feature-link` | Headlines, titles | Color to accent, weight increase | Post titles, section headers |
+| `.action-link` | CTAs, downloads | Color to accent, weight increase | "Download PDF", "View Project" |
+| `.subtle-link` | Secondary actions | Opacity increase, subtle weight change | "View all", quiet actions |
+| `.back-link` | Navigation back | Color to primary, weight increase | "← Back to posts" |
+| `.footer-link` | Footer navigation | Underline appears, color change | Footer menu items |
+
+### Unified Behavior System
+
+**All links share:**
+- **Timing**: `200ms ease` transitions
+- **No size changes**: Font-size remains constant
+- **No transforms**: No scaling, translation, or rotation
+- **Color progression**: Consistent accent color system
+- **Focus states**: WCAG-compliant outline styling
+
+**CSS Variables:**
+```css
+:root {
+  --link-transition: color 200ms ease, text-decoration-color 200ms ease, font-variation-settings 200ms ease;
+  --link-underline-default: hsl(0deg 0% 60%);
+  --link-underline-hover: var(--theme-accent-base);
+}
+```
+
+**Global Anti-Chaos Rules:**
+```css
+/* Prevents jarring size changes */
+a {
+  font-size: inherit !important;
+  transform: none;
+  transition: var(--link-transition);
+}
+
+/* Overrides conflicting utility classes */
+a[class*="hover:text-"]:hover {
+  font-size: inherit !important;
+}
+```
+
+### Migration from Old Patterns
+
+**Old utility approach:**
+```html
+<a href="#" class="text-sm text-gray-600 hover:text-gray-900 hover:text-base">
+  Problematic link
+</a>
+```
+
+**New unified approach:**
+```html
+<a href="#" class="action-link text-sm">
+  Consistent link
+</a>
+```
+
+**Key Changes:**
+- Remove `hover:text-*` size-changing utilities
+- Remove `transition-*` utilities (handled globally)
+- Remove `transform` and `filter` effects
+- Choose appropriate semantic link class
+- Let the unified system handle all hover behavior
+
+### Benefits
+
+- **User Experience**: Smooth, predictable interactions
+- **Performance**: Reduced CSS complexity and faster rendering
+- **Maintainability**: Single source of truth for all link behavior
+- **Accessibility**: Consistent focus states and high contrast support
+- **Future-proof**: Prevents regression of scattered hover behaviors
 
 ---
 
@@ -436,7 +616,7 @@ Practical before/after examples showing how to implement the semantic typography
       <span>5 min read</span>
     </div>
     <h2 class="heading-3 mb-3b">
-      <a href="/posts/typography" class="feature-link hover:text-accent-two">
+      <a href="/posts/typography" class="feature-link">
         Modern Typography Principles
       </a>
     </h2>
@@ -576,18 +756,18 @@ Practical before/after examples showing how to implement the semantic typography
       <div>
         <h3 class="heading-5 text-color-100 mb-4b">Company</h3>
         <ul class="space-y-2b">
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">About</a></li>
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">Careers</a></li>
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">Contact</a></li>
+                  <li><a href="#" class="nav-link">About</a></li>
+        <li><a href="#" class="nav-link">Careers</a></li>
+        <li><a href="#" class="nav-link">Contact</a></li>
         </ul>
       </div>
       
       <div>
         <h3 class="heading-5 text-color-100 mb-4b">Resources</h3>
         <ul class="space-y-2b">
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">Blog</a></li>
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">Documentation</a></li>
-          <li><a href="#" class="nav-link text-color-400 hover:text-color-100">Help Center</a></li>
+                  <li><a href="#" class="nav-link">Blog</a></li>
+        <li><a href="#" class="nav-link">Documentation</a></li>
+        <li><a href="#" class="nav-link">Help Center</a></li>
         </ul>
       </div>
     </div>

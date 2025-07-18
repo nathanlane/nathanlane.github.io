@@ -1,59 +1,21 @@
-/* Homepage Link Typography System */
+/* Homepage Link Extensions - Use unified link system */
 
-/* Section Title Links - Quiet but discoverable */
+/* Section Title Links - Use .feature-link class instead */
 .section-title-link {
-  /* No underline by default */
-  text-decoration: none;
-  
-  /* Slightly tighter tracking for headlines */
-  letter-spacing: -0.01em;
+  @apply feature-link;
 }
 
-.section-title-link:hover {
-  /* Color change is enough */
-  color: var(--accent);
-}
-
-/* View All Links - Clear but unobtrusive */
+/* View All Links - Use .action-link class instead */  
 .view-all-link {
-  /* Smaller, secondary text */
-  font-size: var(--step--1);
-  
-  /* Muted color */
-  color: var(--light);
+  @apply action-link;
   opacity: 0.8;
-  
-  /* No underline */
-  text-decoration: none;
-  
-  /* No transitions - instant feedback */
-  /* Removed for animation-free design */
 }
 
 .view-all-link:hover {
-  /* Increase prominence on hover */
   opacity: 1;
-  color: var(--textColor);
-  
-  /* Subtle expansion */
-  letter-spacing: 0.02em;
 }
 
-/* Arrow icon - no animation */
-.view-all-link svg {
-  /* Static positioning */
-}
-
-.view-all-link:hover svg {
-  /* No transform - removed for simplicity */
-}
-
-/* Alternative: Simple underline pattern */
+/* Legacy support - map to new system */
 .subtle-link {
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-}
-
-.subtle-link:hover {
-  border-bottom-color: currentColor;
+  @apply action-link;
 }

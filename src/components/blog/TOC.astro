@@ -15,22 +15,22 @@ const toc = generateToc(headings);
 
 <div class="rounded-t-lg">
 	<div class="bg-bgColor rounded-t-lg">
-		<div class="flex py-2b px-4b items-center title rounded-t-lg bg-color-75 gap-x-2 border-t border-l border-r border-special-light">
-			<h4 class="text-1 title">Table of Contents</h4>
+		<div class="flex py-1b px-3b items-center title rounded-t-lg bg-color-75 gap-x-2 border-t border-l border-r border-special-light">
+			<h4 class="text-xs font-semibold uppercase tracking-wide title">Contents</h4>
 			<button
 				id="close-toc"
-				class="absolute top-2b right-2b btn-icon-close"
+				class="absolute top-1b right-1b btn-icon-close p-1"
 				aria-label="Close TOC"
 			>
-				<Icon aria-hidden="true" class="icon-close size-4" focusable="false" name="lucide:x" />
+				<Icon aria-hidden="true" class="icon-close size-3" focusable="false" name="lucide:x" />
 			</button>
 			
 		</div>
 	</div>
 	<div class="bg-bgColor rounded-b-lg">
-		<div class="rounded-b-lg pb-3b bg-color-75 border-b border-l border-r border-special-light">
-			<div class="px-4b py-2b">
-				<ul class="text-body-sm text-textColor">
+		<div class="rounded-b-lg pb-2b bg-color-75 border-b border-l border-r border-special-light">
+			<div class="px-3b py-1b">
+				<ul class="text-xs text-textColor space-y-0.5">
 					{toc.map((heading) => <TOCHeading heading={heading} />)}
 				</ul>
 			</div>
