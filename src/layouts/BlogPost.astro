@@ -1,12 +1,12 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
 import SeriesPanel from "@/components/SeriesPanel.astro";
-import StructuredData from "@/components/StructuredData.astro";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "./Base.astro";
+import type { LayoutStructuredData } from "@/types";
 
 interface Props {
 	post: CollectionEntry<"post">;
@@ -41,7 +41,7 @@ const articleData = {
 	updatedDate: updatedDate?.toISOString(),
 	ogImage: socialImage,
 	tags: post.data.tags,
-	minutesRead: remarkPluginFrontmatter?.minutesRead
+	minutesRead: remarkPluginFrontmatter?.minutesRead as number | undefined
 };
 
 // Prepare breadcrumb data
@@ -54,9 +54,9 @@ const breadcrumbData = {
 };
 
 // Structured data array for SEO
-const structuredData = [
-	{ type: 'article' as const, data: articleData },
-	{ type: 'breadcrumb' as const, data: breadcrumbData }
+const structuredData: LayoutStructuredData[] = [
+	{ type: 'article', data: articleData },
+	{ type: 'breadcrumb', data: breadcrumbData }
 ];
 ---
 

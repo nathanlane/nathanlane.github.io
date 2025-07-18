@@ -2,25 +2,23 @@
 bio:
   # Section title (optional, defaults to "About")
   title: "Nathan Lane, PhD"
-  
+
   # Primary intro - the hook
   tagline: "Economics professor, University of Oxford"
-  
+
   # Main narrative (supports markdown)
   narrative: |
     I'm an Associate Professor of Economics at the University of Oxford and co-founder of the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/).
-    
+
     My work has been featured in The Economist, The Financial Times, The Wall Street Journal, Trade Talks, and other major outlets.
 
-
-  
   # Brief credentials or affiliations
   affiliations:
     - title: "Oxford Economics"
       role: "Assistant Professor"
     - title: "Industrial Policy Group"
       role: "Co-Principal Investigator"
-  
+
   # Photo configuration (optional - remove this entire section if no photo)
   # photo:
   #   src: "/images/bio/nathan-lane.jpg"
@@ -35,15 +33,15 @@ bio:
 #     - title: "Research Papers"
 #       description: "My research papers."
 #       url: "/research/"
-#     
+#
 #     - title: "Industrial Policy Data"
 #       description: "A database of industrial policy interventions across the world."
 #       url: "https://www.industrialpolicydata.com/"
-#     
+#
 #     - title: "Industrial Policy Group lab"
 #       description: "The Industrial Policy Group is a research lab at the University of Oxford and UBC."
 #       url: "https://www.industrialpolicygroup.com/"
-# 
+#
 #     - title: "LaTeX Template"
 #       description: "A LaTeX template for research papers."
 #       url: "https://github.com/nathanlane/lane_latex_template"
@@ -69,21 +67,21 @@ contact:
 sections:
   research:
     title: "Research"
-    itemCount: 3  # Number of papers to show
+    itemCount: 3 # Number of papers to show
     viewAllText: "View all papers"
     viewAllUrl: "/research/"
   essays:
     title: "Recent Essays"
-    itemCount: 3  # Number of posts to show
+    itemCount: 3 # Number of posts to show
     viewAllText: "View all posts"
     viewAllUrl: "/posts/"
   writing:
     title: "Recent Writing"
-    itemCount: 2  # Number of writing pieces to show
+    itemCount: 2 # Number of writing pieces to show
     viewAllText: "View all writing"
     viewAllUrl: "/writing/"
   media:
     title: "Recent in the News"
-    itemCount: 5  # Number of media items to show
+    itemCount: 5 # Number of media items to show
     viewAllText: "View all media"
     viewAllUrl: "/media/"

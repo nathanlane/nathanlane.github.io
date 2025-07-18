@@ -95,22 +95,20 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		flex: 1 1 auto;
 	}
 
-	/* Link styling - subtle and integrated */
+	/* Link styling - using consolidated system */
 	.entry-link {
-		/* Remove default link styling */
-		text-decoration: none;
-		color: inherit;
+		/* Inherits from link-title */
+		@apply link-title;
 		
 		/* Expand click target for better UX */
 		display: block;
 		
-		/* Subtle underline on hover only */
+		/* Keep position relative for pseudo-element */
 		position: relative;
 	}
 
 	/* Refined hover state following Butterick's restraint */
 	.entry-link:hover .entry-title {
-		color: var(--theme-accent-base);
 		/* Micro-expansion for tactile feedback */
 		letter-spacing: 0.002em;
 	}
@@ -125,6 +123,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		height: 1px;
 		background: var(--theme-accent-base);
 		opacity: 0;
+		transition: width 200ms ease, opacity 200ms ease;
 	}
 
 	.entry-link:hover::after {

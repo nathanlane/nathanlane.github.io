@@ -9,18 +9,18 @@ console.log("Starting Jekyll to Astro migration...");
 const migrationScript = path.join(__dirname, "migrate-jekyll-archive.js");
 
 const migration = spawn("node", [migrationScript], {
-	cwd: __dirname,
-	stdio: "inherit",
+  cwd: __dirname,
+  stdio: "inherit",
 });
 
 migration.on("close", (code) => {
-	if (code === 0) {
-		console.log("Migration completed successfully!");
-	} else {
-		console.error(`Migration failed with code ${code}`);
-	}
+  if (code === 0) {
+    console.log("Migration completed successfully!");
+  } else {
+    console.error(`Migration failed with code ${code}`);
+  }
 });
 
 migration.on("error", (err) => {
-	console.error("Failed to start migration:", err);
+  console.error("Failed to start migration:", err);
 });

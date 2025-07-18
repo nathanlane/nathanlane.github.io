@@ -1,84 +1,84 @@
 /* Print Styles for Accessibility */
 
 @media print {
-	/* High contrast for printing */
-	* {
-		background: transparent !important;
-		color: black !important;
-		box-shadow: none !important;
-		text-shadow: none !important;
-	}
+  /* High contrast for printing */
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
 
-	/* Ensure good contrast and optimal reading */
-	body {
-		font-size: 12pt;
-		line-height: 1.4; /* Tighter for print */
-		max-width: var(--measure-base); /* Optimal line length for print */
-		margin: 0 auto;
-		padding: 1in; /* Standard print margins */
-	}
+  /* Ensure good contrast and optimal reading */
+  body {
+    font-size: 12pt;
+    line-height: 1.4; /* Tighter for print */
+    max-width: var(--measure-base); /* Optimal line length for print */
+    margin: 0 auto;
+    padding: 1in; /* Standard print margins */
+  }
 
-	/* Typography adjustments for print */
-	p,
-	li,
-	blockquote {
-		line-height: 1.4;
-		margin-bottom: 0.5em;
-	}
+  /* Typography adjustments for print */
+  p,
+  li,
+  blockquote {
+    line-height: 1.4;
+    margin-bottom: 0.5em;
+  }
 
-	/* Heading adjustments */
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		line-height: 1.2;
-		margin-top: 1em;
-		margin-bottom: 0.5em;
-	}
+  /* Heading adjustments */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
 
-	/* Disable hyphenation for print (manual control preferred) */
-	* {
-		hyphens: none !important;
-	}
+  /* Disable hyphenation for print (manual control preferred) */
+  * {
+    hyphens: none !important;
+  }
 
-	/* Show link URLs */
-	a[href^="http"]:after {
-		content: " (" attr(href) ")";
-		font-size: var(--step--1);
-		opacity: 0.7;
-	}
+  /* Show link URLs */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: var(--step--1);
+    opacity: 0.7;
+  }
 
-	/* But not for internal links */
-	a[href^="/"]:after,
-	a[href^="#"]:after {
-		content: "";
-	}
+  /* But not for internal links */
+  a[href^="/"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
 
-	/* Page breaks */
-	h1,
-	h2,
-	h3 {
-		page-break-after: avoid;
-	}
+  /* Page breaks */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
 
-	img,
-	figure {
-		page-break-inside: avoid;
-	}
+  img,
+  figure {
+    page-break-inside: avoid;
+  }
 
-	/* Hide non-essential elements */
-	nav,
-	.skip-link,
-	button,
-	.social-links,
-	footer {
-		display: none !important;
-	}
+  /* Hide non-essential elements */
+  nav,
+  .skip-link,
+  button,
+  .social-links,
+  footer {
+    display: none !important;
+  }
 
-	/* Expand abbreviations */
-	abbr[title]:after {
-		content: " (" attr(title) ")";
-	}
+  /* Expand abbreviations */
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
 }
