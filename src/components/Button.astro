@@ -102,12 +102,7 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
     letter-spacing: var(--letter-spacing-tight);
   }
   
-  /* Focus state with typographic emphasis */
-  [data-button-variant]:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 3px;
-    font-variation-settings: 'wght' 500;
-  }
+  /* Focus handled by global system */
   
   /* Size-specific typography adjustments */
   [data-button-variant] {
@@ -137,8 +132,8 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   
   /* Optical adjustments for all-caps text */
   [data-button-variant].text-xs {
-    /* Slightly reduce font size for uppercase */
-    font-size: 0.68rem;
+    /* Use design token for uppercase */
+    font-size: var(--step--2);
     line-height: 1.2;
   }
 </style>

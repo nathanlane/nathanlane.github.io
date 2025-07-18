@@ -142,18 +142,7 @@ a[class*="hover:text-"]:hover {
 	font-variation-settings: "wght" 450;
 }
 
-/* ===== FOCUS STATES - WCAG Compliant ===== */
-.inline-link:focus,
-.nav-link:focus,
-.feature-link:focus,
-.action-link:focus,
-.subtle-link:focus,
-.back-link:focus,
-.footer-link:focus {
-	outline: 2px solid var(--theme-accent-base);
-	outline-offset: 2px;
-	border-radius: 2px;
-}
+/* Focus states handled by global system - no custom styles needed */
 
 /* ===== PREVENT UTILITY CLASS CONFLICTS ===== */
 /* These rules override any conflicting Tailwind utilities */

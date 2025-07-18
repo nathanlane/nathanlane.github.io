@@ -64,11 +64,7 @@ const { title, description, additionalInfo, class: className } = Astro.props;
     text-decoration-thickness: 2px !important;
   }
   
-  header a:focus-visible {
-    outline: 2px solid var(--theme-accent-base);
-    outline-offset: var(--space-0.5);
-    border-radius: var(--space-0.5);
-  }
+  /* Focus handled by global system */
   
   /* Responsive adjustments */
   @media (max-width: 640px) {

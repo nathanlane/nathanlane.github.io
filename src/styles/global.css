@@ -1,6 +1,4 @@
-/* Import Utopia fluid type scale - GENERATED FROM Utopia step-map */
-/* Utopia fluid scale now provided via tailwindcss-fluid-type plugin — import disabled */
-/* @import "./utopia.css";  Migrated to fluid-type plugin */
+/* Fluid type scale provided via tailwindcss-fluid-type plugin */
 
 /* Import font definitions */
 @import "./fonts.css";
@@ -213,17 +211,7 @@
 		}
 	}
 
-	/* Enhanced Focus Management */
-	.heading-1:focus,
-	.heading-2:focus,
-	.heading-3:focus,
-	.heading-4:focus,
-	.heading-5:focus,
-	.heading-6:focus {
-		outline: 0.125rem solid var(--theme-link);
-		outline-offset: 0.25rem;
-		border-radius: 0.25rem;
-	}
+	/* Headings use standardized focus system - no custom styles needed */
 
 	/* Skip link styling for keyboard navigation */
 	.skip-link {
@@ -257,8 +245,6 @@
 		}
 	}
 }
-
-/* Old font declarations removed - now using @fontsource packages */
 
 @layer base {
 	:root,
@@ -680,22 +666,38 @@
 		color: hsl(0deg 0% 95%);
 	}
 
-	/* Focus states - accessible but refined */
+	/* ==================================================
+	   STANDARDIZED FOCUS SYSTEM
+	   
+	   Focus states follow a consistent pattern:
+	   - Use :focus-visible for keyboard navigation only
+	   - 2px solid outline with currentColor or theme variable
+	   - Consistent outline-offset using grid units
+	   - No border-radius on focus (cleaner, more accessible)
+	   ================================================== */
+	
+	/* Default focus - hidden for mouse users */
 	:focus {
-		outline: 1.5px solid hsl(220deg 35% 40%); /* Match link color */
-		outline-offset: 3px;
-		border-radius: 2px;
+		outline: none;
 	}
 
-	:root[data-theme="dark"] :focus {
-		outline-color: hsl(220deg 25% 70%);
-	}
-
-	/* Enhanced accessibility - grid-compliant spacing */
+	/* Keyboard focus - visible and consistent */
 	:focus-visible {
-		outline: 3px solid var(--theme-accent);
-		outline-offset: var(--space-1); /* 6px = 1 grid unit */
-		border-radius: var(--space-1); /* 6px radius */
+		outline: 2px solid var(--theme-accent);
+		outline-offset: var(--space-0.5); /* 3px = 0.5 grid units */
+	}
+
+	/* Dark mode focus adjustment */
+	:root[data-theme="dark"] :focus-visible {
+		outline-color: var(--theme-accent-light);
+	}
+
+	/* High contrast mode support */
+	@media (prefers-contrast: high) {
+		:focus-visible {
+			outline-width: 3px;
+			outline-offset: var(--space-1); /* 6px = 1 grid unit */
+		}
 	}
 
 	/* High contrast mode - maintains baseline alignment */
@@ -1029,7 +1031,7 @@
 
 	figcaption {
 		margin-top: var(--space-2); /* 12px = 0.5 baseline */
-		font-size: 0.875rem; /* text-sm */
+		font-size: var(--step--1); /* Use design token */
 	}
 
 	/* Table spacing - aligned to grid */
@@ -1095,12 +1097,6 @@
 		stroke-linejoin: miter !important;
 	}
 
-	/* Needed for code copy button when rehype-pretty-code is disabled */
-	/*
-	pre {
-		@apply relative;
-	}
-	*/
 }
 
 :root {
@@ -1132,7 +1128,7 @@
 			border-bottom: 1px solid var(--theme-color-150);
 			padding: 0 1.25rem; /* 5b horizontal padding */
 			height: 2.5rem; /* 10b - baseline aligned */
-			font-size: 0.75rem; /* 12px - smaller, more refined */
+			font-size: var(--step--1); /* Use design token */
 			font-family: var(--font-mono);
 			font-weight: 500;
 			letter-spacing: 0.04em;
@@ -1149,7 +1145,7 @@
 		/* Enhanced code block styling */
 		pre {
 			@apply m-0 static relative; /* Add relative for button positioning */
-			font-size: 0.8125rem; /* 13px - consistent smaller size */
+			font-size: var(--step--1); /* Use design token */
 			padding-top: 2.5rem; /* 10b - space for copy button */
 			padding-bottom: 1.25rem; /* 5b */
 			padding-left: 0; /* Let line styles handle horizontal padding */
@@ -1165,7 +1161,7 @@
 
 			/* Font optimization for code */
 			font-family: var(--font-mono);
-			font-size: 0.8125rem; /* 13px - optimal for code */
+			font-size: var(--step--1); /* Use design token */
 			line-height: 1.7; /* More generous line height */
 			letter-spacing: 0.02em;
 			font-variant-ligatures: contextual;
@@ -1210,7 +1206,7 @@
 							width: 2.5rem; /* 10b */
 							text-align: right;
 							padding-right: 1rem; /* 4b */
-							font-size: 0.75rem; /* Smaller line numbers */
+							font-size: var(--step--2); /* Use design token */
 							opacity: 0.5;
 							user-select: none; /* Prevent selection */
 						}
@@ -1259,18 +1255,6 @@
 				[data-highlighted-chars] > span {
 					@apply py-[4px];
 				}
-
-				/* For differences in lines (implemented above) */
-				/*
-				.diff {
-					&.add {
-						background-color: var(--code-line-diff-add);
-					}
-					&.remove {
-						background-color: var(--code-line-diff-remove);
-					}
-				}
-				*/
 			}
 		}
 	}
@@ -1294,7 +1278,7 @@
 
 		/* Mobile optimization */
 		@media (max-width: 640px) {
-			font-size: 0.6875rem; /* 11px on mobile - even smaller */
+			font-size: var(--step--2); /* Use design token */
 			letter-spacing: 0.015em;
 
 			/* Horizontal scroll indicator */
@@ -1314,7 +1298,7 @@
 		padding: 0.125rem 0.375rem; /* 0.5b 1.5b */
 		/* Typography optimization */
 		font-family: var(--font-mono);
-		font-size: 0.85em; /* Slightly smaller for inline context */
+		font-size: var(--step--1); /* Use design token */
 		font-weight: 450;
 		/* Enable programming ligatures and features */
 		font-feature-settings: "liga" 1, "calt" 1, "ss01" 1, "zero" 1;
@@ -1355,7 +1339,7 @@
 		top: 0.75rem; /* 3b */
 		right: 0.75rem; /* 3b */
 		padding: 0.375rem 0.75rem; /* 1.5b 3b */
-		font-size: 0.6875rem; /* 11px */
+		font-size: var(--step--2); /* Use design token */
 		font-weight: 500;
 		font-family: var(--font-sans);
 		text-transform: uppercase;
@@ -1468,7 +1452,7 @@
 			background: var(--theme-bg);
 			border: 1px solid var(--theme-color-200);
 			color: var(--theme-color-600);
-			font-size: 0.625rem; /* 10px */
+			font-size: var(--step--2); /* Use design token */
 			font-family: var(--font-mono);
 			font-weight: 600;
 			text-transform: uppercase;
@@ -1564,8 +1548,6 @@
 		font-weight: 500;
 	}
 
-	/* Back link styles moved to unified links.css system */
-
 	/* Essay header */
 	.essay-header {
 		margin-bottom: var(--space-8); /* 48px */
@@ -1648,8 +1630,6 @@
 		background: none;
 	}
 
-	/* Asterism styles moved to component - see src/components/typography/Asterism.astro */
-
 	/* Images with breathing room */
 	.essay-wrapper .prose img {
 		margin: var(--space-12) calc(-1 * var(--space-4)); /* 72px -24px */
@@ -1699,7 +1679,7 @@
 
 		/* Typography optimizations for TOC */
 		h4 {
-			font-size: 0.8125rem !important; /* 13px - smaller title */
+			font-size: var(--step--1) !important; /* Use design token */
 			font-weight: 600;
 			letter-spacing: 0.025em;
 			text-transform: uppercase;
@@ -1707,7 +1687,7 @@
 
 		/* TOC list styling */
 		ul {
-			font-size: 0.75rem; /* 12px - smaller for dense display */
+			font-size: var(--step--1); /* Use design token */
 			line-height: 1.4; /* Tighter line height */
 		}
 
@@ -1731,7 +1711,7 @@
 
 		/* Nested items */
 		ul ul {
-			font-size: 0.6875rem; /* 11px - even smaller for nested */
+			font-size: var(--step--2); /* Use design token */
 			margin-left: 0.75rem; /* Reduced indent */
 		}
 
@@ -1759,8 +1739,6 @@
 		.back-link {
 			color: var(--theme-color-400);
 		}
-
-		/* Back link styles moved to unified links.css system */
 	}
 
 	/* Responsive adjustments */
@@ -1809,7 +1787,7 @@
 	/* TOC-specific typography overrides */
 	#toc-panel {
 		/* Ensure consistent small typography */
-		font-size: 0.75rem; /* 12px base */
+		font-size: var(--step--1); /* Use design token */
 
 		/* Prevent text overflow in nested structures */
 		* {
@@ -1859,7 +1837,7 @@
 	/* Navigation link refinements */
 	.nav-link {
 		font-family: "IBM Plex Sans", system-ui, sans-serif;
-		font-size: 0.875rem;
+		font-size: var(--step--1);
 		font-weight: 500;
 		letter-spacing: 0.05em; /* Uppercase navigation spacing */
 		font-feature-settings: "kern" 1, "ss01" 1;
@@ -1889,8 +1867,6 @@
 		background: currentColor;
 		/* Removed transition */
 	}
-
-	/* Nav link styles moved to unified links.css system */
 
 	/* Active navigation state */
 	.nav-link[aria-current="page"] {
@@ -2044,17 +2020,7 @@
 		text-decoration-skip-ink: auto;
 	}
 
-	/* Remove default focus outline */
-	a:focus {
-		outline: none;
-	}
-
-	/* Accessible focus state */
-	a:focus-visible {
-		outline: 2px solid var(--accent-base);
-		outline-offset: 4px;
-		border-radius: 2px;
-	}
+	/* Links use standardized focus system - no custom styles needed */
 
 	/* Content links with refined underline */
 	.inline-link,
@@ -2063,8 +2029,6 @@
 		text-decoration-color: var(--theme-color-300);
 		text-decoration-thickness: 0.06em;
 	}
-
-	/* Inline link hover styles moved to unified links.css system */
 
 	.inline-link:visited,
 	.prose a:not(.nav-link):not(.footer-link):visited {
@@ -2078,8 +2042,6 @@
 		text-decoration: none;
 		border-bottom: 1px solid transparent;
 	}
-
-	/* Footer link styles moved to unified links.css system */
 }
 
 /* === Header Spacing Refinements === */
@@ -2143,7 +2105,7 @@
 
 	/* Copyright text - smaller, lighter */
 	.footer-copyright {
-		font-size: var(--text--1);
+		font-size: var(--step--1);
 		font-weight: 400;
 		opacity: 0.64;
 		letter-spacing: 0.02em;
@@ -2152,7 +2114,7 @@
 
 	/* Footer navigation - slightly larger */
 	.footer-nav {
-		font-size: var(--text-0);
+		font-size: var(--step-0);
 		font-weight: 450;
 	}
 
@@ -2173,7 +2135,7 @@
 
 		/* Copyright last, smaller */
 		.footer-copyright {
-			font-size: 0.75rem;
+			font-size: var(--step--2);
 		}
 	}
 }
