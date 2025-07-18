@@ -1,7 +1,7 @@
 ---
 import { siteConfig } from '@/site.config';
 // This component adds JSON-LD structured data to help search engines understand your content
-import type { BreadcrumbItem, StructuredDataProps, StructuredDataContent } from '@/types';
+import type { BreadcrumbItem, StructuredDataContent, StructuredDataProps } from '@/types';
 
 export interface Props extends StructuredDataProps {}
 
@@ -47,7 +47,7 @@ switch (type) {
     };
     break;
 
-  case 'article':
+  case 'article': {
     // Article schema - rich snippets for blog posts
     if (!data || 'items' in data) break; // Skip if it's breadcrumb data
     const articleData = data as StructuredDataContent;
@@ -70,6 +70,7 @@ switch (type) {
       "wordCount": articleData.minutesRead ? Math.round(articleData.minutesRead * 200) : undefined
     };
     break;
+  }
 
   case 'person':
     // Person schema - establishes your identity
