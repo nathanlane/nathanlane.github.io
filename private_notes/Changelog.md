@@ -1,5 +1,42 @@
 # Changelog
 
+## CSS Audit and Phase 1 Improvements (January 29, 2025)
+
+### Phase 1: Zero-Risk CSS Improvements
+- **Replaced Hardcoded Colors**:
+  - Updated CompactList.astro print styles: `#666`, `#ccc`, `#000` → theme variables
+  - Updated Asterism.astro print style: `#666` → `var(--theme-color-600)`
+  - Maintained exact visual parity with CSS variables
+  
+- **Standardized Spacing Values**:
+  - Replaced `outline-offset: 2px` with `var(--space-0.5)` across components
+  - Updated PageHeader, Sidenote, CompactList focus states
+  - All changes maintain exact spacing (2px = var(--space-0.5))
+  
+- **Extracted Repeated Utility Combinations**:
+  - Created `src/styles/components.css` with common patterns:
+    - `.page-container` for 7x repeated layout pattern
+    - `.flex-center`, `.flex-between` for flex layouts
+    - `.stack`, `.stack-lg`, `.stack-md`, `.stack-sm` for vertical spacing
+    - Heading classes with consistent margins (`.heading-X-spaced`)
+    - `.meta-light` for repeated metadata styling
+  - Imported components.css in global.css
+  
+- **Consolidated Duplicate Component Styles**:
+  - Added card-specific classes:
+    - `.card-elevated` for ProjectCard/WritingCard pattern
+    - `.card-flat` for MediaCard pattern
+    - `.card-title`, `.card-description`, `.card-meta` for typography
+    - `.card-link` for unified link styling
+  - Reduces duplication across card components
+
+### CSS Audit Summary
+- **Zero visual changes** - Everything looks exactly the same
+- **Better maintainability** - Using CSS variables instead of hardcoded values
+- **Reduced duplication** - Common patterns extracted to reusable classes
+- **Improved organization** - New components.css file for shared patterns
+- **Foundation for Phase 2** - Ready for more significant improvements when desired
+
 ## Homepage Structure Simplification & Configuration Management (January 28, 2025)
 
 ### Homepage Redesign & Streamlining

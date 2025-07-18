@@ -2,20 +2,20 @@
 
 /* Section Title Links - Use .feature-link class instead */
 .section-title-link {
-  @apply feature-link;
+	@apply feature-link;
 }
 
-/* View All Links - Use .action-link class instead */  
+/* View All Links - Use .action-link class instead */
 .view-all-link {
-  @apply action-link;
-  opacity: 0.8;
+	@apply action-link;
+	opacity: 0.8;
 }
 
 .view-all-link:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 /* Legacy support - map to new system */
 .subtle-link {
-  @apply action-link;
+	@apply action-link;
 }

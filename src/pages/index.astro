@@ -1,14 +1,14 @@
 ---
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import BioPanel from "@/components/BioPanel.astro";
+import ContactInfo from "@/components/ContactInfo.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
-import ContactInfo from "@/components/ContactInfo.astro";
+import { mediaData } from "@/data/media";
 import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
-import { mediaData } from "@/data/media";
 
 // Get homepage content from content collection
 const homepageContent = await getEntry("homepage", "index");
