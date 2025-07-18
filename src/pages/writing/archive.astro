@@ -38,8 +38,10 @@ const formatDate = (date: Date) => {
   });
 };
 
+import type { CollectionItemBase } from '@/types';
+
 // Helper function to determine essay type
-const getEssayType = (post: any) => {
+const getEssayType = (post: CollectionItemBase) => {
   // You can customize this logic based on your content structure
   if (post.data.tags?.includes('research')) return 'Research Essay';
   if (post.data.tags?.includes('tutorial')) return 'Tutorial';
@@ -49,7 +51,7 @@ const getEssayType = (post: any) => {
 };
 
 // Helper function to get tertiary meta (genre, status, etc.)
-const getTertiaryMeta = (post: any) => {
+const getTertiaryMeta = (post: CollectionItemBase) => {
   if (post.data.featured) return 'Featured';
   if (post.data.tags && post.data.tags.length > 0) {
     // Return the most relevant tag

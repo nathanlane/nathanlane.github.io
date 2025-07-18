@@ -1,11 +1,9 @@
 ---
 // This component adds JSON-LD structured data to help search engines understand your content
-export interface Props {
-  type: 'website' | 'article' | 'person' | 'breadcrumb';
-  data?: Record<string, any>;
-}
-
+import type { StructuredDataProps, StructuredDataContent, BreadcrumbItem } from '@/types';
 import { siteConfig } from '@/site.config';
+
+export interface Props extends StructuredDataProps {}
 
 const { type, data } = Astro.props;
 
@@ -25,7 +23,7 @@ const personSchema = {
 };
 
 // Generate appropriate schema based on type
-let schema: Record<string, any>;
+let schema: Record<string, unknown> | undefined;
 
 switch (type) {
   case 'website':
@@ -99,7 +97,7 @@ switch (type) {
     schema = {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
-      "itemListElement": data.items.map((item: Record<string, any>, index: number) => ({
+      "itemListElement": data.items.map((item: BreadcrumbItem, index: number) => ({
         "@type": "ListItem",
         "position": index + 1,
         "name": item.name,

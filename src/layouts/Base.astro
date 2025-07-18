@@ -8,12 +8,11 @@ import Header from "@/components/layout/Header.astro";
 import { siteConfig } from "@/site.config";
 import type { SiteMeta } from "@/types";
 
+import type { LayoutStructuredData } from '@/types';
+
 interface Props {
 	meta: SiteMeta;
-	structuredData?: {
-		type: 'article' | 'breadcrumb';
-		data: Record<string, any>;
-	}[];
+	structuredData?: LayoutStructuredData[];
 }
 
 const {
@@ -35,7 +34,7 @@ const isArticle = articleDate !== undefined;
 		{/* Website structured data for all pages */}
 		<StructuredData type="website" />
 		{/* Additional structured data passed from child layouts */}
-		{structuredData.map((sd) => (
+		{structuredData.map((sd: LayoutStructuredData) => (
 			<StructuredData type={sd.type} data={sd.data} />
 		))}
 	</head>

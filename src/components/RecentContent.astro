@@ -43,9 +43,11 @@ Follows the typography patterns established in the Writing page with proper base
 import MetadataLine from "@/components/MetadataLine.astro";
 import { formatDate } from "@/utils/date";
 
+import type { CollectionItemBase } from '@/types';
+
 export interface Props {
   title: string;
-  items: any[]; // Content collection items
+  items: CollectionItemBase[]; // Content collection items
   linkBase: string; // e.g. "/writing" or "/posts"
   archiveLink?: string; // Link to full archive
   archiveLinkText?: string; // Text for archive link
@@ -69,7 +71,7 @@ const {
 const displayItems = items.slice(0, maxItems);
 
 // Helper function to generate metadata for different content types
-function getMetadataItems(item: any) {
+function getMetadataItems(item: CollectionItemBase) {
   const metadata = [];
   
   // Handle different content types

@@ -45,8 +45,10 @@ const formatDate = (date: Date) => {
   });
 };
 
+import type { CollectionItemBase } from '@/types';
+
 // Helper function to determine post type based on tags and title
-const getPostType = (post: any) => {
+const getPostType = (post: CollectionItemBase) => {
   const tags = post.data.tags || [];
   const title = post.data.title.toLowerCase();
   
@@ -72,7 +74,7 @@ const getPostType = (post: any) => {
 };
 
 // Helper function to get primary tag for tertiary metadata
-const getPrimaryTag = (post: any) => {
+const getPrimaryTag = (post: CollectionItemBase) => {
   if (!post.data.tags || post.data.tags.length === 0) return undefined;
   
   // Prioritize certain tags as "primary"
