@@ -1032,10 +1032,20 @@
 :root {
   /* Enhanced code block typography with baseline grid alignment */
   figure[data-rehype-pretty-code-figure] {
-    @apply relative m-0 overflow-hidden;
-    /* Baseline grid aligned margins */
-    margin-top: 1.5rem; /* 6b */
-    margin-bottom: 1.5rem; /* 6b */
+    @apply relative m-0;
+    overflow: hidden;
+    /* Baseline grid aligned margins with more breathing room */
+    margin-top: 2.25rem; /* 9b - more space above */
+    margin-bottom: 2.25rem; /* 9b - more space below */
+    /* Elegant border and shadow */
+    border: 1px solid var(--theme-color-100);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.03);
+    transition: box-shadow 150ms ease;
+    
+    &:hover {
+      box-shadow: 0 4px 6px 0 rgb(0 0 0 / 0.07), 0 2px 4px 0 rgb(0 0 0 / 0.04);
+    }
 
     figcaption {
       @apply m-0;
@@ -1043,39 +1053,50 @@
 
     /* Enhanced code block titles */
     [data-rehype-pretty-code-title] {
-      @apply break-words bg-[var(--code-title-bg)] border-b border-color-200 text-textColor flex items-center;
-      padding: 0 1rem; /* 4b horizontal padding */
-      height: 2rem; /* 8b - baseline aligned */
-      font-size: 0.8125rem; /* Slightly smaller */
+      @apply break-words text-textColor flex items-center;
+      background: linear-gradient(to bottom, var(--theme-color-50), var(--theme-color-75));
+      border-bottom: 1px solid var(--theme-color-150);
+      padding: 0 1.25rem; /* 5b horizontal padding */
+      height: 2.5rem; /* 10b - baseline aligned */
+      font-size: 0.75rem; /* 12px - smaller, more refined */
       font-family: var(--font-mono);
       font-weight: 500;
-      letter-spacing: 0.025em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
+      color: var(--theme-color-700);
+      border-radius: 0.5rem 0.5rem 0 0;
 
       & + pre {
         @apply m-0 rounded-t-none;
+        border-top: none;
       }
     }
 
     /* Enhanced code block styling */
     pre {
-      @apply m-0 static px-0 text-sm;
-      padding-top: 0.75rem; /* 3b */
-      padding-bottom: 0.75rem; /* 3b */
+      @apply m-0 static px-0 relative; /* Add relative for button positioning */
+      padding-top: 3rem; /* 12b - space for copy button */
+      padding-bottom: 1.5rem; /* 6b */
+      padding-left: 1.25rem; /* 5b */
+      padding-right: 1.25rem; /* 5b */
       max-height: 36rem; /* 144b - generous but limited */
       overflow-x: auto;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      /* Subtle background */
+      background: var(--theme-color-25);
+      border-radius: 0 0 0.5rem 0.5rem;
 
       /* Font optimization for code */
       font-family: var(--font-mono);
       font-size: 0.8125rem; /* 13px - optimal for code */
+      line-height: 1.7; /* More generous line height */
       letter-spacing: 0.02em;
       font-variant-ligatures: contextual;
 
       /* Custom scrollbar styling */
       scrollbar-width: thin;
-      scrollbar-color: var(--color-300) transparent;
+      scrollbar-color: var(--theme-color-200) transparent;
 
       &::-webkit-scrollbar {
         width: 0.5rem; /* 2b */
@@ -1131,7 +1152,7 @@
           padding-left: 1rem; /* 4b */
           padding-right: 1rem; /* 4b */
           /* Baseline grid aligned line height */
-          line-height: 1.5;
+          line-height: 1.5rem; /* 24px - exactly 4 baseline units */
           min-height: 1.5rem; /* 6b - comfortable touch target */
 
           /* Subtle hover effect for better code navigation */
@@ -1199,7 +1220,7 @@
 
     /* Mobile optimization */
     @media (max-width: 640px) {
-      font-size: 0.75rem; /* 12px on mobile */
+      font-size: 0.6875rem; /* 11px on mobile - even smaller */
       letter-spacing: 0.015em;
 
       /* Horizontal scroll indicator */
@@ -1211,13 +1232,16 @@
 
   /* Enhanced inline code typography */
   :not(pre) > code {
-    @apply bg-[var(--code-inline-bg)] border border-color-100;
+    /* Subtle background with border */
+    background: var(--theme-color-50);
+    border: 1px solid var(--theme-color-150);
+    border-radius: 0.25rem;
     /* Baseline grid aligned padding */
     padding: 0.125rem 0.375rem; /* 0.5b 1.5b */
     /* Typography optimization */
     font-family: var(--font-mono);
-    font-size: 0.875em; /* Slightly smaller than 0.9em */
-    font-weight: 400;
+    font-size: 0.85em; /* Slightly smaller for inline context */
+    font-weight: 450;
     /* Enable programming ligatures and features */
     font-feature-settings:
       "liga" 1,
@@ -1225,53 +1249,75 @@
       "ss01" 1,
       "zero" 1;
     /* Optimal letter spacing for inline code */
-    letter-spacing: 0.025em;
-    /* Prevent breaking */
+    letter-spacing: 0.02em;
+    /* Prevent breaking when possible */
     white-space: nowrap;
+    /* Subtle color shift */
+    color: var(--theme-color-800);
+    /* Smooth transition for hover states */
+    transition: all 150ms ease;
+    
+    /* Interactive hover state */
+    &:hover {
+      background: var(--theme-color-75);
+      border-color: var(--theme-color-200);
+    }
 
     /* Dark mode optimizations */
     :root[data-theme="dark"] & {
-      background-color: hsl(0deg 0% 12%); /* Slightly lighter than pure black */
-      border-color: hsl(0deg 0% 20%);
-      color: hsl(0deg 0% 88%); /* Not pure white */
-      font-weight: 450; /* Slightly heavier in dark mode */
-      letter-spacing: 0.03em; /* More spacing for clarity */
+      background-color: hsl(0deg 0% 10%); /* Subtle background */
+      border-color: hsl(0deg 0% 18%);
+      color: hsl(0deg 0% 85%); /* Softer than pure white */
+      font-weight: 425; /* Slightly lighter in dark mode */
+      
+      &:hover {
+        background-color: hsl(0deg 0% 12%);
+        border-color: hsl(0deg 0% 25%);
+      }
     }
   }
 
   /* Enhanced copy button for code blocks */
   .copy-code-button {
-    @apply absolute bg-color-100 text-accent-base;
-    top: 0.5rem; /* 2b */
-    right: 0.5rem; /* 2b */
-    width: 2rem; /* 8b */
-    height: 2rem; /* 8b */
+    @apply absolute text-accent-base;
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-color-200);
+    top: 0.75rem; /* 3b */
+    right: 0.75rem; /* 3b */
+    padding: 0.375rem 0.75rem; /* 1.5b 3b */
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 500;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
+    transition: all 150ms ease;
+    cursor: pointer;
 
     /* Show on hover */
     figure[data-rehype-pretty-code-figure]:hover & {
-      opacity: 1;
+      opacity: 0.8;
     }
 
     &:hover {
-      @apply bg-color-200;
+      opacity: 1 !important;
+      background: var(--theme-color-50);
+      border-color: var(--theme-color-300);
+      transform: translateY(-1px);
     }
 
     &:active {
+      transform: translateY(0);
     }
 
     /* Success state */
     &.copied {
-      @apply bg-green-100 text-green-700;
-    }
-
-    /* Icon size */
-    svg {
-      width: 1rem; /* 4b */
-      height: 1rem; /* 4b */
+      @apply bg-green-50 text-green-700 border-green-300;
+      opacity: 1 !important;
     }
   }
 
@@ -1315,25 +1361,28 @@
 
     /* Copy button in dark mode */
     .copy-code-button {
-      background-color: hsl(0deg 0% 15%);
+      background-color: hsl(0deg 0% 8%);
       color: hsl(0deg 0% 70%);
+      border-color: hsl(0deg 0% 20%);
 
       &:hover {
-        background-color: hsl(0deg 0% 20%);
+        background-color: hsl(0deg 0% 12%);
         color: hsl(0deg 0% 85%);
+        border-color: hsl(0deg 0% 30%);
       }
 
       &.copied {
-        background-color: hsl(120deg 40% 20%);
+        background-color: hsl(120deg 40% 15%);
         color: hsl(120deg 40% 80%);
+        border-color: hsl(120deg 40% 30%);
       }
     }
 
     /* Language badge in dark mode */
     figure[data-rehype-pretty-code-figure][data-language]::before {
-      background-color: hsl(0deg 0% 20%);
+      background-color: hsl(0deg 0% 8%);
       color: hsl(0deg 0% 70%);
-      opacity: 0.8;
+      border-color: hsl(0deg 0% 20%);
     }
   }
 
@@ -1343,19 +1392,26 @@
     &[data-language]::before {
       content: attr(data-language);
       position: absolute;
-      top: 0.5rem; /* 2b */
-      left: 0.5rem; /* 2b */
-      padding: 0.125rem 0.5rem; /* 0.5b 2b */
-      background-color: var(--color-800);
-      color: var(--color-100);
+      bottom: 0.75rem; /* 3b */
+      left: 0.75rem; /* 3b */
+      padding: 0.25rem 0.625rem; /* 1b 2.5b */
+      background: var(--theme-bg);
+      border: 1px solid var(--theme-color-200);
+      color: var(--theme-color-600);
       font-size: 0.625rem; /* 10px */
       font-family: var(--font-mono);
-      font-weight: 500;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       border-radius: 0.25rem; /* 1b */
-      opacity: 0.7;
+      opacity: 0;
+      transition: opacity 150ms ease;
       z-index: 1;
+    }
+    
+    /* Show on hover */
+    &:hover[data-language]::before {
+      opacity: 0.9;
     }
 
     /* Hide when title is present */
@@ -1551,12 +1607,15 @@
 
   /* Table of Contents positioning */
   .essay-toc {
-    position: absolute;
+    position: fixed;
     top: var(--space-8); /* 48px */
-    right: var(--space-6); /* 36px */
+    /* Position TOC to the right of content with proper spacing */
+    left: calc(50% + (var(--measure-base) / 2) + var(--space-8));
     width: 14rem;
     min-width: 14rem;
     z-index: 10;
+    max-height: calc(100vh - 6rem); /* Prevent TOC from being too tall */
+    overflow-y: auto; /* Allow scrolling if needed */
   }
 
   /* Dark mode adjustments */
@@ -1598,10 +1657,25 @@
     }
   }
 
+  /* Medium screens - hide TOC if viewport is too narrow */
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .essay-toc {
+      display: none !important; /* Hide TOC when there's not enough space */
+    }
+  }
+  
+  /* Large screens - show TOC only when there's enough space */
+  @media (min-width: 1281px) {
+    .essay-toc {
+      display: block !important;
+    }
+  }
+  
   /* Wide screen optimization */
   @media (min-width: 1400px) {
     .essay-toc {
-      right: calc((100vw - 65ch) / 4); /* Position relative to content width */
+      /* On very wide screens, give more breathing room */
+      left: calc(50% + (var(--measure-base) / 2) + var(--space-12));
     }
   }
 }

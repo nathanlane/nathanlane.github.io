@@ -1,37 +1,29 @@
 ---
 import { Image } from 'astro:assets';
 import PageLayout from "@/layouts/Base.astro";
-import FooterConnect from "@/components/FooterConnect.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import Marginalia from "@/components/Marginalia.astro";
 import { aboutConfig } from "@/data/about-config";
 
-// Import placeholder image or use remote image
-// For now, we'll show how to handle both local and remote images
 const { meta, photo, content } = aboutConfig;
-
-// For demonstration - in production, you'd import your actual image:
-// import profilePhoto from '../assets/images/headshot.jpg';
 ---
 
 <PageLayout meta={meta}>
-
-	<h1>{meta.title}</h1>
-	<div class="prose prose-lane max-w-none space-y-4">
-		{photo.show && (
-			<div class="float-right ml-6b mb-6b w-48 sm:w-56 -mt-1b">
-				<figure class="space-y-1">
+	<div class="measure-base mx-auto px-4b py-8b">
+		
+		<!-- Reusable Page Header -->
+		<PageHeader 
+			title={meta.title}
+			description="Nathan Lane, PhD - Associate Professor of Economics at Oxford University and co-founder of the Industrial Policy Group"
+		/>
+		
+		<!-- Main Content with Typography-First Design -->
+		<div class="prose prose-lane max-w-none">
+			
+			<!-- Profile Photo - Elegant Float Treatment -->
+			{photo.show && (
+				<figure class="float-right ml-6b mb-6b w-48 sm:w-56 -mt-2b">
 					<div class="overflow-hidden border border-color-200 dark:border-color-700">
-						{/* 
-							For local images (recommended):
-							<Image 
-								src={profilePhoto}
-								alt={photo.alt}
-								width={400}
-								height={400}
-								class="w-full h-auto aspect-square object-cover"
-							/>
-						*/}
-						
-						{/* For both local and remote images: */}
 						<Image 
 							src={photo.src}
 							alt={photo.alt}
@@ -41,36 +33,37 @@ const { meta, photo, content } = aboutConfig;
 							inferSize={photo.src.startsWith('http')}
 						/>
 					</div>
-					<figcaption class="text-center">
+					<figcaption class="text-center mt-2b">
 						<a 
 							href={photo.fullSizeLink} 
 							download
-							class="opacity-30 hover:opacity-50"
-							style="font-size: 0.625rem; color: var(--theme-lightest);"
+							class="text--2 text-light hover:text-base"
 						>
 							Download headshot ↓
 						</a>
 					</figcaption>
 				</figure>
-			</div>
-		)}
+			)}
+			
+			<!-- Biography Content -->
+			<p class="text-lead">{content.intro}</p>
+			
+			{content.paragraphs && content.paragraphs.map((paragraph) => (
+				<p>{paragraph}</p>
+			))}
+			
+			<p>
+				{content.outro.text} <a
+					href={content.outro.linkUrl}
+					class="inline-link"
+					target="_blank"
+					rel="noopener noreferrer"
+				>{content.outro.linkText}</a> {content.outro.suffix}
+			</p>
+		</div>
 		
-		<p>{content.intro}</p>
-		{content.paragraphs && content.paragraphs.map((paragraph) => (
-			<p>{paragraph}</p>
-		))}
-		<p>
-			{content.outro.text} <a
-				aria-label="github repository"
-				class="inline-link inline-block"
-				href={content.outro.linkUrl}
-				rel="noreferrer"
-				target="_blank">{content.outro.linkText}</a
-			> {content.outro.suffix}
-		</p>
-
-		<!-- Social Links Section -->
-		<FooterConnect />
+		<!-- Marginalia - Classical Footnote-Style Navigation -->
+		<Marginalia />
+		
 	</div>
-
 </PageLayout>

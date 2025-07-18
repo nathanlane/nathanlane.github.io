@@ -123,15 +123,18 @@ const structuredData = [
 		document.querySelectorAll("pre").forEach((pre) => {
 			// Check if the button already exists
 			if (!pre.querySelector(".copy-code")) {
+				// Ensure pre has position relative for absolute button
+				pre.style.position = "relative";
+				
 				// Create the button
 				const copyButton = document.createElement("button");
 				copyButton.className =
-				"absolute flex items-center justify-center bg-bgColor h-space-s font-medium overflow-hidden rounded text-light hover:text-accent-two font-sans text-xs font-medium top-space-1 right-space-1";
+				"copy-code absolute flex items-center justify-center bg-bgColor h-5 font-medium rounded text-light hover:text-accent-two font-sans text-xs font-medium top-2 right-2 z-10";
 
 				// Create the span element that will hold the button text
 				const buttonText = document.createElement("span");
 				buttonText.innerText = "Copy"; // Initial text
-				buttonText.className = "flex items-center block w-full h-full px-space-1 py-space-0.5 bg-[var(--code-title-bg)] text-xs"; // Set the span to take up full width with background color
+				buttonText.className = "flex items-center px-2 py-0.5 bg-[var(--code-title-bg)] text-xs rounded"; // Simplified with standard spacing
 
 				copyButton.appendChild(buttonText); // Append span to the button
 
@@ -144,6 +147,10 @@ const structuredData = [
 					if (code) {
 						await navigator.clipboard.writeText(code);
 						buttonText.innerText = "Copied!";
+						// Reset after 2 seconds
+						setTimeout(() => {
+							buttonText.innerText = "Copy";
+						}, 2000);
 					}
 				});
 			}
