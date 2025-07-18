@@ -142,32 +142,19 @@ const {
     color: var(--theme-text);
   }
 
-  /* Link styling - Butterick's web typography principles */
+  /* Link styling - Using consolidated link system */
   .archive-link {
-    /* Color progression for interactive states */
+    /* Inherits from link-title with underline modifier */
+    @apply link-title link-underline-thin;
+    
+    /* Archive-specific color override */
     color: var(--theme-accent-base);
-    text-decoration: none;
     
-    /* Underline styling for accessibility */
-    text-decoration: underline;
-    text-decoration-color: var(--theme-accent-base);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
-    
-    /* Smooth transitions - Hochuli's refinement */
-    transition: all 0.2s ease-in-out;
-    
-    /* Focus accessibility */
-    outline-offset: 2px;
-    
-    /* Hover state */
+    /* Hover state - color override */
     &:hover {
       color: var(--theme-accent-dark);
       text-decoration-color: var(--theme-accent-dark);
-      text-decoration-thickness: 2px;
     }
-    
-    /* Focus handled by global system */
   }
 
   /* Metadata styling - Ambrose-Harris information hierarchy */

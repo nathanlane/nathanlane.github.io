@@ -88,7 +88,7 @@ const getPrimaryTag = (post: CollectionItemBase) => {
   }
   
   // Otherwise return the first tag, formatted nicely
-  return post.data.tags[0].split('-').map((word: string) => 
+  return post.data.tags?.[0]?.split('-').map((word: string) => 
     word.charAt(0).toUpperCase() + word.slice(1)
   ).join(' ');
 };
@@ -139,12 +139,12 @@ const getPrimaryTag = (post: CollectionItemBase) => {
             <!-- Year heading with post count -->
             <h3 class="heading-3 text-light mb-6b">
               {year}
-              <span class="text-meta ml-2b">• {groupedByYear[year].length} posts</span>
+              <span class="text-meta ml-2b">• {groupedByYear[year]!.length} posts</span>
             </h3>
             
             <!-- Posts for this year using ArchiveEntry component -->
             <div class="space-y-6b">
-              {groupedByYear[year]
+              {groupedByYear[year]!
                 .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
                 .map(post => (
                   <ArchiveEntry 

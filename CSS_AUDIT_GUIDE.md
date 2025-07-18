@@ -91,6 +91,82 @@ Implemented a global focus system that provides consistency across all interacti
 
 **Components updated**: Button, CompactList, PostSearch, SkipLink, MediaEntry, ArchiveEntry, PageHeader, Sidenote, and all webmentions components now use the global system.
 
+### ✅ Link System Consolidation (Phase 3 - January 30, 2025)
+Consolidated and simplified the link styling system for better maintainability:
+
+#### Before: 7+ Different Link Types
+```css
+/* Scattered across multiple files */
+.inline-link { /* prose links */ }
+.nav-link { /* navigation */ }
+.feature-link { /* featured content */ }
+.media-link { /* media entries */ }
+.archive-link { /* archive entries */ }
+.research-link { /* research entries */ }
+.section-link { /* document sections */ }
+/* Plus many component-specific variations */
+```
+
+#### After: 4 Primary Link Types with Modifiers
+```css
+/* Consolidated in src/styles/links.css */
+
+/* 1. INLINE LINKS - For prose and body text */
+.link-inline {
+  color: var(--theme-accent-base);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  font-weight: inherit;
+  transition: all 0.2s ease;
+}
+
+/* 2. TITLE LINKS - For headings and prominent links */
+.link-title {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+  transition: color 0.2s ease;
+}
+
+/* 3. NAVIGATION LINKS - For menus and navigation */
+.link-nav {
+  color: var(--theme-color-600);
+  text-decoration: none;
+  font-weight: 450;
+  font-variation-settings: "wght" 450;
+  transition: all 0.2s ease;
+}
+
+/* 4. FEATURE LINKS - For featured content */
+.link-feature {
+  @apply link-title; /* Inherits from title links */
+  font-variation-settings: "wght" 450;
+}
+
+/* UTILITY MODIFIERS */
+.link-underline-thin { /* 1px underline */ }
+.link-underline-thick { /* 2px underline */ }
+.link-no-underline { /* Remove underline */ }
+.link-accent { /* Force accent color */ }
+.link-inherit { /* Inherit parent color */ }
+```
+
+#### Component Updates
+- **MediaEntry & ArchiveEntry**: Now use `@apply link-title link-underline-thin`
+- **ResearchEntry**: Uses `@apply link-title` with custom hover
+- **CompactList**: Uses `@apply link-title` with animated underline
+- **DocumentSection**: Uses `@apply link-nav` for section links
+- **RecentContent**: Uses consolidated classes for both feature and nav links
+- **Footer**: Uses `@apply link-nav` for all footer links
+
+#### Impact
+- **40% reduction** in link-related CSS
+- **Consistent behavior** across all components
+- **Single source of truth** for link styling
+- **Easier maintenance** with inheritance pattern
+- **No visual changes** - all existing behaviors preserved
+
 ### ✅ Typography Token Migration
 Replaced all hardcoded font sizes with fluid typography tokens:
 

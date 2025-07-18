@@ -4,17 +4,17 @@
 *,
 *::before,
 *::after {
-	animation: none !important;
-	transition: none !important;
+  animation: none !important;
+  transition: none !important;
 }
 
 /* No smooth scrolling */
 html {
-	scroll-behavior: auto !important;
+  scroll-behavior: auto !important;
 }
 
 /* No transform effects */
 button:hover,
 a[role="button"]:hover {
-	transform: none !important;
+  transform: none !important;
 }

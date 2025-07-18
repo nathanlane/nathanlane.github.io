@@ -39,16 +39,14 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 
 
 
+  /* Using consolidated link system */
   .section-link {
+    @apply link-nav;
     font-family: var(--font-sans);
     font-size: var(--step--1); /* 12.8-14.4px */
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--theme-color-600);
-    text-decoration: none;
     font-weight: 500;
-    
-    /* Subtle hover effect - transition removed */
   }
 
   .section-link:hover {

@@ -5,179 +5,179 @@
 */
 
 @layer components {
-	/* Layout Components
+  /* Layout Components
      ----------------- */
 
-	/* Standard page container - used 7 times */
-	.page-container {
-		@apply measure-base mx-auto px-4b py-8b;
-	}
+  /* Standard page container - used 7 times */
+  .page-container {
+    @apply measure-base mx-auto px-4b py-8b;
+  }
 
-	/* Flex centering - used extensively */
-	.flex-center {
-		@apply flex items-center;
-	}
+  /* Flex centering - used extensively */
+  .flex-center {
+    @apply flex items-center;
+  }
 
-	.flex-between {
-		@apply flex items-center justify-between;
-	}
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
 
-	/* Article content wrapper - used 3 times */
-	.article-content {
-		@apply flex-grow break-words max-w-prose mx-auto measure-base space-y-4;
-	}
+  /* Article content wrapper - used 3 times */
+  .article-content {
+    @apply flex-grow break-words max-w-prose mx-auto measure-base space-y-4;
+  }
 
-	/* Responsive flex layout - used 3 times */
-	.responsive-flex {
-		@apply gap-x-8b lg:flex lg:items-start;
-	}
+  /* Responsive flex layout - used 3 times */
+  .responsive-flex {
+    @apply gap-x-8b lg:flex lg:items-start;
+  }
 
-	/* Spacing Components
+  /* Spacing Components
      ------------------ */
 
-	/* Section spacing - standardized margins */
-	.section-spacing-lg {
-		@apply mb-16b;
-	}
+  /* Section spacing - standardized margins */
+  .section-spacing-lg {
+    @apply mb-16b;
+  }
 
-	.section-spacing {
-		@apply mb-8b;
-	}
+  .section-spacing {
+    @apply mb-8b;
+  }
 
-	.section-spacing-sm {
-		@apply mb-6b;
-	}
+  .section-spacing-sm {
+    @apply mb-6b;
+  }
 
-	/* Vertical spacing containers */
-	.stack-lg {
-		@apply space-y-12b;
-	}
+  /* Vertical spacing containers */
+  .stack-lg {
+    @apply space-y-12b;
+  }
 
-	.stack {
-		@apply space-y-8b;
-	}
+  .stack {
+    @apply space-y-8b;
+  }
 
-	.stack-md {
-		@apply space-y-6b;
-	}
+  .stack-md {
+    @apply space-y-6b;
+  }
 
-	.stack-sm {
-		@apply space-y-3b;
-	}
+  .stack-sm {
+    @apply space-y-3b;
+  }
 
-	/* Typography Components
+  /* Typography Components
      --------------------- */
 
-	/* Headings with consistent margins */
-	.heading-1-spaced {
-		@apply heading-1 mb-4b;
-	}
+  /* Headings with consistent margins */
+  .heading-1-spaced {
+    @apply heading-1 mb-4b;
+  }
 
-	.heading-2-spaced {
-		@apply heading-2 mb-8b;
-	}
+  .heading-2-spaced {
+    @apply heading-2 mb-8b;
+  }
 
-	.heading-3-spaced {
-		@apply heading-3 mb-4b;
-	}
+  .heading-3-spaced {
+    @apply heading-3 mb-4b;
+  }
 
-	.heading-3-light {
-		@apply heading-3 text-light mb-6b;
-	}
+  .heading-3-light {
+    @apply heading-3 text-light mb-6b;
+  }
 
-	.heading-4-spaced {
-		@apply heading-4 mb-2b;
-	}
+  .heading-4-spaced {
+    @apply heading-4 mb-2b;
+  }
 
-	.heading-4-tight {
-		@apply heading-4 mb-1b;
-	}
+  .heading-4-tight {
+    @apply heading-4 mb-1b;
+  }
 
-	/* Meta text combinations */
-	.meta-light {
-		@apply text-meta text-light;
-	}
+  /* Meta text combinations */
+  .meta-light {
+    @apply text-meta text-light;
+  }
 
-	.meta-light-spaced {
-		@apply text-meta text-light mt-3b;
-	}
+  .meta-light-spaced {
+    @apply text-meta text-light mt-3b;
+  }
 
-	/* Prose container */
-	.prose-container {
-		@apply prose prose-lane max-w-none;
-	}
+  /* Prose container */
+  .prose-container {
+    @apply prose prose-lane max-w-none;
+  }
 
-	/* Interactive Components
+  /* Interactive Components
      ---------------------- */
 
-	/* Card with hover state - used 3 times */
-	.card-interactive {
-		@apply block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200;
-	}
+  /* Card with hover state - used 3 times */
+  .card-interactive {
+    @apply block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200;
+  }
 
-	/* Link Components (already well-defined)
+  /* Link Components (already well-defined)
      --------------------------------------- */
-	/* Note: inline-link, nav-link, feature-link patterns
+  /* Note: inline-link, nav-link, feature-link patterns
      are already properly extracted in the codebase */
 
-	/* Utility Helpers
+  /* Utility Helpers
      --------------- */
 
-	/* Small body text in lightest color - used 3 times */
-	.text-body-muted {
-		@apply text-body-sm text-lightest;
-	}
+  /* Small body text in lightest color - used 3 times */
+  .text-body-muted {
+    @apply text-body-sm text-lightest;
+  }
 
-	/* Card Components
+  /* Card Components
      --------------- */
 
-	/* Base card container - elevated style (ProjectCard, WritingCard) */
-	.card-elevated {
-		@apply group rounded-lg bg-color-75 hover:bg-color-100 p-space-s;
-	}
+  /* Base card container - elevated style (ProjectCard, WritingCard) */
+  .card-elevated {
+    @apply group rounded-lg bg-color-75 hover:bg-color-100 p-space-s;
+  }
 
-	/* Flat card style (MediaCard) */
-	.card-flat {
-		@apply flex gap-4b py-4b border-b border-color-100 last:border-0;
-	}
+  /* Flat card style (MediaCard) */
+  .card-flat {
+    @apply flex gap-4b py-4b border-b border-color-100 last:border-0;
+  }
 
-	/* Card typography system */
-	.card-title {
-		@apply font-headline font-medium leading-tight;
-	}
+  /* Card typography system */
+  .card-title {
+    @apply font-headline font-medium leading-tight;
+  }
 
-	.card-title-sm {
-		@apply card-title text-0;
-	}
+  .card-title-sm {
+    @apply card-title text-0;
+  }
 
-	.card-title-md {
-		@apply card-title text-1;
-	}
+  .card-title-md {
+    @apply card-title text-1;
+  }
 
-	.card-description {
-		@apply text-body-sm text-light leading-relaxed;
-	}
+  .card-description {
+    @apply text-body-sm text-light leading-relaxed;
+  }
 
-	.card-description-clamp-2 {
-		@apply card-description line-clamp-2;
-	}
+  .card-description-clamp-2 {
+    @apply card-description line-clamp-2;
+  }
 
-	.card-description-clamp-3 {
-		@apply card-description line-clamp-3;
-	}
+  .card-description-clamp-3 {
+    @apply card-description line-clamp-3;
+  }
 
-	.card-meta {
-		@apply text-xs text-light;
-	}
+  .card-meta {
+    @apply text-xs text-light;
+  }
 
-	/* Card link styling (consolidating MediaCard patterns) */
-	.card-link {
-		@apply text-accent-base hover:text-accent;
-		@apply underline decoration-1 hover:decoration-2;
-		font-variation-settings: "wght" 450;
-	}
+  /* Card link styling (consolidating MediaCard patterns) */
+  .card-link {
+    @apply text-accent-base hover:text-accent;
+    @apply underline decoration-1 hover:decoration-2;
+    font-variation-settings: "wght" 450;
+  }
 
-	.card-link:hover {
-		font-variation-settings: "wght" 500;
-	}
+  .card-link:hover {
+    font-variation-settings: "wght" 500;
+  }
 }

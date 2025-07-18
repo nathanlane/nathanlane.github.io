@@ -50,27 +50,27 @@ Please provide:
 - [ ] **Clean Build Test**
   ```bash
   rm -rf dist/ node_modules/ .astro/
-  npm install
-  npm run build
+  pnpm install
+  pnpm run build
   ```
 
 - [ ] **Linting Passes**
   ```bash
-  npm run lint        # ESLint for JS/TS
-  npm run lint:css    # Stylelint for CSS
-  npm run format      # Prettier formatting
+  pnpm run lint        # ESLint for JS/TS
+  pnpm run lint:css    # Stylelint for CSS
+  pnpm run format      # Prettier formatting
   ```
 
 - [ ] **Bundle Size Check**
   ```bash
-  npm run build
+  pnpm run build
   # Check dist/ folder size < 1MB for fonts
   # Check JS bundle < 100KB
   ```
 
 - [ ] **Lighthouse Audit**
   ```bash
-  npm run preview
+  pnpm run preview
   # Run Lighthouse: Performance > 95, Accessibility = 100
   ```
 

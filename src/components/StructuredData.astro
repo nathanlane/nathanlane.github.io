@@ -1,7 +1,7 @@
 ---
-// This component adds JSON-LD structured data to help search engines understand your content
-import type { StructuredDataProps, StructuredDataContent, BreadcrumbItem } from '@/types';
 import { siteConfig } from '@/site.config';
+// This component adds JSON-LD structured data to help search engines understand your content
+import type { BreadcrumbItem, StructuredDataProps, StructuredDataContent } from '@/types';
 
 export interface Props extends StructuredDataProps {}
 
@@ -49,24 +49,25 @@ switch (type) {
 
   case 'article':
     // Article schema - rich snippets for blog posts
-    if (!data) break;
+    if (!data || 'items' in data) break; // Skip if it's breadcrumb data
+    const articleData = data as StructuredDataContent;
     schema = {
       "@context": "https://schema.org",
       "@type": "Article",
-      "@id": `${Astro.site}${data.url}#article`,
-      "headline": data.title,
-      "description": data.description,
-      "datePublished": data.publishDate,
-      "dateModified": data.updatedDate || data.publishDate,
+      "@id": `${Astro.site}${articleData.url}#article`,
+      "headline": articleData.title,
+      "description": articleData.description,
+      "datePublished": articleData.publishDate,
+      "dateModified": articleData.updatedDate || articleData.publishDate,
       "author": personSchema,
       "publisher": personSchema,
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `${Astro.site}${data.url}`
+        "@id": `${Astro.site}${articleData.url}`
       },
-      "image": data.ogImage || `${Astro.site}/og-image${data.url.replace(/\/$/, '')}.png`,
-      "keywords": data.tags?.join(', '),
-      "wordCount": data.minutesRead ? Math.round(data.minutesRead * 200) : undefined
+      "image": articleData.ogImage || `${Astro.site}/og-image${articleData.url?.replace(/\/$/, '')}.png`,
+      "keywords": articleData.tags?.join(', '),
+      "wordCount": articleData.minutesRead ? Math.round(articleData.minutesRead * 200) : undefined
     };
     break;
 

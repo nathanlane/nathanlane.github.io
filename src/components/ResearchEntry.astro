@@ -1,6 +1,4 @@
 ---
-import MetadataLine from './MetadataLine.astro';
-
 interface Props {
   title: string;
   href: string;
@@ -8,7 +6,6 @@ interface Props {
   status?: 'published' | 'working-paper' | 'work-in-progress' | 'archived' | undefined;
   metadata?: string | undefined;
   publication?: string | undefined;
-  paperLink?: string | undefined;  // Main link to the paper
   download?: string | undefined;
   link?: string | undefined;
 }
@@ -17,10 +14,8 @@ const {
   title, 
   href, 
   date, 
-  status, 
   metadata,
   publication,
-  paperLink,
   download,
   link
 } = Astro.props;
@@ -111,14 +106,13 @@ const metadataItems = [
       "calt" 1;     /* Contextual alternates */
   }
   
+  /* Using consolidated link system */
   .research-link {
-    color: var(--theme-text);
-    text-decoration: none;
-    transition: color 0.2s ease;
+    @apply link-title;
+    color: var(--theme-text); /* Override to start with text color */
   }
   
   .research-link:hover {
-    color: var(--theme-accent-base);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -150,15 +144,13 @@ const metadataItems = [
     margin-top: var(--space-2); /* 12px - more breathing room without border */
   }
   
+  /* Using consolidated link system */
   .research-action-link {
+    @apply link-nav;
     font-size: var(--step--3); /* 8.6-9.7px - reduced for more subtle appearance */
-    font-weight: 450; /* Balanced weight */
-    color: var(--theme-color-600); /* Subtle but discoverable */
-    text-decoration: none;
     
     /* Butterick: Clear but not dominant links */
     border-bottom: 1px solid transparent;
-    transition: all 0.2s ease;
     
     /* Enhanced readability */
     line-height: 1.3; /* Slightly more open for small text */
@@ -168,9 +160,7 @@ const metadataItems = [
   }
   
   .research-action-link:hover {
-    color: var(--theme-accent-base);
     border-bottom-color: var(--theme-accent-base);
-    /* Bringhurst: Subtle emphasis, not decoration */
   }
   
   /* Custom research metadata - bypasses global text-meta conflicts */

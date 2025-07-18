@@ -120,14 +120,10 @@ const icon = mediaIcons[mediaType] || "lucide:external-link";
     @apply leading-snug;
   }
   
+  /* Using consolidated link system */
   .media-link {
+    @apply link-title link-underline-thin;
     @apply text-accent-base hover:text-accent;
-    @apply underline decoration-1 hover:decoration-2;
-    font-variation-settings: 'wght' 450;
-  }
-  
-  .media-link:hover {
-    font-variation-settings: 'wght' 500;
   }
   
   .media-description {
