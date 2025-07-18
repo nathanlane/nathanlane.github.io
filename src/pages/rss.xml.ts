@@ -5,7 +5,6 @@ import rss from "@astrojs/rss";
 
 export const GET = async () => {
   const posts = await getAllPosts();
-  const notes = await getCollection("note");
   const research = await getCollection("research");
   const writing = await getCollection("writing");
 
@@ -19,15 +18,6 @@ export const GET = async () => {
       content: post.body || "",
       categories: post.data.tags || [],
       customData: `<guid isPermaLink="true">${import.meta.env.SITE}/posts/${post.id}/</guid>`,
-    })),
-    ...notes.map((note) => ({
-      title: note.data.title,
-      description: note.data.description || "",
-      pubDate: note.data.publishDate,
-      link: `/notes/${note.id}/`,
-      content: note.body || "",
-      categories: [], // Notes don't have tags
-      customData: `<guid isPermaLink="true">${import.meta.env.SITE}/notes/${note.id}/</guid>`,
     })),
     ...research.map((item) => ({
       title: item.data.title,

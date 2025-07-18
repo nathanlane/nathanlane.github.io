@@ -4,7 +4,6 @@ import type { CollectionItemBase } from "@/types";
 
 type AnyCollectionEntry =
   | CollectionEntry<"post">
-  | CollectionEntry<"note">
   | CollectionEntry<"research">
   | CollectionEntry<"projects">
   | CollectionEntry<"writing">;
@@ -19,7 +18,6 @@ export async function validateSlugUniqueness() {
   // Collections to check
   const collections = [
     "post",
-    "note",
     "research",
     "projects",
     "writing",

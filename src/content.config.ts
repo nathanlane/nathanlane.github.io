@@ -310,7 +310,6 @@ const homepage = defineCollection({
 // Export collections
 export const collections = {
   post,
-  note,
   privateNote,
   series,
   projects,

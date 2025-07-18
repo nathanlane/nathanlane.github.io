@@ -57,8 +57,9 @@ Please provide:
 - [ ] **Linting Passes**
   ```bash
   pnpm run lint        # ESLint for JS/TS
-  pnpm run lint:css    # Stylelint for CSS
   pnpm run format      # Prettier formatting
+  pnpm run check       # Astro checker
+  # If the steps required editing, run again.
   ```
 
 - [ ] **Bundle Size Check**
