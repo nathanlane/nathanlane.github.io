@@ -70,7 +70,7 @@ const typeLabels: Record<string, string> = {
       href={link} 
       target="_blank" 
       rel="noopener noreferrer"
-      class="media-link link-title link-underline-thin"
+      class="link-title link-underline-thin"
     >
       {title}
     </a>
@@ -129,16 +129,7 @@ const typeLabels: Record<string, string> = {
     color: var(--theme-text);
   }
 
-  /* Media-specific link styling */
-  .media-link {
-    /* Media-specific color override */
-    color: var(--theme-accent-base);
-  }
-  
-  .media-link:hover {
-    color: var(--theme-accent-dark);
-    text-decoration-color: var(--theme-accent-dark);
-  }
+  /* Media link now uses consolidated .link-title class - no custom styles needed */
 
   /* Metadata styling - Ambrose-Harris information hierarchy */
   .media-meta {
@@ -264,17 +255,6 @@ const typeLabels: Record<string, string> = {
       padding-bottom: var(--space-2); /* 12px */
     }
     
-    .media-link {
-      /* Remove underlines for print clarity */
-      text-decoration: none;
-      color: var(--theme-text);
-    }
-    
-    /* Show URLs after links in print */
-    .media-link::after {
-      content: " (" attr(href) ")";
-      font-size: var(--step--3);
-      color: var(--theme-color-500);
-    }
+    /* Print link styles now handled centrally in links.css */
   }
 </style> 

@@ -110,23 +110,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 		letter-spacing: 0.002em;
 	}
 
-	/* Underline animation - minimal and elegant */
-	.entry-link::after {
-		content: "";
-		position: absolute;
-		bottom: -2px;
-		left: 0;
-		width: 0;
-		height: 1px;
-		background: var(--theme-accent-base);
-		opacity: 0;
-		transition: width 200ms ease, opacity 200ms ease;
-	}
-
-	.entry-link:hover::after {
-		width: 100%;
-		opacity: 0.5;
-	}
+	/* Link styling handled by consolidated .link-title class */
 
 	/* Date styling - metadata hierarchy */
 	.entry-date {
@@ -209,15 +193,6 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 			border-bottom: 1px solid var(--theme-color-300);
 		}
 		
-		.entry-link {
-			color: var(--theme-text);
-			text-decoration: underline;
-		}
-		
-		.entry-link::after {
-			content: " (" attr(href) ")";
-			font-size: var(--step--1);
-			color: var(--theme-color-600);
-		}
+		/* Print link styles now handled centrally in links.css */
 	}
 </style>
