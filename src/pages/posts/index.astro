@@ -1,9 +1,9 @@
 ---
-import { getAllPosts, getUniqueTags } from "@/data/post";
-import PageLayout from "@/layouts/Base.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import RecentContent from "@/components/RecentContent.astro";
 import SectionSeparator from "@/components/SectionSeparator.astro";
+import { getAllPosts, getUniqueTags } from "@/data/post";
+import PageLayout from "@/layouts/Base.astro";
 
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);

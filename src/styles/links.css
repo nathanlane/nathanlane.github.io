@@ -5,140 +5,141 @@
 
 /* ===== CORE VARIABLES ===== */
 :root {
-  --link-transition: color 200ms ease, text-decoration-color 200ms ease, font-variation-settings 200ms ease;
-  --link-underline-default: hsl(0deg 0% 60%);
-  --link-underline-hover: var(--theme-accent-base);
+	--link-transition: color 200ms ease, text-decoration-color 200ms ease, font-variation-settings
+		200ms ease;
+	--link-underline-default: hsl(0deg 0% 60%);
+	--link-underline-hover: var(--theme-accent-base);
 }
 
 /* ===== GLOBAL HOVER RULES - Prevent Size/Transform Chaos ===== */
 a {
-  /* Prevent jarring size changes */
-  font-size: inherit !important;
-  
-  /* Disable transforms unless explicitly needed */
-  transform: none;
-  
-  /* Use only our controlled transitions */
-  transition: var(--link-transition);
+	/* Prevent jarring size changes */
+	font-size: inherit !important;
+
+	/* Disable transforms unless explicitly needed */
+	transform: none;
+
+	/* Use only our controlled transitions */
+	transition: var(--link-transition);
 }
 
 /* Override any conflicting utility classes */
 a[class*="hover:text-"]:hover {
-  /* Keep size consistent - only change color/weight */
-  font-size: inherit !important;
+	/* Keep size consistent - only change color/weight */
+	font-size: inherit !important;
 }
 
 /* ===== PRIMARY LINK TYPES ===== */
 
 /* 1. PROSE LINKS - For body text, seamless reading flow */
 .inline-link {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--link-underline-default);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.15em;
-  transition: var(--link-transition);
-  font-variation-settings: 'wght' 400;
+	color: inherit;
+	text-decoration: underline;
+	text-decoration-color: var(--link-underline-default);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+	transition: var(--link-transition);
+	font-variation-settings: "wght" 400;
 }
 
 .inline-link:hover {
-  color: var(--theme-accent-base);
-  text-decoration-color: var(--link-underline-hover);
-  text-decoration-thickness: 1.5px;
-  font-variation-settings: 'wght' 450;
+	color: var(--theme-accent-base);
+	text-decoration-color: var(--link-underline-hover);
+	text-decoration-thickness: 1.5px;
+	font-variation-settings: "wght" 450;
 }
 
 /* 2. NAVIGATION LINKS - UI elements, clear hierarchy */
 .nav-link {
-  color: var(--theme-color-600);
-  text-decoration: none;
-  font-size: var(--step--1);
-  font-variation-settings: 'wght' 450;
-  letter-spacing: 0.02em;
-  transition: var(--link-transition);
+	color: var(--theme-color-600);
+	text-decoration: none;
+	font-size: var(--step--1);
+	font-variation-settings: "wght" 450;
+	letter-spacing: 0.02em;
+	transition: var(--link-transition);
 }
 
 .nav-link:hover {
-  color: var(--theme-accent-base);
-  font-variation-settings: 'wght' 500;
+	color: var(--theme-accent-base);
+	font-variation-settings: "wght" 500;
 }
 
 .nav-link[aria-current="page"] {
-  color: var(--theme-accent-base);
-  font-variation-settings: 'wght' 550;
+	color: var(--theme-accent-base);
+	font-variation-settings: "wght" 550;
 }
 
 /* 3. FEATURE LINKS - Headlines, titles, prominent content */
 .feature-link {
-  color: inherit;
-  text-decoration: none;
-  font-variation-settings: 'wght' 500;
-  transition: var(--link-transition);
+	color: inherit;
+	text-decoration: none;
+	font-variation-settings: "wght" 500;
+	transition: var(--link-transition);
 }
 
 .feature-link:hover {
-  color: var(--theme-accent-base);
-  font-variation-settings: 'wght' 550;
+	color: var(--theme-accent-base);
+	font-variation-settings: "wght" 550;
 }
 
 /* 4. ACTION LINKS - Buttons, CTAs, external links */
 .action-link {
-  color: var(--theme-color-600);
-  text-decoration: none;
-  font-size: inherit; /* Use whatever size is set by parent */
-  font-variation-settings: 'wght' 450;
-  transition: var(--link-transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
+	color: var(--theme-color-600);
+	text-decoration: none;
+	font-size: inherit; /* Use whatever size is set by parent */
+	font-variation-settings: "wght" 450;
+	transition: var(--link-transition);
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3em;
 }
 
 .action-link:hover {
-  color: var(--theme-accent-base);
-  font-variation-settings: 'wght' 500;
+	color: var(--theme-accent-base);
+	font-variation-settings: "wght" 500;
 }
 
 /* 5. SUBTLE LINKS - Minimal emphasis, quiet interaction */
 .subtle-link {
-  color: var(--theme-color-500);
-  text-decoration: none;
-  font-variation-settings: 'wght' 400;
-  transition: var(--link-transition);
-  opacity: 0.8;
+	color: var(--theme-color-500);
+	text-decoration: none;
+	font-variation-settings: "wght" 400;
+	transition: var(--link-transition);
+	opacity: 0.8;
 }
 
 .subtle-link:hover {
-  color: var(--theme-text);
-  font-variation-settings: 'wght' 450;
-  opacity: 1;
+	color: var(--theme-text);
+	font-variation-settings: "wght" 450;
+	opacity: 1;
 }
 
 /* 6. BACK LINKS - Navigation back buttons */
 .back-link {
-  color: var(--theme-color-600);
-  text-decoration: none;
-  font-variation-settings: 'wght' 450;
-  transition: var(--link-transition);
+	color: var(--theme-color-600);
+	text-decoration: none;
+	font-variation-settings: "wght" 450;
+	transition: var(--link-transition);
 }
 
 .back-link:hover {
-  color: var(--theme-text);
-  font-variation-settings: 'wght' 500;
+	color: var(--theme-text);
+	font-variation-settings: "wght" 500;
 }
 
 /* 7. FOOTER LINKS - Simple underline style */
 .footer-link {
-  color: var(--theme-color-600);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  font-variation-settings: 'wght' 400;
-  transition: var(--link-transition), border-bottom-color 200ms ease;
+	color: var(--theme-color-600);
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	font-variation-settings: "wght" 400;
+	transition: var(--link-transition), border-bottom-color 200ms ease;
 }
 
 .footer-link:hover {
-  color: var(--theme-text);
-  border-bottom-color: currentColor;
-  font-variation-settings: 'wght' 450;
+	color: var(--theme-text);
+	border-bottom-color: currentColor;
+	font-variation-settings: "wght" 450;
 }
 
 /* ===== FOCUS STATES - WCAG Compliant ===== */
@@ -149,9 +150,9 @@ a[class*="hover:text-"]:hover {
 .subtle-link:focus,
 .back-link:focus,
 .footer-link:focus {
-  outline: 2px solid var(--theme-accent-base);
-  outline-offset: 2px;
-  border-radius: 2px;
+	outline: 2px solid var(--theme-accent-base);
+	outline-offset: 2px;
+	border-radius: 2px;
 }
 
 /* ===== PREVENT UTILITY CLASS CONFLICTS ===== */
@@ -161,13 +162,13 @@ a[class*="hover:text-"]:hover {
 .action-link.text-0:hover,
 .nav-link.text-sm:hover,
 .subtle-link.text-xs:hover {
-  /* Maintain original size - only change color/weight */
-  font-size: inherit !important;
+	/* Maintain original size - only change color/weight */
+	font-size: inherit !important;
 }
 
 /* ===== DARK MODE ===== */
 :root[data-theme="dark"] {
-  --link-underline-default: hsl(0deg 0% 40%);
+	--link-underline-default: hsl(0deg 0% 40%);
 }
 
 :root[data-theme="dark"] .nav-link,
@@ -175,7 +176,7 @@ a[class*="hover:text-"]:hover {
 :root[data-theme="dark"] .subtle-link,
 :root[data-theme="dark"] .back-link,
 :root[data-theme="dark"] .footer-link {
-  color: var(--theme-color-400);
+	color: var(--theme-color-400);
 }
 
 :root[data-theme="dark"] .nav-link:hover,
@@ -183,22 +184,22 @@ a[class*="hover:text-"]:hover {
 :root[data-theme="dark"] .subtle-link:hover,
 :root[data-theme="dark"] .back-link:hover,
 :root[data-theme="dark"] .footer-link:hover {
-  color: var(--theme-accent-light);
+	color: var(--theme-accent-light);
 }
 
 /* ===== HIGH CONTRAST MODE ===== */
 @media (prefers-contrast: high) {
-  .inline-link {
-    text-decoration-color: currentColor;
-    text-decoration-thickness: 2px;
-  }
-  
-  .nav-link,
-  .feature-link,
-  .action-link,
-  .subtle-link,
-  .back-link,
-  .footer-link {
-    font-weight: 600;
-  }
+	.inline-link {
+		text-decoration-color: currentColor;
+		text-decoration-thickness: 2px;
+	}
+
+	.nav-link,
+	.feature-link,
+	.action-link,
+	.subtle-link,
+	.back-link,
+	.footer-link {
+		font-weight: 600;
+	}
 }
