@@ -6,14 +6,14 @@ export interface Props {
 
 const { type = "horizontal", className = "" } = Astro.props as Props;
 
-// Классы для разделителей в зависимости от типа
+// Classes for separators depending on type
 const separatorClasses = {
-	base: "flex-shrink-0 bg-lighter mx-space-2xs", // Общие стили
+	base: "flex-shrink-0 bg-lighter mx-space-2xs", // Common styles
 	types: {
-		horizontal: "h-px w-full", // Горизонтальный разделитель
-		vertical: "h-full w-px", // Вертикальный разделитель
-		dot: "w-space-1 h-space-1 rounded-full", // Кружок для dot
-	} as const, // Указываем, что типы здесь конкретные строки
+		horizontal: "h-px w-full", // Horizontal separator
+		vertical: "h-full w-px", // Vertical separator
+		dot: "w-space-1 h-space-1 rounded-full", // Circle for dot
+	} as const, // Specify that types here are concrete strings
 };
 
 const typeClass = separatorClasses.types[type];

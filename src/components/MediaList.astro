@@ -1,4 +1,6 @@
 ---
+import MetadataLine from './MetadataLine.astro';
+
 interface MediaItem {
   title: string;
   outlet: string;
@@ -32,9 +34,15 @@ const formatDate = (dateString: string) => {
           {item.title}
         </a>
       </h4>
-      <div class="media-source">
-        {item.outlet} • {item.type.toUpperCase()} • {formatDate(item.date)}
-      </div>
+      <MetadataLine 
+        items={[
+          { text: item.outlet, href: item.link },
+          { text: item.type.toUpperCase() },
+          { text: formatDate(item.date) }
+        ]}
+        variant="light"
+        class="mb-0"
+      />
     </div>
   ))}
 </div>
@@ -60,19 +68,7 @@ const formatDate = (dateString: string) => {
     line-height: 1.4;
   }
 
-  .media-source {
-    font-family: var(--font-sans);
-    font-size: var(--step--1); /* 12.8-14.4px */
-    color: var(--theme-color-600);
-    font-variant: small-caps;
-    letter-spacing: 0.05em;
-    font-weight: 500;
-  }
-
-  /* Dark mode adjustments */
-  :global([data-theme="dark"]) .media-source {
-    color: var(--theme-color-400);
-  }
+  /* Media source styling now handled by MetadataLine component */
 
   /* External link indicator styling already handled by global.css */
 </style> 

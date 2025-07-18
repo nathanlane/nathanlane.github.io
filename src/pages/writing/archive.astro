@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import ArchiveEntry from "@/components/ArchiveEntry.astro";
+
+const meta = {
+  title: "Writing Archive",
+  description: "Complete archive of essays, articles, and long-form writing"
+};
+
+// Get all writing posts
+const allWriting = await getCollection("writing");
+
+// Sort by date (newest first)
+const sortedWriting = allWriting.sort((a, b) => 
+  new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+// Group by year
+const writingByYear: Record<number, typeof allWriting> = {};
+sortedWriting.forEach(post => {
+  const year = new Date(post.data.publishDate).getFullYear();
+  if (!writingByYear[year]) {
+    writingByYear[year] = [];
+  }
+  writingByYear[year].push(post);
+});
+
+// Get years in descending order
+const years = Object.keys(writingByYear).sort((a, b) => Number(b) - Number(a));
+
+// Helper function to format date
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    year: 'numeric'
+  });
+};
+
+// Helper function to determine essay type
+const getEssayType = (post: any) => {
+  // You can customize this logic based on your content structure
+  if (post.data.tags?.includes('research')) return 'Research Essay';
+  if (post.data.tags?.includes('tutorial')) return 'Tutorial';
+  if (post.data.tags?.includes('review')) return 'Review';
+  if (post.data.tags?.includes('analysis')) return 'Analysis';
+  return 'Essay';
+};
+
+// Helper function to get tertiary meta (genre, status, etc.)
+const getTertiaryMeta = (post: any) => {
+  if (post.data.featured) return 'Featured';
+  if (post.data.tags && post.data.tags.length > 0) {
+    // Return the most relevant tag
+    const relevantTags = ['design-systems', 'typography', 'technology', 'philosophy'];
+    const foundTag = post.data.tags.find((tag: string) => relevantTags.includes(tag));
+    if (foundTag) {
+      return foundTag.split('-').map((word: string) => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ');
+    }
+  }
+  return undefined;
+};
+---
+
+<PageLayout meta={meta}>
+  <div class="measure-base mx-auto px-4b py-8b">
+    <!-- Reusable Page Header with proper typography and spacing -->
+    <PageHeader 
+      title="Writing Archive"
+      description="Complete archive of essays, articles, and long-form writing exploring design systems, typography, technology, and digital culture."
+      additionalInfo="Subscribe to RSS • Share feedback • Request topics"
+    />
+
+    <!-- Writing entries organized by year with proper baseline grid spacing -->
+    <div class="space-y-12b">
+      {years.map(year => (
+        <section>
+          <!-- Year heading using semantic typography and baseline grid -->
+          <h2 class="heading-3 text-light mb-6b">{year}</h2>
+          
+                     <!-- Writing items with proper grid spacing -->
+           <div class="space-y-6b">
+             {writingByYear[Number(year)]?.map(post => (
+               <ArchiveEntry 
+                 title={post.data.title}
+                 primaryMeta={getEssayType(post)}
+                 secondaryMeta={formatDate(new Date(post.data.publishDate))}
+                 tertiaryMeta={getTertiaryMeta(post)}
+                 link={`/writing/${post.id}/`}
+                 description={post.data.description}
+               />
+             ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+</PageLayout> 
