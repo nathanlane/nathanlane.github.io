@@ -28,7 +28,7 @@ export async function validateSlugUniqueness() {
   for (const collectionName of collections) {
     const entries = await getCollection(collectionName);
 
-    entries.forEach((entry: any) => {
+    entries.forEach((entry) => {
       const slug = entry.data.slug || entry.id;
       const key = `${collectionName}/${slug}`;
 
