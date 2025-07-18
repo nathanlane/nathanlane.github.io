@@ -39,7 +39,7 @@ const metadataItems = [
 
 <article class="research-entry">
   <h3 class="research-title">
-    <a href={href} class="research-link">{title}</a>
+    <a href={href} class="research-link link-title">{title}</a>
   </h3>
   
   <div class="research-metadata-custom mb-2b">
@@ -66,12 +66,12 @@ const metadataItems = [
   {(link || download) && (
     <div class="research-actions">
       {link && (
-        <a href={link} class="research-action-link" target="_blank" rel="noopener">
+        <a href={link} class="research-action-link link-nav" target="_blank" rel="noopener">
           <span class="action-label">Publication Link</span> ↗
         </a>
       )}
       {download && (
-        <a href={download} class="research-action-link" target="_blank" rel="noopener">
+        <a href={download} class="research-action-link link-nav" target="_blank" rel="noopener">
           <span class="action-label">PDF Download</span> ↗
         </a>
       )}
@@ -108,7 +108,6 @@ const metadataItems = [
   
   /* Using consolidated link system */
   .research-link {
-    @apply link-title;
     color: var(--theme-text); /* Override to start with text color */
   }
   
@@ -146,7 +145,6 @@ const metadataItems = [
   
   /* Using consolidated link system */
   .research-action-link {
-    @apply link-nav;
     font-size: var(--step--3); /* 8.6-9.7px - reduced for more subtle appearance */
     
     /* Butterick: Clear but not dominant links */

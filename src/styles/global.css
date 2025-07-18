@@ -1,5 +1,9 @@
 /* Fluid type scale provided via tailwindcss-fluid-type plugin */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Import font definitions */
 @import "./fonts.css";
 
@@ -14,10 +18,6 @@
 
 /* Import component classes */
 @import "./components.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 /* Enhanced Optical Sizing Context Variants */
 @layer components {

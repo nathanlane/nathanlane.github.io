@@ -13,17 +13,6 @@
   --link-underline-hover: var(--theme-accent-base);
 }
 
-/* ===== BASE LINK BEHAVIOR ===== */
-/* All links inherit these core behaviors */
-.link-base {
-  /* Prevent jarring size changes */
-  font-size: inherit !important;
-  /* Disable transforms */
-  transform: none;
-  /* Consistent transitions */
-  transition: var(--link-transition);
-}
-
 /* Global rule to ensure all links get base behavior */
 a {
   font-size: inherit !important;
@@ -34,6 +23,20 @@ a {
 /* Override any conflicting utility classes */
 a[class*="hover:text-"]:hover {
   font-size: inherit !important;
+}
+
+/* ===== TAILWIND LAYER FOR CUSTOM CLASSES ===== */
+@layer components {
+  
+/* ===== BASE LINK BEHAVIOR ===== */
+/* All links inherit these core behaviors */
+.link-base {
+  /* Prevent jarring size changes */
+  font-size: inherit !important;
+  /* Disable transforms */
+  transform: none;
+  /* Consistent transitions */
+  transition: var(--link-transition);
 }
 
 /* ===== SHARED HOVER PATTERNS ===== */
@@ -240,3 +243,5 @@ a[class*="hover:text-"]:hover {
 .subtle-link.text-xs:hover {
   font-size: inherit !important;
 }
+
+} /* End @layer components */
