@@ -1,16 +1,61 @@
 /**
- * Unified Link System - Consolidated & Simplified
- * Phase 1 Refactoring: Reduced from 7 to 4 primary types with shared base classes
+ * Unified Link System - Consolidated & Optimized
+ * 
+ * Phase 1 (January 30, 2025): Reduced from 7 to 4 primary types with shared base classes
+ * Phase 1A (July 18, 2025): Safe cleanup - fonts.css removal, motion consolidation, print deduplication
+ * Phase 2A (July 18, 2025): Architecture improvements - semantic variables, data attributes, canonical classes
+ * 
+ * Current Architecture:
+ * - 4 canonical link types: link-inline, link-nav, link-title, link-footer
+ * - 20+ semantic CSS variables for consistent theming
+ * - Data-attribute variant system: data-variant="subtle|back|action"
+ * - Utility classes with u- prefix: u-underline-thin, u-with-icon
+ * - Complete backward compatibility with @apply aliases
  */
 
-/* ===== CORE VARIABLES ===== */
+/* ===== SEMANTIC LINK TOKENS ===== */
 :root {
+  /* Transition timing */
   --link-transition:
     color 200ms ease, text-decoration-color 200ms ease,
     font-variation-settings 200ms ease, border-color 200ms ease,
     opacity 200ms ease;
-  --link-underline-default: hsl(0deg 0% 60%);
-  --link-underline-hover: var(--theme-accent-base);
+  --link-transition-duration: 200ms;
+  
+  /* Link colors */
+  --link-color-default: inherit;
+  --link-color-nav: var(--theme-color-600);
+  --link-color-nav-subtle: var(--theme-color-500);
+  --link-color-hover: var(--theme-accent-base);
+  --link-color-active: var(--theme-text);
+  
+  /* Underline properties */
+  --link-underline-color-default: hsl(0deg 0% 60%);
+  --link-underline-color-hover: var(--theme-accent-base);
+  --link-underline-thickness-default: 1px;
+  --link-underline-thickness-hover: 1.5px;
+  --link-underline-thickness-thin: 1px;
+  --link-underline-thickness-thin-hover: 2px;
+  --link-underline-offset-default: 0.1em;
+  --link-underline-offset-inline: 0.15em;
+  --link-underline-offset-thin: 0.2em;
+  
+  /* Font weights */
+  --link-weight-default: 400;
+  --link-weight-nav: 450;
+  --link-weight-title: 500;
+  --link-weight-hover: 450;
+  --link-weight-nav-hover: 500;
+  --link-weight-title-hover: 550;
+  
+  /* Letter spacing */
+  --link-letter-spacing-default: inherit;
+  --link-letter-spacing-nav: 0.02em;
+  
+  /* Other properties */
+  --link-decoration-thickness-default: 0.05em;
+  --link-opacity-subtle: 0.8;
+  --link-gap-icon: 0.3em;
 }
 
 /* ===== SINGLE SOURCE OF TRUTH - Base Link Reset ===== */
@@ -24,8 +69,8 @@ a {
   /* From global.css (moved here) */
   position: relative;
   min-height: 24px;
-  text-underline-offset: 0.1em;
-  text-decoration-thickness: 0.05em;
+  text-underline-offset: var(--link-underline-offset-default);
+  text-decoration-thickness: var(--link-decoration-thickness-default);
   text-decoration-skip-ink: auto;
 }
 
@@ -87,161 +132,127 @@ a[class*="hover:text-"]:hover {
 /* ===== PRIMARY LINK TYPES (Consolidated from 7 to 4) ===== */
 
 /* 1. INLINE LINKS - For prose and body text */
-.link-inline,
-.inline-link {
-  /* Keep old class for compatibility */
-  color: inherit;
+.link-inline {
+  color: var(--link-color-default);
   text-decoration: underline;
-  text-decoration-color: var(--link-underline-default);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.15em;
-  font-variation-settings: "wght" 400;
+  text-decoration-color: var(--link-underline-color-default);
+  text-decoration-thickness: var(--link-underline-thickness-default);
+  text-underline-offset: var(--link-underline-offset-inline);
+  font-variation-settings: "wght" var(--link-weight-default);
 }
 
-.link-inline:hover,
-.inline-link:hover {
-  color: var(--theme-accent-base);
-  text-decoration-color: var(--link-underline-hover);
-  text-decoration-thickness: 1.5px;
-  font-variation-settings: "wght" 450;
+.link-inline:hover {
+  color: var(--link-color-hover);
+  text-decoration-color: var(--link-underline-color-hover);
+  text-decoration-thickness: var(--link-underline-thickness-hover);
+  font-variation-settings: "wght" var(--link-weight-hover);
 }
 
 /* 2. NAV LINKS - For navigation, actions, and UI elements */
-/* Consolidates: nav-link, action-link, subtle-link, back-link */
-.link-nav,
-.nav-link,
-.action-link,
-.subtle-link,
-.back-link {
-  color: var(--theme-color-600);
+.link-nav {
+  color: var(--link-color-nav);
   text-decoration: none;
-  font-variation-settings: "wght" 450;
-  letter-spacing: 0.02em;
+  font-variation-settings: "wght" var(--link-weight-nav);
+  letter-spacing: var(--link-letter-spacing-nav);
 }
 
-.link-nav:hover,
-.nav-link:hover,
-.action-link:hover,
-.back-link:hover {
-  color: var(--theme-accent-base);
-  font-variation-settings: "wght" 500;
+.link-nav:hover {
+  color: var(--link-color-hover);
+  font-variation-settings: "wght" var(--link-weight-nav-hover);
 }
 
-/* Subtle link variant */
-.subtle-link {
-  color: var(--theme-color-500);
-  font-variation-settings: "wght" 400;
-  opacity: 0.8;
+/* Navigation variants using data attributes */
+.link-nav[data-variant="subtle"] {
+  color: var(--link-color-nav-subtle);
+  font-variation-settings: "wght" var(--link-weight-default);
+  opacity: var(--link-opacity-subtle);
 }
 
-.subtle-link:hover {
-  color: var(--theme-text);
-  font-variation-settings: "wght" 450;
+.link-nav[data-variant="subtle"]:hover {
+  color: var(--link-color-active);
+  font-variation-settings: "wght" var(--link-weight-hover);
   opacity: 1;
 }
 
-/* Back link variant */
-.back-link:hover {
-  color: var(--theme-text);
+.link-nav[data-variant="back"]:hover {
+  color: var(--link-color-active);
+}
+
+.link-nav[data-variant="action"] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--link-gap-icon);
 }
 
 /* Active state */
-.link-nav[aria-current="page"],
-.nav-link[aria-current="page"] {
-  color: var(--theme-accent-base);
-  font-variation-settings: "wght" 550;
+.link-nav[aria-current="page"] {
+  color: var(--link-color-hover);
+  font-variation-settings: "wght" var(--link-weight-title-hover);
 }
 
 /* 3. TITLE LINKS - For headings, titles, and featured content */
-.link-title,
-.feature-link {
-  color: inherit;
+.link-title {
+  color: var(--link-color-default);
   text-decoration: none;
-  font-variation-settings: "wght" 500;
+  font-variation-settings: "wght" var(--link-weight-title);
 }
 
-.link-title:hover,
-.feature-link:hover {
-  color: var(--theme-accent-base);
-  font-variation-settings: "wght" 550;
+.link-title:hover {
+  color: var(--link-color-hover);
+  font-variation-settings: "wght" var(--link-weight-title-hover);
 }
 
 /* 4. FOOTER LINKS - Unique border-bottom behavior */
-.link-footer,
-.footer-link {
-  color: var(--theme-color-600);
+.link-footer {
+  color: var(--link-color-nav);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  font-variation-settings: "wght" 400;
+  border-bottom: var(--link-underline-thickness-default) solid transparent;
+  font-variation-settings: "wght" var(--link-weight-default);
   transition:
     var(--link-transition),
-    border-bottom-color 200ms ease;
+    border-bottom-color var(--link-transition-duration) ease;
 }
 
-.link-footer:hover,
-.footer-link:hover {
-  color: var(--theme-text);
+.link-footer:hover {
+  color: var(--link-color-active);
   border-bottom-color: currentColor;
-  font-variation-settings: "wght" 450;
+  font-variation-settings: "wght" var(--link-weight-hover);
 }
 
 /* ===== UTILITY MODIFIERS ===== */
 
 /* Underline variations */
-.link-underline-thin {
+.u-underline-thin {
   text-decoration: underline;
-  text-decoration-color: var(--theme-accent-base);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
+  text-decoration-color: var(--link-color-hover);
+  text-decoration-thickness: var(--link-underline-thickness-thin);
+  text-underline-offset: var(--link-underline-offset-thin);
 }
 
-.link-underline-thin:hover {
-  text-decoration-thickness: 2px;
+.u-underline-thin:hover {
+  text-decoration-thickness: var(--link-underline-thickness-thin-hover);
 }
 
 /* External link modifier */
-.link-external {
+.u-with-icon {
   display: inline-flex;
   align-items: center;
-  gap: 0.3em;
+  gap: var(--link-gap-icon);
 }
 
 /* Font size modifiers for specific nav contexts */
-.nav-link {
+.link-nav[data-size="small"] {
   font-size: var(--step--1);
-}
-
-.action-link {
-  font-size: inherit;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
 }
 
 /* ===== DARK MODE ===== */
 :root[data-theme="dark"] {
-  --link-underline-default: hsl(0deg 0% 40%);
+  --link-underline-color-default: hsl(0deg 0% 40%);
+  --link-color-nav: var(--theme-color-400);
+  --link-color-nav-subtle: var(--theme-color-400);
 }
 
-:root[data-theme="dark"] .link-nav,
-:root[data-theme="dark"] .nav-link,
-:root[data-theme="dark"] .action-link,
-:root[data-theme="dark"] .subtle-link,
-:root[data-theme="dark"] .back-link,
-:root[data-theme="dark"] .link-footer,
-:root[data-theme="dark"] .footer-link {
-  color: var(--theme-color-400);
-}
-
-:root[data-theme="dark"] .link-nav:hover,
-:root[data-theme="dark"] .nav-link:hover,
-:root[data-theme="dark"] .action-link:hover,
-:root[data-theme="dark"] .subtle-link:hover,
-:root[data-theme="dark"] .back-link:hover,
-:root[data-theme="dark"] .link-footer:hover,
-:root[data-theme="dark"] .footer-link:hover {
-  color: var(--theme-accent-light);
-}
+/* Dark mode uses CSS variables above, no specific overrides needed */
 
 /* ===== PRINT STYLES - Centralized from all components ===== */
 @media print {
@@ -267,33 +278,83 @@ a[class*="hover:text-"]:hover {
 
 /* ===== HIGH CONTRAST MODE ===== */
 @media (prefers-contrast: high) {
-  .link-inline,
-  .inline-link {
+  .link-inline {
     text-decoration-color: currentColor;
     text-decoration-thickness: 2px;
   }
 
   .link-nav,
-  .nav-link,
   .link-title,
-  .feature-link,
-  .action-link,
-  .subtle-link,
-  .back-link,
-  .link-footer,
-  .footer-link {
+  .link-footer {
     font-weight: 600;
   }
 }
 
 /* ===== PREVENT UTILITY CLASS CONFLICTS ===== */
-/* Legacy support - maintain these for compatibility */
-.action-link.text--2:hover,
-.action-link.text--1:hover,
-.action-link.text-0:hover,
-.nav-link.text-sm:hover,
-.subtle-link.text-xs:hover {
+/* Legacy support - maintain font size stability */
+.link-nav.text--2:hover,
+.link-nav.text--1:hover,
+.link-nav.text-0:hover,
+.link-nav.text-sm:hover,
+.link-nav.text-xs:hover {
   font-size: inherit !important;
+}
+
+/* ===== BACKWARD COMPATIBILITY ALIASES ===== */
+/* These can be removed in a future cleanup phase */
+.inline-link {
+  @apply link-inline;
+}
+
+.nav-link {
+  @apply link-nav;
+}
+
+.action-link {
+  @apply link-nav;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.subtle-link {
+  @apply link-nav;
+  color: var(--theme-color-500);
+  font-variation-settings: "wght" 400;
+  opacity: 0.8;
+}
+
+.subtle-link:hover {
+  color: var(--theme-text);
+  font-variation-settings: "wght" 450;
+  opacity: 1;
+}
+
+.back-link {
+  @apply link-nav;
+}
+
+.back-link:hover {
+  color: var(--theme-text);
+}
+
+.feature-link {
+  @apply link-title;
+}
+
+.footer-link {
+  @apply link-footer;
+}
+
+/* Research action links now use existing .section-link class */
+
+/* Utility class backwards compatibility */
+.link-underline-thin {
+  @apply u-underline-thin;
+}
+
+.link-external {
+  @apply u-with-icon;
 }
 
 } /* End @layer components */

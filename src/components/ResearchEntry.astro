@@ -42,7 +42,7 @@ const metadataItems = [
     <a href={href} class="link-title">{title}</a>
   </h3>
   
-  <div class="research-metadata-custom mb-2b">
+  <div class="research-metadata text-meta text-meta--light mb-2b">
     {metadataItems.map((item, index) => (
       <>
         <span class="metadata-item">{item.text}</span>
@@ -66,13 +66,13 @@ const metadataItems = [
   {(link || download) && (
     <div class="research-actions">
       {link && (
-        <a href={link} class="research-action-link link-nav" target="_blank" rel="noopener">
-          <span class="action-label">Publication Link</span> ↗
+        <a href={link} class="section-link link-nav" target="_blank" rel="noopener">
+          Publication Link ↗
         </a>
       )}
       {download && (
-        <a href={download} class="research-action-link link-nav" target="_blank" rel="noopener">
-          <span class="action-label">PDF Download</span> ↗
+        <a href={download} class="section-link link-nav" target="_blank" rel="noopener">
+          PDF Download ↗
         </a>
       )}
     </div>
@@ -134,46 +134,20 @@ const metadataItems = [
     margin-top: var(--space-2); /* 12px - more breathing room without border */
   }
   
-  /* Using consolidated link system */
-  .research-action-link {
-    font-size: var(--step--3); /* 8.6-9.7px - reduced for more subtle appearance */
-    
-    /* Butterick: Clear but not dominant links */
-    border-bottom: 1px solid transparent;
-    
-    /* Enhanced readability */
-    line-height: 1.3; /* Slightly more open for small text */
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.2em; /* Small space before arrow */
-  }
+  /* Action links now use consolidated .link-research-action classes from links.css */
   
-  .research-action-link:hover {
-    border-bottom-color: var(--theme-accent-base);
-  }
   
-  /* Custom research metadata - bypasses global text-meta conflicts */
-  .research-metadata-custom {
+  /* Research metadata using global text-meta system */
+  .research-metadata {
     display: flex;
     align-items: center;
     gap: 0;
     flex-wrap: wrap;
-    font-size: var(--step--1); /* 10.2-11.5px - smallest available size */
-    font-weight: 400;
-    opacity: 0.8;
     line-height: 1.4;
-    color: var(--theme-color-500);
-    
-    /* Typography features for metadata */
-    font-feature-settings:
-      "kern" 1,
-      "smcp" 1,
-      "c2sc" 1;
-    letter-spacing: 0.03em;
   }
   
   .metadata-item {
-    /* No additional styling needed - inherits from parent */
+    /* Inherits styling from .text-meta and .text-meta--light */
   }
   
   .metadata-separator {

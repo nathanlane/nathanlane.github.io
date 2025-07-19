@@ -12,15 +12,17 @@ const { sections, class: className = "" } = Astro.props;
 ---
 
 <nav class={`table-of-contents ${className}`} role="navigation" aria-label="Research sections">
+	<header class="toc-header">
+		<h2 class="toc-heading text-small-caps">Table of Contents</h2>
+	</header>
+	
 	<ul class="toc-list" role="list">
-		{sections.map((section: { title: string; href: string; count?: number }) => (
+		{sections.map((section: { title: string; href: string; count?: number }, index: number) => (
 			<li class="toc-entry">
 				<a href={section.href} class="toc-link link-nav">
 					<span class="toc-title">{section.title}</span>
 					<span class="toc-dots" aria-hidden="true"></span>
-					{section.count !== undefined && (
-						<span class="toc-count">({section.count})</span>
-					)}
+					<span class="toc-number">[{index + 1}]</span>
 				</a>
 			</li>
 		))}
@@ -28,18 +30,28 @@ const { sections, class: className = "" } = Astro.props;
 </nav>
 
 <style>
-	/* Container styling */
+	/* Container styling - minimal, document-centric */
 	.table-of-contents {
-		/* Background and border for definition */
-		background: var(--theme-color-50);
-		border: 1px solid var(--theme-color-150);
-		border-radius: 4px;
-		
-		/* Padding for comfortable reading */
-		padding: var(--space-6) var(--space-5); /* 36px 30px */
-		
-		/* Typography foundation */
-		font-family: var(--font-serif);
+		/* No background or border - let typography breathe */
+		margin-bottom: var(--space-12); /* 72px - 3 baseline units */
+	}
+
+	/* Header section */
+	.toc-header {
+		margin-bottom: var(--space-3); /* 36px - 1.5 baseline units */
+		padding-bottom: var(--space-1); /* 12px - 0.5 baseline units */
+	}
+
+	/* Small caps title styling matching home page sections */
+	.toc-heading {
+		font-family: var(--font-sans);
+		font-size: var(--step-1); /* 12.8-14.4px - matching section-link */
+		font-weight: 500;
+		color: var(--theme-color-600);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		margin: 0;
+		line-height: var(--baseline); /* 24px - align to baseline */
 	}
 
 	/* Remove default list styling */
@@ -49,14 +61,15 @@ const { sections, class: className = "" } = Astro.props;
 		margin: 0;
 	}
 
-	/* Tight vertical spacing for entries */
+	/* Entry spacing aligned to baseline grid */
 	.toc-entry {
 		margin: 0;
 		padding: 0;
+		line-height: var(--baseline); /* 24px baseline */
 	}
 
 	.toc-entry + .toc-entry {
-		margin-top: var(--space-2); /* 12px - tight spacing */
+		margin-top: var(--space-1); /* 6px - 0.25 baseline units for tight spacing */
 	}
 
 	/* Link container with flex layout for dot leaders */
@@ -67,22 +80,37 @@ const { sections, class: className = "" } = Astro.props;
 		
 		/* Typography */
 		font-size: var(--step-0); /* 15.6-17px */
-		line-height: 1.3; /* Tight leading for clean lines */
+		line-height: var(--baseline); /* 24px - baseline aligned */
 		
 		/* Interactive states */
 		transition: color 200ms ease;
 	}
 
+	/* Sequential numbering */
+	.toc-number {
+		font-family: var(--font-sans);
+		font-size: var(--step-0);
+		font-variant-numeric: lining-nums tabular-nums;
+		color: var(--theme-color-500);
+		margin-left: var(--space-2); /* 12px */
+		flex: 0 0 auto;
+	}
+
 	/* Title styling - serif with academic feel */
 	.toc-title {
 		/* Serif typography for academic aesthetic */
-		font-family: var(--font-serif);
+		font-family: var(--font-sans);
 		font-weight: 400;
+		font-size: var(--step-0);
+		line-height: var(--baseline);
 		color: var(--theme-text);
 		
 		/* Prevent wrapping */
 		flex: 0 0 auto;
 		white-space: nowrap;
+		
+		/* Spacing from dots */
+		margin-right: var(--space-2); /* 12px */
 	}
 
 	/* Dot leaders for visual rhythm */
@@ -90,38 +118,29 @@ const { sections, class: className = "" } = Astro.props;
 		/* Flex fill the space */
 		flex: 1 1 auto;
 		
-		/* Create dot pattern */
-		border-bottom: 1px dotted var(--theme-color-300);
-		margin: 0 var(--space-2); /* 12px spacing from title and count */
+		/* Option 1: Traditional dots (uncomment to use) */
+		/* border-bottom: 1px dotted var(--theme-color-400); */
+		
+		/* Option 2: Solid hairline (current) */
+		border-bottom: 1px solid var(--theme-color-200);
 		
 		/* Align with baseline */
-		height: 0.5em;
-		margin-bottom: 0.25em;
+		height: 0;
+		align-self: center;
+		margin: 0 var(--space-2); /* 12px spacing */
 	}
 
-	/* Count styling - parenthetical notation */
-	.toc-count {
-		/* Typography */
-		font-family: var(--font-sans);
-		font-size: var(--step--1); /* 12.8-14.4px - smaller metadata size */
-		font-variant-numeric: lining-nums;
-		color: var(--theme-color-500);
-		
-		/* Prevent shrinking */
-		flex: 0 0 auto;
-	}
-
-	/* Hover states */
+	/* Hover states - subtle and refined */
 	.toc-link:hover .toc-title {
 		color: var(--theme-accent-base);
 	}
 
-	.toc-link:hover .toc-dots {
-		border-bottom-color: var(--theme-accent-base);
+	.toc-link:hover .toc-number {
+		color: var(--theme-color-600);
 	}
 
-	.toc-link:hover .toc-count {
-		color: var(--theme-color-600);
+	.toc-link:hover .toc-dots {
+		border-bottom-color: var(--theme-accent-base);
 	}
 
 	/* Focus states - using site's consolidated system */
@@ -132,48 +151,50 @@ const { sections, class: className = "" } = Astro.props;
 	}
 
 	/* Dark mode adaptations */
-	:global([data-theme="dark"]) .table-of-contents {
-		background: var(--theme-color-950);
-		border-color: var(--theme-color-800);
+	:global([data-theme="dark"]) .toc-header {
+		border-bottom-color: var(--theme-color-800);
+	}
+
+	:global([data-theme="dark"]) .toc-heading {
+		color: var(--theme-color-300);
+	}
+
+	:global([data-theme="dark"]) .toc-number {
+		color: var(--theme-color-500);
 	}
 
 	:global([data-theme="dark"]) .toc-dots {
-		border-bottom-color: var(--theme-color-600);
-	}
-
-	:global([data-theme="dark"]) .toc-count {
-		color: var(--theme-color-400);
+		border-bottom-color: var(--theme-color-800);
 	}
 
 	:global([data-theme="dark"]) .toc-link:hover .toc-dots {
 		border-bottom-color: var(--theme-accent-light);
 	}
 
-	:global([data-theme="dark"]) .toc-link:hover .toc-count {
-		color: var(--theme-color-300);
+	:global([data-theme="dark"]) .toc-link:hover .toc-number {
+		color: var(--theme-color-400);
 	}
 
 	/* High contrast mode support */
 	@media (prefers-contrast: high) {
-		.table-of-contents {
-			border-width: 2px;
-		}
-		
 		.toc-dots {
 			border-bottom-width: 2px;
-			border-bottom-style: solid;
+			border-bottom-style: dotted;
 		}
 	}
 
 	/* Print optimization */
 	@media print {
 		.table-of-contents {
-			background: transparent;
-			border: 1px solid var(--theme-color-300);
+			break-inside: avoid;
+		}
+		
+		.toc-heading {
+			font-weight: 600;
 		}
 		
 		.toc-dots {
-			border-bottom-color: var(--theme-color-600) !important;
+			border-bottom: 1px dotted #000 !important;
 		}
 		
 		/* Print link styles handled by consolidated system */
@@ -181,12 +202,12 @@ const { sections, class: className = "" } = Astro.props;
 
 	/* Responsive adjustments */
 	@media (max-width: 640px) {
-		.table-of-contents {
-			padding: var(--space-4) var(--space-3); /* 24px 18px */
+		.toc-entry + .toc-entry {
+			margin-top: 0; /* Remove spacing on mobile for compactness */
 		}
 		
-		.toc-entry + .toc-entry {
-			margin-top: var(--space-1.5); /* 9px - slightly tighter on mobile */
+		.toc-link {
+			font-size: var(--step--1); /* Slightly smaller on mobile */
 		}
 	}
 </style> 

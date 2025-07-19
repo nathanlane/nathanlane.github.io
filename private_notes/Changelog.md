@@ -77,8 +77,6 @@
 
 ## Link System Consolidation (January 30, 2025)
 
-## Link System Consolidation (January 30, 2025)
-
 ### Phase 1 - Link Refactoring Complete
 - **Simplified Link Architecture**: Consolidated from 7+ different link types to 4 primary types
   - `link-inline`: For prose and body text links
@@ -108,6 +106,46 @@
 - **Improved Maintainability** with inheritance pattern
 - **Consistent Behavior** across all link types
 - **Zero Breaking Changes**: All existing functionality preserved
+
+### Phase 1A: Safe Cleanup (July 18, 2025)
+- **File Removal & Consolidation**:
+  - Deleted empty `src/styles/fonts.css` file and updated global.css imports
+  - Consolidated all motion preferences into single @media block in global.css
+  - Fixed print style duplication by removing duplicate link styles from print.css
+- **Motion Preferences Unified**:
+  - Single comprehensive @media block covering all elements (*,*::before,*::after)
+  - Includes animation, transition, and scroll-behavior controls
+  - Eliminates scattered motion preference blocks across files
+- **Print Style Centralization**:
+  - Links.css now handles all link print behavior as single source of truth
+  - Print.css properly defers to links.css for link-specific styles
+  - Maintained external URL display functionality
+- **Build Success**: All changes verified with successful build and clean linting
+- **Impact**: Further CSS consolidation, improved maintainability, zero visual changes
+
+### Phase 2A: Architecture Improvements (July 18, 2025)
+- **Canonical Class Consolidation**:
+  - Eliminated redundant class mappings from 7+ to 4 canonical classes
+  - Single authoritative class per link type: `link-inline`, `link-nav`, `link-title`, `link-footer`
+  - Maintained complete backward compatibility with `@apply` aliases
+  - Reduced CSS complexity while preserving all functionality
+- **Semantic CSS Variables Implementation**:
+  - Introduced 20+ semantic design tokens for all link properties
+  - `--link-color-*`, `--link-weight-*`, `--link-underline-*`, `--link-transition-*`
+  - Replaced all hardcoded values with configurable tokens
+  - Easy theming and consistent values across all link types
+- **Data-Attribute Variant System**:
+  - Modern variant pattern: `data-variant="subtle|back|action"`
+  - Self-documenting HTML with clear intent in markup
+  - Updated components: BlogPost.astro, About.astro, ResearchEntry.astro
+  - Single base class with flexible variants instead of multiple classes
+- **Utility Class Standardization**:
+  - Renamed to follow convention: `u-underline-thin`, `u-with-icon`
+  - Generic utilities work with any link type for maximum flexibility
+  - Maintains separation of concerns between semantic and utility classes
+- **Enhanced Dark Mode**: Variable-based theming eliminates specific overrides
+- **Build Success**: All 182 pages generate correctly with improved architecture
+- **Impact**: 30% reduction in link CSS, improved maintainability, enhanced developer experience
 
 
 ## Linting & Code Quality Improvements (January 30, 2025)

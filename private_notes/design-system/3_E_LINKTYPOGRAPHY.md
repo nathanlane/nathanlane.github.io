@@ -1,7 +1,7 @@
 # Link Typography System - Current State
 
 **Date**: July 18, 2025  
-**Status**: ✅ Complete refactoring - Single Source of Truth established
+**Status**: ✅ Complete refactoring + Phase 1A cleanup - Single Source of Truth established
 
 ## Overview
 
@@ -9,16 +9,22 @@ The site now uses a **fully consolidated link system** with 4 primary link types
 
 ## ✅ Refactoring Completed
 
-### What Was Fixed
+### Phase 1: Link System Consolidation
 1. **🎯 Single Source of Truth**: All link styles now originate from `links.css`
 2. **🧹 Component Cleanup**: Removed all custom link overrides from components  
 3. **📁 File Reduction**: Deleted redundant `motion.css` and `homepage-links.css`
 4. **🖨️ Print Centralization**: All print styles consolidated in `links.css`
 5. **🎨 Zero Visual Changes**: Maintained exact same appearance throughout
 
+### Phase 1A: Safe Cleanup (July 18, 2025)
+6. **🗑️ Font File Removal**: Deleted empty `fonts.css` file
+7. **🎮 Motion Consolidation**: All motion preferences moved to single block in `global.css`
+8. **📄 Print Deduplication**: Removed duplicate link styles from `print.css`
+
 ### Files Removed
-- ❌ `src/styles/motion.css` - Motion preferences moved to `links.css`
+- ❌ `src/styles/motion.css` - Motion preferences moved to `global.css`
 - ❌ `src/styles/homepage-links.css` - Redundant mappings removed
+- ❌ `src/styles/fonts.css` - Empty file removed (Phase 1A cleanup)
 
 ### Components Updated
 - ✅ **ResearchEntry.astro**: Removed `.research-link`, uses `.link-title`
@@ -197,10 +203,16 @@ a:focus-visible {
 ```
 
 ### Motion Preferences
+Motion preferences are now consolidated in `global.css`:
 ```css
 @media (prefers-reduced-motion: reduce) {
-  a {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 ```
@@ -328,8 +340,9 @@ All links share consistent transition timing:
 - ✅ **`src/styles/print.css`** - No link styles (moved to links.css)
 
 ### Removed Files
-- ❌ **`src/styles/motion.css`** - Functionality moved to links.css
+- ❌ **`src/styles/motion.css`** - Functionality moved to global.css
 - ❌ **`src/styles/homepage-links.css`** - Redundant mappings removed
+- ❌ **`src/styles/fonts.css`** - Empty file removed (Phase 1A cleanup)
 
 ### Component Files
 All components now use consolidated classes only:
