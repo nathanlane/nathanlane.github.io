@@ -72,9 +72,9 @@ Unordered
 
 Ordered
 
-1. Lorem ipsum dolor sit amet
-2. Consectetur adipiscing elit
-3. Integer molestie lorem at massa
+1. First, gather your materials
+2. Next, prepare your workspace
+3. Finally, begin the creative process
 
 4. You can use sequential numbers...
 5. ...or keep all the numbers as `1.`
@@ -98,7 +98,9 @@ Indented code
 Block code "fences"
 
 ```
-Sample text here...
+function greet(name) {
+  return `Hello, ${name}!`;
+}
 ```
 
 Syntax highlighting

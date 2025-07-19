@@ -66,7 +66,7 @@ const post = defineCollection({
       })),
 });
 
-const note = defineCollection({
+const _note = defineCollection({
   loader: glob({ base: "./src/content/note", pattern: "**/*.{md,mdx}" }),
   schema: baseSchema
     .merge(slugSchema)
@@ -172,7 +172,7 @@ const research = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ base: "./src/content/projects", pattern: "**/*.{md,mdx}" }),
-  schema: ({ image }) =>
+  schema: ({ image: _image }) =>
     baseSchema
       .merge(seoSchema)
       .merge(slugSchema)

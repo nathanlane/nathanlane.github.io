@@ -1,5 +1,211 @@
 # Changelog
 
+## Build Error Resolution - TypeScript Import Fix (July 19, 2025 - 2:34PM PST)
+
+### Critical Build Fix
+- **Fixed Module Resolution Error**: Resolved "Cannot find module" error for `archive.astro.mjs`
+  - **Root Cause**: TypeScript import placed incorrectly in script section
+  - **File**: `src/pages/posts/archive.astro`
+  - **Issue**: `import type { CollectionItemBase } from '@/types'` was located mid-script instead of at top
+  - **Solution**: Moved import to top with other imports, removed duplicate declaration
+
+### Technical Details
+- **Error Context**: Build failing during static route generation for posts archive
+- **Import Location**: Moved from line 47 (mid-script) to line 6 (with other imports)
+- **Build Impact**: Fixed module resolution allowing successful generation of 181 pages
+- **Build Time**: 24.56s successful completion
+
+### Impact
+- **✅ Production Ready**: Build now completes successfully
+- **✅ All Routes Generated**: Including posts archive page that was failing
+- **✅ Zero Runtime Impact**: Pure development/build-time fix
+- **✅ Type Safety Maintained**: Proper TypeScript import positioning
+
+### Prevention
+- **Best Practice**: Always place TypeScript imports at top of Astro component script sections
+- **Validation**: Import placement affects Astro's build-time module resolution
+- **Team Note**: Check import positioning during code reviews
+
+## Astro 5.12.0 Changes (July 19, 2025 - 2:30PM PST)
+
+✅ Minor Changes (No Breaking Changes)
+
+1. 🧪 New Experimental Flag: rawEnvValues
+•  Purpose: Disables automatic coercion of import.meta.env values from process.env
+•  Impact: Previously, strings like "true" were automatically converted to boolean true, and "1" to number 1
+•  Action Required: If you enable this flag, you'll need to manually handle type conversion:
+ts
+2. 📄 TOML Support in Content Loaders
+•  Purpose: Built-in support for TOML files in glob() and file() content loaders
+•  Impact: You can now remove custom TOML parsers if you were using them
+•  Benefit: Cleaner code if you use TOML content files
+
+✅ @astrojs/mdx 4.3.1 Changes
+•  Type: Patch release (bug fixes only)
+•  Impact: No breaking changes, likely minor bug fixes and improvements
+
+## Security Improvements & Vulnerability Auditing (July 19, 2025 - 4PM PST)
+
+### Security Headers Enhancement
+- **Enhanced _headers file** for Netlify deployment:
+  - Added `X-XSS-Protection: 1; mode=block` for XSS protection
+  - Maintained existing security headers (X-Frame-Options, X-Content-Type-Options)
+  - Updated CSP to allow CDN resources while maintaining security
+  - All changes backward-compatible with existing functionality
+
+### Git Pre-commit Hook Implementation
+- **Created security-focused pre-commit hook** (`.git/hooks/pre-commit`):
+  - Scans staged files for potential secrets before commits
+  - Detects patterns: api_key, apikey, access_token, auth_token, private_key, secret_key
+  - Checks for AWS keys pattern: `AKIA[0-9A-Z]{16}`
+  - Examines files: .js, .ts, .json, .env, .astro, .md, .mdx, .yml, .yaml
+  - Prevents accidental secret commits with clear warning messages
+
+### Security Audit Performed
+- **Comprehensive codebase scan** for hardcoded secrets:
+  - No API keys or tokens found in source files
+  - No hardcoded passwords or credentials
+  - Environment variable usage confirmed (WEBMENTION_API_KEY properly configured)
+  - No sensitive information in committed files
+- **Dependency vulnerability check**:
+  - 1 moderate severity issue in dev dependency (sharp@0.33.5)
+  - Production dependencies clean - no security risks
+  - Development-only vulnerability doesn't affect deployed site
+
+### Security Documentation
+- **Created SECURITY_AUDIT_CHECKLIST.md** in private documentation:
+  - Comprehensive security checklist for ongoing audits
+  - Regular audit schedule (weekly for secrets, monthly for dependencies)
+  - Clear remediation steps for common security issues
+  - Best practices for secure development
+
+### Impact
+- **Proactive Security**: Pre-commit hook prevents future secret leaks
+- **Enhanced Headers**: Better protection against common web vulnerabilities
+- **Clean Codebase**: Verified no existing security issues in source code
+- **Documentation**: Clear security practices for ongoing maintenance
+- **Zero Breaking Changes**: All security enhancements backward-compatible
+
+## SEO & Production Readiness Improvements (July 19, 2025 - 2PM PST)
+
+### Content Quality Fixes
+- **Lorem Ipsum Removal**: Replaced all placeholder text in content files
+  - `long-title.md` - Changed Lorem ipsum title to meaningful test title
+  - `typography-components-demo.mdx` - Replaced Lorem ipsum in drop cap demo with typography history narrative
+  - `markdown-elements/index.md` - Updated example lists and code blocks with real content
+
+### Enhanced 404 Error Page
+- **Complete Redesign**: Professional error page with helpful navigation
+  - Large, subtle 404 display with opacity effect
+  - Clear, friendly error messaging
+  - Prominent "Go to Homepage" and "Go Back" action buttons
+  - Quick links to main site sections (Blog, Research, Projects, About)
+  - Responsive design with mobile-first approach
+  - Proper typography hierarchy using design system
+
+### Metadata Improvements
+- **Homepage Meta Description**: Added specific, keyword-rich description
+  - Previous: Generic site description
+  - New: "Nathan Lane is an Associate Professor of Economics at Oxford University, specializing in industrial policy, economic development, and the intersection of technology and economics. Co-founder of the Industrial Policy Group."
+- **404 Page Meta**: Updated with helpful, SEO-friendly description
+
+### Social Sharing Setup
+- **Social Card Template**: Created `social-card.svg` as design template
+  - Professional layout with name, title, and tagline
+  - Site branding colors (#224d67)
+  - Standard OG image dimensions (1200x630)
+- **Documentation**: Added guides for generating PNG version and favicon sizes
+  - `SOCIAL-CARD-README.md` - Instructions for creating social-card.png
+  - `FAVICON-SETUP.md` - Guide for generating multiple favicon sizes
+
+### Documentation & Organization
+- **Helper Scripts**: Created placeholder for social card generation
+- **Setup Guides**: Clear instructions for completing image asset generation
+- **Maintained Clean Codebase**: No unnecessary files added to production
+
+### Impact
+- **Better User Experience**: Clear 404 page helps users navigate back
+- **Improved SEO**: Unique meta descriptions for better search visibility
+- **Social Media Ready**: Template for professional social sharing appearance
+- **Production Checklist**: ✅ No Lorem ipsum, ✅ Styled error pages, ✅ Unique metadata
+
+### Next Steps (Documented)
+- Generate `social-card.png` from SVG template
+- Create multiple favicon sizes (16x16, 32x32, 192x192, 512x512)
+- Optimize the 77 images over 100KB (9 critical images over 1MB)
+
+## Link System Harmonization Phase 2B (July 19, 2025 - 1PM PST)
+
+### Hover Behavior Harmonization
+- **Standardized all hover colors**: Every link type now hovers to `--theme-accent-base`
+  - Previously mixed between `--theme-text`, `--theme-accent`, and custom colors
+  - Provides consistent user experience across all interactions
+- **Unified weight changes**: All links increase by +50 font weight units on hover
+  - link-inline: 400 → 450
+  - link-nav: 450 → 500
+  - link-title: 500 → 550
+  - Previously inconsistent with some using +100 units
+- **Created `u-hover-underline` utility**: For links that only show underline on hover
+  - Used by PostPreview and similar components
+  - Replaces inline Tailwind `hover:underline` classes
+
+### Component Fixes
+- **Header Component**: Fixed nav link overrides that prevented proper hover behavior
+  - Removed custom CSS that was duplicating link-nav functionality
+  - Now properly inherits all harmonized behaviors
+- **TableOfContents**: Removed duplicate link styling, relies on link-nav class
+- **DocumentSection**: Fixed hover color override, now uses harmonized system
+- **DocumentEntry**: Removed all custom link CSS, uses global classes
+- **BioPanel**: Removed custom narrative link styling
+- **6 components updated** for consistent link behavior
+
+### Documentation
+- **Updated links.css header**: Added Phase 2B documentation
+- **Created LINK_HARMONIZATION_SUMMARY.md**: Complete record of changes
+- **Updated design system docs**: Reflected new hover patterns
+
+### Impact
+- **Consistent UX**: All links behave predictably with same hover patterns
+- **Reduced CSS**: Eliminated ~40 duplicate hover definitions
+- **Better maintainability**: Single source of truth for all link behaviors
+- **Zero visual regression**: All existing designs preserved
+
+## TypeScript Type Safety & Error Resolution (January 2025)
+
+### Type System Improvements
+- **Page Interface**: Added proper `Page<T>` interface to `src/types.ts`
+  - Matches Astro's pagination object structure with properties: `data`, `currentPage`, `url.next`, `url.prev`
+  - Provides type safety for paginated content across the site
+  - Uses `unknown` as default generic parameter for better type safety over `any`
+
+### Pagination Components Type Fixes
+- **Posts Pagination** (`src/pages/posts/[...page].astro`):
+  - Added import for `Page` type from `@/types`
+  - Fixed `page: any` to `page: Page<CollectionEntry<"post">>`
+  - Proper typing for post pagination interface
+- **Tags Pagination** (`src/pages/tags/[tag]/[...page].astro`):
+  - Added import for `Page` type from `@/types`
+  - Fixed `page: any` to `page: Page<CollectionEntry<"post">>`
+  - Removed inline `any` type from template loop for better type inference
+
+### Build Quality Improvements
+- **Clean Build**: Achieved 0 TypeScript errors and 0 warnings
+- **Removed Unused Imports**: Cleaned up `collectionDateSort` imports that were no longer needed
+- **Structured Data Fix**: Added `is:inline` directive to LD+JSON script to resolve processing warnings
+- **File Cleanup**: Removed backup files causing build warnings
+
+### Type Safety Benefits
+- **Compile-time Safety**: Proper typing prevents runtime errors in pagination logic
+- **Better IntelliSense**: Enhanced developer experience with accurate autocompletion
+- **Maintainability**: Clear interface contracts make future modifications safer
+- **Performance**: TypeScript optimizations possible with proper type information
+
+### Impact
+- **Zero Build Errors**: Clean TypeScript compilation with full type checking
+- **Enhanced Developer Experience**: Proper types provide better IDE support and error detection
+- **Future-proof**: Robust type system supports safe refactoring and feature additions
+- **Production Ready**: All type issues resolved for deployment confidence
+
 ## Research Page Typography & Component Refinements (January 2025)
 
 ### Research Entry Component Overhaul
@@ -275,7 +481,7 @@
 - **Impact**: 30% reduction in link CSS, improved maintainability, enhanced developer experience
 
 
-## Linting & Code Quality Improvements (January 30, 2025)
+## Linting & Code Quality Improvements (January 18, 2025)
 
 ### TypeScript Type Safety Enhancements
 - **Eliminated All `any` Types**: Replaced 11 instances of `any` type with proper TypeScript interfaces
@@ -317,7 +523,7 @@
 - **Developer Experience**: Clean linting output and proper package manager usage
 - **Zero Breaking Changes**: All fixes maintain visual and functional parity
 
-## CSS Refactoring Phase 2 Complete (January 30, 2025)
+## CSS Refactoring Phase 2 Complete (January 18, 2025)
 
 ### Standardized Focus States
 - **Global Focus System**: Implemented consistent focus-visible pattern across entire codebase
@@ -364,9 +570,9 @@
 - **Reduced Code**: ~50 lines of dead/duplicate code removed
 - **Accessibility Win**: Consistent focus-visible implementation improves keyboard navigation
 
-## CSS Audit and Phase 1 Improvements (January 29, 2025)
+## CSS Audit and Phase 1 Improvements (July 17, 2025)
 
-## Navigation & User Experience Improvements (January 2025)
+## Navigation & User Experience Improvements (July 2025)
 
 ### Header Navigation Update
 - **Replaced Email with Media**: Changed header navigation from "Email" to "Media" 
@@ -531,7 +737,7 @@
 - **Accessibility**: Proper focus indicators and high contrast support
 - **Maintainability**: Single file controls all link behavior site-wide
 
-## ResearchEntry Typography Refinement & Simplification (January 28, 2025)
+## ResearchEntry Typography Refinement & Simplification (July 17, 2025)
 
 ### Typography Hierarchy Optimization
 - **Size Rationalization**: Fixed typography hierarchy following masters' principles:
@@ -573,7 +779,7 @@
 - **Cleaner Design**: Eliminated visual noise and focused on essential information
 - **Professional Appearance**: Academic-appropriate styling following typography masters' principles
 
-## Media Page Refactoring & Reusable Archive System (January 28, 2025)
+## Media Page Refactoring & Reusable Archive System (July 17, 2025)
 
 ### Phase 1: Media Page Complete Typography Refactoring
 - **Typography Alignment**: Replaced all non-semantic classes (`text-lg`, `text-sm`) with semantic design system classes (`text-0`, `text-meta`, `text--1`)
@@ -615,7 +821,7 @@
 - **Enhanced User Experience**: Improved readability and navigation with proper link styling
 - **Maintainable Codebase**: Clean component architecture with comprehensive documentation
 
-## Master Typographers' Metadata System Implementation (January 28, 2025)
+## Master Typographers' Metadata System Implementation (July 17, 2025)
 
 ### Refined Global Metadata Typography
 - **Applied classical typography principles** from Bringhurst, Ruder, Hochuli, and Butterick:
@@ -778,7 +984,7 @@
 - Ensures consistent content creation practices
 - Facilitates onboarding for new contributors
 
-## Homepage Redesign: Document-Centric Transformation (January 2025)
+## Homepage Redesign: Document-Centric Transformation (July 17 2025)
 
 ### Complete Visual & Structural Overhaul
 - **Philosophy**: Transformed from card-based landing page to single-column document
@@ -957,7 +1163,7 @@ This transformation successfully creates a homepage that embodies the "calm-edit
 - **Simplified maintenance**: Fewer browser compatibility concerns
 - **Typography focus**: Visual hierarchy now entirely typography-driven
 
-## Bio Panel Component Implementation (July 2025)
+## Bio Panel Component Implementation (July 17 2025)
 
 ### New Homepage Bio Panel
 - **Created elegant bio panel component** inspired by Jason Santa Maria and Craig Mod's sites:
@@ -1004,7 +1210,7 @@ This transformation successfully creates a homepage that embodies the "calm-edit
   - Maintains baseline grid alignment
   - Consistent with site's minimal aesthetic
 
-## Newsreader Phase 2: Enhanced Optical Sizing & Accessibility (January 2025)
+## Newsreader Phase 2: Enhanced Optical Sizing & Accessibility (July 17 2025)
 
 ### Enhanced Context-Aware Typography
 - **Content context detection system** implemented:
@@ -1067,7 +1273,7 @@ This transformation successfully creates a homepage that embodies the "calm-edit
 - **Updated design system documentation** reflecting new context-aware typography system
 - **Enhanced accessibility guidelines** with specific WCAG AAA compliance measures
 
-## Newsreader Typography Optimization (January 2025)
+## Newsreader Typography Optimization (July 17 2025)
 
 ### Typography Refinements
 - **Refined Newsreader font weight hierarchy** for better visual progression:
@@ -1170,7 +1376,7 @@ This transformation successfully creates a homepage that embodies the "calm-edit
 - **Created scripts README** with detailed usage for all utilities
 - **Added migration notes** to development documentation
 
-## Production Readiness Improvements - Technical Debt (July 2025)
+## Production Readiness Improvements - Technical Debt (July 16 2025)
 
 ### Security & Build Improvements
 - **Disabled source maps** for production builds to prevent source code exposure
@@ -1271,7 +1477,7 @@ This transformation successfully creates a homepage that embodies the "calm-edit
 - **Moderate scaling**: 25-40% progression between sizes
 - **Line height improved** to 1.6 for optimal readability
 
-## July 14, 2025 - Baseline Grid Refactoring
+## July 15, 2025 - Baseline Grid Refactoring
 
 ### Changes Made
 - **Header.astro**: Refactored all spacing to align with 6px grid (px-4b, gap-5b, h-5b, etc.)

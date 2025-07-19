@@ -1,13 +1,98 @@
 ---
 import PageLayout from "@/layouts/Base.astro";
+import { siteConfig } from "@/site.config";
 
 const meta = {
-	description: "Oops! It looks like this page is lost in space!",
-	title: "Oops! You found a missing page!",
+	description: "The page you're looking for could not be found. Let's get you back on track.",
+	title: "404 - Page Not Found",
 };
 ---
 
 <PageLayout meta={meta}>
-	<h1>404 | Oops something went wrong</h1>
-	<p class="mb-8b">Please use the navigation to find your way back</p>
+	<div class="error-page measure-base mx-auto px-4b py-16b text-center">
+		<!-- Large 404 Display -->
+		<div class="error-code mb-8b">
+			<span class="text-6 font-headline font-light text-accent-base">404</span>
+		</div>
+		
+		<!-- Error Message -->
+		<h1 class="heading-1 mb-4b">Page Not Found</h1>
+		<p class="text-1 text-light mb-8b max-w-prose mx-auto">
+			The page you're looking for seems to have wandered off. It might have been moved, deleted, or perhaps it never existed.
+		</p>
+		
+		<!-- Action Buttons -->
+		<div class="flex flex-col sm:flex-row gap-4b justify-center items-center mb-12b">
+			<a href="/" class="link-nav px-6b py-3b bg-accent-base text-white rounded hover:bg-accent-dark transition-colors">
+				Go to Homepage
+			</a>
+			<button 
+				onclick="history.back()" 
+				class="link-nav px-6b py-3b border border-color-200 rounded hover:bg-color-50 transition-colors"
+			>
+				Go Back
+			</button>
+		</div>
+		
+		<!-- Helpful Links -->
+		<div class="helpful-links">
+			<h2 class="heading-4 mb-4b text-light">Here are some helpful links:</h2>
+			<nav class="flex flex-wrap gap-4b justify-center">
+				<a href="/posts/" class="link-nav" data-variant="subtle">Blog Posts</a>
+				<span class="text-lightest" aria-hidden="true">·</span>
+				<a href="/research/" class="link-nav" data-variant="subtle">Research</a>
+				<span class="text-lightest" aria-hidden="true">·</span>
+				<a href="/projects/" class="link-nav" data-variant="subtle">Projects</a>
+				<span class="text-lightest" aria-hidden="true">·</span>
+				<a href="/about/" class="link-nav" data-variant="subtle">About</a>
+			</nav>
+		</div>
+	</div>
 </PageLayout>
+
+<style>
+	.error-page {
+		min-height: 60vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	
+	.error-code {
+		line-height: 1;
+		opacity: 0.1;
+		font-size: clamp(8rem, 20vw, 16rem);
+		font-weight: 200;
+		user-select: none;
+		margin-bottom: -2rem;
+	}
+	
+	/* Button styles that complement the link system */
+	button {
+		cursor: pointer;
+		font-family: var(--font-sans);
+		font-size: var(--step-0);
+		font-weight: 450;
+		letter-spacing: 0.02em;
+		background: transparent;
+		color: var(--theme-text);
+	}
+	
+	/* Helpful links separator styling */
+	.helpful-links nav span {
+		display: none;
+	}
+	
+	@media (min-width: 640px) {
+		.helpful-links nav span {
+			display: inline;
+		}
+	}
+	
+	/* Print styles */
+	@media print {
+		.error-page {
+			display: none;
+		}
+	}
+</style>

@@ -88,6 +88,22 @@ export interface PaginationLink {
   url: string;
 }
 
+// Astro pagination type for paginate() function result
+export interface Page<T = unknown> {
+  data: T[];
+  start: number;
+  end: number;
+  size: number;
+  total: number;
+  currentPage: number;
+  lastPage: number;
+  url: {
+    current: string;
+    next?: string;
+    prev?: string;
+  };
+}
+
 export interface SiteMeta {
   articleDate?: string | undefined;
   description?: string;

@@ -25,17 +25,7 @@ function convertFilename(jekyllFilename) {
   return jekyllFilename;
 }
 
-function extractDate(filename) {
-  const match = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-  return match ? match[1] : null;
-}
-
-function cleanTitle(title) {
-  return title
-    .trim()
-    .replace(/^["']|["']$/g, "")
-    .trim();
-}
+// Utility functions removed - not used in this script
 
 function processImages(content) {
   let updatedContent = content;
@@ -61,7 +51,7 @@ function fixTruncatedPost(jekyllFile) {
   try {
     // Read Jekyll post
     const jekyllContent = fs.readFileSync(jekyllPath, "utf-8");
-    const { data: jekyllFrontmatter, content: jekyllBody } =
+    const { data: _jekyllFrontmatter, content: jekyllBody } =
       matter(jekyllContent);
 
     // Read existing Astro post to preserve any manual edits to frontmatter
