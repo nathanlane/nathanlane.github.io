@@ -6,6 +6,7 @@ import PostPreview from "@/components/blog/PostPreview.astro";
 import PostSearch from "@/components/blog/PostSearch.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import type { Page } from "@/types";
 
 import type { GetStaticPaths } from "astro";
 import { Icon } from "astro-icon/components";
@@ -23,7 +24,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths;
 
 interface Props {
-	page: any; // Fix type later
+	page: Page<CollectionEntry<"post">>;
 	uniqueTags: string[];
 	allPostsCount: number;
 }

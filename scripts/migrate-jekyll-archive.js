@@ -118,7 +118,7 @@ function convertFrontmatter(jekyllFrontmatter, filename) {
 }
 
 // Helper to fix image paths and copy images
-function processImages(content, filename) {
+function processImages(content, _filename) {
   const imagePaths = [];
 
   // Find all image references
@@ -181,12 +181,12 @@ function migratePost(filePath) {
 
   // Skip if not in selected categories (optional filter)
   if (frontmatter.categories) {
-    const categories = Array.isArray(frontmatter.categories)
+    const _categories = Array.isArray(frontmatter.categories)
       ? frontmatter.categories
       : [frontmatter.categories];
 
     // Uncomment to filter by categories
-    // const hasSelectedCategory = categories.some(cat =>
+    // const hasSelectedCategory = _categories.some(cat =>
     //   IMPORT_CATEGORIES.includes(cat)
     // );
     // if (!hasSelectedCategory) return null;
