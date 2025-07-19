@@ -5,6 +5,7 @@ interface Props {
   date?: string | undefined;
   status?: 'published' | 'working-paper' | 'work-in-progress' | 'archived' | undefined;
   metadata?: string | undefined;
+  description?: string | undefined;
   publication?: string | undefined;
   download?: string | undefined;
   link?: string | undefined;
@@ -14,23 +15,18 @@ const {
   title, 
   href, 
   date, 
+  status,
   metadata,
+  description,
   publication,
   download,
   link
 } = Astro.props;
 
-// Format date if provided
-const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { 
-  year: 'numeric', 
-  month: 'short' 
-}) : '';
-
 // Build metadata items - research-specific formatting
 const metadataItems = [
-  { text: 'RESEARCH' },
-  ...(formattedDate ? [{ text: formattedDate }] : []),
-  // ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []), // Temporarily removed work-in-progress status
+  ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []),
+  ...(date ? [{ text: date }] : []), // Use year directly, not formatted date
   ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
 
@@ -60,18 +56,21 @@ const metadataItems = [
     </div>
   )}
   
-
+  <!-- Description text with optimal reading typography -->
+  {description && (
+    <p class="research-description">{description}</p>
+  )}
   
   <!-- Research-specific action links -->
   {(link || download) && (
     <div class="research-actions">
       {link && (
-        <a href={link} class="section-link link-nav" target="_blank" rel="noopener">
+        <a href={link} class="inline-link" target="_blank" rel="noopener">
           Publication Link ↗
         </a>
       )}
       {download && (
-        <a href={download} class="section-link link-nav" target="_blank" rel="noopener">
+        <a href={download} class="inline-link" target="_blank" rel="noopener">
           PDF Download ↗
         </a>
       )}
@@ -94,7 +93,7 @@ const metadataItems = [
   
   /* Research title - appropriately sized for entry previews */
   .research-title {
-    font-size: var(--step-1); /* 14.4-16.2px - reduced from step-2 for better proportion */
+    font-size: var(--step-2); /* 14.4-16.2px - reduced from step-2 for better proportion */
     font-weight: 500;
     line-height: 1.4; /* Slightly tighter for denser presentation */
     margin-bottom: var(--space-1); /* 6px - tighter, grid-aligned */
@@ -143,7 +142,7 @@ const metadataItems = [
     align-items: center;
     gap: 0;
     flex-wrap: wrap;
-    line-height: 1.4;
+    line-height: 1.6;
   }
   
   .metadata-item {
@@ -154,6 +153,15 @@ const metadataItems = [
     opacity: 0.6;
     margin: 0 0.4em;
     font-weight: 300;
+  }
+  
+  /* Description styling - readable and elegant */
+  .research-description {
+    font-size: var(--step-0); /* Base size for readability */
+    line-height: 1.6; /* Generous leading for comfortable reading */
+    color: var(--theme-color-600);
+    margin: var(--space-3) 0; /* 18px spacing */
+    max-width: 70ch; /* Optimal reading line length */
   }
   
   /* Refined action links following masters' spacing principles */
