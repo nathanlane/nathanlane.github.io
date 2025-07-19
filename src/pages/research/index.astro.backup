@@ -52,18 +52,47 @@ const meta = {
     {featuredPapers.length > 0 && (
       <section id="featured" class="mb-16b">
         <h2 class="heading-2 mb-8b">New and Updated</h2>
-        <ul class="space-y-3b list-none">
+        <div class="space-y-6b">
           {sortByYear(featuredPapers).map((paper) => (
-            <li class="flex items-baseline justify-between gap-4b">
-              <span class="featured-title flex-1">{paper.data.title}</span>
-              <a href={`/research/${paper.id}/`} class="link-research-action">
-                <span>View</span>
-                <span aria-hidden="true">→</span>
-              </a>
-            </li>
-          ))}        </ul>
+            <article class="featured-research-entry entry-divider">
+              <h3 class="featured-research-title">
+                <a href={`/research/${paper.id}/`} class="link-title">{paper.data.title}</a>
+              </h3>
+              
+              <div class="featured-research-metadata text-meta text-meta--light">
+                <span class="metadata-item">FEATURED</span>
+                <span class="text-meta__separator" aria-hidden="true">•</span>
+                <span class="metadata-item">{paper.data.paperDate}</span>
+                {paper.data.authors && (
+                  <>
+                    <span class="text-meta__separator" aria-hidden="true">•</span>
+                    <span class="metadata-item">{paper.data.authors}</span>
+                  </>
+                )}
+              </div>
+              
+              {paper.data.publication && (
+                <div class="text-publication">
+                  {paper.data.publication}
+                </div>
+              )}
+              
+              {paper.data.description && (
+                <p class="text-research-description">{paper.data.description}</p>
+              )}
+              
+              <div class="featured-research-actions">
+                <a href={`/research/${paper.id}/`} class="link-research-action">
+                  <span>View Details</span>
+                  <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     )}
+
     <!-- Wide Full Header Line Separator -->
     {featuredPapers.length > 0 && <SectionSeparator variant="full-width" spacing="normal" />}
 
@@ -141,19 +170,21 @@ const meta = {
 </BaseLayout>
 
 <style>
-  /* Remove default list padding for featured section */
-  .list-none {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
+  /* Featured research entries - consistent with ResearchEntry styling */
+  .featured-research-entry {
+    margin-bottom: var(--space-6); /* 36px - consistent spacing */
   }
   
-  /* Featured title styling - elegant and refined */
-  .featured-title {
-    font-size: var(--step-1); /* 15.6-18px - proper hierarchy */
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--theme-text);
+  .featured-research-entry:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Featured title typography - matching refined ResearchEntry */
+  .featured-research-title {
+    font-size: var(--step-1); /* 15.6-18px - same as ResearchEntry */
+    font-weight: 525; /* Slightly heavier for distinction */
+    line-height: 1.3; /* Tighter for impact */
+    margin-bottom: var(--space-2); /* 12px - breathing room */
     
     /* Enhanced OpenType features */
     font-feature-settings:
@@ -163,6 +194,21 @@ const meta = {
     
     /* Ruder: slight negative tracking for display sizes */
     letter-spacing: -0.01em;
+  }
+  
+  /* Featured metadata styling */
+  .featured-research-metadata {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    line-height: 1.5;
+    margin-bottom: var(--space-1); /* 6px */
+  }
+  
+  /* Featured action container */
+  .featured-research-actions {
+    margin-top: var(--space-2); /* 12px */
   }
   
   /* Smooth scroll for anchor links */
@@ -177,7 +223,7 @@ const meta = {
   
   /* High contrast mode support */
   @media (prefers-contrast: high) {
-    .featured-title {
+    .featured-research-title {
       font-weight: 600;
     }
   }

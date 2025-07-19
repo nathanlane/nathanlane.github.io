@@ -34,7 +34,7 @@ export const navigationConfig = {
       { title: "About", href: "/about" },
       { title: "Research", href: "/research" },
       { title: "Writing", href: "/writing" },
-      { title: "Email", href: `mailto:${siteConfig.email}` },
+      { title: "Media", href: "/media" },
     ],
   },
 

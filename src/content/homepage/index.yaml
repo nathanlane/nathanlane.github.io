@@ -47,15 +47,18 @@ bio:
 #       url: "https://github.com/nathanlane/lane_latex_template"
 
 contact:
-  title: "The Important Stuff"
+  title: "Important Links"
   email: "drnathanlane@gmail.com"
   items:
+    - label: "The Industrial Policy Group"
+      href: "https://industrialpolicygroup.com"
+      text: "industrialpolicygroup.com"
+    - label: "Industrial Policy Data"
+      href: "https://industrialpolicydata.com"
+      text: "industrialpolicydata.com"
     - label: "Email"
       href: "mailto:drnathanlane@gmail.com"
       text: "drnathanlane@gmail.com"
-    - label: "Research"
-      href: "/research/"
-      text: "Research"
     - label: "CV"
       href: "/cv.pdf"
       text: "Download CV"
