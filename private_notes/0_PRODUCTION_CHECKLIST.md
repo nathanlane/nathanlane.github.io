@@ -206,6 +206,36 @@ Please provide:
   - [ ] CSP headers considered
   - [ ] HTTPS enforced
 
+### 🔒 Security Checks (Updated July 19, 2025)
+
+- [x] **Secret Detection**
+  - [x] Git pre-commit hook installed (`.git/hooks/pre-commit`)
+  - [x] Scans for API keys, tokens, passwords before commits
+  - [x] AWS key pattern detection (`AKIA[0-9A-Z]{16}`)
+  - [x] False positive handling with `.gitsecret` configuration
+  - [ ] Run manual scan: `git grep -iE "api[_-]key|secret|token" | grep -v "pattern\|detect\|example"`
+
+- [x] **Security Headers**
+  - [x] X-Frame-Options: DENY
+  - [x] X-Content-Type-Options: nosniff
+  - [x] X-XSS-Protection: 1; mode=block
+  - [x] Content-Security-Policy configured
+  - [x] Referrer-Policy: strict-origin-when-cross-origin
+  - [x] Permissions-Policy restricting features
+
+- [ ] **Dependency Security**
+  - [ ] Run `npm audit` for vulnerabilities
+  - [ ] Update critical security patches
+  - [ ] Check for known vulnerable packages
+  - [ ] Review dev dependencies for risks
+
+- [ ] **Code Security Review**
+  - [x] No hardcoded secrets in source (verified July 19, 2025)
+  - [x] Environment variables properly used
+  - [ ] No exposed debug information
+  - [ ] Input validation on forms (if any)
+  - [ ] XSS prevention in user content
+
 ### 🎯 Final Checks
 
 - [ ] **Performance Metrics**

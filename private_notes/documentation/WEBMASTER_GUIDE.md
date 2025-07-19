@@ -12,7 +12,8 @@ This guide covers everything you need to know to manage and deploy this website 
 7. [Typography System Guide](#typography-system-guide)
 8. [Footer Management & Sitemap System](#footer-management--sitemap-system)
 9. [Security Headers](#security-headers)
-10. [Monitoring & Maintenance](#monitoring--maintenance)
+10. [Secret Detection & Security](#secret-detection--security)
+11. [Monitoring & Maintenance](#monitoring--maintenance)
 
 ---
 
@@ -578,6 +579,98 @@ If you need to add external resources:
 # Example: Adding Google Analytics
 Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com; ...
 ```
+
+---
+
+## Secret Detection & Security
+
+**Added July 19, 2025**
+
+### Git Pre-commit Hook
+
+The repository includes an advanced pre-commit hook that prevents accidental commits of secrets:
+
+#### Features
+- **Automatic Secret Detection**: Scans for API keys, tokens, passwords before commits
+- **Pattern Detection**: 
+  - Common patterns: `api_key`, `apikey`, `access_token`, `auth_token`, `private_key`
+  - AWS keys: `AKIA[0-9A-Z]{16}`
+  - Real secret patterns: `"api_key": "actual_value"`
+- **Smart False Positive Handling**:
+  - Excludes documentation files by default
+  - Detects context (documentation vs actual secrets)
+  - Configurable via `.gitsecret` file
+
+#### Installation
+```bash
+# Install the pre-commit hook
+./scripts/maintenance/install-git-hooks.sh
+```
+
+#### Configuration (.gitsecret)
+Create a `.gitsecret` file to customize behavior:
+
+```yaml
+exclude_paths:
+  - "private_notes/"
+  - "docs/"
+  - "*.test.js"
+  
+doc_context_words:
+  - "example"
+  - "documentation"
+  - "detects"
+```
+
+#### Handling False Positives
+If the hook detects a false positive (e.g., documentation about secrets):
+
+```bash
+# One-time bypass
+git commit --no-verify -m "Your commit message"
+
+# Check what's triggering
+git diff --cached | grep -iE "api_key|secret|token"
+```
+
+### Security Best Practices
+
+1. **Never Commit Secrets**
+   - Use environment variables for all secrets
+   - Add sensitive files to `.gitignore`
+   - Use `.env` files locally (already in .gitignore)
+
+2. **Environment Variables**
+   ```javascript
+   // Good - using environment variable
+   const apiKey = import.meta.env.WEBMENTION_API_KEY;
+   
+   // Bad - hardcoded secret
+   const apiKey = "sk_live_abc123";
+   ```
+
+3. **Regular Security Audits**
+   ```bash
+   # Check for npm vulnerabilities
+   npm audit
+   
+   # Manual secret scan
+   git grep -iE "api[_-]key|secret|token" | grep -v "pattern\|detect\|example"
+   
+   # Check git history (careful - this loads entire history)
+   git log -p | grep -iE "api[_-]key|secret|token"
+   ```
+
+### Security Headers Configuration
+
+The site includes comprehensive security headers via `public/_headers`:
+
+- **X-XSS-Protection**: `1; mode=block` - XSS protection
+- **X-Frame-Options**: `DENY` - Prevents clickjacking
+- **X-Content-Type-Options**: `nosniff` - Prevents MIME sniffing
+- **CSP**: Configured for self-hosted resources + CDN
+- **Referrer-Policy**: `strict-origin-when-cross-origin`
+- **Permissions-Policy**: Restricts browser features
 
 ---
 
