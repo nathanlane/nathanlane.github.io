@@ -8,13 +8,15 @@ export interface Props {
 	class?: string;
 	headerText?: string;
 	showHeader?: boolean;
+	showNumbers?: boolean;
 }
 
 const { 
 	sections, 
 	class: className = "", 
 	headerText = "Table of Contents",
-	showHeader = true 
+	showHeader = true,
+	showNumbers = true 
 } = Astro.props;
 ---
 
@@ -31,7 +33,7 @@ const {
 				<a href={section.href} class="toc-link link-nav">
 					<span class="toc-title">{section.title}</span>
 					<span class="toc-dots" aria-hidden="true"></span>
-					<span class="toc-number">{index + 1}</span>
+					{showNumbers && <span class="toc-number">{index + 1}</span>}
 				</a>
 			</li>
 		))}

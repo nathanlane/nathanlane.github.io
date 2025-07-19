@@ -40,7 +40,7 @@ const { header } = navigationConfig;
 				{header.primary.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.href ? "page" : false}
-						class="nav-link"
+						class="link-nav nav-link"
 						data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
 						href={link.href}
 					>
@@ -97,7 +97,7 @@ const { header } = navigationConfig;
 			{header.primary.map((link) => (
 				<a
 					aria-current={Astro.url.pathname === link.href ? "page" : false}
-					class="nav-link text-lg"
+					class="link-nav nav-link text-lg"
 					data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
 					href={link.href}
 				>
@@ -115,33 +115,26 @@ const { header } = navigationConfig;
 		height: var(--header-height);
 	}
 
+	/* Site title - using nav link behavior but darker default */
 	.site-title {
-		color: var(--color-text);
+		color: var(--theme-text);
+		transition: color 200ms ease;
 	}
 
 	.site-title:hover {
-		color: var(--color-text-muted);
+		color: var(--theme-accent-base);
 	}
 
-	/* Navigation link styles */
+	/* Navigation link styles - let link-nav handle the base behaviors */
 	.nav-link {
-		display: inline-block;
+		/* Custom padding for header context */
 		padding: var(--space-xs) var(--space-xs);
-		color: var(--color-text);
-		text-decoration: none;
-		position: relative;
+		/* Custom font size for header */
 		font-size: var(--step--1);
-		font-family: var(--font-body);
-		font-weight: normal;
 	}
 
-	.nav-link:hover {
-		color: var(--color-text-muted);
-	}
-
-	.nav-link[aria-current="page"] {
-		color: var(--color-accent);
-	}
+	/* Active page state - using existing link-nav behavior */
+	/* link-nav already handles aria-current="page" styling */
 
 	/* Mobile menu toggle */
 	.mobile-menu-toggle {

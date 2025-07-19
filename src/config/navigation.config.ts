@@ -71,6 +71,7 @@ export const navigationConfig = {
         title: "Contact",
         links: [
           { title: "Email", href: `mailto:${siteConfig.email}` },
+          { title: "CV", href: siteConfig.resumeUrl || "/cv.pdf" },
         ],
       },
       {
