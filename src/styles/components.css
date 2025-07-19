@@ -2,6 +2,11 @@
    ========================
    Extracted from repeated utility combinations found in the codebase.
    These classes maintain exact visual parity with existing patterns.
+   
+   Last Updated: July 19, 2025
+   - Added Border Utility Components (Zero-Risk Consolidation)
+   - Eliminates duplicate border patterns across 6+ components
+   - Provides consistent border-radius utilities
 */
 
 @layer components {

@@ -6,15 +6,24 @@ export interface Props {
 		count?: number;
 	}>;
 	class?: string;
+	headerText?: string;
+	showHeader?: boolean;
 }
 
-const { sections, class: className = "" } = Astro.props;
+const { 
+	sections, 
+	class: className = "", 
+	headerText = "Table of Contents",
+	showHeader = true 
+} = Astro.props;
 ---
 
-<nav class={`table-of-contents ${className}`} role="navigation" aria-label="Research sections">
-	<header class="toc-header">
-		<h2 class="toc-heading text-small-caps">Table of Contents</h2>
-	</header>
+<nav class={`table-of-contents ${className}`} role="navigation" aria-label="Table of contents">
+	{showHeader && (
+		<header class="toc-header">
+			<h2 class="toc-heading text-small-caps">{headerText}</h2>
+		</header>
+	)}
 	
 	<ul class="toc-list" role="list">
 		{sections.map((section: { title: string; href: string; count?: number }, index: number) => (

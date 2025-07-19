@@ -33,45 +33,49 @@ const metadataItems = [
 
 ---
 
-<article class="research-entry">
+<article class="research-entry entry-divider">
+  <!-- Title with refined typography matching MediaEntry scale -->
   <h3 class="research-title">
     <a href={href} class="link-title">{title}</a>
   </h3>
   
-  <div class="research-metadata text-meta text-meta--light mb-2b">
+  <!-- Unified metadata approach -->
+  <div class="research-metadata text-meta text-meta--light">
     {metadataItems.map((item, index) => (
       <>
         <span class="metadata-item">{item.text}</span>
         {index < metadataItems.length - 1 && (
-          <span class="metadata-separator" aria-hidden="true">•</span>
+          <span class="text-meta__separator" aria-hidden="true">•</span>
         )}
       </>
     ))}
   </div>
   
-  <!-- Publication information - more prominent for research -->
+  <!-- Publication with refined small caps -->
   {publication && (
-    <div class="research-publication">
+    <div class="text-publication">
       {publication}
     </div>
   )}
   
-  <!-- Description text with optimal reading typography -->
+  <!-- Description with optimal typography -->
   {description && (
-    <p class="research-description">{description}</p>
+    <p class="text-research-description">{description}</p>
   )}
   
-  <!-- Research-specific action links -->
+  <!-- Research action links with new styling -->
   {(link || download) && (
     <div class="research-actions">
       {link && (
-        <a href={link} class="inline-link" target="_blank" rel="noopener">
-          Publication Link ↗
+        <a href={link} class="link-research-action" target="_blank" rel="noopener">
+          <span>Publication</span>
+          <span aria-hidden="true">↗</span>
         </a>
       )}
       {download && (
-        <a href={download} class="inline-link" target="_blank" rel="noopener">
-          PDF Download ↗
+        <a href={download} class="link-research-action" target="_blank" rel="noopener">
+          <span>PDF</span>
+          <span aria-hidden="true">↗</span>
         </a>
       )}
     </div>
@@ -79,115 +83,77 @@ const metadataItems = [
 </article>
 
 <style>
-  /* Research-specific styling - more academic, formal presentation */
+  /* Research entry container - using global .entry-divider */
   .research-entry {
-    margin-bottom: var(--space-8); /* 48px - denser spacing for research */
-    padding-bottom: var(--space-4); /* 24px - tighter */
-    border-bottom: 1px solid var(--theme-color-200);
+    margin-bottom: var(--space-6); /* 36px - tighter spacing */
   }
   
   .research-entry:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    margin-bottom: 0;
   }
   
-  /* Research title - appropriately sized for entry previews */
+  /* Title typography - matching MediaEntry's refined approach */
   .research-title {
-    font-size: var(--step-2); /* 14.4-16.2px - reduced from step-2 for better proportion */
-    font-weight: 500;
-    line-height: 1.4; /* Slightly tighter for denser presentation */
-    margin-bottom: var(--space-1); /* 6px - tighter, grid-aligned */
+    /* INCREASED SIZE - now properly larger than body text */
+    font-size: var(--step-1); /* 15.6-18px - proper hierarchy */
+    font-weight: 525; /* Slightly heavier for distinction */
+    line-height: 1.3; /* Tighter for impact */
+    margin-bottom: var(--space-2); /* 12px - more breathing room */
     
-    /* Enhanced OpenType features for research titles */
-    font-feature-settings:
-      "kern" 1,     /* Kerning for better spacing */
-      "liga" 1,     /* Standard ligatures */
-      "calt" 1;     /* Contextual alternates */
-  }
-  
-  /* Research link now uses consolidated .link-title class - no custom styles needed */
-  
-  /* Publication styling - refined and subtle */
-  .research-publication {
-    font-size: var(--step--1); /* 12.3-13.9px - increased from step--2 for better readability */
-    font-weight: 400; /* Normal weight for cleaner appearance */
-    color: var(--theme-color-600); /* Muted from accent for subtlety */
-    margin-bottom: var(--space-1); /* 6px - tighter spacing for density */
-    font-style: normal; /* Remove italic for cleaner look */
-    line-height: 1.4; /* Slightly more open for small text legibility */
-    
-    /* Real small caps for publication names */
+    /* Enhanced OpenType features */
     font-feature-settings:
       "kern" 1,
-      "smcp" 1,     /* Small caps */
-      "c2sc" 1;     /* Caps to small caps */
+      "liga" 1,
+      "calt" 1;
+    
+    /* Ruder: slight negative tracking for display sizes */
+    letter-spacing: -0.01em;
   }
   
-
-  
-  /* Research action links - following Ruder's spacing principles */
-  .research-actions {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3); /* 18px - Ruder: tight but clear separation */
-    margin-top: var(--space-2); /* 12px - more breathing room without border */
-  }
-  
-  /* Action links now use consolidated .link-research-action classes from links.css */
-  
-  
-  /* Research metadata using global text-meta system */
+  /* Research metadata - clean and minimal */
   .research-metadata {
     display: flex;
     align-items: center;
     gap: 0;
     flex-wrap: wrap;
-    line-height: 1.6;
+    line-height: 1.5;
+    margin-bottom: var(--space-1); /* 6px */
   }
   
   .metadata-item {
-    /* Inherits styling from .text-meta and .text-meta--light */
+    /* Inherits from global .text-meta system */
   }
   
-  .metadata-separator {
-    opacity: 0.6;
-    margin: 0 0.4em;
-    font-weight: 300;
+  /* Publication spacing */
+  .text-publication {
+    margin-bottom: var(--space-2); /* 12px */
   }
   
-  /* Description styling - readable and elegant */
-  .research-description {
-    font-size: var(--step-0); /* Base size for readability */
-    line-height: 1.6; /* Generous leading for comfortable reading */
-    color: var(--theme-color-600);
-    margin: var(--space-3) 0; /* 18px spacing */
-    max-width: 70ch; /* Optimal reading line length */
+  /* Description spacing */
+  .text-research-description {
+    margin-top: var(--space-2); /* 12px */
+    margin-bottom: var(--space-2);
   }
   
-  /* Refined action links following masters' spacing principles */
-  .action-label {
-    /* Bringhurst: Real small caps for proper typography */
-    font-feature-settings:
-      "kern" 1,
-      "smcp" 1,     /* Small caps */
-      "c2sc" 1;     /* Caps to small caps */
-    letter-spacing: 0.05em; /* Wider tracking for small caps */
+  /* Action links container */
+  .research-actions {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4); /* 24px - generous spacing */
+    margin-top: var(--space-2); /* 12px */
   }
   
-  /* Dark mode adjustments */
-  :global([data-theme="dark"]) .research-publication {
-    color: var(--theme-color-300);
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .research-title {
+      font-weight: 600;
+    }
   }
   
-  :global([data-theme="dark"]) .research-action-link {
-    color: var(--theme-color-300);
-  }
-  
-  :global([data-theme="dark"]) .research-action-link:hover {
-    color: var(--theme-color-100);
-  }
-  
-  :global([data-theme="dark"]) .research-metadata-custom {
-    color: var(--theme-color-400);
+  /* Mobile adjustments */
+  @media (max-width: 640px) {
+    .research-actions {
+      gap: var(--space-3); /* Tighter on mobile */
+    }
   }
 </style> 
