@@ -48,8 +48,8 @@ const { title, viewAllText, viewAllHref } = Astro.props;
     font-weight: 500;
   }
 
+  /* Section links use u-hover-underline pattern */
   .section-link:hover {
-    color: var(--theme-text);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
@@ -62,11 +62,5 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 
   /* Dark mode adjustments */
 
-  :global([data-theme="dark"]) .section-link {
-    color: var(--theme-color-400);
-  }
-
-  :global([data-theme="dark"]) .section-link:hover {
-    color: var(--theme-color-100);
-  }
+  /* Dark mode handled by link-nav class */
 </style> 

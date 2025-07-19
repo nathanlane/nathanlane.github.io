@@ -120,18 +120,7 @@ const narrativeHtml = await marked.parse(bio.narrative);
     @apply mb-0;
   }
 
-  .narrative :global(a) {
-    color: var(--theme-link);
-    text-decoration: underline;
-    text-decoration-thickness: 0.0625em;
-    text-underline-offset: 0.125em;
-    /* transition removed */
-  }
-  
-  .narrative :global(a:hover) {
-    text-decoration-thickness: 0.125em;
-    text-underline-offset: 0.25em;
-  }
+  /* Narrative links use global link-inline class */
 
   /* Currently list styling */
   .currently-section ul {
