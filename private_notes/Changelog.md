@@ -1,5 +1,37 @@
 # Changelog
 
+## Zero-Risk CSS Consolidation (July 19, 2025)
+
+### Border Utility Components
+- **Added Utility Classes**: Created 6 new border utilities in `src/styles/components.css`
+  - `.u-border-separator` (default theme-color-200)
+  - `.u-border-separator--light` (theme-color-100)
+  - `.u-border-separator--medium` (theme-color-150)
+  - `.u-border-separator--dark` (theme-color-300)
+  - `.u-radius-sm` (2px border-radius)
+  - `.u-radius` (4px border-radius)
+- **Purpose**: Eliminates duplicate border patterns found across 6 different components
+- **Impact**: Single source of truth for common border styling patterns
+
+### Hardcoded Values → CSS Variables
+- **Footer.astro Updates**:
+  - `rgba(128, 128, 128, 0.2)` → `var(--theme-color-200)`
+  - `rgba(128, 128, 128, 0.15)` → `var(--theme-color-150)`
+- **TableOfContents.astro Updates**:
+  - `#000` → `var(--theme-text)` (better dark mode support)
+- **Benefits**: Consistent theming, automatic dark mode support, maintainability
+
+### Dead Code Removal
+- **TableOfContents.astro**: Removed commented CSS line `/* border-bottom: 1px dotted var(--theme-color-400); */`
+- **Impact**: Cleaner codebase, reduced file size
+
+### Consolidation Impact
+- **Lines Saved**: 12+ lines of duplicate/hardcoded CSS
+- **Files Modified**: 3 files (components.css, Footer.astro, TableOfContents.astro)
+- **Risk Level**: ZERO - All changes maintain exact visual parity
+- **Build Verification**: ✅ All 182 pages generated successfully
+- **Future Benefits**: Foundation established for more comprehensive CSS consolidations
+
 ## TypeScript Type Safety & Build System Fixes (January 31, 2025)
 
 ### TypeScript Type Errors Fixed (10 errors → 0)

@@ -1,68 +1,84 @@
 ---
-import { Image } from 'astro:assets';
 import PageHeader from "@/components/PageHeader.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
 import { aboutConfig } from "@/data/about-config";
+import { siteConfig } from "@/site.config";
 import PageLayout from "@/layouts/Base.astro";
 
 const { meta, photo, content } = aboutConfig;
+
+// Create table of contents sections
+const tocSections = [
+  { title: "Biography", href: "#biography" },
+  { title: "Email", href: `mailto:${siteConfig.email}` },
+  { title: "Curriculum Vitae", href: siteConfig.resumeUrl || "/cv.pdf" }
+];
 ---
 
 <PageLayout meta={meta}>
 	<div class="measure-base mx-auto px-4b py-8b">
 		
-		<!-- Reusable Page Header -->
+		<!-- Page Header with description -->
 		<PageHeader 
 			title={meta.title}
 			description="Nathan Lane, PhD - Associate Professor of Economics at Oxford University and co-founder of the Industrial Policy Group"
 		/>
 		
+		<!-- Table of Contents with custom header -->
+		<TableOfContents 
+			sections={tocSections} 
+			headerText="Quick Links"
+		/>
+		
 		<!-- Main Content with Typography-First Design -->
 		<div class="prose prose-lane max-w-none">
 			
-			<!-- Profile Photo - Elegant Float Treatment -->
-			{photo.show && (
-				<figure class="float-right ml-6b mb-6b w-48 sm:w-56 -mt-2b">
-					<div class="overflow-hidden border border-color-200 dark:border-color-700">
-						<Image 
-							src={photo.src}
-							alt={photo.alt}
-							width={400}
-							height={400}
-							class="w-full h-auto aspect-square object-cover"
-							inferSize={photo.src.startsWith('http')}
-						/>
-					</div>
-					<figcaption class="text-center mt-2b">
-						<a 
-							href={photo.fullSizeLink} 
-							download
-							class="link-nav text--2" 
-							data-variant="action"
-						>
-							Download headshot ↓
-						</a>
-					</figcaption>
-				</figure>
-			)}
-			
-			<!-- Biography Content -->
-			<p class="text-2 leading-snug mb-8b" style="font-weight: 375; letter-spacing: 0.002em;">{content.intro}</p>
-			
-			{content.paragraphs && content.paragraphs.map((paragraph) => (
-				<p class="text-1 leading-relaxed mb-6b">{paragraph}</p>
-			))}	
-			
-			<p class="text-1 leading-relaxed mb-6b">
-				{content.outro.text} <a
-					href={content.outro.linkUrl}
-					class="inline-link"
-					target="_blank"
-					rel="noopener noreferrer"
-				>{content.outro.linkText}</a> {content.outro.suffix}
-			</p>
+			<!-- Biography Section -->
+			<section id="biography">
+				<h2 class="heading-2 mb-8b">Biography</h2>
+				
+				<!-- Profile Photo - Elegant Float Treatment -->
+				{photo.show && (
+					<figure class="float-right ml-6b mb-6b w-48 sm:w-56 -mt-2b">
+						<div class="overflow-hidden border border-color-200 dark:border-color-700">
+							<img 
+								src={photo.src}
+								alt={photo.alt}
+								width={400}
+								height={400}
+								class="w-full h-auto aspect-square object-cover"
+							/>
+						</div>
+						<figcaption class="text-center mt-2b">
+							<a 
+								href={photo.fullSizeLink} 
+								download
+								class="link-nav text--2" 
+								data-variant="action"
+							>
+								Download headshot ↓
+							</a>
+						</figcaption>
+					</figure>
+				)}
+				
+				<!-- Biography Content -->
+				<p class="text-2 leading-snug mb-8b" style="font-weight: 375; letter-spacing: 0.002em;">{content.intro}</p>
+				
+				{content.paragraphs && content.paragraphs.map((paragraph) => (
+					<p class="text-1 leading-relaxed mb-6b">{paragraph}</p>
+				))}	
+				
+				<p class="text-1 leading-relaxed mb-6b">
+					{content.outro.text} <a
+						href={content.outro.linkUrl}
+						class="inline-link"
+						target="_blank"
+						rel="noopener noreferrer"
+					>{content.outro.linkText}</a> {content.outro.suffix}
+				</p>
+			</section>
 		</div>
-		
-
 		
 	</div>
 </PageLayout>
