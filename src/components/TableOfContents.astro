@@ -118,8 +118,7 @@ const { sections, class: className = "" } = Astro.props;
 		/* Flex fill the space */
 		flex: 1 1 auto;
 		
-		/* Option 1: Traditional dots (uncomment to use) */
-		/* border-bottom: 1px dotted var(--theme-color-400); */
+		/* Option 1: Traditional dots (available but unused) */
 		
 		/* Option 2: Solid hairline (current) */
 		border-bottom: 1px solid var(--theme-color-200);
@@ -194,7 +193,7 @@ const { sections, class: className = "" } = Astro.props;
 		}
 		
 		.toc-dots {
-			border-bottom: 1px dotted #000 !important;
+			border-bottom: 1px dotted var(--theme-text) !important;
 		}
 		
 		/* Print link styles handled by consolidated system */
