@@ -19,6 +19,15 @@ const worksInProgress = allResearch.filter(paper => paper.data.status === "work-
 // Sort by year (newest first)
 const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.data.paperDate.localeCompare(a.data.paperDate));
 
+// Create table of contents data
+const tocSections = [
+  { title: "New and Updated", href: "#featured", count: featuredPapers.length },
+  { title: "Published Papers", href: "#published", count: publishedPapers.length },
+  { title: "Working Papers", href: "#working", count: workingPapers.length },
+  { title: "Works in Progress", href: "#wip", count: worksInProgress.length },
+  { title: "Curriculum Vitae", href: siteConfig.resumeUrl || "/cv.pdf" }
+];
+
 const meta = {
   title: "Research",
   description: "Academic research on economics, technology, and digital transformation."
@@ -32,18 +41,22 @@ const meta = {
     <PageHeader 
       title="Research"
       description="My research focuses on the intersection of economics, technology, and digital transformation. I examine how technological change affects markets, productivity, and economic outcomes."
-      additionalInfo={`<a href="${siteConfig.resumeUrl}">Download CV</a> • Also see <a href="/writing">writing</a> and <a href="/projects">projects</a>`}
     />
+
+    <!-- Table of Contents Block -->
+    <div class="mb-12b">
+      <TableOfContents sections={tocSections} />
+    </div>
 
     <!-- Featured/Recent Papers Section -->
     {featuredPapers.length > 0 && (
-      <section class="mb-12b">
-        <h2 class="heading-3 mb-6b">Recent and Updated</h2>
-        <ul class="space-y-3b">
+      <section id="featured" class="mb-12b">
+        <h2 class="heading-3 mb-6b">New and Updated</h2>
+        <ul class="space-y-3b list-none">
           {sortByYear(featuredPapers).map((paper) => (
             <li class="flex items-baseline justify-between gap-4b">
               <span class="text-0 flex-1">{paper.data.title}</span>
-              <a href={`/research/${paper.id}/`} class="nav-link text-meta uppercase tracking-wide whitespace-nowrap">
+              <a href={`/research/${paper.id}/`} class="featured-link text-meta">
                 View →
               </a>
             </li>
@@ -137,6 +150,29 @@ const meta = {
   
   .nav-link:hover {
     color: var(--theme-text);
+  }
+  
+  /* Featured section link - smaller and refined */
+  .featured-link {
+    color: var(--theme-color-500);
+    text-decoration: none;
+    font-size: var(--step--1); /* Smaller size */
+    font-weight: 450;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  
+  .featured-link:hover {
+    color: var(--theme-accent-base);
+  }
+  
+  /* Remove default list padding for featured section */
+  .list-none {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
   }
   
   /* Smooth scroll for anchor links */

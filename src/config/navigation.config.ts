@@ -49,11 +49,11 @@ export const navigationConfig = {
       {
         title: "Here",
         links: [
+          { title: "Home", href: "/" },
           { title: "About", href: "/about" },
           { title: "Research", href: "/research" },
           { title: "Writing", href: "/writing" },
           { title: "Blog", href: "/posts" },
-          { title: "CV", href: "/cv" },
           { title: "Sitemap", href: "/sitemap.xml" },
         ],
       },
@@ -71,7 +71,6 @@ export const navigationConfig = {
         title: "Contact",
         links: [
           { title: "Email", href: `mailto:${siteConfig.email}` },
-          { title: "CV", href: "/cv" },
         ],
       },
       {
