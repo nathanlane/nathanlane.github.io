@@ -180,4 +180,33 @@
   .card-link:hover {
     font-variation-settings: "wght" 500;
   }
+
+  /* Border Utility Components (Zero-Risk Consolidation)
+     --------------------------------------------------- */
+
+  /* Standard border separators - consolidates duplicate border patterns */
+  .u-border-separator {
+    border-bottom: 1px solid var(--theme-color-200);
+  }
+
+  .u-border-separator--light {
+    border-bottom: 1px solid var(--theme-color-100);
+  }
+
+  .u-border-separator--medium {
+    border-bottom: 1px solid var(--theme-color-150);
+  }
+
+  .u-border-separator--dark {
+    border-bottom: 1px solid var(--theme-color-300);
+  }
+
+  /* Border radius utilities */
+  .u-radius-sm {
+    border-radius: 2px;
+  }
+
+  .u-radius {
+    border-radius: 4px;
+  }
 }

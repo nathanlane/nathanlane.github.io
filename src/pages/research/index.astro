@@ -56,7 +56,7 @@ const meta = {
           {sortByYear(featuredPapers).map((paper) => (
             <li class="flex items-baseline justify-between gap-4b">
               <span class="text-0 flex-1">{paper.data.title}</span>
-              <a href={`/research/${paper.id}/`} class="featured-link text-meta">
+              <a href={`/research/${paper.id}/`}>
                 View →
               </a>
             </li>

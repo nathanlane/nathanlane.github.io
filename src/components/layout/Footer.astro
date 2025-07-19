@@ -50,7 +50,7 @@ const currentYear = new Date().getFullYear();
     line-height: 1.65; /* 165% - Extra generous for very small text */
     color: var(--color-text-muted);
     background: var(--color-bg-subtle);
-    border-top: 1px solid rgba(128, 128, 128, 0.2); /* Full-width separator line */
+    border-top: 1px solid var(--theme-color-200); /* Full-width separator line */
     position: relative;
     /* Optimize IBM Plex Sans for small text rendering */
     font-variation-settings: "wght" 425; /* Slightly heavier for small IBM Plex */
@@ -83,7 +83,7 @@ const currentYear = new Date().getFullYear();
     color: var(--color-text); /* Full contrast for section headers */
     line-height: 1.4; /* Slightly more generous for small headers */
     padding-bottom: var(--space-1); /* 6px space before line */
-    border-bottom: 1px solid rgba(128, 128, 128, 0.15); /* Subtle underline for each header */
+    border-bottom: 1px solid var(--theme-color-150); /* Subtle underline for each header */
   }
 
   .footer-links {
