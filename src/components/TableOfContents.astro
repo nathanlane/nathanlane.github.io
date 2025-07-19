@@ -87,14 +87,11 @@ const {
 	.toc-link {
 		display: flex;
 		align-items: baseline;
-		text-decoration: none;
+		/* Let link-nav handle text-decoration and transitions */
 		
 		/* Typography */
 		font-size: var(--step-0); /* 15.6-17px */
 		line-height: var(--baseline); /* 24px - baseline aligned */
-		
-		/* Interactive states */
-		transition: color 200ms ease;
 	}
 
 	/* Sequential numbering */
@@ -109,12 +106,8 @@ const {
 
 	/* Title styling - serif with academic feel */
 	.toc-title {
-		/* Serif typography for academic aesthetic */
-		font-family: var(--font-sans);
-		font-weight: 400;
-		font-size: var(--step-0);
+		/* Let link-nav handle font properties */
 		line-height: var(--baseline);
-		color: var(--theme-text);
 		
 		/* Prevent wrapping */
 		flex: 0 0 auto;
@@ -141,10 +134,8 @@ const {
 	}
 
 	/* Hover states - subtle and refined */
-	.toc-link:hover .toc-title {
-		color: var(--theme-accent-base);
-	}
-
+	/* link-nav handles color changes, we just need dots and number */
+	
 	.toc-link:hover .toc-number {
 		color: var(--theme-color-600);
 	}
