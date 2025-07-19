@@ -623,7 +623,7 @@
     /* Default light version - elegant and refined */
     font-weight: 425; /* Slightly heavier for better legibility */
     color: var(--theme-color-450); /* Balanced tone - not too light */
-    
+
     /* Ruder: Create clear information hierarchy */
     opacity: 0.9; /* Subtle recession without losing legibility */
   }
@@ -904,48 +904,48 @@
       color: hsl(0deg 0% 98%); /* Brighter than body */
     }
 
-      /* Italic adjustments */
-  em,
-  i {
-    /* Slightly increase letter spacing for readability */
-    letter-spacing: 0.02em;
-  }
+    /* Italic adjustments */
+    em,
+    i {
+      /* Slightly increase letter spacing for readability */
+      letter-spacing: 0.02em;
+    }
 
-  /* Blockquote optimizations */
-  blockquote {
-    opacity: 0.85;
-    /* Add subtle glow to border */
-    border-left-color: hsl(0deg 0% 60%);
-  }
+    /* Blockquote optimizations */
+    blockquote {
+      opacity: 0.85;
+      /* Add subtle glow to border */
+      border-left-color: hsl(0deg 0% 60%);
+    }
 
-  /* Research typography dark mode adjustments */
-  .text-publication {
-    color: var(--theme-accent-one); /* Maintain accent but adapted for dark */
-    font-weight: 425; /* Slightly lighter than light mode */
-  }
+    /* Research typography dark mode adjustments */
+    .text-publication {
+      color: var(--theme-accent-one); /* Maintain accent but adapted for dark */
+      font-weight: 425; /* Slightly lighter than light mode */
+    }
 
-  .link-research-action {
-    color: var(--theme-color-400);
-    opacity: 0.85;
-  }
+    .link-research-action {
+      color: var(--theme-color-400);
+      opacity: 0.85;
+    }
 
-  .link-research-action:hover {
-    color: var(--theme-color-200);
-    opacity: 1;
-  }
+    .link-research-action:hover {
+      color: var(--theme-color-200);
+      opacity: 1;
+    }
 
-  .entry-divider {
-    border-bottom-color: var(--theme-color-150); /* Very subtle in dark */
-  }
+    .entry-divider {
+      border-bottom-color: var(--theme-color-150); /* Very subtle in dark */
+    }
 
-  .text-research-description {
-    color: var(--theme-color-550); /* Better contrast in dark mode */
-  }
-  
-  .text-meta--light {
-    color: var(--theme-color-400);
-    opacity: 0.85; /* Slightly more transparent in dark */
-  }
+    .text-research-description {
+      color: var(--theme-color-550); /* Better contrast in dark mode */
+    }
+
+    .text-meta--light {
+      color: var(--theme-color-400);
+      opacity: 0.85; /* Slightly more transparent in dark */
+    }
   }
 
   /* Utopia Spacing Rules for Optimal Vertical Rhythm */
@@ -2367,35 +2367,35 @@
 
 /* Research-specific typography refinements */
 
-  /* Publication names - Bringhurst's proper small caps approach */
-  .text-publication {
-    /* Enhanced small caps following masters' principles */
-    font-feature-settings:
-      "kern" 1,     /* Essential kerning */
-      "smcp" 1,     /* Real small caps */
-      "c2sc" 1,     /* Caps to small caps */
-      "case" 1,     /* Case-sensitive forms */
-      "ss01" 1,     /* Stylistic alternates */
-      "lnum" 1;     /* Lining figures */
-    
-    /* Hochuli: Optimal sizing for publication names */
-    font-size: var(--step--1); /* 12.8-14.4px */
-    font-weight: 450; /* Increased weight for better presence */
-    
-    /* Butterick: Generous tracking for small caps */
-    letter-spacing: 0.05em; /* More generous for distinction */
-    
-    /* Jason Santa Maria: Create visual anchors through strategic color */
-    color: var(--theme-accent-base); /* Accent color for visual anchor */
-    line-height: 1.4; /* Comfortable for small text */
-    
-    /* No transform - using real small caps */
-    text-transform: none;
-    
-    /* Ambrose-Harris: subtle emphasis through spacing */
-    display: inline-block; /* Allows for better control */
-    margin-top: var(--space-1); /* 6px - slight separation from metadata */
-  }
+/* Publication names - Bringhurst's proper small caps approach */
+.text-publication {
+  /* Enhanced small caps following masters' principles */
+  font-feature-settings:
+    "kern" 1,
+    /* Essential kerning */ "smcp" 1,
+    /* Real small caps */ "c2sc" 1,
+    /* Caps to small caps */ "case" 1,
+    /* Case-sensitive forms */ "ss01" 1,
+    /* Stylistic alternates */ "lnum" 1; /* Lining figures */
+
+  /* Hochuli: Optimal sizing for publication names */
+  font-size: var(--step--1); /* 12.8-14.4px */
+  font-weight: 450; /* Increased weight for better presence */
+
+  /* Butterick: Generous tracking for small caps */
+  letter-spacing: 0.05em; /* More generous for distinction */
+
+  /* Jason Santa Maria: Create visual anchors through strategic color */
+  color: var(--theme-accent-base); /* Accent color for visual anchor */
+  line-height: 1.4; /* Comfortable for small text */
+
+  /* No transform - using real small caps */
+  text-transform: none;
+
+  /* Ambrose-Harris: subtle emphasis through spacing */
+  display: inline-block; /* Allows for better control */
+  margin-top: var(--space-1); /* 6px - slight separation from metadata */
+}
 
 /* Research action links - specialized for external resources */
 .link-research-action {
@@ -2405,11 +2405,11 @@
   font-size: var(--step--1); /* Smaller, refined */
   font-weight: 450;
   letter-spacing: 0.02em;
-  
+
   /* Ruder: Clear but unobtrusive */
   opacity: 0.9;
   transition: all 200ms ease;
-  
+
   /* Inline-flex for icon alignment */
   display: inline-flex;
   align-items: baseline;
@@ -2423,55 +2423,55 @@
   font-weight: 500;
 }
 
-  /* Entry dividers - Hochuli's subtle structural division */
-  .entry-divider {
-    border: 0;
-    border-bottom: 1px solid var(--theme-color-100); /* Ultra-light for subtlety */
-    margin: 0;
-    padding-bottom: var(--space-5); /* 30px - more generous breathing room */
-    
-    /* Ambrose-Harris: create rhythm through spacing variation */
-    position: relative;
-  }
-  
-  /* Bringhurst: "Letters have life and dignity of their own" - give entries space to breathe */
-  .entry-divider + .entry-divider {
-    padding-top: var(--space-1); /* 6px - subtle top padding for visual separation */
-  }
-  
-  .entry-divider:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  
+/* Entry dividers - Hochuli's subtle structural division */
+.entry-divider {
+  border: 0;
+  border-bottom: 1px solid var(--theme-color-100); /* Ultra-light for subtlety */
+  margin: 0;
+  padding-bottom: var(--space-5); /* 30px - more generous breathing room */
 
+  /* Ambrose-Harris: create rhythm through spacing variation */
+  position: relative;
+}
 
-  /* Research description refinements */
-  .text-research-description {
-    /* Optimal reading typography - Butterick's hierarchy principles */
-    font-size: var(--step-0); /* 13-14px - larger for better readability */
-    line-height: 1.5; /* Baseline-aligned (24px at 16px base) */
-    color: var(--theme-color-700); /* Darker for better contrast */
-    font-weight: 400; /* Regular weight for body text */
-    
-    /* Bringhurst: Optimal measure for comfortable reading */
-    max-width: 65ch; /* Slightly narrower for academic content */
-    
-    /* OpenType refinements */
-    font-feature-settings:
-      "kern" 1,
-      "liga" 1,
-      "calt" 1,
-      "onum" 0, /* Lining figures for consistency */
-      "ss01" 1; /* Stylistic alternates for better 'a' */
-    
-    /* Hochuli: Careful treatment of text details */
-    hyphens: auto;
-    hanging-punctuation: first last;
-    
-    /* Ambrose-Harris: Create visual interest through subtle variation */
-    text-rendering: optimizeLegibility;
-  }
+/* Bringhurst: "Letters have life and dignity of their own" - give entries space to breathe */
+.entry-divider + .entry-divider {
+  padding-top: var(
+    --space-1
+  ); /* 6px - subtle top padding for visual separation */
+}
+
+.entry-divider:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Research description refinements */
+.text-research-description {
+  /* Optimal reading typography - Butterick's hierarchy principles */
+  font-size: var(--step-0); /* 13-14px - larger for better readability */
+  line-height: 1.5; /* Baseline-aligned (24px at 16px base) */
+  color: var(--theme-color-700); /* Darker for better contrast */
+  font-weight: 400; /* Regular weight for body text */
+
+  /* Bringhurst: Optimal measure for comfortable reading */
+  max-width: 65ch; /* Slightly narrower for academic content */
+
+  /* OpenType refinements */
+  font-feature-settings:
+    "kern" 1,
+    "liga" 1,
+    "calt" 1,
+    "onum" 0,
+    /* Lining figures for consistency */ "ss01" 1; /* Stylistic alternates for better 'a' */
+
+  /* Hochuli: Careful treatment of text details */
+  hyphens: auto;
+  hanging-punctuation: first last;
+
+  /* Ambrose-Harris: Create visual interest through subtle variation */
+  text-rendering: optimizeLegibility;
+}
 
 /* Dark mode adjustments */
 :root[data-theme="dark"] .text-sm,

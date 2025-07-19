@@ -145,7 +145,7 @@ Header:
   - About  
   - Research
   - Writing
-  - Email
+  - Media
 
 Footer:
   Explore:

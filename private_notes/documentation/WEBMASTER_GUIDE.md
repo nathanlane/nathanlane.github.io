@@ -9,9 +9,10 @@ This guide covers everything you need to know to manage and deploy this website 
 4. [Deployment](#deployment)
 5. [Content Management](#content-management)
 6. [Typography & Metadata System](#typography--metadata-system)
-7. [Footer Management & Sitemap System](#footer-management--sitemap-system)
-8. [Security Headers](#security-headers)
-9. [Monitoring & Maintenance](#monitoring--maintenance)
+7. [Typography System Guide](#typography-system-guide)
+8. [Footer Management & Sitemap System](#footer-management--sitemap-system)
+9. [Security Headers](#security-headers)
+10. [Monitoring & Maintenance](#monitoring--maintenance)
 
 ---
 
@@ -220,8 +221,11 @@ bio:
     Your bio content here...
 
 contact:
-  title: "Contact & Links"
+  title: "Important Links"
   items:
+    - label: "The Industrial Policy Group"
+      href: "https://industrialpolicygroup.com"
+      text: "industrialpolicygroup.com"
     - label: "Email"
       href: "mailto:your@email.com"
       text: "your@email.com"
@@ -294,6 +298,7 @@ The site uses a sophisticated metadata system based on classical typography prin
 
 - **[Complete Guide](METADATA_SYSTEM_GUIDE.md)** - Comprehensive documentation
 - **[Quick Reference](METADATA_QUICK_REFERENCE.md)** - Developer cheat sheet
+- **[Typography System Guide](TYPOGRAPHY_SYSTEM_GUIDE.md)** - Global CSS classes and typography principles
 
 ### MetadataLine Component
 
@@ -333,6 +338,81 @@ import MetadataLine from '@/components/MetadataLine.astro';
 
 ---
 
+## Typography System Guide
+
+### Overview
+
+The typography system has been centralized and refined based on principles from typography masters including Ambrose & Harris, Hochuli, Santa Maria, Bringhurst, Ruder, and Butterick. This system provides:
+
+- **Global CSS classes** for consistent typography patterns
+- **Baseline grid alignment** using 6px units
+- **Enhanced OpenType features** for professional appearance
+- **Accessibility support** including high contrast modes
+- **Performance optimization** through reduced CSS duplication
+
+### Key Global Classes
+
+#### Research-Specific Typography
+- `.text-publication` - Publication and journal name styling
+- `.text-research-description` - Optimized description typography
+- `.link-research-action` - Consistent research action links
+- `.entry-divider` - Semantic content separation
+
+#### Layout Utilities
+- `.featured-title` - Lightweight titles for featured sections
+- `.list-none` - Clean list styling removal
+
+### Implementation Examples
+
+**Research Entry Component:**
+```astro
+<article class="entry-divider">
+  <h3 class="research-title">
+    <a href={href} class="link-title">{title}</a>
+  </h3>
+  
+  {publication && (
+    <div class="text-publication">{publication}</div>
+  )}
+  
+  {description && (
+    <p class="text-research-description">{description}</p>
+  )}
+  
+  <a href={href} class="link-research-action">
+    <span>View Details</span>
+    <span aria-hidden="true">→</span>
+  </a>
+</article>
+```
+
+**Minimal Featured Section:**
+```astro
+<ul class="space-y-3b list-none">
+  {papers.map((paper) => (
+    <li class="flex items-baseline justify-between gap-4b">
+      <span class="featured-title flex-1">{paper.data.title}</span>
+      <a href={`/research/${paper.id}/`} class="link-research-action">
+        <span>View</span>
+        <span aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>
+```
+
+### Benefits
+
+- **Consistency**: Unified typography patterns across all research components
+- **Maintainability**: Single source of truth for styling decisions
+- **Performance**: Reduced CSS duplication and improved caching
+- **Accessibility**: Built-in support for high contrast and dark modes
+- **Scalability**: Easy to extend and modify system-wide
+
+For complete documentation, see **[Typography System Guide](TYPOGRAPHY_SYSTEM_GUIDE.md)**.
+
+---
+
 ## Footer Management & Sitemap System
 
 ### Footer Content Management
@@ -367,7 +447,7 @@ export const navigationConfig = {
         title: "Contact",
         links: [
           { title: "Email", href: `mailto:${siteConfig.email}` },
-          { title: "CV", href: "/cv" }
+          { title: "CV", href: siteConfig.resumeUrl || "/cv.pdf" }
         ]
       },
       {

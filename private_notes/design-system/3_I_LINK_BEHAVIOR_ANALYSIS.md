@@ -2,7 +2,7 @@
 
 ## Current Link System Overview
 
-The site uses a consolidated link system with 4 primary link types, each with distinct hover behaviors. The system was refactored from 7 types down to 4 in Phase 1 (January 30, 2025) and further enhanced in Phase 2A (July 18, 2025).
+The site uses a consolidated link system with 4 primary link types, each with distinct hover behaviors. The system was refactored from 7 types down to 4 in Phase 1 (January 30, 2025), further enhanced in Phase 2A (July 18, 2025), and harmonized in Phase 2B (July 19, 2025).
 
 ## Link Type Behaviors
 
@@ -148,19 +148,40 @@ The site uses a consolidated link system with 4 primary link types, each with di
    - Keep navigation subtle variant for secondary links
    - Maintain research action links as specialized type
 
-### Implementation Priority
+## Phase 2B Harmonization (July 19, 2025)
 
-1. **High Priority**
-   - Fix Header nav link overrides to use link-nav properly
-   - Harmonize prose link styling with link-inline
-   - Consolidate color variable usage
+### Changes Implemented
 
-2. **Medium Priority**
-   - Standardize weight increase patterns
-   - Add hover-underline utility class for PostPreview pattern
-   - Remove brightness filters in favor of color changes
+1. **Header Component Fixed** ✅
+   - Removed custom overrides that prevented proper link-nav behavior
+   - Now uses `link-nav` class properly with custom padding/font-size only
+   - Site title uses consistent hover to `--theme-accent-base`
 
-3. **Low Priority**
-   - Audit all custom component overrides
-   - Document when to use each link type
-   - Consider reducing to 3 types (merge link-title into link-nav)
+2. **Hover Colors Standardized** ✅
+   - All links now hover to `--theme-accent-base` for consistency
+   - Fixed nav variants (subtle, back) to use accent hover color
+   - Footer links updated to use accent color on hover
+
+3. **Hover Underline Utility Created** ✅
+   - Added `.u-hover-underline` utility class
+   - Applied to PostPreview component links
+   - Provides consistent "no underline → underline on hover" pattern
+
+4. **Weight Changes Harmonized** ✅
+   - All links now use consistent +50 weight units on hover
+   - Updated CSS variables with clear comments
+   - Fixed active state to use proper nav weight
+
+### Harmonized Link Behaviors
+
+| Link Type | Default | Hover | Underline Pattern |
+|-----------|---------|-------|-------------------|
+| **link-inline** | Weight 400, underlined | Weight 450, accent color, thicker underline | Always underlined |
+| **link-nav** | Weight 450, no underline | Weight 500, accent color | Never underlined |
+| **link-title** | Weight 500, no underline | Weight 550, accent color | Never underlined |
+| **link-footer** | Weight 400, transparent border | Weight 450, accent color, visible border | Border effect |
+
+### Utility Modifiers
+- `.u-underline-thin`: Always thin underline, thickens on hover
+- `.u-hover-underline`: No underline → underline on hover
+- `.u-with-icon`: Flex display with icon gap

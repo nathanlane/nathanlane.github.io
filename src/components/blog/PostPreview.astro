@@ -14,8 +14,8 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 <div class={withDesc ? "flex flex-col" : "flex flex-col grow sm:flex-row sm:items-center sm:justify-between"}>
 	{!withDesc ? (
 		<>
-			<Tag class="font-sans font-normal text-0 text-accent-base md:line-clamp-1 hover:underline flex-grow">
-				<a data-astro-prefetch href={`/posts/${post.id}/`}>
+			<Tag class="font-sans font-normal text-0 text-accent-base md:line-clamp-1 flex-grow">
+				<a class="u-hover-underline" data-astro-prefetch href={`/posts/${post.id}/`}>
 					{post.data.draft && <span class="text-red-500">(Draft) </span>}
 					{post.data.title}
 				</a>
@@ -41,8 +41,8 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 					day: "2-digit",
 				}}
 			/>
-			<Tag class="font-sans font-normal text-0 text-accent-base mt-space-2xs hover:underline">
-				<a data-astro-prefetch href={`/posts/${post.id}/`}>
+			<Tag class="font-sans font-normal text-0 text-accent-base mt-space-2xs">
+				<a class="u-hover-underline" data-astro-prefetch href={`/posts/${post.id}/`}>
 					{post.data.title}
 				</a>
 			</Tag>

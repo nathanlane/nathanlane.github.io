@@ -1,5 +1,100 @@
 # Changelog
 
+## Research Page Typography & Component Refinements (January 2025)
+
+### Research Entry Component Overhaul
+- **Typography Refinement**: Complete refactor of `ResearchEntry.astro` component
+  - Applied typography principles from masters: Ambrose & Harris, Hochuli, Santa Maria, Bringhurst, Ruder, Butterick
+  - Increased title sizes using `var(--step-1)` (15.6-18px) for better hierarchy
+  - Enhanced OpenType features: kerning, ligatures, contextual alternates
+  - Improved baseline grid alignment with 6px grid units
+  - Added real small caps for status indicators
+  - Refined link typography with proper weight and color transitions
+
+### Global CSS System Centralization
+- **New Global Classes**: Added comprehensive typography classes to `src/styles/global.css`
+  - `.text-publication` for publication information styling
+  - `.link-research-action` for consistent research action links
+  - `.entry-divider` for semantic content separation
+  - `.text-research-description` for optimized description typography
+  - All classes include dark mode and high contrast support
+
+### Research Index Page Improvements
+- **"New and Updated" Section**: Simplified to minimal design
+  - Removed complex metadata, descriptions, and publication info
+  - Clean title + link layout using flexbox
+  - Lighter font weight (400) for elegant appearance
+  - Consistent with site's refined typography system
+- **Section Consistency**: Standardized heading hierarchy across all sections
+- **Hover States**: Removed background color changes for cleaner interaction
+
+### About Page Enhancements
+- **Table of Contents**: Added customizable TOC component
+  - Dynamic sections: Biography, Email, CV
+  - Config-driven content using `site.config.ts`
+  - Optional and customizable header text
+  - Accessible numbering without brackets
+  - Responsive design with proper spacing
+
+### Typography System Maturation
+- **Baseline Grid**: Consistent 6px unit system throughout
+- **Vertical Rhythm**: Proper line-height and spacing relationships
+- **Semantic Classes**: Move from component-specific to reusable global styles
+- **Accessibility**: High contrast mode support and semantic markup
+- **Performance**: Reduced CSS duplication through centralized classes
+
+### Component Architecture
+- **TableOfContents.astro**: New reusable component with props
+  - `headerText` and `showHeader` for customization
+  - Clean numbering system without decorative brackets
+  - Consistent with site's link and typography patterns
+- **ResearchEntry.astro**: Streamlined to use global classes
+  - Improved maintainability and consistency
+  - Better semantic structure and accessibility
+
+### Impact
+- **Visual Hierarchy**: Clear information architecture with proper typographic scale
+- **Maintainability**: Centralized CSS reduces duplication and improves consistency
+- **User Experience**: Cleaner, more readable interface with refined interactions
+- **Accessibility**: Better semantic markup and high contrast support
+- **Performance**: Reduced CSS payload through global class consolidation
+
+## Link CSS Harmonization - Phase 2B (July 19, 2025)
+
+### Hover Behavior Standardization
+- **All Links Hover to Accent Color**: Standardized `--theme-accent-base` for all hover states
+  - Updated nav variants (subtle, back) to use accent instead of `--theme-text`
+  - Footer links changed from `--theme-text` to accent color
+  - Header site title now properly uses accent hover
+- **Consistent Weight Changes**: All links now use +50 weight units on hover
+  - link-inline: 400 → 450
+  - link-nav: 450 → 500  
+  - link-title: 500 → 550
+  - Fixed active state weight for nav links
+
+### Header Component Fix
+- **Removed Custom Overrides**: Header nav links now properly use `link-nav` class
+  - Custom styles reduced to only padding and font-size
+  - Eliminated conflicting color and hover rules
+  - Both desktop and mobile nav links updated
+
+### New Hover Underline Utility
+- **Created `.u-hover-underline`**: For links that only show underline on hover
+  - Applied to PostPreview component links
+  - Provides consistent behavior for "hover to reveal" pattern
+  - Uses semantic CSS variables for theming
+
+### Documentation
+- **Updated Link Behavior Analysis**: Added Phase 2B harmonization details
+- **Clear Behavior Patterns**: Documented 4 distinct underline patterns
+- **Utility Modifier Guide**: Listed all available link modifiers
+
+### Impact
+- **Consistency**: All links now have predictable, harmonized hover behaviors
+- **Maintainability**: Single source of truth for hover colors and weights
+- **User Experience**: Consistent visual feedback across all link types
+- **Zero Breaking Changes**: All existing functionality preserved
+
 ## Zero-Risk CSS Consolidation (July 19, 2025)
 
 ### Border Utility Components
@@ -270,6 +365,43 @@
 - **Accessibility Win**: Consistent focus-visible implementation improves keyboard navigation
 
 ## CSS Audit and Phase 1 Improvements (January 29, 2025)
+
+## Navigation & User Experience Improvements (January 2025)
+
+### Header Navigation Update
+- **Replaced Email with Media**: Changed header navigation from "Email" to "Media" 
+  - Updated `src/config/navigation.config.ts` primary navigation array
+  - Media link points to `/media/` page showing media appearances and press coverage
+  - Improves content discoverability and navigation hierarchy
+  - Maintains clean 5-item navigation: Home, About, Research, Writing, Media
+
+### Footer Contact Section Enhancement
+- **Added CV Link**: Extended footer Contact section to include CV link below Email
+  - Updated `src/config/navigation.config.ts` footer configuration
+  - Contact section now shows: Email → CV (logical progression)
+  - Uses dynamic `siteConfig.resumeUrl` for maintainability
+  - Provides better access to professional materials from every page
+
+### Homepage Important Links Redesign
+- **TableOfContents Component Integration**: Replaced ContactInfo with TableOfContents for "Important Links"
+  - Created sophisticated dot-leader design with optional numbering
+  - Changed section title from "The Important Stuff" to "Important Links"
+  - Updated content to include: Industrial Policy Group, Industrial Policy Data, Email, CV, GitHub
+  - Maintains document-centric aesthetic with elegant typography
+
+### TableOfContents Component Enhancement
+- **Optional Numbers Feature**: Added `showNumbers` prop to TableOfContents component
+  - **Interface**: Added `showNumbers?: boolean` to Props interface
+  - **Default**: `showNumbers = true` (maintains backward compatibility)
+  - **Implementation**: Conditional rendering of numbers using `{showNumbers && <span>}`
+  - **Homepage Usage**: Set `showNumbers={false}` for clean, number-free Important Links
+
+### Benefits Delivered
+- **Better Content Discovery**: Media section now prominently featured in navigation
+- **Professional Accessibility**: CV easily accessible from footer on every page
+- **Design Consistency**: TableOfContents maintains site's typography-first aesthetic
+- **Component Flexibility**: TableOfContents now adaptable for various use cases
+- **User Experience**: Clear, logical navigation hierarchy throughout site
 
 ## CSS Audit and Phase 1 Improvements (January 29, 2025)
 

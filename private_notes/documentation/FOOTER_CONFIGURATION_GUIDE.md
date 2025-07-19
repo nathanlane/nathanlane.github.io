@@ -35,7 +35,7 @@ export const navigationConfig = {
         title: "Contact",
         links: [
           { title: "Email", href: `mailto:${siteConfig.email}` },
-          { title: "CV", href: "/cv" }
+          { title: "CV", href: siteConfig.resumeUrl || "/cv.pdf" }
         ]
       },
       {
@@ -138,11 +138,21 @@ Use `href: "#"` for descriptive text:
 {
   title: "Downloads",
   links: [
-    { title: "CV", href: "/cv.pdf" },
+    { title: "CV", href: siteConfig.resumeUrl || "/cv.pdf" },
     { title: "Resume", href: "/resume.pdf" }
   ]
 }
 ```
+
+### Current Footer Configuration
+
+As of January 2025, the footer includes:
+
+**Contact Section:**
+- Email (using dynamic `siteConfig.email`)
+- CV (using dynamic `siteConfig.resumeUrl` for maintainability)
+
+This provides easy access to professional contact information from every page.
 
 ## Typography Customization
 

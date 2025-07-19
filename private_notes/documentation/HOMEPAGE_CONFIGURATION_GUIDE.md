@@ -30,23 +30,26 @@ bio:
     - title: "Industrial Policy Group"
       role: "Co-Principal Investigator"
 
-# Contact section configuration
+# Contact section configuration (displays as Important Links)
 contact:
-  title: "Contact & Links"
+  title: "Important Links"
   email: "drnathanlane@gmail.com"
   items:
+    - label: "The Industrial Policy Group"
+      href: "https://industrialpolicygroup.com"
+      text: "industrialpolicygroup.com"
+    - label: "Industrial Policy Data"
+      href: "https://industrialpolicydata.com"
+      text: "industrialpolicydata.com"
     - label: "Email"
       href: "mailto:drnathanlane@gmail.com"
       text: "drnathanlane@gmail.com"
-    - label: "Research"
-      href: "/research/"
-      text: "Browse all papers"
     - label: "CV"
       href: "/cv.pdf"
       text: "Download CV"
-    - label: "Updates"
-      href: "/rss.xml"
-      text: "RSS feed"
+    - label: "GitHub"
+      href: "https://github.com/nathanlane"
+      text: "GitHub"
 
 # Homepage sections configuration
 sections:
@@ -206,10 +209,11 @@ The current homepage follows this structure:
    - Sorted by date
    - Configurable count
 
-6. **Contact Section**
-   - Configurable contact links
-   - Email integration
-   - Flexible link structure
+6. **Important Links Section**
+   - Uses TableOfContents component with dot leaders
+   - Displays as elegant link list without numbers
+   - Includes professional and project links
+   - Typography-focused design
 
 ## Troubleshooting
 
@@ -218,10 +222,11 @@ The current homepage follows this structure:
 - Check YAML syntax for errors
 - Verify required `narrative` field is provided
 
-### Contact Section Issues
+### Important Links Section Issues
 - Check that `contact.items` is properly formatted array
 - Ensure each item has `label`, `href`, and `text` fields
 - Test all URLs for validity
+- Verify TableOfContents component is properly imported in index.astro
 
 ### Section Content Missing
 - Verify content exists (e.g., featured research papers)

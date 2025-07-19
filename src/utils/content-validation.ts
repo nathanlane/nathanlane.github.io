@@ -16,12 +16,7 @@ export async function validateSlugUniqueness() {
   const slugMap = new Map<string, { collection: string; title: string }[]>();
 
   // Collections to check
-  const collections = [
-    "post",
-    "research",
-    "projects",
-    "writing",
-  ] as const;
+  const collections = ["post", "research", "projects", "writing"] as const;
 
   for (const collectionName of collections) {
     const entries = await getCollection(collectionName);
