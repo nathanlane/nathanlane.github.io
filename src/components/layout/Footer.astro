@@ -74,13 +74,14 @@ const currentYear = new Date().getFullYear();
 
   /* Enhanced section titles with proper hierarchy */
   .footer-section-title {
-    font-family: "Newsreader Variable", "Newsreader", serif;
-    font-size: var(--step-1); /* Clear hierarchy */
-    font-weight: 350; /* Lighter weight - footer is secondary content */
-    font-variation-settings: "opsz" 14, "wght" 350; /* Refined weight for quiet presence */
-    letter-spacing: 0.03em; /* More open spacing for light serif headers */
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: var(--step--1); /* Slightly smaller than body text */
+    font-weight: 500; /* Medium weight for subordinate headers */
+    font-variation-settings: "wght" 500; /* Precise weight control */
+    letter-spacing: 0.075em; /* Classic subordinate header spacing */
+    text-transform: uppercase; /* Classic subordinate header treatment */
     margin-bottom: var(--space-3); /* 18px - 0.75 baseline */
-    color: var(--color-text); /* Full contrast for section headers */
+    color: var(--theme-color-550); /* Lighter text for subordinate headers */
     line-height: 1.4; /* Slightly more generous for small headers */
     /* No underline - clean typography principle */
   }
@@ -207,8 +208,8 @@ const currentYear = new Date().getFullYear();
   /* Typography enhancement for different screen densities */
   @media (-webkit-min-device-pixel-ratio: 2) {
     .footer-section-title {
-      font-variation-settings: "opsz" 14, "wght" 325; /* Even lighter on crisp displays */
-      letter-spacing: 0.035em; /* More open on sharp screens */
+      font-variation-settings: "wght" 475; /* Slightly lighter on crisp displays */
+      letter-spacing: 0.08em; /* More open on sharp screens */
     }
     
     /* Footer link media query handled by links.css */
@@ -222,10 +223,10 @@ const currentYear = new Date().getFullYear();
   /* High contrast mode - accessibility per WCAG */
   @media (prefers-contrast: high) {
     .footer-section-title {
-      font-weight: 500; /* Medium weight for accessibility without being heavy */
-      font-variation-settings: "opsz" 14, "wght" 500;
-      letter-spacing: 0.03em; /* Maintain open spacing */
-      color: var(--color-text);
+      font-weight: 550; /* Slightly heavier for accessibility */
+      font-variation-settings: "wght" 550;
+      letter-spacing: 0.075em; /* Maintain classic spacing */
+      color: var(--theme-color-700); /* Darker for high contrast accessibility */
     }
     
     /* Footer link high contrast handled by links.css */

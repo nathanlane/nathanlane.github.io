@@ -22,12 +22,12 @@ When your professional information changes, update `/src/site.config.ts`:
 
 ```typescript
 // SEO and structured data fields
-jobTitle: "Assistant Professor of Economics",  // Update when job title changes
-organization: "University of Oxford",           // Update when changing institutions
-profileImage: "/headshot.jpg",                  // Update if you change the filename
-twitterHandle: "@straightedge",                 // Update if Twitter handle changes
-orcid: "0000-0003-0884-8418",                  // Your ORCID ID (rarely changes)
-socialProfiles: [                               // Add/remove social profiles
+jobTitle: "Assistant Professor of Economics", // Update when job title changes
+organization: "University of Oxford", // Update when changing institutions
+profileImage: "/headshot.jpg", // Update if you change the filename
+twitterHandle: "@straightedge", // Update if Twitter handle changes
+orcid: "0000-0003-0884-8418", // Your ORCID ID (rarely changes)
+socialProfiles: [ // Add/remove social profiles
   "https://twitter.com/straightedge",
   "https://www.linkedin.com/in/drnathanlane/",
   "https://github.com/nathanlane",
@@ -44,15 +44,15 @@ If you add new types of content beyond blog posts and research papers, you'll ne
 ```typescript
 case 'project':
   schema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareSourceCode",  // or "CreativeWork" for non-code projects
-    "@id": `${siteConfig.siteUrl}${data.url}#project`,
-    "name": data.title,
-    "description": data.description,
-    "author": personSchema,
-    "datePublished": data.publishDate,
-    "programmingLanguage": data.technologies,  // ["Python", "R", etc.]
-    "codeRepository": data.github
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode", // or "CreativeWork" for non-code projects
+  "@id": `${siteConfig.siteUrl}${data.url}#project`,
+  "name": data.title,
+  "description": data.description,
+  "author": personSchema,
+  "datePublished": data.publishDate,
+  "programmingLanguage": data.technologies, // ["Python", "R", etc.]
+  "codeRepository": data.github
   };
   break;
 ```
@@ -62,24 +62,24 @@ case 'project':
 After making changes, always test your structured data:
 
 1. **Google's Rich Results Test**: https://search.google.com/test/rich-results
-   - Enter your URL or paste your HTML
-   - Check for errors or warnings
-   - Preview how your content might appear in search
+  - Enter your URL or paste your HTML
+  - Check for errors or warnings
+  - Preview how your content might appear in search
 
 2. **Schema.org Validator**: https://validator.schema.org/
-   - More technical validation
-   - Shows the complete structured data tree
+  - More technical validation
+  - Shows the complete structured data tree
 
 3. **Local Testing**:
-   ```bash
-   # Build your site
-   pnpm build
+  ```bash
+  # Build your site
+  pnpm build
 
-   # Preview locally
-   pnpm preview
+  # Preview locally
+  pnpm preview
 
-   # View page source and search for "application/ld+json"
-   ```
+  # View page source and search for "application/ld+json"
+  ```
 
 ## Common Maintenance Tasks
 
@@ -135,12 +135,12 @@ If you reorganize where images are stored:
 ### Validation Errors
 1. Use Google's Rich Results Test to identify issues
 2. Common issues:
-   - Missing required fields
-   - Invalid date formats (use ISO 8601)
-   - Broken image URLs
+  - Missing required fields
+  - Invalid date formats (use ISO 8601)
+  - Broken image URLs
 
 ### Changes Not Reflected
-1. Clear your build cache: `rm -rf .astro dist`
+1. Clear your build cache: `rm -rf.astro dist`
 2. Rebuild: `pnpm build`
 3. Google can take days/weeks to update their index
 

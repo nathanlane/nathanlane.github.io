@@ -25,5 +25,5 @@ The great lil' seminar is related to his recent working paper, "Methods for Coll
 ##### Abstract
 
 <blockquote>
-The task of coding text for discrete categories or quantifiable scales is a classic problem in political science. Traditionally, this task is executed by qualified ``experts''.  While productive, this method is time consuming, resource intensive, and introduces bias.  In the following paper I present the findings from a series of experiments developed to assess the viability of using crowd-sourcing platforms for political text coding, and how variations in the collection mechanism affects the quality of output...
+The task of coding text for discrete categories or quantifiable scales is a classic problem in political science. Traditionally, this task is executed by qualified ``experts''. While productive, this method is time consuming, resource intensive, and introduces bias. In the following paper I present the findings from a series of experiments developed to assess the viability of using crowd-sourcing platforms for political text coding, and how variations in the collection mechanism affects the quality of output...
 </blockquote>

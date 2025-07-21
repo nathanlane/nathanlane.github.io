@@ -1,43 +1,51 @@
 {
-  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "formatter": {
-    "indentStyle": "tab",
-    "indentWidth": 2,
-    "lineWidth": 100,
-    "formatWithErrors": true,
-		"ignore": ["*.astro", "tsconfig.json", "package.json", "vitest.config.ts", ".claude/**"]
-  },
-  "organizeImports": {
-    "enabled": true
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "a11y": {
-        "noSvgWithoutTitle": "off"
-      },
-      "suspicious": {
-        "noExplicitAny": "warn"
-      },
-      "complexity": {
-        "noForEach": "off"
-      },
-      "style": {
-        "useNodejsImportProtocol": "warn",
-        "useTemplate": "warn"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "trailingCommas": "all",
-      "semicolons": "always"
-    }
-  },
-  "vcs": {
-    "clientKind": "git",
-    "enabled": true,
-    "useIgnoreFile": true
-  }
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"formatter": {
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 100,
+		"formatWithErrors": true,
+		"ignore": [
+			"*.astro",
+			"tsconfig.json",
+			"package.json",
+			"vitest.config.ts",
+			".claude/**",
+			"*.css",
+			"biome.json"
+		]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"a11y": {
+				"noSvgWithoutTitle": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "warn"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
+			"style": {
+				"useNodejsImportProtocol": "warn",
+				"useTemplate": "warn"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"trailingCommas": "all",
+			"semicolons": "always"
+		}
+	},
+	"vcs": {
+		"clientKind": "git",
+		"enabled": true,
+		"useIgnoreFile": true
+	}
 }

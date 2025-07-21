@@ -19,24 +19,24 @@ Before stumbling across Revolution R, the predesessor to Microsoft R Open, I did
 #### Upgrading to R Open
 
 Before installing <a href="https://mran.revolutionanalytics.com/open/
-">Microsoft R Open</a>, you want to keep track of all the packages you’ve installed. Because we’re installing a new version of R underneath RStudio, we wont have access to our old packages.
+">Microsoft R Open</a>, you want to keep track of all the packages you've installed. Because we're installing a new version of R underneath RStudio, we wont have access to our old packages.
 
 The following R code saves a list of packages that are currently installed in R. A <code>.Rda</code> file containing the installed package list will be saved in your default working directory. (If you need a reminder of your current working directory type <code>getwd()</code> into R.)
 
 {% highlight R %}
 # Save a list of packges install in R.
 temp <- installed.packages()
-installedpackages <- as.vector( temp[ is.na( temp[ , "Priority" ] ) , 1 ] )
-save( installedpackages , file = "oldpackages.rda" )
+installedpackages <- as.vector( temp[ is.na( temp[, "Priority" ] ), 1 ] )
+save( installedpackages, file = "oldpackages.rda" )
 {% endhighlight %}
 
 The above code is essentially the same as <a href="https://www.datascienceriot.com/how-to-upgrade-r-without-losing-your-packages/kris/">Data Science Riot</a>.
 
-Once we setup R Open, we’ll evoke this <code>.Rda</code> file to automatically (re-)install the old packages.
+Once we setup R Open, we'll evoke this <code>.Rda</code> file to automatically (re-)install the old packages.
 
 Next, we download and install Microsoft R Open: <a href="https://mran.revolutionanalytics.com/download/#download">https://mran.revolutionanalytics.com/download/</a>.
 
-If, like me, you juggle multiple systems and can’t keep track of which version of Ubuntu you have, type the following command into the terminal:
+If, like me, you juggle multiple systems and can't keep track of which version of Ubuntu you have, type the following command into the terminal:
 
 {% highlight bash %}
 From your terminal:
@@ -48,14 +48,14 @@ Then download the appropriate version of R Open **and** the MKL libraries.
 After downloading, first install the Microsoft R Open Debian package:
 
 {% highlight bash %}
-sudo dpkg -i ./Downloads/MRO-3.3.0-Ubuntu-15.4.x86_64.deb
+sudo dpkg -i./Downloads/MRO-3.3.0-Ubuntu-15.4.x86_64.deb
 sudo apt-get install -f
 {% endhighlight %}
 
 Next install the MKL libraries by unzipping and then running the installation script located in the <code>/RevoMath</code> directory:
 
 {% highlight bash %}
-tar xvfz ./Downloads/RevoMath-3.3.0.tar.gz
+tar xvfz./Downloads/RevoMath-3.3.0.tar.gz
 cd RevoMath
 ./RevoMath.sh
 {% endhighlight %}
@@ -81,8 +81,8 @@ Now that RStudio "sees" Microsoft R Open as our default version of R, we return 
 {% highlight R %}
 load( "oldpackages.rda" )
 temp <- installed.packages()
-installedpackages.new <- as.vector( temp[ is.na( temp[ , "Priority" ] ) , 1 ] )
-missing <- setdiff( installedpackages , installedpackages.new )
+installedpackages.new <- as.vector( temp[ is.na( temp[, "Priority" ] ), 1 ] )
+missing <- setdiff( installedpackages, installedpackages.new )
 install.packages( missing )
 update.packages()
 {% endhighlight %}

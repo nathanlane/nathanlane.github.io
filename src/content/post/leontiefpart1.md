@@ -1,7 +1,7 @@
 ---
-title: Input-Output Tables & the Leontief Inverse in R - Part I.
-description: 'Surahammars Ironworks/Surahammars Järnbruk, Sweden, 1919.[](...</x-turndown)'
-publishDate: '2016-07-11'
+title: Input-Output Tables & the Leontief Inverse in R
+description: 'Surahammars Ironworks/Surahammars Järnbruk, Sweden, 1919.\[\](...'
+publishDate: 2016-07-11T00:00:00.000Z
 tags:
   - tutorial
   - input-output
@@ -42,7 +42,7 @@ First we'll build the input-output table in Table 1 using R. We generate the two
 
 {% highlight R %}
 # Intermediate flow matrix.
-flowtable <- rbind( c( 150 , 500 ), c( 200 , 100 ) )
+flowtable <- rbind( c( 150, 500 ), c( 200, 100 ) )
 # Final demand.
 finaldemand <- rbind( c( 350 ), c( 1700 ) )
 {% endhighlight %}
@@ -51,24 +51,24 @@ We combined these pieces into a <code>data.frame</code> object. Once combined, w
 
 {% highlight R %}
 # Bind into input-output table.
-inputoutputtable <- cbind( flowtable , finaldemand )
+inputoutputtable <- cbind( flowtable, finaldemand )
 
 # Convert object to data.frame.
 inputoutputtable <- as.data.frame( inputoutputtable )
 
 # Name columns of table (dataframe)
-names( inputoutputtable ) <- c("x1" , "x2" , "finaldemand")
+names( inputoutputtable ) <- c("x1", "x2", "finaldemand")
 
 # Calculate total output, add final demand and intermediate columns:
 inputoutputtable$totaloutput <- inputoutputtable$x1 +
-                                inputoutputtable$x2 +
-                                inputoutputtable$finaldemand
+  inputoutputtable$x2 +
+  inputoutputtable$finaldemand
 
 # Show the small IO table.
 inputoutputtable
->   x1  x2 finaldemand totaloutput
->1 150 500         350        1000
->2 200 100         1700       2000
+> x1 x2 finaldemand totaloutput
+>1 150 500 350 1000
+>2 200 100 1700 2000
 
 # Save total output vector as a separate object. Use later.
 totaloutput <- inputoutputtable$totaloutput
@@ -79,13 +79,13 @@ Now we can derive a **technical coefficient matrix**, also called **matrix A**. 
 Matrix A is calculated by dividing intersectoral flows by the total output of each column's sector. Specifically, sector 1 ships 500 dollars of good 1 to sector 2, which produces 1000 dollars of total output. Thus, one dollar of good 1 is absorbed to produce 25 cents of sector 2's output.
 
 $$
-\textrm{Input Flow Matrix: }~X  = \left[ \begin{matrix} 150 & 500 \\\ 200 & 100 \end{matrix} \right]~
+\textrm{Input Flow Matrix: }~X = \left[ \begin{matrix} 150 & 500 \\\ 200 & 100 \end{matrix} \right]~
 \\\
-z = \textrm{I}_2 \textrm{Total Output}^{-1} =\left[ \begin{matrix} 1 & 0 \\\ 0 & 1 \end{matrix} \right] \left[ \begin{matrix} 1000 \\\ 2000 \end{matrix}   \right]^{-1}~
+z = \textrm{I}_2 \textrm{Total Output}^{-1} =\left[ \begin{matrix} 1 & 0 \\\ 0 & 1 \end{matrix} \right] \left[ \begin{matrix} 1000 \\\ 2000 \end{matrix} \right]^{-1}~
 $$
 
 $$
-\textrm{Technical Coefficient Matrix: }~A = Xz \Rightarrow A = \left[ \begin{matrix} .15 & .25 \\\ .2 & .05 \end{matrix} \right]
+\textrm{Technical Coefficient Matrix: }~A = Xz \Rightarrow A = \left[ \begin{matrix}.15 &.25 \\\.2 &.05 \end{matrix} \right]
 $$
 
 To calculate matrix A in R: first take the inverse of the total output vector and multiply it with an identity matrix. The resulting object, <code>z</code>, is multiplied again with the <code>flowtable</code> matrix.
@@ -97,7 +97,7 @@ A <- flowtable %*% z
 
 # Show A
 A
-     [,1] [,2]
+  [,1] [,2]
 [1,] 0.15 0.25
 [2,] 0.20 0.05
 
@@ -107,12 +107,12 @@ Alternatively, we can use R's <code>sweep()</code> function to calculate A direc
 
 {% highlight R %}
 # Using "Sweep"
-A.alternative <- sweep( flowtable ,
-						margin = 2 ,
-						totaloutput ,
+A.alternative <- sweep( flowtable,
+						margin = 2,
+						totaloutput,
 						'/' )
 A.alternative
-     [,1] [,2]
+  [,1] [,2]
 [1,] 0.15 0.25
 [2,] 0.20 0.05
 {% endhighlight %}
@@ -120,7 +120,7 @@ A.alternative
 Finally, the Leontief matrix is calculated in the following way.
 
 $$
-\textrm{Leontief Matrix: }~ L = (\textrm{I}_2 - A)^{-1} \Rightarrow L = \left[ \begin{matrix} 1.2541 & .33 \\\ .264 & 1.1221 \end{matrix}  \right]
+\textrm{Leontief Matrix: }~ L = (\textrm{I}_2 - A)^{-1} \Rightarrow L = \left[ \begin{matrix} 1.2541 &.33 \\\.264 & 1.1221 \end{matrix} \right]
 $$
 
 Using R, we first calculate <code>I-A</code>, substracting the technical coefficient matrix from the identity matrix. We then invert the I-A matrix by using the<code>solve()</code> function. The result, <code>L</code>, is the Leontief coefficient matrix.
@@ -135,7 +135,7 @@ L <- solve( IminusA )
 
 # Show Leontief matrix.
 L
-          [,1]     [,2]
+  [,1] [,2]
 [1,] 1.2541254 0.330033
 [2,] 0.2640264 1.122112
 

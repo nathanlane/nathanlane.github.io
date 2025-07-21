@@ -1,8 +1,14 @@
 ---
-title: "TypeScript Prop Interfaces Implementation"
-description: "How we added explicit TypeScript interfaces to all components for better type safety and developer experience."
-publishDate: 2024-01-15
-tags: ["typescript", "components", "type-safety", "implementation"]
+title: TypeScript Prop Interfaces Implementation
+description: >-
+  How we added explicit TypeScript interfaces to all components for better type
+  safety and developer experience.
+publishDate: 2024-01-15T00:00:00.000Z
+tags:
+  - typescript
+  - components
+  - type-safety
+  - implementation
 draft: false
 ---
 
@@ -21,24 +27,16 @@ Following our best practices audit, Priority 4 was adding TypeScript prop interf
 ### TypeScript Improvements
 
 #### Before: Badge Component
-```astro
----
-const { variant = "default", showHash = true, title } = Astro.props;
----
-```
+```astro---const { variant = "default", showHash = true, title } = Astro.props;---```
 
 #### After: Badge Component
-```astro
----
-export interface Props {
+```astro---export interface Props {
   variant?: "default" | "accent" | "accent-base" | "accent-one" | "accent-two" | "muted" | "outline" | "inactive";
   showHash?: boolean;
   title?: string;
 }
 
-const { variant = "default", showHash = true, title } = Astro.props as Props;
----
-```
+const { variant = "default", showHash = true, title } = Astro.props as Props;---```
 
 ### Union Type Discrimination
 
@@ -59,7 +57,7 @@ interface CVLink {
 }
 
 // Use type guards for conditional logic
-target={'isEmail' in link || 'isCV' in link ? "_self" : "_blank"}
+target={'isEmail' in link || 'isCV' in link? "_self": "_blank"}
 ```
 
 ### Optional Properties Handling

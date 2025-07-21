@@ -18,5 +18,5 @@ draft: true
 <div class="post_title medium">I love regexes even more because they make it possible – if not trivial – to do research and analysis that is otherwise impossible, because believe it or not, most research and analysis start out with just giant blobs of text</div>
 </blockquote>
 <div class="post_title medium"></div>
-<div class="post_title medium"><span>The Bastard&#8217;s Book of Regex is a great (free!) text on cleaning up crappy data with regular expressions. Given this is the work of <a href="http://danwin.com" target="_blank">Dan Nguyen</a>, there is definitely a nod to cleaning OCR’d and scraped data in there.</span></div>
+<div class="post_title medium"><span>The Bastard's Book of Regex is a great (free!) text on cleaning up crappy data with regular expressions. Given this is the work of <a href="http://danwin.com" target="_blank">Dan Nguyen</a>, there is definitely a nod to cleaning OCR'd and scraped data in there.</span></div>
 </div>

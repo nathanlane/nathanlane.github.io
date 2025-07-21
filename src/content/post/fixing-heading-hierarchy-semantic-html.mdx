@@ -20,11 +20,11 @@ I just ran into an interesting dilemma while auditing my site's accessibility. T
 When I originally designed this site's typography, I made what seemed like a reasonable decision:
 
 ```html
-<!-- Main page title styled as a second-level heading -->
+<!--Main page title styled as a second-level heading-->
 
 ## Writing
 
-<!-- Section headers -->
+<!--Section headers-->
 
 ### Featured Writing
 
@@ -110,8 +110,4 @@ This experience reinforced an important principle: semantic HTML and visual desi
 
 Sometimes the best solution isn't to fight the platform but to embrace it and make it work for your design system.
 
-The web has conventions for good reasons. When we work with them rather than against them, everyone benefits—screen reader users, search engines, and developers who have to maintain the code.
-
----
-
-*Technical note: This approach uses Tailwind's `@apply` directive to map utility classes to semantic elements. The `:not([class])` selector ensures we only affect plain heading tags, preserving the ability to override with explicit classes when needed.*
+The web has conventions for good reasons. When we work with them rather than against them, everyone benefits—screen reader users, search engines, and developers who have to maintain the code.---*Technical note: This approach uses Tailwind's `@apply` directive to map utility classes to semantic elements. The `:not([class])` selector ensures we only affect plain heading tags, preserving the ability to override with explicit classes when needed.*

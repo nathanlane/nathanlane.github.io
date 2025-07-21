@@ -1,5 +1,38 @@
 # Changelog
 
+## HTML Entity Cleanup Script & Formatting Fixes (July 21, 2025)
+
+### Content Cleanup Tools
+- **Created HTML entity cleanup script** (`scripts/migration/clean-html-entities.js`):
+  - Converts HTML entities (&nbsp;, &gt;, &lt;, &amp;, etc.) to proper characters
+  - Fixes double-encoded entities (e.g., &amp;gt; → &gt; → >)
+  - Removes zero-width spaces and invisible characters
+  - Cleans up excessive whitespace and OCR/paste artifacts
+  - Converts smart quotes to straight quotes (optional)
+  - Handles special cases like "File: Save As > Image > TIFFs"
+  - Supports dry-run mode for previewing changes
+  - Can process single files or entire post collection
+  - **Statistics**: Found 70 files needing cleanup with 97 HTML entities, 1,454 whitespace issues, and 83 special character issues
+
+### Code Formatting Improvements
+- **Resolved Biome and Prettier conflicts**:
+  - Fixed formatting issues across 57 files using consistent tab indentation
+  - Updated biome.json to be self-ignored to prevent recursive formatting issues
+  - Ensured both formatters work harmoniously with tabs for JS/TS and prettier for other files
+  - All migration scripts now properly formatted with tab indentation
+  
+### Build & Validation Updates
+- **Enhanced check:all command**:
+  - Now runs lint, format:check, type checking, and full build
+  - Provides clear error messages for any failures
+  - Successfully passing all checks ensures code quality before deployment
+
+### Files Added/Modified
+- `/scripts/migration/clean-html-entities.js` - New HTML entity cleanup tool
+- `/scripts/README.md` - Updated with new script documentation
+- `biome.json` - Added self to ignore list to prevent formatting conflicts
+- Various migration scripts - Auto-formatted to use consistent tab indentation
+
 ## Domain Migration to GitHub Pages (January 21, 2025)
 
 ### Squarespace to GitHub Pages Migration
@@ -47,7 +80,45 @@
 
 - **Local Development Setup**:
   - Run `npx decap-server` to start proxy server on port 8081
-  - Access CMS at `http://localhost:4323/admin/`
+  - Access CMS at `http://localhost:4321/admin/` (corrected port)
+  - Added convenience scripts: `pnpm cms` for proxy server
+
+### Production CMS Access
+- **Production behavior** configured for security:
+  - `/admin/` on live site shows instructions for local setup
+  - No authentication interface exposed on production
+  - CMS only loads when accessed from localhost
+  - Prevents confusion for visitors and maintains security
+
+### Validation Workflow (July 21, 2025)
+
+#### Pre-Push Validation System
+- **Created comprehensive validation workflow** to catch errors before GitHub push:
+  - `scripts/validation/pre-push-check.js` - Runs all checks sequentially
+  - Validates: lint, format, TypeScript, and build
+  - Visual feedback with colored output and progress indicators
+  - Can be run with `pnpm run pre-push` or `pnpm run validate`
+
+#### Code Quality Tools
+- **Resolved Biome and Prettier conflicts**:
+  - Created `.prettierrc` config file to use tabs (matching Biome)
+  - Added CSS files to Biome's ignore list (Prettier handles them better)
+  - Both formatters now work together harmoniously
+  - Consistent formatting across JavaScript, TypeScript, and CSS
+
+#### Content Validation Fixes
+- **Fixed multiple content validation errors**:
+  - Updated post descriptions to meet 20-character minimum requirement
+  - Fixed empty description fields in migrated posts
+  - All content now passes Zod schema validation
+  - Build process no longer fails due to content issues
+
+#### Migration Script Improvements
+- **Fixed lint errors in migration scripts**:
+  - Replaced smart quotes with Unicode escape sequences
+  - Changed `parseInt` to `Number.parseInt` (ES2015 standard)
+  - Fixed template literal usage
+  - All scripts now pass Biome linting rules
   - Full read/write access to all content without authentication
   - Changes saved directly to local files
 

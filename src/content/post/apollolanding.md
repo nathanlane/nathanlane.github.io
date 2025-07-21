@@ -19,6 +19,6 @@ Originally from the Apollo 11 Preliminary Science Report volume. With some custo
 
 Paired with another multi-dimensional perspective given by Georgia Tech's __[Yanni Loukissas](http://yloukissas.com/)__:
 
-<div class='visually_embed' data-category='Science' rel='videographic' style='position: relative;width: 540px;height: 405px'><iframe src='https://player.vimeo.com/video/28199826' width='540' height='405'  loading="lazy"></iframe><div class='visually_embed_bar'><span class='visually_embed_cycle'></span></div><link rel='stylesheet' type='text/css' href='http://visual.ly/embeder/style.css' /><script type='text/javascript' src='http://visual.ly/embeder/embed.js'></script></div>
+<div class='visually_embed' data-category='Science' rel='videographic' style='position: relative;width: 540px;height: 405px'><iframe src='https://player.vimeo.com/video/28199826' width='540' height='405' loading="lazy"></iframe><div class='visually_embed_bar'><span class='visually_embed_cycle'></span></div><link rel='stylesheet' type='text/css' href='http://visual.ly/embeder/style.css' /><script type='text/javascript' src='http://visual.ly/embeder/embed.js'></script></div>
 
 Source: from Yanni's __[Visual.ly page](http://visual.ly/apollo-11-lunar-landing-visualization-1969-2011)__.

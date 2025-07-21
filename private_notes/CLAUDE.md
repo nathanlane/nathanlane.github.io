@@ -12,7 +12,7 @@ This is a typography-focused personal website built with Astro. The goal is to c
 
 ```bash
 # Development
-pnpm dev          # Start dev server on localhost:3000
+pnpm dev          # Start dev server on localhost:4321
 pnpm build        # Build to ./dist/
 pnpm preview      # Preview production build
 
@@ -20,6 +20,13 @@ pnpm preview      # Preview production build
 pnpm lint         # Run Biome linting
 pnpm format       # Format code with Biome and Prettier
 pnpm check        # Type-check with Astro
+
+# Validation
+pnpm run pre-push # Run all validation checks before pushing
+pnpm run validate # Alias for pre-push
+
+# Content Management
+pnpm cms          # Start Decap CMS proxy server
 ```
 
 ## Quick Start: Content Management System (CMS)

@@ -1,8 +1,16 @@
 ---
-title: "Baseline Grid Refactoring: Audit and Action Plan"
-publishDate: "2025-07-13"
-description: "A complete audit of the website's typography and spacing system, and a detailed, prioritized plan for enforcing a consistent baseline grid."
-tags: ["refactoring", "typography", "css", "tailwind", "astro", "planning"]
+title: 'Baseline Grid Refactoring: Audit and Action Plan'
+publishDate: '2025-07-13'
+description: >-
+  A complete audit of the website's typography and spacing system, and a
+  detailed, prioritized plan for enforcing a consistent baseline grid.
+tags:
+  - refactoring
+  - typography
+  - css
+  - tailwind
+  - astro
+  - planning
 draft: false
 ---
 
@@ -16,25 +24,25 @@ Your primary goal is to analyze the entire Astro/TailwindCSS codebase and produc
 
 ## Part 1: Comprehensive Code and Typography Audit — Findings
 
-1.  **Foundational Styles Analysis (`global.css`, `tailwind.config.ts`)**
-    *   **A Baseline Grid is Already Defined:** A well-structured baseline grid system is defined in `src/styles/global.css` and correctly integrated into `tailwind.config.ts`.
-        *   `--baseline`: `1.5rem` (24px)
-        *   `--grid-unit`: `0.375rem` (6px, which is 24px / 4)
-        *   **Single Source of Truth:** A full scale of `--space-*` variables and corresponding Tailwind `spacing` utilities (`1b`, `2b`, `4b`, `space-s`, etc.) exist.
-    *   **Fluid Typography:** The `tailwindcss-fluid-type` plugin manages responsive font sizes. The body text `line-height` is `1.6`, which is the basis for the vertical rhythm.
-    *   **The Core Problem:** The project's weakness is not the lack of a system, but the **inconsistent application** of it.
+1. **Foundational Styles Analysis (`global.css`, `tailwind.config.ts`)**
+  *  **A Baseline Grid is Already Defined:** A well-structured baseline grid system is defined in `src/styles/global.css` and correctly integrated into `tailwind.config.ts`.
+  *  `--baseline`: `1.5rem` (24px)
+  *  `--grid-unit`: `0.375rem` (6px, which is 24px / 4)
+  *  **Single Source of Truth:** A full scale of `--space-*` variables and corresponding Tailwind `spacing` utilities (`1b`, `2b`, `4b`, `space-s`, etc.) exist.
+  *  **Fluid Typography:** The `tailwindcss-fluid-type` plugin manages responsive font sizes. The body text `line-height` is `1.6`, which is the basis for the vertical rhythm.
+  *  **The Core Problem:** The project's weakness is not the lack of a system, but the **inconsistent application** of it.
 
-2.  **Component and Layout Implementation Analysis**
-    *   **Good Implementation:** Several components correctly use the established system. `BlogPost.astro` uses `mt-6b`, and `ProjectCard.astro` uses `p-4b`. These `*b` suffixed classes correctly map to the baseline grid.
-    *   **Hardcoded/Inconsistent Spacing:** The primary issue is the widespread use of default Tailwind spacing utilities that are **not aligned with the 6px grid unit**. These break the vertical rhythm that the system is designed to create.
-        *   `src/components/blog/PostPreview.astro`: Uses `mt-2.5` and `mt-0.5`. These correspond to `10px` and `2px`, which are not multiples of the `6px` grid unit.
-        *   `src/components/layout/Header.astro`: Uses `px-5` (`20px`), `ms-3` (`12px` - this one is okay), and `h-8` (`32px`). The `20px` and `32px` values are inconsistent with the grid.
-        *   `src/components/layout/Footer.astro`: Uses `px-5` (`20px`), breaking the grid.
-        *   `src/layouts/Base.astro`: Uses `mt-20` (`80px`) and `md:mt-8` (`32px`). `80px` is not a multiple of `6px`. `32px` is not a multiple of `6px`.
+2. **Component and Layout Implementation Analysis**
+  *  **Good Implementation:** Several components correctly use the established system. `BlogPost.astro` uses `mt-6b`, and `ProjectCard.astro` uses `p-4b`. These `*b` suffixed classes correctly map to the baseline grid.
+  *  **Hardcoded/Inconsistent Spacing:** The primary issue is the widespread use of default Tailwind spacing utilities that are **not aligned with the 6px grid unit**. These break the vertical rhythm that the system is designed to create.
+  *  `src/components/blog/PostPreview.astro`: Uses `mt-2.5` and `mt-0.5`. These correspond to `10px` and `2px`, which are not multiples of the `6px` grid unit.
+  *  `src/components/layout/Header.astro`: Uses `px-5` (`20px`), `ms-3` (`12px` - this one is okay), and `h-8` (`32px`). The `20px` and `32px` values are inconsistent with the grid.
+  *  `src/components/layout/Footer.astro`: Uses `px-5` (`20px`), breaking the grid.
+  *  `src/layouts/Base.astro`: Uses `mt-20` (`80px`) and `md:mt-8` (`32px`). `80px` is not a multiple of `6px`. `32px` is not a multiple of `6px`.
 
-3.  **Typographic Principles Analysis (`bringhurst.md`, `butterick.md`)**
-    *   The current state directly violates Bringhurst's core principle of vertical rhythm: *"Add and delete vertical space in measured intervals... The space taken by headings, block quotes, and other interruptions must be an even multiple of the basic leading of the main text."*
-    *   The inconsistent values (`10px`, `20px`, `32px`) disrupt the page's underlying grid, preventing elements from aligning correctly and creating a subtle but pervasive visual disharmony.
+3. **Typographic Principles Analysis (`bringhurst.md`, `butterick.md`)**
+  *  The current state directly violates Bringhurst's core principle of vertical rhythm: *"Add and delete vertical space in measured intervals... The space taken by headings, block quotes, and other interruptions must be an even multiple of the basic leading of the main text."*
+  *  The inconsistent values (`10px`, `20px`, `32px`) disrupt the page's underlying grid, preventing elements from aligning correctly and creating a subtle but pervasive visual disharmony.
 
 ## Part 2: The Prioritized Refactoring Plan
 
@@ -42,38 +50,38 @@ This plan will enforce the existing baseline grid system, creating visual harmon
 
 ### A. Identified Issues (Prioritized)
 
-*   **High Priority:**
-    1.  **Inconsistent Component-Level Spacing:** Key components like `Header`, `Footer`, and `PostPreview` use hardcoded Tailwind spacing values (`px-5`, `mt-2.5`, `h-8`) that do not align with the established `6px` grid unit. This is the most significant and widespread issue.
-    2.  **Inconsistent Layout Spacing:** The main layouts (`Base.astro`, `BlogPost.astro`) have margin and padding values (`mt-20`) that are not derived from the baseline grid, breaking the overall page rhythm.
+* **High Priority:**
+  1. **Inconsistent Component-Level Spacing:** Key components like `Header`, `Footer`, and `PostPreview` use hardcoded Tailwind spacing values (`px-5`, `mt-2.5`, `h-8`) that do not align with the established `6px` grid unit. This is the most significant and widespread issue.
+  2. **Inconsistent Layout Spacing:** The main layouts (`Base.astro`, `BlogPost.astro`) have margin and padding values (`mt-20`) that are not derived from the baseline grid, breaking the overall page rhythm.
 
-*   **Medium Priority:**
-    1.  **Review `prose` Typography:** The `@tailwindcss/typography` styles need to be audited to ensure all its generated margins and paddings (for `p`, `ul`, `blockquote`, etc.) are configured to use the project's `--space-*` variables. While there is configuration, it needs to be verified against all prose elements.
-    2.  **Icon Sizing:** Icon sizes are defined with classes like `size-8`. These should be mapped to the grid-aligned spacing system for consistency.
+* **Medium Priority:**
+  1. **Review `prose` Typography:** The `@tailwindcss/typography` styles need to be audited to ensure all its generated margins and paddings (for `p`, `ul`, `blockquote`, etc.) are configured to use the project's `--space-*` variables. While there is configuration, it needs to be verified against all prose elements.
+  2. **Icon Sizing:** Icon sizes are defined with classes like `size-8`. These should be mapped to the grid-aligned spacing system for consistency.
 
-*   **Low Priority:**
-    1.  **Semantic Naming Review:** The legacy `*b` spacing convention (`4b`, `6b`) is functional but could be clearer. Migrating fully to the semantic tokens (`space-s`, `space-m`) would improve developer experience, but this is a cosmetic change for after the grid is enforced.
+* **Low Priority:**
+  1. **Semantic Naming Review:** The legacy `*b` spacing convention (`4b`, `6b`) is functional but could be clearer. Migrating fully to the semantic tokens (`space-s`, `space-m`) would improve developer experience, but this is a cosmetic change for after the grid is enforced.
 
 ### B. The Baseline Grid Refactoring Plan
 
 The goal is to systematically replace all non-compliant spacing values with the correct variables from `tailwind.config.ts`. The primary reference will be the spacing scale based on the `6px` unit (`--grid-unit`).
 
-*   **1rem = 16px**
-*   **`--baseline` = 24px**
-*   **`--grid-unit` = 6px**
-*   `1b` / `space-1` = **6px**
-*   `2b` / `space-2` = **12px**
-*   `3b` / `space-3` = **18px**
-*   `4b` / `space-4` = **24px** (1 baseline)
-*   `6b` / `space-6` = **36px**
-*   `8b` / `space-8` = **48px**
+* **1rem = 16px**
+* **`--baseline` = 24px**
+* **`--grid-unit` = 6px**
+* `1b` / `space-1` = **6px**
+* `2b` / `space-2` = **12px**
+* `3b` / `space-3` = **18px**
+* `4b` / `space-4` = **24px** (1 baseline)
+* `6b` / `space-6` = **36px**
+* `8b` / `space-8` = **48px**
 
 ### C. Proposed Execution Order
 
-1.  Refactor `src/components/layout/Header.astro`
-2.  Refactor `src/components/layout/Footer.astro`
-3.  Refactor `src/layouts/Base.astro`
-4.  Refactor `src/components/blog/PostPreview.astro`
-5.  Audit and refactor `@tailwindcss/typography` configuration.
-6.  Address remaining components and icon sizes.
+1. Refactor `src/components/layout/Header.astro`
+2. Refactor `src/components/layout/Footer.astro`
+3. Refactor `src/layouts/Base.astro`
+4. Refactor `src/components/blog/PostPreview.astro`
+5. Audit and refactor `@tailwindcss/typography` configuration.
+6. Address remaining components and icon sizes.
 
 This structured approach will ensure the most impactful changes are made first, establishing a consistent grid foundation before moving to finer details.

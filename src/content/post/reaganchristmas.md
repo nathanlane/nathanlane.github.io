@@ -1,6 +1,6 @@
 ---
 title: 'A Christmas with the Gipper & Nancy, 1983.'
-description: 'Article discussing a christmas with the gipper &...'
+description: Article discussing a christmas with the gipper &...
 publishDate: '2015-12-25'
 tags: []
 draft: true

@@ -30,7 +30,7 @@ are several ways to add a link in markdown (as in, autolinks: `<https://url>`,
 resource links: `[label](url)`, and reference links with definitions:
 `[label][id]` and `[id]: url`).
 In other cases HTML contains more information than markdown: there are many
-tags, which add new meaning (semantics), available in HTML that aren’t available
+tags, which add new meaning (semantics), available in HTML that aren't available
 in markdown.
 If there was just one AST, it would be quite hard to perform the tasks that
 several remark and rehype plugins currently do.
@@ -41,7 +41,7 @@ This project is useful when you want to turn markdown to HTML.
 It opens up a whole new ecosystem with tons of plugins to do all kinds of
 things.
 You can [minify HTML][rehype-minify], [format HTML][rehype-format],
-[make sure it’s safe][rehype-sanitize], [highlight code][rehype-highlight],
+[make sure it's safe][rehype-sanitize], [highlight code][rehype-highlight],
 [add metadata][rehype-meta], and a lot more.
 
 A different plugin, [`rehype-raw`][rehype-raw], adds support for raw HTML
@@ -55,7 +55,7 @@ The rehype plugin [`rehype-remark`][rehype-remark] does the inverse of this
 plugin.
 It turns HTML into markdown.
 
-If you don’t use plugins and want to access syntax trees, you can use
+If you don't use plugins and want to access syntax trees, you can use
 [`mdast-util-to-hast`][mdast-util-to-hast].
 
 ## Install
@@ -106,12 +106,12 @@ import {unified} from 'unified'
 import {reporter} from 'vfile-reporter'
 
 const file = await unified()
-  .use(remarkParse)
-  .use(remarkRehype)
-  .use(rehypeDocument)
-  .use(rehypeFormat)
-  .use(rehypeStringify)
-  .process(await read('example.md'))
+.use(remarkParse)
+.use(remarkRehype)
+.use(rehypeDocument)
+.use(rehypeFormat)
+.use(rehypeStringify)
+.process(await read('example.md'))
 
 console.error(reporter(file))
 console.log(String(file))
@@ -129,18 +129,17 @@ HTML:
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>example</title>
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta charset="utf-8">
+  <title>example</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport">
   </head>
   <body>
 
 # Pluto
 
-
 **Pluto** (minor-planet designation: **134340 Pluto**) is a
-      <a href="https://en.wikipedia.org/wiki/Dwarf_planet">dwarf planet</a> in the
-      <a href="https://en.wikipedia.org/wiki/Kuiper_belt">Kuiper belt</a>.
+  <a href="https://en.wikipedia.org/wiki/Dwarf_planet">dwarf planet</a> in the
+  <a href="https://en.wikipedia.org/wiki/Kuiper_belt">Kuiper belt</a>.
 
   </body>
 </html>
@@ -195,14 +194,14 @@ Transform ([`Transformer`][unified-transformer]).
   are rehype plugins ([*mutate mode*][unified-mode])
 
 :::note
-It’s highly unlikely that you want to pass a `processor`.
+It's highly unlikely that you want to pass a `processor`.
 :::
 
 ###### HTML
 
 Raw HTML is available in mdast as [`html`][mdast-html] nodes and can be embedded
 in hast as semistandard `raw` nodes.
-Most plugins ignore `raw` nodes but two notable ones don’t:
+Most plugins ignore `raw` nodes but two notable ones don't:
 
 * [`rehype-stringify`][rehype-stringify] also has an option
   `allowDangerousHtml` which will output the raw HTML.
@@ -254,10 +253,10 @@ More information on how to handle clobbering and the prefix is explained in
 
 ###### Unknown nodes
 
-Unknown nodes are nodes with a type that isn’t in `handlers` or `passThrough`.
+Unknown nodes are nodes with a type that isn't in `handlers` or `passThrough`.
 The default behavior for unknown nodes is:
 
-* when the node has a `value` (and doesn’t have `data.hName`,
+* when the node has a `value` (and doesn't have `data.hName`,
   `data.hProperties`, or `data.hChildren`, see later), create a hast `text`
   node
 * otherwise, create a `<div>` element (which could be changed with
@@ -325,10 +324,10 @@ import remarkRehype from 'remark-rehype'
 import {unified} from 'unified'
 
 const file = await unified()
-  .use(remarkParse)
-  .use(remarkRehype, {allowDangerousHtml: true})
-  .use(rehypeStringify, {allowDangerousHtml: true})
-  .process('<a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a>')
+.use(remarkParse)
+.use(remarkRehype, {allowDangerousHtml: true})
+.use(rehypeStringify, {allowDangerousHtml: true})
+.process('<a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a>')
 
 console.log(String(file))
 ```
@@ -364,12 +363,12 @@ import remarkRehype from 'remark-rehype'
 import {unified} from 'unified'
 
 const file = await unified()
-  .use(remarkParse)
-  .use(remarkRehype, {allowDangerousHtml: true})
-  .use(rehypeRaw)
-  .use(rehypeSanitize)
-  .use(rehypeStringify)
-  .process('<a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a>')
+.use(remarkParse)
+.use(remarkRehype, {allowDangerousHtml: true})
+.use(rehypeRaw)
+.use(rehypeSanitize)
+.use(rehypeStringify)
+.process('<a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a>')
 
 console.log(String(file))
 ```
@@ -389,11 +388,11 @@ Running that code yields:
 ### Example: footnotes in languages other than English
 
 If you know that the markdown is authored in a language other than English,
-and you’re using `remark-gfm` to match how GitHub renders markdown, and you know
+and you're using `remark-gfm` to match how GitHub renders markdown, and you know
 that footnotes are (or can?) be used, you should translate the labels associated
 with them.
 
-Let’s first set the stage:
+Let's first set the stage:
 
 ```js
 import {unified} from 'unified'
@@ -407,18 +406,18 @@ Ceres ist nach der römischen Göttin des Ackerbaus benannt;
 ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.[^nasa-2015]
 
 [^nasa-2015]: JPL/NASA:
-    [*What is a Dwarf Planet?*](https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet)
-    In: Jet Propulsion Laboratory.
-    22. April 2015,
-    abgerufen am 19. Januar 2022 (englisch).
+  [*What is a Dwarf Planet?*](https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet)
+  In: Jet Propulsion Laboratory.
+  22. April 2015,
+  abgerufen am 19. Januar 2022 (englisch).
 `
 
 const file = await unified()
-  .use(remarkParse)
-  .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeStringify)
-  .process(doc)
+.use(remarkParse)
+.use(remarkGfm)
+.use(remarkRehype)
+.use(rehypeStringify)
+.process(doc)
 
 console.log(String(file))
 ```
@@ -430,13 +429,13 @@ Yields:
 Ceres ist nach der römischen Göttin des Ackerbaus benannt;
   ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.
   <sup>
-    <a
-      href="#user-content-fn-nasa-2015"
-      id="user-content-fnref-nasa-2015"
-      data-footnote-ref aria-describedby="footnote-label"
-    >
-      1
-    </a>
+  <a
+  href="#user-content-fn-nasa-2015"
+  id="user-content-fnref-nasa-2015"
+  data-footnote-ref aria-describedby="footnote-label"
+  >
+  1
+  </a>
   </sup>
 
 <section data-footnotes class="footnotes">
@@ -444,53 +443,53 @@ Ceres ist nach der römischen Göttin des Ackerbaus benannt;
 ## Footnotes
 
   <ol>
-    <li id="user-content-fn-nasa-2015">
+  <li id="user-content-fn-nasa-2015">
 
 JPL/NASA:
-        <a href="https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet">
-          *What is a Dwarf Planet?*
-        </a>
-        In: Jet Propulsion Laboratory.
-        22. April 2015,
-        abgerufen am 19. Januar 2022 (englisch).
-        <a
-          href="#user-content-fnref-nasa-2015"
-          data-footnote-backref=""
-          aria-label="Back to reference 1"
-          class="data-footnote-backref"
-        >
-          ↩
-        </a>
+  <a href="https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet">
+  *What is a Dwarf Planet?*
+  </a>
+  In: Jet Propulsion Laboratory.
+  22. April 2015,
+  abgerufen am 19. Januar 2022 (englisch).
+  <a
+  href="#user-content-fnref-nasa-2015"
+  data-footnote-backref=""
+  aria-label="Back to reference 1"
+  class="data-footnote-backref"
+  >
+  ↩
+  </a>
 
-    </li>
+  </li>
   </ol>
 </section>
 ```
 
-This is a mix of English and German that isn’t very accessible, such as that
-screen readers can’t handle it nicely.
-Let’s say our program *does* know that the markdown is in German.
-In that case, it’s important to translate and define the labels relating to
+This is a mix of English and German that isn't very accessible, such as that
+screen readers can't handle it nicely.
+Let's say our program *does* know that the markdown is in German.
+In that case, it's important to translate and define the labels relating to
 footnotes so that screen reader users can properly pronounce the page:
 
 ```diff
 @@ -18,7 +18,16 @@ ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.[^nasa-2015]
  const file = await unified()
-   .use(remarkParse)
-   .use(remarkGfm)
--  .use(remarkRehype)
-+  .use(remarkRehype, {
-+    footnoteBackLabel(referenceIndex, rereferenceIndex) {
-+      return (
-+        'Hochspringen nach: ' +
-+        (referenceIndex + 1) +
-+        (rereferenceIndex > 1 ? '-' + rereferenceIndex : '')
-+      )
-+    },
-+    footnoteLabel: 'Fußnoten'
-+  })
-   .use(rehypeStringify)
-   .process(doc)
+.use(remarkParse)
+.use(remarkGfm)
+-.use(remarkRehype)
++.use(remarkRehype, {
++ footnoteBackLabel(referenceIndex, rereferenceIndex) {
++ return (
++ 'Hochspringen nach: ' +
++ (referenceIndex + 1) +
++ (rereferenceIndex > 1? '-' + rereferenceIndex: '')
++ )
++ },
++ footnoteLabel: 'Fußnoten'
++ })
+.use(rehypeStringify)
+.process(doc)
 ```
 
 Running the code with the above patch applied, yields:
@@ -666,7 +665,7 @@ abide by its terms.
 
 [MIT][license] © [Titus Wormer][author]
 
-<!-- Definitions -->
+<!--Definitions-->
 
 [build-badge]: https://github.com/remarkjs/remark-rehype/workflows/main/badge.svg
 

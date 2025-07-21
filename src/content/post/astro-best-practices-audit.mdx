@@ -57,7 +57,7 @@ export interface SiteConfig {
   author: string;
   title: string;
   description: string;
-  // ... comprehensive typing
+  //... comprehensive typing
 }
 
 // Content type safety
@@ -80,10 +80,10 @@ The component structure follows clean architecture principles:
 
 ```
 src/components/
-├── blog/        # Blog-specific components
-├── layout/      # Layout components
-├── note/        # Note components
-└── typography/  # Typography system
+├── blog/ # Blog-specific components
+├── layout/ # Layout components
+├── note/ # Note components
+└── typography/ # Typography system
 ```
 
 ## ⚠️ Areas for Improvement
@@ -93,14 +93,10 @@ src/components/
 We're using native HTML images instead of Astro's optimized Image component:
 
 ```astro
-<!-- Current approach -->
+<!--Current approach-->
 <img src={photo.src} alt={photo.alt} loading="lazy" />
 
-<!-- Best practice -->
----
-import { Image } from 'astro:assets';
----
-<Image src={profilePhoto} alt={photo.alt} width={400} height={400} />
+<!--Best practice-->---import { Image } from 'astro:assets';---<Image src={profilePhoto} alt={photo.alt} width={400} height={400} />
 ```
 
 ### 2. Content Editing Pattern - Current: B-
@@ -113,8 +109,8 @@ hero:
   title: "Nathan Lane"
   description: "Economist and Data Scientist..."
   buttons:
-    - text: "Read Blog"
-      href: "/posts/"
+  - text: "Read Blog"
+  href: "/posts/"
 ```
 
 ### 3. Critical Path Optimization - Current: B
@@ -122,29 +118,25 @@ hero:
 We're missing font preloading for our Newsreader variable font:
 
 ```astro
-<!-- Should add to BaseHead.astro -->
+<!--Should add to BaseHead.astro-->
 <link rel="preload"
-      href="/fonts/newsreader-variable.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin>
+  href="/fonts/newsreader-variable.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin>
 ```
 
 ### 4. Component Props Validation - Current: B-
 
 Many components lack explicit TypeScript interfaces:
 
-```astro
----
-// Better practice
+```astro---// Better practice
 export interface Props {
   title: string;
   description?: string;
   featured?: boolean;
 }
-const { title, description, featured = false } = Astro.props;
----
-```
+const { title, description, featured = false } = Astro.props;---```
 
 ## 📊 Benchmark Comparison
 
@@ -170,24 +162,24 @@ const { title, description, featured = false } = Astro.props;
 Based on this audit, here's our priority list:
 
 1. **Implement Astro's Image component** (~2 hours)
-   - Automatic format conversion (WebP/AVIF)
-   - Responsive sizing
-   - Lazy loading with native browser support
+  - Automatic format conversion (WebP/AVIF)
+  - Responsive sizing
+  - Lazy loading with native browser support
 
 2. **Create content collection for homepage** (~1 hour)
-   - Move hero content to YAML
-   - Enable non-developer editing
-   - Maintain type safety
+  - Move hero content to YAML
+  - Enable non-developer editing
+  - Maintain type safety
 
 3. **Add font preloading** (~15 minutes)
-   - Reduce CLS (Cumulative Layout Shift)
-   - Improve perceived performance
-   - Critical for our typography-focused design
+  - Reduce CLS (Cumulative Layout Shift)
+  - Improve perceived performance
+  - Critical for our typography-focused design
 
 4. **Add prop types to components** (~2 hours)
-   - Start with frequently used components
-   - Improve IDE experience
-   - Catch errors at build time
+  - Start with frequently used components
+  - Improve IDE experience
+  - Catch errors at build time
 
 ## Conclusion
 

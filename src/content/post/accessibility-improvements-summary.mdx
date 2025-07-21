@@ -24,21 +24,18 @@ Several text elements failed WCAG contrast requirements:
 
 ### The Fix
 1. **Replaced opacity with semantic color classes**
-   ```css
-   /* Before: opacity reduces contrast unpredictably */
-   opacity-60 hover:opacity-100
+  ```css
+  /* Before: opacity reduces contrast unpredictably */
+  opacity-60 hover:opacity-100
 
-   /* After: predictable color values */
-   text-light hover:text-textColor
-   ```
+  /* After: predictable color values */
+  text-light hover:text-textColor
+  ```
 
 2. **Improved dark mode text colors**
-   ```css
-   /* Light text colors now meet WCAG AA */
-   --theme-lightest: hsl(40deg 5% 75%); /* Up from 65% */
-   --theme-lighter: hsl(40deg 5% 70%);  /* Up from 55% */
-   --theme-light: hsl(40deg 5% 65%);    /* Up from 50% */
-   ```
+  ```css
+  /* Light text colors now meet WCAG AA */--theme-lightest: hsl(40deg 5% 75%); /* Up from 65% */--theme-lighter: hsl(40deg 5% 70%); /* Up from 55% */--theme-light: hsl(40deg 5% 65%); /* Up from 50% */
+  ```
 
 ## Heading Hierarchy Fix
 
@@ -100,8 +97,8 @@ Improved the skip link for keyboard users:
 ```html
 <a
   class="sr-only focus:not-sr-only focus:fixed focus:z-50
-         focus:bg-accent-base focus:text-bgColor focus:px-4
-         focus:py-2 focus:rounded-md"
+  focus:bg-accent-base focus:text-bgColor focus:px-4
+  focus:py-2 focus:rounded-md"
   href="#main"
 >
   Skip to main content

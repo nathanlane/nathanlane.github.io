@@ -20,10 +20,10 @@ Building static sites with Astro? Here's a comprehensive list of best practices 
 Astro ships zero JavaScript to the browser by default. Only add client-side JS when absolutely necessary.
 
 ```astro
-<!-- Static by default - no JS -->
+<!--Static by default - no JS-->
 <button>Click me</button>
 
-<!-- Only hydrate when needed -->
+<!--Only hydrate when needed-->
 <ReactComponent client:visible />
 ```
 
@@ -37,13 +37,8 @@ Astro ships zero JavaScript to the browser by default. Only add client-side JS w
 ### 3. **Optimize Images**
 Always use Astro's built-in `<Image />` component for automatic optimization:
 
-```astro
----
-import { Image } from 'astro:assets';
-import heroImage from '/images/hero.jpg';
----
-
-<Image src={heroImage} alt="Description" />
+```astro---import { Image } from 'astro:assets';
+import heroImage from '/images/hero.jpg';---<Image src={heroImage} alt="Description" />
 ```
 
 ## 📁 Project Structure
@@ -51,12 +46,12 @@ import heroImage from '/images/hero.jpg';
 ### 4. **Follow Astro's Conventions**
 ```
 src/
-├── components/     # Reusable components
-├── layouts/        # Page layouts
-├── pages/          # File-based routing
-├── content/        # Content collections
-├── styles/         # Global styles
-└── assets/         # Images, fonts, etc.
+├── components/ # Reusable components
+├── layouts/ # Page layouts
+├── pages/ # File-based routing
+├── content/ # Content collections
+├── styles/ # Global styles
+└── assets/ # Images, fonts, etc.
 ```
 
 ### 5. **Use Content Collections**
@@ -68,9 +63,9 @@ import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({
   schema: z.object({
-    title: z.string(),
-    publishDate: z.date(),
-    description: z.string(),
+  title: z.string(),
+  publishDate: z.date(),
+  description: z.string(),
   }),
 });
 ```
@@ -86,18 +81,13 @@ const blog = defineCollection({
 ### 7. **Prefer Astro Components**
 Use `.astro` components for static content. They're lighter than framework components:
 
-```astro
----
-// Component.astro
+```astro---// Component.astro
 export interface Props {
   title: string;
   variant?: 'primary' | 'secondary';
 }
 
-const { title, variant = 'primary' } = Astro.props;
----
-
-<button class={`btn btn-${variant}`}>
+const { title, variant = 'primary' } = Astro.props;---<button class={`btn btn-${variant}`}>
   {title}
 </button>
 ```
@@ -105,66 +95,49 @@ const { title, variant = 'primary' } = Astro.props;
 ### 8. **Extract Reusable Logic**
 Keep components focused and extract shared logic:
 
-```astro
----
-// utils/formatDate.ts
+```astro---// utils/formatDate.ts
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('en-US').format(date);
 }
 
 // Component.astro
 import { formatDate } from '@/utils/formatDate';
-const formattedDate = formatDate(new Date());
----
-```
+const formattedDate = formatDate(new Date());---```
 
 ### 9. **Use TypeScript**
 Astro has excellent TypeScript support. Use it for better DX:
 
-```astro
----
-import type { CollectionEntry } from 'astro:content';
+```astro---import type { CollectionEntry } from 'astro:content';
 
 interface Props {
   post: CollectionEntry<'blog'>;
 }
 
-const { post } = Astro.props;
----
-```
+const { post } = Astro.props;---```
 
 ## 🎯 Data Fetching
 
 ### 10. **Fetch at Build Time**
 Leverage Astro's static generation by fetching data in frontmatter:
 
-```astro
----
-// This runs at build time
+```astro---// This runs at build time
 const response = await fetch('https://api.example.com/data');
-const data = await response.json();
----
-
-<ul>
+const data = await response.json();---<ul>
   {data.map(item => <li>{item.name}</li>)}
 </ul>
 ```
 
 ### 11. **Use getStaticPaths for Dynamic Routes**
-```astro
----
-export async function getStaticPaths() {
+```astro---export async function getStaticPaths() {
   const posts = await getCollection('blog');
 
   return posts.map(post => ({
-    params: { slug: post.slug },
-    props: { post },
+  params: { slug: post.slug },
+  props: { post },
   }));
 }
 
-const { post } = Astro.props;
----
-```
+const { post } = Astro.props;---```
 
 ## 🔧 Development Workflow
 
@@ -174,12 +147,12 @@ Configure path aliases in `tsconfig.json`:
 ```json
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@layouts/*": ["src/layouts/*"]
-    }
+  "baseUrl": ".",
+  "paths": {
+  "@/*": ["src/*"],
+  "@components/*": ["src/components/*"],
+  "@layouts/*": ["src/layouts/*"]
+  }
   }
 }
 ```
@@ -190,7 +163,7 @@ Add prefetching for near-instant page navigations:
 ```astro
 <a href="/about" data-astro-prefetch>About</a>
 
-<!-- Or enable globally in config -->
+<!--Or enable globally in config-->
 export default defineConfig({
   prefetch: true
 });
@@ -199,15 +172,11 @@ export default defineConfig({
 ### 14. **Use Environment Variables**
 Keep sensitive data secure:
 
-```astro
----
-// .env
+```astro---//.env
 API_KEY=secret_key
 
 // Component.astro
-const apiKey = import.meta.env.API_KEY;
----
-```
+const apiKey = import.meta.env.API_KEY;---```
 
 ## 🎭 Styling Best Practices
 
@@ -218,16 +187,14 @@ Astro automatically scopes styles in components:
 <style>
   /* Only applies to this component */
   h1 {
-    color: purple;
+  color: purple;
   }
 </style>
 ```
 
 ### 16. **Use CSS Variables for Theming**
 ```css
-:root {
-  --color-primary: #0066cc;
-  --spacing-unit: 8px;
+:root {--color-primary: #0066cc;--spacing-unit: 8px;
 }
 
 .button {
@@ -237,12 +204,8 @@ Astro automatically scopes styles in components:
 ```
 
 ### 17. **Import Global Styles Once**
-```astro
----
-// Layout.astro
-import '@/styles/global.css';
----
-```
+```astro---// Layout.astro
+import '@/styles/global.css';---```
 
 ## 🛠️ Build Optimization
 
@@ -250,10 +213,10 @@ import '@/styles/global.css';
 When you must use external scripts, load them efficiently:
 
 ```astro
-<!-- Defer non-critical scripts -->
+<!--Defer non-critical scripts-->
 <script defer src="analytics.js"></script>
 
-<!-- Use type="module" for modern JS -->
+<!--Use type="module" for modern JS-->
 <script type="module" src="app.js"></script>
 ```
 
@@ -264,8 +227,8 @@ Optimize your build output:
 // astro.config.mjs
 export default defineConfig({
   build: {
-    inlineStylesheets: 'auto',
-    format: 'file', // or 'directory'
+  inlineStylesheets: 'auto',
+  format: 'file', // or 'directory'
   },
 });
 ```
@@ -276,51 +239,37 @@ Enable compression in your hosting platform or use Astro's compression integrati
 ## 📋 Common Patterns
 
 ### 21. **Layout Composition**
-```astro
----
-// BaseLayout.astro
+```astro---// BaseLayout.astro
 import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
----
-
-<html>
+import Footer from '@/components/Footer.astro';---<html>
   <body>
-    <Header />
-    <slot />
-    <Footer />
+  <Header />
+  <slot />
+  <Footer />
   </body>
 </html>
 ```
 
 ### 22. **Conditional Rendering**
-```astro
----
-const showBanner = true;
-const items = ['one', 'two', 'three'];
----
-
-{showBanner && <div>Banner</div>}
+```astro---const showBanner = true;
+const items = ['one', 'two', 'three'];---{showBanner && <div>Banner</div>}
 
 {items.length > 0 && (
   <ul>
-    {items.map(item => <li>{item}</li>)}
+  {items.map(item => <li>{item}</li>)}
   </ul>
 )}
 ```
 
 ### 23. **Error Handling**
-```astro
----
-let data;
+```astro---let data;
 try {
   const response = await fetch('/api/data');
   data = await response.json();
 } catch (error) {
   console.error('Failed to fetch data:', error);
   data = { fallback: true };
-}
----
-```
+}---```
 
 ## ✅ Deployment Checklist
 
@@ -346,8 +295,4 @@ try {
 5. **Optimize Assets** - Use built-in image optimization
 6. **Think Static First** - Only add dynamic features when necessary
 
-Remember: Astro is designed for content-focused websites. Embrace its static-first philosophy, and you'll build incredibly fast sites with great developer experience.
-
----
-
-*New to Astro? Check out the [official documentation](https://docs.astro.build) and join the [Discord community](https://astro.build/chat) for help!*
+Remember: Astro is designed for content-focused websites. Embrace its static-first philosophy, and you'll build incredibly fast sites with great developer experience.---*New to Astro? Check out the [official documentation](https://docs.astro.build) and join the [Discord community](https://astro.build/chat) for help!*

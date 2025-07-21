@@ -33,45 +33,45 @@ We added a comprehensive schema to `content.config.ts`:
 const homepage = defineCollection({
   loader: glob({ base: "./src/content/homepage", pattern: "**/*.yaml" }),
   schema: z.object({
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-      buttons: z.array(z.object({
-        text: z.string(),
-        href: z.string(),
-        variant: z.enum(["primary", "secondary"]),
-      })),
-    }),
-    currentProjects: z.object({
-      title: z.string(),
-      projects: z.array(z.object({
-        title: z.string(),
-        description: z.string(),
-        url: z.string(),
-      })),
-    }),
-    contact: z.object({
-      title: z.string(),
-      email: z.string().email(),
-    }),
-    showcase: z.object({
-      title: z.string(),
-      sections: z.array(z.object({
-        title: z.string(),
-        type: z.enum(["projects", "writing", "compact"]),
-        items: z.array(z.object({
-          title: z.string(),
-          description: z.string().optional(),
-          excerpt: z.string().optional(),
-          date: z.string().optional(),
-          url: z.string(),
-        })),
-      })),
-    }),
-    posts: z.object({
-      title: z.string(),
-      maxPosts: z.number(),
-    }),
+  hero: z.object({
+  title: z.string(),
+  description: z.string(),
+  buttons: z.array(z.object({
+  text: z.string(),
+  href: z.string(),
+  variant: z.enum(["primary", "secondary"]),
+  })),
+  }),
+  currentProjects: z.object({
+  title: z.string(),
+  projects: z.array(z.object({
+  title: z.string(),
+  description: z.string(),
+  url: z.string(),
+  })),
+  }),
+  contact: z.object({
+  title: z.string(),
+  email: z.string().email(),
+  }),
+  showcase: z.object({
+  title: z.string(),
+  sections: z.array(z.object({
+  title: z.string(),
+  type: z.enum(["projects", "writing", "compact"]),
+  items: z.array(z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  excerpt: z.string().optional(),
+  date: z.string().optional(),
+  url: z.string(),
+  })),
+  })),
+  }),
+  posts: z.object({
+  title: z.string(),
+  maxPosts: z.number(),
+  }),
   }),
 });
 ```
@@ -85,20 +85,20 @@ hero:
   title: "Nathan Lane"
   description: "Economist and Data Scientist exploring the intersection of technology, markets, and economic systems."
   buttons:
-    - text: "Read Blog"
-      href: "/posts/"
-      variant: "primary"
-    - text: "View Research"
-      href: "/research/"
-      variant: "secondary"
+  - text: "Read Blog"
+  href: "/posts/"
+  variant: "primary"
+  - text: "View Research"
+  href: "/research/"
+  variant: "secondary"
 
 currentProjects:
   title: "Current Projects"
   projects:
-    - title: "Economic Policy Research"
-      description: "Analyzing the impact of trade policies on regional economic development and labor markets."
-      url: "/research/trade-policy"
-    # ... more projects
+  - title: "Economic Policy Research"
+  description: "Analyzing the impact of trade policies on regional economic development and labor markets."
+  url: "/research/trade-policy"
+  #... more projects
 
 contact:
   title: "Get In Touch"
@@ -107,13 +107,13 @@ contact:
 showcase:
   title: "New Components"
   sections:
-    - title: "Projects Grid"
-      type: "projects"
-      items:
-        - title: "SectionGrid.astro"
-          description: "Flexible grid container with responsive columns"
-          url: "#section-grid"
-    # ... more sections
+  - title: "Projects Grid"
+  type: "projects"
+  items:
+  - title: "SectionGrid.astro"
+  description: "Flexible grid container with responsive columns"
+  url: "#section-grid"
+  #... more sections
 
 posts:
   title: "Posts"
@@ -124,34 +124,29 @@ posts:
 
 Modified the homepage to use content collection data:
 
-```astro
----
-import { getEntry } from "astro:content";
+```astro---import { getEntry } from "astro:content";
 
 // Get homepage content from content collection
 const homepageContent = await getEntry("homepage", "index");
-const { hero, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;
----
-
-<!-- Use content in template -->
+const { hero, currentProjects, contact, showcase, posts: postsConfig } = homepageContent.data;---<!--Use content in template-->
 <h1 class="heading-2 text-center">
   {hero.title}
 </h1>
 <p class="text-body mt-4 mb-4">
   {hero.description}
 
-<!-- Dynamic button rendering -->
+<!--Dynamic button rendering-->
 <div class="flex justify-center gap-3 mt-6">
   {hero.buttons.map((button) => (
-    <a
-      href={button.href}
-      class={button.variant === "primary"
-        ? "inline-flex items-center px-3 py-1.5 text-xs font-medium text-bgColor bg-accent-base rounded hover:opacity-90 transition-all"
-        : "inline-flex items-center px-3 py-1.5 text-xs font-medium text-accent-base bg-color-100 hover:bg-color-150 rounded transition-colors"
-      }
-    >
-      {button.text}
-    </a>
+  <a
+  href={button.href}
+  class={button.variant === "primary"
+? "inline-flex items-center px-3 py-1.5 text-xs font-medium text-bgColor bg-accent-base rounded hover:opacity-90 transition-all"
+: "inline-flex items-center px-3 py-1.5 text-xs font-medium text-accent-base bg-color-100 hover:bg-color-150 rounded transition-colors"
+  }
+  >
+  {button.text}
+  </a>
   ))}
 </div>
 ```
