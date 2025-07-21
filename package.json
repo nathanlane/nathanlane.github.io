@@ -7,10 +7,18 @@
     "build": "astro build",
     "preview": "astro preview",
     "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
     "format": "pnpm run format:code && pnpm run format:imports",
     "format:code": "biome format . --write && prettier -w \"**/*\" \"!**/*.{md,mdx}\" --ignore-unknown --cache",
     "format:imports": "biome check --formatter-enabled=false --write",
-    "check": "astro check"
+    "format:check": "biome format . && prettier --check \"**/*\" \"!**/*.{md,mdx}\" --ignore-unknown",
+    "check": "astro check",
+    "check:types": "tsc --noEmit",
+    "check:all": "pnpm run lint && pnpm run format:check && pnpm run check && pnpm run build",
+    "fix:all": "pnpm run lint:fix && pnpm run format && pnpm run check",
+    "clean": "rm -rf dist .astro node_modules/.cache",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.1",
