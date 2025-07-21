@@ -32,9 +32,7 @@ My first attempt at refinement added warmth to the entire palette:
 
 ```css
 /* First refinement - too warm */
-:root {
-  --theme-fg: 40deg 8% 8%;    /* Warm black #0a0908 */
-  --theme-bg: 40deg 20% 99%;  /* Warm white #fdfcfb */
+:root {--theme-fg: 40deg 8% 8%; /* Warm black #0a0908 */--theme-bg: 40deg 20% 99%; /* Warm white #fdfcfb */
 }
 ```
 
@@ -47,13 +45,9 @@ The current solution strikes a careful balance:
 ```css
 /* Current refinement - pure white, subtle warm black */
 :root {
-  /* Pure white background */
-  --bg-brightness: 100%;      /* #ffffff */
+  /* Pure white background */--bg-brightness: 100%; /* #ffffff */
 
-  /* Very subtle warm black text */
-  --fg-hue: 30deg;           /* Slight warmth */
-  --fg-saturation: 2%;       /* Barely perceptible */
-  --fg-brightness: 10%;      /* #1a1918 */
+  /* Very subtle warm black text */--fg-hue: 30deg; /* Slight warmth */--fg-saturation: 2%; /* Barely perceptible */--fg-brightness: 10%; /* #1a1918 */
 }
 ```
 
@@ -67,11 +61,8 @@ This gives us:
 The color system uses CSS variables as a single source of truth:
 
 ```css
-/* Generate a 19-step opacity scale */
---theme-color-900: hsl(var(--theme-fg) / 1.0);
---theme-color-850: hsl(var(--theme-fg) / 0.9675);
-/* ... down to ... */
---theme-color-50:  hsl(var(--theme-fg) / 0.0225);
+/* Generate a 19-step opacity scale */--theme-color-900: hsl(var(--theme-fg) / 1.0);--theme-color-850: hsl(var(--theme-fg) / 0.9675);
+/*... down to... */--theme-color-50: hsl(var(--theme-fg) / 0.0225);
 ```
 
 This creates consistent shading throughout the design while maintaining a minimal color palette.
@@ -80,8 +71,7 @@ This creates consistent shading throughout the design while maintaining a minima
 
 Rather than default web blue, links use a refined steel blue:
 
-```css
---theme-link: 220deg 35% 40%;  /* #365880 */
+```css--theme-link: 220deg 35% 40%; /* #365880 */
 ```
 
 Combined with subtle underlines that darken on hover:
@@ -104,7 +94,7 @@ Headers appear slightly lighter than body text for visual balance:
 
 ```css
 h1, h2 {
-  color: hsl(0deg 0% 12%);  /* 2% lighter than body */
+  color: hsl(0deg 0% 12%); /* 2% lighter than body */
 }
 ```
 
@@ -112,8 +102,8 @@ h1, h2 {
 Small text gets darker for better readability:
 
 ```css
-.text-sm, .caption {
-  color: hsl(0deg 0% 30%);  /* Higher contrast */
+.text-sm,.caption {
+  color: hsl(0deg 0% 30%); /* Higher contrast */
 }
 ```
 
@@ -132,9 +122,7 @@ Instead of harsh system blues, text selection uses a muted blue:
 Dark mode inverts the approach with warm whites on warm blacks:
 
 ```css
-:root[data-theme="dark"] {
-  --bg-brightness: 6%;   /* Warm black background */
-  --fg-brightness: 88%;  /* Warm white text */
+:root[data-theme="dark"] {--bg-brightness: 6%; /* Warm black background */--fg-brightness: 88%; /* Warm white text */
 }
 ```
 

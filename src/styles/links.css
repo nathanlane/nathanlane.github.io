@@ -21,316 +21,310 @@
 
 /* ===== SEMANTIC LINK TOKENS ===== */
 :root {
-  /* Transition timing */
-  --link-transition:
-    color 200ms ease, text-decoration-color 200ms ease, border-color 200ms ease,
-    opacity 200ms ease;
+	/* Transition timing */
+	--link-transition:
+		color 200ms ease, text-decoration-color 200ms ease, border-color 200ms ease, opacity 200ms ease;
 
-  /* Link colors */
-  --link-color-default: inherit;
-  --link-color-nav: var(--theme-color-600);
-  --link-color-nav-subtle: var(--theme-color-500);
-  --link-color-hover: var(--theme-accent-base);
+	/* Link colors */
+	--link-color-default: inherit;
+	--link-color-nav: var(--theme-color-600);
+	--link-color-nav-subtle: var(--theme-color-500);
+	--link-color-hover: var(--theme-accent-base);
 
-  /* Underline properties */
-  --link-underline-color-default: hsl(0deg 0% 60%);
-  --link-underline-color-hover: var(--theme-accent-base);
-  --link-underline-thickness-default: 1px;
-  --link-underline-thickness-hover: 1.5px;
-  --link-underline-thickness-thin: 1px;
-  --link-underline-thickness-thin-hover: 2px;
-  --link-underline-offset-default: 0.1em;
-  --link-underline-offset-inline: 0.15em;
-  --link-underline-offset-thin: 0.2em;
+	/* Underline properties */
+	--link-underline-color-default: hsl(0deg 0% 60%);
+	--link-underline-color-hover: var(--theme-accent-base);
+	--link-underline-thickness-default: 1px;
+	--link-underline-thickness-hover: 1.5px;
+	--link-underline-thickness-thin: 1px;
+	--link-underline-thickness-thin-hover: 2px;
+	--link-underline-offset-default: 0.1em;
+	--link-underline-offset-inline: 0.15em;
+	--link-underline-offset-thin: 0.2em;
 
-  /* Font weights - consistent +50 on hover */
-  --link-weight-default: 400;
-  --link-weight-nav: 450;
-  --link-weight-title: 500;
-  --link-weight-hover: 450; /* default + 50 */
-  --link-weight-nav-hover: 500; /* nav + 50 */
-  --link-weight-title-hover: 550; /* title + 50 */
+	/* Font weights - consistent +50 on hover */
+	--link-weight-default: 400;
+	--link-weight-nav: 450;
+	--link-weight-title: 500;
+	--link-weight-hover: 450; /* default + 50 */
+	--link-weight-nav-hover: 500; /* nav + 50 */
+	--link-weight-title-hover: 550; /* title + 50 */
 
-  /* Letter spacing */
-  --link-letter-spacing-default: inherit;
-  --link-letter-spacing-nav: 0.02em;
+	/* Letter spacing */
+	--link-letter-spacing-default: inherit;
+	--link-letter-spacing-nav: 0.02em;
 
-  /* Other properties */
-  --link-opacity-subtle: 0.8;
-  --link-gap-icon: 0.3em;
+	/* Other properties */
+	--link-opacity-subtle: 0.8;
+	--link-gap-icon: 0.3em;
 
-  /* Editorial link color - black with emphasis */
-  --link-color-editorial: var(
-    --theme-text
-  ); /* Match text color, rely on weight/underline for emphasis */
+	/* Editorial link color - black with emphasis */
+	--link-color-editorial: var(
+		--theme-text
+	); /* Match text color, rely on weight/underline for emphasis */
 }
 
 /* Dark mode variable overrides */
 :root[data-theme="dark"] {
-  --link-underline-color-default: hsl(0deg 0% 40%);
-  --link-color-nav: var(--theme-color-400);
-  --link-color-nav-subtle: var(--theme-color-400);
-  --link-color-editorial: var(
-    --theme-text
-  ); /* Match text color in dark mode too */
+	--link-underline-color-default: hsl(0deg 0% 40%);
+	--link-color-nav: var(--theme-color-400);
+	--link-color-nav-subtle: var(--theme-color-400);
+	--link-color-editorial: var(--theme-text); /* Match text color in dark mode too */
 }
 
 /* ===== SINGLE SOURCE OF TRUTH - Base Link Reset ===== */
 /* ALL links inherit these core behaviors */
 a {
-  /* From links.css (keep) */
-  font-size: inherit !important;
-  transform: none;
-  transition: var(--link-transition);
+	/* From links.css (keep) */
+	font-size: inherit !important;
+	transform: none;
+	transition: var(--link-transition);
 
-  /* From global.css (moved here) */
-  position: relative;
-  min-height: 24px;
-  text-underline-offset: var(--link-underline-offset-default);
-  text-decoration-thickness: 0.05em;
-  text-decoration-skip-ink: auto;
+	/* From global.css (moved here) */
+	position: relative;
+	min-height: 24px;
+	text-underline-offset: var(--link-underline-offset-default);
+	text-decoration-thickness: 0.05em;
+	text-decoration-skip-ink: auto;
 }
 
 /* Focus states for ALL links - Single source of truth */
 a:focus {
-  outline: none;
+	outline: none;
 }
 
 a:focus-visible {
-  outline: 2px solid var(--theme-accent);
-  outline-offset: var(--space-0 0.5);
-  border-radius: 2px;
+	outline: 2px solid var(--theme-accent);
+	outline-offset: var(--space-0 0.5);
+	border-radius: 2px;
 }
 
 /* Motion preferences handled in global.css */
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
-  a {
-    text-decoration-thickness: 2px !important;
-    font-weight: 600 !important;
-  }
+	a {
+		text-decoration-thickness: 2px !important;
+		font-weight: 600 !important;
+	}
 }
 
 /* Override any conflicting utility classes */
 a[class*="hover:text-"]:hover {
-  font-size: inherit !important;
+	font-size: inherit !important;
 }
 
 /* ===== TAILWIND LAYER FOR CUSTOM CLASSES ===== */
 @layer components {
-  /* ===== PRIMARY LINK TYPES (Consolidated from 7 to 4) ===== */
+	/* ===== PRIMARY LINK TYPES (Consolidated from 7 to 4) ===== */
 
-  /* 1. INLINE LINKS - For prose and body text */
-  .link-inline {
-    color: var(--link-color-default);
-    text-decoration: underline;
-    text-decoration-color: var(--link-underline-color-default);
-    text-decoration-thickness: var(--link-underline-thickness-default);
-    text-underline-offset: var(--link-underline-offset-inline);
-    font-weight: var(--link-weight-default);
-  }
+	/* 1. INLINE LINKS - For prose and body text */
+	.link-inline {
+		color: var(--link-color-default);
+		text-decoration: underline;
+		text-decoration-color: var(--link-underline-color-default);
+		text-decoration-thickness: var(--link-underline-thickness-default);
+		text-underline-offset: var(--link-underline-offset-inline);
+		font-weight: var(--link-weight-default);
+	}
 
-  .link-inline:hover {
-    color: var(--link-color-hover);
-    text-decoration-color: var(--link-underline-color-hover);
-    text-decoration-thickness: var(--link-underline-thickness-hover);
-    /* No weight change on hover */
-  }
+	.link-inline:hover {
+		color: var(--link-color-hover);
+		text-decoration-color: var(--link-underline-color-hover);
+		text-decoration-thickness: var(--link-underline-thickness-hover);
+		/* No weight change on hover */
+	}
 
-  /* 2. NAV LINKS - For navigation, actions, and UI elements */
-  .link-nav {
-    color: var(--link-color-nav);
-    text-decoration: none !important; /* Ensure no underlines ever */
-    border-bottom: none !important; /* Clean navigation principle */
-    font-weight: var(--link-weight-nav);
-    letter-spacing: var(--link-letter-spacing-nav);
-  }
+	/* 2. NAV LINKS - For navigation, actions, and UI elements */
+	.link-nav {
+		color: var(--link-color-nav);
+		text-decoration: none !important; /* Ensure no underlines ever */
+		border-bottom: none !important; /* Clean navigation principle */
+		font-weight: var(--link-weight-nav);
+		letter-spacing: var(--link-letter-spacing-nav);
+	}
 
-  .link-nav:hover {
-    color: var(--link-color-hover);
-    /* No weight change on hover */
-    text-decoration: none !important; /* Maintain clean hover */
-  }
+	.link-nav:hover {
+		color: var(--link-color-hover);
+		/* No weight change on hover */
+		text-decoration: none !important; /* Maintain clean hover */
+	}
 
-  /* Navigation variants using data attributes */
-  .link-nav[data-variant="subtle"] {
-    color: var(--link-color-nav-subtle);
-    font-weight: var(--link-weight-default);
-    opacity: var(--link-opacity-subtle);
-  }
+	/* Navigation variants using data attributes */
+	.link-nav[data-variant="subtle"] {
+		color: var(--link-color-nav-subtle);
+		font-weight: var(--link-weight-default);
+		opacity: var(--link-opacity-subtle);
+	}
 
-  .link-nav[data-variant="subtle"]:hover {
-    color: var(--link-color-hover);
-    /* No weight change on hover */
-    opacity: 1;
-  }
+	.link-nav[data-variant="subtle"]:hover {
+		color: var(--link-color-hover);
+		/* No weight change on hover */
+		opacity: 1;
+	}
 
-  .link-nav[data-variant="action"] {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--link-gap-icon);
-  }
+	.link-nav[data-variant="action"] {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--link-gap-icon);
+	}
 
-  /* Active state - Typography principle: weight and color only */
-  .link-nav[aria-current="page"] {
-    color: var(--link-color-hover);
-    font-weight: 550; /* Extra bold for current page */
-  }
+	/* Active state - Typography principle: weight and color only */
+	.link-nav[aria-current="page"] {
+		color: var(--link-color-hover);
+		font-weight: 550; /* Extra bold for current page */
+	}
 
-  /* 3. TITLE LINKS - For headings, titles, and featured content */
-  .link-title {
-    color: var(--link-color-default);
-    text-decoration: none;
-    font-weight: var(--link-weight-title);
-  }
+	/* 3. TITLE LINKS - For headings, titles, and featured content */
+	.link-title {
+		color: var(--link-color-default);
+		text-decoration: none;
+		font-weight: var(--link-weight-title);
+	}
 
-  .link-title:hover {
-    color: var(--link-color-hover);
-    /* No weight change on hover */
-    text-decoration: underline;
-    text-decoration-thickness: 0.05em;
-    text-underline-offset: 0.2em;
-  }
+	.link-title:hover {
+		color: var(--link-color-hover);
+		/* No weight change on hover */
+		text-decoration: underline;
+		text-decoration-thickness: 0.05em;
+		text-underline-offset: 0.2em;
+	}
 
-  /* 4. FOOTER LINKS - Refined underline with breathing room */
-  .link-footer {
-    color: var(--link-color-nav);
-    text-decoration: underline;
-    text-decoration-color: transparent;
-    text-decoration-thickness: 0.05em; /* Hair-thin elegance */
-    text-underline-offset: 0.2em; /* Generous breathing room */
-    font-weight: var(--link-weight-default);
-    transition:
-      var(--link-transition),
-      text-decoration-color var(--link-transition-duration) ease,
-      opacity var(--link-transition-duration) ease;
-  }
+	/* 4. FOOTER LINKS - Refined underline with breathing room */
+	.link-footer {
+		color: var(--link-color-nav);
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		text-decoration-thickness: 0.05em; /* Hair-thin elegance */
+		text-underline-offset: 0.2em; /* Generous breathing room */
+		font-weight: var(--link-weight-default);
+		transition:
+			var(--link-transition),
+			text-decoration-color var(--link-transition-duration) ease,
+			opacity var(--link-transition-duration) ease;
+	}
 
-  .link-footer:hover {
-    color: var(--link-color-hover);
-    text-decoration-color: currentColor;
-    /* No weight change on hover */
-    opacity: 0.7; /* Subtle presence */
-  }
+	.link-footer:hover {
+		color: var(--link-color-hover);
+		text-decoration-color: currentColor;
+		/* No weight change on hover */
+		opacity: 0.7; /* Subtle presence */
+	}
 
-  /* ===== UTILITY MODIFIERS ===== */
+	/* ===== UTILITY MODIFIERS ===== */
 
-  /* Underline variations */
-  .u-underline-thin {
-    text-decoration: underline;
-    text-decoration-color: var(--link-color-hover);
-    text-decoration-thickness: var(--link-underline-thickness-thin);
-    text-underline-offset: var(--link-underline-offset-thin);
-  }
+	/* Underline variations */
+	.u-underline-thin {
+		text-decoration: underline;
+		text-decoration-color: var(--link-color-hover);
+		text-decoration-thickness: var(--link-underline-thickness-thin);
+		text-underline-offset: var(--link-underline-offset-thin);
+	}
 
-  .u-underline-thin:hover {
-    text-decoration-thickness: var(--link-underline-thickness-thin-hover);
-  }
+	.u-underline-thin:hover {
+		text-decoration-thickness: var(--link-underline-thickness-thin-hover);
+	}
 
-  /* External link modifier */
-  .u-with-icon {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--link-gap-icon);
-  }
+	/* External link modifier */
+	.u-with-icon {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--link-gap-icon);
+	}
 
-  /* Hover underline pattern - for links that only show underline on hover */
-  .u-hover-underline {
-    text-decoration: none;
-  }
+	/* Hover underline pattern - for links that only show underline on hover */
+	.u-hover-underline {
+		text-decoration: none;
+	}
 
-  .u-hover-underline:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--link-underline-color-hover);
-    text-decoration-thickness: var(--link-underline-thickness-default);
-    text-underline-offset: var(--link-underline-offset-default);
-  }
+	.u-hover-underline:hover {
+		text-decoration: underline;
+		text-decoration-color: var(--link-underline-color-hover);
+		text-decoration-thickness: var(--link-underline-thickness-default);
+		text-underline-offset: var(--link-underline-offset-default);
+	}
 
-  /* Editorial prose variant - for prominent links in About page and headers */
-  .link-inline[data-variant="editorial"] {
-    color: var(--link-color-editorial, var(--theme-accent-base));
-    font-weight: 450; /* Slightly bolder, no animation */
-    text-decoration: underline;
-    text-decoration-color: var(
-      --link-color-editorial,
-      var(--theme-accent-base)
-    );
-    text-decoration-thickness: 0.05em; /* Hair-thin, elegant */
-    text-underline-offset: 0.2em; /* Generous breathing room */
-    position: relative;
-  }
+	/* Editorial prose variant - for prominent links in About page and headers */
+	.link-inline[data-variant="editorial"] {
+		color: var(--link-color-editorial, var(--theme-accent-base));
+		font-weight: 450; /* Slightly bolder, no animation */
+		text-decoration: underline;
+		text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+		text-decoration-thickness: 0.05em; /* Hair-thin, elegant */
+		text-underline-offset: 0.2em; /* Generous breathing room */
+		position: relative;
+	}
 
-  .link-inline[data-variant="editorial"]:hover {
-    color: var(--link-color-hover);
-    /* No weight change - avoiding size shifts */
-    text-decoration-color: var(--link-color-hover);
-    /* Subtle thickness increase without jarring animation */
-    text-decoration-thickness: 0.075em;
-  }
+	.link-inline[data-variant="editorial"]:hover {
+		color: var(--link-color-hover);
+		/* No weight change - avoiding size shifts */
+		text-decoration-color: var(--link-color-hover);
+		/* Subtle thickness increase without jarring animation */
+		text-decoration-thickness: 0.075em;
+	}
 
-  /* Font size modifiers for specific nav contexts */
-  .link-nav[data-size="small"] {
-    font-size: var(--step--1);
-  }
+	/* Font size modifiers for specific nav contexts */
+	.link-nav[data-size="small"] {
+		font-size: var(--step--1);
+	}
 
-  /* ===== PRINT STYLES - Centralized from all components ===== */
-  @media print {
-    /* Base print styles for all links */
-    a {
-      color: var(--theme-text) !important;
-      text-decoration: underline !important;
-    }
+	/* ===== PRINT STYLES - Centralized from all components ===== */
+	@media print {
+		/* Base print styles for all links */
+		a {
+			color: var(--theme-text) !important;
+			text-decoration: underline !important;
+		}
 
-    /* Show URLs for external links */
-    a[href^="http"]:not(.no-print-url)::after {
-      content: " (" attr(href) ")";
-      font-size: var(--step--1);
-      opacity: 0.7;
-    }
+		/* Show URLs for external links */
+		a[href^="http"]:not(.no-print-url)::after {
+			content: " (" attr(href) ")";
+			font-size: var(--step--1);
+			opacity: 0.7;
+		}
 
-    /* Hide URLs for internal links */
-    a[href^="/"]:after,
-    a[href^="#"]:after {
-      content: "";
-    }
-  }
+		/* Hide URLs for internal links */
+		a[href^="/"]:after,
+		a[href^="#"]:after {
+			content: "";
+		}
+	}
 
-  /* ===== HIGH CONTRAST MODE ===== */
-  @media (prefers-contrast: high) {
-    .link-inline {
-      text-decoration-color: currentColor;
-      text-decoration-thickness: 2px;
-    }
+	/* ===== HIGH CONTRAST MODE ===== */
+	@media (prefers-contrast: high) {
+		.link-inline {
+			text-decoration-color: currentColor;
+			text-decoration-thickness: 2px;
+		}
 
-    .link-nav,
-    .link-title,
-    .link-footer {
-      font-weight: 600;
-    }
-  }
+		.link-nav,
+		.link-title,
+		.link-footer {
+			font-weight: 600;
+		}
+	}
 
-  /* ===== PREVENT UTILITY CLASS CONFLICTS ===== */
-  /* Legacy support - maintain font size stability */
-  .link-nav.text--2:hover,
-  .link-nav.text--1:hover,
-  .link-nav.text-0:hover,
-  .link-nav.text-sm:hover,
-  .link-nav.text-xs:hover {
-    font-size: inherit !important;
-  }
+	/* ===== PREVENT UTILITY CLASS CONFLICTS ===== */
+	/* Legacy support - maintain font size stability */
+	.link-nav.text--2:hover,
+	.link-nav.text--1:hover,
+	.link-nav.text-0:hover,
+	.link-nav.text-sm:hover,
+	.link-nav.text-xs:hover {
+		font-size: inherit !important;
+	}
 
-  /* Temporary backward compatibility for build process */
-  .inline-link {
-    @apply link-inline;
-  }
-  .nav-link {
-    @apply link-nav;
-  }
-  .feature-link {
-    @apply link-title;
-  }
-  .footer-link {
-    @apply link-footer;
-  }
+	/* Temporary backward compatibility for build process */
+	.inline-link {
+		@apply link-inline;
+	}
+	.nav-link {
+		@apply link-nav;
+	}
+	.feature-link {
+		@apply link-title;
+	}
+	.footer-link {
+		@apply link-footer;
+	}
 } /* End @layer components */

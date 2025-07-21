@@ -16,13 +16,13 @@ We take Vietnam as a parable for the larger Asian experience: After independence
 
 Understandably, the history of Asian political development isn't known to many economists. However, the history of European state capacity has influenced a wave of research in the political economy of development. Classic works by eminent historians like Charles Tilly or Perry Anderson have become commonplace, informing the way economists explore the role of state history and economic development.
 
-Our paper on state capacity appeals to a rich literature on Asia -- one that may be less well known to economists. Since my co-authors and I spent much time delving into these works, much of which can’t fully be discussed in the scope of an empirical economics paper, I wanted to share some of these readings on Asian formation in Asia, emphasizing Vietnam.
+Our paper on state capacity appeals to a rich literature on Asia--one that may be less well known to economists. Since my co-authors and I spent much time delving into these works, much of which can't fully be discussed in the scope of an empirical economics paper, I wanted to share some of these readings on Asian formation in Asia, emphasizing Vietnam.
 
 #### Asian State Formation in a Comparative Perspective.
 
 A great starting point for understand the patterns of long-run Asian state formation would be Victor Lierberman's wonderful two volume history, _Strange Parallels_. Lieberman synthesizes a massive literature on political development, comparing Asian state history to that of Europe and Eurasia.
 
-* Lieberman, V. _Strange Parallels: Southeast Asia in Global Context, C. 800–1830. Volume I:  Integration on the Mainland._ Cambridge University Press, Cambridge (2003).
+* Lieberman, V. _Strange Parallels: Southeast Asia in Global Context, C. 800–1830. Volume I: Integration on the Mainland._ Cambridge University Press, Cambridge (2003).
 * Lieberman, V. _Strange Parallels: Southeast Asia in Global Context, c. 800-1830. Volume II: Mainland Mirrors, Europe, China._ South Asia, and the Islands. Cambridge University Press, Cambridge (2010).
 
 #### The Chinese State and Historical Congruity in East Asian Political Development
@@ -68,6 +68,6 @@ Another strand of scholarship has studied the way in which--with the help of a m
 * Cotter, M. G. (1968). Towards a Social History of the Vietnamese Southward Movement. _Journal of Southeast Asian History_, 9(1), 12–24.
 * Cooke, N. (1998). Regionalism and the Nature of Nguyen Rule in Seventeenth-Century Dang Trong (Cochinchina). _Journal of Southeast Asian Studies_, 29(1), 122–161.
 * Li, T. (1998). _Nguyen Cochinchina: Southern Vietnam in the Seventeenth and Eighteenth Centuries._ SEAP Publications.
-* Taylor, K. (1993). Nguyen Hoang and the Beginning of Vietnam’s Southward Expansion. _Southeast Asia in the Early Modern Era_, 42–65.
+* Taylor, K. (1993). Nguyen Hoang and the Beginning of Vietnam's Southward Expansion. _Southeast Asia in the Early Modern Era_, 42–65.
 
 Many thanks to the helpful discussion and input for the Vietnamese Studies Group listserv and my co-authors.

@@ -40,21 +40,14 @@ IBM Plex Sans ships with weights from 100 (Thin) to 700 (Bold), but not all weig
 ```css
 /* Optimal weight mapping for body text */
 :root {
-  /* Light mode */
-  --body-weight-regular: 400;
-  --body-weight-medium: 500;
-  --body-weight-semibold: 600;
+  /* Light mode */--body-weight-regular: 400;--body-weight-medium: 500;--body-weight-semibold: 600;
 
-  /* Subtle weight increase for headings */
-  --heading-weight-adjustment: 50;
+  /* Subtle weight increase for headings */--heading-weight-adjustment: 50;
 }
 
 /* Dark mode adjustments */
 :root[data-theme="dark"] {
-  /* Increase weights slightly for better contrast */
-  --body-weight-regular: 425;
-  --body-weight-medium: 525;
-  --body-weight-semibold: 625;
+  /* Increase weights slightly for better contrast */--body-weight-regular: 425;--body-weight-medium: 525;--body-weight-semibold: 625;
 }
 
 /* Implementation with CSS custom properties */
@@ -81,9 +74,9 @@ IBM Plex Sans has generous built-in spacing, but screen rendering benefits from 
 
 /* Size-specific adjustments */
 @media (min-width: 768px) {
-  .text-body {
-    /* Desktop screens can handle tighter spacing */
-    letter-spacing: -0.015em;
+.text-body {
+  /* Desktop screens can handle tighter spacing */
+  letter-spacing: -0.015em;
   }
 }
 
@@ -105,10 +98,10 @@ The relationship between font size and line height dramatically affects readabil
 }
 
 /* Responsive line height scaling */
-.prose-sm { line-height: 1.5; }    /* Tighter for small text */
+.prose-sm { line-height: 1.5; } /* Tighter for small text */
 .prose-base { line-height: 1.618; } /* Golden ratio */
-.prose-lg { line-height: 1.7; }     /* More space for larger text */
-.prose-xl { line-height: 1.75; }    /* Maximum readability */
+.prose-lg { line-height: 1.7; } /* More space for larger text */
+.prose-xl { line-height: 1.75; } /* Maximum readability */
 
 /* Viewport-based fluid line height */
 .prose-fluid {
@@ -125,13 +118,13 @@ IBM Plex Sans includes professional OpenType features that enhance readability:
 .text-enhanced {
   /* Basic features */
   font-feature-settings:
-    "kern" 1,  /* Kerning */
-    "liga" 1,  /* Standard ligatures */
-    "calt" 1,  /* Contextual alternates */
-    "ss01" 1,  /* Stylistic set 01: Open forms */
-    "ss02" 1,  /* Stylistic set 02: Alt g */
-    "tnum" 1,  /* Tabular numbers for data */
-    "case" 1;  /* Case-sensitive punctuation */
+  "kern" 1, /* Kerning */
+  "liga" 1, /* Standard ligatures */
+  "calt" 1, /* Contextual alternates */
+  "ss01" 1, /* Stylistic set 01: Open forms */
+  "ss02" 1, /* Stylistic set 02: Alt g */
+  "tnum" 1, /* Tabular numbers for data */
+  "case" 1; /* Case-sensitive punctuation */
 
   /* Prevent common issues */
   font-variant-ligatures: common-ligatures contextual;
@@ -162,18 +155,18 @@ IBM Plex Sans includes professional OpenType features that enhance readability:
 Implement a progressive font loading strategy:
 
 ```html
-<!-- Preload critical weights -->
+<!--Preload critical weights-->
 <link rel="preload"
-      href="/fonts/IBMPlexSans-Regular.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin>
+  href="/fonts/IBMPlexSans-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin>
 
 <link rel="preload"
-      href="/fonts/IBMPlexSans-Italic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin>
+  href="/fonts/IBMPlexSans-Italic.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin>
 ```
 
 ### 2. Font Display Strategy
@@ -188,9 +181,9 @@ Implement a progressive font loading strategy:
 
   /* Limit character range for faster initial load */
   unicode-range: U+0020-007F, /* Basic Latin */
-                 U+00A0-00FF, /* Latin-1 Supplement */
-                 U+2000-206F, /* General Punctuation */
-                 U+20AC, U+2122; /* Common symbols */
+  U+00A0-00FF, /* Latin-1 Supplement */
+  U+2000-206F, /* General Punctuation */
+  U+20AC, U+2122; /* Common symbols */
 }
 ```
 
@@ -202,15 +195,15 @@ Match system font metrics to minimize layout shift:
 /* Fallback font stack with metric adjustments */
 .font-sans {
   font-family: "IBM Plex Sans",
-               -apple-system,
-               BlinkMacSystemFont,
-               "Segoe UI",
-               system-ui,
-               sans-serif;
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  system-ui,
+  sans-serif;
 }
 
 /* Adjust metrics when font hasn't loaded */
-.fonts-loading .font-sans {
+.fonts-loading.font-sans {
   letter-spacing: 0.02em;
   word-spacing: -0.05em;
   line-height: 1.55;
@@ -224,16 +217,11 @@ IBM Plex Sans performs beautifully with fluid type scaling:
 ```css
 /* Fluid type scale using clamp() */
 :root {
-  /* Base size scales from 16px to 18px */
-  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  /* Base size scales from 16px to 18px */--text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
 
-  /* Scale ratio increases on larger screens */
-  --scale-ratio: clamp(1.2, 1.15 + 0.25vw, 1.25);
+  /* Scale ratio increases on larger screens */--scale-ratio: clamp(1.2, 1.15 + 0.25vw, 1.25);
 
-  /* Generate scale */
-  --text-sm: calc(var(--text-base) / var(--scale-ratio));
-  --text-lg: calc(var(--text-base) * var(--scale-ratio));
-  --text-xl: calc(var(--text-lg) * var(--scale-ratio));
+  /* Generate scale */--text-sm: calc(var(--text-base) / var(--scale-ratio));--text-lg: calc(var(--text-base) * var(--scale-ratio));--text-xl: calc(var(--text-lg) * var(--scale-ratio));
 }
 ```
 
@@ -252,7 +240,7 @@ IBM Plex Sans maintains excellent legibility at various weights:
 }
 
 /* Dark mode needs special attention */
-[data-theme="dark"] .text-high-contrast {
+[data-theme="dark"].text-high-contrast {
   color: hsl(0deg 0% 93%); /* Not pure white */
   font-weight: 450; /* Compensate for halation */
   -webkit-font-smoothing: antialiased;
@@ -272,8 +260,8 @@ a:focus {
 
   /* High contrast mode support */
   @media (prefers-contrast: high) {
-    outline-width: 4px;
-    text-decoration-thickness: 3px;
+  outline-width: 4px;
+  text-decoration-thickness: 3px;
   }
 }
 ```
@@ -297,8 +285,8 @@ Here's a complete implementation combining all optimizations:
 
   /* OpenType features */
   font-feature-settings:
-    "kern" 1, "liga" 1, "calt" 1,
-    "ss01" 1, "pnum" 1;
+  "kern" 1, "liga" 1, "calt" 1,
+  "ss01" 1, "pnum" 1;
 
   /* Rendering optimization */
   text-rendering: optimizeLegibility;
@@ -310,15 +298,15 @@ Here's a complete implementation combining all optimizations:
 
   /* Responsive adjustments */
   @media (min-width: 768px) {
-    letter-spacing: -0.015em;
-    line-height: 1.65;
+  letter-spacing: -0.015em;
+  line-height: 1.65;
   }
 
   /* Dark mode refinements */
   @media (prefers-color-scheme: dark) {
-    font-weight: var(--body-weight-regular-dark, 425);
-    letter-spacing: -0.005em;
-    color: hsl(0deg 0% 88%);
+  font-weight: var(--body-weight-regular-dark, 425);
+  letter-spacing: -0.005em;
+  color: hsl(0deg 0% 88%);
   }
 }
 
@@ -340,7 +328,7 @@ Here's a complete implementation combining all optimizations:
   text-underline-offset: 0.2em;
 
   &:hover {
-    text-decoration-thickness: 0.15em;
+  text-decoration-thickness: 0.15em;
   }
 }
 ```
@@ -374,11 +362,7 @@ IBM Plex Sans represents a masterclass in contemporary type design, but its true
 
 The techniques outlined here—from weight adjustments to OpenType features—create a typography system that respects both the typeface's design intent and the reader's needs. Whether rendering on a high-DPI display or a modest mobile screen, these optimizations ensure IBM Plex Sans delivers clarity, comfort, and character.
 
-Remember: typography is not about fonts—it's about reading. Every optimization should serve that fundamental purpose.
-
----
-
-## Resources
+Remember: typography is not about fonts—it's about reading. Every optimization should serve that fundamental purpose.---## Resources
 
 - [IBM Plex on GitHub](https://github.com/IBM/plex)
 - [Variable Font Browser Support](https://caniuse.com/variable-fonts)

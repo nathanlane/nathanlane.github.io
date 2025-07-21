@@ -92,6 +92,30 @@ node scripts/migration/fix-blog-images.js --download
 
 **Dependencies:** `npm install gray-matter`
 
+### `clean-html-entities.js`
+Cleans up HTML entities and messy content from migrated blog posts.
+- Converts HTML entities (&nbsp;, &gt;, &lt;, &amp;, etc.) to proper characters
+- Fixes double-encoded entities (like &amp;gt; → &gt; → >)
+- Removes zero-width spaces and invisible characters
+- Cleans up excessive whitespace
+- Converts smart quotes to straight quotes (optional)
+- Fixes common OCR/paste artifacts
+- Handles special cases like "File: Save As > Image > TIFFs"
+
+**Usage:**
+```bash
+# Clean all posts
+node scripts/migration/clean-html-entities.js
+
+# Preview changes without saving
+node scripts/migration/clean-html-entities.js --dry-run
+
+# Clean specific file
+node scripts/migration/clean-html-entities.js --file=my-post.md
+```
+
+**Dependencies:** `npm install gray-matter`
+
 ### `squarespace-url-extractor.js`
 Extracts and analyzes URLs from Squarespace sitemap.xml.
 - Groups URLs by pattern (blog, portfolio, pages)

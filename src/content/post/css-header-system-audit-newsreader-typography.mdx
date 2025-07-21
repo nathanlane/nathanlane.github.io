@@ -28,7 +28,7 @@ Users reported that headers appeared "as small as body text" and lacked any visu
 The most shocking discovery came in `tailwind.config.ts`:
 
 ```typescript
-addBase({});  // 🚨 EMPTY!
+addBase({}); // 🚨 EMPTY!
 ```
 
 This single line meant **zero base styles** for any HTML headers. Raw `<h1>` through `<h6>` elements had:
@@ -44,18 +44,18 @@ Headers literally inherited body text sizing (15-17px), explaining why they appe
 We discovered three separate, uncoordinated header systems:
 
 1. **Semantic Classes** (`.heading-1` through `.heading-6`)
-   - Defined in Tailwind components
-   - Used fluid type scale
-   - Applied Newsreader font
+  - Defined in Tailwind components
+  - Used fluid type scale
+  - Applied Newsreader font
 
 2. **Prose Typography Plugin**
-   - Defined styles within `.prose` wrapper
-   - Attempted to use non-existent theme values
-   - Different weight system
+  - Defined styles within `.prose` wrapper
+  - Attempted to use non-existent theme values
+  - Different weight system
 
 3. **Base Styles**
-   - Missing entirely
-   - Headers fell back to browser defaults
+  - Missing entirely
+  - Headers fell back to browser defaults
 
 ### High Priority Error: Fluid Type Integration Failure
 
@@ -64,7 +64,7 @@ The `tailwindcss-fluid-type` plugin generates utility classes but doesn't popula
 ```typescript
 // This FAILS - no theme('fontSize.4') exists!
 h1: {
-  fontSize: theme("fontSize.4"),  // ❌ undefined
+  fontSize: theme("fontSize.4"), // ❌ undefined
 }
 ```
 
@@ -101,7 +101,7 @@ Different systems defined different dark mode weights:
 Newsreader is a variable font with an optical size axis (`opsz`). The implementation set static values:
 
 ```css
-h1 { font-variation-settings: "opsz" 72; }  /* For 52px text */
+h1 { font-variation-settings: "opsz" 72; } /* For 52px text */
 ```
 
 But on mobile, H1 renders at 37px—requiring `opsz` 48 for optimal legibility. The optical sizes were never adjusted for viewport changes.
@@ -122,20 +122,20 @@ First, we populated the empty `addBase()`:
 ```typescript
 addBase({
   'h1, h2, h3, h4, h5, h6': {
-    fontFamily: theme('fontFamily.headline'),
-    fontWeight: '400',
-    lineHeight: '1.2',
-    letterSpacing: '-0.01em',
-    color: theme('colors.accent-base'),
-    fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+  fontFamily: theme('fontFamily.headline'),
+  fontWeight: '400',
+  lineHeight: '1.2',
+  letterSpacing: '-0.01em',
+  color: theme('colors.accent-base'),
+  fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
   },
   h1: {
-    fontSize: 'var(--step-5)',
-    fontWeight: '450',
-    fontVariationSettings: '"opsz" 72, "wght" 450',
-    letterSpacing: '-0.025em',
+  fontSize: 'var(--step-5)',
+  fontWeight: '450',
+  fontVariationSettings: '"opsz" 72, "wght" 450',
+  letterSpacing: '-0.025em',
   },
-  // ... h2 through h6
+  //... h2 through h6
 });
 ```
 
@@ -144,16 +144,7 @@ addBase({
 Added CSS custom properties for the fluid scale:
 
 ```css
-:root {
-  --step--2: clamp(0.64rem, 0.62rem + 0.09vw, 0.72rem);
-  --step--1: clamp(0.80rem, 0.77rem + 0.14vw, 0.90rem);
-  --step-0: clamp(0.94rem, 0.89rem + 0.23vw, 1.06rem);
-  --step-1: clamp(1.17rem, 1.10rem + 0.37vw, 1.33rem);
-  --step-2: clamp(1.46rem, 1.36rem + 0.55vw, 1.66rem);
-  --step-3: clamp(1.83rem, 1.67rem + 0.79vw, 2.08rem);
-  --step-4: clamp(2.29rem, 2.07rem + 1.11vw, 2.59rem);
-  --step-5: clamp(2.86rem, 2.55rem + 1.55vw, 3.24rem);
-  --step-6: clamp(3.58rem, 3.14rem + 2.17vw, 4.05rem);
+:root {--step--2: clamp(0.64rem, 0.62rem + 0.09vw, 0.72rem);--step--1: clamp(0.80rem, 0.77rem + 0.14vw, 0.90rem);--step-0: clamp(0.94rem, 0.89rem + 0.23vw, 1.06rem);--step-1: clamp(1.17rem, 1.10rem + 0.37vw, 1.33rem);--step-2: clamp(1.46rem, 1.36rem + 0.55vw, 1.66rem);--step-3: clamp(1.83rem, 1.67rem + 0.79vw, 2.08rem);--step-4: clamp(2.29rem, 2.07rem + 1.11vw, 2.59rem);--step-5: clamp(2.86rem, 2.55rem + 1.55vw, 3.24rem);--step-6: clamp(3.58rem, 3.14rem + 2.17vw, 4.05rem);
 }
 ```
 
@@ -166,7 +157,7 @@ Implemented viewport-aware optical sizes:
   h1 { font-variation-settings: "opsz" 48, "wght" 450; }
   h2 { font-variation-settings: "opsz" 36, "wght" 475; }
   h3 { font-variation-settings: "opsz" 28, "wght" 500; }
-  /* ... */
+  /*... */
 }
 ```
 

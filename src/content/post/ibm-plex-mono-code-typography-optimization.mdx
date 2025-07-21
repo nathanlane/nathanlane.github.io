@@ -71,17 +71,11 @@ Code benefits from strict vertical rhythm. Here's how to implement a proper grid
 
 ```css
 :root {
-  /* 4px baseline grid for precise alignment */
-  --code-grid-unit: 0.25rem; /* 4px */
+  /* 4px baseline grid for precise alignment */--code-grid-unit: 0.25rem; /* 4px */
 
-  /* Derive all measurements from the grid */
-  --code-line-height: calc(var(--code-grid-unit) * 5); /* 20px */
-  --code-padding-block: calc(var(--code-grid-unit) * 4); /* 16px */
-  --code-padding-inline: calc(var(--code-grid-unit) * 6); /* 24px */
+  /* Derive all measurements from the grid */--code-line-height: calc(var(--code-grid-unit) * 5); /* 20px */--code-padding-block: calc(var(--code-grid-unit) * 4); /* 16px */--code-padding-inline: calc(var(--code-grid-unit) * 6); /* 24px */
 
-  /* Character-based measurements */
-  --code-char-width: 0.6ch; /* IBM Plex Mono character width */
-  --code-indent: calc(var(--code-char-width) * 2); /* 2-space indent */
+  /* Character-based measurements */--code-char-width: 0.6ch; /* IBM Plex Mono character width */--code-indent: calc(var(--code-char-width) * 2); /* 2-space indent */
 }
 ```
 
@@ -132,14 +126,14 @@ code {
   /* Disable ligatures - they harm code readability */
   font-variant-ligatures: none;
   font-feature-settings:
-    "liga" 0,    /* No ligatures */
-    "clig" 0,    /* No contextual ligatures */
-    "calt" 1,    /* Keep contextual alternates */
-    "zero" 1,    /* Slashed zero - critical for code */
-    "ss01" 1,    /* Alternative 'a' - more open */
-    "ss02" 0,    /* Keep default 'g' for clarity */
-    "tnum" 1,    /* Tabular numbers */
-    "case" 1;    /* Case-sensitive punctuation */
+  "liga" 0, /* No ligatures */
+  "clig" 0, /* No contextual ligatures */
+  "calt" 1, /* Keep contextual alternates */
+  "zero" 1, /* Slashed zero - critical for code */
+  "ss01" 1, /* Alternative 'a' - more open */
+  "ss02" 0, /* Keep default 'g' for clarity */
+  "tnum" 1, /* Tabular numbers */
+  "case" 1; /* Case-sensitive punctuation */
 }
 
 /* Language-specific adjustments */
@@ -147,10 +141,10 @@ code {
 .language-elm code {
   /* Functional languages can benefit from some ligatures */
   font-feature-settings:
-    "liga" 1,    /* Enable for operators like => */
-    "calt" 1,
-    "zero" 1,
-    "tnum" 1;
+  "liga" 1, /* Enable for operators like => */
+  "calt" 1,
+  "zero" 1,
+  "tnum" 1;
 }
 
 .language-python code {
@@ -164,27 +158,16 @@ code {
 ```css
 /* Weight adjustments for different contexts */
 :root {
-  /* Base weights */
-  --code-weight-normal: 400;
-  --code-weight-medium: 500;
-  --code-weight-bold: 600;
+  /* Base weights */--code-weight-normal: 400;--code-weight-medium: 500;--code-weight-bold: 600;
 
-  /* Context-specific weights */
-  --code-weight-comment: 400;
-  --code-weight-keyword: 500;
-  --code-weight-string: 400;
-  --code-weight-function: 500;
+  /* Context-specific weights */--code-weight-comment: 400;--code-weight-keyword: 500;--code-weight-string: 400;--code-weight-function: 500;
 }
 
 /* Dark mode adjustments */
 [data-theme="dark"] {
-  /* Increase weights slightly for better contrast */
-  --code-weight-normal: 425;
-  --code-weight-medium: 525;
-  --code-weight-bold: 625;
+  /* Increase weights slightly for better contrast */--code-weight-normal: 425;--code-weight-medium: 525;--code-weight-bold: 625;
 
-  /* Comments need special attention in dark mode */
-  --code-weight-comment: 450;
+  /* Comments need special attention in dark mode */--code-weight-comment: 450;
 }
 
 /* Apply weights semantically */
@@ -213,37 +196,35 @@ Code must remain readable across all devices:
 ```css
 /* Responsive code sizing with constraints */
 :root {
-  /* Size scale based on viewport */
-  --code-size-base: clamp(
-    0.75rem,  /* 12px minimum */
-    0.7rem + 0.25vw, /* Fluid scaling */
-    0.9375rem /* 15px maximum */
+  /* Size scale based on viewport */--code-size-base: clamp(
+  0.75rem, /* 12px minimum */
+  0.7rem + 0.25vw, /* Fluid scaling */
+  0.9375rem /* 15px maximum */
   );
 
-  /* Inline code is slightly smaller */
-  --code-size-inline: calc(var(--code-size-base) * 0.9);
+  /* Inline code is slightly smaller */--code-size-inline: calc(var(--code-size-base) * 0.9);
 }
 
 /* Breakpoint-based adjustments */
 @media (max-width: 640px) {
   pre {
-    /* Smaller size on mobile */
-    font-size: 0.75rem; /* 12px */
-    line-height: 1.5rem; /* 24px */
+  /* Smaller size on mobile */
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.5rem; /* 24px */
 
-    /* Tighter spacing */
-    letter-spacing: 0;
+  /* Tighter spacing */
+  letter-spacing: 0;
 
-    /* Reduced padding */
-    padding: 1rem;
+  /* Reduced padding */
+  padding: 1rem;
   }
 }
 
 @media (min-width: 1920px) {
   pre {
-    /* Larger size on big screens */
-    font-size: 0.9375rem; /* 15px */
-    line-height: 1.5625rem; /* 25px */
+  /* Larger size on big screens */
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.5625rem; /* 25px */
   }
 }
 ```
@@ -262,12 +243,12 @@ pre {
 
   /* Visual scroll indicators */
   background-image:
-    linear-gradient(to right,
-      var(--code-bg) 0%,
-      transparent 2rem),
-    linear-gradient(to left,
-      var(--code-bg) 0%,
-      transparent 2rem);
+  linear-gradient(to right,
+  var(--code-bg) 0%,
+  transparent 2rem),
+  linear-gradient(to left,
+  var(--code-bg) 0%,
+  transparent 2rem);
   background-attachment: local, local;
   background-size: 2rem 100%, 2rem 100%;
   background-repeat: no-repeat;
@@ -285,20 +266,20 @@ pre::-webkit-scrollbar-thumb {
   border-radius: 0.25rem;
 
   &:hover {
-    background: var(--code-scrollbar-thumb-hover);
+  background: var(--code-scrollbar-thumb-hover);
   }
 }
 
 /* Mobile-specific scroll enhancements */
 @media (max-width: 768px) {
   pre {
-    /* Momentum scrolling on iOS */
-    -webkit-overflow-scrolling: touch;
+  /* Momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 
-    /* Larger touch area for scrollbar */
-    &::-webkit-scrollbar {
-      height: 0.75rem;
-    }
+  /* Larger touch area for scrollbar */
+  &::-webkit-scrollbar {
+  height: 0.75rem;
+  }
   }
 }
 ```
@@ -312,23 +293,11 @@ Color choices must work with IBM Plex Mono's weight and spacing:
 ```css
 /* High-contrast light theme */
 :root {
-  /* Base colors */
-  --syntax-fg: hsl(0deg 0% 10%);
-  --syntax-bg: hsl(0deg 0% 98%);
+  /* Base colors */--syntax-fg: hsl(0deg 0% 10%);--syntax-bg: hsl(0deg 0% 98%);
 
-  /* Syntax colors - WCAG AA compliant */
-  --syntax-comment: hsl(0deg 0% 45%);
-  --syntax-keyword: hsl(280deg 70% 40%);
-  --syntax-string: hsl(140deg 70% 30%);
-  --syntax-number: hsl(30deg 80% 40%);
-  --syntax-function: hsl(220deg 70% 40%);
-  --syntax-variable: hsl(0deg 70% 40%);
-  --syntax-operator: hsl(0deg 0% 25%);
-  --syntax-punctuation: hsl(0deg 0% 40%);
+  /* Syntax colors - WCAG AA compliant */--syntax-comment: hsl(0deg 0% 45%);--syntax-keyword: hsl(280deg 70% 40%);--syntax-string: hsl(140deg 70% 30%);--syntax-number: hsl(30deg 80% 40%);--syntax-function: hsl(220deg 70% 40%);--syntax-variable: hsl(0deg 70% 40%);--syntax-operator: hsl(0deg 0% 25%);--syntax-punctuation: hsl(0deg 0% 40%);
 
-  /* Special states */
-  --syntax-highlight-bg: hsl(60deg 70% 95%);
-  --syntax-selection-bg: hsl(220deg 70% 90%);
+  /* Special states */--syntax-highlight-bg: hsl(60deg 70% 95%);--syntax-selection-bg: hsl(220deg 70% 90%);
 }
 ```
 
@@ -337,23 +306,11 @@ Color choices must work with IBM Plex Mono's weight and spacing:
 ```css
 /* Optimized dark theme for reduced eye strain */
 [data-theme="dark"] {
-  /* Softer contrast to prevent glare */
-  --syntax-fg: hsl(0deg 0% 85%);
-  --syntax-bg: hsl(0deg 0% 7%);
+  /* Softer contrast to prevent glare */--syntax-fg: hsl(0deg 0% 85%);--syntax-bg: hsl(0deg 0% 7%);
 
-  /* Adjusted colors for dark backgrounds */
-  --syntax-comment: hsl(0deg 0% 55%);
-  --syntax-keyword: hsl(280deg 60% 70%);
-  --syntax-string: hsl(140deg 50% 60%);
-  --syntax-number: hsl(30deg 70% 65%);
-  --syntax-function: hsl(220deg 60% 70%);
-  --syntax-variable: hsl(0deg 60% 70%);
-  --syntax-operator: hsl(0deg 0% 75%);
-  --syntax-punctuation: hsl(0deg 0% 60%);
+  /* Adjusted colors for dark backgrounds */--syntax-comment: hsl(0deg 0% 55%);--syntax-keyword: hsl(280deg 60% 70%);--syntax-string: hsl(140deg 50% 60%);--syntax-number: hsl(30deg 70% 65%);--syntax-function: hsl(220deg 60% 70%);--syntax-variable: hsl(0deg 60% 70%);--syntax-operator: hsl(0deg 0% 75%);--syntax-punctuation: hsl(0deg 0% 60%);
 
-  /* States */
-  --syntax-highlight-bg: hsl(60deg 30% 15%);
-  --syntax-selection-bg: hsl(220deg 40% 20%);
+  /* States */--syntax-highlight-bg: hsl(60deg 30% 15%);--syntax-selection-bg: hsl(220deg 40% 20%);
 }
 
 /* Apply colors with proper weights */
@@ -436,25 +393,25 @@ li code {
 ```css
 /* Mobile optimizations for inline code */
 @media (max-width: 640px) {
-  :not(pre) > code {
-    /* Slightly larger on mobile for touch */
-    font-size: 0.9em;
-    padding: 0.1875rem 0.4375rem; /* 3px 7px */
+:not(pre) > code {
+  /* Slightly larger on mobile for touch */
+  font-size: 0.9em;
+  padding: 0.1875rem 0.4375rem; /* 3px 7px */
 
-    /* Allow breaking on mobile */
-    white-space: normal;
-    word-break: break-word;
-    hyphens: none;
+  /* Allow breaking on mobile */
+  white-space: normal;
+  word-break: break-word;
+  hyphens: none;
   }
 }
 
 /* High DPI adjustments */
 @media (-webkit-min-device-pixel-ratio: 2),
-       (min-resolution: 192dpi) {
-  :not(pre) > code {
-    /* Crisper rendering on retina */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  (min-resolution: 192dpi) {
+:not(pre) > code {
+  /* Crisper rendering on retina */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   }
 }
 ```
@@ -525,26 +482,26 @@ li code {
 
   /* States */
   &:hover {
-    background: var(--code-hover-bg);
+  background: var(--code-hover-bg);
   }
 
   &:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
   }
 
   &[data-copied] {
-    &::after {
-      content: "Copied!";
-      position: absolute;
-      top: 100%;
-      right: 0;
-      margin-top: 0.5rem;
-      padding: 0.25rem 0.5rem;
-      background: var(--code-tooltip-bg);
-      color: var(--code-tooltip-fg);
-      border-radius: 0.25rem;
-      white-space: nowrap;
-    }
+  &::after {
+  content: "Copied!";
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--code-tooltip-bg);
+  color: var(--code-tooltip-fg);
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  }
   }
 }
 ```
@@ -557,42 +514,42 @@ li code {
 // Progressive enhancement for code fonts
 class CodeFontOptimizer {
   constructor() {
-    this.fonts = {
-      primary: 'IBM Plex Mono',
-      weights: ['400', '400 italic', '500', '600']
-    };
+  this.fonts = {
+  primary: 'IBM Plex Mono',
+  weights: ['400', '400 italic', '500', '600']
+  };
   }
 
   async init() {
-    // Check if fonts API is available
-    if (!('fonts' in document)) return;
+  // Check if fonts API is available
+  if (!('fonts' in document)) return;
 
-    try {
-      // Load critical weight first
-      await document.fonts.load(`400 1em ${this.fonts.primary}`);
-      document.documentElement.classList.add('mono-400-loaded');
+  try {
+  // Load critical weight first
+  await document.fonts.load(`400 1em ${this.fonts.primary}`);
+  document.documentElement.classList.add('mono-400-loaded');
 
-      // Load other weights asynchronously
-      this.loadSecondaryWeights();
-    } catch (error) {
-      console.warn('Font loading failed:', error);
-      this.applyFallbackMetrics();
-    }
+  // Load other weights asynchronously
+  this.loadSecondaryWeights();
+  } catch (error) {
+  console.warn('Font loading failed:', error);
+  this.applyFallbackMetrics();
+  }
   }
 
   async loadSecondaryWeights() {
-    const loads = this.fonts.weights.slice(1).map(weight =>
-      document.fonts.load(`${weight} 1em ${this.fonts.primary}`)
-    );
+  const loads = this.fonts.weights.slice(1).map(weight =>
+  document.fonts.load(`${weight} 1em ${this.fonts.primary}`)
+  );
 
-    await Promise.all(loads);
-    document.documentElement.classList.add('mono-all-loaded');
+  await Promise.all(loads);
+  document.documentElement.classList.add('mono-all-loaded');
   }
 
   applyFallbackMetrics() {
-    // Adjust metrics for system fonts
-    document.documentElement.style.setProperty('--code-fallback-scale', '0.95');
-    document.documentElement.style.setProperty('--code-fallback-spacing', '0.02em');
+  // Adjust metrics for system fonts
+  document.documentElement.style.setProperty('--code-fallback-scale', '0.95');
+  document.documentElement.style.setProperty('--code-fallback-spacing', '0.02em');
   }
 }
 
@@ -627,11 +584,11 @@ pre:not(.highlighted) {
 
   /* Show loading state */
   &::before {
-    content: "Loading syntax highlighting...";
-    display: block;
-    opacity: 0.5;
-    font-style: italic;
-    margin-bottom: 1rem;
+  content: "Loading syntax highlighting...";
+  display: block;
+  opacity: 0.5;
+  font-style: italic;
+  margin-bottom: 1rem;
   }
 }
 ```
@@ -668,11 +625,7 @@ IBM Plex Mono, when properly optimized, transforms code from mere text into a st
 
 The techniques presented here—from baseline grids to syntax highlighting—work together to showcase code as both functional and beautiful. Whether viewing a simple snippet or analyzing complex algorithms, properly implemented IBM Plex Mono ensures that the typography enhances rather than hinders understanding.
 
-Remember: great code deserves great typography.
-
----
-
-## Implementation Checklist
+Remember: great code deserves great typography.---## Implementation Checklist
 
 - [ ] Load all necessary font weights and styles
 - [ ] Implement 4px baseline grid system

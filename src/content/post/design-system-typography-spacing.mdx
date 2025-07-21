@@ -27,9 +27,9 @@ Rather than fixed font sizes, we use a **fluid type system** that smoothly scale
 ```typescript
 // In tailwind.config.ts
 "0": {
-  minSize: "0.94rem",  // 15px on mobile (320px)
-  maxSize: "1.06rem",  // 17px on desktop (1280px)
-  lineHeight: "1.60"   // 160% for optimal readability
+  minSize: "0.94rem", // 15px on mobile (320px)
+  maxSize: "1.06rem", // 17px on desktop (1280px)
+  lineHeight: "1.60" // 160% for optimal readability
 }
 ```
 
@@ -54,9 +54,7 @@ This base size (`text-0`) is our body text. All other sizes scale proportionally
 Our spacing system is built on a **6px grid unit** that creates a **24px baseline** (matching 1.5 × 16px base font size):
 
 ```css
-/* In global.css */
---baseline: 1.5rem;      /* 24px = 16px × 1.5 */
---grid-unit: 0.375rem;   /* 6px = 24px ÷ 4 */
+/* In global.css */--baseline: 1.5rem; /* 24px = 16px × 1.5 */--grid-unit: 0.375rem; /* 6px = 24px ÷ 4 */
 ```
 
 Why 6px? It's the perfect divisor:
@@ -67,17 +65,7 @@ Why 6px? It's the perfect divisor:
 
 The complete spacing scale:
 
-```css
---space-1:  6px   /* 1 unit - hairline */
---space-2:  12px  /* 2 units - tight */
---space-3:  18px  /* 3 units - compact */
---space-4:  24px  /* 4 units = 1 baseline */
---space-6:  36px  /* 6 units = 1.5 baselines */
---space-8:  48px  /* 8 units = 2 baselines */
---space-10: 60px  /* 10 units = 2.5 baselines */
---space-12: 72px  /* 12 units = 3 baselines */
---space-16: 96px  /* 16 units = 4 baselines */
---space-24: 144px /* 24 units = 6 baselines */
+```css--space-1: 6px /* 1 unit - hairline */--space-2: 12px /* 2 units - tight */--space-3: 18px /* 3 units - compact */--space-4: 24px /* 4 units = 1 baseline */--space-6: 36px /* 6 units = 1.5 baselines */--space-8: 48px /* 8 units = 2 baselines */--space-10: 60px /* 10 units = 2.5 baselines */--space-12: 72px /* 12 units = 3 baselines */--space-16: 96px /* 16 units = 4 baselines */--space-24: 144px /* 24 units = 6 baselines */
 ```
 
 ## How It All Works Together
@@ -89,13 +77,13 @@ Every element aligns to the 24px baseline, creating a invisible grid that guides
 ```css
 /* Paragraphs */
 p {
-  line-height: 1.5;             /* 24px baseline */
+  line-height: 1.5; /* 24px baseline */
   margin-bottom: var(--space-4); /* 24px = 1 baseline */
 }
 
 /* Headings */
 h2 {
-  margin-top: var(--space-8);    /* 48px = 2 baselines */
+  margin-top: var(--space-8); /* 48px = 2 baselines */
   margin-bottom: var(--space-2); /* 12px = 0.5 baseline */
 }
 ```
@@ -105,17 +93,17 @@ h2 {
 The beauty of this system is its simplicity. In Tailwind, you use semantic spacing utilities:
 
 ```html
-<!-- Using grid-based spacing -->
-<div class="p-4">        <!-- 24px padding -->
-  <h2 class="mb-2">      <!-- 12px margin bottom -->
-    Heading
+<!--Using grid-based spacing-->
+<div class="p-4"> <!--24px padding-->
+  <h2 class="mb-2"> <!--12px margin bottom-->
+  Heading
   </h2>
-  <p class="mb-4">       <!-- 24px margin bottom -->
-    Body text here...
+  <p class="mb-4"> <!--24px margin bottom-->
+  Body text here...
 
 </div>
 
-<!-- Using fluid typography -->
+<!--Using fluid typography-->
 
 # Display Heading
 
@@ -130,8 +118,7 @@ The beauty of this system is its simplicity. In Tailwind, you use semantic spaci
 
 Change the grid unit:
 ```css
-/* In global.css */
---grid-unit: 0.4125rem; /* 6.6px instead of 6px */
+/* In global.css */--grid-unit: 0.4125rem; /* 6.6px instead of 6px */
 ```
 
 All spacing throughout the site scales proportionally!
@@ -142,7 +129,7 @@ Update the base size:
 ```typescript
 // In tailwind.config.ts
 "0": {
-  minSize: "1.0rem",   // 16px mobile
+  minSize: "1.0rem", // 16px mobile
   maxSize: "1.125rem", // 18px desktop
   lineHeight: "1.60"
 }
@@ -157,9 +144,7 @@ The system includes mobile-specific adjustments:
 ```css
 /* Mobile baseline (smaller screens) */
 @media (max-width: 640px) {
-  :root {
-    --baseline: 1.375rem;    /* 22px */
-    --grid-unit: 0.34375rem; /* 5.5px */
+:root {--baseline: 1.375rem; /* 22px */--grid-unit: 0.34375rem; /* 5.5px */
   }
 }
 ```
@@ -173,23 +158,23 @@ Every component uses these foundational values:
 ### Headers
 ```css
 .header {
-  height: var(--space-12);      /* 72px = 3 baselines */
-  padding: var(--space-3);      /* 18px vertical */
+  height: var(--space-12); /* 72px = 3 baselines */
+  padding: var(--space-3); /* 18px vertical */
 }
 ```
 
 ### Navigation
 ```css
 .nav-link {
-  font-size: 0.875rem;          /* Slightly smaller than body */
-  padding: var(--space-2);      /* 12px = 0.5 baseline */
+  font-size: 0.875rem; /* Slightly smaller than body */
+  padding: var(--space-2); /* 12px = 0.5 baseline */
 }
 ```
 
 ### Cards & Containers
 ```css
 .card {
-  padding: var(--space-4);      /* 24px = 1 baseline */
+  padding: var(--space-4); /* 24px = 1 baseline */
   margin-bottom: var(--space-6); /* 36px = 1.5 baselines */
 }
 ```
@@ -201,14 +186,14 @@ Typography needs special attention in dark mode:
 ```css
 /* Increased weight for better readability */
 :root[data-theme="dark"] h1 {
-  font-weight: 450;  /* vs 400 in light mode */
-  opacity: 0.95;     /* Slight reduction to prevent glare */
+  font-weight: 450; /* vs 400 in light mode */
+  opacity: 0.95; /* Slight reduction to prevent glare */
 }
 
 /* Body text adjustments */
 :root[data-theme="dark"] body {
-  font-weight: 425;  /* Slightly heavier */
-  opacity: 0.90;     /* Reduced brightness */
+  font-weight: 425; /* Slightly heavier */
+  opacity: 0.90; /* Reduced brightness */
 }
 ```
 
@@ -237,22 +222,22 @@ Add these classes to visualize the grid:
 /* Show baseline grid */
 .show-baseline {
   background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 255, 0.1) 0,
-    rgba(0, 0, 255, 0.1) 2px,
-    transparent 2px,
-    transparent var(--baseline)
+  to bottom,
+  rgba(0, 0, 255, 0.1) 0,
+  rgba(0, 0, 255, 0.1) 2px,
+  transparent 2px,
+  transparent var(--baseline)
   );
 }
 
 /* Show 6px grid */
 .show-grid {
   background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 0, 0, 0.1) 0,
-    rgba(255, 0, 0, 0.1) 1px,
-    transparent 1px,
-    transparent var(--grid-unit)
+  to bottom,
+  rgba(255, 0, 0, 0.1) 0,
+  rgba(255, 0, 0, 0.1) 1px,
+  transparent 1px,
+  transparent var(--grid-unit)
   );
 }
 ```

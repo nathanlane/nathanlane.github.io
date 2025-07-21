@@ -30,20 +30,18 @@ We have successfully implemented a comprehensive baseline grid and semantic toke
 ### 2. Core Principles
 
 This refactoring will be guided by five principles:
-1.  **Single Source of Truth:** All spacing will be derived from the `--grid-unit` (6px).
-2.  **System Over Ad-Hoc Values:** Eliminate all non-standard spacing utilities.
-3.  **Configuration-Driven Design:** `tailwind.config.ts` will be the single point of integration.
-4.  **Separation of Semantics and Styling:** Conflicting base styles on `h1-h6` tags will be removed in favor of utility-driven component classes.
-5.  **Developer Experience:** The legacy `*b` tokens will be deprecated and replaced by a clear, semantic token system (e.g., `space-s`, `space-m`).
+1. **Single Source of Truth:** All spacing will be derived from the `--grid-unit` (6px).
+2. **System Over Ad-Hoc Values:** Eliminate all non-standard spacing utilities.
+3. **Configuration-Driven Design:** `tailwind.config.ts` will be the single point of integration.
+4. **Separation of Semantics and Styling:** Conflicting base styles on `h1-h6` tags will be removed in favor of utility-driven component classes.
+5. **Developer Experience:** The legacy `*b` tokens will be deprecated and replaced by a clear, semantic token system (e.g., `space-s`, `space-m`).
 
 ### 3. The New Spacing System
 
 #### Grid Foundation
 Our spacing system is built on a 6px baseline grid unit, providing precise control and consistent rhythm:
 
-```css
---grid-unit: 0.375rem; /* 6px */
---baseline: 1.5rem;    /* 24px = 4 grid units */
+```css--grid-unit: 0.375rem; /* 6px */--baseline: 1.5rem; /* 24px = 4 grid units */
 ```
 
 #### Semantic Token Scale
@@ -64,10 +62,7 @@ The new semantic tokens provide intuitive, scalable spacing:
 #### Musical Intervals
 For sophisticated layouts, we've incorporated musical interval spacing:
 
-```css
---space-major-third: 3rem;     /* 48px */
---space-minor-third: 2.25rem;  /* 36px */
---space-perfect-fourth: 1rem;  /* 16px */
+```css--space-major-third: 3rem; /* 48px */--space-minor-third: 2.25rem; /* 36px */--space-perfect-fourth: 1rem; /* 16px */
 ```
 
 ### 4. Implementation Details
@@ -76,14 +71,14 @@ For sophisticated layouts, we've incorporated musical interval spacing:
 Here's how the new system is applied in practice:
 
 ```astro
-<!-- Header spacing -->
+<!--Header spacing-->
 <header class="px-space-s py-space-xs">
   <nav class="gap-space-2xs">
-    <!-- Navigation items with consistent spacing -->
+  <!--Navigation items with consistent spacing-->
   </nav>
 </header>
 
-<!-- Content sections -->
+<!--Content sections-->
 <section class="py-space-xl">
 
 ## Section Title
@@ -92,9 +87,9 @@ Here's how the new system is applied in practice:
 
 </section>
 
-<!-- Card components -->
+<!--Card components-->
 <div class="p-space-s gap-space-xs">
-  <!-- Card content with harmonic spacing -->
+  <!--Card content with harmonic spacing-->
 </div>
 ```
 
@@ -111,34 +106,34 @@ Heading classes now use semantic spacing:
 ### 5. The Refactoring Process (Completed)
 
 **Phase 0: Foundation and Tooling**
-*   **Objective:** Prepare the tools and create a visual contract for the new system.
-*   **Actions:**
-    1.  **Update `tailwind.config.ts`:**
-        *   Remove the legacy `*b` spacing tokens to prevent their future use.
-        *   Ensure the semantic tokens (`space-s`, `space-m`, etc.) are correctly configured and comprehensive.
-        *   Begin configuring the `@tailwindcss/typography` plugin to use our semantic tokens.
-    2.  **Create `spacing-test.astro` Page:**
-        *   Build a new page at `src/pages/spacing-test.astro`.
-        *   This page will visually render all fluid font sizes and all semantic spacing tokens, providing a clear reference and a tool for visual verification.
+* **Objective:** Prepare the tools and create a visual contract for the new system.
+* **Actions:**
+  1. **Update `tailwind.config.ts`:**
+  *  Remove the legacy `*b` spacing tokens to prevent their future use.
+  *  Ensure the semantic tokens (`space-s`, `space-m`, etc.) are correctly configured and comprehensive.
+  *  Begin configuring the `@tailwindcss/typography` plugin to use our semantic tokens.
+  2. **Create `spacing-test.astro` Page:**
+  *  Build a new page at `src/pages/spacing-test.astro`.
+  *  This page will visually render all fluid font sizes and all semantic spacing tokens, providing a clear reference and a tool for visual verification.
 
 **Phase 1: Core Layout Refactoring**
-*   **Objective:** Align the primary page layouts to the baseline grid using the new semantic tokens.
-*   **Target Files:**
-    *   `src/layouts/Base.astro`
-    *   `src/layouts/BlogPost.astro`
-    *   `src/layouts/Series.astro`
-*   **Action:** Replace all non-compliant spacing (e.g., `mt-20`, `px-5`) with the new semantic tokens (e.g., `mt-space-xl`, `px-space-s`).
+* **Objective:** Align the primary page layouts to the baseline grid using the new semantic tokens.
+* **Target Files:**
+  *  `src/layouts/Base.astro`
+  *  `src/layouts/BlogPost.astro`
+  *  `src/layouts/Series.astro`
+* **Action:** Replace all non-compliant spacing (e.g., `mt-20`, `px-5`) with the new semantic tokens (e.g., `mt-space-xl`, `px-space-s`).
 
 **Phase 2: Component Refactoring**
-*   **Objective:** Align all reusable components to the baseline grid.
-*   **Target Files:** The full "hit list" of components identified in the audit, including `Header.astro`, `Footer.astro`, `PostPreview.astro`, `ResearchCard.astro`, etc.
-*   **Action:** Systematically replace all non-compliant spacing and sizing utilities (`h-8`, `size-5`, `gap-4`, etc.) with their semantic equivalents. This includes refactoring the `.icon-*` classes to use grid-aligned sizes.
+* **Objective:** Align all reusable components to the baseline grid.
+* **Target Files:** The full "hit list" of components identified in the audit, including `Header.astro`, `Footer.astro`, `PostPreview.astro`, `ResearchCard.astro`, etc.
+* **Action:** Systematically replace all non-compliant spacing and sizing utilities (`h-8`, `size-5`, `gap-4`, etc.) with their semantic equivalents. This includes refactoring the `.icon-*` classes to use grid-aligned sizes.
 
 **Phase 3: Global Styles and Prose Refactoring**
-*   **Objective:** Eliminate the final sources of inconsistency.
-*   **Actions:**
-    1.  **Refactor Heading Styles:** Remove all base styles applied directly to `h1-h6` tags in `global.css` and `tailwind.config.ts`. Ensure all heading styles are exclusively handled by the `.heading-*` utility classes.
-    2.  **Finalize `prose` Configuration:** Complete the configuration of the `@tailwindcss/typography` plugin to ensure all its generated margins and paddings use our semantic spacing tokens.
+* **Objective:** Eliminate the final sources of inconsistency.
+* **Actions:**
+  1. **Refactor Heading Styles:** Remove all base styles applied directly to `h1-h6` tags in `global.css` and `tailwind.config.ts`. Ensure all heading styles are exclusively handled by the `.heading-*` utility classes.
+  2. **Finalize `prose` Configuration:** Complete the configuration of the `@tailwindcss/typography` plugin to ensure all its generated margins and paddings use our semantic spacing tokens.
 
 ### 6. Migration Guide
 
@@ -146,30 +141,30 @@ Heading classes now use semantic spacing:
 When working with the new system:
 
 1. **Always use semantic tokens** instead of numeric values:
-   - ❌ `p-4` → ✅ `p-space-s`
-   - ❌ `mt-8` → ✅ `mt-space-l`
-   - ❌ `gap-2` → ✅ `gap-space-2xs`
+  - ❌ `p-4` → ✅ `p-space-s`
+  - ❌ `mt-8` → ✅ `mt-space-l`
+  - ❌ `gap-2` → ✅ `gap-space-2xs`
 
 2. **Reference the spacing scale** for appropriate values:
-   - Micro adjustments: `space-3xs` (6px)
-   - Standard spacing: `space-s` (24px)
-   - Section breaks: `space-xl` (72px)
+  - Micro adjustments: `space-3xs` (6px)
+  - Standard spacing: `space-s` (24px)
+  - Section breaks: `space-xl` (72px)
 
 3. **Maintain grid alignment** - all spacing should be multiples of 6px
 
 #### Common Patterns
 
 ```astro
-<!-- Button padding -->
+<!--Button padding-->
 <button class="px-space-xs py-space-2xs">
 
-<!-- Card spacing -->
+<!--Card spacing-->
 <div class="p-space-s">
 
-<!-- Section spacing -->
+<!--Section spacing-->
 <section class="py-space-xl">
 
-<!-- List item gaps -->
+<!--List item gaps-->
 <ul class="space-y-space-3xs">
 ```
 

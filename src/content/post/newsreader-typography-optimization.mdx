@@ -71,15 +71,15 @@ h3 {
 
 #### Font Loading Strategy
 ```html
-<!-- Preload critical weights -->
+<!--Preload critical weights-->
 <link rel="preload" href="/fonts/newsreader-300.woff2" as="font" crossorigin>
 <link rel="preload" href="/fonts/newsreader-400.woff2" as="font" crossorigin>
 
-<!-- Variable font with fallback -->
+<!--Variable font with fallback-->
 @font-face {
   font-family: 'Newsreader';
   src: url('/fonts/newsreader-var.woff2') format('woff2-variations'),
-       url('/fonts/newsreader-var.woff2') format('woff2');
+  url('/fonts/newsreader-var.woff2') format('woff2');
   font-weight: 200 800;
   font-display: swap;
 }
@@ -104,12 +104,12 @@ h3 {
 h1, h2, h3, h4, h5, h6 {
   /* Optimized OpenType features for headers */
   font-feature-settings:
-    "kern" 1,    /* Kerning - essential */
-    "liga" 0,    /* Ligatures - disabled for clarity */
-    "calt" 1,    /* Contextual alternates */
-    "lnum" 1,    /* Lining figures */
-    "case" 1,    /* Case-sensitive forms */
-    "cpsp" 1;    /* Capital spacing */
+  "kern" 1, /* Kerning - essential */
+  "liga" 0, /* Ligatures - disabled for clarity */
+  "calt" 1, /* Contextual alternates */
+  "lnum" 1, /* Lining figures */
+  "case" 1, /* Case-sensitive forms */
+  "cpsp" 1; /* Capital spacing */
 }
 ```
 
@@ -131,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Prevent single-word widows */
-.heading-1, .heading-2 {
+.heading-1,.heading-2 {
   text-wrap: balance;
   hanging-punctuation: first last;
 }
@@ -156,15 +156,15 @@ Dark backgrounds require special consideration for serif typefaces:
 ```css
 @media (prefers-color-scheme: dark) {
   h1 {
-    font-weight: 325; /* Slightly heavier than light mode */
-    font-variation-settings: "opsz" 72, "wght" 325;
-    letter-spacing: -0.015em; /* Slightly more open */
-    -webkit-font-smoothing: antialiased;
+  font-weight: 325; /* Slightly heavier than light mode */
+  font-variation-settings: "opsz" 72, "wght" 325;
+  letter-spacing: -0.015em; /* Slightly more open */
+  -webkit-font-smoothing: antialiased;
   }
 
   h2 {
-    font-weight: 375;
-    font-variation-settings: "opsz" 48, "wght" 375;
+  font-weight: 375;
+  font-variation-settings: "opsz" 48, "wght" 375;
   }
 }
 ```
@@ -180,8 +180,8 @@ Dark backgrounds require special consideration for serif typefaces:
 
   /* Adjust for ClearType rendering */
   h1, h2, h3 {
-    -webkit-font-smoothing: auto;
-    text-rendering: geometricPrecision;
+  -webkit-font-smoothing: auto;
+  text-rendering: geometricPrecision;
   }
 }
 ```
@@ -189,7 +189,7 @@ Dark backgrounds require special consideration for serif typefaces:
 #### High-DPI Display Optimization
 ```css
 @media (-webkit-min-device-pixel-ratio: 2),
-       (min-resolution: 192dpi) {
+  (min-resolution: 192dpi) {
   /* Can use lighter weights on high-DPI */
   h1 { font-weight: 275; }
   h2 { font-weight: 325; }
@@ -279,10 +279,10 @@ Our optimizations resulted in significant improvements:
 ```astro
 <header class="space-y-4">
   <h1 class="heading-1 tracking-tight-display">
-    <span class="block text-2 font-normal opacity-70">
-      Chapter One
-    </span>
-    The Evolution of Digital Typography
+  <span class="block text-2 font-normal opacity-70">
+  Chapter One
+  </span>
+  The Evolution of Digital Typography
   </h1>
 </header>
 ```
@@ -308,8 +308,4 @@ We're exploring several advanced features:
 
 Optimizing Newsreader for headers required balancing aesthetic beauty with technical constraints. By carefully considering visual hierarchy, implementing smart loading strategies, and fine-tuning for different contexts, we've created a header system that's both beautiful and performant.
 
-The key insight? Great typography isn't about following rules blindly—it's about understanding principles deeply enough to know when and how to bend them. Newsreader now sings in its role as our header typeface, creating an elegant, readable, and distinctly editorial voice for our content.
-
----
-
-*This optimization process improved our Lighthouse performance score by 8 points while creating a more beautiful, readable site. Typography isn't just about aesthetics—it's about creating the best possible reading experience for everyone.*
+The key insight? Great typography isn't about following rules blindly—it's about understanding principles deeply enough to know when and how to bend them. Newsreader now sings in its role as our header typeface, creating an elegant, readable, and distinctly editorial voice for our content.---*This optimization process improved our Lighthouse performance score by 8 points while creating a more beautiful, readable site. Typography isn't just about aesthetics—it's about creating the best possible reading experience for everyone.*

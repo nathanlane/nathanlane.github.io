@@ -23,16 +23,16 @@ After auditing our codebase, I found **6 different icon sizes** used across **17
 Here's what we were dealing with:
 
 ```astro
-<!-- Navigation icons -->
+<!--Navigation icons-->
 <Icon class="h-4 w-4 drop-shadow-[0px_1.5px_1.5px_rgba(0,0,0,0.175)]" name="menu" />
 
-<!-- Close buttons -->
+<!--Close buttons-->
 <Icon class="size-4 hover:scale-110 transition-transform" name="cancel" />
 
-<!-- RSS feeds -->
+<!--RSS feeds-->
 <Icon class="h-2.5 w-2.5 opacity-70" name="rss" />
 
-<!-- Theme toggle -->
+<!--Theme toggle-->
 <Icon class="size-4 transition-all dark:scale-0" name="sun" />
 ```
 
@@ -52,33 +52,33 @@ Instead of fighting the chaos, we built a systematic approach using Tailwind's c
 addComponents({
   // Size-based classes
   ".icon-sm": {
-    "@apply size-3 aspect-square": {}, // 12px - decorative
+  "@apply size-3 aspect-square": {}, // 12px - decorative
   },
   ".icon-base": {
-    "@apply size-4 aspect-square": {}, // 16px - standard
+  "@apply size-4 aspect-square": {}, // 16px - standard
   },
   ".icon-lg": {
-    "@apply size-5 aspect-square": {}, // 20px - prominent
+  "@apply size-5 aspect-square": {}, // 20px - prominent
   },
   ".icon-xl": {
-    "@apply size-6 aspect-square": {}, // 24px - large interactive
+  "@apply size-6 aspect-square": {}, // 24px - large interactive
   },
 
   // Context-specific classes
   ".icon-nav": {
-    "@apply size-4 aspect-square drop-shadow-[0px_1.5px_1.5px_rgba(0,0,0,0.175)]": {},
+  "@apply size-4 aspect-square drop-shadow-[0px_1.5px_1.5px_rgba(0,0,0,0.175)]": {},
   },
   ".icon-close": {
-    "@apply size-4 aspect-square hover:scale-110 transition-transform": {},
+  "@apply size-4 aspect-square hover:scale-110 transition-transform": {},
   },
   ".icon-rss": {
-    "@apply size-3 aspect-square opacity-70 hover:opacity-100 transition-opacity": {},
+  "@apply size-3 aspect-square opacity-70 hover:opacity-100 transition-opacity": {},
   },
   ".icon-toggle": {
-    "@apply size-4 aspect-square transition-all": {},
+  "@apply size-4 aspect-square transition-all": {},
   },
   ".icon-action": {
-    "@apply size-4 aspect-square hover:text-accent-two transition-colors": {},
+  "@apply size-4 aspect-square hover:text-accent-two transition-colors": {},
   },
 })
 ```
@@ -133,10 +133,10 @@ grep -r "Icon.*size-\d+\|Icon.*h-\d+" src/
 
 ### **Dramatic Code Reduction**
 ```astro
-<!-- 82 characters -->
+<!--82 characters-->
 <Icon class="h-4 w-4 drop-shadow-[0px_1.5px_1.5px_rgba(0,0,0,0.175)] aspect-square" />
 
-<!-- 21 characters -->
+<!--21 characters-->
 <Icon class="icon-nav" />
 ```
 
@@ -171,10 +171,10 @@ Easy to add breakpoint-specific sizing:
 ### **Start Semantic from Day One**
 Don't wait for chaos to emerge. Build semantic systems early:
 ```astro
-<!-- Avoid this -->
+<!--Avoid this-->
 <Icon class="size-4" />
 
-<!-- Do this -->
+<!--Do this-->
 <Icon class="icon-nav" />
 ```
 
@@ -201,11 +201,11 @@ We used `icon-{context}` for specific use cases and `icon-{size}` for generic si
 ### **Override Patterns**
 Keep escape hatches for edge cases:
 ```astro
-<!-- Use semantic class first -->
+<!--Use semantic class first-->
 <Icon class="icon-nav" />
 
-<!-- Override when truly needed -->
-<Icon class="icon-nav !size-6" />
+<!--Override when truly needed-->
+<Icon class="icon-nav!size-6" />
 ```
 
 ### **Team Communication**
@@ -247,11 +247,11 @@ Add breakpoint-specific sizing:
 Override for specific cases:
 
 ```astro
-<!-- Use semantic class first -->
+<!--Use semantic class first-->
 <Icon class="icon-nav" name="menu" />
 
-<!-- Override when needed -->
-<Icon class="icon-nav !size-6" name="menu" /> <!-- Force larger -->
+<!--Override when needed-->
+<Icon class="icon-nav!size-6" name="menu" /> <!--Force larger-->
 ```
 
 ### **Current Size Reference**
@@ -263,8 +263,8 @@ Override for specific cases:
 ### **Example: Making All Icons Touch-Friendly**
 ```typescript
 // Three lines = entire website becomes more touch-friendly
-".icon-nav": { "@apply size-5": {} },    // 16px → 20px
-".icon-close": { "@apply size-5": {} },  // 16px → 20px
+".icon-nav": { "@apply size-5": {} }, // 16px → 20px
+".icon-close": { "@apply size-5": {} }, // 16px → 20px
 ".icon-action": { "@apply size-5": {} }, // 16px → 20px
 ```
 
@@ -292,8 +292,4 @@ If you're fighting icon sizing chaos, try this approach:
 4. **Migrate** systematically, file by file
 5. **Validate** that no manual sizing remains
 
-The upfront investment pays dividends in **maintainability**, **consistency**, and **developer happiness**.
-
----
-
-*Building design systems isn't just about the big architectural decisions—sometimes it's about solving the small, daily frustrations that slow teams down. Icon sizing might seem trivial, but good systems make the trivial things invisible.*
+The upfront investment pays dividends in **maintainability**, **consistency**, and **developer happiness**.---*Building design systems isn't just about the big architectural decisions—sometimes it's about solving the small, daily frustrations that slow teams down. Icon sizing might seem trivial, but good systems make the trivial things invisible.*

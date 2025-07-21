@@ -28,23 +28,14 @@ The Astro Image component provides:
 
 ### Step 1: Import the Image Component
 
-```astro
----
-import { Image } from 'astro:assets';
----
-```
+```astro---import { Image } from 'astro:assets';---```
 
 ### Step 2: For Local Images
 
 Place images in `src/images/images/` and import them:
 
-```astro
----
-import { Image } from 'astro:assets';
-import profilePhoto from '/images/images/headshot.jpg';
----
-
-<Image
+```astro---import { Image } from 'astro:assets';
+import profilePhoto from '/images/images/headshot.jpg';---<Image
   src={profilePhoto}
   alt="Nathan Lane headshot"
   width={400}
@@ -77,27 +68,22 @@ import { defineCollection, z, image } from 'astro:content';
 
 const blogCollection = defineCollection({
   schema: ({ image }) => z.object({
-    title: z.string(),
-    coverImage: image().optional(),
-    coverImageAlt: z.string().optional(),
+  title: z.string(),
+  coverImage: image().optional(),
+  coverImageAlt: z.string().optional(),
   }),
 });
 ```
 
 Then use in your templates:
 
-```astro
----
-import { Image } from 'astro:assets';
-const { coverImage, coverImageAlt } = post.data;
----
-
-{coverImage && (
+```astro---import { Image } from 'astro:assets';
+const { coverImage, coverImageAlt } = post.data;---{coverImage && (
   <Image
-    src={coverImage}
-    alt={coverImageAlt || ''}
-    widths={[400, 800, 1200]}
-    sizes="(max-width: 800px) 100vw, 800px"
+  src={coverImage}
+  alt={coverImageAlt || ''}
+  widths={[400, 800, 1200]}
+  sizes="(max-width: 800px) 100vw, 800px"
   />
 )}
 ```
@@ -142,23 +128,21 @@ const { coverImage, coverImageAlt } = post.data;
 ```astro
 <picture>
   <source
-    srcset={mobileImage.src}
-    media="(max-width: 768px)"
+  srcset={mobileImage.src}
+  media="(max-width: 768px)"
   />
   <Image
-    src={desktopImage}
-    alt="Responsive design"
-    width={1600}
-    height={900}
+  src={desktopImage}
+  alt="Responsive design"
+  width={1600}
+  height={900}
   />
 </picture>
 ```
 
 ### 3. Background Images
 
-```astro
----
-import { getImage } from 'astro:assets';
+```astro---import { getImage } from 'astro:assets';
 import backgroundImage from '/images/hero-bg.jpg';
 
 const optimizedBackground = await getImage({
@@ -166,14 +150,11 @@ const optimizedBackground = await getImage({
   format: 'webp',
   width: 1920,
   quality: 80
-});
----
-
-<section
+});---<section
   style={`background-image: url('${optimizedBackground.src}')`}
   class="hero"
 >
-  <!-- Content -->
+  <!--Content-->
 </section>
 ```
 

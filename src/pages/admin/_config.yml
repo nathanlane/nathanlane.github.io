@@ -30,20 +30,9 @@ collections:
           hint: "110-160 characters for SEO",
         }
       - { label: "Publish Date", name: "publishDate", widget: "datetime" }
-      - {
-          label: "Updated Date",
-          name: "updatedDate",
-          widget: "datetime",
-          required: false,
-        }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-          required: false,
-        }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
       - {
           label: "Cover Image",
           name: "coverImage",
@@ -51,18 +40,8 @@ collections:
           required: false,
           fields:
             [
-              {
-                label: "Source",
-                name: "src",
-                widget: "image",
-                required: false,
-              },
-              {
-                label: "Alt Text",
-                name: "alt",
-                widget: "string",
-                required: false,
-              },
+              { label: "Source", name: "src", widget: "image", required: false },
+              { label: "Alt Text", name: "alt", widget: "string", required: false },
             ],
         }
       - { label: "Tags", name: "tags", widget: "list", default: [] }
@@ -87,12 +66,7 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Authors", name: "authors", widget: "list" }
-      - {
-          label: "Publication",
-          name: "publication",
-          widget: "string",
-          required: false,
-        }
+      - { label: "Publication", name: "publication", widget: "string", required: false }
       - {
           label: "Status",
           name: "status",
@@ -108,13 +82,7 @@ collections:
           default: "paper",
         }
       - { label: "Date", name: "date", widget: "datetime" }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-          required: false,
-        }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
       - { label: "PDF URL", name: "pdfUrl", widget: "string", required: false }
       - { label: "DOI", name: "doi", widget: "string", required: false }
       - { label: "Abstract", name: "body", widget: "markdown" }
@@ -131,25 +99,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - {
-          label: "Featured",
-          name: "featured",
-          widget: "boolean",
-          default: false,
-          required: false,
-        }
-      - {
-          label: "Demo URL",
-          name: "demoUrl",
-          widget: "string",
-          required: false,
-        }
-      - {
-          label: "Repository URL",
-          name: "repoUrl",
-          widget: "string",
-          required: false,
-        }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
+      - { label: "Demo URL", name: "demoUrl", widget: "string", required: false }
+      - { label: "Repository URL", name: "repoUrl", widget: "string", required: false }
       - { label: "Tech Stack", name: "techStack", widget: "list", default: [] }
       - { label: "Content", name: "body", widget: "markdown" }
 
@@ -166,12 +118,7 @@ collections:
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Genre", name: "genre", widget: "string", required: false }
-      - {
-          label: "Word Count",
-          name: "wordCount",
-          widget: "number",
-          required: false,
-        }
+      - { label: "Word Count", name: "wordCount", widget: "number", required: false }
       - { label: "Content", name: "body", widget: "markdown" }
 
   # Series
@@ -192,18 +139,8 @@ collections:
           required: false,
           fields:
             [
-              {
-                label: "Source",
-                name: "src",
-                widget: "image",
-                required: false,
-              },
-              {
-                label: "Alt Text",
-                name: "alt",
-                widget: "string",
-                required: false,
-              },
+              { label: "Source", name: "src", widget: "image", required: false },
+              { label: "Alt Text", name: "alt", widget: "string", required: false },
             ],
         }
       - { label: "Content", name: "body", widget: "markdown" }
@@ -254,16 +191,8 @@ collections:
                 fields:
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - {
-                      label: "View All Text",
-                      name: "viewAllText",
-                      widget: "string",
-                    }
-                  - {
-                      label: "View All URL",
-                      name: "viewAllUrl",
-                      widget: "string",
-                    }
+                  - { label: "View All Text", name: "viewAllText", widget: "string" }
+                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
 
               - label: "Essays Section"
                 name: "essays"
@@ -271,16 +200,8 @@ collections:
                 fields:
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - {
-                      label: "View All Text",
-                      name: "viewAllText",
-                      widget: "string",
-                    }
-                  - {
-                      label: "View All URL",
-                      name: "viewAllUrl",
-                      widget: "string",
-                    }
+                  - { label: "View All Text", name: "viewAllText", widget: "string" }
+                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
 
               - label: "Writing Section"
                 name: "writing"
@@ -288,16 +209,8 @@ collections:
                 fields:
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - {
-                      label: "View All Text",
-                      name: "viewAllText",
-                      widget: "string",
-                    }
-                  - {
-                      label: "View All URL",
-                      name: "viewAllUrl",
-                      widget: "string",
-                    }
+                  - { label: "View All Text", name: "viewAllText", widget: "string" }
+                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
 
               - label: "Media Section"
                 name: "media"
@@ -305,13 +218,5 @@ collections:
                 fields:
                   - { label: "Title", name: "title", widget: "string" }
                   - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - {
-                      label: "View All Text",
-                      name: "viewAllText",
-                      widget: "string",
-                    }
-                  - {
-                      label: "View All URL",
-                      name: "viewAllUrl",
-                      widget: "string",
-                    }
+                  - { label: "View All Text", name: "viewAllText", widget: "string" }
+                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }

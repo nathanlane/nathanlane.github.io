@@ -35,8 +35,8 @@ Current gaps in our content validation:
 // Common SEO schema for all public content
 const seoSchema = z.object({
   description: z.string()
-    .min(50, "Description should be at least 50 characters")
-    .max(160, "Description must be ≤160 characters for SEO"),
+.min(50, "Description should be at least 50 characters")
+.max(160, "Description must be ≤160 characters for SEO"),
   ogImage: z.string().optional(),
   canonical: z.string().url().optional(),
   draft: z.boolean().default(false),
@@ -48,7 +48,7 @@ const baseSchema = z.object({
   title: z.string().max(60),
   slug: z.string().optional(),
 }).transform((data) => ({
-  ...data,
+...data,
   slug: data.slug || generateSlug(data.title),
 }));
 ```
@@ -78,29 +78,24 @@ Create proper image organization and optimization pipeline:
 ```
 src/
   assets/
-    original/       # High-res source images
-      blog/         # Blog post images
-      projects/     # Project screenshots
-      research/     # Research figures
-    images/         # Optimized versions (generated)
+  original/ # High-res source images
+  blog/ # Blog post images
+  projects/ # Project screenshots
+  research/ # Research figures
+  images/ # Optimized versions (generated)
 ```
 
 **Image Component Pattern:**
 
-```astro
----
-import { Image } from 'astro:assets';
-import originalImage from '@/images/original/blog/example.jpg';
----
-
-<Image
+```astro---import { Image } from 'astro:assets';
+import originalImage from '@/images/original/blog/example.jpg';---<Image
   src={originalImage}
   alt="Descriptive alt text"
   widths={[400, 800, 1200]}
   sizes="(max-width: 800px) 100vw, 800px"
   format="avif"
   quality={80}
-  loading={priority ? "eager" : "lazy"}
+  loading={priority? "eager": "lazy"}
 />
 ```
 
@@ -129,25 +124,25 @@ Add these checks to the build process:
 ## Implementation Priority
 
 1. **Phase 1**: Enhanced front-matter schemas (1 day)
-   - Add SEO schema to all collections
-   - Implement description length validation
-   - Add draft field universally
+  - Add SEO schema to all collections
+  - Implement description length validation
+  - Add draft field universally
 
 2. **Phase 2**: Slug generation and validation (1 day)
-   - Install github-slugger
-   - Add slug transformation
-   - Build-time uniqueness check
+  - Install github-slugger
+  - Add slug transformation
+  - Build-time uniqueness check
 
 3. **Phase 3**: Media organization (2-3 days)
-   - Create directory structure
-   - Migrate existing images
-   - Implement Image component usage
-   - Add priority loading for LCP
+  - Create directory structure
+  - Migrate existing images
+  - Implement Image component usage
+  - Add priority loading for LCP
 
 4. **Phase 4**: Collection-specific enhancements (1 day)
-   - Add specialized fields per collection
-   - Implement cross-collection references
-   - Add build-time validations
+  - Add specialized fields per collection
+  - Implement cross-collection references
+  - Add build-time validations
 
 ## Expected Outcomes
 

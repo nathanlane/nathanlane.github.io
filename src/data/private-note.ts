@@ -6,11 +6,9 @@ import { type CollectionEntry, getCollection } from "astro:content";
  */
 
 /** Get private notes - NEVER used for web rendering */
-export async function getPrivateNotes(): Promise<
-  CollectionEntry<"privateNote">[]
-> {
-  // Private notes are NEVER web-accessible in any environment
-  return [];
+export async function getPrivateNotes(): Promise<CollectionEntry<"privateNote">[]> {
+	// Private notes are NEVER web-accessible in any environment
+	return [];
 }
 
 /**
@@ -19,30 +17,23 @@ export async function getPrivateNotes(): Promise<
  */
 
 /** Groups private notes by year (for CLI tools only) */
-export function groupPrivateNotesByYear(
-  notes: CollectionEntry<"privateNote">[],
-) {
-  return notes.reduce<Record<string, CollectionEntry<"privateNote">[]>>(
-    (acc, note) => {
-      const year = note.data.publishDate.getFullYear();
-      if (!acc[year]) {
-        acc[year] = [];
-      }
-      acc[year]?.push(note);
-      return acc;
-    },
-    {},
-  );
+export function groupPrivateNotesByYear(notes: CollectionEntry<"privateNote">[]) {
+	return notes.reduce<Record<string, CollectionEntry<"privateNote">[]>>((acc, note) => {
+		const year = note.data.publishDate.getFullYear();
+		if (!acc[year]) {
+			acc[year] = [];
+		}
+		acc[year]?.push(note);
+		return acc;
+	}, {});
 }
 
 /** Returns all tags from private notes (for CLI tools only) */
 export function getAllPrivateNoteTags(notes: CollectionEntry<"privateNote">[]) {
-  return notes.flatMap((note) => [...note.data.tags]);
+	return notes.flatMap((note) => [...note.data.tags]);
 }
 
 /** Returns unique tags from private notes (for CLI tools only) */
-export function getUniquePrivateNoteTags(
-  notes: CollectionEntry<"privateNote">[],
-) {
-  return [...new Set(getAllPrivateNoteTags(notes))];
+export function getUniquePrivateNoteTags(notes: CollectionEntry<"privateNote">[]) {
+	return [...new Set(getAllPrivateNoteTags(notes))];
 }

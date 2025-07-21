@@ -13,7 +13,7 @@ tags:
 draft: false
 ---
 
-This is a short literature review of recent papers on industrial policy (and related topics) , focusing on work coming from economic historians. It is taken somewhat--though not entirely--from an upcoming literature review I have written on the empirics of industrial policy. (Stay tuned for more contemporary policy discussions.)
+This is a short literature review of recent papers on industrial policy (and related topics), focusing on work coming from economic historians. It is taken somewhat--though not entirely--from an upcoming literature review I have written on the empirics of industrial policy. (Stay tuned for more contemporary policy discussions.)
 
 **I. Output Protection: Temporary and Otherwise.**
 ![Industrial Policy](/images/blog/uploads/2019/01/17/e010782410-v8.jpg)

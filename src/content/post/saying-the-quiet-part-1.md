@@ -13,7 +13,7 @@ draft: false
 
 It's often revealing when someone when someone "says the quiet part loud." I thought this was particularly resonant:
 
-> We are fortunate that, thanks to globalisation, policy decisions in the  US have been largely replaced by global market forces. National security  aside, it hardly makes any difference who will be the next president.  The world is governed by market forces.
+> We are fortunate that, thanks to globalisation, policy decisions in the US have been largely replaced by global market forces. National security aside, it hardly makes any difference who will be the next president. The world is governed by market forces.
 >
 > \-Alan Greenspan, 2007, interview with a Swiss newspaper.
 >

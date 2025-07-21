@@ -1,8 +1,15 @@
 ---
-title: "Track 2: Content System Refactoring Plan"
-publishDate: "2025-07-13"
-description: "Detailed action plan for Agent 2 to refactor content components and the Tailwind Typography plugin to align with the project's baseline grid."
-tags: ["refactoring", "planning", "track-2", "content", "typography"]
+title: 'Track 2: Content System Refactoring Plan'
+publishDate: '2025-07-13'
+description: >-
+  Detailed action plan for Agent 2 to refactor content components and the
+  Tailwind Typography plugin to align with the project's baseline grid.
+tags:
+  - refactoring
+  - planning
+  - track-2
+  - content
+  - typography
 draft: true
 ---
 
@@ -16,50 +23,50 @@ Your mission is to refactor the website's content display components and the glo
 
 The entire vertical and horizontal rhythm of the site is based on the following values. You must use the `*b` utility classes or semantic tokens that map to this scale.
 
--   **Baseline:** `1.5rem` (24px)
--   **Grid Unit:** `0.375rem` (6px)
--   **Spacing Scale:**
-    -   `1b` / `space-1` = **6px**
-    -   `2b` / `space-2` = **12px**
-    -   `3b` / `space-3` = **18px**
-    -   `4b` / `space-4` = **24px** (1 baseline)
-    -   `5b` = **30px**
-    -   `6b` / `space-6` = **36px**
-    -   `8b` / `space-8` = **48px**
+- **Baseline:** `1.5rem` (24px)
+- **Grid Unit:** `0.375rem` (6px)
+- **Spacing Scale:**
+  -  `1b` / `space-1` = **6px**
+  -  `2b` / `space-2` = **12px**
+  -  `3b` / `space-3` = **18px**
+  -  `4b` / `space-4` = **24px** (1 baseline)
+  -  `5b` = **30px**
+  -  `6b` / `space-6` = **36px**
+  -  `8b` / `space-8` = **48px**
 
 ## 3. Step-by-Step Execution Plan
 
 ### Task 2.A: Refactor `src/components/blog/PostPreview.astro`
 
--   **Action:**
-    -   `mt-2.5` (10px) → `mt-2b` (12px)
-    -   `mt-0.5` (2px) → `mt-px` (1px) or remove if spacing is not needed.
--   **Verification:**
-    1.  Run `pnpm dev`.
-    2.  Navigate to a blog listing page (e.g., `/posts`).
-    3.  Visually inspect the post preview elements.
-    4.  Confirm the vertical spacing between the date, title, and description aligns with the new `12px` value.
+- **Action:**
+  -  `mt-2.5` (10px) → `mt-2b` (12px)
+  -  `mt-0.5` (2px) → `mt-px` (1px) or remove if spacing is not needed.
+- **Verification:**
+  1. Run `pnpm dev`.
+  2. Navigate to a blog listing page (e.g., `/posts`).
+  3. Visually inspect the post preview elements.
+  4. Confirm the vertical spacing between the date, title, and description aligns with the new `12px` value.
 
 ### Task 2.B: Audit & Refactor `@tailwindcss/typography` (`prose`)
 
--   **Action:** This is the most critical task. The goal is to ensure all HTML elements automatically generated from MDX/Markdown content adhere to the baseline grid.
-    1.  Open `tailwind.config.ts`.
-    2.  Locate the `typography` key within the `theme.extend` object.
-    3.  Systematically review the `css` object for the `DEFAULT` and `invert` configurations.
-    4.  For every element (`p`, `h1`-`h6`, `ul`, `ol`, `li`, `blockquote`, `pre`, `hr`, `table`, etc.), ensure that all `marginTop`, `marginBottom`, `paddingTop`, `paddingBottom`, etc., values use the project's grid-aligned spacing tokens.
-    5.  **Example:** A paragraph's bottom margin should be `marginBottom: 'var(--space-4)'` or `marginBottom: theme('spacing.4b')`, not a hardcoded value like `'1.25em'`.
--   **Verification:**
-    1.  Create a new test page at `src/pages/prose-test.astro`.
-    2.  Populate this page with a comprehensive set of Markdown elements: all heading levels, paragraphs, ordered and unordered lists (including nested lists), a blockquote, a code block, a table, and a horizontal rule.
-    3.  Wrap the content in a `<div>` with the `prose` class.
-    4.  Run `pnpm dev` and navigate to `/prose-test`.
-    5.  Using browser developer tools, inspect **every single element** within the `prose` container.
-    6.  Verify that all vertical margins and paddings are exact multiples of the **6px** grid unit.
+- **Action:** This is the most critical task. The goal is to ensure all HTML elements automatically generated from MDX/Markdown content adhere to the baseline grid.
+  1. Open `tailwind.config.ts`.
+  2. Locate the `typography` key within the `theme.extend` object.
+  3. Systematically review the `css` object for the `DEFAULT` and `invert` configurations.
+  4. For every element (`p`, `h1`-`h6`, `ul`, `ol`, `li`, `blockquote`, `pre`, `hr`, `table`, etc.), ensure that all `marginTop`, `marginBottom`, `paddingTop`, `paddingBottom`, etc., values use the project's grid-aligned spacing tokens.
+  5. **Example:** A paragraph's bottom margin should be `marginBottom: 'var(--space-4)'` or `marginBottom: theme('spacing.4b')`, not a hardcoded value like `'1.25em'`.
+- **Verification:**
+  1. Create a new test page at `src/pages/prose-test.astro`.
+  2. Populate this page with a comprehensive set of Markdown elements: all heading levels, paragraphs, ordered and unordered lists (including nested lists), a blockquote, a code block, a table, and a horizontal rule.
+  3. Wrap the content in a `<div>` with the `prose` class.
+  4. Run `pnpm dev` and navigate to `/prose-test`.
+  5. Using browser developer tools, inspect **every single element** within the `prose` container.
+  6. Verify that all vertical margins and paddings are exact multiples of the **6px** grid unit.
 
 ## 4. Final Checklist
 
--   [ ] `PostPreview.astro` has been fully refactored and verified.
--   [ ] The `prose` configuration in `tailwind.config.ts` has been audited and updated.
--   [ ] A `prose-test.astro` page has been used to visually confirm that all generated typography elements align perfectly with the baseline grid.
--   [ ] All changes have been checked for visual regressions.
--   [ ] The site has been checked with `pnpm dev` and builds successfully with `pnpm build`.
+- [ ] `PostPreview.astro` has been fully refactored and verified.
+- [ ] The `prose` configuration in `tailwind.config.ts` has been audited and updated.
+- [ ] A `prose-test.astro` page has been used to visually confirm that all generated typography elements align perfectly with the baseline grid.
+- [ ] All changes have been checked for visual regressions.
+- [ ] The site has been checked with `pnpm dev` and builds successfully with `pnpm build`.

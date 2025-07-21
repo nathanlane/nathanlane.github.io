@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Git pre-push hook
+# Runs validation checks before allowing push
+# 
+# To enable this hook:
+# git config core.hooksPath .githooks
+
+echo "🔍 Running pre-push validation..."
+
+# Run the validation checks
+pnpm run validate
+
+# Capture the exit code
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+    echo ""
+    echo "⚠️  Push aborted due to validation errors!"
+    echo "📝 Fix the errors above and try again."
+    echo ""
+    echo "💡 To bypass this check (not recommended):"
+    echo "   git push --no-verify"
+    exit 1
+fi
+
+echo "✅ All checks passed! Proceeding with push..."
+exit 0

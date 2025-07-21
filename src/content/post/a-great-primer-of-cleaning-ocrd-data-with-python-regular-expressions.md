@@ -2,7 +2,7 @@
 title: A great primer on cleaning OCRd data with Python &...
 description: >-
   [](http://programminghistorian.org/lessons/cleaning-ocrd-text-with-regular-expressions
-  "Cleaning OCR’d text with Regular Expressions")
+  "Cleaning OCR'd text with Regular Expressions")
 publishDate: '2014-09-02'
 tags:
   - links
@@ -14,9 +14,9 @@ tags:
 draft: true
 ---
 
-<a href="http://programminghistorian.org/lessons/cleaning-ocrd-text-with-regular-expressions" title="Cleaning OCR’d text with Regular Expressions" target="_blank"><br />
+<a href="http://programminghistorian.org/lessons/cleaning-ocrd-text-with-regular-expressions" title="Cleaning OCR'd text with Regular Expressions" target="_blank"><br />
 
-#### Link: Cleaning OCR’d text with Regular Expressions
+#### Link: Cleaning OCR'd text with Regular Expressions
 
 </a></ br>
 

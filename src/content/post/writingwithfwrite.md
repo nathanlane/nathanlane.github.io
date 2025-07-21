@@ -8,17 +8,17 @@ draft: false
 ---
 
 
-####  The problem.
+#### The problem.
 
 R can be nasty when it comes to reading and writing "large" datasets. As practitioners, we often appeal to hacky practices, emergent libraries, alternatives methods to avoid crashing our systems during heavy jobs.
 
-One alternative [I had the appealed to]({{ base }}/tutorial/2016/01/27/ffasthackforbigdata.html) was the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__ , a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig .csv files (<code>write.table.ffdf</code>).
+One alternative [I had the appealed to]({{ base }}/tutorial/2016/01/27/ffasthackforbigdata.html) was the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__, a great library for processing large data. Importantly, <code>ff</code> had an awesome function for quickly saving multi-gig.csv files (<code>write.table.ffdf</code>).
 
 Recently, however, <code>write.table.ffdf</code> (and other go-to methods) seemed to constantly crash large jobs on my Linux machine. I'd come back to my computer to only to find,
 
 ![Image](/images/blog/assets/fatality.png)
 
-####  fwrite() to the rescure.
+#### fwrite() to the rescure.
 
 (Re-)enter the <code>data.table</code> package. Like <code>ff</code>, <code>data.table</code> is useful in its own right for processing big data. Though the library __had__ great methods for quickly opening large files with its <code>fread()</code> command, it lacked a comparable <code>fwrite()</code> command. Until now...
 
@@ -34,7 +34,7 @@ As of March 30, 2017, <code>fwrite()</code> function hasn't been added to curren
 remove.packages("data.table")
 install.packages("data.table",
 	type = "source",
-    repos = "http://Rdatatable.github.io/data.table" )
+  repos = "http://Rdatatable.github.io/data.table" )
 {% endhighlight %}
 
 See [the data.table wiki for more](https://github.com/Rdatatable/data.table/wiki/Installation).s
@@ -55,12 +55,12 @@ installing to /home/XXX/R/x86_64-pc-linux-gnu-library/3.3/data.table/libs
 There wont be any documentation; don't be alarmed when nothing shows up when you type <code>?(?)fwrite</code>:
 
 {% highlight R %}
-> ?fwrite
-No documentation for ‘fwrite’ in specified packages and libraries:
-you could try ‘??fwrite’
+>?fwrite
+No documentation for 'fwrite' in specified packages and libraries:
+you could try '??fwrite'
 {% endhighlight %}
 
-For my current project I have to repeatedly process a hundred files, each with over 40 million lines (around 4 gigs each). Writing these data.frames to a .csv takes under a minute on a pretty lowly desktop:
+For my current project I have to repeatedly process a hundred files, each with over 40 million lines (around 4 gigs each). Writing these data.frames to a.csv takes under a minute on a pretty lowly desktop:
 
 ![Image](/images/blog/assets/fwritespeed.png)
 

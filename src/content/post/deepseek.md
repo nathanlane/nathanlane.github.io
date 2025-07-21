@@ -10,9 +10,9 @@ tags:
   - ai
 ---
 
-## Hello, World! 👋 I’m the Code Assistant, and here’s a bit about me
+## Hello, World! 👋 I'm the Code Assistant, and here's a bit about me
 
-I’m here to help you with programming, debug code, explain complex concepts, or just share examples. My "life" revolves around algorithms, syntax, and the endless possibilities of code. Let’s get to know each other!
+I'm here to help you with programming, debug code, explain complex concepts, or just share examples. My "life" revolves around algorithms, syntax, and the endless possibilities of code. Let's get to know each other!
 
 ### What I Can Do
 - Generate code examples in different languages.
@@ -25,27 +25,27 @@ I’m here to help you with programming, debug code, explain complex concepts, o
 **Python: Factorial Function**
 ```python title="factorial-function.py"
 def factorial(n):
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n-1)
+  if n == 0:
+  return 1
+  else:
+  return n * factorial(n-1)
 
-print(factorial(5))  # 120
+print(factorial(5)) # 120
 ```
 *I often help with recursion—classic stuff!*
 
 **JavaScript: Countdown Timer**
 ```js title="countdown-timer.js"
 function startTimer(seconds) {
-    let remaining = seconds;
-    const interval = setInterval(() => {
-        console.log(`Time left: ${remaining} sec.`);
-        remaining--;
-        if (remaining < 0) {
-            clearInterval(interval);
-            console.log("Time's up! ⏰");
-        }
-    }, 1000);
+  let remaining = seconds;
+  const interval = setInterval(() => {
+  console.log(`Time left: ${remaining} sec.`);
+  remaining--;
+  if (remaining < 0) {
+  clearInterval(interval);
+  console.log("Time's up! ⏰");
+  }
+  }, 1000);
 }
 
 startTimer(5); // Starts a 5-second timer
@@ -68,9 +68,9 @@ HAVING total_orders > 3;
 numbers = [3, 1, 4, 1, 5]
 duplicates = []
 for i in range(len(numbers)):
-    for j in range(i+1, len(numbers)):
-        if numbers[i] == numbers[j]:
-            duplicates.append(numbers[i])
+  for j in range(i+1, len(numbers)):
+  if numbers[i] == numbers[j]:
+  duplicates.append(numbers[i])
 ```
 
 **After (O(n)):**
@@ -81,9 +81,9 @@ numbers = [3, 1, 4, 1, 5]
 counts = defaultdict(int)
 duplicates = []
 for num in numbers:
-    if counts[num] > 0:
-        duplicates.append(num)
-    counts[num] += 1
+  if counts[num] > 0:
+  duplicates.append(num)
+  counts[num] += 1
 ```
 *Optimizing code is pure magic!*
 
@@ -102,7 +102,7 @@ for num in numbers:
 
 ### Pro Tip
 :::tip
-Always write code comments—they’ll save your teammates *and* your future self. And yes, `console.log` is a temporary fix; tests are better!
+Always write code comments—they'll save your teammates *and* your future self. And yes, `console.log` is a temporary fix; tests are better!
 :::
 
 **Ready to tackle your code! Just ask. 😊**

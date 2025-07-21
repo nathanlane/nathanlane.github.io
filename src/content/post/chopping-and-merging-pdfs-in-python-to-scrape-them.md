@@ -32,7 +32,7 @@ To restate the problem:
 
 #### Have: Province x Variable PDFs
 
-Most old historical data comes in the following format: hard copy volumes organized by province, state, region, etc., each with the same set of tables (*cough* variables).</li>
+Most old historical data comes in the following format: hard copy volumes organized by province, state, region, etc., each with the same set of tables (*cough* variables).</li>
 <li>
 
 #### Need: Variable x Province PDFs
@@ -67,30 +67,30 @@ The following code chunk begins at the <code>/start_dir</code>, the file contain
 {% highlight Python %}
 
 for filename in os.listdir(start_dir):
-    #Run the following on PDFs only.
-    if filename.endswith('.pdf'):
-    #Show current multi-page PDF.
-        print("Splitting "+filename)
+  #Run the following on PDFs only.
+  if filename.endswith('.pdf'):
+  #Show current multi-page PDF.
+  print("Splitting "+filename)
 
-        #Define input files, paths.
-        in_file = os.path.join(start_dir,filename)
-        in_file_pdf = PdfFileReader(file(in_file, "rb")) #(be explicit about binary file)
+  #Define input files, paths.
+  in_file = os.path.join(start_dir,filename)
+  in_file_pdf = PdfFileReader(file(in_file, "rb")) #(be explicit about binary file)
 
-        for i in xrange(in_file_pdf.numPages):
-            output = PdfFileWriter()
+  for i in xrange(in_file_pdf.numPages):
+  output = PdfFileWriter()
 
-            #Make subfolder for each page, but only once.
-            num_path = os.path.join(splits,str(i))
-            if not os.path.exists(num_path): os.makedirs(num_path)
+  #Make subfolder for each page, but only once.
+  num_path = os.path.join(splits,str(i))
+  if not os.path.exists(num_path): os.makedirs(num_path)
 
-            #Add i page to output, define output path, save, close outputstream.
-            output.addPage(in_file_pdf.getPage(i))
-            out_file_pdf = os.path.splitext(filename)[0]+str(i)+".pdf" #Add i number to new name.
-            out_file = os.path.join(splits,str(i),out_file_pdf)
-            print("Saving "+out_file)
-            outputStream = file(out_file, "wb")
-            output.write(outputStream)
-            outputStream.close()
+  #Add i page to output, define output path, save, close outputstream.
+  output.addPage(in_file_pdf.getPage(i))
+  out_file_pdf = os.path.splitext(filename)[0]+str(i)+".pdf" #Add i number to new name.
+  out_file = os.path.join(splits,str(i),out_file_pdf)
+  print("Saving "+out_file)
+  outputStream = file(out_file, "wb")
+  output.write(outputStream)
+  outputStream.close()
 {% endhighlight %}
 
 Third, after chopping and saving, we combine the separated pages into variable-based PDFs.
@@ -101,21 +101,21 @@ Hence, the first page of each provincial yearbook is combined into a new file (i
 
 {% highlight Python %}
 for root, dirs, filenames in os.walk(splits):
-    for dir in dirs:
-        merger = PdfFileMerger()
-        dirname = os.path.join(splits, dir)
-        print(dirname)
-        for filename in os.listdir(dirname):
-            print(filename)
-            in_file_pdf = os.path.join(splits, dir, filename)
-            print(in_file_pdf)
-            merger.append(PdfFileReader(file(in_file_pdf, "rb")))
+  for dir in dirs:
+  merger = PdfFileMerger()
+  dirname = os.path.join(splits, dir)
+  print(dirname)
+  for filename in os.listdir(dirname):
+  print(filename)
+  in_file_pdf = os.path.join(splits, dir, filename)
+  print(in_file_pdf)
+  merger.append(PdfFileReader(file(in_file_pdf, "rb")))
 
-        out_file_pdf = str(dir)+".pdf"
-        out_file = os.path.join(splits, out_file_pdf)
-        outputStream = file(out_file, "wb")
-        merger.write(outputStream)
-        outputStream.close()
+  out_file_pdf = str(dir)+".pdf"
+  out_file = os.path.join(splits, out_file_pdf)
+  outputStream = file(out_file, "wb")
+  merger.write(outputStream)
+  outputStream.close()
 {% endhighlight %}
 
 Importantly, your project will probably look much different from this, but combining the <code>OS module</code> with the <code>pyPDF2 package</code> in Python can make many splitting/merging tasks trivial. Digitizing old data often entails mind-numbing file manipulation, so a little Python can go a long way.

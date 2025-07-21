@@ -48,18 +48,21 @@
     
     if (!isLocal) {
       // Show message for production visitors
-      document.getElementById('cms-container').innerHTML = `
-        <div class="message">
-          <h1>CMS Access</h1>
-          <p>The content management system is only available for local development.</p>
-          <p>To edit content, clone the repository and run:</p>
-          <code>pnpm dev</code><br>
-          <code>npx decap-server</code>
-          <p style="margin-top: 1.5rem; font-size: 0.9em;">
-            Then visit <code>http://localhost:4323/admin/</code>
+      const container = document.getElementById('cms-container');
+      if (container) {
+        container.innerHTML = `
+          <div class="message">
+            <h1>CMS Access</h1>
+            <p>The content management system is only available for local development.</p>
+            <p>To edit content, clone the repository and run:</p>
+            <code>pnpm dev</code><br>
+            <code>npx decap-server</code>
+            <p style="margin-top: 1.5rem; font-size: 0.9em;">
+              Then visit <code>http://localhost:4323/admin/</code>
           </p>
         </div>
-      `;
+        `;
+      }
     } else {
       // Load CMS for local development
       const script = document.createElement('script');

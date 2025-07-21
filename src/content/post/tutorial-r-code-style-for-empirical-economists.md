@@ -28,7 +28,7 @@ Now, I'm not going to get advanced here, such as discuss unit testing or object-
 
 I'll go out on a limb: researchers probably ought to emphasize readability and reproducibility over writing slick code. The programming background of collaborators varies wildly, so understandability is a must. Seldom are we working with industrial scale projects. In fact, most big data people would probably laugh at what we consider "big."
 
-## The Broad Stuff : humbling "bang for your buck" rules
+## The Broad Stuff: humbling "bang for your buck" rules
 
 A lot of this will seem like plain common sense, of course. Then again, many of us never think to do it.
 
@@ -93,7 +93,7 @@ Functions play a key role in modularization. Use them often, keeping them short 
 
 Limit your *actual script files*. Split them into two files if necessary. At minimum, you should divide analysis and data preparation. Jonathan Nagler of NYU Polisci. [explains why](http://www.nyu.edu/classes/nagler/quant2/coding_style.html):
 
-> "Separating data-manipulation and data-analysis is an example of modularity. ... The logic for this is simple. Lots of things can go wrong. You want to be able to isolate what went wrong. You also want to be able to isolate what went right."
+> "Separating data-manipulation and data-analysis is an example of modularity.... The logic for this is simple. Lots of things can go wrong. You want to be able to isolate what went wrong. You also want to be able to isolate what went right."
 
 **Refine and Refactor.**
 

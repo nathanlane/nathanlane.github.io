@@ -131,7 +131,7 @@ Variable fonts allow weight adjustments in increments of 1, not just the standar
 The most insidious issue was the use of semantic classes like `.heading-1` that were overriding base styles:
 
 ```html
-<!-- This applies BOTH h1 base styles AND .heading-1 class styles -->
+<!--This applies BOTH h1 base styles AND.heading-1 class styles-->
 
 # Site Hero
 
@@ -171,54 +171,54 @@ After deeper investigation, I discovered the `tailwindcss-fluid-type` plugin doe
 // WRONG - The plugin doesn't add these to theme!
 addBase({
   h1: {
-    fontSize: theme('fontSize.4'), // Error: fontSize.4 doesn't exist!
+  fontSize: theme('fontSize.4'), // Error: fontSize.4 doesn't exist!
   }
 });
 
 // FIXED - Let utility classes handle sizing
 addBase({
   h1: {
-    fontFamily: theme('fontFamily.headline'),
-    // fontSize handled by utility classes
-    lineHeight: '1.15',
-    fontWeight: '400',
-    fontVariationSettings: '"opsz" 72, "wght" 400',
-    letterSpacing: '-0.02em',
-    color: theme('colors.accent-base'),
+  fontFamily: theme('fontFamily.headline'),
+  // fontSize handled by utility classes
+  lineHeight: '1.15',
+  fontWeight: '400',
+  fontVariationSettings: '"opsz" 72, "wght" 400',
+  letterSpacing: '-0.02em',
+  color: theme('colors.accent-base'),
   },
   h2: {
-    fontFamily: theme('fontFamily.headline'),
-    // fontSize handled by utility classes
-    lineHeight: '1.2',
-    fontWeight: '425',
-    fontVariationSettings: '"opsz" 48, "wght" 425',
-    letterSpacing: '-0.015em',
-    color: theme('colors.accent-base'),
+  fontFamily: theme('fontFamily.headline'),
+  // fontSize handled by utility classes
+  lineHeight: '1.2',
+  fontWeight: '425',
+  fontVariationSettings: '"opsz" 48, "wght" 425',
+  letterSpacing: '-0.015em',
+  color: theme('colors.accent-base'),
   },
-  // ... continue for h3-h6
+  //... continue for h3-h6
 });
 ```
 
 ### 2. Semantic Class Updates
 
 ```typescript
-// Update .heading-1 through .heading-6 classes to use proper sizes
+// Update.heading-1 through.heading-6 classes to use proper sizes
 addComponents({
   ".heading-1": {
-    "@apply text-4 sm:text-5 font-headline font-normal text-accent-base mb-space-2xs mt-0": {},
-    // Now uses text-5 (2.86-3.24rem) on larger screens!
-    fontWeight: "400",
-    fontVariationSettings: '"opsz" 72, "wght" 400',
-    letterSpacing: "-0.02em",
+  "@apply text-4 sm:text-5 font-headline font-normal text-accent-base mb-space-2xs mt-0": {},
+  // Now uses text-5 (2.86-3.24rem) on larger screens!
+  fontWeight: "400",
+  fontVariationSettings: '"opsz" 72, "wght" 400',
+  letterSpacing: "-0.02em",
   },
   ".heading-2": {
-    "@apply text-3 sm:text-4 font-headline font-normal text-accent-two mb-space-2xs mt-space-m sm:mt-space-l": {},
-    // Properly sized at text-4 (2.29-2.59rem) on desktop
-    fontWeight: "425",
-    fontVariationSettings: '"opsz" 48, "wght" 425',
-    letterSpacing: "-0.015em",
+  "@apply text-3 sm:text-4 font-headline font-normal text-accent-two mb-space-2xs mt-space-m sm:mt-space-l": {},
+  // Properly sized at text-4 (2.29-2.59rem) on desktop
+  fontWeight: "425",
+  fontVariationSettings: '"opsz" 48, "wght" 425',
+  letterSpacing: "-0.015em",
   },
-  // ... continue with proper sizing
+  //... continue with proper sizing
 });
 ```
 
@@ -229,15 +229,15 @@ addComponents({
 @media (prefers-color-scheme: dark),
 [data-theme="dark"] {
   h1 {
-    font-weight: 450; /* +50 for better contrast */
-    font-variation-settings: "opsz" 72, "wght" 450;
-    opacity: 0.95; /* Slight reduction for comfort */
+  font-weight: 450; /* +50 for better contrast */
+  font-variation-settings: "opsz" 72, "wght" 450;
+  opacity: 0.95; /* Slight reduction for comfort */
   }
 
   h2 {
-    font-weight: 475; /* +50 adjustment */
-    font-variation-settings: "opsz" 48, "wght" 475;
-    opacity: 0.93;
+  font-weight: 475; /* +50 adjustment */
+  font-variation-settings: "opsz" 48, "wght" 475;
+  opacity: 0.93;
   }
 }
 ```
@@ -250,24 +250,24 @@ The fluid type scale ensures headers scale smoothly:
 // Fluid type configuration
 textSizes: {
   "6": {
-    minSize: "3.58rem",  // ~57px on mobile
-    maxSize: "4.05rem",  // ~65px on desktop
-    lineHeight: "1.05"
+  minSize: "3.58rem", // ~57px on mobile
+  maxSize: "4.05rem", // ~65px on desktop
+  lineHeight: "1.05"
   },
   "5": {
-    minSize: "2.86rem",  // ~46px on mobile
-    maxSize: "3.24rem",  // ~52px on desktop
-    lineHeight: "1.10"
+  minSize: "2.86rem", // ~46px on mobile
+  maxSize: "3.24rem", // ~52px on desktop
+  lineHeight: "1.10"
   },
   "4": {
-    minSize: "2.29rem",  // ~36px on mobile
-    maxSize: "2.59rem",  // ~41px on desktop
-    lineHeight: "1.15"
+  minSize: "2.29rem", // ~36px on mobile
+  maxSize: "2.59rem", // ~41px on desktop
+  lineHeight: "1.15"
   },
   "3": {
-    minSize: "1.83rem",  // ~29px on mobile
-    maxSize: "2.08rem",  // ~33px on desktop
-    lineHeight: "1.25"
+  minSize: "1.83rem", // ~29px on mobile
+  maxSize: "2.08rem", // ~33px on desktop
+  lineHeight: "1.25"
   }
 }
 ```
@@ -335,11 +335,7 @@ After implementing these fixes:
 
 What started as "headers look tiny" became a masterclass in typography systems. The issue wasn't just about making text bigger—it was about understanding how modern web typography tools interact, ensuring consistent system usage, and fine-tuning optical details that make reading effortless.
 
-Remember: great typography is invisible when it works, but painfully obvious when it doesn't. Take time to understand your tools, test thoroughly, and document your decisions. Your readers—and future self—will thank you.
-
----
-
-## Technical Summary
+Remember: great typography is invisible when it works, but painfully obvious when it doesn't. Take time to understand your tools, test thoroughly, and document your decisions. Your readers—and future self—will thank you.---## Technical Summary
 
 **Problem**: Headers appeared same size as body text due to incorrect theme value references
 

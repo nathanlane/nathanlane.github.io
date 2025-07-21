@@ -17,7 +17,7 @@ Enter the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff
 
 #### A simple alternative to write.table():
 
-Below I take a data.table object I was manipulating (perhaps in a loop), convert it into an "ff dataframe" (ffdf), which I can then save using <code>ff</code>'s speedy .csv file writing function.
+Below I take a data.table object I was manipulating (perhaps in a loop), convert it into an "ff dataframe" (ffdf), which I can then save using <code>ff</code>'s speedy.csv file writing function.
 
 {% highlight R %}
 library(magrittr) # For use of piping %>%.
@@ -29,13 +29,13 @@ library(ff) # And the key package we'll use to save.
   # Start with the data.table object,
   mygiant_datatable %>%
 
-    # ... transform it into an ff dataframe,
-    as.ffdf( . ) %>%
+  #... transform it into an ff dataframe,
+  as.ffdf(. ) %>%
 
-    # Write the ffdf object using ff's csv writing function.
-    write.csv.ffdf( . , file = "/my/file/path/myfile.csv")
+  # Write the ffdf object using ff's csv writing function.
+  write.csv.ffdf(., file = "/my/file/path/myfile.csv")
 {% endhighlight %}
 
 Note: the type of data table (mygiant_datatable) I was working with was quite simple, composed of only a few numeric columns. Thus, coercing the data into an ffdf object was no problemo.
 
-Of course, in the cheap workaround above, the <code>as.ffdf()</code> adds a costly step (time-wise). However, it was well worth the benefit of utilizing the <code>write.csv.ffdf()</code> function ... and worth not crashing *ad nauseum*.
+Of course, in the cheap workaround above, the <code>as.ffdf()</code> adds a costly step (time-wise). However, it was well worth the benefit of utilizing the <code>write.csv.ffdf()</code> function... and worth not crashing *ad nauseum*.

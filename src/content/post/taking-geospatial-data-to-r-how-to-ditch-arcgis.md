@@ -16,40 +16,40 @@ For R users it's very straightforward to ditch ArcGIS (for most tasks) in favor 
 
 <ul>
 <li>First, if you can do GIS work on your Linux system or Mac without having to run things through a lame emulator.
-<li>Second, you can cut yourself loose from dealing with the clunky ArcGIS licensing system.
+<li>Second, you can cut yourself loose from dealing with the clunky ArcGIS licensing system.
 <li>Third, the GIS/R user community is pretty dang big, with a growing collection of resources and libraries.
-<li>Fourth, you can escape the mysterious, temperamental nature of ArcGIS and have full control over data outputs. Most quant folks I know try to minimize their time processing things on ArcGIS, outsourcing data as soon as possible to Stata or R. By working entirely in R lets you skip the murky black box of ArcGIS.
+<li>Fourth, you can escape the mysterious, temperamental nature of ArcGIS and have full control over data outputs. Most quant folks I know try to minimize their time processing things on ArcGIS, outsourcing data as soon as possible to Stata or R. By working entirely in R lets you skip the murky black box of ArcGIS.
 </ul>
 
 All this means there are many reasons to dump ArcGIS--something I should have done before my pal called me out on twitter.
 
 ![Damnnnnnn](/images/blog/assets/calledout.gif)
 
-Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..
+Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..
 
-To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html">* this is helpful to note if you're a Linux user*</a>).
+To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html">* this is helpful to note if you're a Linux user*</a>).
 
-**Starting with Raster Data**
+**Starting with Raster Data**
 
-Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as .csv file. Specifically, <code>library( raster )</code> is enough to load raster-based images directly into R.
+Let's consider working with raster files first. You can think of loading GIS-based data just like you would any object, such as.csv file. Specifically, <code>library( raster )</code> is enough to load raster-based images directly into R.
 
 {% highlight R %}
 library(raster)
 weatherfile <- "/home/user/population_raster.tif"
 rasterweather <- raster( weatherfile )
 popfile <- "/home/user/population_raster.tif"
-rasterpop <- raster( popfile ) 
+rasterpop <- raster( popfile )
 {% endhighlight %}
 
 Crop to the size of Europe shapefile; the extent() function helps with this.
 
 {% highlight R %}
-rasterpop <- crop( rasterpopfile , extent( rasterweather ) )
+rasterpop <- crop( rasterpopfile, extent( rasterweather ) )
 {% endhighlight %}
 
 Above, I used the <code>extext()</code> function to automatically use the dimensions of another file in our memory. Since we're in R, we can easily save an extent to an object and re use it.
 
-One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to *see* multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile):</code>
+One thing that ArcGIS has over R, however, is that it is based thoroughly on a graphical user interface and allows you to *see* multiple layers seamlessly. Nonetheless, the <code>raster</code> package (as well as staples such as <code>GGPLOT2</code>) allow you to eyeball and visualize GIS tasks. To plot an individual R layer, <code>plot(rasterpopfile):</code>
 
 ![Image](/images/blog/assets/Rplot04.jpg)
 
@@ -66,34 +66,34 @@ Moreover, it's pretty straightforward to perform common manipulations of raster 
 {% highlight R %}
 # Say we have another raster with a different coordinate system.
 # We can save this coordinate system using the proj4string() function.
-target_raster <- raster( "/home/user/target_raster.tif" ) 
+target_raster <- raster( "/home/user/target_raster.tif" )
 target_crs <- proj4string( target_raster )
 
 # Reproject using the projectRaster() function and the target_crs.
-re_rasterpopfile <- projectRaster( rasterpopfile, crs = target_crs , method = "bilinear")
+re_rasterpopfile <- projectRaster( rasterpopfile, crs = target_crs, method = "bilinear")
 
 # Reproject using the projectRaster() function and the target_crs.
-re_rasterpopfile <- resample( re_rasterpopfile, target_raster , method = "bilinear")
+re_rasterpopfile <- resample( re_rasterpopfile, target_raster, method = "bilinear")
 {% endhighlight %}
 
-The first manipulation changes coordinate system of a current raster, changing it to match the target coordinate system; the second function is necessary so that the grid of the starting raster matches the grid of the target raster.
+The first manipulation changes coordinate system of a current raster, changing it to match the target coordinate system; the second function is necessary so that the grid of the starting raster matches the grid of the target raster.
 
 Alternatively, you can easily specify nearest neighbor methods if you are working with categorical raster data. Now, both the target and starting raster layers should have the same resolution.
 
 While <code>resample()</code> allows us to align the grids of the two files, if the target raster is much more coarse--at a much lower resolution--we should use the <code>aggregate()</code> function, which lets us aggregate the cells of the fine raster to the larger raster; <code>disaggregate()</code> does just the opposite.
 
-**Shapefiles &amp; Vector Manipulations**
+**Shapefiles & Vector Manipulations**
 
 The <code>rgdal</code> package is fantastic for reading vectorized data and shapefiles into R. The package's <code>readOGR()</code> function is fantastic for loading shapefiles directly into R.
 
-Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code> , <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or *class*, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.
+Besides liberating yourself from ArcGIS wackiness, you can manipulate shapefile objects similar to the way you manipulate dataframes. This is because points, lines, and polygon shapes can be recognized as special <code>SpatialPointsDataFrames</code>, <code>SpatialĹinesDataFrames</code>, or <code>SpatialPolygonsDataFrames</code> classes. Each type, or *class*, of layer contains an attributes table. An advantage of this is that you can use these attributes to select parts of the shapefile as you would select a subset of a dataset.
 
 The <code>rgdal</code> assists in loading vector-based GIS data into R, and comfortably handles ESRI shapefiles. The libary's <code>readOGR()</code> function is enough to get started. Here we load a file a standard shapefile of country polygons and create a shapefile layer for Sweden:
 
 {% highlight R %}
 library( rgdal )
 # Read in with readOGR since it preserves CRS projections.
-globeshape <- readOGR( dsn= "/home/user/countries.shp" , layer = "countries" )
+globeshape <- readOGR( dsn= "/home/user/countries.shp", layer = "countries" )
 plot( globeshape )
 {% endhighlight %}
 
@@ -113,7 +113,7 @@ Sure R is a free, programmatic solution to working with spatial data. Sure it al
 
 Work with *Brick* and *Stack* Objects
 
-*RasterBrick*s and *RasterStack*s are your friend when working with big datasets. For instance, weather data often comes in the compact NetCDF format, where a common NetCDF file may contain hundreds of layers of daily weather data, each dimension representing geocoded raster data for a single day. RasterBricks are useful in this case, and store a multi-layered raster file in a single object that can be manipulated.
+*RasterBrick*s and *RasterStack*s are your friend when working with big datasets. For instance, weather data often comes in the compact NetCDF format, where a common NetCDF file may contain hundreds of layers of daily weather data, each dimension representing geocoded raster data for a single day. RasterBricks are useful in this case, and store a multi-layered raster file in a single object that can be manipulated.
 
 With the <code>ncdf4</code> library, you can load a 365 layer NetCDF raster file directly into R. Together with the <code>brick()</code> function (from the <code>raster</code> package), you can work with large, multi-dimensional raster files as if they were one single raster file. In other words, you can apply raster manipulations to a block of raster data directly by defining it as a brick (or <code>stack()</code> as well, though raster bricks and raster stacks are treated a bit differently in memory). This is handy when you want to resize, crop, or transpose an entire set of raster layers all at once instead of looping through each individual raster layer.
 
@@ -131,18 +131,18 @@ And we chop hundreds of layers to an appropriate size in one go,
 
 {% highlight R %}
 cropsize <- extent( eushape )
-cropped_dailyweather <- crop( dailyweather , crop_size )
+cropped_dailyweather <- crop( dailyweather, crop_size )
 {% endhighlight %}
 
 We can also multiply a multi-dimensional brick object by a single raster layer, effectively multiplying a hundred rasters contained in the brick with the singleton layer. I find this extremely useful for calculation population-based weights.
 
 {% highlight R %}
-weatherXpop <- overlay( crop_dailyweather , population_raster )
+weatherXpop <- overlay( crop_dailyweather, population_raster )
 {% endhighlight %}
 
-**Parallelization, foreach/plyr, apply, and data.table**
+**Parallelization, foreach/plyr, apply, and data.table**
 
-If you're trying to programmatically manipulate many files at once, you can speed things up tremendously with a a number of R libraries and features, especially those that support parallelization.
+If you're trying to programmatically manipulate many files at once, you can speed things up tremendously with a a number of R libraries and features, especially those that support parallelization.
 
 For instance, the omnipresent <code>plyr</code> package and the handy <code>foreach</code> package allow you to parallalize time consuming manipulations of GIS data, especially GIS tasks that you would normally loop, such as computing repetitive calculations of zonal statistics and such. I'm not sure what geoprocessing tools are supported by ArcGIS' own parallel processing environment, but R certainly allows you to flexibly use the power of your multi-core processors for intensive tasks.
 

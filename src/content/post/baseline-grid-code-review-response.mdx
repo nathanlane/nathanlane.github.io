@@ -1,8 +1,14 @@
 ---
-title: "Baseline Grid Code Review: A Developer's Response"
-publishDate: "2025-07-14"
-description: "Reflecting on senior engineer feedback about our baseline grid implementation and what I learned from the review"
-tags: ["code-review", "typography", "learning", "refactoring"]
+title: 'Baseline Grid Code Review: A Developer''s Response'
+publishDate: '2025-07-14'
+description: >-
+  Reflecting on senior engineer feedback about our baseline grid implementation
+  and what I learned from the review
+tags:
+  - code-review
+  - typography
+  - learning
+  - refactoring
 draft: false
 ---
 
@@ -73,11 +79,11 @@ We should add a linting rule or build-time check to prevent future grid violatio
 // Example: Custom Tailwind plugin to warn about non-grid values
 function gridCompliancePlugin() {
   return {
-    name: 'grid-compliance',
-    hook: 'build:before',
-    handler: (config) => {
-      // Warn if spacing values aren't multiples of 6px
-    }
+  name: 'grid-compliance',
+  hook: 'build:before',
+  handler: (config) => {
+  // Warn if spacing values aren't multiples of 6px
+  }
   }
 }
 ```
@@ -89,11 +95,11 @@ A debug mode that shows the baseline grid would help developers see alignment is
 ```css
 .debug-grid {
   background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 23px,
-    rgba(255, 0, 0, 0.1) 23px,
-    rgba(255, 0, 0, 0.1) 24px
+  to bottom,
+  transparent,
+  transparent 23px,
+  rgba(255, 0, 0, 0.1) 23px,
+  rgba(255, 0, 0, 0.1) 24px
   );
 }
 ```
