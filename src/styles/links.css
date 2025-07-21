@@ -9,9 +9,9 @@
  * Current Architecture:
  * - 4 canonical link types: link-inline, link-nav, link-title, link-footer
  * - 20+ semantic CSS variables for consistent theming
- * - Data-attribute variant system: data-variant="subtle|back|action"
+ * - Data-attribute variant system: data-variant="subtle|action"
  * - Utility classes with u- prefix: u-underline-thin, u-hover-underline, u-with-icon
- * - Complete backward compatibility with @apply aliases
+ * - Consolidated from 7 types, removed all backward compatibility
  *
  * Harmonized Behaviors:
  * - All links hover to --theme-accent-base color
@@ -26,14 +26,12 @@
     color 200ms ease, text-decoration-color 200ms ease,
     font-variation-settings 200ms ease, border-color 200ms ease,
     opacity 200ms ease;
-  --link-transition-duration: 200ms;
 
   /* Link colors */
   --link-color-default: inherit;
   --link-color-nav: var(--theme-color-600);
   --link-color-nav-subtle: var(--theme-color-500);
   --link-color-hover: var(--theme-accent-base);
-  --link-color-active: var(--theme-text);
 
   /* Underline properties */
   --link-underline-color-default: hsl(0deg 0% 60%);
@@ -59,9 +57,15 @@
   --link-letter-spacing-nav: 0.02em;
 
   /* Other properties */
-  --link-decoration-thickness-default: 0.05em;
   --link-opacity-subtle: 0.8;
   --link-gap-icon: 0.3em;
+}
+
+/* Dark mode variable overrides */
+:root[data-theme="dark"] {
+  --link-underline-color-default: hsl(0deg 0% 40%);
+  --link-color-nav: var(--theme-color-400);
+  --link-color-nav-subtle: var(--theme-color-400);
 }
 
 /* ===== SINGLE SOURCE OF TRUTH - Base Link Reset ===== */
@@ -76,7 +80,7 @@ a {
   position: relative;
   min-height: 24px;
   text-underline-offset: var(--link-underline-offset-default);
-  text-decoration-thickness: var(--link-decoration-thickness-default);
+  text-decoration-thickness: 0.05em;
   text-decoration-skip-ink: auto;
 }
 
@@ -108,32 +112,6 @@ a[class*="hover:text-"]:hover {
 
 /* ===== TAILWIND LAYER FOR CUSTOM CLASSES ===== */
 @layer components {
-  /* ===== BASE LINK BEHAVIOR ===== */
-  /* All links inherit these core behaviors */
-  .link-base {
-    /* Prevent jarring size changes */
-    font-size: inherit !important;
-    /* Disable transforms */
-    transform: none;
-    /* Consistent transitions */
-    transition: var(--link-transition);
-  }
-
-  /* ===== SHARED HOVER PATTERNS ===== */
-  /* Pattern A: Color changes to accent */
-  .link-hover-accent:hover {
-    color: var(--theme-accent-base);
-  }
-
-  /* Pattern B: Font weight increases */
-  .link-hover-weight:hover {
-    font-variation-settings: "wght" 500;
-  }
-
-  .link-hover-weight-subtle:hover {
-    font-variation-settings: "wght" 450;
-  }
-
   /* ===== PRIMARY LINK TYPES (Consolidated from 7 to 4) ===== */
 
   /* 1. INLINE LINKS - For prose and body text */
@@ -156,7 +134,8 @@ a[class*="hover:text-"]:hover {
   /* 2. NAV LINKS - For navigation, actions, and UI elements */
   .link-nav {
     color: var(--link-color-nav);
-    text-decoration: none;
+    text-decoration: none !important; /* Ensure no underlines ever */
+    border-bottom: none !important; /* Clean navigation principle */
     font-variation-settings: "wght" var(--link-weight-nav);
     letter-spacing: var(--link-letter-spacing-nav);
   }
@@ -164,6 +143,7 @@ a[class*="hover:text-"]:hover {
   .link-nav:hover {
     color: var(--link-color-hover);
     font-variation-settings: "wght" var(--link-weight-nav-hover);
+    text-decoration: none !important; /* Maintain clean hover */
   }
 
   /* Navigation variants using data attributes */
@@ -179,20 +159,17 @@ a[class*="hover:text-"]:hover {
     opacity: 1;
   }
 
-  .link-nav[data-variant="back"]:hover {
-    color: var(--link-color-hover);
-  }
-
   .link-nav[data-variant="action"] {
     display: inline-flex;
     align-items: center;
     gap: var(--link-gap-icon);
   }
 
-  /* Active state */
+
+  /* Active state - Typography principle: weight and color only */
   .link-nav[aria-current="page"] {
     color: var(--link-color-hover);
-    font-variation-settings: "wght" var(--link-weight-nav-hover);
+    font-variation-settings: "wght" 550; /* Extra bold for current page */
   }
 
   /* 3. TITLE LINKS - For headings, titles, and featured content */
@@ -207,21 +184,25 @@ a[class*="hover:text-"]:hover {
     font-variation-settings: "wght" var(--link-weight-title-hover);
   }
 
-  /* 4. FOOTER LINKS - Unique border-bottom behavior */
+  /* 4. FOOTER LINKS - Refined underline with breathing room */
   .link-footer {
     color: var(--link-color-nav);
-    text-decoration: none;
-    border-bottom: var(--link-underline-thickness-default) solid transparent;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 0.05em; /* Hair-thin elegance */
+    text-underline-offset: 0.2em; /* Generous breathing room */
     font-variation-settings: "wght" var(--link-weight-default);
     transition:
       var(--link-transition),
-      border-bottom-color var(--link-transition-duration) ease;
+      text-decoration-color var(--link-transition-duration) ease,
+      opacity var(--link-transition-duration) ease;
   }
 
   .link-footer:hover {
     color: var(--link-color-hover);
-    border-bottom-color: currentColor;
+    text-decoration-color: currentColor;
     font-variation-settings: "wght" var(--link-weight-hover);
+    opacity: 0.7; /* Subtle presence */
   }
 
   /* ===== UTILITY MODIFIERS ===== */
@@ -262,14 +243,6 @@ a[class*="hover:text-"]:hover {
     font-size: var(--step--1);
   }
 
-  /* ===== DARK MODE ===== */
-  :root[data-theme="dark"] {
-    --link-underline-color-default: hsl(0deg 0% 40%);
-    --link-color-nav: var(--theme-color-400);
-    --link-color-nav-subtle: var(--theme-color-400);
-  }
-
-  /* Dark mode uses CSS variables above, no specific overrides needed */
 
   /* ===== PRINT STYLES - Centralized from all components ===== */
   @media print {
@@ -317,60 +290,17 @@ a[class*="hover:text-"]:hover {
     font-size: inherit !important;
   }
 
-  /* ===== BACKWARD COMPATIBILITY ALIASES ===== */
-  /* These can be removed in a future cleanup phase */
+  /* Temporary backward compatibility for build process */
   .inline-link {
     @apply link-inline;
   }
-
   .nav-link {
     @apply link-nav;
   }
-
-  .action-link {
-    @apply link-nav;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
-  }
-
-  .subtle-link {
-    @apply link-nav;
-    color: var(--theme-color-500);
-    font-variation-settings: "wght" 400;
-    opacity: 0.8;
-  }
-
-  .subtle-link:hover {
-    color: var(--theme-text);
-    font-variation-settings: "wght" 450;
-    opacity: 1;
-  }
-
-  .back-link {
-    @apply link-nav;
-  }
-
-  .back-link:hover {
-    color: var(--theme-text);
-  }
-
   .feature-link {
     @apply link-title;
   }
-
   .footer-link {
     @apply link-footer;
-  }
-
-  /* Research action links now use existing .section-link class */
-
-  /* Utility class backwards compatibility */
-  .link-underline-thin {
-    @apply u-underline-thin;
-  }
-
-  .link-external {
-    @apply u-with-icon;
   }
 } /* End @layer components */

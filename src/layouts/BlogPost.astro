@@ -19,8 +19,7 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 
-// Calculate reading time and word count
-const readingTime = remarkPluginFrontmatter?.minutesRead || 5;
+// Calculate word count
 const wordCount = remarkPluginFrontmatter?.words || 1000;
 
 // Format date for display
@@ -40,8 +39,7 @@ const articleData = {
 	publishDate: publishDate.toISOString(),
 	updatedDate: updatedDate?.toISOString(),
 	ogImage: socialImage,
-	tags: post.data.tags,
-	minutesRead: remarkPluginFrontmatter?.minutesRead as number | undefined
+	tags: post.data.tags
 };
 
 // Prepare breadcrumb data
@@ -76,7 +74,7 @@ const structuredData: LayoutStructuredData[] = [
 			<h1 class="essay-title">{title}</h1>
 			<hr class="essay-separator" />
 			<div class="essay-metadata">
-				ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS • {readingTime} MIN READ
+				ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS
 			</div>
 		</header>
 

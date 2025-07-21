@@ -58,7 +58,6 @@ export interface StructuredDataContent {
   publishDate?: string | undefined;
   updatedDate?: string | undefined;
   tags?: string[] | undefined;
-  minutesRead?: number | undefined;
   ogImage?: string | undefined;
   // For breadcrumbs
   items?: BreadcrumbItem[] | undefined;

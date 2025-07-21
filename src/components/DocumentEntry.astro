@@ -45,7 +45,7 @@ const metadataItems = [
 
 <article class="document-entry">
   <h3 class="heading-3">
-    <a href={href} class="feature-link">{title}</a>
+    <a href={href} class="link-title">{title}</a>
   </h3>
   
   <MetadataLine 
@@ -66,12 +66,12 @@ const metadataItems = [
   {(download || link) && (
     <div class="flex items-center gap-4b text-meta pt-2b">
       {download && (
-        <a href={download} class="nav-link text-meta" target="_blank" rel="noopener">
+        <a href={download} class="link-nav text-meta" target="_blank" rel="noopener">
           PDF ↗
         </a>
       )}
       {link && (
-        <a href={link} class="nav-link text-meta" target="_blank" rel="noopener">
+        <a href={link} class="link-nav text-meta" target="_blank" rel="noopener">
           Journal ↗
         </a>
       )}
