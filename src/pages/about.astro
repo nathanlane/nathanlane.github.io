@@ -21,7 +21,7 @@ const tocSections = [
 		<!-- Page Header with description -->
 		<PageHeader 
 			title={meta.title}
-			description="Nathan Lane, PhD - Associate Professor of Economics at Oxford University and co-founder of the Industrial Policy Group"
+			description='Nathan Lane, PhD - Associate Professor of Economics at <a href="https://www.ox.ac.uk">Oxford University</a> and co-founder of the <a href="#">Industrial Policy Group</a>'
 		/>
 		
 		<!-- Table of Contents with custom header -->
@@ -82,3 +82,28 @@ const tocSections = [
 		
 	</div>
 </PageLayout>
+
+<style>
+	/* Apply editorial link style to all prose links by default */
+	.prose a {
+		color: var(--link-color-editorial, var(--theme-accent-base));
+		font-weight: 450;
+		text-decoration: underline;
+		text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+		text-decoration-thickness: 0.05em;
+		text-underline-offset: 0.2em;
+	}
+	
+	.prose a:hover {
+		color: var(--link-color-hover);
+		text-decoration-color: var(--link-color-hover);
+		text-decoration-thickness: 0.075em;
+	}
+	
+	/* Override for the download link which has its own nav style */
+	.prose .link-nav {
+		font-weight: var(--link-weight-nav);
+		text-decoration: none !important;
+		border-bottom: none !important;
+	}
+</style>

@@ -1,5 +1,41 @@
 # Changelog
 
+## Editorial Link Style Implementation (July 21, 2025)
+
+### New Typography-Driven Feature
+- **Added editorial link variant** for prominent prose links:
+  - New `data-variant="editorial"` for `link-inline` class
+  - Inspired by Jason Santa Maria's editorial link approach
+  - Hair-thin underlines (0.05em) with generous offset (0.2em)
+  - Fixed weight (450) - no animations or size changes
+  - Subtle underline thickening on hover (0.075em)
+  
+### Implementation Details
+- **Enhanced PageHeader component**:
+  - Now supports HTML in both `description` and `additionalInfo` props
+  - Applies editorial link style to ALL links by default
+  - Simplified usage - no need for explicit class or data-variant
+  - Updated About and Research pages to use clean link syntax
+  
+- **Extended editorial style to more components**:
+  - BioPanel.astro - All narrative links now use editorial style
+  - About page prose - All prose links now use editorial style
+  - Removed ALL font-variation-settings changes on hover
+  - No more text size or weight changes on hover system-wide
+  
+### Typography Principles Applied
+- **No underlines in body text** - Following Butterick's guidance
+- **Color and weight for emphasis** - More elegant than underlines
+- **Hover reveals intent** - Underline appears only when needed
+- **Dark mode support** - Warm, readable color in dark theme
+
+### Files Updated
+- `/src/styles/links.css` - Added editorial variant styles
+- `/src/components/PageHeader.astro` - HTML support in description
+- `/src/pages/about.astro` - Applied editorial links
+- `/src/pages/research/index.astro` - Applied editorial links
+- `/private_notes/documentation/LINK_SYSTEM_GUIDE.md` - Documentation
+
 ## CSS Link System Consolidation (July 21, 2025)
 
 ### Major Architecture Improvements

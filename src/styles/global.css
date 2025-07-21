@@ -2096,9 +2096,7 @@
 /* === Link System Refinements === */
 @layer components {
   /* Universal link improvements - MOVED TO links.css for SSOT */
-
   /* Links use standardized focus system - handled in links.css */
-
   /* Link styles now handled by links.css */
 }
 

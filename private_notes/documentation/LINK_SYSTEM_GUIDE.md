@@ -40,6 +40,7 @@ The site uses a centralized link system that eliminates scattered hover behavior
   --link-color-default: inherit;
   --link-color-nav: var(--theme-color-600);
   --link-color-hover: var(--theme-accent-base);
+  --link-color-editorial: var(--theme-accent-base); /* Enhanced prominence */
   
   /* Underline properties */
   --link-underline-color-default: hsl(0deg 0% 60%);
@@ -156,6 +157,26 @@ a[class*="hover:text-"]:hover {
 - Border: transparent → currentColor on hover
 - Font weight: 400 → 450 (+50 units)
 - Unique visual treatment for footer context
+
+### 5. `.link-inline[data-variant="editorial"]` - Editorial Prose Links
+**Use for**: Prominent links in editorial content, special prose contexts
+
+```html
+<!-- In prose where you want editorial style -->
+<p>
+  Read more about <a href="/research" class="link-inline" data-variant="editorial">my research</a> 
+  in economics and technology.
+</p>
+```
+
+**Behavior**: 
+- Hair-thin underline (0.05em) with generous offset (0.2em)
+- Bold accent color for prominence
+- Fixed font weight: 450 (no animation or size changes)
+- Subtle underline thickening on hover (0.05em → 0.075em)
+- Follows Jason Santa Maria's approach: color + refined underlines
+
+**Note**: PageHeader component applies this style to all links by default, so no need to add the variant class within PageHeader.
 
 ## Migration Guide
 

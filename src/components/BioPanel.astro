@@ -120,7 +120,21 @@ const narrativeHtml = await marked.parse(bio.narrative);
     @apply mb-0;
   }
 
-  /* Narrative links use global link-inline class */
+  /* Apply editorial link style to all narrative links by default */
+  .narrative a {
+    color: var(--link-color-editorial, var(--theme-accent-base));
+    font-weight: 450;
+    text-decoration: underline;
+    text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.2em;
+  }
+  
+  .narrative a:hover {
+    color: var(--link-color-hover);
+    text-decoration-color: var(--link-color-hover);
+    text-decoration-thickness: 0.075em;
+  }
 
   /* Currently list styling */
   .currently-section ul {

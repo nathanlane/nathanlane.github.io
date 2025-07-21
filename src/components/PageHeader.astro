@@ -7,6 +7,18 @@ export interface Props {
 }
 
 const { title, description, additionalInfo, class: className } = Astro.props;
+
+// Process description to add editorial link classes
+const processedDescription = description?.replace(
+  /<a\s+href="/g, 
+  '<a class="link-inline" data-variant="editorial" href="'
+);
+
+// Process additionalInfo to add editorial link classes
+const processedAdditionalInfo = additionalInfo?.replace(
+  /<a\s+href="/g, 
+  '<a class="link-inline" data-variant="editorial" href="'
+);
 ---
 
 <header class:list={[
@@ -17,9 +29,9 @@ const { title, description, additionalInfo, class: className } = Astro.props;
   <h1 class="heading-1 mb-4b text-left">{title}</h1>
   
   <!-- Body description text - baseline size, generous reading measure -->
-  {description && (
+  {processedDescription && (
     <div class="text-0 text-base leading-relaxed measure-base mb-2b">
-      <p>{description}</p>
+      <p set:html={processedDescription}></p>
     </div>
   )}
   
@@ -29,9 +41,9 @@ const { title, description, additionalInfo, class: className } = Astro.props;
   </div>
   
   <!-- Additional info - baseline text size, muted, connected to rule -->
-  {additionalInfo && (
+  {processedAdditionalInfo && (
     <div class="text-0 text-light leading-relaxed mb-4b">
-      <p set:html={additionalInfo}></p>
+      <p set:html={processedAdditionalInfo}></p>
     </div>
   )}
 </header>
@@ -47,24 +59,6 @@ const { title, description, additionalInfo, class: className } = Astro.props;
   header p {
     margin: 0; /* Reset default margins for clean spacing */
   }
-  
-  /* Link styling in additional info - ensuring underlines show */
-  header a {
-    color: var(--theme-accent-base);
-    text-decoration: underline !important;
-    text-decoration-color: var(--theme-accent-base);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.2em;
-    transition: all 0.2s ease-in-out;
-  }
-  
-  header a:hover {
-    color: var(--theme-accent-dark);
-    text-decoration-color: var(--theme-accent-dark);
-    text-decoration-thickness: 2px !important;
-  }
-  
-  /* Focus handled by global system */
   
   /* Responsive adjustments */
   @media (max-width: 640px) {
