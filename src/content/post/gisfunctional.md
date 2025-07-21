@@ -1,60 +1,57 @@
 ---
 title: 'Tutorial: Big GIS Data in R & Functional Programming'
 description: >-
-  <a href="{{ site.baseurl }}/2016/01/02/gisfunctional.html">
+  [![]({{ site.baseurl }}/assets/thermalmap.jpg)]({{ site.baseurl
+  }}/2016/01/02/gisfunctional.html)  
 
-  <img src="{{ site.baseurl }}/assets/thermalmap.jpg" width="600px">
 
-  </a><br>
-
-  <p>
-
-  <small>
-
-  Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the
-  Isothermal Axis of Identity, and its expansions up and down the...
+  Caption: "Thermal Map of North America. Delineating the Iso
 publishDate: '2016-01-02'
 tags:
   - tutorial
 draft: true
 ---
 
-<a href="{{ site.baseurl }}/2016/01/02/gisfunctional.html">
-<img src="{{ site.baseurl }}/assets/thermalmap.jpg" width="600px">
+<a href="/2016/01/02/gisfunctional.html">
+![Image](/images/blog/assets/thermalmap.jpg)
 </a><br>
-<p>
-<small>
+
 Caption: "Thermal Map of North America. Delineating the Isothermal Zodiac, the Isothermal Axis of Identity, and its expansions up and down the 'Plateau' " From William Gilpin’s "Mission of the North American People (1873)." Via <a href="http://makingmaps.net/2014/09/30/gilpins-map-of-the-isothermal-zodiac-and-axis-of-intensity-round-the-world-calcareous-plain-maritime-selvage-etc-etc-maps-1873/">the "Making Maps: DIY Cartography" blog.</a>
-</small>
-</p>
 
-<h3>The Question</h3>
-<p>How do I take over 100 NetCDF files, each containing thousands of layers of hourly raster data, and translate into dataset?</p>
+### The Question
 
-<p>I'll flesh out the problem more,</p>
+How do I take over 100 NetCDF files, each containing thousands of layers of hourly raster data, and translate into dataset?
+
+I'll flesh out the problem more,
 
 <ul>
-<li><p><strong>NetCDF files.</strong> We have over 100 NetCDF datasets: <i> 1850weather.nc, 1851weather.nc , 1851weather , ... , 1971weather, ... etc.</i>.</p>
-<li><p><strong>Raster layers.</strong> Each NetCDF is a stack of hourly raster layers: 1850weather.nc: <i> layer.hour1 , layer.hour2 , ... , layer.hour2000, ... etc</i>.</p>
-<li><p><strong>Shapefiles.</strong> We also have a shapefile countaining country boundaries.</p>
-<li><p><strong>Our goal.</strong> Extract a giant panel dataset, containing average hourly weather data for each country.</p>
+<li>
+**NetCDF files.** We have over 100 NetCDF datasets: * 1850weather.nc, 1851weather.nc , 1851weather , ... , 1971weather, ... etc.*.
+
+<li>
+**Raster layers.** Each NetCDF is a stack of hourly raster layers: 1850weather.nc: * layer.hour1 , layer.hour2 , ... , layer.hour2000, ... etc*.
+
+<li>
+**Shapefiles.** We also have a shapefile countaining country boundaries.
+
+<li>
+**Our goal.** Extract a giant panel dataset, containing average hourly weather data for each country.
+
 </ul>
 
-<p>In other words, we need a way to cycle through each NetCDF file and for every layer within a file, retrieve the average raster stats corresponding to each country in our shapefile. This adds up. </p>
+In other words, we need a way to cycle through each NetCDF file and for every layer within a file, retrieve the average raster stats corresponding to each country in our shapefile. This adds up.
 
-<p>This problem is interesting because normal approaches to processing piles of raster data (using nested loops) takes forever. A more "functional" approach to the problem can be amazingly more efficient.</p>
+This problem is interesting because normal approaches to processing piles of raster data (using nested loops) takes forever. A more "functional" approach to the problem can be amazingly more efficient.
 
-<p>In this post I consider the ways in which we can tackle this problem (Part I.) and then motive a solution (Part 2.) for comfortably extracting statistics from gigs of GIS weather data.</p>
+In this post I consider the ways in which we can tackle this problem (Part I.) and then motive a solution (Part 2.) for comfortably extracting statistics from gigs of GIS weather data.
 
-<h3>Part 1. - A comparison of Two Approaches.</h3>
+### Part 1. - A comparison of Two Approaches.
 
-<p>Consider two approaches to our problem, a conventional loop-based approach and an optimized approach.</p>
+Consider two approaches to our problem, a conventional loop-based approach and an optimized approach.
 
-<p><strong>Conventional Dead Ends with Loops.</strong></p>
+**Conventional Dead Ends with Loops.**
 
-<p>
 Most of us would attack the problem using nexted loops. The first loop reads and prepares the NetCDF file; a second deals with the raster layers within each file.
-</p>
 
 {% highlight R %}
 for(i in 1:number_of_netcdffiles) {
@@ -74,21 +71,21 @@ for(i in 1:number_of_netcdffiles) {
 }
 {% endhighlight %}
 
-<p>We're tempted to iterate over the raster layers ( <code>layer[l]</code> ) and use standard R GIS libraries to, say, extract everage values from the rasters over a country boundary shapefile (e.g. hourly weather readings over the borders of Finland). Above all, we're tempted to "harvest" the geographic statistics, taking the values we extract and collating them in a giant file.</p>
+We're tempted to iterate over the raster layers ( <code>layer[l]</code> ) and use standard R GIS libraries to, say, extract everage values from the rasters over a country boundary shapefile (e.g. hourly weather readings over the borders of Finland). Above all, we're tempted to "harvest" the geographic statistics, taking the values we extract and collating them in a giant file.
 
-<p>Straight up, this is a bad idea.</p>
+Straight up, this is a bad idea.
 
-<p>Loops can be abysmal for these tasks. When iterating through objects with a <code>for()</code> loop, we're actually calling many tiny functions ... <i>over and over again</i>. Not only is the <code>for()</code> a function, but so is the ":", and so are the brackets "[ ]".</p>
+Loops can be abysmal for these tasks. When iterating through objects with a <code>for()</code> loop, we're actually calling many tiny functions ... *over and over again*. Not only is the <code>for()</code> a function, but so is the ":", and so are the brackets "[ ]".
 
-<p>To make matters worse, when we manipulate a vector or data.frame with a for-loop, we're also making many internal copies of our objects. Unbeknownst to us, mundane data transormations can quickly fill out memory with repeated copies.</p>
+To make matters worse, when we manipulate a vector or data.frame with a for-loop, we're also making many internal copies of our objects. Unbeknownst to us, mundane data transormations can quickly fill out memory with repeated copies.
 
-<p>Moreover, embedded in our first attempt is the agony loop-based "data-harvesting." Unless we're carefull, using a loop to incrementally "grow" a dataset will bring your computer to its knees.</p>
+Moreover, embedded in our first attempt is the agony loop-based "data-harvesting." Unless we're carefull, using a loop to incrementally "grow" a dataset will bring your computer to its knees.
 
-<p><strong>Consider an Alternative Approach.</strong></p>
+**Consider an Alternative Approach.**
 
-<p>Instead of loops, the following template - and specifically the full program in Part 2 - considers a solution more suited to R.</p>
+Instead of loops, the following template - and specifically the full program in Part 2 - considers a solution more suited to R.
 
-<p>By combining functional style with the use of the <code>raster()</code> library, we eliminate the need for nested loops and boil the problem down to a streamlined "apply+function" structure.</p>
+By combining functional style with the use of the <code>raster()</code> library, we eliminate the need for nested loops and boil the problem down to a streamlined "apply+function" structure.
 
 {% highlight R %}
 generate_statistics_from_netcdf <- function( input_netcdffile ) {
@@ -99,26 +96,25 @@ generate_statistics_from_netcdf <- function( input_netcdffile ) {
 lapply( list_of_netcdffiles , generate_statistics_from_netcdffile)
 {% endhighlight %}
 
-<p>Instead of using a for-loop to iterate over NetCDF weather files, we take a list of files <code>list_of_netcdffiles</code> and "apply" a big function, <code>generate_statistics_from_netcdf</code>.</p>
+Instead of using a for-loop to iterate over NetCDF weather files, we take a list of files <code>list_of_netcdffiles</code> and "apply" a big function, <code>generate_statistics_from_netcdf</code>.
 
-<p>We eliminate the entire inner loop with the help of <code>RasterBrick</code> manipulations. That is, instead of looping over the individual raster layers within a NetCDF file, we transform the NetCDF into a <code>RasterBrick</code> object and manipulate the collection of layers as a single object.</p>
+We eliminate the entire inner loop with the help of <code>RasterBrick</code> manipulations. That is, instead of looping over the individual raster layers within a NetCDF file, we transform the NetCDF into a <code>RasterBrick</code> object and manipulate the collection of layers as a single object.
 
-Appealing to <code>RasterBrick</code> instead of cycling through individual layers feels a lot of like the practice of <emph>"vectorization"</emph>, where instead of iteraring over individual members of a vector one-by-one, we work directly with the vector. Stylistically, this is a common line of attack for writing more efficient code.</p>
+Appealing to <code>RasterBrick</code> instead of cycling through individual layers feels a lot of like the practice of <emph>"vectorization"</emph>, where instead of iteraring over individual members of a vector one-by-one, we work directly with the vector. Stylistically, this is a common line of attack for writing more efficient code.
 
-<h3>Part 2. The Program.</h3>
+### Part 2. The Program.
 
-<p>Let's expand the alternative template above into a full program.</p>
+Let's expand the alternative template above into a full program.
 
-<p>The first part of the program defines our functions: the main <code> generate_datatable_from_rasterbricks</code> function and a set of small sub-functions used within it.</p>
+The first part of the program defines our functions: the main <code> generate_datatable_from_rasterbricks</code> function and a set of small sub-functions used within it.
 
-<p>The <code>generate_datatable_from_rasterbricks</code> functon eats a raw NetCDF file, and using a a team of smaller functions, reads it as a RasterBrick, aligns it with our country shapefile, extracts the country-level weather statistcs, then saves the output file.</p>
+The <code>generate_datatable_from_rasterbricks</code> functon eats a raw NetCDF file, and using a a team of smaller functions, reads it as a RasterBrick, aligns it with our country shapefile, extracts the country-level weather statistcs, then saves the output file.
 
-<p>The second part contains the core code. Here we define a list of NetCDF raster files (<code>raster_file_list</code>) and the country shapefile (<code>countryshape</code>) used in our calculations. An *apply function feeds NetCDF files through the <code>generate_datatable_from_rasterbricks</code> function. </p>
+The second part contains the core code. Here we define a list of NetCDF raster files (<code>raster_file_list</code>) and the country shapefile (<code>countryshape</code>) used in our calculations. An *apply function feeds NetCDF files through the <code>generate_datatable_from_rasterbricks</code> function.
 
-<p>Instead of using <code>lapply</code> I use <code>mclapply</code>: the latter is a multiprocessor version of list-apply provided by the <code>parallel()</code> package. Conveniently, <code>mclapply</code> utilizes the power of out multi-core processor (if we have one).</p>
+Instead of using <code>lapply</code> I use <code>mclapply</code>: the latter is a multiprocessor version of list-apply provided by the <code>parallel()</code> package. Conveniently, <code>mclapply</code> utilizes the power of out multi-core processor (if we have one).
 
-<p>The third part of the program takes our saved files and assembles them into a giant file via the amazingly useful functions provifed by the <code>data.table()</code>package. With <code>lapply()</code>, our list of .csv files is opened with the speedy <code>fread()</code> function. A list big list of opened .csv files is then fed through <code>rbindlist()</code>, which combines them into a single massive data.table.</p>
-
+The third part of the program takes our saved files and assembles them into a giant file via the amazingly useful functions provifed by the <code>data.table()</code>package. With <code>lapply()</code>, our list of .csv files is opened with the speedy <code>fread()</code> function. A list big list of opened .csv files is then fed through <code>rbindlist()</code>, which combines them into a single massive data.table.
 
 {% highlight R %}
 
@@ -137,7 +133,6 @@ library(data.table)
 # Detect cores automatically, I usually free one up.
 cores <- detectCores() - 1
 
-
 # Define your file paths here.
 weatherraster_path <- "/path/to/weatherrasterfiles"
 countryshape_path <- "/path/to/countryshapefile"
@@ -154,7 +149,6 @@ open_netcdf_as_rasterbrick <- function( ncdf_filename_input ) {
   file.path( weatherraster_path , . ) %>%
   nc_open( . )  %>%  # Open path as NetCDF file.
   ncvar_get( . ) %>%  # Get NetCDF file.
-
 
   # Transform NetCDF into raster brick.
 
@@ -216,7 +210,6 @@ generate_datatable_from_rasterbricks <- function( ncdf_filename_input ) {
 	match_rainbrick_to_countryshape( . ) %>%
 	generate_data_from_rasterandshape( . ) -> country_means_dataframe
 
-
 	# Go back to the file input name, create automatic names, and save.
 	ncdf_filename_input %>%
 
@@ -231,7 +224,6 @@ generate_datatable_from_rasterbricks <- function( ncdf_filename_input ) {
 "country_shapefile_name.shp" %>%
 file.path( countryshape_path , ) %>%
 readODG( den = .  , layer = "countries" ) -> countryshape
-
 
 # Generate list of NetCDF files automatically from our directory.
 # Match all files ending in ".nc"
@@ -256,7 +248,6 @@ lapply( csv_file_list , fread , sep = "," ) %>%
 # Transform the list of read files into a data.table:
 rbindlist( . ) -> big_datatable
 
-
 # Note: Before reassembling the data, or after, you may want
 # to manipulate the data so that it is in a more usable format.
 
@@ -266,15 +257,15 @@ rbindlist( . ) -> big_datatable
 write.csv( big_datatable, file = file.path( output_path , "big_file_name.csv") )
 {% endhighlight %}
 
+#### One thing to try.
 
-<h4>One thing to try.</h4>
+**Compiling functions with R's byte-compiler**
 
-<p><b>Compiling functions with R's byte-compiler</b></p>
-
-<p>Writing our own functions also allows us to easily use R's <code>compiler()</code> on chunks of our code. The <code>cmpfun()</code> function allows us to generate byte-compiled versions of our own functions, </p>
+Writing our own functions also allows us to easily use R's <code>compiler()</code> on chunks of our code. The <code>cmpfun()</code> function allows us to generate byte-compiled versions of our own functions,
 
 {% highlight R %}
 c.myfunction <- compiler::cmpfun(myfunction)
 {% endhighlight %}
 
-<p>Sometimes byte-compiled function can give our programs another performance boost, often with minimal upfront costs, and can yield surprising gains in big data projects without having to turn to Rcpp/C++.</p>
+Sometimes byte-compiled function can give our programs another performance boost, often with minimal upfront costs, and can yield surprising gains in big data projects without having to turn to Rcpp/C++.
+

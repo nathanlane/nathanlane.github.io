@@ -1,9 +1,17 @@
 ---
-title: "From Chaos to Harmony: Optimizing Our Grid System"
-publishDate: 2024-01-15
-description: "A comprehensive report on transforming our spacing system from a partially-implemented 4px grid to a typography-driven 6px grid with perfect vertical rhythm"
-tags: ["typography", "design", "css", "optimization", "web performance"]
-series: "typography-system"
+title: 'From Chaos to Harmony: Optimizing Our Grid System'
+publishDate: 2024-01-15T00:00:00.000Z
+description: >-
+  A comprehensive report on transforming our spacing system from a
+  partially-implemented 4px grid to a typography-driven 6px grid with perfect
+  vertical rhythm
+tags:
+  - typography
+  - design
+  - css
+  - optimization
+  - web performance
+series: typography-system
 draft: false
 ---
 
@@ -108,13 +116,13 @@ Every typographic element now aligns perfectly to the grid:
 
 ```css
 /* Headings with proportional spacing */
-h1 { 
+h1 {
   margin-top: var(--space-8);    /* 2 baselines above */
   margin-bottom: var(--space-3);  /* 0.75 baseline below */
   line-height: 1.1;               /* Tight for display */
 }
 
-h2 { 
+h2 {
   margin-top: var(--space-8);    /* 2 baselines above */
   margin-bottom: var(--space-2);  /* 0.5 baseline below */
   line-height: 1.15;
@@ -199,7 +207,7 @@ Your question about Tailwind's impact on maintainability is crucial. Here's our 
    ```html
    <!-- Bad: Magic numbers -->
    <section class="py-20 mt-16">
-   
+
    <!-- Good: Semantic spacing -->
    <section class="py-section mt-section-gap">
    ```
@@ -223,16 +231,23 @@ Your question about Tailwind's impact on maintainability is crucial. Here's our 
 ### Before: Chaos
 ```html
 <div class="mt-20 md:mt-8 px-3 py-4 space-y-2.5">
-  <h2 class="text-2xl mt-6 mb-2">...</h2>
-  <p class="mb-4">...</p>
+
+## ...
+
+  <p class="mb-4">...
+
 </div>
 ```
 
 ### After: Harmony
 ```html
 <div class="mt-section px-component py-component space-y-4">
-  <h2 class="heading-2">...</h2>
-  <p>...</p>
+
+## ...
+
+
+...
+
 </div>
 ```
 

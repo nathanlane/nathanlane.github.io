@@ -6,14 +6,11 @@ tags: []
 draft: true
 ---
 
-<img src="{{ site.baseurl }}/assets/reagannote.jpg" alt="" width="700px"/>
+![Image](/images/blog/assets/reagannote.jpg)
 
-<small>
-The Ronald Reagan Presidential Library care of <strong><a href="http://www.buzzfeed.com/chrisgeidner/nancy-reagan-turned-down-rock-hudsons-plea-for-help-seven-we#.tdjDew1BDZ">Chris Geidner of BuzzFeed News</a></strong>
-</small>
+The Ronald Reagan Presidential Library care of **<a href="http://www.buzzfeed.com/chrisgeidner/nancy-reagan-turned-down-rock-hudsons-plea-for-help-seven-we#.tdjDew1BDZ">Chris Geidner of BuzzFeed News</a>**
 
-
-A great long read from BuzzFeed New's Chris Geidner with a snippet of Rock Hudson's telegram to longtime friend, Nancy Reagan. A few weeks before his death, the Hollywood star appealed to Reagan for assistence in transferring to a French military hospital for AIDS treatment. Quoting Hudson's publicist at the time, Dale Olson: 
+A great long read from BuzzFeed New's Chris Geidner with a snippet of Rock Hudson's telegram to longtime friend, Nancy Reagan. A few weeks before his death, the Hollywood star appealed to Reagan for assistence in transferring to a French military hospital for AIDS treatment. Quoting Hudson's publicist at the time, Dale Olson:
 
 “ 'Only one hospital in the world can offer necessary medical treatment to save life of Rock Hudson or at least alleviate his illness,' Olson wrote. Although the commanding officer had denied Hudson admission to the French military hospital initially, Olson wrote that they believed 'a request from the White House … would change his mind.'
 

@@ -1,10 +1,14 @@
 ---
-title: "SEO & Structured Data Maintenance Guide"
-description: "How to maintain and update the structured data implementation for better SEO"
-publishDate: "2025-07-16"
-tags: ["seo", "structured-data", "maintenance", "documentation"]
+title: SEO & Structured Data Maintenance Guide
+description: How to maintain and update the structured data implementation for better SEO
+publishDate: '2025-07-16'
+tags:
+  - seo
+  - structured-data
+  - maintenance
+  - documentation
 draft: false
-seriesId: "lane-docs"
+seriesId: lane-docs
 orderInSeries: 8
 ---
 
@@ -70,10 +74,10 @@ After making changes, always test your structured data:
    ```bash
    # Build your site
    pnpm build
-   
+
    # Preview locally
    pnpm preview
-   
+
    # View page source and search for "application/ld+json"
    ```
 
@@ -106,7 +110,7 @@ If you reorganize where images are stored:
 - **Benefits**: Can enable sitelinks search box in Google results
 - **Maintenance**: Rarely needs updates
 
-### Article Schema  
+### Article Schema
 - **Purpose**: Rich snippets for blog posts and papers
 - **Benefits**: Shows publish date, author, reading time in search
 - **Maintenance**: Automatic for new content

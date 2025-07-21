@@ -1,8 +1,15 @@
 ---
-title: "Astro Best Practices for Static Sites"
-description: "Essential best practices and conventions for building performant static sites with Astro. A guide for newcomers to the framework."
-publishDate: "2024-07-04"
-tags: ["astro", "web development", "static sites", "best practices", "tutorial"]
+title: Astro Best Practices for Static Sites
+description: >-
+  Essential best practices and conventions for building performant static sites
+  with Astro. A guide for newcomers to the framework.
+publishDate: '2024-07-04'
+tags:
+  - astro
+  - web development
+  - static sites
+  - best practices
+  - tutorial
 ---
 
 Building static sites with Astro? Here's a comprehensive list of best practices and conventions that will help you create fast, maintainable, and scalable projects.
@@ -33,7 +40,7 @@ Always use Astro's built-in `<Image />` component for automatic optimization:
 ```astro
 ---
 import { Image } from 'astro:assets';
-import heroImage from '../assets/hero.jpg';
+import heroImage from '/images/hero.jpg';
 ---
 
 <Image src={heroImage} alt="Description" />
@@ -148,7 +155,7 @@ const data = await response.json();
 ---
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  
+
   return posts.map(post => ({
     params: { slug: post.slug },
     props: { post },

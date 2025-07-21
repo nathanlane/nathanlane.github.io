@@ -1,0 +1,13 @@
+# Squarespace Migration Redirects
+# This file handles redirects from old Squarespace URLs to new URLs
+
+# Homepage redirect
+/home              /                    301
+
+# Bio to About page redirect  
+/bio               /about/              301
+
+# Common Squarespace patterns (if they exist on your site)
+/blog/*            /posts/:splat        301
+/portfolio/*       /projects/:splat     301
+/work/*            /projects/:splat     301

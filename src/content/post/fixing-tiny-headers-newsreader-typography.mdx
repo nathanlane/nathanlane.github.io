@@ -132,7 +132,9 @@ The most insidious issue was the use of semantic classes like `.heading-1` that 
 
 ```html
 <!-- This applies BOTH h1 base styles AND .heading-1 class styles -->
-<h1 class="heading-1">Site Hero</h1>
+
+# Site Hero
+
 ```
 
 The `.heading-1` class was applying `text-3 sm:text-4` which maps to smaller sizes:
@@ -231,7 +233,7 @@ addComponents({
     font-variation-settings: "opsz" 72, "wght" 450;
     opacity: 0.95; /* Slight reduction for comfort */
   }
-  
+
   h2 {
     font-weight: 475; /* +50 adjustment */
     font-variation-settings: "opsz" 48, "wght" 475;
@@ -247,25 +249,25 @@ The fluid type scale ensures headers scale smoothly:
 ```typescript
 // Fluid type configuration
 textSizes: {
-  "6": { 
+  "6": {
     minSize: "3.58rem",  // ~57px on mobile
     maxSize: "4.05rem",  // ~65px on desktop
-    lineHeight: "1.05" 
+    lineHeight: "1.05"
   },
-  "5": { 
+  "5": {
     minSize: "2.86rem",  // ~46px on mobile
     maxSize: "3.24rem",  // ~52px on desktop
-    lineHeight: "1.10" 
+    lineHeight: "1.10"
   },
-  "4": { 
+  "4": {
     minSize: "2.29rem",  // ~36px on mobile
     maxSize: "2.59rem",  // ~41px on desktop
-    lineHeight: "1.15" 
+    lineHeight: "1.15"
   },
-  "3": { 
+  "3": {
     minSize: "1.83rem",  // ~29px on mobile
     maxSize: "2.08rem",  // ~33px on desktop
-    lineHeight: "1.25" 
+    lineHeight: "1.25"
   }
 }
 ```

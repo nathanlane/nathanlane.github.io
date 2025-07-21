@@ -1,8 +1,15 @@
 ---
-title: "Implementing Astro Image Optimization: A Step-by-Step Guide"
-description: "How to migrate from native HTML images to Astro's optimized Image component for better performance and user experience."
-publishDate: 2024-01-15
-tags: ["astro", "performance", "images", "optimization", "tutorial"]
+title: 'Implementing Astro Image Optimization: A Step-by-Step Guide'
+description: >-
+  How to migrate from native HTML images to Astro's optimized Image component
+  for better performance and user experience.
+publishDate: 2024-01-15T00:00:00.000Z
+tags:
+  - astro
+  - performance
+  - images
+  - optimization
+  - tutorial
 draft: false
 ---
 
@@ -29,15 +36,15 @@ import { Image } from 'astro:assets';
 
 ### Step 2: For Local Images
 
-Place images in `src/assets/images/` and import them:
+Place images in `src/images/images/` and import them:
 
 ```astro
 ---
 import { Image } from 'astro:assets';
-import profilePhoto from '../assets/images/headshot.jpg';
+import profilePhoto from '/images/images/headshot.jpg';
 ---
 
-<Image 
+<Image
   src={profilePhoto}
   alt="Nathan Lane headshot"
   width={400}
@@ -51,7 +58,7 @@ import profilePhoto from '../assets/images/headshot.jpg';
 Use the URL directly with explicit dimensions:
 
 ```astro
-<Image 
+<Image
   src="https://example.com/photo.jpg"
   alt="Example image showing Astro's image optimization features"
   width={800}
@@ -86,7 +93,7 @@ const { coverImage, coverImageAlt } = post.data;
 ---
 
 {coverImage && (
-  <Image 
+  <Image
     src={coverImage}
     alt={coverImageAlt || ''}
     widths={[400, 800, 1200]}
@@ -100,12 +107,12 @@ const { coverImage, coverImageAlt } = post.data;
 ### About Page
 - [x] Import Image component
 - [x] Convert profile photo to Image component
-- [ ] Move headshot.jpg to src/assets/images/
+- [ ] Move headshot.jpg to src/images/images/
 - [ ] Update aboutConfig to use imported image
 
 ### Blog Post Images
 - [ ] Update schema to use image() helper
-- [ ] Migrate existing post images to src/assets/
+- [ ] Migrate existing post images to src/images/
 - [ ] Update image references in MDX files
 
 ### Social/OG Images
@@ -121,7 +128,7 @@ const { coverImage, coverImageAlt } = post.data;
 ### 1. Responsive Images
 
 ```astro
-<Image 
+<Image
   src={heroImage}
   alt="Example of optimized hero image implementation"
   widths={[400, 800, 1600]}
@@ -138,7 +145,7 @@ const { coverImage, coverImageAlt } = post.data;
     srcset={mobileImage.src}
     media="(max-width: 768px)"
   />
-  <Image 
+  <Image
     src={desktopImage}
     alt="Responsive design"
     width={1600}
@@ -152,7 +159,7 @@ const { coverImage, coverImageAlt } = post.data;
 ```astro
 ---
 import { getImage } from 'astro:assets';
-import backgroundImage from '../assets/hero-bg.jpg';
+import backgroundImage from '/images/hero-bg.jpg';
 
 const optimizedBackground = await getImage({
   src: backgroundImage,
@@ -162,7 +169,7 @@ const optimizedBackground = await getImage({
 });
 ---
 
-<section 
+<section
   style={`background-image: url('${optimizedBackground.src}')`}
   class="hero"
 >
@@ -180,7 +187,7 @@ Expected improvements:
 
 ## Next Steps
 
-1. Create `src/assets/images/` directory
+1. Create `src/images/images/` directory
 2. Move existing images from `public/`
 3. Update all image references to use Image component
 4. Test build output and verify optimization

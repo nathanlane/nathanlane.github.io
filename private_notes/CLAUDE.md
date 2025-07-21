@@ -22,6 +22,38 @@ pnpm format       # Format code with Biome and Prettier
 pnpm check        # Type-check with Astro
 ```
 
+## Quick Start: Content Management System (CMS)
+
+The site includes Decap CMS for web-based content editing. To use it:
+
+### 1. Start Both Servers
+```bash
+# Terminal 1: Start Astro dev server
+pnpm dev
+
+# Terminal 2: Start CMS proxy server
+npx decap-server
+```
+
+### 2. Access the CMS
+- Open `http://localhost:4323/admin/`
+- Click "Login" (any credentials work locally)
+- Edit content through the web interface
+
+### 3. What You Can Edit
+- **Blog Posts**: Create/edit posts with rich text editor
+- **Homepage**: Update bio, tagline, contact links via forms
+- **Research/Projects/Writing**: Manage all content collections
+- **Media**: Upload images to `public/images/uploads/`
+
+### 4. How It Works
+- Changes save directly to your local files
+- No authentication needed - local development only
+- Full WYSIWYG editing for markdown content
+- All edits follow the same structure as manual file editing
+
+**Note**: The CMS is intentionally configured for local-only access. When visitors go to `/admin/` on the live site, they see instructions for local setup instead of a login screen.
+
 ## Recent Major Improvements (July 17, 2025)
 
 ### Media Page Refactoring & Archive System

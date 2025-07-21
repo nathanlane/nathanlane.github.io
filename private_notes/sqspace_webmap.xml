@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.nathanlane.info/home</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <lastmod>2025-07-15</lastmod>
+  </url>
+  <url>
+    <loc>https://www.nathanlane.info/bio</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.75</priority>
+    <lastmod>2025-06-26</lastmod>
+    <image:image>
+      <image:loc>https://images.squarespace-cdn.com/content/v1/64ce5c107d6fa3510e03fc3a/f8716d0e-003b-44b9-b3be-ad621f5c1aa7/spring2024headshot_oxford_crop2.JPG</image:loc>
+    </image:image>
+  </url>
+</urlset>
+

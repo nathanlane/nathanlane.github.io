@@ -63,10 +63,8 @@ const variantClasses = badgeClasses.variants[variant];
 	
 	/* Hover state typography */
 	.badge:hover {
-		/* Slightly heavier weight */
-		font-variation-settings: 'wght' 550;
-		/* Expand letter spacing */
-		letter-spacing: 0.05em;
+		/* No weight or letter-spacing changes to prevent size shifts */
+		/* Keep same weight and spacing as base state */
 	}
 	
 	/* Active state */
@@ -102,7 +100,7 @@ const variantClasses = badgeClasses.variants[variant];
 	}
 	
 	[data-badge-variant="muted"]:hover {
-		font-variation-settings: 'wght' 500;
+		/* No weight change to prevent size shifts */
 	}
 	
 	/* Size adjustments for readability */

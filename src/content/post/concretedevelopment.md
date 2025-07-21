@@ -1,19 +1,19 @@
 ---
 title: Concrete Development & Path Dependent Capital in Afghanistan
-description: |-
-  <img src="{{ site.baseurl }}/assets/cementafghanistan4.jpg" width="700px">
-  <img src="{{ site.baseurl }}/assets/cementafghanistan1.jpg" width="700px">
-  <img src="{{ site.baseurl }}/assets/cementafghanistan3.jpg" width="700px">
+description: >-
+  ![]({{ site.baseurl }}/assets/cementafghanistan4.jpg) ![]({{ site.baseurl
+  }}/assets/cementafghanistan1.jpg) ![]({{ site.baseurl
+  }}/assets/cementafghanistan3.jpg
 publishDate: '2016-07-18'
 tags: []
 draft: true
 ---
 
-<img src="{{ site.baseurl }}/assets/cementafghanistan_4.jpg" width="700px">
-<img src="{{ site.baseurl }}/assets/cementafghanistan_1.jpg" width="700px">
-<img src="{{ site.baseurl }}/assets/cementafghanistan_3.jpg" width="700px">
+![Image](/images/blog/assets/cementafghanistan_4.jpg)
+![Image](/images/blog/assets/cementafghanistan_1.jpg)
+![Image](/images/blog/assets/cementafghanistan_3.jpg)
 
-<a href="http://www.theatlantic.com/photo/2013/07/afghanistan-in-the-1950s-and-60s/100544/">It's hard to imagine, but in the 1950s and 1960s Afghanistan was in the throws of mid-century developmental modernism</a>. Western and Communist Bloc aid flowed in. Western-style structures rose around Kabul. West German machinery filled new government printing plants and Czechoslovakia invested in a number heavy industrial projects, including a 5 million dollar concrete factory located outside of Kabul. 
+<a href="http://www.theatlantic.com/photo/2013/07/afghanistan-in-the-1950s-and-60s/100544/">It's hard to imagine, but in the 1950s and 1960s Afghanistan was in the throws of mid-century developmental modernism</a>. Western and Communist Bloc aid flowed in. Western-style structures rose around Kabul. West German machinery filled new government printing plants and Czechoslovakia invested in a number heavy industrial projects, including a 5 million dollar concrete factory located outside of Kabul.
 
 Negotiated in 1955 by a new Minister of Finance, (General) Abdul Malik, <a href="https://books.google.se/books?id=_ei0fOSTKNQC&printsec=frontcover#v=onepage&q&f=false">who was inspired by the developmental planning of Turkey</a>, the Czech-built plant opened in 1957 in the district of Jabal Saraj, near Kabul.
 
@@ -25,6 +25,5 @@ Remarkably, the outdated machinery was still functional, able to grind limestone
 
 A lot of development economics in one paragraph.
 
-<small>Photos: Photos from <a href="http://blogs.reuters.com/ahmad-masood/">Ahmad Masood</a> in "Afghanistan's Concrete Plans." Foreign Affairs. 17 July 2016. Web. 17 July 2016.</small>
-
+Photos: Photos from <a href="http://blogs.reuters.com/ahmad-masood/">Ahmad Masood</a> in "Afghanistan's Concrete Plans." Foreign Affairs. 17 July 2016. Web. 17 July 2016.
 

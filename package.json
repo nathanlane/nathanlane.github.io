@@ -29,7 +29,6 @@
     "astro-robots-txt": "^1.0.0",
     "astro-webmanifest": "^1.0.0",
     "github-slugger": "^2.0.0",
-    "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
     "js-yaml": "^4.1.0",
     "katex": "^0.16.22",
@@ -47,7 +46,8 @@
     "satori-html": "^0.3.2",
     "sharp": "^0.34.3",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -58,15 +58,18 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
+    "gray-matter": "^4.0.3",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "reading-time": "^1.5.0",
     "tailwindcss": "^3.4.17",
     "tailwindcss-fluid-type": "^2.0.7",
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.4"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

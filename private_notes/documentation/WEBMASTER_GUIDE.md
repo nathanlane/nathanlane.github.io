@@ -5,15 +5,16 @@ This guide covers everything you need to know to manage and deploy this website 
 ## Table of Contents
 1. [Quick Start](#quick-start)
 2. [Configuration Fields](#configuration-fields)
-3. [GitHub Actions & CI/CD](#github-actions--cicd)
-4. [Deployment](#deployment)
-5. [Content Management](#content-management)
-6. [Typography & Metadata System](#typography--metadata-system)
-7. [Typography System Guide](#typography-system-guide)
-8. [Footer Management & Sitemap System](#footer-management--sitemap-system)
-9. [Security Headers](#security-headers)
-10. [Secret Detection & Security](#secret-detection--security)
-11. [Monitoring & Maintenance](#monitoring--maintenance)
+3. [Content Management System (CMS)](#content-management-system-cms)
+4. [GitHub Actions & CI/CD](#github-actions--cicd)
+5. [Deployment](#deployment)
+6. [Content Management](#content-management)
+7. [Typography & Metadata System](#typography--metadata-system)
+8. [Typography System Guide](#typography-system-guide)
+9. [Footer Management & Sitemap System](#footer-management--sitemap-system)
+10. [Security Headers](#security-headers)
+11. [Secret Detection & Security](#secret-detection--security)
+12. [Monitoring & Maintenance](#monitoring--maintenance)
 
 ---
 
@@ -122,6 +123,73 @@ export default defineConfig({
 
 ---
 
+## Content Management System (CMS)
+
+The site now includes Decap CMS (formerly Netlify CMS) for easy web-based content editing without touching code.
+
+### Local Development with CMS
+
+To use the CMS locally:
+
+1. **Start the development server**:
+   ```bash
+   pnpm dev
+   ```
+
+2. **Start the CMS proxy server** (in a separate terminal):
+   ```bash
+   npx decap-server
+   ```
+   This starts a local server on port 8081 that allows the CMS to read/write your files.
+
+3. **Access the CMS**:
+   - Navigate to `http://localhost:4323/admin/`
+   - Click "Login" (any email/password works for local development)
+   - You'll see all your content collections
+
+### Using the CMS
+
+The CMS provides forms for editing:
+
+- **Blog Posts**: Create/edit posts with title, description, tags, and markdown content
+- **Research Papers**: Manage academic publications with authors, status, and abstracts
+- **Projects**: Document projects with descriptions and tech stacks
+- **Writing**: Creative writing pieces with genre and word count
+- **Homepage**: Edit bio, tagline, affiliations, and contact links
+- **Series**: Create collections of related posts
+
+### CMS Features
+
+- **Rich Text Editor**: Markdown editing with toolbar for formatting
+- **Media Management**: Upload and manage images (saved to `public/images/uploads/`)
+- **Draft Support**: Save posts as drafts before publishing
+- **Real-time Preview**: See changes as you type
+- **Automatic Saving**: Changes are saved to your local files immediately
+
+### Content Structure
+
+All content edits through the CMS follow the same structure as manual edits:
+- Blog posts save to `src/content/post/`
+- Research papers save to `src/content/research/`
+- Homepage content saves to `src/content/homepage/index.yaml`
+- Media uploads save to `public/images/uploads/`
+
+### Production Setup
+
+For production deployment on GitHub Pages, comprehensive instructions are available in the **[Decap CMS Production Setup Guide](DECAP_CMS_PRODUCTION_GUIDE.md)**.
+
+The guide covers:
+- GitHub OAuth App setup
+- Netlify Identity configuration (recommended)
+- Security considerations
+- User management
+- Alternative authentication methods
+- Troubleshooting common issues
+
+Currently, the CMS is configured for local development only. Follow the production guide to enable web-based editing on your live site.
+
+---
+
 ## GitHub Actions & CI/CD
 
 ### Understanding the Workflows
@@ -210,9 +278,13 @@ The `public/_headers` file configures security headers for Netlify:
 
 ## Content Management
 
+You can manage content in two ways:
+1. **Using the CMS** (recommended for non-technical users) - See [Content Management System](#content-management-system-cms) section above
+2. **Editing files directly** (for developers) - Details below
+
 ### Homepage Content
 
-Homepage content is managed through `src/content/homepage/index.yaml`:
+Homepage content is managed through `src/content/homepage/index.yaml` (or via the CMS):
 
 ```yaml
 bio:
@@ -804,3 +876,4 @@ For more detailed guides on specific topics:
 - **[Footer Configuration Guide](FOOTER_CONFIGURATION_GUIDE.md)** - Comprehensive guide to managing footer content
 - **[Metadata System Guide](METADATA_SYSTEM_GUIDE.md)** - Typography and metadata configuration
 - **[Blog and Writing Guide](BLOG_AND_WRITING_GUIDE.md)** - Content creation and management
+- **[Decap CMS Production Setup Guide](DECAP_CMS_PRODUCTION_GUIDE.md)** - Complete guide for setting up CMS on GitHub Pages

@@ -1,8 +1,14 @@
 ---
-title: "Understanding the Typography & Spacing System"
-description: "A comprehensive guide to the fluid typography and mathematical grid system that powers this website's design"
-publishDate: "July 14 2025"
-tags: ["typography", "design-systems", "css", "documentation"]
+title: Understanding the Typography & Spacing System
+description: >-
+  A comprehensive guide to the fluid typography and mathematical grid system
+  that powers this website's design
+publishDate: July 14 2025
+tags:
+  - typography
+  - design-systems
+  - css
+  - documentation
 draft: false
 ---
 
@@ -20,7 +26,7 @@ Rather than fixed font sizes, we use a **fluid type system** that smoothly scale
 
 ```typescript
 // In tailwind.config.ts
-"0": { 
+"0": {
   minSize: "0.94rem",  // 15px on mobile (320px)
   maxSize: "1.06rem",  // 17px on desktop (1280px)
   lineHeight: "1.60"   // 160% for optimal readability
@@ -106,13 +112,16 @@ The beauty of this system is its simplicity. In Tailwind, you use semantic spaci
   </h2>
   <p class="mb-4">       <!-- 24px margin bottom -->
     Body text here...
-  </p>
+
 </div>
 
 <!-- Using fluid typography -->
-<h1 class="text-4">Display Heading</h1>
-<p class="text-0">Body text scales smoothly...</p>
-<small class="text--1">Small print</small>
+
+# Display Heading
+
+<p class="text-0">Body text scales smoothly...
+
+<small class="text--1">Small print
 ```
 
 ## Making Global Changes
@@ -132,10 +141,10 @@ All spacing throughout the site scales proportionally!
 Update the base size:
 ```typescript
 // In tailwind.config.ts
-"0": { 
+"0": {
   minSize: "1.0rem",   // 16px mobile
   maxSize: "1.125rem", // 18px desktop
-  lineHeight: "1.60" 
+  lineHeight: "1.60"
 }
 ```
 

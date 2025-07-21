@@ -1,5 +1,81 @@
 # Changelog
 
+## Domain Migration to GitHub Pages (January 21, 2025)
+
+### Squarespace to GitHub Pages Migration
+- **Migrated nathanlane.info domain** from Squarespace to GitHub Pages:
+  - Added CNAME file for custom domain configuration
+  - Updated DNS records in Gandi (domain registrar)
+  - Configured GitHub Pages with custom domain and HTTPS enforcement
+  - Created redirect rules for Squarespace URLs (/home → /, /bio → /about/)
+
+### DNS Configuration
+- **Updated Gandi DNS settings**:
+  - Removed 4 Squarespace A records (198.185.159.144/145, 198.49.23.144/145)
+  - Added 4 GitHub Pages A records (185.199.108.153/109.153/110.153/111.153)
+  - Added CNAME record for www subdomain → nathanlane.github.io
+  - Successfully provisioned SSL certificate via Let's Encrypt
+
+### Migration Assets
+- **Created migration documentation and tools**:
+  - `SQUARESPACE_MIGRATION_AUDIT.md` - Comprehensive migration checklist
+  - `GANDI_DNS_MIGRATION_GUIDE.md` - Step-by-step DNS configuration guide
+  - `scripts/migration/squarespace-url-extractor.js` - URL analysis tool
+  - `scripts/migration/squarespace-deep-scan.js` - Hidden page scanner
+  - `public/_redirects` - Redirect rules for old Squarespace URLs
+
+### Homepage Updates
+- **Updated Important Links section**:
+  - Changed email display from "drnathanlane@gmail.com" to "Email Me"
+  - Maintained mailto: functionality with cleaner presentation
+
+## Decap CMS Implementation (July 21, 2025)
+
+### Content Management System Setup
+- **Implemented Decap CMS** (formerly Netlify CMS) for web-based content editing:
+  - Added admin interface at `/admin/` route
+  - Configured for all content collections (posts, research, projects, writing, homepage)
+  - Set up local development workflow with `decap-server`
+  - Created simplified field schemas to match existing content structure
+
+### Technical Implementation
+- **CMS Configuration** (`public/admin/config.yml`):
+  - Backend: `git-gateway` with `local_backend: true` for development
+  - Collections configured for blog posts, research papers, projects, writing, series
+  - Homepage content editable via YAML forms
+  - Media uploads configured to `public/images/uploads/`
+
+- **Local Development Setup**:
+  - Run `npx decap-server` to start proxy server on port 8081
+  - Access CMS at `http://localhost:4323/admin/`
+  - Full read/write access to all content without authentication
+  - Changes saved directly to local files
+
+### Files Added/Modified
+- `/src/pages/admin/index.astro` - CMS admin page route
+- `/public/admin/config.yml` - CMS configuration
+- `/public/admin/index.html` - Static admin interface (for production)
+- Updated lint configuration for migration scripts
+
+### Migration Script Updates
+- Fixed Node.js import protocols in migration scripts
+- Updated to use optional chaining for cleaner code
+- Scripts now pass Biome linting standards
+
+### Security Enhancement
+- **Added SEO protection for CMS admin panel**:
+  - Configured `astro-robots-txt` plugin with specific disallow rules for `/admin/`
+  - Excluded `/admin` from sitemap generation using filter function
+  - Prevents CMS interface from appearing in search results
+  - Maintains public visibility for all other content
+
+### CMS Configuration Update
+- **Configured for local-only access**:
+  - Removed authentication complexity - no Netlify Identity needed
+  - Production visitors see helpful instructions instead of login screen
+  - CMS only loads JavaScript when accessed from localhost
+  - Clear messaging guides users to clone repo for content editing
+
 ## UI Refinements & Link System Updates (July 21, 2025)
 
 ### Table of Contents Enhancement

@@ -83,7 +83,7 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   }
   
   [data-button-variant="primary"]:hover {
-    font-variation-settings: 'wght' 520;
+    /* No weight change to prevent size shifts */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   }
   
@@ -94,7 +94,7 @@ const classes = `${baseClasses} ${variantClasses[variant]}`;
   }
   
   [data-button-variant="secondary"]:hover {
-    font-variation-settings: 'wght' 480;
+    /* No weight change to prevent size shifts */
   }
   
   /* Active state */

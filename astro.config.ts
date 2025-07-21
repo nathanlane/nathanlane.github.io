@@ -50,9 +50,19 @@ export default defineConfig({
       applyBaseStyles: false,
       nesting: true,
     }),
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/admin'),
+    }),
     mdx(),
-    robotsTxt(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          disallow: ["/admin", "/admin/"],
+        },
+      ],
+    }),
     webmanifest({
       // See: https://github.com/alextim/astro-lib/blob/main/packages/astro-webmanifest/README.md
       /**

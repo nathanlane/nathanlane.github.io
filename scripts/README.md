@@ -46,6 +46,70 @@ Marks posts older than a specified year as drafts.
 
 **Usage:** `node scripts/migration/mark-old-posts-draft.js`
 
+### `clean-migrated-posts.js`
+Systematically cleans up blog posts migrated from Jekyll/Squarespace.
+- Removes Jekyll template variables ({{ site.baseurl }})
+- Converts HTML img tags to markdown
+- Removes unnecessary `<p>` tags
+- Converts HTML tables to markdown
+- Updates old iframe embed codes
+- Fixes broken image paths
+- Cleans up messy formatting
+
+**Usage:** 
+```bash
+# Clean all posts
+node scripts/migration/clean-migrated-posts.js
+
+# Preview changes without saving
+node scripts/migration/clean-migrated-posts.js --dry-run
+
+# Clean specific file
+node scripts/migration/clean-migrated-posts.js --file=my-post.md
+```
+
+**Dependencies:** `npm install gray-matter turndown turndown-plugin-gfm`
+
+### `fix-blog-images.js`
+Finds and fixes broken images in blog posts.
+- Scans all posts for image references
+- Checks if local images exist
+- Reports broken image paths
+- Suggests fixes for broken paths
+- Optionally downloads external images
+
+**Usage:**
+```bash
+# Check for broken images (report only)
+node scripts/migration/fix-blog-images.js --check-only
+
+# Fix broken image paths
+node scripts/migration/fix-blog-images.js
+
+# Download external images and fix paths
+node scripts/migration/fix-blog-images.js --download
+```
+
+**Dependencies:** `npm install gray-matter`
+
+### `squarespace-url-extractor.js`
+Extracts and analyzes URLs from Squarespace sitemap.xml.
+- Groups URLs by pattern (blog, portfolio, pages)
+- Suggests redirect mappings
+- Exports URLs to JSON for processing
+
+**Usage:** `node scripts/migration/squarespace-url-extractor.js path/to/sitemap.xml`
+
+**Dependencies:** `npm install xml2js`
+
+### `squarespace-deep-scan.js`
+Scans for additional Squarespace pages beyond sitemap.
+- Checks common Squarespace URL patterns
+- Identifies redirects and hidden pages
+- Generates comprehensive site structure report
+
+**Usage:** `node scripts/migration/squarespace-deep-scan.js`
+
 ## Content Scripts (`/content`)
 
 ### `validate-content.js`
