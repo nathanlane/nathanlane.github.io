@@ -1,6 +1,6 @@
 ---
 title: 'Data cleaning music: Nina Simone - Baltimore'
-description: ''
+description: 'Nina Simone performs Baltimore - perfect music for data cleaning sessions'
 publishDate: '2015-04-28'
 tags: []
 draft: true

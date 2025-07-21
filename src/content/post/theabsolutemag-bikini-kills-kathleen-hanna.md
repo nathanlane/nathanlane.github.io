@@ -1,6 +1,6 @@
 ---
-title: Untitled
-description: 'theabsolutemag:'
+title: "Bikini Kill's Kathleen Hanna reads The Riot Grrrl Manifesto"
+description: 'Kathleen Hanna reading The Riot Grrrl Manifesto - via theabsolutemag'
 publishDate: '2014-08-15'
 tags:
   - reblog
