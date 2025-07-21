@@ -25,3 +25,69 @@ Thumbs.db
 PRIVATE_*.md
 # Note: CLAUDE.md, private_notes/, and dev files are not ignored on private-dev branch
 # These files are organized in private_notes/ on private-dev branch only
+
+# Security & Secrets
+# API Keys and secrets
+*.key
+*.pem
+*.p12
+*.pfx
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.asc
+*.gpg
+
+# Config files that might contain secrets
+config.json
+secrets.json
+.secrets
+.credentials
+auth.json
+firebase-adminsdk-*.json
+
+# Cloud provider configs
+.aws/
+.gcp/
+.azure/
+
+# Development & Temporary Files
+# Backup files
+*.bak
+*.backup
+*.tmp
+*~
+*.swp
+*.swo
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db3
+
+# Certificates and keys
+*.crt
+*.cert
+*.ca-bundle
+*.p7b
+*.p7s
+*.der
+
+# OS-specific files (additional)
+.Trashes
+.Spotlight-V100
+.fseventsd
+.TemporaryItems
+
+# macOS-specific Security
+# Keychain access files
+*.keychain
+*.keychain-db
+
+# System files that might contain sensitive info
+.localized
+Network Trash Folder
+Temporary Items
+.apdisk
