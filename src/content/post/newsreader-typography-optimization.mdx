@@ -48,17 +48,17 @@ The problem? Insufficient differentiation between levels. Headers felt monotonou
 #### Implemented Solution
 ```css
 /* After Optimization */
-h1 { 
+h1 {
   font-weight: 300;
   font-variation-settings: "opsz" 72, "wght" 300;
   letter-spacing: -0.02em;
 }
-h2 { 
+h2 {
   font-weight: 350;
   font-variation-settings: "opsz" 48, "wght" 350;
   letter-spacing: -0.015em;
 }
-h3 { 
+h3 {
   font-weight: 400;
   font-variation-settings: "opsz" 32, "wght" 400;
   letter-spacing: -0.01em;
@@ -103,7 +103,7 @@ h3 {
 ```css
 h1, h2, h3, h4, h5, h6 {
   /* Optimized OpenType features for headers */
-  font-feature-settings: 
+  font-feature-settings:
     "kern" 1,    /* Kerning - essential */
     "liga" 0,    /* Ligatures - disabled for clarity */
     "calt" 1,    /* Contextual alternates */
@@ -161,7 +161,7 @@ Dark backgrounds require special consideration for serif typefaces:
     letter-spacing: -0.015em; /* Slightly more open */
     -webkit-font-smoothing: antialiased;
   }
-  
+
   h2 {
     font-weight: 375;
     font-variation-settings: "opsz" 48, "wght" 375;
@@ -177,7 +177,7 @@ Dark backgrounds require special consideration for serif typefaces:
   /* Windows needs heavier weights */
   h1 { font-weight: 350; }
   h2 { font-weight: 400; }
-  
+
   /* Adjust for ClearType rendering */
   h1, h2, h3 {
     -webkit-font-smoothing: auto;
@@ -188,7 +188,7 @@ Dark backgrounds require special consideration for serif typefaces:
 
 #### High-DPI Display Optimization
 ```css
-@media (-webkit-min-device-pixel-ratio: 2), 
+@media (-webkit-min-device-pixel-ratio: 2),
        (min-resolution: 192dpi) {
   /* Can use lighter weights on high-DPI */
   h1 { font-weight: 275; }

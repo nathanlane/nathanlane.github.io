@@ -1,23 +1,22 @@
 ---
 title: 'Quick Note: Upgrading to Microsoft Open R in Linux'
-description: '<img src = "{{ site.baseurl }}/assets/firstwheelie.jpg" width = "700px" >'
+description: '![]({{ site.baseurl }}/assets/firstwheelie.jpg)'
 publishDate: '2016-07-26'
 tags: []
 draft: true
 ---
 
-<img src = "{{ site.baseurl }}/assets/firstwheelie.jpg" width = "700px" >
+<img src = "/images/firstwheelie.jpg" width = "700px" >
 
+Below is a guide to installing Microsoft Open R for those using Ubuntu Linux and R-Studio. Microsoft R Open (MRO) is a pretty powerful distribution of R (and yes, completely open source). It builds off (currently) R version 3.3.0, adding some darn useful enhancements, due in part to their use of Intel's Math Kernel Library (MKL).
 
-Below is a guide to installing Microsoft Open R for those using Ubuntu Linux and R-Studio. Microsoft R Open (MRO) is a pretty powerful distribution of R (and yes, completely open source). It builds off (currently) R version 3.3.0, adding some darn useful enhancements, due in part to their use of Intel's Math Kernel Library (MKL). 
-
-<h4>What is R Open + MKL?</h4>
+#### What is R Open + MKL?
 
 What does this mean? Basically Microsoft R Open is an optimized version of your standard R, and can help tremendously if you're doing, say, many intense vector or matrix-based operations. Importantly, much of this is done for you: instead of having to fiddle around with multi-core support in your code, R Open optimizes things automatically.
 
-Before stumbling across Revolution R, the predesessor to Microsoft R Open, I didn't know there were <strong>other</strong> distributions of R floating around. Switching to Microsoft R Open simply means you're installing an enhanced version of R over the default version. <strong>Everything</strong> works the same. There is nothing special you have to do (other than installing your previous packages, which is covered below). If you're using RStudio, like most people out there, RStudio will automatically use the new, enhanced R.
+Before stumbling across Revolution R, the predesessor to Microsoft R Open, I didn't know there were **other** distributions of R floating around. Switching to Microsoft R Open simply means you're installing an enhanced version of R over the default version. **Everything** works the same. There is nothing special you have to do (other than installing your previous packages, which is covered below). If you're using RStudio, like most people out there, RStudio will automatically use the new, enhanced R.
 
-<h4>Upgrading to R Open</h4>
+#### Upgrading to R Open
 
 Before installing <a href="https://mran.revolutionanalytics.com/open/
 ">Microsoft R Open</a>, you want to keep track of all the packages you’ve installed. Because we’re installing a new version of R underneath RStudio, we wont have access to our old packages.
@@ -31,13 +30,11 @@ installedpackages <- as.vector( temp[ is.na( temp[ , "Priority" ] ) , 1 ] )
 save( installedpackages , file = "oldpackages.rda" )
 {% endhighlight %}
 
-<small>
 The above code is essentially the same as <a href="https://www.datascienceriot.com/how-to-upgrade-r-without-losing-your-packages/kris/">Data Science Riot</a>.
-</small>
 
 Once we setup R Open, we’ll evoke this <code>.Rda</code> file to automatically (re-)install the old packages.
 
-Next, we download and install Microsoft R Open: <a href="https://mran.revolutionanalytics.com/download/#download">https://mran.revolutionanalytics.com/download/</a>. 
+Next, we download and install Microsoft R Open: <a href="https://mran.revolutionanalytics.com/download/#download">https://mran.revolutionanalytics.com/download/</a>.
 
 If, like me, you juggle multiple systems and can’t keep track of which version of Ubuntu you have, type the following command into the terminal:
 
@@ -46,7 +43,7 @@ From your terminal:
 lsb_release -a
 {% endhighlight %}
 
-Then download the appropriate version of R Open <strong>and</strong> the MKL libraries.
+Then download the appropriate version of R Open **and** the MKL libraries.
 
 After downloading, first install the Microsoft R Open Debian package:
 
@@ -89,6 +86,5 @@ missing <- setdiff( installedpackages , installedpackages.new )
 install.packages( missing )
 update.packages()
 {% endhighlight %}
-
 
 If you're like me, you may have sit back for a while and watch R hypnotically re-install the list of packages onto your distribution.

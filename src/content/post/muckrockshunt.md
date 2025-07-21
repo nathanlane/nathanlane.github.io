@@ -1,16 +1,16 @@
 ---
 title: A Hunt for the Oldest Government Computer
-description: '<img src="{{ site.baseurl }}/assets/labold.jpg" width="720px"/>'
+description: '![]({{ site.baseurl }}/assets/labold.jpg)'
 publishDate: '2016-04-12'
 tags: []
 draft: true
 ---
 
-<img src="{{ site.baseurl }}/assets/labold.jpg" width="720px"/>
+![Image](/images/blog/assets/labold.jpg)
 
-Last year <strong><a href="http://www.popularmechanics.com/technology/infrastructure/a16010/30-year-old-computer-runs-school-heat/">Popular Mechanics and WOODtv reported</a></strong> that a single Amiga has been running non-stop for three decades, controlling the heating and cooling system of nineteen Michigan public schools. 
+Last year **<a href="http://www.popularmechanics.com/technology/infrastructure/a16010/30-year-old-computer-runs-school-heat/">Popular Mechanics and WOODtv reported</a>** that a single Amiga has been running non-stop for three decades, controlling the heating and cooling system of nineteen Michigan public schools.
 
-In the spirit of vintage computing, the prolofic researchers at Muckrock.com have a really great ongoing project: <strong><a href="https://www.muckrock.com/news/archives/2016/mar/23/hunt-governments-oldest-computer-continues/">the hunt for the government's oldest computer</a></strong>.
+In the spirit of vintage computing, the prolofic researchers at Muckrock.com have a really great ongoing project: **<a href="https://www.muckrock.com/news/archives/2016/mar/23/hunt-governments-oldest-computer-continues/">the hunt for the government's oldest computer</a>**.
 
 Allan Lasser of MuckRock, in his <a href="https://www.muckrock.com/news/archives/2016/feb/24/hunt-governments-oldest-computer/">original blog post for the project</a>:
 

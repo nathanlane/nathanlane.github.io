@@ -1,8 +1,14 @@
 ---
-title: "Accessibility Improvements: What We Fixed"
-description: "A comprehensive summary of accessibility improvements made to ensure WCAG 2.1 AA compliance"
-publishDate: "2025-07-16"
-tags: ["accessibility", "wcag", "performance", "documentation"]
+title: 'Accessibility Improvements: What We Fixed'
+description: >-
+  A comprehensive summary of accessibility improvements made to ensure WCAG 2.1
+  AA compliance
+publishDate: '2025-07-16'
+tags:
+  - accessibility
+  - wcag
+  - performance
+  - documentation
 draft: false
 ---
 
@@ -21,7 +27,7 @@ Several text elements failed WCAG contrast requirements:
    ```css
    /* Before: opacity reduces contrast unpredictably */
    opacity-60 hover:opacity-100
-   
+
    /* After: predictable color values */
    text-light hover:text-textColor
    ```
@@ -54,9 +60,13 @@ h3:not([class]) { @apply heading-4; }
 
 Now we write clean HTML:
 ```html
-<h1>Page Title</h1>
-<h2>Section</h2>
-<h3>Subsection</h3>
+
+# Page Title
+
+## Section
+
+### Subsection
+
 ```
 
 ## Image Optimization
@@ -69,8 +79,8 @@ Created a custom image component with:
 - Handles both local and remote images
 
 ```astro
-<Image 
-  src={src} 
+<Image
+  src={src}
   alt={alt}
   loading="lazy"
   decoding="async"
@@ -88,9 +98,9 @@ Created a custom image component with:
 ### Skip Link Enhancement
 Improved the skip link for keyboard users:
 ```html
-<a 
-  class="sr-only focus:not-sr-only focus:fixed focus:z-50 
-         focus:bg-accent-base focus:text-bgColor focus:px-4 
+<a
+  class="sr-only focus:not-sr-only focus:fixed focus:z-50
+         focus:bg-accent-base focus:text-bgColor focus:px-4
          focus:py-2 focus:rounded-md"
   href="#main"
 >

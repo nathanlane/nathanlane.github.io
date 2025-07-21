@@ -6,6 +6,10 @@ tags: []
 draft: true
 ---
 
-<p><div class="media image"><img src="{{ site.baseurl }}/assets/dengintheusa.jpg" alt="Deng Xiaoping in the US" /></div></p>
-<p>Deng Xiaoping speaks in D.C., the year relations between the People's Republic of China and the U.S. normalized.</p>
-<p>[Citation: via the <a href="http://asiasociety.org/blog/asia/tbt-deng-xiaopings-historic-1979-us-visit" title="Deng Xiaoping visits the US, 1979." target="_blank">Asia Society blog</a>]</p>
+
+![Deng Xiaoping in the US](/images/blog/assets/dengintheusa.jpg)
+
+Deng Xiaoping speaks in D.C., the year relations between the People's Republic of China and the U.S. normalized.
+
+[Citation: via the <a href="http://asiasociety.org/blog/asia/tbt-deng-xiaopings-historic-1979-us-visit" title="Deng Xiaoping visits the US, 1979." target="_blank">Asia Society blog</a>]
+

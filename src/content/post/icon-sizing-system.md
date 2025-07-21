@@ -1,8 +1,16 @@
 ---
-title: "Building a Semantic Icon Sizing System"
-description: "How we eliminated icon sizing chaos and built a maintainable, semantic system that scales across an entire codebase with just a few CSS classes."
-publishDate: 2025-01-11
-tags: ["css", "design-systems", "tailwind", "icons", "maintenance", "refactoring"]
+title: Building a Semantic Icon Sizing System
+description: >-
+  How we eliminated icon sizing chaos and built a maintainable, semantic system
+  that scales across an entire codebase with just a few CSS classes.
+publishDate: 2025-01-11T00:00:00.000Z
+tags:
+  - css
+  - design-systems
+  - tailwind
+  - icons
+  - maintenance
+  - refactoring
 draft: false
 ---
 
@@ -30,7 +38,7 @@ Here's what we were dealing with:
 
 **Problems:**
 - **No semantic meaning** - `size-4` tells you nothing about the icon's purpose
-- **Inconsistent styling** - Drop shadows, transitions, and effects scattered everywhere  
+- **Inconsistent styling** - Drop shadows, transitions, and effects scattered everywhere
 - **Maintenance nightmare** - Want larger nav icons? Edit 8+ files manually
 - **Cognitive overload** - Developers constantly making sizing decisions
 - **Copy-paste errors** - Easy to miss styling when reusing icons
@@ -55,7 +63,7 @@ addComponents({
   ".icon-xl": {
     "@apply size-6 aspect-square": {}, // 24px - large interactive
   },
-  
+
   // Context-specific classes
   ".icon-nav": {
     "@apply size-4 aspect-square drop-shadow-[0px_1.5px_1.5px_rgba(0,0,0,0.175)]": {},
@@ -109,7 +117,7 @@ We created two types of classes:
 ### 3. **Migrate Systematically**
 Rather than a big-bang rewrite, we migrated file-by-file:
 - Header navigation icons → `icon-nav`
-- Close buttons → `icon-close`  
+- Close buttons → `icon-close`
 - RSS feeds → `icon-rss`
 - Action buttons → `icon-action`
 - Theme toggles → `icon-toggle`
@@ -219,7 +227,7 @@ Edit `tailwind.config.ts` to change **all icons of a type** across your entire c
   "@apply size-5": {}, // Changed from size-4 - affects every nav icon!
 },
 
-// Make RSS icons more prominent  
+// Make RSS icons more prominent
 ".icon-rss": {
   "@apply size-4": {}, // Changed from size-3 - all RSS icons now larger
 },
@@ -230,7 +238,7 @@ Add breakpoint-specific sizing:
 
 ```typescript
 ".icon-nav": {
-  "@apply size-3 sm:size-4 lg:size-5": {}, 
+  "@apply size-3 sm:size-4 lg:size-5": {},
   // Small on mobile, medium on tablet, large on desktop
 },
 ```
@@ -248,7 +256,7 @@ Override for specific cases:
 
 ### **Current Size Reference**
 - **`icon-sm`** - 12px (decorative, RSS)
-- **`icon-base`** - 16px (standard UI)  
+- **`icon-base`** - 16px (standard UI)
 - **`icon-lg`** - 20px (prominent actions)
 - **`icon-xl`** - 24px (large interactive)
 
@@ -256,7 +264,7 @@ Override for specific cases:
 ```typescript
 // Three lines = entire website becomes more touch-friendly
 ".icon-nav": { "@apply size-5": {} },    // 16px → 20px
-".icon-close": { "@apply size-5": {} },  // 16px → 20px  
+".icon-close": { "@apply size-5": {} },  // 16px → 20px
 ".icon-action": { "@apply size-5": {} }, // 16px → 20px
 ```
 
@@ -268,7 +276,7 @@ What started as a refactoring exercise became a **design system foundation**. Ou
 
 - **Consistent** across all components
 - **Maintainable** with global control
-- **Semantic** with self-documenting code  
+- **Semantic** with self-documenting code
 - **Scalable** for future growth
 - **Developer-friendly** with clear conventions
 
@@ -279,7 +287,7 @@ The best part? This approach extends beyond icons. We're applying the same seman
 If you're fighting icon sizing chaos, try this approach:
 
 1. **Audit** your current icon usage
-2. **Design** semantic classes for your common patterns  
+2. **Design** semantic classes for your common patterns
 3. **Implement** in your CSS framework's component system
 4. **Migrate** systematically, file by file
 5. **Validate** that no manual sizing remains

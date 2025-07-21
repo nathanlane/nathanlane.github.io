@@ -7,21 +7,17 @@ tags:
 draft: true
 ---
 
-<div class="media image">
-<img src="{{ site.baseurl }}/assets/motorcycle1970s.jpg" />
-<center><small>Using a really powerful library to do something simple.</small></center>
-</div>
+![Image](/images/blog/assets/motorcycle1970s.jpg)
 
 For a current project, I am having to repeatedly manipulate and save a hundred datasets, each with about 4 million observations. While R tools like <code>fread()</code>, part of __[the <code>data.table</code> library](https://cran.r-project.org/web/packages/data.table/index.html)__, make it trivial to load massive data sets into memory, *writing* these data sets--and doing so repeatedly--is another story..
 
-When trying to save big data sets, many of folks first recommend the <code>write.table()</code> function, which gives some people performance gains over the default <code>write.csv()</code> method. For my project, <code>write.table()</code> wasn't cutting it and, instead, often crashed my system.  
+When trying to save big data sets, many of folks first recommend the <code>write.table()</code> function, which gives some people performance gains over the default <code>write.csv()</code> method. For my project, <code>write.table()</code> wasn't cutting it and, instead, often crashed my system.
 
 Enter the __[<code>ff</code> library](https://cran.r-project.org/web/packages/ff/index.html)__, an incredibly handy tool for working with big data. In fact, ff nimbly deals with some of R's serious memory issues (__[see a more technical guide here.](http://ff.r-forge.r-project.org/bit&ff2.1-2_WU_Vienna2010.pdf)__). Instead of doing anything fancy with ff, however, I realized one could harness the library to simply save problematic data sets. The performance gains were striking.
 
 #### A simple alternative to write.table():
 
 Below I take a data.table object I was manipulating (perhaps in a loop), convert it into an "ff dataframe" (ffdf), which I can then save using <code>ff</code>'s speedy .csv file writing function.
-
 
 {% highlight R %}
 library(magrittr) # For use of piping %>%.
@@ -39,7 +35,6 @@ library(ff) # And the key package we'll use to save.
     # Write the ffdf object using ff's csv writing function.
     write.csv.ffdf( . , file = "/my/file/path/myfile.csv")
 {% endhighlight %}
-
 
 Note: the type of data table (mygiant_datatable) I was working with was quite simple, composed of only a few numeric columns. Thus, coercing the data into an ffdf object was no problemo.
 

@@ -1,6 +1,6 @@
 ---
 title: The Bastards Book of Regular Expressions by Dan Nguyen
-description: The Bastards Book of Regular Expressions by Dan Nguyen <div...
+description: The Bastards Book of Regular Expressions by Dan Nguyen
 publishDate: '2014-07-15'
 tags:
   - data
@@ -11,7 +11,8 @@ tags:
 draft: true
 ---
 
-<p><a href="http://regex.bastardsbook.com/">The Bastards Book of Regular Expressions by Dan Nguyen</a>
+
+<a href="http://regex.bastardsbook.com/">The Bastards Book of Regular Expressions by Dan Nguyen</a>
 <div class="link_description">
 <blockquote>
 <div class="post_title medium">I love regexes even more because they make it possible – if not trivial – to do research and analysis that is otherwise impossible, because believe it or not, most research and analysis start out with just giant blobs of text</div>

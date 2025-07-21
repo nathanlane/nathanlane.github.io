@@ -1493,11 +1493,11 @@
       opacity: 1 !important;
       background: var(--theme-color-50);
       border-color: var(--theme-color-300);
-      transform: translateY(-1px);
+      /* No transform to prevent size shifts */
     }
 
     &:active {
-      transform: translateY(0);
+      /* No transform to prevent size shifts */
     }
 
     /* Success state */
@@ -1957,13 +1957,10 @@
     display: inline-block;
   }
 
-  /* Site title hover - subtle breathing effect */
+  /* Site title hover - no size changes */
   .site-title:hover {
-    /* Increase optical size and adjust weight for sophistication */
-    font-variation-settings:
-      "opsz" 32,
-      "wght" 360;
-    letter-spacing: -0.015em;
+    /* Keep same optical size and weight to prevent shifts */
+    /* Only change color if needed */
   }
 
   /* Site title link container */

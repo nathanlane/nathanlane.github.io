@@ -10,7 +10,7 @@ draft: false
 ---
 As an undergraduate suffering through a graduate PhD micro course, I recall my professor bringing up the "hot new thing" that was implementation theory. I tried hard at the time to ascertain what this literature was.
 
-The other day a colleague of mine mentioned that he was relieved by the direction network economics as going, with more applied studies and an increasing number of empirically-grounded studies. "If that hadn't happened," he said, "it may have gone the way of implementation theory." 
+The other day a colleague of mine mentioned that he was relieved by the direction network economics as going, with more applied studies and an increasing number of empirically-grounded studies. "If that hadn't happened," he said, "it may have gone the way of implementation theory."
 
 With that, it hit me: _what the hell happened to implementation theory?_ So I tweeted into the Econ Twitter black hole.
 
@@ -28,7 +28,7 @@ With a also a little lit review.
 
 The two articles are from Matt Jackson (1992), and Maskin and Jean Tirole (1999):
 
-> [Jackson, M. O. (1992). Implementation in Undominated Strategies: A Look at Bounded Mechanisms. The Review of Economic Studies, 59(4), 757–775](http://dx.doi.org/10.2307/2297996). \[Ungated: [Link](https://www.kellogg.northwestern.edu/research/math/papers/833.pdf)\] 
+> [Jackson, M. O. (1992). Implementation in Undominated Strategies: A Look at Bounded Mechanisms. The Review of Economic Studies, 59(4), 757–775](http://dx.doi.org/10.2307/2297996). \[Ungated: [Link](https://www.kellogg.northwestern.edu/research/math/papers/833.pdf)\]
 
 > [Maskin, E., & Tirole, J. (1999). Unforeseen Contingencies and Incomplete Contracts. The Review of Economic Studies, 66(1), 83–114.](http://dx.doi.org/10.1111/1467-937X.00079) \[Ungated: [Link](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=5&cad=rja&uact=8&ved=2ahUKEwigj5SWpdbfAhXPdN4KHVzACaAQFjAEegQIBhAC&url=https%3A%2F%2Fwww.sss.ias.edu%2Ffiles%2Fpapers%2Feconpapereight.pdf&usg=AOvVaw2XzSxGBWsgdl7DABnMe9s2)\]
 

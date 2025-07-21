@@ -1,8 +1,15 @@
 ---
-title: "Fixing Heading Hierarchy Without Breaking Typography"
-description: "How I solved the semantic HTML vs visual design dilemma by rebasing heading styles"
-publishDate: "2025-07-16"
-tags: ["accessibility", "typography", "html", "css", "web-development"]
+title: Fixing Heading Hierarchy Without Breaking Typography
+description: >-
+  How I solved the semantic HTML vs visual design dilemma by rebasing heading
+  styles
+publishDate: '2025-07-16'
+tags:
+  - accessibility
+  - typography
+  - html
+  - css
+  - web-development
 draft: false
 ---
 
@@ -14,10 +21,13 @@ When I originally designed this site's typography, I made what seemed like a rea
 
 ```html
 <!-- Main page title styled as a second-level heading -->
-<h2 class="heading-2">Writing</h2>
+
+## Writing
 
 <!-- Section headers -->
-<h3 class="heading-3">Featured Writing</h3>
+
+### Featured Writing
+
 ```
 
 Visually, this looked perfect. The `heading-2` class gave me the exact typography I wanted for page titles—not too large, perfectly balanced with the rest of the design.
@@ -34,7 +44,9 @@ My visual design started at "level 2," breaking this semantic structure.
 My first thought was to simply update the HTML:
 
 ```html
-<h1 class="heading-2">Writing</h1>
+
+# Writing
+
 ```
 
 This would work, but it felt wrong. Why should I have to write `<h1 class="heading-2">` everywhere? It's confusing—the semantic level (h1) doesn't match the visual level (heading-2).
@@ -58,9 +70,13 @@ h6:not([class]) { @apply text-sm font-semibold; }
 Now I can write clean, semantic HTML:
 
 ```html
-<h1>Writing</h1>
-<h2>Featured Writing</h2>
-<h3>Article Title</h3>
+
+# Writing
+
+## Featured Writing
+
+### Article Title
+
 ```
 
 And it automatically gets the visual styling I want. No more confusing class names!
@@ -77,7 +93,9 @@ And it automatically gets the visual styling I want. No more confusing class nam
 For those rare times when I need something bigger than my default h1 styling, I can still use:
 
 ```html
-<h1 class="heading-1">Extra Large Title</h1>
+
+# Extra Large Title
+
 ```
 
 The `:not([class])` selector ensures that only classless headings get the rebased styles.

@@ -1,8 +1,14 @@
 ---
-title: "Homepage Content Collection Implementation"
-description: "How we migrated hardcoded homepage content to Astro's content collections for better maintainability and non-developer editing capabilities."
-publishDate: 2024-01-15
-tags: ["astro", "content-collections", "static-site", "implementation"]
+title: Homepage Content Collection Implementation
+description: >-
+  How we migrated hardcoded homepage content to Astro's content collections for
+  better maintainability and non-developer editing capabilities.
+publishDate: 2024-01-15T00:00:00.000Z
+tags:
+  - astro
+  - content-collections
+  - static-site
+  - implementation
 draft: false
 ---
 
@@ -133,14 +139,13 @@ const { hero, currentProjects, contact, showcase, posts: postsConfig } = homepag
 </h1>
 <p class="text-body mt-4 mb-4">
   {hero.description}
-</p>
 
 <!-- Dynamic button rendering -->
 <div class="flex justify-center gap-3 mt-6">
   {hero.buttons.map((button) => (
-    <a 
-      href={button.href} 
-      class={button.variant === "primary" 
+    <a
+      href={button.href}
+      class={button.variant === "primary"
         ? "inline-flex items-center px-3 py-1.5 text-xs font-medium text-bgColor bg-accent-base rounded hover:opacity-90 transition-all"
         : "inline-flex items-center px-3 py-1.5 text-xs font-medium text-accent-base bg-color-100 hover:bg-color-150 rounded transition-colors"
       }

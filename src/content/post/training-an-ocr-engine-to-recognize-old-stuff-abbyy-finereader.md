@@ -9,76 +9,91 @@ tags:
 draft: true
 ---
 
-<p><strong><a title="Tutorial: A Beginner’s Guide to Scraping Historic Table Data" href="http://www.nathanlane.info/?p=281">In a previous tutorial I covered the basics of digitizing old stats</a> </strong>with ABBYY FineReader (&amp; alternative digitization tools). Now, I dig into some important digitization nitty gritty: training optical character recognition software to properly read historical content.<br />
+
+**<a title="Tutorial: A Beginner’s Guide to Scraping Historic Table Data" href="http://www.nathanlane.info/?p=281">In a previous tutorial I covered the basics of digitizing old stats</a> **with ABBYY FineReader (&amp; alternative digitization tools). Now, I dig into some important digitization nitty gritty: training optical character recognition software to properly read historical content.<br />
 &nbsp;<br />
-Most historical digitization projects will entail training. Old statistical documents often use long-gone proprietary typefaces. While modern OCR software can easily read Arials and Times New Romans, it needs help with more exotic typography; this is where training come in. If you have ever worked with machine learning-type projects and/or text analysis, training software to properly classify <em>stuff </em> is a familiar concept. And luckily, training ABBYY FineReader's engine is pretty easy.<br />
+Most historical digitization projects will entail training. Old statistical documents often use long-gone proprietary typefaces. While modern OCR software can easily read Arials and Times New Romans, it needs help with more exotic typography; this is where training come in. If you have ever worked with machine learning-type projects and/or text analysis, training software to properly classify *stuff * is a familiar concept. And luckily, training ABBYY FineReader's engine is pretty easy.<br />
 &nbsp;<br />
-<center><br />
+<br />
 <a title="Tutorial: Training an OCR Engine" href="http://www.nathanlane.info/?p=421" target="_blank">
-<img class="aligncenter" src="{{ site.baseurl }}/assets/robotguy.jpg" alt="Gotta train 'em." width="395" height="480" />
-</a></center></p>
-<p>&nbsp;<br />
-Say you're working with an old scanned document and you wish to extract its tables. If you OCR the document using the default pattern recognition settings you will likely be disappointed. Below is an example of  historic document OCRd using FineReader's default recognition schemes; many numbers have been replaced by letters or strange characters.</p>
-<p><img class="aligncenter" src="{{ site.baseurl }}/assets/badex.png" alt="FineReader gone wrong." /><br />
+![Gotta train ](/images/blog/assets/robotguy.jpg)
+</a>
+
+&nbsp;<br />
+Say you're working with an old scanned document and you wish to extract its tables. If you OCR the document using the default pattern recognition settings you will likely be disappointed. Below is an example of  historic document OCRd using FineReader's default recognition schemes; many numbers have been replaced by letters or strange characters.
+
+![FineReader gone wrong.](/images/blog/assets/badex.png)<br />
 &nbsp;<br />
 Training is used to tell FineReader, "Hey, don't do that. That British pound sign is really a number. Same with that W. Hey, don't do that." Anyone who has ever had to get their hands dirty with machine learning will immediately recognize the intuition. And if not, don't worry.<br />
 &nbsp;<br />
-Using custom <strong>User Patterns</strong>, we train ABBYY FineReader's OCRing algorithm to correctly classify characters in our historic data. Old documents will have many peculiarities that will be missed by FineReader unless we point the software in the right direction.<br />
-&nbsp;</p>
-<p style="padding-left: 30px;"><em>Note</em>: Somewhere buried in the sparse FineReader User Guide is a line reading, "oh no, you seldom have to train FineReader" etc., etc.. This left us scratching our heads. I have <em>never</em> worked with historical data that did not entail some degree of training.</p>
-<h4>1. Setup.</h4>
-<p>It is a good idea to select a handful (or more) representative pages from the document you wish to analyze. We will use these pages to train ABBYY's recognition capabilities.<br />
+Using custom **User Patterns**, we train ABBYY FineReader's OCRing algorithm to correctly classify characters in our historic data. Old documents will have many peculiarities that will be missed by FineReader unless we point the software in the right direction.<br />
+&nbsp;
+
+<p style="padding-left: 30px;">*Note*: Somewhere buried in the sparse FineReader User Guide is a line reading, "oh no, you seldom have to train FineReader" etc., etc.. This left us scratching our heads. I have *never* worked with historical data that did not entail some degree of training.
+
+#### 1. Setup.
+
+It is a good idea to select a handful (or more) representative pages from the document you wish to analyze. We will use these pages to train ABBYY's recognition capabilities.<br />
 &nbsp;<br />
 Save your "training pages" as a distinct file and open them in FineReader.<br />
 &nbsp;<br />
-Pre-process these test pages, but do not "Read" them yet. Instead, click the <strong>Options</strong> button on the main toolbar (or <strong>Tools &gt; Options</strong>), and then click the <strong>Read</strong> tab.<br />
+Pre-process these test pages, but do not "Read" them yet. Instead, click the **Options** button on the main toolbar (or **Tools &gt; Options**), and then click the **Read** tab.<br />
 &nbsp;<br />
-<img class="aligncenter" src="{{ site.baseurl }}/assets/ex2.png" alt="" /><br />
+![Image](/images/blog/assets/ex2.png)<br />
 &nbsp;<br />
-From the <strong>Training</strong> section, select either <strong>Use built-in</strong> <strong>and user patterns</strong> or <strong>Use only user patterns</strong>. I typically go with the built-in and user patterns options. You can (and should) experiment to see which is best for your job.<br />
+From the **Training** section, select either **Use built-in** **and user patterns** or **Use only user patterns**. I typically go with the built-in and user patterns options. You can (and should) experiment to see which is best for your job.<br />
 &nbsp;<br />
-In the <strong>Training </strong>section, click the <strong>Pattern Editor</strong> button. The <strong>Pattern Editor</strong> box will open. From the <strong>Pattern Editor</strong> box, click <strong>New</strong>. The <strong>Create Pattern </strong>box will open; enter a name for the <b>User Pattern</b>. Click <strong>OK</strong>.<br />
+In the **Training **section, click the **Pattern Editor** button. The **Pattern Editor** box will open. From the **Pattern Editor** box, click **New**. The **Create Pattern **box will open; enter a name for the **User Pattern**. Click **OK**.<br />
 &nbsp;<br />
-Last, click the <strong>Read with training</strong> box. This will put ABBYY FineReader in a type of "training mode." Click <strong>OK</strong>.<br />
-&nbsp;</p>
-<h4>2. Reading in Pattern Training mode.</h4>
-<p>ABBYY is now in a zombie-like training mode!<br />
+Last, click the **Read with training** box. This will put ABBYY FineReader in a type of "training mode." Click **OK**.<br />
+&nbsp;
+
+#### 2. Reading in Pattern Training mode.
+
+ABBYY is now in a zombie-like training mode!<br />
 &nbsp;<br />
-Click the main <strong>Read</strong> button.<br />
+Click the main **Read** button.<br />
 &nbsp;<br />
-Instead of reading the document per usual, a <strong>Pattern Training</strong> mode box appears and ABBYY FineReader asks your advice about characters it is unsure about.<br />
+Instead of reading the document per usual, a **Pattern Training** mode box appears and ABBYY FineReader asks your advice about characters it is unsure about.<br />
 &nbsp;<br />
-Adjust the green frame around each character FineReader selects, making sure the box completely encompasses each character. The program is usually good about selecting the full character, but sometimes it needs some help.</p>
-<p>&nbsp;</p>
-<p><img class="aligncenter" src="{{ site.baseurl }}/assets/ex3.png" alt="" /></p>
-<p>In many old documents, printed letters may be misread using FineReader's default OCRing pattern. In my document (seen in the image above), the letter D is always poorly printed. Without direction, the OCR engine systematically reads these letters as Us or Os.<br />
+Adjust the green frame around each character FineReader selects, making sure the box completely encompasses each character. The program is usually good about selecting the full character, but sometimes it needs some help.
+
+&nbsp;
+
+![Image](/images/blog/assets/ex3.png)
+
+In many old documents, printed letters may be misread using FineReader's default OCRing pattern. In my document (seen in the image above), the letter D is always poorly printed. Without direction, the OCR engine systematically reads these letters as Us or Os.<br />
 &nbsp;<br />
-Confirm or correct the highlighted character using the <strong>Enter the character enclosed by the frame</strong> box and click <strong>Train</strong>. FineReader saves the corrected character and moves to the next one.<br />
+Confirm or correct the highlighted character using the **Enter the character enclosed by the frame** box and click **Train**. FineReader saves the corrected character and moves to the next one.<br />
 &nbsp;<br />
 Repeat the Pattern Training process for your training pages, until there are no more characters left to train.<br />
 &nbsp;<br />
-<em>Important</em>: If working with old data, FineReader often mistakes 1s for Is, zeros and letter Os, etc.. Hence, it is worth making sure that FineReader has been extensively trained to recognized your document's digits. These are potentially tedious errors to correct in raw output, so it is worth making sure that FineReader <em>really</em> differentiates things.<br />
+*Important*: If working with old data, FineReader often mistakes 1s for Is, zeros and letter Os, etc.. Hence, it is worth making sure that FineReader has been extensively trained to recognized your document's digits. These are potentially tedious errors to correct in raw output, so it is worth making sure that FineReader *really* differentiates things.<br />
 &nbsp;<br />
 People argue about the optimal amount of pages to train ABBYY on, but it will probably take at least two pages to train FineReader to read the document adequately. However, since we're dealing with a messy environment, we may wish to train many additional pages. It's really an iterative process.<br />
 &nbsp;<br />
-There may be gross characters you don't want ABBYY FineRead to store. For instance, in the image below the word "TABLE" is cut. Feeding ABBYY bad examples can diminish recognition. If letters/numbers are cut, use the <strong>Skip</strong> button.<br />
+There may be gross characters you don't want ABBYY FineRead to store. For instance, in the image below the word "TABLE" is cut. Feeding ABBYY bad examples can diminish recognition. If letters/numbers are cut, use the **Skip** button.<br />
 &nbsp;<br />
-<img class="aligncenter" src="{{ site.baseurl }}/assets/ex4.png" alt="" /><br />
+![Image](/images/blog/assets/ex4.png)<br />
 &nbsp;<br />
-Err on the side of caution and skip weird stuff. For example, if you are uncertain what a letter/number is, also <strong>Skip</strong> it. It is better to skip a letter you are unsure about versus training FineReader incorrectly.<br />
+Err on the side of caution and skip weird stuff. For example, if you are uncertain what a letter/number is, also **Skip** it. It is better to skip a letter you are unsure about versus training FineReader incorrectly.<br />
 &nbsp;<br />
-Once you're done, <strong>Save</strong> all your hard work. Click the <strong>Option</strong> button and select the <strong>Read</strong> tab; click the<strong> Save to File</strong> under the <strong>Training and Language</strong> section.<br />
+Once you're done, **Save** all your hard work. Click the **Option** button and select the **Read** tab; click the** Save to File** under the **Training and Language** section.<br />
 &nbsp;<br />
-When you're finally done with training (and have checked your pattern, see<em> Section 3.</em>), <strong>Load</strong> the document you wish to analyze. Now when you press <strong>Read</strong>, ABBYY will use your <strong>User Pattern</strong> to in its OCRing process. Recognition should improve!<br />
-&nbsp;</p>
-<h4>3. Editing Patterns, Rooting Out Errors.</h4>
-<p>Just like ABBYY, we make mistakes. Before we implement the pattern we trained, make your <b>User Pattern</b> is correct.<br />
+When you're finally done with training (and have checked your pattern, see* Section 3.*), **Load** the document you wish to analyze. Now when you press **Read**, ABBYY will use your **User Pattern** to in its OCRing process. Recognition should improve!<br />
+&nbsp;
+
+#### 3. Editing Patterns, Rooting Out Errors.
+
+Just like ABBYY, we make mistakes. Before we implement the pattern we trained, make your **User Pattern** is correct.<br />
 &nbsp;<br />
-Return to the <strong>Options</strong> window ( <strong>Options</strong> button or <strong>Tools &gt; Options</strong>) and click the <b>Read</b> tab. Then click the <strong>Pattern Editor...</strong> button.<br />
+Return to the **Options** window ( **Options** button or **Tools &gt; Options**) and click the **Read** tab. Then click the **Pattern Editor...** button.<br />
 &nbsp;<br />
-The <b>User Pattern</b> box will open. In the training process we may accidentally mis-characterize letters. Browse the patterns we have recorded during the training process and root out typos. These typos are important to delete! We don't want ABBYY FinerReader's OCR engine to interpret characters incorrectly.<br />
+The **User Pattern** box will open. In the training process we may accidentally mis-characterize letters. Browse the patterns we have recorded during the training process and root out typos. These typos are important to delete! We don't want ABBYY FinerReader's OCR engine to interpret characters incorrectly.<br />
 &nbsp;<br />
-If you find an incorrect character (for example, the L that has been mis-characterized as E below), click the letter image and press <strong>Delete</strong>. Be sure to <em>really</em> check for these types of errors, or any matches that seem iffy.<br />
+If you find an incorrect character (for example, the L that has been mis-characterized as E below), click the letter image and press **Delete**. Be sure to *really* check for these types of errors, or any matches that seem iffy.<br />
 &nbsp;<br />
-Press <b>OK</b> when you are done, then save the corrected <b>User Pattern</b>.</p>
-<p><img class="aligncenter" src="{{ site.baseurl }}/assets/ex5.png" alt="" /></p>
+Press **OK** when you are done, then save the corrected **User Pattern**.
+
+![Image](/images/blog/assets/ex5.png)
+

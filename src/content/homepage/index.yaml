@@ -1,90 +1,55 @@
-# Bio panel configuration
 bio:
-  # Section title (optional, defaults to "About")
-  title: "Nathan Lane, PhD"
+  title: Nathan Lane, PhD
+  tagline: Economics professor, University of Oxford
+  narrative: >-
+    I'm an Associate Professor of Economics at the University of Oxford and
+    co-founder of the empirical economics research lab, the [Industrial Policy
+    Group](https://www.industrialpolicygroup.com/).
 
-  # Primary intro - the hook
-  tagline: "Economics professor, University of Oxford"
 
-  # Main narrative (supports markdown)
-  narrative: |
-    I'm an Associate Professor of Economics at the University of Oxford and co-founder of the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/).
-
-    My work has been featured in The Economist, The Financial Times, The Wall Street Journal, Trade Talks, and other major outlets.
-
-  # Brief credentials or affiliations
+    I'm an economist and data scientist working on economic development and political economy, using machine learning and causal inference. My work has been featured in The Economist, The Financial Times, The Wall Street Journal, Trade Talks, and [more](media/).
   affiliations:
-    - title: "Oxford Economics"
-      role: "Assistant Professor"
-    - title: "Industrial Policy Group"
-      role: "Co-Principal Investigator"
-
-  # Photo configuration (optional - remove this entire section if no photo)
-  # photo:
-  #   src: "/images/bio/nathan-lane.jpg"
-  #   alt: "Nathan Lane"
-  #   caption: "Photo by [photographer name](link)"  # optional
-  #   display: true  # Must be true to show photo
-
-# Current projects configuration (not currently used on homepage)
-# currentProjects:
-#   title: "Current Projects"
-#   projects:
-#     - title: "Research Papers"
-#       description: "My research papers."
-#       url: "/research/"
-#
-#     - title: "Industrial Policy Data"
-#       description: "A database of industrial policy interventions across the world."
-#       url: "https://www.industrialpolicydata.com/"
-#
-#     - title: "Industrial Policy Group lab"
-#       description: "The Industrial Policy Group is a research lab at the University of Oxford and UBC."
-#       url: "https://www.industrialpolicygroup.com/"
-#
-#     - title: "LaTeX Template"
-#       description: "A LaTeX template for research papers."
-#       url: "https://github.com/nathanlane/lane_latex_template"
-
+    - title: University of Oxford
+      role: Assistant Professor
+    - title: Industrial Policy Group
+      role: Co-Principal Investigator
 contact:
-  title: "Important Links"
-  email: "drnathanlane@gmail.com"
+  title: Important Links
+  email: drnathanlane@gmail.com
   items:
-    - label: "The Industrial Policy Group"
-      href: "https://industrialpolicygroup.com"
-      text: "industrialpolicygroup.com"
-    - label: "Industrial Policy Data"
-      href: "https://industrialpolicydata.com"
-      text: "industrialpolicydata.com"
-    - label: "Email"
-      href: "mailto:drnathanlane@gmail.com"
-      text: "drnathanlane@gmail.com"
-    - label: "CV"
-      href: "/cv.pdf"
-      text: "Download CV"
-    - label: "GitHub"
-      href: "https://github.com/nathanlane"
-      text: "GitHub"
-
-# Homepage sections configuration
+    - label: GitHub
+      href: https://github.com/nathanlane
+      text: GitHub
+    - label: The Industrial Policy Group
+      href: https://industrialpolicygroup.com
+      text: industrialpolicygroup.com
+    - label: Industrial Policy Data
+      href: https://industrialpolicydata.com
+      text: industrialpolicydata.com
+    - label: Email
+      href: mailto:drnathanlane@gmail.com
+      text: Email Me
+    - label: CV
+      href: /cv.pdf
+      text: Download CV
 sections:
   research:
-    title: "Research"
-    itemCount: 3 # Number of papers to show
-    viewAllText: "View all papers"
-    viewAllUrl: "/research/"
+    title: Research
+    itemCount: 3
+    viewAllText: View all papers
+    viewAllUrl: /research/
   essays:
-    title: "Recent Essays"
-    itemCount: 3 # Number of posts to show
-    viewAllText: "View all posts"
-    viewAllUrl: "/posts/"
+    title: Recent Essays
+    itemCount: 3
+    viewAllText: View all posts
+    viewAllUrl: /posts/
   writing:
-    title: "Recent Writing"
-    itemCount: 2 # Number of writing pieces to show
-    viewAllText: "View all writing"
-    viewAllUrl: "/writing/"
+    title: Recent Writing
+    itemCount: 2
+    viewAllText: View all writing
+    viewAllUrl: /writing/
   media:
-    title: "Recent in the News"
-    itemCount: 5 # Number of media items to show
-    viewAllText: "View all media"
-    viewAllUrl: "/media/"
+    title: Recent in the News
+    itemCount: 5
+    viewAllText: View all media
+    viewAllUrl: /media/

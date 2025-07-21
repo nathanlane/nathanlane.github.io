@@ -1,8 +1,12 @@
 ---
-title: "Remark-Rehype"
-description: "This post is about Remark-Rehype plugin for Astro"
-publishDate: "26 January 2025"
-tags: ["rehype", "remark", "astro", "plugin"]
+title: Remark-Rehype
+description: This post is about Remark-Rehype plugin for Astro
+publishDate: 26 January 2025
+tags:
+  - rehype
+  - remark
+  - astro
+  - plugin
 draft: false
 ---
 
@@ -130,12 +134,14 @@ HTML:
     <meta content="width=device-width, initial-scale=1" name="viewport">
   </head>
   <body>
-    <h1>Pluto</h1>
-    <p>
-      <strong>Pluto</strong> (minor-planet designation: <strong>134340 Pluto</strong>) is a
+
+# Pluto
+
+
+**Pluto** (minor-planet designation: **134340 Pluto**) is a
       <a href="https://en.wikipedia.org/wiki/Dwarf_planet">dwarf planet</a> in the
       <a href="https://en.wikipedia.org/wiki/Kuiper_belt">Kuiper belt</a>.
-    </p>
+
   </body>
 </html>
 ```
@@ -233,7 +239,8 @@ which results in DOM clobbering.
 DOM clobbering is this:
 
 ```html
-<p id=x></p>
+<p id=x>
+
 <script>alert(x) // `x` now refers to the DOM `p#x` element</script>
 ```
 
@@ -329,7 +336,9 @@ console.log(String(file))
 Yields:
 
 ```html
-<p><a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a></p>
+
+<a href="/wiki/Dysnomia_(moon)" onclick="alert(1)">Dysnomia</a>
+
 ```
 
 :::caution
@@ -368,7 +377,9 @@ console.log(String(file))
 Running that code yields:
 
 ```html
-<p><a href="/wiki/Dysnomia_(moon)">Dysnomia</a></p>
+
+<a href="/wiki/Dysnomia_(moon)">Dysnomia</a>
+
 ```
 
 :::caution
@@ -415,40 +426,42 @@ console.log(String(file))
 Yields:
 
 ```html
-<p>
-  Ceres ist nach der römischen Göttin des Ackerbaus benannt; 
+
+Ceres ist nach der römischen Göttin des Ackerbaus benannt;
   ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.
   <sup>
-    <a 
-      href="#user-content-fn-nasa-2015" 
-      id="user-content-fnref-nasa-2015" 
+    <a
+      href="#user-content-fn-nasa-2015"
+      id="user-content-fnref-nasa-2015"
       data-footnote-ref aria-describedby="footnote-label"
     >
       1
     </a>
   </sup>
-</p>
+
 <section data-footnotes class="footnotes">
-  <h2 class="sr-only" id="footnote-label">Footnotes</h2>
+
+## Footnotes
+
   <ol>
     <li id="user-content-fn-nasa-2015">
-      <p>
-        JPL/NASA:
+
+JPL/NASA:
         <a href="https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet">
-          <em>What is a Dwarf Planet?</em>
+          *What is a Dwarf Planet?*
         </a>
         In: Jet Propulsion Laboratory.
         22. April 2015,
         abgerufen am 19. Januar 2022 (englisch).
-        <a 
-          href="#user-content-fnref-nasa-2015" 
-          data-footnote-backref="" 
-          aria-label="Back to reference 1" 
+        <a
+          href="#user-content-fnref-nasa-2015"
+          data-footnote-backref=""
+          aria-label="Back to reference 1"
           class="data-footnote-backref"
         >
           ↩
         </a>
-      </p>
+
     </li>
   </ol>
 </section>
@@ -484,18 +497,27 @@ Running the code with the above patch applied, yields:
 
 ```diff
 @@ -1,13 +1,13 @@
- <p>Ceres ist nach der römischen Göttin des Ackerbaus benannt;
- ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.<sup><a href="#user-content-fn-nasa-2015" id="user-content-fnref-nasa-2015" data-footnote-ref aria-describedby="footnote-label">1</a></sup></p>
--<section data-footnotes class="footnotes"><h2 class="sr-only" id="footnote-label">Footnotes</h2>
-+<section data-footnotes class="footnotes"><h2 class="sr-only" id="footnote-label">Fußnoten</h2>
+
+Ceres ist nach der römischen Göttin des Ackerbaus benannt;
+ ihr astronomisches Symbol ist daher eine stilisierte Sichel: ⚳.<sup><a href="#user-content-fn-nasa-2015" id="user-content-fnref-nasa-2015" data-footnote-ref aria-describedby="footnote-label">1</a></sup>
+
+-<section data-footnotes class="footnotes">
+## Footnotes
+
++<section data-footnotes class="footnotes">
+## Fußnoten
+
  <ol>
  <li id="user-content-fn-nasa-2015">
- <p>JPL/NASA:
- <a href="https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet"><em>What is a Dwarf Planet?</em></a>
+
+JPL/NASA:
+ <a href="https://www.jpl.nasa.gov/infographics/what-is-a-dwarf-planet">*What is a Dwarf Planet?*</a>
  In: Jet Propulsion Laboratory.
  22. April 2015,
--abgerufen am 19. Januar 2022 (englisch). <a href="#user-content-fnref-nasa-2015" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a></p>
-+abgerufen am 19. Januar 2022 (englisch). <a href="#user-content-fnref-nasa-2015" data-footnote-backref="" aria-label="Hochspringen nach: 1" class="data-footnote-backref">↩</a></p>
+-abgerufen am 19. Januar 2022 (englisch). <a href="#user-content-fnref-nasa-2015" data-footnote-backref="" aria-label="Back to reference 1" class="data-footnote-backref">↩</a>
+
++abgerufen am 19. Januar 2022 (englisch). <a href="#user-content-fnref-nasa-2015" data-footnote-backref="" aria-label="Hochspringen nach: 1" class="data-footnote-backref">↩</a>
+
  </li>
  </ol>
  </section>

@@ -14,23 +14,37 @@ tags:
 draft: true
 ---
 
-<p>When digitizing old data, we often start with a pile of scanned documents we must reorganize. Much time is spent manually trudging through scans, deducing what variables exist, and selecting the tables we eventually wish to turn into machine-readable data. When you have hundreds of multi-page PDFS, this can be a painful experience. However, automating PDF manipulation with Python can save major time.</p>
-<h3>The Problem</h3>
-<p>We start with scans of old, provincial statistical yearbooks for a Southeast Asian country.</p>
-<p>Each yearbook page corresponds to a variable we want: page 1 has land statistics, page 2 has rice statistics, page 3 irrigation, etc..</p>
-<p>We want to reorganize this stack of yearbooks into something that is easier to digitize and organized by variable, not province. In essence (to the data scientist) we need to "reshape" our scanned PDF data.</p>
-<p>To restate the problem:</p>
+
+When digitizing old data, we often start with a pile of scanned documents we must reorganize. Much time is spent manually trudging through scans, deducing what variables exist, and selecting the tables we eventually wish to turn into machine-readable data. When you have hundreds of multi-page PDFS, this can be a painful experience. However, automating PDF manipulation with Python can save major time.
+
+### The Problem
+
+We start with scans of old, provincial statistical yearbooks for a Southeast Asian country.
+
+Each yearbook page corresponds to a variable we want: page 1 has land statistics, page 2 has rice statistics, page 3 irrigation, etc..
+
+We want to reorganize this stack of yearbooks into something that is easier to digitize and organized by variable, not province. In essence (to the data scientist) we need to "reshape" our scanned PDF data.
+
+To restate the problem:
+
 <ul>
 <li>
-<h4>Have: Province x Variable PDFs</h4>
-<p>Most old historical data comes in the following format: hard copy volumes organized by province, state, region, etc., each with the same set of tables (<em>cough</em> variables).</li>
+
+#### Have: Province x Variable PDFs
+
+Most old historical data comes in the following format: hard copy volumes organized by province, state, region, etc., each with the same set of tables (*cough* variables).</li>
 <li>
-<h4>Need: Variable x Province PDFs</h4>
-<p>And most of the time we want to pull certain pages from each geographic volume and create a new document for each variable.</li>
+
+#### Need: Variable x Province PDFs
+
+And most of the time we want to pull certain pages from each geographic volume and create a new document for each variable.</li>
 </ul>
-<h3>The Code</h3>
-<p>The following is written for Python 3.* and uses the <strong><a title="pyPDF2" href="https://pypi.python.org/pypi/PyPDF2" target="_blank">PyPDF2 package</a></strong> (which is a <strong><a title="PyPdf" href="http://pybrary.net/pyPdf/" target="_blank">fork of the original PyPdf package</a></strong>), as well as the <code>OS</code> module for directory manipulation.</p>
-<p>The code starts with a directory containing our multi-page PDFs and creates a sub-folder to store individual pages, <code>/splits.</code></p>
+
+### The Code
+
+The following is written for Python 3.* and uses the **<a title="pyPDF2" href="https://pypi.python.org/pypi/PyPDF2" target="_blank">PyPDF2 package</a>** (which is a **<a title="PyPdf" href="http://pybrary.net/pyPdf/" target="_blank">fork of the original PyPdf package</a>**), as well as the <code>OS</code> module for directory manipulation.
+
+The code starts with a directory containing our multi-page PDFs and creates a sub-folder to store individual pages, <code>/splits.</code>
 
 {% highlight Python %}
 
@@ -46,9 +60,9 @@ splits = os.path.join(start_dir, "splits1")
 if not os.path.exists(splits): os.makedirs(splits)
 {% endhighlight %}
 
+Second, our stack-o-PDFs are read, chopped, and their pages are placed in (page) numbered folders.
 
-<p>Second, our stack-o-PDFs are read, chopped, and their pages are placed in (page) numbered folders.</p>
-<p>The following code chunk begins at the <code>/start_dir</code>, the file containing our original PDF files. We read each scan and then loop over its pages with the line, <code>for i in xrange(in_file_pdf.numPages)</code>. Each page <code>i</code> is saved to a variable folder, corresponding to its page number: first pages are saved in <code>start_dir/splits/1</code>; second pages, into <code>start_dir/splits/2</code> folder, etc..</p>
+The following code chunk begins at the <code>/start_dir</code>, the file containing our original PDF files. We read each scan and then loop over its pages with the line, <code>for i in xrange(in_file_pdf.numPages)</code>. Each page <code>i</code> is saved to a variable folder, corresponding to its page number: first pages are saved in <code>start_dir/splits/1</code>; second pages, into <code>start_dir/splits/2</code> folder, etc..
 
 {% highlight Python %}
 
@@ -79,9 +93,11 @@ for filename in os.listdir(start_dir):
             outputStream.close()
 {% endhighlight %}
 
-<p>Third, after chopping and saving, we combine the separated pages into variable-based PDFs.</p>
-<p>The following code loops over each page folder (<code>/splits/1</code>, <code>/splits/2</code>,<code>...</code>). Using pyPDF2's <code>PdfFilerMerge </code>function, we combine pages within each folder into a single PDF file.</p>
-<p>Hence, the first page of each provincial yearbook is combined into a new file (i.e. the pages in <code>/splits/1</code> become 1.pdf), which we can then scrape/digitize/pre-process/whatever.</p>
+Third, after chopping and saving, we combine the separated pages into variable-based PDFs.
+
+The following code loops over each page folder (<code>/splits/1</code>, <code>/splits/2</code>,<code>...</code>). Using pyPDF2's <code>PdfFilerMerge </code>function, we combine pages within each folder into a single PDF file.
+
+Hence, the first page of each provincial yearbook is combined into a new file (i.e. the pages in <code>/splits/1</code> become 1.pdf), which we can then scrape/digitize/pre-process/whatever.
 
 {% highlight Python %}
 for root, dirs, filenames in os.walk(splits):
@@ -102,4 +118,5 @@ for root, dirs, filenames in os.walk(splits):
         outputStream.close()
 {% endhighlight %}
 
-<p>Importantly, your project will probably look much different from this, but combining the <code>OS module</code> with the <code>pyPDF2 package</code> in Python can make many splitting/merging tasks trivial. Digitizing old data often entails mind-numbing file manipulation, so a little Python can go a long way.</p>
+Importantly, your project will probably look much different from this, but combining the <code>OS module</code> with the <code>pyPDF2 package</code> in Python can make many splitting/merging tasks trivial. Digitizing old data often entails mind-numbing file manipulation, so a little Python can go a long way.
+

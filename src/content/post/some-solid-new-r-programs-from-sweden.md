@@ -2,12 +2,16 @@
 title: Useful new R programs from Stockholm.
 description: >-
   There's a lot useful R programming that comes out of the Stockholm University
-  economics community, like Mahmood Arai's <a title="Cluster-ro...
+  economics community, like Mahmood Arai's
 publishDate: '2015-05-03'
 tags: []
 draft: true
 ---
 
-<p>There's a lot useful R programming that comes out of the Stockholm University economics community, like Mahmood Arai's <strong><a title="Cluster-robust standard errors using R" href="http://www.ne.su.se/polopoly_fs/1.216115.1426234213!/menu/standard/file/clustering1.pdf">code for estimating clustered standard errors</a></strong>--small programs that go a long way in making R more comfortable for Stata-minded econometrics folks. </p>
-<p>Whelp, my pal <strong><a href="https://sites.google.com/site/sirusddari/r">Sirus Dehdari</a></strong>, a metrics guy and fellow Ph.D. candidate in economics, has some fresh code for producing both regression tables (with spatially correlated errors and other useful stuff) and regression discontinuity plots--in the vein of Outreg and Binscatter in Stata, respectively. <a href="https://sites.google.com/site/sirusddari/r"><strong>Check out</strong></a> <code>rddplot.R</code> and <code>rdd.R</code>. </p>
-<p>Whew--the first post after 4 months of trauma after my computer crash.</p>
+
+There's a lot useful R programming that comes out of the Stockholm University economics community, like Mahmood Arai's **<a title="Cluster-robust standard errors using R" href="http://www.ne.su.se/polopoly_fs/1.216115.1426234213!/menu/standard/file/clustering1.pdf">code for estimating clustered standard errors</a>**--small programs that go a long way in making R more comfortable for Stata-minded econometrics folks.
+
+Whelp, my pal **<a href="https://sites.google.com/site/sirusddari/r">Sirus Dehdari</a>**, a metrics guy and fellow Ph.D. candidate in economics, has some fresh code for producing both regression tables (with spatially correlated errors and other useful stuff) and regression discontinuity plots--in the vein of Outreg and Binscatter in Stata, respectively. <a href="https://sites.google.com/site/sirusddari/r">**Check out**</a> <code>rddplot.R</code> and <code>rdd.R</code>.
+
+Whew--the first post after 4 months of trauma after my computer crash.
+

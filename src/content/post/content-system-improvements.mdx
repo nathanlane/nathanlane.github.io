@@ -1,8 +1,14 @@
 ---
-title: "Content System Improvements Roadmap"
-description: "Making our content predictable, type-safe, and future-proof with enhanced schemas, media handling, and SEO optimization."
-publishDate: 2024-01-15
-tags: ["content-management", "astro", "seo", "best-practices"]
+title: Content System Improvements Roadmap
+description: >-
+  Making our content predictable, type-safe, and future-proof with enhanced
+  schemas, media handling, and SEO optimization.
+publishDate: 2024-01-15T00:00:00.000Z
+tags:
+  - content-management
+  - astro
+  - seo
+  - best-practices
 draft: false
 ---
 
@@ -84,10 +90,10 @@ src/
 ```astro
 ---
 import { Image } from 'astro:assets';
-import originalImage from '@/assets/original/blog/example.jpg';
+import originalImage from '@/images/original/blog/example.jpg';
 ---
 
-<Image 
+<Image
   src={originalImage}
   alt="Descriptive alt text"
   widths={[400, 800, 1200]}
