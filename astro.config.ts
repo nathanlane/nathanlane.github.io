@@ -51,7 +51,7 @@ export default defineConfig({
       nesting: true,
     }),
     sitemap({
-      filter: (page) => !page.includes('/admin'),
+      filter: (page) => !page.includes("/admin"),
     }),
     mdx(),
     robotsTxt({
