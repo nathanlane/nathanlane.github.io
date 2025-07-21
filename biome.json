@@ -5,7 +5,7 @@
     "indentWidth": 2,
     "lineWidth": 100,
     "formatWithErrors": true,
-    "ignore": ["*.astro"]
+		"ignore": ["*.astro", "tsconfig.json", "package.json", "vitest.config.ts", ".claude/**"]
   },
   "organizeImports": {
     "enabled": true
