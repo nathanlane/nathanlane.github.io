@@ -40,7 +40,7 @@ const { header } = navigationConfig;
 				{header.primary.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.href ? "page" : false}
-						class="link-nav nav-link"
+						class="link-nav"
 						data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
 						href={link.href}
 					>
@@ -97,7 +97,7 @@ const { header } = navigationConfig;
 			{header.primary.map((link) => (
 				<a
 					aria-current={Astro.url.pathname === link.href ? "page" : false}
-					class="link-nav nav-link text-lg"
+					class="link-nav text-lg"
 					data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
 					href={link.href}
 				>

@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
           <ul class="footer-links">
             {section.links.map(link => (
               <li>
-                <a href={link.href} class="footer-link link-nav">
+                <a href={link.href} class="link-footer">
                   {link.title}
                 </a>
               </li>
@@ -75,15 +75,14 @@ const currentYear = new Date().getFullYear();
   /* Enhanced section titles with proper hierarchy */
   .footer-section-title {
     font-family: "Newsreader Variable", "Newsreader", serif;
-    font-size: var(--step-1); /* Increased from step-0 to step-1 for better hierarchy */
-    font-weight: 400; /* Slightly heavier for small size legibility */
-    font-variation-settings: "opsz" 14, "wght" 400; /* Optimized for small display */
-    letter-spacing: 0.02em; /* More open spacing for small headers */
+    font-size: var(--step-1); /* Clear hierarchy */
+    font-weight: 350; /* Lighter weight - footer is secondary content */
+    font-variation-settings: "opsz" 14, "wght" 350; /* Refined weight for quiet presence */
+    letter-spacing: 0.03em; /* More open spacing for light serif headers */
     margin-bottom: var(--space-3); /* 18px - 0.75 baseline */
     color: var(--color-text); /* Full contrast for section headers */
     line-height: 1.4; /* Slightly more generous for small headers */
-    padding-bottom: var(--space-1); /* 6px space before line */
-    border-bottom: 1px solid var(--theme-color-150); /* Subtle underline for each header */
+    /* No underline - clean typography principle */
   }
 
   .footer-links {
@@ -100,19 +99,7 @@ const currentYear = new Date().getFullYear();
     margin-bottom: 0;
   }
 
-  /* Using consolidated link system */
-  .footer-link {
-    color: var(--color-text-muted);
-    font-size: var(--step--1); /* Match footer font size */
-    font-variation-settings: "wght" 450; /* Optimized weight for small IBM Plex */
-    letter-spacing: 0.03em; /* More generous spacing for small sans-serif links */
-    line-height: 1.65; /* Consistent with body line-height */
-  }
-
-  .footer-link:hover {
-    color: var(--color-text);
-    opacity: 1;
-  }
+  /* Footer link styles handled by links.css */
 
   /* Refined bottom bar with better spacing rhythm */
   .footer-bottom {
@@ -213,39 +200,18 @@ const currentYear = new Date().getFullYear();
     }
   }
 
-  /* Additional footer link refinements */
-  .footer-link {
-    position: relative;
-    opacity: 0.9; /* Slightly reduced for better hierarchy */
-  }
+  /* Additional footer link refinements handled by links.css */
 
-  /* Special styling for descriptive text in "About this site" */
-  .footer-link[href="#"] {
-    color: var(--color-text-muted);
-    pointer-events: none; /* Not clickable */
-    font-family: inherit; /* Use IBM Plex Sans */
-    font-variation-settings: "wght" 400; /* Regular weight for IBM Plex */
-    letter-spacing: 0.02em; /* Moderate spacing for small sans-serif */
-    line-height: 1.7; /* Extra generous for small descriptive text */
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
-    opacity: 0.8;
-  }
-
-  .footer-link[href="#"]:hover::after {
-    display: none; /* No underline for non-clickable text */
-  }
+  /* Special styling for descriptive text handled by links.css */
 
   /* Typography enhancement for different screen densities */
   @media (-webkit-min-device-pixel-ratio: 2) {
     .footer-section-title {
-      font-variation-settings: "opsz" 14, "wght" 375; /* Lighter on crisp displays */
-      letter-spacing: 0.025em; /* More open on sharp screens */
+      font-variation-settings: "opsz" 14, "wght" 325; /* Even lighter on crisp displays */
+      letter-spacing: 0.035em; /* More open on sharp screens */
     }
     
-    .footer-link {
-      font-variation-settings: "wght" 400; /* Lighter IBM Plex for crisp displays */
-      letter-spacing: 0.035em; /* More open sans-serif spacing */
-    }
+    /* Footer link media query handled by links.css */
     
     .footer-utility a {
       font-variation-settings: "wght" 450; /* Lighter IBM Plex for very small crisp text */
@@ -256,17 +222,13 @@ const currentYear = new Date().getFullYear();
   /* High contrast mode - accessibility per WCAG */
   @media (prefers-contrast: high) {
     .footer-section-title {
-      font-weight: 600;
-      font-variation-settings: "opsz" 14, "wght" 600;
-      letter-spacing: 0.025em; /* More open for small high-contrast text */
+      font-weight: 500; /* Medium weight for accessibility without being heavy */
+      font-variation-settings: "opsz" 14, "wght" 500;
+      letter-spacing: 0.03em; /* Maintain open spacing */
       color: var(--color-text);
     }
     
-    .footer-link {
-      font-weight: 550; /* Heavier IBM Plex for high contrast */
-      font-variation-settings: "wght" 550;
-      letter-spacing: 0.04em; /* Extra open for small high-contrast sans-serif */
-    }
+    /* Footer link high contrast handled by links.css */
     
     .footer-utility a {
       font-weight: 600; /* Very heavy IBM Plex for tiny high-contrast text */

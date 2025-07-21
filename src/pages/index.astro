@@ -1,7 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 import BioPanel from "@/components/BioPanel.astro";
-import ContactInfo from "@/components/ContactInfo.astro";
+// import ContactInfo from "@/components/ContactInfo.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
@@ -65,8 +65,8 @@ const importantLinksSections = contact?.items?.map((item) => ({
 
 		<!-- Research Section -->
 		<DocumentSection 
-			title="Research" 
-			viewAllText="View all papers" 
+			title="Recent Research" 
+			viewAllText="View all research" 
 			viewAllHref="/research/"
 		>
 			{featuredResearch.map((paper) => (
@@ -78,23 +78,6 @@ const importantLinksSections = contact?.items?.map((item) => ({
 					status={paper.data.status}
 					description={paper.data.description}
 					metadata={paper.data.authors}
-				/>
-			))}
-		</DocumentSection>
-
-		<!-- Recent Essays -->
-		<DocumentSection 
-			title="Recent Essays" 
-			viewAllText="View all posts" 
-			viewAllHref="/posts/"
-		>
-			{recentPosts.map((post) => (
-				<DocumentEntry
-					title={post.data.title}
-					href={`/posts/${post.id}/`}
-					type="post"
-					date={post.data.publishDate.toISOString()}
-					description={post.data.description}
 				/>
 			))}
 		</DocumentSection>
@@ -145,8 +128,6 @@ const importantLinksSections = contact?.items?.map((item) => ({
 		margin: 0 auto;
 		padding: var(--space-8) var(--space-4); /* 48px 24px */
 	}
-
-
 
 	/* Responsive adjustments */
 	@media (max-width: 768px) {

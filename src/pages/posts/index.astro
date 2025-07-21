@@ -64,7 +64,7 @@ const meta = {
           <ul class="space-y-3b">
             {economicsPosts.slice(0, 5).map((post: any) => (
               <li>
-                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                <a href={`/posts/${post.id}`} class="link-title text-0">
                   {post.data.title}
                 </a>
               </li>
@@ -83,7 +83,7 @@ const meta = {
           <ul class="space-y-3b">
             {technicalPosts.slice(0, 5).map((post: any) => (
               <li>
-                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                <a href={`/posts/${post.id}`} class="link-title text-0">
                   {post.data.title}
                 </a>
               </li>
@@ -104,7 +104,7 @@ const meta = {
           <ul class="space-y-3b max-w-2xl">
             {researchPosts.slice(0, 5).map((post: any) => (
               <li>
-                <a href={`/posts/${post.id}`} class="feature-link text-0">
+                <a href={`/posts/${post.id}`} class="link-title text-0">
                   {post.data.title}
                 </a>
               </li>
@@ -147,14 +147,5 @@ const meta = {
 </PageLayout>
 
 <style>
-  /* Feature link styling consistent with Writing page */
-  .feature-link {
-    color: var(--theme-text);
-    text-decoration: none;
-    transition: color 0.2s ease;
-  }
-  
-  .feature-link:hover {
-    color: var(--theme-accent-base);
-  }
+  /* Link styling now handled by links.css */
 </style>

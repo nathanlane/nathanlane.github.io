@@ -629,18 +629,19 @@ The codebase uses a context-aware link styling system:
   - Supports responsive breakpoints (md/lg) and visibility classes
 - **Impact**: ~270 lines reduced, cleaner production code, better maintainability
 
-### Link System Consolidation (January 30, 2025)
-- **Phase 1 - Link Refactoring**:
+### Link System Consolidation (January 30, 2025 - Updated July 21, 2025)
+- **Phase 1 - Initial Refactoring** (January):
   - Consolidated from 7 primary link types to 4 in `src/styles/links.css`
-  - Primary types: `link-inline`, `link-title`, `link-nav`, `link-feature`
+  - Primary types: `link-inline`, `link-title`, `link-nav`, `link-footer`
   - Created base classes with inheritance pattern using `@apply`
-  - Added utility modifiers: `link-underline-*`, `link-no-underline`, etc.
-- **Component Updates**:
-  - Updated MediaEntry, ArchiveEntry, ResearchEntry to use consolidated system
-  - Updated CompactList, DocumentSection, RecentContent components
-  - Updated Footer to use `link-nav` base class
-  - Maintained all visual behaviors while reducing code duplication
-- **Impact**: ~40% reduction in link CSS, improved maintainability, consistent behavior
+  - Added utility modifiers with u- prefix
+- **Phase 3 - Major Consolidation** (July):
+  - Removed all backward compatibility aliases (56 lines)
+  - Eliminated unused hover patterns and redundant variables
+  - Merged `.link-base` into global `a` rules
+  - Removed redundant `data-variant="back"`
+  - Updated all components to canonical names (inline-link → link-inline, etc.)
+- **Impact**: 30% total reduction in link CSS, zero visual changes, cleaner architecture
 
 ## Resources
 - [Tailwind Typography Plugin](https://tailwindcss.com/docs/typography-plugin)

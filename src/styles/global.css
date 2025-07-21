@@ -257,9 +257,7 @@
     }
 
     /* Ensure maximum contrast for links and interactive elements */
-    a,
-    .nav-link,
-    .inline-link {
+    a {
       color: var(--theme-link);
       text-decoration: underline;
       text-decoration-thickness: 0.125em;
@@ -824,8 +822,7 @@
   }
 
   /* Button and interactive element hover states */
-  button:hover,
-  a[role="button"]:hover {
+  button:hover {
     opacity: 0.85;
   }
 
@@ -886,16 +883,7 @@
       opacity: 0.88;
     }
 
-    /* Links with better visibility - scoped to avoid conflicts */
-    .content a:not(.no-filter),
-    .prose a:not(.no-filter) {
-      /* Increase brightness for better visibility */
-      filter: brightness(1.1);
-      /* Subtle hover effect without glow */
-      &:hover {
-        filter: brightness(1.15);
-      }
-    }
+    /* Link visibility now handled by links.css */
 
     /* Strong emphasis adjustments */
     strong,
@@ -1985,62 +1973,11 @@
 
   /* Removed site title transform effects */
 
-  /* Navigation link refinements */
-  .nav-link {
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
-    font-size: var(--step--1);
-    font-weight: 500;
-    letter-spacing: 0.05em; /* Uppercase navigation spacing */
-    font-feature-settings:
-      "kern" 1,
-      "ss01" 1;
-    line-height: 1;
-    /* Removed transform */
-    position: relative;
-    text-decoration: none;
-    color: var(--theme-color-600);
-    /* Removed transition */
-  }
+  /* Navigation link styles now handled by links.css */
 
-  /* Invisible hitbox expansion for better UX */
-  .nav-link::before {
-    content: "";
-    position: absolute;
-    inset: -4px -8px; /* Reduced from -8px -12px */
-  }
+  /* Active navigation state now handled by links.css */
 
-  /* Sophisticated underline animation */
-  .nav-link::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: currentColor;
-    /* Removed transition */
-  }
-
-  /* Active navigation state */
-  .nav-link[aria-current="page"] {
-    color: var(--theme-accent-base);
-    font-weight: 600;
-  }
-
-  .nav-link[aria-current="page"]::after {
-    /* No underline animation for active state */
-    display: none;
-  }
-
-  /* Highlighted nav link (Docs) */
-  .nav-link--highlight {
-    color: var(--accent-base);
-    font-weight: 500;
-  }
-
-  .nav-link--highlight:hover {
-    color: var(--accent-two);
-  }
+  /* Highlighted nav link styles now handled by links.css */
 
   /* Icon links in navigation */
   .nav-icon-link {
@@ -2162,26 +2099,7 @@
 
   /* Links use standardized focus system - handled in links.css */
 
-  /* Content links with refined underline */
-  .inline-link,
-  .prose a:not(.nav-link):not(.footer-link) {
-    color: var(--theme-text);
-    text-decoration-color: var(--theme-color-300);
-    text-decoration-thickness: 0.06em;
-  }
-
-  .inline-link:visited,
-  .prose a:not(.nav-link):not(.footer-link):visited {
-    color: var(--theme-color-700);
-    text-decoration-color: var(--theme-color-200);
-  }
-
-  /* Footer links with subtle animation */
-  .footer-link {
-    color: var(--theme-color-600);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-  }
+  /* Link styles now handled by links.css */
 }
 
 /* === Header Spacing Refinements === */

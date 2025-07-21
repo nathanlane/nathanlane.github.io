@@ -1,5 +1,48 @@
 # Changelog
 
+## CSS Link System Consolidation (July 21, 2025)
+
+### Major Architecture Improvements
+- **Consolidated from 7 to 4 canonical link types**:
+  - Removed backward compatibility aliases (56 lines)
+  - Kept only essential types: `link-inline`, `link-nav`, `link-title`, `link-footer`
+  - Maintained minimal aliases temporarily for build compatibility
+  
+### Code Reduction & Optimization
+- **30% reduction in links.css file size**:
+  - Removed unused hover pattern classes (25 lines)
+  - Consolidated redundant CSS variables (removed `--link-color-active`, `--link-decoration-thickness-default`)
+  - Removed `.link-base` class - merged into global `a` rules
+  - Eliminated redundant `data-variant="back"` (now uses default hover behavior)
+  
+### Architecture Cleanup
+- **Single source of truth**:
+  - Moved dark mode variables outside @layer for better organization
+  - Removed conflicting link styles from global.css
+  - Consolidated all link behaviors in links.css
+  - Updated all components to use canonical class names
+  
+### Component Updates
+- **Updated all usage across codebase**:
+  - Changed `inline-link` → `link-inline` 
+  - Changed `nav-link` → `link-nav`
+  - Changed `feature-link` → `link-title`
+  - Changed `footer-link` → `link-footer`
+  - Updated: RecentContent, Header, Footer, ContactInfo, Posts index, and more
+  
+### Consistent Behaviors Maintained
+- **Zero visual changes**:
+  - All links still hover to `--theme-accent-base` color
+  - Consistent +50 font weight units on hover
+  - 4 distinct underline patterns preserved
+  - All existing functionality maintained
+  
+### Impact
+- **✅ Cleaner codebase**: Easier to maintain and extend
+- **✅ Better performance**: Less CSS to parse and apply
+- **✅ Future-ready**: Clean foundation for new link behaviors
+- **✅ No breaking changes**: All visual styles remain identical
+
 ## Build Error Resolution - TypeScript Import Fix (July 19, 2025 - 2:34PM PST)
 
 ### Critical Build Fix

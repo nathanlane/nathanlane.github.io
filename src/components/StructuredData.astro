@@ -66,8 +66,7 @@ switch (type) {
         "@id": `${Astro.site}${articleData.url}`
       },
       "image": articleData.ogImage || `${Astro.site}/og-image${articleData.url?.replace(/\/$/, '')}.png`,
-      "keywords": articleData.tags?.join(', '),
-      "wordCount": articleData.minutesRead ? Math.round(articleData.minutesRead * 200) : undefined
+      "keywords": articleData.tags?.join(', ')
     };
     break;
   }

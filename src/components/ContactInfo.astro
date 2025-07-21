@@ -45,7 +45,7 @@ const contactItems = items || defaultItems;
     {contactItems.map((item) => (
       <div class="contact-item">
         <span class="contact-label">{item.label}</span>
-        <a href={item.href} class="inline-link">{item.text}</a>
+        <a href={item.href} class="link-inline">{item.text}</a>
       </div>
     ))}
   </div>
@@ -91,11 +91,7 @@ const contactItems = items || defaultItems;
     flex-shrink: 0;
   }
 
-  /* Link styling - inherit from global inline-link but ensure consistency */
-  .contact-item .inline-link {
-    font-size: var(--step-0); /* Base text size */
-    font-weight: 400; /* Normal weight for readability */
-  }
+  /* Link styling handled by links.css */
 
   /* Variant: Compact - for sidebars or tight spaces */
   .contact-info--compact .contact-details {
@@ -111,9 +107,7 @@ const contactItems = items || defaultItems;
     font-size: var(--step--2); /* Smaller text */
   }
   
-  .contact-info--compact .inline-link {
-    font-size: var(--step--1); /* Smaller link text */
-  }
+  /* Compact link styling handled by links.css */
 
   /* Variant: Sidebar - for narrow contexts */
   .contact-info--sidebar .contact-item {
