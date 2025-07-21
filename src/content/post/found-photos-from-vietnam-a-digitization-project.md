@@ -1,6 +1,6 @@
 ---
 title: Found Photos from Vietnam - a Digitization Project
-description: ''
+description: 'Digitization project featuring found photographs from Vietnam'
 publishDate: '2015-11-08'
 tags:
   - digital-history

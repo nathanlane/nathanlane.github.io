@@ -1,6 +1,6 @@
 ---
-title: Untitled
-description: '[](...</x-turndown)'
+title: "Berlin Wall Reinforced - US National Archives"
+description: 'Historical photograph of Berlin Wall reinforcement from US National Archives'
 publishDate: '2014-08-15'
 tags:
   - archives

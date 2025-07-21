@@ -1,6 +1,6 @@
 ---
 title: 'On developmentalism, planning, & early big data in...'
-description: ''
+description: 'Article on socialist cybernetics and computer-age planning in 1970s Chile'
 publishDate: '2014-10-08'
 tags:
   - articles

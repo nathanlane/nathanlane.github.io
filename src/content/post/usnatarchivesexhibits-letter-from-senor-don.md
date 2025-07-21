@@ -1,6 +1,6 @@
 ---
 title: Untitled
-description: ''
+description: 'Historical letter from Senor Don exhibit at National Archives'
 publishDate: '2014-08-19'
 tags:
   - archives

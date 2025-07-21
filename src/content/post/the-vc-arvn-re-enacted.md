@@ -1,6 +1,6 @@
 ---
 title: 'The VC & ARVN, re-enacted.'
-description: ''
+description: 'Blog post about the vc & arvn, re-enacted.'
 publishDate: '2014-11-11'
 tags:
   - vietnam

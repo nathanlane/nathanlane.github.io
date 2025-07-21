@@ -1,6 +1,6 @@
 ---
 title: From Iceland with Love
-description: ''
+description: 'Blog post about iceland and related content'
 publishDate: '2014-12-12'
 tags: []
 draft: true

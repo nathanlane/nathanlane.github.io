@@ -1,6 +1,6 @@
 ---
 title: From the Historical Times
-description: ''
+description: 'Historical photo of a 19-inch color TV drawing crowds'
 publishDate: '2014-08-23'
 tags: []
 draft: true
