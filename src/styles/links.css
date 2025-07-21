@@ -23,8 +23,7 @@
 :root {
   /* Transition timing */
   --link-transition:
-    color 200ms ease, text-decoration-color 200ms ease,
-    font-variation-settings 200ms ease, border-color 200ms ease,
+    color 200ms ease, text-decoration-color 200ms ease, border-color 200ms ease,
     opacity 200ms ease;
 
   /* Link colors */
@@ -59,6 +58,11 @@
   /* Other properties */
   --link-opacity-subtle: 0.8;
   --link-gap-icon: 0.3em;
+
+  /* Editorial link color - black with emphasis */
+  --link-color-editorial: var(
+    --theme-text
+  ); /* Match text color, rely on weight/underline for emphasis */
 }
 
 /* Dark mode variable overrides */
@@ -66,6 +70,9 @@
   --link-underline-color-default: hsl(0deg 0% 40%);
   --link-color-nav: var(--theme-color-400);
   --link-color-nav-subtle: var(--theme-color-400);
+  --link-color-editorial: var(
+    --theme-text
+  ); /* Match text color in dark mode too */
 }
 
 /* ===== SINGLE SOURCE OF TRUTH - Base Link Reset ===== */
@@ -121,14 +128,14 @@ a[class*="hover:text-"]:hover {
     text-decoration-color: var(--link-underline-color-default);
     text-decoration-thickness: var(--link-underline-thickness-default);
     text-underline-offset: var(--link-underline-offset-inline);
-    font-variation-settings: "wght" var(--link-weight-default);
+    font-weight: var(--link-weight-default);
   }
 
   .link-inline:hover {
     color: var(--link-color-hover);
     text-decoration-color: var(--link-underline-color-hover);
     text-decoration-thickness: var(--link-underline-thickness-hover);
-    font-variation-settings: "wght" var(--link-weight-hover);
+    /* No weight change on hover */
   }
 
   /* 2. NAV LINKS - For navigation, actions, and UI elements */
@@ -136,26 +143,26 @@ a[class*="hover:text-"]:hover {
     color: var(--link-color-nav);
     text-decoration: none !important; /* Ensure no underlines ever */
     border-bottom: none !important; /* Clean navigation principle */
-    font-variation-settings: "wght" var(--link-weight-nav);
+    font-weight: var(--link-weight-nav);
     letter-spacing: var(--link-letter-spacing-nav);
   }
 
   .link-nav:hover {
     color: var(--link-color-hover);
-    font-variation-settings: "wght" var(--link-weight-nav-hover);
+    /* No weight change on hover */
     text-decoration: none !important; /* Maintain clean hover */
   }
 
   /* Navigation variants using data attributes */
   .link-nav[data-variant="subtle"] {
     color: var(--link-color-nav-subtle);
-    font-variation-settings: "wght" var(--link-weight-default);
+    font-weight: var(--link-weight-default);
     opacity: var(--link-opacity-subtle);
   }
 
   .link-nav[data-variant="subtle"]:hover {
     color: var(--link-color-hover);
-    font-variation-settings: "wght" var(--link-weight-hover);
+    /* No weight change on hover */
     opacity: 1;
   }
 
@@ -165,23 +172,22 @@ a[class*="hover:text-"]:hover {
     gap: var(--link-gap-icon);
   }
 
-
   /* Active state - Typography principle: weight and color only */
   .link-nav[aria-current="page"] {
     color: var(--link-color-hover);
-    font-variation-settings: "wght" 550; /* Extra bold for current page */
+    font-weight: 550; /* Extra bold for current page */
   }
 
   /* 3. TITLE LINKS - For headings, titles, and featured content */
   .link-title {
     color: var(--link-color-default);
     text-decoration: none;
-    font-variation-settings: "wght" var(--link-weight-title);
+    font-weight: var(--link-weight-title);
   }
 
   .link-title:hover {
     color: var(--link-color-hover);
-    font-variation-settings: "wght" var(--link-weight-title-hover);
+    /* No weight change on hover */
   }
 
   /* 4. FOOTER LINKS - Refined underline with breathing room */
@@ -191,7 +197,7 @@ a[class*="hover:text-"]:hover {
     text-decoration-color: transparent;
     text-decoration-thickness: 0.05em; /* Hair-thin elegance */
     text-underline-offset: 0.2em; /* Generous breathing room */
-    font-variation-settings: "wght" var(--link-weight-default);
+    font-weight: var(--link-weight-default);
     transition:
       var(--link-transition),
       text-decoration-color var(--link-transition-duration) ease,
@@ -201,7 +207,7 @@ a[class*="hover:text-"]:hover {
   .link-footer:hover {
     color: var(--link-color-hover);
     text-decoration-color: currentColor;
-    font-variation-settings: "wght" var(--link-weight-hover);
+    /* No weight change on hover */
     opacity: 0.7; /* Subtle presence */
   }
 
@@ -238,11 +244,32 @@ a[class*="hover:text-"]:hover {
     text-underline-offset: var(--link-underline-offset-default);
   }
 
+  /* Editorial prose variant - for prominent links in About page and headers */
+  .link-inline[data-variant="editorial"] {
+    color: var(--link-color-editorial, var(--theme-accent-base));
+    font-weight: 450; /* Slightly bolder, no animation */
+    text-decoration: underline;
+    text-decoration-color: var(
+      --link-color-editorial,
+      var(--theme-accent-base)
+    );
+    text-decoration-thickness: 0.05em; /* Hair-thin, elegant */
+    text-underline-offset: 0.2em; /* Generous breathing room */
+    position: relative;
+  }
+
+  .link-inline[data-variant="editorial"]:hover {
+    color: var(--link-color-hover);
+    /* No weight change - avoiding size shifts */
+    text-decoration-color: var(--link-color-hover);
+    /* Subtle thickness increase without jarring animation */
+    text-decoration-thickness: 0.075em;
+  }
+
   /* Font size modifiers for specific nav contexts */
   .link-nav[data-size="small"] {
     font-size: var(--step--1);
   }
-
 
   /* ===== PRINT STYLES - Centralized from all components ===== */
   @media print {

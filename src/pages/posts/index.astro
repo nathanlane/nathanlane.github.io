@@ -8,19 +8,6 @@ import PageLayout from "@/layouts/Base.astro";
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);
 
-// Group posts by category based on tags
-const economicsPosts = allPosts.filter(p => 
-  p.data.tags?.some((tag: string) => ["economics", "industrial-policy", "globalization", "political-economy"].includes(tag))
-);
-
-const technicalPosts = allPosts.filter(p => 
-  p.data.tags?.some((tag: string) => ["programming", "r", "python", "data-science", "tutorials", "code"].includes(tag))
-);
-
-const researchPosts = allPosts.filter(p => 
-  p.data.tags?.some((tag: string) => ["bibliographies", "big-push", "research", "academic"].includes(tag))
-);
-
 const recentPosts = allPosts.slice(0, 5);
 
 const meta = {
@@ -49,75 +36,6 @@ const meta = {
       maxItems={5}
       class="mb-16b"
     />
-
-    <!-- Wide Full Header Line Separator -->
-    <SectionSeparator variant="full-width" spacing="normal" />
-
-    <!-- Category Sections with improved typography -->
-    <section class="mb-16b">
-      <h2 class="heading-2 mb-8b">Browse by Category</h2>
-      
-      <div class="grid md:grid-cols-2 gap-12b">
-        <!-- Economics & Policy -->
-        <div>
-          <h3 class="heading-3 mb-4b">Economics & Policy</h3>
-          <ul class="space-y-3b">
-            {economicsPosts.slice(0, 5).map((post: any) => (
-              <li>
-                <a href={`/posts/${post.id}`} class="link-title text-0">
-                  {post.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-          {economicsPosts.length > 5 && (
-            <p class="text-meta text-light mt-3b">
-              ...and {economicsPosts.length - 5} more
-            </p>
-          )}
-        </div>
-
-        <!-- Technical Tutorials -->
-        <div>
-          <h3 class="heading-3 mb-4b">Technical Tutorials</h3>
-          <ul class="space-y-3b">
-            {technicalPosts.slice(0, 5).map((post: any) => (
-              <li>
-                <a href={`/posts/${post.id}`} class="link-title text-0">
-                  {post.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-          {technicalPosts.length > 5 && (
-            <p class="text-meta text-light mt-3b">
-              ...and {technicalPosts.length - 5} more
-            </p>
-          )}
-        </div>
-      </div>
-
-      <!-- Research & Bibliography (full width if substantial content) -->
-      {researchPosts.length > 0 && (
-        <div class="mt-12b">
-          <h3 class="heading-3 mb-4b">Research & Bibliography</h3>
-          <ul class="space-y-3b max-w-2xl">
-            {researchPosts.slice(0, 5).map((post: any) => (
-              <li>
-                <a href={`/posts/${post.id}`} class="link-title text-0">
-                  {post.data.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-          {researchPosts.length > 5 && (
-            <p class="text-meta text-light mt-3b">
-              ...and {researchPosts.length - 5} more
-            </p>
-          )}
-        </div>
-      )}
-    </section>
 
     <!-- Wide Full Header Line Separator -->
     <SectionSeparator variant="full-width" spacing="normal" />
