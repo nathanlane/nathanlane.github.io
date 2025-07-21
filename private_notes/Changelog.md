@@ -1,5 +1,38 @@
 # Changelog
 
+## UI Refinements & Link System Updates (July 21, 2025)
+
+### Table of Contents Enhancement
+- **Darker lines for better visibility**:
+  - Changed line color from `--theme-color-200` to `--theme-color-300`
+  - Improves visual hierarchy and scannability
+  - Better contrast in both light and dark modes
+
+### Blog Page Simplification
+- **Removed "Browse by Category" section**:
+  - Eliminated category-based browsing to simplify navigation
+  - Removed category filtering logic (economics, technical, research posts)
+  - Cleaner, more focused blog index page
+  - Users can still browse via tags, archive, or recent posts
+
+### Link System Refinements
+- **Fixed hover size changes**:
+  - Removed font-weight change (450→500) on `.link-research-action:hover`
+  - Eliminated visual size shifts that were disrupting reading flow
+  - All links now maintain consistent weight on hover
+  
+- **Added underlines to title links on hover**:
+  - `.link-title` now shows underline on hover
+  - Hair-thin 0.05em underline with 0.2em offset
+  - Provides clear hover feedback without size changes
+  - Applied to all Research and Document entry headers
+
+### Files Updated
+- `/src/components/TableOfContents.astro` - Darker line color
+- `/src/pages/posts/index.astro` - Removed category browsing
+- `/src/styles/global.css` - Fixed research action link hover
+- `/src/styles/links.css` - Added title link hover underlines
+
 ## Editorial Link Style Implementation (July 21, 2025)
 
 ### New Typography-Driven Feature

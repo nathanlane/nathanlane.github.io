@@ -188,6 +188,9 @@ a[class*="hover:text-"]:hover {
   .link-title:hover {
     color: var(--link-color-hover);
     /* No weight change on hover */
+    text-decoration: underline;
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.2em;
   }
 
   /* 4. FOOTER LINKS - Refined underline with breathing room */

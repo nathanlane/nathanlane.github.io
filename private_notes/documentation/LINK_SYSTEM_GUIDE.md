@@ -48,13 +48,13 @@ The site uses a centralized link system that eliminates scattered hover behavior
   --link-underline-thickness-default: 1px;
   --link-underline-thickness-hover: 1.5px;
   
-  /* Font weights - consistent +50 on hover */
+  /* Font weights - no changes on hover */
   --link-weight-default: 400;
   --link-weight-nav: 450;
   --link-weight-title: 500;
-  --link-weight-hover: 450; /* default + 50 */
-  --link-weight-nav-hover: 500; /* nav + 50 */
-  --link-weight-title-hover: 550; /* title + 50 */
+  --link-weight-hover: 450; /* deprecated - no longer used */
+  --link-weight-nav-hover: 500; /* deprecated - no longer used */
+  --link-weight-title-hover: 550; /* deprecated - no longer used */
 }
 ```
 
@@ -98,7 +98,7 @@ a[class*="hover:text-"]:hover {
 
 **Behavior**: 
 - Always underlined (default gray → accent on hover)
-- Font weight: 400 → 450 (+50 units)
+- Font weight: 400 (no change on hover)
 - Underline thickness increases: 1px → 1.5px
 - Color changes to accent on hover
 
@@ -119,7 +119,7 @@ a[class*="hover:text-"]:hover {
 
 **Behavior**: 
 - No underline (clean UI appearance)
-- Font weight: 450 → 500 (+50 units)
+- Font weight: 450 (no change on hover)
 - Color: theme-color-600 → accent on hover
 - Letter spacing: 0.02em for improved readability
 
@@ -138,10 +138,11 @@ a[class*="hover:text-"]:hover {
 ```
 
 **Behavior**: 
-- No underline (clean headlines)
-- Font weight: 500 → 550 (+50 units)
+- No underline by default (clean headlines)
+- Shows underline on hover (0.05em thick, 0.2em offset)
+- Font weight: 500 (no change on hover)
 - Color: inherit → accent on hover
-- Maintains heading typography while adding interactivity
+- Maintains heading typography while adding clear hover feedback
 
 ### 4. `.link-footer` - Footer Links with Border Effect
 **Use for**: Footer navigation, links needing border-bottom effect
@@ -155,7 +156,7 @@ a[class*="hover:text-"]:hover {
 **Behavior**: 
 - Border-bottom instead of text-decoration
 - Border: transparent → currentColor on hover
-- Font weight: 400 → 450 (+50 units)
+- Font weight: 400 (no change on hover)
 - Unique visual treatment for footer context
 
 ### 5. `.link-inline[data-variant="editorial"]` - Editorial Prose Links
@@ -353,17 +354,15 @@ a[class*="hover:text-"]:hover {
 - Previously inconsistent: some to `--theme-text`, some to `--theme-accent`
 - Creates unified brand experience across all link types
 
-### Predictable Weight Changes
-- **All links** increase by exactly +50 font weight units on hover
-- Default: 400 → 450
-- Navigation: 450 → 500  
-- Title: 500 → 550
-- Creates subtle but consistent tactile feedback
+### No Weight Changes on Hover
+- **All links** maintain consistent weight on hover
+- Prevents jarring size shifts during interaction
+- Better reading experience without text reflow
 
 ### Four Distinct Underline Patterns
 1. **Always underlined**: `.link-inline` (prose links)
-2. **Never underlined**: `.link-nav`, `.link-title` (UI links)
-3. **Underline on hover**: `.u-hover-underline` utility
+2. **Never underlined**: `.link-nav` (navigation links)
+3. **Underline on hover**: `.link-title` (headers/titles), `.u-hover-underline` utility
 4. **Border effect**: `.link-footer` (uses border-bottom)
 
 ## Consolidation Details (July 2025)
@@ -379,7 +378,7 @@ a[class*="hover:text-"]:hover {
 - **All visual behaviors remain identical**
 - **Minimal aliases kept temporarily for build compatibility**
 - **All 4 underline patterns maintained**
-- **Consistent +50 weight hover pattern**
+- **No weight changes on hover**
 
 ## Future Maintenance
 

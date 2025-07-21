@@ -2335,8 +2335,7 @@
 .link-research-action:hover {
   color: var(--theme-accent-base);
   opacity: 1;
-  /* Subtle weight increase on hover */
-  font-weight: 500;
+  /* No weight change - avoiding size shifts */
 }
 
 /* Entry dividers - Hochuli's subtle structural division */
