@@ -1,12 +1,7 @@
 ---
-title: Economics Must Catch Up On Industrial Policy (ProMarket Series)
-description: As countries openly embrace industrial policies, social science—and
-  economics in particular—is faced with a knowledge deficit. Put simply,
-  scholarship around industrial policy has left us bereft of a systematic
-  understanding of these policies. We lack an empirical roadmap for implementing
-  industrial policy.  Reka Juhasz and Nathan Lane on industrial policy
-  (published by ProMarket).
-date: 2023-03-14T18:04:00.000-07:00
+title: Economics Must Catch Up On Industrial Policy
+description: As countries embrace industrial policies, economics faces a knowledge deficit. We lack systematic understanding and an empirical roadmap for implementation. By Reka Juhasz and Nathan Lane (ProMarket Series).
+publishDate: 2023-03-14T18:04:00.000-07:00
 genre: ""
 ---
 # Economics Must Catch Up On Industrial Policy (ProMarket Series)

@@ -1,18 +1,56 @@
 ---
 import Badge from "@/components/Badge.astro";
+import PageHeader from "@/components/PageHeader.astro";
 import { getAllPosts, getUniqueTagsWithCount } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 
 const allPosts = await getAllPosts();
 const allTags = getUniqueTagsWithCount(allPosts);
 
+// Sort tags alphabetically
+const sortedTags = allTags.sort((a, b) => a.tag.localeCompare(b.tag));
+
+// Group tags by first letter for easier browsing
+const tagsByLetter = sortedTags.reduce((acc, { tag, count }) => {
+	const firstLetter = tag[0].toUpperCase();
+	if (!acc[firstLetter]) {
+		acc[firstLetter] = [];
+	}
+	acc[firstLetter].push({ tag, count });
+	return acc;
+}, {} as Record<string, Array<{ tag: string; count: number }>>);
+
+const totalTags = allTags.length;
+const totalPosts = allPosts.length;
+
 const meta = {
-	description: "A list of all the topics I've written about in my posts",
+	description: `Browse all ${totalTags} topics from ${totalPosts} posts on economics, technology, and development`,
 	title: "All Tags",
 };
 ---
 
 <PageLayout meta={meta}>
-	<h1>Tags</h1>
-	<p class="text-textColor">Tags have been removed from this theme for a cleaner, minimal design.</p>
+	<div class="measure-base mx-auto px-4b py-8b">
+		<PageHeader 
+			title="All Tags"
+			description={`Browse ${totalTags} topics from ${totalPosts} posts. Click any tag to see related content.`}
+		/>
+
+		<div class="space-y-8b">
+			{Object.entries(tagsByLetter).sort().map(([letter, tags]) => (
+				<section>
+					<h2 class="heading-3 mb-4b">{letter}</h2>
+					<div class="flex flex-wrap gap-2b">
+						{tags.map(({ tag, count }) => (
+							<a href={`/tags/${tag}/`} class="inline-block">
+								<Badge variant="muted">
+									{tag} ({count})
+								</Badge>
+							</a>
+						))}
+					</div>
+				</section>
+			))}
+		</div>
+	</div>
 </PageLayout>

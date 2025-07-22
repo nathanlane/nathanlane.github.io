@@ -1,18 +1,19 @@
 ---
 export interface Props {
 	variant?: "default" | "accent" | "accent-base" | "accent-one" | "accent-two" | "muted" | "outline" | "inactive";
+	shape?: "rounded" | "pill";
 	showHash?: boolean;
 	title?: string;
 	class?: string;
 }
 
-const { variant = "default", showHash = true, title, class: className = "" } = Astro.props as Props;
+const { variant = "default", shape = "rounded", showHash = true, title, class: className = "" } = Astro.props as Props;
 
 // Badge base with typography refinements
 const badgeClasses = {
 	base: `
 		inline-flex items-center
-		rounded-sm
+		${shape === 'pill' ? 'rounded-full' : 'rounded-sm'}
 		h-6 px-3b text-xs
 		font-medium tracking-wider
 		${className}

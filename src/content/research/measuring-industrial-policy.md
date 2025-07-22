@@ -1,15 +1,22 @@
 ---
+authors: Réka Juhász, Nathan Lane, Emily Oehlsen, and Verónica C. Pérez
+download: https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/MeasuringIndustrialPolicy_2025.pdf
 title: "Measuring Industrial Policy: A Text-Based Approach"
-authors: "Réka Juhász, Nathan Lane, Emily Oehlsen, and Verónica C. Pérez"
-paperDate: "2025"
-status: "working-paper"
-type: "paper"
+description: We provide a new, text-based approach to measuring industrial
+  policy at scale and deliver a global data set on industrial policy practice.
+publication: NBER Working Paper
+status: working-paper
+type: paper
+date: 2025-07-01T20:44:00.000-07:00
 featured: true
-publication: "NBER Working Paper"
-description: "We provide a new, text-based approach to measuring industrial policy at scale and deliver a global data set on industrial policy practice."
-link: "https://www.nber.org/papers/w33902"
-download: "https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/MeasuringIndustrialPolicy_2025.pdf"
-tags: ["industrial policy", "text analysis", "machine learning", "text-as-data"]
+tags:
+  - industrial policy
+  - text analysis
+  - machine learning
+  - text-as-data
+paperDate: "2025"
+link: https://www.nber.org/papers/w33902
+pdfUrl: ""
 ---
 
 ## Abstract
@@ -18,7 +25,7 @@ Since the 18th century, policymakers have debated the merits of industrial polic
 
 ## Resources
 
-- [NBER Working Paper](https://www.nber.org/papers/w33902)
+- [NBER Working Paper](https://www.nber.org/papers/w33895)
 - [SocArxiv Preprint](https://osf.io/preprints/socarxiv/uyxh9)
 - [Dataset](https://www.industrialpolicydata.com)
 - [Teaching Material](https://www.industrialpolicydata.com)
