@@ -4,7 +4,7 @@ description: New measures reveal that advanced economies are leading a global
   surge in industrial policy—developing countries must navigate the
   consequences. By Reka Juhasz, Nathan Lane, Emily Oehslen, and Veronica Perez
   on VoxDev.
-date: 2025-06-24T20:51:00.000-07:00
+publishDate: 2025-06-24T20:51:00.000-07:00
 ---
 # New measures reveal a growing industrial policy divide
 Article by Reka Juhasz, Nathan Lane, Emily Oehslen, and Veronica Perez on [VoxDev](https://voxdev.org/topic/methods-measurement/new-measures-reveal-growing-industrial-policy-divide)

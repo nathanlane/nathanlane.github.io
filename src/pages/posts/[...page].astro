@@ -84,7 +84,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			<div class="flex flex-wrap gap-2b">
 				{uniqueTags.map(tag => (
 					<a href={`/tags/${tag}`}>
-						<Badge>{tag}</Badge>
+						<Badge variant="secondary">{tag}</Badge>
 					</a>
 				))}
 			</div>
