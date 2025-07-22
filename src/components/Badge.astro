@@ -1,32 +1,37 @@
 ---
 export interface Props {
-	variant?: "default" | "accent" | "accent-base" | "accent-one" | "accent-two" | "muted" | "outline" | "inactive";
-	shape?: "rounded" | "pill";
-	showHash?: boolean;
+	variant?: "primary" | "secondary" | "accent" | "inactive";
+	size?: "sm" | "md" | "lg";
 	title?: string;
 	class?: string;
 }
 
-const { variant = "default", shape = "rounded", showHash = true, title, class: className = "" } = Astro.props as Props;
+const { variant = "primary", size = "md", title, class: className = "" } = Astro.props as Props;
+
+// Size classes
+const sizeClasses = {
+	sm: "h-4b px-3b text--3", // 24px height
+	md: "h-5b px-4b text--2", // 30px height (default)
+	lg: "h-6b px-5b text--1", // 36px height
+};
 
 // Badge base with typography refinements
 const badgeClasses = {
 	base: `
-		inline-flex items-center
-		${shape === 'pill' ? 'rounded-full' : 'rounded-sm'}
-		h-6 px-3b text-xs
-		font-medium tracking-wider
+		inline-flex items-center justify-center
+		rounded
+		font-medium
+		border
+		transition-colors duration-150 ease-in-out
+		contain-layout contain-style
+		${sizeClasses[size]}
 		${className}
 	`,
 	variants: {
-		default: "bg-textColor text-bgColor hover:opacity-90",
-		accent: "bg-accent text-bgColor hover:opacity-90",
-		"accent-base": "bg-accent-base text-bgColor hover:opacity-90",
-		"accent-one": "bg-accent-base text-bgColor hover:opacity-90",
-		"accent-two": "bg-accent-base text-bgColor hover:opacity-90",
-		muted: "bg-color-100 text-textColor hover:bg-color-150 border border-color-200",
-		outline: "border border-color-300 text-textColor hover:bg-color-50",
-		inactive: "text-lighter bg-color-50 opacity-75",
+		primary: "bg-color-900/8 text-textColor border-color-900/15 hover:border-color-900/25 dark:bg-color-100/12 dark:border-color-100/20 dark:hover:border-color-100/30",
+		secondary: "bg-transparent text-light border-color-200/80 hover:border-color-300 dark:border-color-700/50 dark:hover:border-color-600",
+		accent: "bg-accent text-white border-transparent hover:bg-accent/90",
+		inactive: "bg-color-50 text-lighter border-color-100 opacity-60 cursor-not-allowed",
 	},
 };
 
@@ -34,10 +39,9 @@ const variantClasses = badgeClasses.variants[variant];
 ---
 
 <span 
-	class={`badge ${badgeClasses.base} ${variantClasses}`}
+	class={`badge badge-${size} ${badgeClasses.base} ${variantClasses}`}
 	data-badge-variant={variant}
 >
-	{showHash && <span class="badge-hash opacity-70">#</span>}
 	<span class="badge-text">
 		{title}
 		<slot />
@@ -49,64 +53,70 @@ const variantClasses = badgeClasses.variants[variant];
 	.badge {
 		/* Enable font features */
 		font-feature-settings: 'kern' 1, 'liga' 1, 'ss01' 1;
-		/* Variable font weight */
-		font-variation-settings: 'wght' 500;
 		/* Smooth rendering */
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		/* Uppercase for small text */
+		/* Base typography */
 		text-transform: uppercase;
-		/* Base letter spacing - matches .tracking-nav utility */
-		letter-spacing: 0.05em;
-		/* Remove default shadow */
+		letter-spacing: 0.04em; /* Reduced from 0.05em */
+		line-height: 1;
+		/* Width constraints */
+		min-width: 4ch;
+		max-width: 20ch;
+		/* Grid alignment */
+		margin-block: calc(var(--baseline) / 4); /* 6px */
+		/* No shadows per typography masters */
 		box-shadow: none;
+		text-shadow: none;
 	}
 	
-	/* Hover state typography */
-	.badge:hover {
-		/* No weight or letter-spacing changes to prevent size shifts */
-		/* Keep same weight and spacing as base state */
+	/* Size-specific typography */
+	.badge-sm {
+		font-variation-settings: 'wght' 540; /* Heavier for tiny text */
 	}
 	
-	/* Active state */
-	.badge:active {
-		/* Compress spacing */
-		letter-spacing: 0.035em;
-		/* Remove shadow */
-		box-shadow: none;
+	.badge-md {
+		font-variation-settings: 'wght' 520; /* Default weight */
 	}
 	
-	/* Hash symbol refinement */
-	.badge-hash {
-		/* Slightly lighter weight */
-		font-variation-settings: 'wght' 400;
-		/* Tighter spacing */
-		margin-right: 0.1em;
+	.badge-lg {
+		font-variation-settings: 'wght' 480; /* Lighter at larger sizes */
+		text-transform: none; /* Sentence case for larger badges */
+		letter-spacing: 0.01em;
 	}
 	
-	/* Dark mode adjustments */
-	:root[data-theme="dark"] .badge {
-		/* Subtle text shadow for depth */
-		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	/* Hover state - minimal changes */
+	.badge:hover:not([data-badge-variant="inactive"]) {
+		/* Border color changes handled by utility classes */
+		/* No typography changes to prevent reflow */
 	}
 	
-	/* Muted variant specifics */
-	[data-badge-variant="muted"] {
-		/* Lighter weight for muted */
-		font-variation-settings: 'wght' 450;
-		/* Normal case for muted */
+	/* Active state - micro-interaction only */
+	.badge:active:not([data-badge-variant="inactive"]) {
+		transform: translateY(0.5px);
+	}
+	
+	/* Secondary variant - normal case */
+	[data-badge-variant="secondary"] {
 		text-transform: none;
-		/* Tighter tracking */
-		letter-spacing: 0.02em;
+		font-variation-settings: 'wght' 450;
+		letter-spacing: 0.01em;
 	}
 	
-	[data-badge-variant="muted"]:hover {
-		/* No weight change to prevent size shifts */
+	/* Accent variant - ensure maximum contrast */
+	[data-badge-variant="accent"] {
+		font-variation-settings: 'wght' 500;
+		/* Ensure white text is always readable */
+		color: white !important;
 	}
 	
-	/* Size adjustments for readability */
-	.badge {
-		font-size: var(--step--2);
-		line-height: 1.2;
+	/* Inactive state */
+	[data-badge-variant="inactive"] {
+		font-variation-settings: 'wght' 400;
+	}
+	
+	/* Remove dark mode text shadows */
+	:root[data-theme="dark"] .badge {
+		text-shadow: none;
 	}
 </style>

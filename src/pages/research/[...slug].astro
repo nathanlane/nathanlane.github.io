@@ -1,8 +1,8 @@
 ---
 import { render } from "astro:content";
 import { getCollection } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
 import Badge from "@/components/Badge.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
 import BaseLayout from "@/layouts/Base.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
@@ -99,7 +99,7 @@ const structuredData = [
 				<footer class="mt-12b pt-6b border-t border-color-200">
 					<div class="flex flex-wrap gap-2">
 						{essay.data.tags.map((tag: string) => (
-							<Badge variant="muted" shape="pill" showHash={false}>{tag}</Badge>
+							<Badge variant="secondary">{tag}</Badge>
 						))}
 					</div>
 				</footer>
