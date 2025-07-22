@@ -1,15 +1,28 @@
 ---
-title: "Manufacturing Revolutions: Industrial Policy and Industrialization in South Korea"
-authors: "Nathan Lane"
-paperDate: "2025"
-status: "published"
-type: "paper"
+authors: Nathan Lane
+download: https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/Lane_QJE_2025_Manufacturing_Revolutions.pdf
+title: "Manufacturing Revolutions: Industrial Policy and Industrialization in
+  South Korea"
+description: "I study the impact of industrial policy on industrial development
+  by considering an important episode during the East Asian miracle: South
+  Korea's heavy and chemical industry (HCI) drive, 1973--1979. Based on newly
+  assembled data, I use the introduction and termination of industrial policies
+  to study their impacts during and after the intervention period."
+publication: Quarterly Journal of Economics
+status: published
+type: paper
+date: 2025-08-01T20:41:00.000-07:00
 featured: true
-publication: "Quarterly Journal of Economics (forthcoming)"
-description: "I study the impact of industrial policy on industrial development by considering an important episode during the East Asian miracle: South Korea's heavy and chemical industry (HCI) drive, 1973--1979. Based on newly assembled data, I use the introduction and termination of industrial policies to study their impacts during and after the intervention period."
-link: "https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjae030/7857207"
-download: "https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/Lane_QJE_2025_Manufacturing_Revolutions.pdf"
-tags: ["industrial policy", "South Korea", "economic development", "industrialization", "East Asian miracle", "HCI Drive"]
+tags:
+  - industrial policy
+  - South Korea
+  - economic development
+  - industrialization
+  - East Asian miracle
+  - HCI Drive
+paperDate: "2025"
+link: https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjae030/7857207
+pdfUrl: https://academic.oup.com/qje/article/140/3/1683/8152916
 ---
 
 ## Abstract

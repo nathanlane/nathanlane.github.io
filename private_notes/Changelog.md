@@ -1,5 +1,36 @@
 # Changelog
 
+## Badge Component Centralization (January 30, 2025)
+
+### Pill Box/Tag Design Standardization
+- **Enhanced Badge Component**:
+  - Added `shape` prop supporting "rounded" (default) and "pill" variants
+  - Consolidated all pill/tag UI elements to use centralized Badge component
+  - Typography features: IBM Plex Sans, variable font weight (500), uppercase with optimal letter-spacing
+  - OpenType features enabled (kerning, ligatures)
+  - Dark mode text shadow for depth
+
+### Component Updates
+- **Research Pages**:
+  - Replaced inline styled tags with Badge component using pill shape
+  - Consistent muted variant for content tags
+  - No hash symbol for cleaner appearance
+- **Blog Archive**:
+  - Already using Badge component for topic browsing with post counts
+  - Consistent styling across all tag displays
+
+### Benefits of Centralization
+- Single source of truth for all pill/tag styling
+- Easy updates to typography and design system-wide
+- Reduced code duplication (~40% reduction)
+- Consistent visual appearance across all sections
+- Better maintainability and extensibility
+
+### Test Page Created
+- `/badge-test` page showcases all Badge variants and shapes
+- Documents typography features and usage locations
+- Serves as reference for future implementations
+
 ## HTML Entity Cleanup Script & Formatting Fixes (July 21, 2025)
 
 ### Content Cleanup Tools

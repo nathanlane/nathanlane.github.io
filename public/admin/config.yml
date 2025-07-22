@@ -168,15 +168,6 @@ collections:
                   - { label: "View All Text", name: "viewAllText", widget: "string" }
                   - { label: "View All URL", name: "viewAllUrl", widget: "string" }
 
-              - label: "Essays Section"
-                name: "essays"
-                widget: "object"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - { label: "View All Text", name: "viewAllText", widget: "string" }
-                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
-
               - label: "Writing Section"
                 name: "writing"
                 widget: "object"

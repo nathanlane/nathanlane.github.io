@@ -1,18 +1,11 @@
 ---
-title: "Not a ‘side dish’: New industrial policy and competition (CEPR)"
-description: Industrial policy is undergoing a major resurgence. Spurred by
-  multiple overlapping crises, economists have been seeking to draw lessons from
-  the past, while policymakers have had to take urgent action. This column
-  describes how the paradigm shift in ‘industrial strategy’ in the US has been
-  occurring alongside a fundamental shift in antitrust thinking – and the
-  ‘antimonopoly’ values of antitrust enforcers in the current administration are
-  motivating a vision of industrial policy that eschews national champions. In
-  Europe, the next Commission mandate will need to address deep structural
-  issues that require significant state and Commission support; competition
-  policy will play a crucial role. Major investments in a ‘European digital
-  stack’ must complement regulatory efforts and reduce dependency on tech
-  giants. By Cristina Caffarra and Nathaniel Lane in the CEPR.
-date: 2025-04-05T18:13:00.000-07:00
+title: 'Not a ‘side dish’: New industrial policy and competition'
+description: >-
+  Industrial policy is undergoing a major resurgence. Spurred by multiple
+  overlapping crises, economists have been seeking to draw lessons from the
+  past, while policymakers have had to take urgent action. This column describes
+  how the paradigm shift in ‘industrial strategy’ in the US has been...
+publishDate: 2025-04-06T01:13:00.000Z
 ---
 Not a ‘side dish’: New industrial policy and competition
 [from VoxEU/CEPR](https://cepr.org/voxeu/columns/not-side-dish-new-industrial-policy-and-competition)

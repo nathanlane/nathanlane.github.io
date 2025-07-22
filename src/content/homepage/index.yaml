@@ -1,13 +1,22 @@
 bio:
   title: Nathan Lane, PhD
   tagline: Economics professor, University of Oxford
-  narrative: >-
-    I'm an Associate Professor of Economics at the University of Oxford and
-    co-founder of the empirical economics research lab, the [Industrial Policy
-    Group](https://www.industrialpolicygroup.com/).
+  narrative: >+
+    I’m an empirical economist working at the intersection of big data, economic
+    development, political economy, and industrial economics. Find my [research
+    here](/research/).
 
 
-    I'm an economist and data scientist specializing in economic development and political economy, using machine learning and causal inference. My work has been featured in The Economist, The Financial Times, The Wall Street Journal, Trade Talks, and [more](/media/). More about me [here](/about/).
+    My work has appeared in [The New York Times](https://www.nytimes.com/2023/09/08/opinion/industrial-policy-biden.html), [The Economist](https://www.economist.com/special-report/2023/10/02/governments-across-the-world-are-discovering-homeland-economics), [The Financial Times](https://www.ft.com/content/34872d9a-3587-4b27-a01d-2905f8e23408), [The Wall Street Journal](https://www.wsj.com/articles/this-part-of-bidenomics-needs-more-economics-2cea1641?ns=prod%2Faccounts-wsj), [Noahpinion](https://www.noahpinion.blog/p/a-few-economists-are-starting-to), [Trade Talks](https://tradetalkspodcast.com/podcast/189-south-koreas-controversial-industrial-policy/), and [more](/media/). 
+
+
+    See my work with The [Industrial Policy Group](https://www.industrialpolicygroup.com/), an empirical research lab. I’m an affiliate of CESifo research network and a cofounder of [Sodalabs.io](https://sodalabs.io).
+
+
+
+
+
+
   affiliations:
     - title: University of Oxford
       role: Assistant Professor
@@ -50,6 +59,6 @@ sections:
     viewAllUrl: /writing/
   media:
     title: Recent in the News
-    itemCount: 5
+    itemCount: 12
     viewAllText: View all media
     viewAllUrl: /media/
