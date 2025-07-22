@@ -1,0 +1,65 @@
+---
+title: Economics Must Catch Up On Industrial Policy (ProMarket Series)
+description: As countries openly embrace industrial policies, social science—and
+  economics in particular—is faced with a knowledge deficit. Put simply,
+  scholarship around industrial policy has left us bereft of a systematic
+  understanding of these policies. We lack an empirical roadmap for implementing
+  industrial policy.  Reka Juhasz and Nathan Lane on industrial policy
+  (published by ProMarket).
+date: 2023-03-14T18:04:00.000-07:00
+genre: ""
+---
+# Economics Must Catch Up On Industrial Policy (ProMarket Series)
+
+*By Reka Juhasz and Nathan Lane*
+
+
+*[This article [original here]](https://www.promarket.org/2023/03/14/economics-must-catch-up-on-industrial-policy/) is part of [ProMarket's series on industrial policy](https://www.promarket.org/category/news/series/industrial-policy/).*
+
+As countries openly embrace industrial policies, social science—and economics in particular—is faced with a knowledge deficit. Put simply, scholarship around industrial policy has left us bereft of a systematic understanding of these policies. We are missing an empirical roadmap for how to perform industrial policy.
+
+For starters, systematic evidence on best practices is incomplete. Where industrial policies are multidimensional and complex, our understanding is inadequate across nearly every dimension. The abandonment of industrial policy as a serious object of study has left us with an oddly piecemeal understanding of practice. Given the renewed international interest and national experimentation with industrial policy, we need an empirically grounded conversation now more than ever.
+
+We need evidence, data, and concreteness, and we needed it yesterday. After a decades-long intellectual hiatus, industrial policy must be taken seriously as an object of study by the economics discipline. In doing so, scholars need to interrogate how industrial policy is practiced *in* practice. Our recent work is a small step in this direction, and an attempt to measure industrial policy in the real world. By building descriptive facts surrounding contemporary practice, we join emerging work on industrial policy and contribute to our basic understanding of these levers.
+
+## Going Underground, Impossibility Theorems, and the Rise of Empirics
+
+For a subject wrought with controversy, one fact is not controversial: since the 1980s, industrial policy has receded as a serious object of inquiry in economics. The height of globalization and, with it, the triumphalism of the Washington Consensus, signaled the nadir of industrial policy as a serious subject of study within mainstream economics. Academic economics saw industrial policy as *old hat*, part of the structural developmentalism of the previous generation of economics.
+
+Yet while industrial policy was declared dead, practice hummed along anyways. Academic economics may have turned away from policymaking, but the exigencies of the real world meant that industrial policy never truly went away; it merely faded from the view of mainstream academia, and public oversight. In the early 1980s, Robert Reich [observed](https://hbr.org/1982/01/why-the-us-needs-an-industrial-policy) that governments always end up doing industrial strategy, only without a coherent strategy, pursuing promotion with "no rhyme or reason" the policies most vulnerable to special interest pressure.
+
+The rise of international agreements constrained industrial policy in its most conspicuous forms, yet these interventions never went away. Between the 1980s and 1990s, a steady march of multilateral agreements reduced old tools of protectionism, such as tariffs, but industrial policy merely mutated and [took new forms](http://web5.uottawa.ca/www5/jasongarred/Garred2018TradePolicyChina.pdf). As if summoned by the economist's scepter of unintended consequences, industrial policy merely went underground. I call these the 'wilderness years' for industrial policy research.
+
+In these wilderness years, where academic economics *did* engage with industrial policy, it was relegated to whimsical thought experiments. Industrial policy was simply a curiosity. Gary Becker perhaps best exemplified the spirit of the debate in 1985: "The best industrial policy is none at all." Here, much intellectual engaging in industrial policy largely focused on high-level debates surrounding the impossibility of industrial policy. As if the question of industrial policy was a hypothetical binary variable, untangled from the complexities of practice on the ground.
+
+To this day, much work in economics has been dedicated to demonstrating that industrial policy does not work, even empirically. This "impossibility theorem" view of industrial policy permeates the conversation surrounding industrial policy to this day. Inspired by debates about central planning, some of the most vocal critics have followed a Hayekian and Austrian route, [claiming that](https://www.promarket.org/2023/01/24/industrial-policy-is-a-seductive-mirage/) "industrial policy is literally impossible." Confronting the details of actual practice is largely second order.
+
+Nevertheless, it is a tall order to claim that industrial policy is, literally, impossible. Whilst important for intellectual debates, it is often lateral to the realities of practice. These claims are also open to being falsified by empirical work. Historically, for example, they require social scientists to confront episodes where industrial policy featured conspicuously in post-war development, including the experiences of Taiwan, Singapore, Japan, South Korea, and, more recently, China. Today, these claims implore us to erroneously reject emerging work on the efficacy of [place-based policies](https://www.aeaweb.org/articles?id=10.1257/jep.34.3.99), [or innovation policy and R&D](https://www.nber.org/papers/w26483), two literatures where empirical evidence has rapidly expanded.
+
+In the wilderness years of industrial policy, the scattered empirical work that *did* exist, thus, centered on [rejecting the potential](https://www.jstor.org/stable/3986500) that industrial policy played a role in the postwar miracle episodes. To the extent that the mainstream economics permitted the role of industrial policy, such as the [World Bank's post-mortem of the East Asian growth miracle](https://www.google.co.uk/books/edition/The_East_Asian_Miracle/k3HuPwOlPXoC?hl=en), it nevertheless located success with largely getting market fundamentals right. It was largely left to political scientists, comparative sociologists, and heterodox economists in seminal qualitative work to unpack the practice and role of industrial policy in the [East Asian growth miracle](https://press.princeton.edu/books/paperback/9780691117294/governing-the-market).
+
+However, the empirical turn in development economics has slowly challenged the impossibility theorem-style arguments against industrial policy. As industrial policy re-emerged over the past decade, empirical work has begun evaluating the tenants of these policies. A trickle of well-identified, econometric [studies have started to pick apart](https://osf.io/preprints/socarxiv/tnxg6/) and unpack the experience of specific case studies.
+
+For example, Juhasz's (2018) paper on the Napoleonic blockade applied the tools of causal inference and natural experiments—in this case, a blockade that mimicked protection of French textile manufacturers—to examine the mechanisms of the infant industry hypothesis. When subject to serious empirical study, it turns out that the theory of industrial policy is very much relevant. For the East Asian miracle, [the work of Lane (2022)](https://osf.io/preprints/socarxiv/6tqax/) targeted the Heavy Chemical and Industry Drive of South Korea. Largely, empirical work on the South Korean episode has made room for a formative role of industrial policy, as least in one canonical episode.
+
+## Back To Basics: Measurement in an Imperfect World
+
+Yet, although the empirical turn in economics has finally reached the industrial policy debate, practitioners of industrial policy still lack fundamentals. Not only is the econometric work on industrial policy still in its infancy, the policy world lacks something more fundamental: empirical basics. Specifically, we do not yet understand the descriptive facts, nor do we have measures of contemporary policy practice.
+
+Our recent work, joint with Emily Oehslen and Veronica Perez, is a [new attempt to establish](https://steg.cepr.org/publications/who-what-when-and-how-industrial-policy-text-based-approach) empirical fundamentals of industrial policy. In doing so, we join researchers who have started doing the hard work of providing basic insights surrounding industrial policy, from considering the [conceptual foundations](https://www.promarket.org/2023/01/17/a-new-framework-for-better-industrial-policies/) of industrial policy, to accounting for industrial policy practice in [primary source documents](https://www.csis.org/programs/chinese-business-and-economics/projects/chinese-industrial-policy).
+
+Our proof of concept uses machine learning techniques that automatically classify industrial policies using textual policy descriptions. Instead of using quantitative policy measures, which may be used for many purposes, our methodology focuses on the language of policy descriptions to identify those that include goal-oriented actions aimed at changing the composition of economic activity ‒ the definition of industrial policy. We apply our classification algorithm to a large international database of commercial policy text, the Global Trade Alert (GTA) project, and obtain counts of new flows of industrial policy use at the country-sector-year level. Creating measures of industrial policy allows us, for the first time, to describe the rough contours of industrial policy practice, globally.
+
+Even this prototype dataset yielded results that surprised us. We see that the industrial policies used today are a far cry from caricatures of overt post-war protectionism. Policies tend to take the form of financial lending and export support, and much less so tariffs. These industrial policy levers also tend to be granular, often targeted toward specific clusters of industries. Although, like the past, manufacturing is an omnipresent feature of targeting: economies across the income distribution target capital goods, as well as heavy industry.
+
+Given the seemingly technocratic nature of industrial policy that emerges, we find a strong relationship between the flow of new industrial policy and a country's income. According to our data, high-income countries implement about five times as many industrial policies, on average, as low- to middle-income economies. Among these latter countries, it is mostly industrialized, middle-income economies using industrial policies ([UNIDO](https://iap.unido.org/articles/trends-global-industrial-policy)). Furthermore, wealthy nations tend to target commodities for which they have high comparative advantage in world export markets. Whatever the source of these patterns, they beg the question: developing countries will face hurdles if they leverage industrial policies to move into competitive manufacturing markets.
+
+Simply put, advanced, high-income countries have the state capacity to deploy technocratic industrial policies, and doing so may be challenging for lower-income countries. Thus, the patterns in our data suggest the need to invest in state capacity, as well as the need to understand the institutional demands of advanced industrial policies. Currently, we lack systematic quantitative evidence on the political economy of successful industrial policies.
+
+Our research is a first stab into establishing basic cross-country facts about industrial policy. For practitioners and researchers, establishing an empirical picture of industrial policy is necessary to have constructive conversations about how to perform industrial policy. After all, industrial policy never went away—it's been alive and well in the developed world, even while academic economists read its eulogy. As the world starts to take industrial policy seriously, economics should take these policies seriously, too, as an object of study. Economists must perform the hard work of establishing the basic facts surrounding these controversial policies. We're already late.
+
+---
+
+*Articles represent the opinions of their writers, not necessarily those of the University of Chicago, the Booth School of Business, or its faculty.*
+
+---
