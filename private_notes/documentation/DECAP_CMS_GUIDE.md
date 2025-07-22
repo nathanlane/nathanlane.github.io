@@ -21,7 +21,9 @@ pnpm cms
 
 ### 2. Access the CMS
 
-1. Open your browser to `http://localhost:4321/admin/`
+1. Open your browser to `http://localhost:4321/admin/index.html`
+   - Note: You must include `index.html` in the URL
+   - If port 4321 is in use, check the terminal for the actual port (e.g., 4322)
 2. Click the "Login" button (any credentials work locally)
 3. You're now in the CMS interface!
 

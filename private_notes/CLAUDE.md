@@ -43,7 +43,7 @@ npx decap-server
 ```
 
 ### 2. Access the CMS
-- Open `http://localhost:4323/admin/`
+- Open `http://localhost:4321/admin/index.html`
 - Click "Login" (any credentials work locally)
 - Edit content through the web interface
 

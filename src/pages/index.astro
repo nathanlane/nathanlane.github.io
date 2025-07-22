@@ -72,7 +72,7 @@ const importantLinksSections = contact?.items?.map((item) => ({
 			{featuredResearch.map((paper) => (
 				<DocumentEntry
 					title={paper.data.title}
-					href={`/research/${paper.data.slug || paper.id}/`}
+					href={`/research/${paper.id}/`}
 					type="research"
 					date={paper.data.paperDate}
 					status={paper.data.status}
@@ -91,7 +91,7 @@ const importantLinksSections = contact?.items?.map((item) => ({
 			{latestWriting.map((piece) => (
 				<DocumentEntry
 					title={piece.data.title}
-					href={`/writing/${piece.data.slug || piece.id}/`}
+					href={`/writing/${piece.id}/`}
 					type="writing"
 					date={piece.data.publishDate.toISOString()}
 					description={piece.data.description}
