@@ -1,0 +1,240 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+
+const meta = {
+  title: "Halyard Font Test",
+  description: "Testing Halyard font family",
+  articleDate: null,
+  ogImage: null
+};
+---
+
+<Base meta={meta}>
+  <!-- Adobe Fonts Kit for Halyard (if you have access) -->
+  <!-- Replace with your Adobe Fonts project ID if you have one -->
+  <link rel="stylesheet" href="https://use.typekit.net/xxxxxx.css">
+  
+  <!-- Alternative: Use CSS for testing with system fallbacks -->
+  <style>
+    /* If you don't have Adobe Fonts access, this simulates Halyard's characteristics */
+    .halyard-display {
+      font-family: "halyard-display", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+    }
+    
+    .halyard-text {
+      font-family: "halyard-text", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+    }
+    
+    /* Override site fonts for testing */
+    .test-halyard-headlines h1,
+    .test-halyard-headlines h2,
+    .test-halyard-headlines h3,
+    .test-halyard-headlines h4,
+    .test-halyard-headlines h5,
+    .test-halyard-headlines h6 {
+      font-family: "halyard-display", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+    }
+    
+    .test-halyard-body {
+      font-family: "halyard-text", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+    }
+    
+    /* Weight variations */
+    .weight-300 { font-weight: 300; }
+    .weight-400 { font-weight: 400; }
+    .weight-500 { font-weight: 500; }
+    .weight-600 { font-weight: 600; }
+    .weight-700 { font-weight: 700; }
+    .weight-800 { font-weight: 800; }
+    .weight-900 { font-weight: 900; }
+  </style>
+
+  <div class="mx-auto max-w-3xl px-4">
+    <PageHeader>
+      Halyard Font Test
+    </PageHeader>
+
+    <div class="mb-12">
+      <div class="p-4 bg-amber-100 dark:bg-amber-900/20 rounded-lg mb-8">
+        <p class="text-sm font-semibold mb-2">⚠️ Note about Halyard:</p>
+        <p class="text-sm">
+          Halyard is a commercial font from Darden Studio. To see actual Halyard fonts:
+        </p>
+        <ol class="text-sm mt-2 ml-4 list-decimal">
+          <li>Add Halyard to your Adobe Fonts account</li>
+          <li>Replace the typekit link above with your project ID</li>
+          <li>Or purchase a web license from Darden Studio</li>
+        </ol>
+        <p class="text-sm mt-2">
+          This page shows system fallbacks that approximate Halyard's characteristics.
+        </p>
+      </div>
+    </div>
+
+    <!-- Test with current site styling but Halyard fonts -->
+    <section class="test-halyard-headlines test-halyard-body space-y-16">
+      <!-- Display Sizes -->
+      <div class="space-y-8">
+        <h2 class="heading-3 mb-6">Halyard Display for Headlines</h2>
+        
+        <div class="space-y-6">
+          <div>
+            <p class="text-meta mb-2">Heading 1 - Halyard Display</p>
+            <h1 class="heading-1">The Quick Brown Fox Jumps Over the Lazy Dog</h1>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-2">Heading 2 - Halyard Display</p>
+            <h2 class="heading-2">Pack my box with five dozen liquor jugs</h2>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-2">Heading 3 - Halyard Display</p>
+            <h3 class="heading-3">Amazingly few discotheques provide jukeboxes</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weight Variations -->
+      <div class="space-y-8">
+        <h2 class="heading-3 mb-6">Halyard Weight Variations</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <p class="text-meta mb-1">Light (300)</p>
+            <h2 class="heading-2 weight-300">The quick brown fox jumps</h2>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-1">Regular (400)</p>
+            <h2 class="heading-2 weight-400">The quick brown fox jumps</h2>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-1">Medium (500)</p>
+            <h2 class="heading-2 weight-500">The quick brown fox jumps</h2>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-1">Semibold (600)</p>
+            <h2 class="heading-2 weight-600">The quick brown fox jumps</h2>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-1">Bold (700)</p>
+            <h2 class="heading-2 weight-700">The quick brown fox jumps</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison -->
+      <div class="space-y-8">
+        <h2 class="heading-3 mb-6">Compare with Current Fonts</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-meta mb-3">Current (Newsreader Variable)</p>
+            <div style="font-family: var(--font-headline);">
+              <h2 class="heading-2">Typography Matters</h2>
+              <p class="mt-4">The craft of endowing human language with a durable visual form.</p>
+            </div>
+          </div>
+          
+          <div>
+            <p class="text-meta mb-3">With Halyard</p>
+            <div class="test-halyard-headlines test-halyard-body">
+              <h2 class="heading-2">Typography Matters</h2>
+              <p class="mt-4">The craft of endowing human language with a durable visual form.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body Text Comparison -->
+      <div class="space-y-8">
+        <h2 class="heading-3 mb-6">Body Text Comparison</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <p class="text-meta mb-3">IBM Plex Sans (Current)</p>
+            <div class="prose">
+              <p>
+                Typography is the craft of endowing human language with a durable visual form,
+                and thus with an independent existence. Its heartwood is calligraphy – the dance,
+                on a tiny stage, of the living, speaking hand.
+              </p>
+            </div>
+          </div>
+          
+          <div class="test-halyard-body">
+            <p class="text-meta mb-3">Halyard Text</p>
+            <div class="prose">
+              <p>
+                Typography is the craft of endowing human language with a durable visual form,
+                and thus with an independent existence. Its heartwood is calligraphy – the dance,
+                on a tiny stage, of the living, speaking hand.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Context Examples -->
+      <div class="space-y-8">
+        <h2 class="heading-3 mb-6">In Context with Halyard</h2>
+        
+        <!-- Article Header -->
+        <div class="border border-color-200 rounded-lg p-6">
+          <p class="text-meta mb-4">Article with Halyard</p>
+          <article>
+            <h1 class="heading-2 mb-2">Understanding Typography in Digital Design</h1>
+            <p class="text-meta mb-4">By Nathan Lane • January 22, 2025</p>
+            <p class="text-lead">
+              Typography is the craft of endowing human language with a durable visual form.
+              With Halyard, we get a contemporary geometric sans-serif that balances clarity with personality.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Toggle for A/B Testing -->
+    <div class="mt-16 p-6 bg-color-100 rounded-lg">
+      <p class="text-sm font-semibold mb-4">Quick A/B Test</p>
+      <button 
+        onclick="document.body.classList.toggle('use-halyard')"
+        class="px-4 py-2 bg-color-800 text-white rounded hover:bg-color-700 transition-colors"
+      >
+        Toggle Halyard On/Off
+      </button>
+      <p class="text-sm mt-4">
+        Click to toggle between your current fonts and Halyard throughout this page.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Add CSS when toggle is active
+    const style = document.createElement('style');
+    style.textContent = `
+      body.use-halyard h1,
+      body.use-halyard h2,
+      body.use-halyard h3,
+      body.use-halyard h4,
+      body.use-halyard h5,
+      body.use-halyard h6 {
+        font-family: "halyard-display", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+      }
+      
+      body.use-halyard p,
+      body.use-halyard li,
+      body.use-halyard span {
+        font-family: "halyard-text", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</Base>
