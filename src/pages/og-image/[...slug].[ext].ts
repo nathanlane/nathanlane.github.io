@@ -11,14 +11,10 @@ import { html } from "satori-html";
 
 // Load Inter fonts for OG images (using WOFF for Satori compatibility)
 const interRegular = fs.readFileSync(
-	path.resolve(
-		"./node_modules/@fontsource/inter/files/inter-latin-400-normal.woff",
-	),
+	path.resolve("./node_modules/@fontsource/inter/files/inter-latin-400-normal.woff"),
 );
 const interBold = fs.readFileSync(
-	path.resolve(
-		"./node_modules/@fontsource/inter/files/inter-latin-700-normal.woff",
-	),
+	path.resolve("./node_modules/@fontsource/inter/files/inter-latin-700-normal.woff"),
 );
 
 const ogOptions: SatoriOptions = {
