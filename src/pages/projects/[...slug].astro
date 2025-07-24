@@ -1,53 +1,19 @@
 ---
-import { render } from "astro:content";
 import { getCollection } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
-import BaseLayout from "@/layouts/Base.astro";
+import ContentPage from "@/components/ContentPage.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
 	const projects = await getCollection("projects");
-	return projects.map((project) => ({
-		params: { slug: project.id },
-		props: { project },
+	return projects.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
 	}));
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const { entry } = Astro.props;
 ---
 
-<BaseLayout meta={{ title: project.data.title, description: project.data.description }}>
-	<div class="gap-x-8b lg:flex lg:items-start">
-		<article class="flex-grow break-words max-w-prose mx-auto measure-base space-y-4">
-			<header class="mb-8b">
-				<h1 class="heading-1 mb-4b">{project.data.title}</h1>
-				
-				<p class="text-body leading-relaxed text-light">{project.data.description}</p>
-
-				<div class="mt-4b flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
-					<FormattedDate
-						date={project.data.publishDate}
-						dateTimeOptions={{
-							year: "numeric",
-							month: "long",
-							day: "2-digit",
-						}}
-					/>
-					{project.data.featured && (
-						<>
-							<span class="text-lighter">•</span>
-							<span class="text-accent-two">Featured</span>
-						</>
-					)}
-				</div>
-			</header>
-
-			<div class="prose prose-lane max-w-none">
-				<Content />
-			</div>
-		</article>
-	</div>
-</BaseLayout>
+<ContentPage {entry} />

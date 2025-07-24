@@ -1,0 +1,140 @@
+---
+import { render } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+import Badge from "@/components/Badge.astro";
+import BaseLayout from "@/layouts/Base.astro";
+import type { CollectionEntry } from "astro:content";
+
+// Accept any content collection type
+type Props = {
+  entry: CollectionEntry<"writing"> | CollectionEntry<"projects"> | CollectionEntry<"research">;
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Check if this is a research entry for special handling
+const isResearch = entry.collection === "research";
+
+// Prepare structured data for research papers
+let structuredData = undefined;
+if (isResearch) {
+  const articleData = {
+    url: Astro.url.pathname,
+    title: entry.data.title,
+    description: entry.data.description,
+    publishDate: `${entry.data.paperDate}-01-01`, // Convert year to full date
+    ogImage: entry.data.ogImage || `/og-image/research/${entry.id}.png`,
+    tags: entry.data.tags || [],
+  };
+
+  const breadcrumbData = {
+    items: [
+      { name: "Home", url: Astro.site?.href || "/" },
+      { name: "Research", url: new URL("/research/", Astro.site).href },
+      { name: entry.data.title, url: new URL(Astro.url.pathname, Astro.site).href }
+    ]
+  };
+
+  structuredData = [
+    { type: 'article' as const, data: articleData },
+    { type: 'breadcrumb' as const, data: breadcrumbData }
+  ];
+}
+---
+
+<BaseLayout meta={{ title: entry.data.title, description: entry.data.description }} structuredData={structuredData}>
+  <div class="gap-x-8b lg:flex lg:items-start">
+    <article class="flex-grow break-words max-w-prose mx-auto measure-base space-y-4">
+      <header class="mb-8b">
+        <h1 class="heading-1 mb-4b">{entry.data.title}</h1>
+        
+        {isResearch ? (
+          <div class="space-y-3">
+            {entry.data.authors && (
+              <p class="text-body font-medium text-accent-base">{entry.data.authors}</p>
+            )}
+            
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-meta text-meta--light">
+              {entry.data.paperDate && (
+                <span>{entry.data.paperDate}</span>
+              )}
+              {entry.data.publication && (
+                <>
+                  <span class="text-meta__separator">•</span>
+                  <span>{entry.data.publication}</span>
+                </>
+              )}
+              {entry.data.status && (
+                <>
+                  <span class="text-meta__separator">•</span>
+                  <span class="text-accent-two">
+                    {entry.data.status === "published" && "PUBLISHED"}
+                    {entry.data.status === "working-paper" && "WORKING PAPER"}
+                    {entry.data.status === "work-in-progress" && "WORK IN PROGRESS"}
+                  </span>
+                </>
+              )}
+            </div>
+            
+            {(entry.data.link || entry.data.download) && (
+              <div class="flex flex-wrap gap-3 mt-4b">
+                {entry.data.link && (
+                  <a href={entry.data.link} class="link-inline" target="_blank" rel="noopener noreferrer">
+                    View Paper →
+                  </a>
+                )}
+                {entry.data.download && (
+                  <a href={entry.data.download} class="link-inline" target="_blank" rel="noopener noreferrer">
+                    Download PDF
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <p class="text-body leading-relaxed text-light">{entry.data.description}</p>
+
+            <div class="mt-4b flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
+              <FormattedDate
+                date={entry.data.publishDate}
+                dateTimeOptions={{
+                  year: "numeric",
+                  month: "long",
+                  day: "2-digit",
+                }}
+              />
+              {entry.data.featured && (
+                <>
+                  <span class="text-lighter">•</span>
+                  <span class="text-accent-two">Featured</span>
+                </>
+              )}
+            </div>
+          </>
+        )}
+      </header>
+
+      {isResearch && (
+        <div class="prose-summary bg-warm-50 dark:bg-warm-800 p-6b rounded-lg mb-8b">
+          <p class="text-body leading-relaxed">{entry.data.description}</p>
+        </div>
+      )}
+
+      <div class="prose prose-lane max-w-none">
+        <Content />
+      </div>
+      
+      {entry.data.tags && entry.data.tags.length > 0 && (
+        <footer class="mt-12b pt-6b border-t border-color-200">
+          <div class="flex flex-wrap gap-2">
+            {entry.data.tags.map((tag: string) => (
+              <Badge variant="secondary">{tag}</Badge>
+            ))}
+          </div>
+        </footer>
+      )}
+    </article>
+  </div>
+</BaseLayout>
