@@ -436,26 +436,26 @@
 		--measure-base: 65ch; /* Optimal for body text, document layouts */
 		--measure-wide: 85ch; /* Wide layouts, technical content */
 		--measure-full: none; /* Full-width content */
-		
+
 		/* JetBrains Mono Optical Compensation System */
 		/* Size compensation - JetBrains appears ~12% larger than Inter */
-		--mono-size-factor: 0.875;        /* Primary size reduction: 14px when Inter is 16px */
-		--mono-inline-factor: 0.85;       /* Even smaller for inline code contexts */
-		--mono-meta-factor: 0.88;         /* Metadata-specific sizing */
-		
+		--mono-size-factor: 0.875; /* Primary size reduction: 14px when Inter is 16px */
+		--mono-inline-factor: 0.85; /* Even smaller for inline code contexts */
+		--mono-meta-factor: 0.88; /* Metadata-specific sizing */
+
 		/* Weight compensation - JetBrains strokes appear heavier */
-		--mono-weight-offset: -50;        /* Systematic weight reduction */
-		--mono-weight-light-offset: -75;  /* Extra reduction for light variants */
-		--mono-weight-dark-offset: -25;   /* Moderate reduction for emphasis */
-		
+		--mono-weight-offset: -50; /* Systematic weight reduction */
+		--mono-weight-light-offset: -75; /* Extra reduction for light variants */
+		--mono-weight-dark-offset: -25; /* Moderate reduction for emphasis */
+
 		/* Baseline grid integration - optical positioning corrections */
-		--jetbrains-adjustment: -1px;     /* Primary baseline correction */
+		--jetbrains-adjustment: -1px; /* Primary baseline correction */
 		--jetbrains-adjustment-small: -0.5px; /* Fine adjustment for smaller sizes */
-		
+
 		/* Color/contrast compensation - JetBrains appears darker */
-		--jetbrains-opacity: 0.78;        /* Light mode visual weight reduction */
-		--jetbrains-opacity-dark: 0.82;   /* Dark mode compensation */
-		--jetbrains-opacity-light: 0.72;  /* Light variant extra recession */
+		--jetbrains-opacity: 0.78; /* Light mode visual weight reduction */
+		--jetbrains-opacity-dark: 0.82; /* Dark mode compensation */
+		--jetbrains-opacity-light: 0.72; /* Light variant extra recession */
 
 		/* Spacing Scale - Grid Aligned */
 		--space-1: calc(var(--grid-unit) * 1); /* 6px - hairline */
@@ -612,42 +612,42 @@
 
 	.text-meta {
 		/* Enhanced metadata typography following the masters' principles */
-		
+
 		/* Use JetBrains Mono for metadata */
 		font-family: var(--font-meta);
 
 		/* Master typographer optimizations for JetBrains Mono */
-		
+
 		/* 1. FONT FEATURES: Hochuli's "Detail in Typography" - exploit font capabilities */
 		font-feature-settings:
-			"kern" 1,        /* Essential kerning for tabular data alignment */
-			"tnum" 1,        /* Tabular numbers - critical for dates/data */
-			"lnum" 1,        /* Lining figures for metadata consistency */
-			"case" 1,        /* Case-sensitive forms for punctuation */
-			"ss01" 1;        /* Stylistic set 1 - often improves legibility */
+			"kern" 1,
+			/* Essential kerning for tabular data alignment */ "tnum" 1,
+			/* Tabular numbers - critical for dates/data */ "lnum" 1,
+			/* Lining figures for metadata consistency */ "case" 1,
+			/* Case-sensitive forms for punctuation */ "ss01" 1; /* Stylistic set 1 - often improves legibility */
 
 		/* 2. SIZE & WEIGHT: JetBrains Mono optical compensation */
 		font-size: calc(var(--step--1) * var(--mono-meta-factor)); /* Size-compensated: ~11.3-12.7px */
-		font-weight: calc(400 + var(--mono-weight-offset));         /* Weight-compensated: 350 */
-		
+		font-weight: calc(400 + var(--mono-weight-offset)); /* Weight-compensated: 350 */
+
 		/* 3. SPACING: Butterick's "space between letters" optimization for monospace */
-		letter-spacing: 0.015em;       /* Tighter than Inter - monospace needs less breathing room */
-		
+		letter-spacing: 0.015em; /* Tighter than Inter - monospace needs less breathing room */
+
 		/* 4. RHYTHM: Ruder's "systematic approach" to vertical spacing */
-		line-height: 1.45;             /* Slightly tighter for compact metadata */
-		
+		line-height: 1.45; /* Slightly tighter for compact metadata */
+
 		/* 5. CONTRAST: JetBrains Mono color compensation */
 		color: var(--theme-color-500);
 		opacity: var(--jetbrains-opacity); /* Visual weight reduction - JetBrains appears darker */
-		
+
 		/* 6. MONO-SPECIFIC: Prevent character width variations */
 		font-variant-numeric: tabular-nums;
 		text-rendering: optimizeLegibility;
-		
+
 		/* 7. BASELINE GRID INTEGRATION: Optical positioning correction */
 		position: relative;
 		top: var(--jetbrains-adjustment); /* -1px baseline correction */
-		
+
 		/* 7. INTER HARMONY: Create visual contrast while maintaining cohesion */
 		/* - Inter: rounded, humanist, flowing */
 		/* - JetBrains: geometric, structured, precise */
@@ -660,13 +660,13 @@
 		/* JetBrains Mono light variant with optical compensation */
 		font-weight: calc(350 + var(--mono-weight-light-offset)); /* 275 - extra light for recession */
 		color: var(--theme-color-450);
-		
+
 		/* Enhanced recession through opacity stacking */
 		opacity: calc(var(--jetbrains-opacity) * var(--jetbrains-opacity-light)); /* ~0.56 total */
-		
+
 		/* Slightly more open spacing for lighter weight */
 		letter-spacing: 0.02em;
-		
+
 		/* Mono-specific refinements */
 		font-variant-numeric: tabular-nums;
 	}
@@ -675,13 +675,13 @@
 		/* JetBrains Mono dark variant with optical compensation */
 		font-weight: calc(500 + var(--mono-weight-dark-offset)); /* 475 - moderated emphasis */
 		color: var(--theme-color-600);
-		
+
 		/* Balanced opacity - less reduction for emphasis */
 		opacity: calc(var(--jetbrains-opacity) + 0.15); /* ~0.93 - still visible as emphasis */
-		
+
 		/* Tighter tracking for emphasis */
 		letter-spacing: 0.01em;
-		
+
 		/* Subtle weight enhancement while maintaining JetBrains character */
 		text-shadow: 0 0 0.5px currentColor;
 	}
@@ -862,18 +862,18 @@
 		.text-meta {
 			/* Mobile JetBrains Mono optimizations with compensation */
 			font-weight: calc(425 + var(--mono-weight-offset)); /* 375 - compensated mobile weight */
-			letter-spacing: 0.02em; 
-			
+			letter-spacing: 0.02em;
+
 			/* Size adjustment for mobile - slightly larger compensation factor */
 			font-size: calc(var(--step--1) * 0.89); /* Less aggressive reduction on mobile */
-			
+
 			/* Generous spacing for small screens */
 			line-height: 1.5;
-			
+
 			/* Enhanced rendering for mobile screens */
 			text-rendering: optimizeLegibility;
 			-webkit-font-smoothing: antialiased;
-			
+
 			/* Mobile-specific baseline adjustment */
 			top: var(--jetbrains-adjustment-small); /* -0.5px for smaller sizes */
 		}
@@ -887,27 +887,27 @@
 			[data-theme="dark"] body {
 				font-variation-settings: "wght" 360;
 			}
-			
+
 			/* JetBrains Mono high-DPI with full compensation system */
 			.text-meta {
 				/* Compensated weights for high-DPI - can go lighter */
 				font-weight: calc(375 + var(--mono-weight-offset)); /* 325 */
 				letter-spacing: 0.01em;
-				
+
 				/* Size compensation remains consistent */
 				font-size: calc(var(--step--1) * var(--mono-meta-factor));
-				
+
 				/* Enhanced rendering for crisp displays */
 				text-rendering: geometricPrecision;
-				
+
 				/* Refined baseline adjustment for high-DPI */
 				top: calc(var(--jetbrains-adjustment) * 0.75); /* -0.75px more precise */
 			}
-			
+
 			.text-meta--light {
 				font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
 			}
-			
+
 			.text-meta--dark {
 				font-weight: calc(450 + var(--mono-weight-dark-offset)); /* 425 */
 			}
@@ -1027,30 +1027,30 @@
 			color: var(--theme-color-400);
 			opacity: 0.85; /* Slightly more transparent in dark */
 		}
-		
+
 		/* JetBrains Mono dark mode with full compensation system */
 		.text-meta {
 			/* Compensated weight for dark mode */
 			font-weight: calc(375 + var(--mono-weight-offset)); /* 325 */
-			
+
 			/* Enhanced spacing and opacity for dark mode */
 			letter-spacing: 0.025em;
 			opacity: var(--jetbrains-opacity-dark); /* 0.82 - dedicated dark mode opacity */
-			
+
 			/* Size compensation consistent in dark mode */
 			font-size: calc(var(--step--1) * var(--mono-meta-factor));
-			
+
 			/* Dark mode definition enhancement */
 			text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.02);
 		}
-		
+
 		.text-meta--light {
 			/* Maximum recession in dark mode */
 			font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
 			letter-spacing: 0.03em;
 			opacity: calc(var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)); /* ~0.59 */
 		}
-		
+
 		.text-meta--dark {
 			/* Balanced emphasis in dark mode */
 			font-weight: calc(475 + var(--mono-weight-dark-offset)); /* 450 */

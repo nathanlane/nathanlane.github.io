@@ -148,7 +148,7 @@ export default {
 						fontWeight: "360", // Lighter in dark mode
 						letterSpacing: "0.008em",
 					},
-					// Mobile optimization  
+					// Mobile optimization
 					"@media (max-width: 640px)": {
 						fontWeight: "400", // Heavier on mobile
 						letterSpacing: "0.003em",
@@ -163,7 +163,7 @@ export default {
 					fontFamily: theme("fontFamily.sans"),
 				},
 				".text-lead": {
-					fontSize: "var(--step-1)", 
+					fontSize: "var(--step-1)",
 					fontWeight: "400",
 					letterSpacing: "0.002em",
 					lineHeight: "1.65", // More generous for lead text
@@ -331,7 +331,7 @@ export default {
 				},
 				".meta-secondary": {
 					fontSize: "0.8125rem", // 13px
-					fontWeight: "400", 
+					fontWeight: "400",
 					letterSpacing: theme("letterSpacing.wide"),
 					lineHeight: "1.45",
 					color: theme("colors.lighter"),
@@ -340,7 +340,7 @@ export default {
 				".meta-tertiary": {
 					fontSize: "0.75rem", // 12px
 					fontWeight: "380",
-					letterSpacing: "0.03em", 
+					letterSpacing: "0.03em",
 					lineHeight: "1.4",
 					color: theme("colors.lightest"),
 					fontFamily: theme("fontFamily.sans"),
@@ -647,16 +647,16 @@ export default {
 			},
 			letterSpacing: {
 				// Semantic letter-spacing system (consolidated from 20+ values)
-				tight: "-0.02em",      // Headlines and display text
-				normal: "0.005em",     // Body text (subtle breathing room for Inter)
-				wide: "0.02em",        // Emphasis, buttons, interactive elements
-				caps: "0.075em",       // Small caps and uppercase text
+				tight: "-0.02em", // Headlines and display text
+				normal: "0.005em", // Body text (subtle breathing room for Inter)
+				wide: "0.02em", // Emphasis, buttons, interactive elements
+				caps: "0.075em", // Small caps and uppercase text
 			},
 			fontWeight: {
 				// Semantic font weight system (consolidated from 15+ values)
-				light: "380",      // Body text, warm and readable
-				medium: "450",     // Meta text, emphasis, secondary elements  
-				bold: "520",       // Headers, strong emphasis, calls-to-action
+				light: "380", // Body text, warm and readable
+				medium: "450", // Meta text, emphasis, secondary elements
+				bold: "520", // Headers, strong emphasis, calls-to-action
 			},
 			maxWidth: {
 				lg: "32rem", // default 32rem (512px)
@@ -881,7 +881,7 @@ export default {
 						},
 						h1: {
 							fontSize: "var(--step-5)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "600",
 							letterSpacing: "-0.01em",
 							marginBottom: "var(--space-4)",
@@ -890,7 +890,7 @@ export default {
 						},
 						h2: {
 							fontSize: "var(--step-4)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "700",
 							letterSpacing: "-0.005em",
 							marginBottom: "var(--space-3)",
@@ -899,7 +899,7 @@ export default {
 						},
 						h3: {
 							fontSize: "var(--step-3)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
@@ -908,7 +908,7 @@ export default {
 						},
 						h4: {
 							fontSize: "var(--step-2)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
@@ -917,7 +917,7 @@ export default {
 						},
 						h5: {
 							fontSize: "var(--step-1)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-1)",
@@ -926,7 +926,7 @@ export default {
 						},
 						h6: {
 							fontSize: "var(--step-0)",
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							fontWeight: "900",
 							textTransform: "uppercase",
 							letterSpacing: "0.05em",
@@ -1247,7 +1247,7 @@ export default {
 							lineHeight: "1.65", // More space in dark mode
 						},
 						"h1, h2, h3, h4, h5, h6": {
-							fontFamily: 'var(--font-headline)',
+							fontFamily: "var(--font-headline)",
 							letterSpacing: "-0.005em", // Tighter for dark mode sans-serif
 						},
 						h1: {
