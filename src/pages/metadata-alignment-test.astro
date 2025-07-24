@@ -1,0 +1,134 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+import MetadataLine from "@/components/MetadataLine.astro";
+
+const meta = {
+  title: "Metadata Alignment Test",
+  description: "Testing the fixed metadata alignment system",
+  articleDate: null,
+  ogImage: null
+};
+
+// Example metadata items
+const examples = [
+  {
+    title: "Research Paper Example",
+    items: [
+      { text: "Council on Foreign Relations", href: "https://www.cfr.org" },
+      { text: "Feb 10, 2025" },
+      { text: "Article" }
+    ]
+  },
+  {
+    title: "Blog Post Example", 
+    items: [
+      { text: "Nathan Lane", href: "/about" },
+      { text: "Jan 23, 2025" },
+      { text: "15 min read" },
+      { text: "Economics" }
+    ]
+  },
+  {
+    title: "Media Example",
+    items: [
+      { text: "Wall Street Journal", href: "https://wsj.com" },
+      { text: "Interview" },
+      { text: "Dec 15, 2024" }
+    ]
+  }
+];
+---
+
+<Base meta={meta}>
+  <div class="mx-auto max-w-3xl px-4">
+    <PageHeader title="Metadata Typography Alignment Test" />
+
+    <div class="space-y-12">
+      <section>
+        <h2 class="heading-3 mb-6">Fixed Metadata Alignment</h2>
+        <p class="text-body mb-8">
+          The metadata alignment issues have been resolved using master typographer principles:
+        </p>
+        
+        <div class="space-y-6">
+          {examples.map((example) => (
+            <div class="p-6 border border-color-200 rounded-lg">
+              <h3 class="text-sm font-semibold mb-3">{example.title}</h3>
+              <MetadataLine 
+                items={example.items}
+                separator="•"
+                class="mb-2"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="heading-3 mb-6">Different Separators</h2>
+        
+        <div class="space-y-4">
+          <div class="p-4 border border-color-200 rounded">
+            <p class="text-sm font-semibold mb-2">Interpunct (•) - Traditional</p>
+            <MetadataLine 
+              items={[
+                { text: "Research" },
+                { text: "2025" },
+                { text: "Published" }
+              ]}
+              separator="•"
+            />
+          </div>
+          
+          <div class="p-4 border border-color-200 rounded">
+            <p class="text-sm font-semibold mb-2">Middle Dot (·) - Subtle</p>
+            <MetadataLine 
+              items={[
+                { text: "Research" },
+                { text: "2025" },
+                { text: "Published" }
+              ]}
+              separator="·"
+            />
+          </div>
+          
+          <div class="p-4 border border-color-200 rounded">
+            <p class="text-sm font-semibold mb-2">Pipe (|) - Hierarchical</p>
+            <MetadataLine 
+              items={[
+                { text: "Research" },
+                { text: "2025" },
+                { text: "Published" }
+              ]}
+              separator="|"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="heading-3 mb-6">Typography Principles Applied</h2>
+        
+        <div class="prose max-w-none">
+          <h3>Master Typographer Guidelines:</h3>
+          
+          <h4>1. Baseline Alignment (Fixed)</h4>
+          <p>Changed from <code>align-items: center</code> to <code>align-items: baseline</code> for proper text alignment.</p>
+          
+          <h4>2. Optical Bullet Positioning</h4>
+          <p>Applied <code>transform: translateY(-0.02em)</code> to visually center bullets with the text baseline.</p>
+          
+          <h4>3. Proper Spacing (Bringhurst)</h4>
+          <p>Used <code>margin: 0 0.25em</code> around separators for optimal visual rhythm.</p>
+          
+          <h4>4. Semantic Markup</h4>
+          <p>Separators marked with <code>aria-hidden="true"</code> and <code>user-select: none</code> for accessibility.</p>
+          
+          <h4>5. Typographic Features</h4>
+          <p>Enabled kerning with <code>font-feature-settings: "kern" 1</code> for optimal spacing.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</Base>

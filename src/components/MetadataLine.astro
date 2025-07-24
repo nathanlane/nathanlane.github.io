@@ -109,14 +109,32 @@ A refined metadata component implementing typographic principles from the master
     /* Better line breaking for long metadata */
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline; /* CRITICAL FIX: baseline alignment for text */
     gap: 0; /* No gap - separators handle spacing */
-    line-height: 1.3; /* Tighter for metadata */
+    line-height: 1.4; /* Improved for baseline alignment */
   }
   
   /* Ensure separators stay with their preceding item */
   .text-meta__separator {
     white-space: nowrap;
+    
+    /* Master Typographer Principles for Optical Bullet Alignment */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Bringhurst: Proper spacing around interpuncts */
+    margin: 0 0.25em;
+    
+    /* Prevent user selection on decorative elements */
+    user-select: none;
+    pointer-events: none;
+    
+    /* Optical fine-tuning for bullets */
+    font-feature-settings: "kern" 1;
+    
+    /* Slight elevation for optical centering of bullet */
+    transform: translateY(-0.02em);
   }
   
   /* Mobile responsiveness */
@@ -128,7 +146,7 @@ A refined metadata component implementing typographic principles from the master
     
     .text-meta__separator {
       /* Tighter separator spacing on mobile */
-      margin: 0 0.3em;
+      margin: 0 0.2em;
     }
   }
   

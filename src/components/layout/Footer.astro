@@ -46,14 +46,14 @@ const currentYear = new Date().getFullYear();
     margin-top: var(--space-16); /* 96px - Generous separation from content */
     padding-top: var(--space-12); /* 72px - 3 baselines for strong rhythm */
     font-size: var(--step--1); /* ~11.5-13px - Slightly larger body text size */
-    font-family: "IBM Plex Sans", system-ui, sans-serif; /* IBM Plex Sans for body */
+    font-family: var(--font-body); /* Inter Variable for body */
     line-height: 1.65; /* 165% - Extra generous for very small text */
     color: var(--color-text-muted);
     background: var(--color-bg-subtle);
     border-top: 1px solid var(--theme-color-200); /* Full-width separator line */
     position: relative;
-    /* Optimize IBM Plex Sans for small text rendering */
-    font-variation-settings: "wght" 425; /* Slightly heavier for small IBM Plex */
+    /* Optimize Inter Variable for small text rendering */
+    font-variation-settings: "wght" 425; /* Slightly heavier for small Inter */
     letter-spacing: 0.025em; /* More generous spacing for small sans-serif */
     font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
   }
@@ -74,7 +74,7 @@ const currentYear = new Date().getFullYear();
 
   /* Enhanced section titles with proper hierarchy */
   .footer-section-title {
-    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-family: var(--font-body);
     font-size: var(--step--1); /* Slightly smaller than body text */
     font-weight: 500; /* Medium weight for subordinate headers */
     font-variation-settings: "wght" 500; /* Precise weight control */

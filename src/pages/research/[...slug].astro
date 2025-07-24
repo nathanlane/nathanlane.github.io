@@ -2,9 +2,8 @@
 import { render } from "astro:content";
 import { getCollection } from "astro:content";
 import Badge from "@/components/Badge.astro";
-import FormattedDate from "@/components/FormattedDate.astro";
 import BaseLayout from "@/layouts/Base.astro";
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
 	const essays = await getCollection("research");
@@ -13,8 +12,6 @@ export const getStaticPaths = (async () => {
 		props: { essay },
 	}));
 }) satisfies GetStaticPaths;
-
-type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { essay } = Astro.props;
 const { Content } = await render(essay);

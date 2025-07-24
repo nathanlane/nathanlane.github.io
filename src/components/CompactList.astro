@@ -14,7 +14,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 ---
 
 <ul class={`compact-list ${className}`} role="list">
-	{items.map((item, index) => (
+	{items.map((item) => (
 		<li class="compact-entry">
 			<div class="entry-content">
 				{item.url ? (
