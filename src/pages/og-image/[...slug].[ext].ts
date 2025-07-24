@@ -9,15 +9,15 @@ import type { APIContext, InferGetStaticPropsType } from "astro";
 import satori, { type SatoriOptions } from "satori";
 import { html } from "satori-html";
 
-// Load IBM Plex Sans fonts for OG images (using WOFF format for compatibility)
-const ibmPlexSansRegular = fs.readFileSync(
+// Load Inter fonts for OG images (using WOFF for Satori compatibility)
+const interRegular = fs.readFileSync(
 	path.resolve(
-		"./node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff",
+		"./node_modules/@fontsource/inter/files/inter-latin-400-normal.woff",
 	),
 );
-const ibmPlexSansBold = fs.readFileSync(
+const interBold = fs.readFileSync(
 	path.resolve(
-		"./node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-700-normal.woff",
+		"./node_modules/@fontsource/inter/files/inter-latin-700-normal.woff",
 	),
 );
 
@@ -25,14 +25,14 @@ const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
 		{
-			data: Buffer.from(ibmPlexSansRegular),
-			name: "IBM Plex Sans",
+			data: Buffer.from(interRegular),
+			name: "Inter",
 			style: "normal",
 			weight: 400,
 		},
 		{
-			data: Buffer.from(ibmPlexSansBold),
-			name: "IBM Plex Sans",
+			data: Buffer.from(interBold),
+			name: "Inter",
 			style: "normal",
 			weight: 700,
 		},

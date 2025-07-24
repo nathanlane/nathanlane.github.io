@@ -433,9 +433,29 @@
 
 		/* Reading Measure - Single Source of Truth */
 		--measure-narrow: 45ch; /* Sidebars, narrow columns */
-		--measure-base: 75ch; /* Optimal for body text, document layouts */
+		--measure-base: 65ch; /* Optimal for body text, document layouts */
 		--measure-wide: 85ch; /* Wide layouts, technical content */
 		--measure-full: none; /* Full-width content */
+		
+		/* JetBrains Mono Optical Compensation System */
+		/* Size compensation - JetBrains appears ~12% larger than Inter */
+		--mono-size-factor: 0.875;        /* Primary size reduction: 14px when Inter is 16px */
+		--mono-inline-factor: 0.85;       /* Even smaller for inline code contexts */
+		--mono-meta-factor: 0.88;         /* Metadata-specific sizing */
+		
+		/* Weight compensation - JetBrains strokes appear heavier */
+		--mono-weight-offset: -50;        /* Systematic weight reduction */
+		--mono-weight-light-offset: -75;  /* Extra reduction for light variants */
+		--mono-weight-dark-offset: -25;   /* Moderate reduction for emphasis */
+		
+		/* Baseline grid integration - optical positioning corrections */
+		--jetbrains-adjustment: -1px;     /* Primary baseline correction */
+		--jetbrains-adjustment-small: -0.5px; /* Fine adjustment for smaller sizes */
+		
+		/* Color/contrast compensation - JetBrains appears darker */
+		--jetbrains-opacity: 0.78;        /* Light mode visual weight reduction */
+		--jetbrains-opacity-dark: 0.82;   /* Dark mode compensation */
+		--jetbrains-opacity-light: 0.72;  /* Light variant extra recession */
 
 		/* Spacing Scale - Grid Aligned */
 		--space-1: calc(var(--grid-unit) * 1); /* 6px - hairline */
@@ -487,12 +507,13 @@
 		letter-spacing: 0.025em;
 	}
 
-	/* Text rendering optimizations for IBM Plex */
+	/* Text rendering optimizations for body text */
 	body {
+		font-family: var(--font-body);
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		/* Enhanced OpenType features for IBM Plex body text */
+		/* Enhanced OpenType features for Source Serif 4 body text */
 		font-feature-settings:
 			"kern" 1,
 			/* Kerning */ "liga" 1,
@@ -591,42 +612,78 @@
 
 	.text-meta {
 		/* Enhanced metadata typography following the masters' principles */
+		
+		/* Use JetBrains Mono for metadata */
+		font-family: var(--font-meta);
 
-		/* Bringhurst: Use proper small caps, not uppercase transform */
+		/* Master typographer optimizations for JetBrains Mono */
+		
+		/* 1. FONT FEATURES: Hochuli's "Detail in Typography" - exploit font capabilities */
 		font-feature-settings:
-			"kern" 1,
-			/* Kerning essential at small sizes */ "smcp" 1,
-			/* Real small caps */ "c2sc" 1,
-			/* Caps to small caps */ "case" 1,
-			/* Case-sensitive forms */ "lnum" 1; /* Lining figures for metadata */
+			"kern" 1,        /* Essential kerning for tabular data alignment */
+			"tnum" 1,        /* Tabular numbers - critical for dates/data */
+			"lnum" 1,        /* Lining figures for metadata consistency */
+			"case" 1,        /* Case-sensitive forms for punctuation */
+			"ss01" 1;        /* Stylistic set 1 - often improves legibility */
 
-		/* Hochuli: Optimal size and weight for metadata readability */
-		font-size: var(--step--1); /* 12.8-14.4px - better than --2 */
-		font-weight: 450; /* Reduced from 425 for better balance */
-
-		/* Butterick: Reduced tracking for improved readability */
-		letter-spacing: 0.03em; /* Reduced from 0.05em */
-
-		/* No text-transform needed - using real small caps */
-		color: var(--theme-color-500); /* Base metadata color */
-		line-height: 1.5; /* More generous spacing for small caps readability */
+		/* 2. SIZE & WEIGHT: JetBrains Mono optical compensation */
+		font-size: calc(var(--step--1) * var(--mono-meta-factor)); /* Size-compensated: ~11.3-12.7px */
+		font-weight: calc(400 + var(--mono-weight-offset));         /* Weight-compensated: 350 */
+		
+		/* 3. SPACING: Butterick's "space between letters" optimization for monospace */
+		letter-spacing: 0.015em;       /* Tighter than Inter - monospace needs less breathing room */
+		
+		/* 4. RHYTHM: Ruder's "systematic approach" to vertical spacing */
+		line-height: 1.45;             /* Slightly tighter for compact metadata */
+		
+		/* 5. CONTRAST: JetBrains Mono color compensation */
+		color: var(--theme-color-500);
+		opacity: var(--jetbrains-opacity); /* Visual weight reduction - JetBrains appears darker */
+		
+		/* 6. MONO-SPECIFIC: Prevent character width variations */
+		font-variant-numeric: tabular-nums;
+		text-rendering: optimizeLegibility;
+		
+		/* 7. BASELINE GRID INTEGRATION: Optical positioning correction */
+		position: relative;
+		top: var(--jetbrains-adjustment); /* -1px baseline correction */
+		
+		/* 7. INTER HARMONY: Create visual contrast while maintaining cohesion */
+		/* - Inter: rounded, humanist, flowing */
+		/* - JetBrains: geometric, structured, precise */
+		/* - Together: creates clear information hierarchy */
 	}
 
 	/* Simplified metadata variants - globally reusable */
 
 	.text-meta--light {
-		/* Default light version - elegant and refined */
-		font-weight: 425; /* Slightly heavier for better legibility */
-		color: var(--theme-color-450); /* Balanced tone - not too light */
-
-		/* Ruder: Create clear information hierarchy */
-		opacity: 0.9; /* Subtle recession without losing legibility */
+		/* JetBrains Mono light variant with optical compensation */
+		font-weight: calc(350 + var(--mono-weight-light-offset)); /* 275 - extra light for recession */
+		color: var(--theme-color-450);
+		
+		/* Enhanced recession through opacity stacking */
+		opacity: calc(var(--jetbrains-opacity) * var(--jetbrains-opacity-light)); /* ~0.56 total */
+		
+		/* Slightly more open spacing for lighter weight */
+		letter-spacing: 0.02em;
+		
+		/* Mono-specific refinements */
+		font-variant-numeric: tabular-nums;
 	}
 
 	.text-meta--dark {
-		/* Heavy version for emphasis when needed */
-		font-weight: 500; /* Heavier weight */
-		color: var(--theme-color-600); /* Darker for prominence */
+		/* JetBrains Mono dark variant with optical compensation */
+		font-weight: calc(500 + var(--mono-weight-dark-offset)); /* 475 - moderated emphasis */
+		color: var(--theme-color-600);
+		
+		/* Balanced opacity - less reduction for emphasis */
+		opacity: calc(var(--jetbrains-opacity) + 0.15); /* ~0.93 - still visible as emphasis */
+		
+		/* Tighter tracking for emphasis */
+		letter-spacing: 0.01em;
+		
+		/* Subtle weight enhancement while maintaining JetBrains character */
+		text-shadow: 0 0 0.5px currentColor;
 	}
 
 	/* Legacy support - map old classes to new system */
@@ -786,8 +843,8 @@
 	/* Variable font progressive enhancement */
 	@supports (font-variation-settings: normal) {
 		body {
-			font-family: "IBM Plex Sans Variable", "IBM Plex Sans", sans-serif;
-			font-variation-settings: "wght" 380;
+			font-family: var(--font-body);
+			font-variation-settings: "wght" 400;
 		}
 
 		[data-theme="dark"] body {
@@ -803,7 +860,22 @@
 		}
 
 		.text-meta {
-			font-variation-settings: "wght" 425;
+			/* Mobile JetBrains Mono optimizations with compensation */
+			font-weight: calc(425 + var(--mono-weight-offset)); /* 375 - compensated mobile weight */
+			letter-spacing: 0.02em; 
+			
+			/* Size adjustment for mobile - slightly larger compensation factor */
+			font-size: calc(var(--step--1) * 0.89); /* Less aggressive reduction on mobile */
+			
+			/* Generous spacing for small screens */
+			line-height: 1.5;
+			
+			/* Enhanced rendering for mobile screens */
+			text-rendering: optimizeLegibility;
+			-webkit-font-smoothing: antialiased;
+			
+			/* Mobile-specific baseline adjustment */
+			top: var(--jetbrains-adjustment-small); /* -0.5px for smaller sizes */
 		}
 
 		/* High-DPI adjustments with variable font */
@@ -814,6 +886,30 @@
 
 			[data-theme="dark"] body {
 				font-variation-settings: "wght" 360;
+			}
+			
+			/* JetBrains Mono high-DPI with full compensation system */
+			.text-meta {
+				/* Compensated weights for high-DPI - can go lighter */
+				font-weight: calc(375 + var(--mono-weight-offset)); /* 325 */
+				letter-spacing: 0.01em;
+				
+				/* Size compensation remains consistent */
+				font-size: calc(var(--step--1) * var(--mono-meta-factor));
+				
+				/* Enhanced rendering for crisp displays */
+				text-rendering: geometricPrecision;
+				
+				/* Refined baseline adjustment for high-DPI */
+				top: calc(var(--jetbrains-adjustment) * 0.75); /* -0.75px more precise */
+			}
+			
+			.text-meta--light {
+				font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
+			}
+			
+			.text-meta--dark {
+				font-weight: calc(450 + var(--mono-weight-dark-offset)); /* 425 */
 			}
 		}
 	}
@@ -930,6 +1026,37 @@
 		.text-meta--light {
 			color: var(--theme-color-400);
 			opacity: 0.85; /* Slightly more transparent in dark */
+		}
+		
+		/* JetBrains Mono dark mode with full compensation system */
+		.text-meta {
+			/* Compensated weight for dark mode */
+			font-weight: calc(375 + var(--mono-weight-offset)); /* 325 */
+			
+			/* Enhanced spacing and opacity for dark mode */
+			letter-spacing: 0.025em;
+			opacity: var(--jetbrains-opacity-dark); /* 0.82 - dedicated dark mode opacity */
+			
+			/* Size compensation consistent in dark mode */
+			font-size: calc(var(--step--1) * var(--mono-meta-factor));
+			
+			/* Dark mode definition enhancement */
+			text-shadow: 0 0 0.5px rgba(255, 255, 255, 0.02);
+		}
+		
+		.text-meta--light {
+			/* Maximum recession in dark mode */
+			font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
+			letter-spacing: 0.03em;
+			opacity: calc(var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)); /* ~0.59 */
+		}
+		
+		.text-meta--dark {
+			/* Balanced emphasis in dark mode */
+			font-weight: calc(475 + var(--mono-weight-dark-offset)); /* 450 */
+			letter-spacing: 0.015em;
+			opacity: calc(var(--jetbrains-opacity-dark) + 0.1); /* ~0.92 */
+			text-shadow: 0 0 1px rgba(255, 255, 255, 0.08);
 		}
 	}
 
@@ -1466,7 +1593,7 @@
 		padding: 0.375rem 0.75rem; /* 1.5b 3b */
 		font-size: var(--step--2); /* Use design token */
 		font-weight: 500;
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		border-radius: 0.25rem;
@@ -1664,7 +1791,7 @@
 	}
 
 	.back-link {
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		@apply text--1; /* 12.8-14.4px */
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
@@ -1681,7 +1808,7 @@
 	.essay-title {
 		@apply heading-3; /* 29.3-33.2px - more modest than heading-5 */
 		margin-bottom: var(--space-4); /* 24px */
-		font-family: var(--font-newsreader);
+		font-family: var(--font-headline);
 	}
 
 	.essay-separator {
@@ -1692,7 +1819,7 @@
 	}
 
 	.essay-metadata {
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		@apply text--1; /* 12.8-14.4px */
 		font-variant: small-caps;
 		letter-spacing: 0.075em;
@@ -1720,7 +1847,7 @@
 
 	.essay-wrapper .prose > p:first-of-type::first-letter {
 		float: left;
-		font-family: var(--font-newsreader);
+		font-family: var(--font-headline);
 		font-size: calc(var(--step-5) * 1.2); /* ~55-62px */
 		line-height: 0.8;
 		margin-right: var(--space-1); /* 6px */
@@ -1932,14 +2059,10 @@
 @layer components {
 	/* Site title with optical adjustments */
 	.site-title {
-		font-family: "Newsreader Variable", serif;
+		font-family: var(--font-headline);
 		font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-		font-weight: 380;
-		/* Enhanced variable font settings for elegance */
-		font-variation-settings:
-			"opsz" 28,
-			"wght" 380;
-		letter-spacing: -0.02em;
+		font-weight: 400;
+		letter-spacing: -0.01em;
 		font-feature-settings:
 			"kern" 1,
 			"liga" 0,
@@ -2407,4 +2530,28 @@
 :root[data-theme="dark"] .text-research-description {
 	color: var(--theme-color-400);
 	opacity: 0.9;
+}
+
+/* Departure Mono Utilities */
+.text-meta-mono {
+	font-family: var(--font-meta);
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	font-weight: 400;
+	opacity: 0.85;
+}
+
+.text-decorative {
+	font-family: var(--font-meta);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-weight: 400;
+}
+
+.text-date {
+	font-family: var(--font-meta);
+	font-size: 0.875rem;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
 }

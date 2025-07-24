@@ -1,0 +1,205 @@
+---
+/**
+ * MetadataGroup Component
+ * 
+ * Centralized metadata typography following master typographer principles:
+ * - Bringhurst: Proper spacing and optical alignment
+ * - Butterick: Clarity and functional hierarchy  
+ * - Hochuli: Attention to micro-typography details
+ */
+
+export interface Props {
+  items: Array<{
+    text: string;
+    href?: string;
+    variant?: 'primary' | 'secondary' | 'muted';
+  }>;
+  separator?: '•' | '|' | '·' | '/';
+  alignment?: 'left' | 'center';
+  size?: 'sm' | 'base';
+  class?: string;
+}
+
+const { 
+  items, 
+  separator = '•', 
+  alignment = 'left', 
+  size = 'sm',
+  class: className = ''
+} = Astro.props;
+
+// Typography-based separator spacing (Bringhurst principle)
+const separatorSpacing = size === 'sm' ? 'gap-3' : 'gap-4';
+const alignmentClass = alignment === 'center' ? 'justify-center' : 'justify-start';
+---
+
+<div class:list={[
+  'metadata-group',
+  `flex flex-wrap items-baseline ${separatorSpacing} ${alignmentClass}`,
+  className
+]}>
+  {items.map((item, index) => (
+    <span class="metadata-item-wrapper flex items-baseline">
+      {item.href ? (
+        <a 
+          href={item.href}
+          class:list={[
+            'metadata-link',
+            `metadata-${item.variant || 'primary'}`,
+            'link-inline u-no-underline hover:u-underline'
+          ]}
+        >
+          {item.text}
+        </a>
+      ) : (
+        <span class:list={[
+          'metadata-text',
+          `metadata-${item.variant || 'primary'}`
+        ]}>
+          {item.text}
+        </span>
+      )}
+      
+      {/* Optical separator with proper alignment */}
+      {index < items.length - 1 && (
+        <span 
+          class="metadata-separator" 
+          aria-hidden="true"
+          role="presentation"
+        >
+          {separator}
+        </span>
+      )}
+    </span>
+  ))}
+</div>
+
+<style>
+  /* Master Typographer Metadata System */
+  .metadata-group {
+    /* Hochuli: Baseline alignment for mixed content */
+    line-height: 1.4;
+    
+    /* Butterick: Functional color hierarchy */
+    --meta-primary-color: var(--theme-color-600);
+    --meta-secondary-color: var(--theme-color-500);  
+    --meta-muted-color: var(--theme-color-400);
+    
+    /* Dark mode optimization */
+    :root[data-theme="dark"] & {
+      --meta-primary-color: var(--theme-color-400);
+      --meta-secondary-color: var(--theme-color-350);
+      --meta-muted-color: var(--theme-color-300);
+    }
+  }
+
+  /* Typography Hierarchy */
+  .metadata-primary {
+    font-family: var(--font-body);
+    font-size: var(--step--1); /* 13-14px */
+    font-weight: 450;
+    letter-spacing: 0.008em;
+    color: var(--meta-primary-color);
+    
+    /* Bringhurst: Proper small caps instead of text-transform */
+    font-feature-settings: "kern" 1, "liga" 1, "smcp" 1;
+  }
+  
+  .metadata-secondary {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 420;
+    letter-spacing: 0.01em;
+    color: var(--meta-secondary-color);
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+  
+  .metadata-muted {
+    font-family: var(--font-body);
+    font-size: var(--step--2); /* 11-12px */
+    font-weight: 400;
+    letter-spacing: 0.012em;
+    color: var(--meta-muted-color);
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  /* Optical Separator Typography (Bringhurst's principles) */
+  .metadata-separator {
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 400;
+    color: var(--meta-muted-color);
+    
+    /* Critical: Optical alignment for bullets */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Bringhurst: Proper spacing around interpuncts */
+    margin: 0 0.25em;
+    
+    /* Prevent text selection on decorative elements */
+    user-select: none;
+    pointer-events: none;
+    
+    /* Optical fine-tuning for different separators */
+    &:has-text('•') {
+      /* Bullet: slightly elevated for optical center */
+      transform: translateY(-0.02em);
+    }
+    
+    &:has-text('·') {
+      /* Middle dot: already optically centered */
+      transform: none;
+    }
+    
+    &:has-text('|') {
+      /* Pipe: extend slightly for better rhythm */
+      letter-spacing: 0.02em;
+    }
+  }
+
+  /* Link Treatment */
+  .metadata-link {
+    /* Inherit parent typography */
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    
+    /* Subtle interactive enhancement */
+    transition: color 150ms ease;
+    
+    &:hover {
+      color: var(--theme-accent);
+    }
+    
+    &:focus-visible {
+      outline: 2px solid var(--theme-accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  /* Container Alignment Fixes */
+  .metadata-item-wrapper {
+    /* Ensure all items align to the same baseline */
+    align-items: baseline;
+    
+    /* Prevent orphaned separators */
+    white-space: nowrap;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .metadata-group {
+      /* Tighter spacing on mobile */
+      gap: 0.625rem; /* 10px */
+    }
+    
+    .metadata-separator {
+      margin: 0 0.2em;
+    }
+  }
+</style>

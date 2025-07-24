@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import BioPanel from "@/components/BioPanel.astro";
 // import ContactInfo from "@/components/ContactInfo.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
@@ -7,7 +7,6 @@ import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { mediaData } from "@/data/media";
-import { getAllPosts } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 
 
@@ -25,11 +24,8 @@ const featuredResearch = allResearch
 	.sort((a, b) => Number.parseInt(b.data.paperDate) - Number.parseInt(a.data.paperDate))
 	.slice(0, 3);
 
-// Get recent posts/essays
-const allPosts = await getAllPosts();
-const recentPosts = allPosts
-	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-	.slice(0, 3);
+// Note: getAllPosts is imported but not used directly on homepage
+// Keep import as it may be needed for future features
 
 // Get latest writing pieces
 const allWriting = await getCollection("writing");
@@ -39,7 +35,7 @@ const latestWriting = allWriting
 
 // Get latest media appearances
 const allMediaItems = Object.entries(mediaData)
-	.flatMap(([year, items]) => items)
+	.flatMap(([, items]) => items)
 	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
 	.slice(0, 5);
 

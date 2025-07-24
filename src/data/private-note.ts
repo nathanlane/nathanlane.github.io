@@ -1,4 +1,4 @@
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
 /**
  * Private notes are for personal documentation only and are NEVER web-accessible

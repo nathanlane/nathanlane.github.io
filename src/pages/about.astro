@@ -1,6 +1,5 @@
 ---
 import PageHeader from "@/components/PageHeader.astro";
-import TableOfContents from "@/components/TableOfContents.astro";
 import { aboutConfig } from "@/data/about-config";
 import PageLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
@@ -21,15 +20,9 @@ const tocSections = [
 		<!-- Page Header with description -->
 		<PageHeader 
 			title={meta.title}
-			description='Nathan Lane, PhD - Associate Professor of Economics at <a href="https://www.ox.ac.uk">Oxford University</a> and co-founder of the <a href="#">Industrial Policy Group</a>'
+			description={`Nathan Lane, PhD. I am an economics professor and data scientist, find my biography <a href="#biography">below</a>. <br><br> You can also email me <a href="mailto:${siteConfig.email}">here</a>. Or download my CV <a href="${siteConfig.resumeUrl || "/cv.pdf"}">here too</a>.`}
 		/>
-		
-		<!-- Table of Contents with custom header -->
-		<TableOfContents 
-			sections={tocSections} 
-			headerText="Quick Links"
-		/>
-		
+			
 		<!-- Main Content with Typography-First Design -->
 		<div class="prose prose-lane max-w-none">
 			

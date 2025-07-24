@@ -40,7 +40,7 @@ const meta = {
     <!-- Reusable Page Header with proper typography and spacing -->
     <PageHeader 
       title="Research"
-      description='My research focuses on the intersection of <a href="#published">economics</a>, <a href="#working">technology</a>, and digital transformation. I examine how technological change affects markets, productivity, and economic outcomes.'
+      description='I study <a href="#published">economic change</a> with messy data. Find my work <a href="#featured">below</a>. <br><br> I work on economic and industrial development, political economy, and establishing basic facts around industrial policy. I tackle these questions with the <a href="https://www.industrialpolicygroup.com">Industrial Policy Group</a>. <br><br> I also enjoy working with computational tools and bridging the worlds of data science and economics. Find my GitHub <a href="https://github.com/nathanlane">here</a>.'
     />
 
     <!-- Table of Contents Block -->
@@ -51,7 +51,7 @@ const meta = {
     <!-- Featured/Recent Papers Section -->
     {featuredPapers.length > 0 && (
       <section id="featured" class="mb-16b">
-        <h2 class="heading-2 mb-8b">New and Updated</h2>
+        <h2 class="heading-2 mb-8b">New and Recently Updated</h2>
         <ul class="space-y-3b list-none">
           {sortByYear(featuredPapers).map((paper) => (
             <li class="flex items-baseline justify-between gap-4b">

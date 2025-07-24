@@ -21,18 +21,21 @@ Current codebase
 ## 3. Design intent
 
 ### A. Purpose: 
-Academic research portfolio and digital garden  •   Core identity: typographic-forward, academic-technologist, thoughtful, document-centered, minimalist
+Academic research portfolio and digital garden
 
-### B. Keywords: 
-```document-centric, text-first, minimal, calm-editorial, typographic, content-first, indie-research-lab, technologist/diy, accessible, monochrome, handcrafted```
+### B. Core identity: 
+typographic-forward, academic-technologist, thoughtful, document-centered, minimalist
 
-### C. Tone & voice: 
+### C. Keywords: 
+document-centric, text-first, minimal, calm-editorial, typographic, content-first, indie-research-lab, technologist/diy, accessible, monochrome, handcrafted
+
+### D. Tone & voice: 
 Thoughtful, academic but approachable, DIY-craft
 
-### D. Visual palette: 
+### E. Visual palette: 
 monochrome, serif/sans-serif contrast, optimized typography, generous whitespace, tiny accent icons, minimize cards/boxes
 
-### E. Elevator pitch:
+### F. Elevator pitch:
 “An indie economist-technologist running a one-person research lab, publishing document-centric, minimal, typographic-first interface that feels more like a quiet, handcrafted typographic than a modern website.”
 
 ## 4. Style Guide

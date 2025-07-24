@@ -1,5 +1,122 @@
 # Changelog
 
+## JetBrains Mono Typography Optimization (July 24, 2025)
+
+### Complete Monospace Font Integration
+- **Master Typography Analysis**: Applied typographic principles for optimal monospace integration with Inter Variable
+- **JetBrains Mono Implementation**:
+  - Migrated from IBM Plex Mono to JetBrains Mono across all monospace contexts
+  - Added `@fontsource/jetbrains-mono` imports (400, 500, 600, 400-italic)
+  - Updated CSS variables: `--font-mono` and dedicated `--font-meta` for metadata
+  - Created comprehensive font stack with fallbacks
+
+### Typography Consolidation & Semantic Tokens
+- **Letter-Spacing Consolidation**:
+  - Reduced from 20+ inconsistent values to 4 semantic tokens
+  - `tight` (-0.02em), `normal` (0.005em), `wide` (0.02em), `caps` (0.075em)
+  - Applied master typographer spacing principles across all components
+- **Font Weight Standardization**:
+  - Consolidated from 15+ values to 3 semantic weights
+  - `light` (380), `medium` (450), `bold` (520)
+  - Strategic progression following Inter Variable's characteristics
+- **Metadata Typography Centralization**:
+  - Created unified `.text-meta` system with consistent hierarchy
+  - Fixed alignment issues: changed from `align-items: center` to `align-items: baseline`
+  - Implemented proper bullet typography with optical centering (`translateY(-0.02em)`)
+
+### JetBrains Mono Optical Compensation System
+- **Font-Specific CSS Variables**:
+  - `--mono-size-factor: 0.875` (primary size reduction)
+  - `--mono-inline-factor: 0.85` (inline code contexts)
+  - `--mono-meta-factor: 0.88` (metadata-specific sizing)
+  - `--mono-weight-offset: -50` (systematic weight reduction)
+  - `--jetbrains-adjustment: -1px` (baseline correction)
+  - `--jetbrains-opacity: 0.78/0.82` (visual weight compensation)
+
+- **Size Compensation Implementation**:
+  - Applied calculated sizing: `calc(var(--step--1) * var(--mono-meta-factor))`
+  - Context-aware factors for different use cases
+  - Maintains proper hierarchy while compensating for JetBrains' tall x-height
+
+- **Weight & Color Corrections**:
+  - Systematic weight reduction: `calc(400 + var(--mono-weight-offset))`
+  - Opacity-based visual weight adjustment for better balance with Inter
+  - Dark mode compensation with different opacity values
+  - Enhanced contrast ratios for accessibility
+
+- **Baseline Grid Integration**:
+  - Optical positioning with `position: relative; top: var(--jetbrains-adjustment)`
+  - Perfect alignment with 24px baseline grid system
+  - Compensates for JetBrains Mono's unique baseline characteristics
+
+- **Responsive Optimizations**:
+  - Mobile-specific compensation factors
+  - High-DPI display adjustments
+  - Context-sensitive weight offsets (light/dark variants)
+  - OpenType features: `"kern" 1, "tnum" 1, "lnum" 1, "case" 1, "ss01" 1`
+
+### Technical Implementation
+- **Component Updates**: Fixed `tailwind.config.ts` conflicts that prevented JetBrains Mono display
+- **CSS Architecture**: Comprehensive compensation system in `src/styles/global.css`
+- **Metadata Components**: Updated `MetadataLine.astro` with proper baseline alignment
+- **Character Width Optimization**: Homepage set to 65ch for optimal reading measure
+- **Build System**: Verified compatibility with all existing font loading and fallback systems
+
+### Typography Philosophy Applied
+- **Master Typographer Principles**: Applied Bringhurst's optical alignment and Butterick's practical adjustments
+- **Monospace Integration**: Proper contrast and harmony with Inter Variable
+- **Accessibility Focus**: Enhanced contrast ratios and consistent baseline alignment
+- **Performance Maintained**: No impact on font loading performance or Core Web Vitals
+
+## Inter Typography Optimization (July 23, 2025)
+
+### Complete Font System Migration
+- **Typography Master's Analysis**: Applied principles from Bringhurst, Butterick, and Hochuli to optimize Inter Variable for warmth and readability
+- **Full Inter Variable Implementation**:
+  - Migrated all fonts from Newsreader/IBM Plex Sans to Inter Variable system
+  - Updated CSS variables: `--font-headline`, `--font-body`, `--font-serif` all use Inter Variable
+  - Added `@fontsource/inter` for OG image generation (Satori compatibility)
+  - Removed unused font dependencies and cleaned package.json
+
+### Typography Warmth Enhancements
+- **Strategic Weight Progression**:
+  - H1: 350 (light for elegance), H2: 380, H3: 420, H4: 450, H5: 480, H6: 520
+  - Body text: 380 (lighter for warmth vs. standard 400)
+  - Meta text hierarchy: primary 450, secondary 420, tertiary 400
+- **Organic Letter-Spacing**:
+  - Headers: -0.015em to -0.005em (tighter for display sizes)
+  - Body: +0.005em (subtle breathing room for Inter's geometric nature)
+  - Meta text: +0.01em to +0.015em (generous spacing for smaller sizes)
+- **Warmth Techniques**:
+  - Subtle text shadows: `0 0 1px rgba(0, 0, 0, 0.02)` for depth
+  - Contextual weight adjustments for dark mode (reduced weights)
+  - Mobile optimizations with slightly heavier weights for clarity
+
+### Typography System Refinements
+- **Optical Sizing Removal**: Eliminated inappropriate `opsz` settings from Inter (sans-serif)
+- **Small Caps Implementation**: Proper `font-variant-caps: small-caps` across components
+- **Meta Text Consolidation**: 
+  - Replaced inconsistent meta styling with systematic hierarchy
+  - Clear progression: meta-primary (14px), meta-secondary (13px), meta-tertiary (12px)
+  - Consistent color treatment and weight scaling
+- **Body Text Optimization**:
+  - Perfect line-height: 1.6 for 24px baseline alignment
+  - Improved readability with subtle letter-spacing
+  - Enhanced contrast ratios for accessibility
+
+### Technical Implementation
+- **CSS Variable System**: Fixed all broken references from legacy font names
+- **Component Updates**: Updated Asterism component and all typography references
+- **Build System**: Successfully updated OG image generation to use Inter WOFF fonts
+- **Performance**: Maintained excellent font loading with metrics-matched fallbacks
+- **Compatibility**: All existing functionality preserved while improving typography
+
+### Design Philosophy Applied
+- **Bringhurst's Principles**: Proper measure, rhythm, and typographic hierarchy
+- **Butterick's Practicality**: Focus on readability and professional appearance
+- **Hochuli's Precision**: Attention to micro-typography and spacing details
+- **Modern Web Standards**: Variable fonts, OpenType features, responsive design
+
 ## Badge Component Refinement (January 30, 2025)
 
 ### Typography Masters' Principles Applied

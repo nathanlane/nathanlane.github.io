@@ -115,7 +115,8 @@ See `private_notes/planning/Changelog.md` for complete details.
 ## Typography Enhancement Focus
 
 ### Current Typography System
-- **Fonts**: Newsreader (serif headings), IBM Plex Sans (body text), IBM Plex Mono (code)
+- **Fonts**: Inter Variable (all text), IBM Plex Mono (code)
+- **Typography Philosophy**: Master typographer principles applied for warmth and readability
 - **Fluid Typography**: Responsive type scale using `tailwindcss-fluid-type` plugin
 - **Grid System**: 6px grid unit with 24px baseline for vertical rhythm
 - **Themes**: Both light/dark modes with CSS variables
@@ -462,11 +463,15 @@ When making changes, document:
    - All header sizes proportionally scaled down
    - Fluid type scale: `text--2` to `text-6` with smooth viewport scaling
 
-2. **Font Updates**
-   - Changed from SF Pro Rounded to Newsreader (serif) for headings
-   - Changed from SF Pro to IBM Plex Sans for body text
-   - Removed old font-face declarations
-   - Implemented variable font weights for headers
+2. **Font Evolution** (Multiple Phases)
+   - **Phase 1**: Changed from SF Pro to Newsreader (serif) + IBM Plex Sans (body)
+   - **Phase 2**: Complete Inter Variable migration (July 2025)
+     - All text now uses Inter Variable for consistency and warmth
+     - Strategic weight progression: H1 (350) to H6 (520)
+     - Organic letter-spacing for geometric font humanization
+     - Contextual adjustments for dark mode and mobile
+   - Removed old font-face declarations and unused dependencies
+   - Optimized font loading with metrics-matched fallbacks
 
 3. **Blog Layout Improvements**
    - Removed sticky/fixed positioning from blog headers
@@ -681,6 +686,53 @@ The codebase uses a context-aware link styling system:
   - Removed redundant `data-variant="back"`
   - Updated all components to canonical names (inline-link → link-inline, etc.)
 - **Impact**: 30% total reduction in link CSS, zero visual changes, cleaner architecture
+
+### JetBrains Mono Typography Optimization (July 24, 2025)
+- **Complete Monospace Integration**:
+  - Migrated from IBM Plex Mono to JetBrains Mono for all monospace text
+  - Added `@fontsource/jetbrains-mono` with weights 400, 500, 600, and italic
+  - Created dedicated `--font-meta` CSS variable for metadata typography
+  - Comprehensive font stack with system fallbacks
+- **Typography Consolidation & Semantic Tokens**:
+  - **Letter-Spacing**: Reduced 20+ values to 4 semantic tokens (tight, normal, wide, caps)
+  - **Font Weights**: Consolidated 15+ values to 3 semantic weights (light 380, medium 450, bold 520)
+  - **Metadata System**: Unified `.text-meta` with consistent hierarchy and proper baseline alignment
+  - Fixed bullet typography with optical centering and Bringhurst spacing principles
+- **JetBrains Mono Optical Compensation System**:
+  - **Size Compensation**: CSS variables for context-aware sizing (0.875-0.88 factors)
+  - **Weight Corrections**: Systematic -50 weight offset to balance with Inter Variable
+  - **Baseline Integration**: -1px optical positioning for perfect grid alignment
+  - **Visual Weight**: Opacity adjustments (0.78 light/0.82 dark) for proper contrast
+  - **Responsive Optimizations**: Mobile, high-DPI, and dark mode specific adjustments
+- **Technical Implementation**:
+  - Fixed `tailwind.config.ts` conflicts that prevented JetBrains Mono display
+  - Comprehensive compensation system in `global.css` with CSS calculations
+  - Updated `MetadataLine.astro` with proper baseline alignment fixes
+  - Homepage character width optimized to 65ch for optimal reading
+- **Master Typography Principles**: Applied Bringhurst's optical alignment and Butterick's practical monospace integration techniques
+
+### Inter Variable Typography Migration (July 23, 2025)
+- **Complete Font Unification**:
+  - Migrated all typography from Newsreader/IBM Plex Sans to Inter Variable
+  - CSS variables updated: `--font-headline`, `--font-body`, `--font-serif` all use Inter
+  - Added `@fontsource/inter` package for OG image generation (Satori compatibility)
+  - Removed 10+ unused font packages, cleaned dependencies
+- **Master Typographer Principles Applied**:
+  - Strategic weight progression for warmth: H1 (350) through H6 (520)
+  - Organic letter-spacing to humanize geometric nature (-0.015em to +0.015em)
+  - Body text optimized: 380 weight, +0.005em spacing, 1.6 line-height
+  - Subtle warmth techniques: text shadows, contextual weight adjustments
+- **Typography System Improvements**:
+  - Eliminated inappropriate optical sizing from sans-serif font
+  - Implemented proper small caps (`font-variant-caps`) across components
+  - Rebuilt meta text hierarchy: primary (450), secondary (420), tertiary (400)
+  - Enhanced dark mode typography with reduced weights for better contrast
+- **Technical Excellence**:
+  - Fixed all broken CSS variable references from legacy fonts
+  - Updated OG image generation to use Inter WOFF fonts
+  - Maintained excellent performance with metrics-matched fallbacks
+  - Zero functionality changes, purely enhanced typography
+- **Impact**: Unified, warm, highly readable typography system following best practices from Bringhurst, Butterick, and Hochuli
 
 ## Resources
 - [Tailwind Typography Plugin](https://tailwindcss.com/docs/typography-plugin)

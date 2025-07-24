@@ -105,7 +105,7 @@ export default {
 
 				".dark-heading-enhanced": {
 					':root[data-theme="dark"] &': {
-						fontWeight: "450",
+						fontWeight: theme("fontWeight.medium"),
 						letterSpacing: "0.01em",
 						opacity: "0.93",
 					},
@@ -135,16 +135,40 @@ export default {
 				},
 			});
 			addComponents({
-				// Semantic Typography System
-				// Body text variants
+				// Body Text System - Inter optimized
 				".text-body": {
-					"@apply text-0 leading-relaxed text-textColor": {},
+					fontSize: "var(--step-0)", // 15-17px fluid
+					fontWeight: theme("fontWeight.light"), // Semantic light weight
+					letterSpacing: theme("letterSpacing.normal"), // Semantic normal spacing
+					lineHeight: "1.6", // 24px baseline aligned
+					color: theme("colors.textColor"),
+					fontFamily: theme("fontFamily.sans"),
+					// Dark mode optimization
+					":root[data-theme='dark'] &": {
+						fontWeight: "360", // Lighter in dark mode
+						letterSpacing: "0.008em",
+					},
+					// Mobile optimization  
+					"@media (max-width: 640px)": {
+						fontWeight: "400", // Heavier on mobile
+						letterSpacing: "0.003em",
+					},
 				},
 				".text-body-sm": {
-					"@apply text-0 leading-relaxed text-light": {},
+					fontSize: "var(--step--1)",
+					fontWeight: "400",
+					letterSpacing: "0.008em",
+					lineHeight: "1.55",
+					color: theme("colors.light"),
+					fontFamily: theme("fontFamily.sans"),
 				},
 				".text-lead": {
-					"@apply text-1 leading-relaxed text-accent": {},
+					fontSize: "var(--step-1)", 
+					fontWeight: "400",
+					letterSpacing: "0.002em",
+					lineHeight: "1.65", // More generous for lead text
+					color: theme("colors.accent"),
+					fontFamily: theme("fontFamily.sans"),
 				},
 
 				// Heading system with consistent spacing and baseline grid alignment
@@ -152,32 +176,30 @@ export default {
 					"@apply font-headline text-accent-base": {},
 					fontSize: "var(--step-5)",
 					"scroll-margin-top": "4rem", // For anchor links
-					lineHeight: "1.25",
-					fontWeight: "375", // Lighter = more elegant, prominent
-					fontVariationSettings: '"opsz" 72, "wght" 375',
-					letterSpacing: "-0.025em", // Refined tracking for editorial feel
+					lineHeight: "1.15", // Tighter for display
+					fontWeight: "350", // Light Inter for elegance
+					letterSpacing: theme("letterSpacing.tight"), // Semantic tight spacing
 					// Professional polish with OpenType features
 					fontFeatureSettings:
 						'"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
-					// Subtle text enhancement
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.1)",
+					// Warm subtle enhancement
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.02)",
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 48, "wght" 400', // Slightly heavier on mobile
-						letterSpacing: "-0.02em",
+						fontWeight: "400", // Slightly heavier on mobile
+						letterSpacing: "-0.01em",
 					},
 					// High-DPI displays: Can go lighter
 					"@media (-webkit-min-device-pixel-ratio: 2)": {
-						fontVariationSettings: '"opsz" 72, "wght" 350',
-						letterSpacing: "-0.03em",
+						fontWeight: "325",
+						letterSpacing: "-0.02em",
 					},
 					// Dark mode optimizations
 					":root[data-theme='dark'] &": {
-						fontWeight: "400", // +25 weight units for dark mode
-						fontVariationSettings: '"opsz" 72, "wght" 400',
+						fontWeight: "300", // Lighter in dark mode
 						opacity: "0.95",
-						textShadow: "0 0 2px rgba(255, 255, 255, 0.05)",
+						textShadow: "0 0 2px rgba(255, 255, 255, 0.02)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 48, "wght" 425',
+							fontWeight: "375",
 						},
 					},
 				},
@@ -185,29 +207,27 @@ export default {
 					"@apply font-headline text-accent-two": {},
 					fontSize: "var(--step-4)",
 					"scroll-margin-top": "4rem",
-					lineHeight: "1.3",
-					fontWeight: "425", // Better distinction from H1
-					fontVariationSettings: '"opsz" 60, "wght" 425', // Enhanced optical size
-					letterSpacing: "-0.02em",
+					lineHeight: "1.25", // Tighter for sections
+					fontWeight: theme("fontWeight.medium"), // Balanced Inter weight
+					letterSpacing: "-0.01em", // Moderate tracking
 					// Enhanced OpenType features for section headers
 					fontFeatureSettings:
 						'"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.08)",
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.015)",
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 40, "wght" 450', // Mobile optimization
+						fontWeight: "500", // Mobile optimization
 					},
 					// High-DPI displays: Can go lighter
 					"@media (-webkit-min-device-pixel-ratio: 2)": {
-						fontVariationSettings: '"opsz" 60, "wght" 400',
-						letterSpacing: "-0.025em",
+						fontWeight: "425",
+						letterSpacing: "-0.015em",
 					},
 					":root[data-theme='dark'] &": {
-						fontWeight: "450", // +25 weight units for dark mode
-						fontVariationSettings: '"opsz" 60, "wght" 450',
+						fontWeight: "400", // Lighter in dark mode
 						opacity: "0.93",
-						textShadow: "0 0 1px rgba(255, 255, 255, 0.04)",
+						textShadow: "0 0 1px rgba(255, 255, 255, 0.015)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 40, "wght" 475',
+							fontWeight: "475",
 						},
 					},
 				},
@@ -215,28 +235,25 @@ export default {
 					"@apply font-headline text-accent-base": {},
 					fontSize: "var(--step-3)",
 					"scroll-margin-top": "4rem",
-					lineHeight: "1.35",
-					fontWeight: "475", // Smoother progression from H2
-					fontVariationSettings: '"opsz" 48, "wght" 475', // Enhanced optical size
-					letterSpacing: "-0.015em",
+					lineHeight: "1.3", // Tighter for subsections
+					fontWeight: "550", // Semi-bold Inter
+					letterSpacing: "-0.005em", // Slight negative tracking
 					// Subsection header refinement with enhanced features
 					fontFeatureSettings:
 						'"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1, "case" 1, "cpsp" 1',
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.06)",
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.01)",
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 32, "wght" 500', // Mobile optimization
+						fontWeight: "600", // Mobile optimization
 					},
 					// High-DPI displays: Can go lighter
 					"@media (-webkit-min-device-pixel-ratio: 2)": {
-						fontVariationSettings: '"opsz" 48, "wght" 450',
+						fontWeight: "525",
 					},
 					":root[data-theme='dark'] &": {
-						fontWeight: "500", // +25 weight units for dark mode
-						fontVariationSettings: '"opsz" 48, "wght" 500',
+						fontWeight: "500", // Lighter in dark mode
 						opacity: "0.92",
-						textShadow: "0 0 1px rgba(255, 255, 255, 0.03)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 32, "wght" 525',
+							fontWeight: "575",
 						},
 					},
 				},
@@ -244,23 +261,19 @@ export default {
 					"@apply font-headline text-accent-base": {},
 					fontSize: "var(--step-2)",
 					"scroll-margin-top": "4rem",
-					lineHeight: "1.4",
-					fontWeight: "525", // Reduce visual heaviness
-					fontVariationSettings: '"opsz" 36, "wght" 525', // Enhanced optical size
-					letterSpacing: "-0.01em",
-					// Detail header optimization - disable ligatures at smaller sizes
-					fontFeatureSettings: '"kern" 1, "liga" 0, "clig" 0, "calt" 1, "lnum" 1',
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.04)",
+					lineHeight: "1.35", // Balanced for details
+					fontWeight: "600", // Semi-bold for clarity
+					letterSpacing: "0.005em", // Slight positive for warmth
+					// Detail header optimization - ligatures enabled for warmth
+					fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1',
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 28, "wght" 550', // Mobile optimization
+						fontWeight: "650", // Mobile optimization
 					},
 					":root[data-theme='dark'] &": {
-						fontWeight: "550", // +25 weight units for dark mode
-						fontVariationSettings: '"opsz" 36, "wght" 550',
+						fontWeight: "550", // Lighter in dark mode
 						opacity: "0.90",
-						textShadow: "0 0 1px rgba(255, 255, 255, 0.02)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 28, "wght" 575',
+							fontWeight: "625",
 						},
 					},
 				},
@@ -268,23 +281,19 @@ export default {
 					"@apply font-headline text-accent-base": {},
 					fontSize: "var(--step-1)",
 					"scroll-margin-top": "4rem",
-					lineHeight: "1.5",
-					fontWeight: "575", // More readable at small sizes
-					fontVariationSettings: '"opsz" 28, "wght" 575', // Enhanced optical size
-					letterSpacing: "-0.005em", // Subtle negative tracking
-					// Fine detail header - disable ligatures at small sizes
-					fontFeatureSettings: '"kern" 1, "liga" 0, "clig" 0, "calt" 1, "lnum" 1',
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.03)",
+					lineHeight: "1.4", // Tighter for smaller text
+					fontWeight: "650", // Bold for small sizes
+					letterSpacing: "0.01em", // Positive tracking for warmth
+					// Fine detail header - ligatures for warmth
+					fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "lnum" 1',
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 24, "wght" 600', // Mobile optimization
+						fontWeight: "675", // Slightly heavier on mobile
 					},
 					":root[data-theme='dark'] &": {
-						fontWeight: "600", // +25 weight units for dark mode
-						fontVariationSettings: '"opsz" 28, "wght" 600',
+						fontWeight: "600", // Lighter in dark mode
 						opacity: "0.90",
-						textShadow: "0 0 1px rgba(255, 255, 255, 0.015)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 24, "wght" 625',
+							fontWeight: "650",
 						},
 					},
 				},
@@ -292,38 +301,66 @@ export default {
 					"@apply font-headline text-accent-base": {},
 					fontSize: "var(--step-0)",
 					"scroll-margin-top": "4rem",
-					lineHeight: "1.6",
-					fontWeight: "800",
-					fontVariationSettings: '"opsz" 20, "wght" 800',
+					lineHeight: "1.5", // Optimal for small caps
+					fontWeight: "600", // Medium weight for small caps
 					textTransform: "uppercase",
-					letterSpacing: "0.075em",
-					// Small caps and sophisticated tracking
+					letterSpacing: theme("letterSpacing.caps"), // Semantic caps spacing
+					// Enhanced small caps with warmth
+					fontVariantCaps: "small-caps",
 					fontFeatureSettings: '"kern" 1, "liga" 1, "clig" 1, "calt" 1, "smcp" 1, "c2sc" 1',
-					textShadow: "0 0 1px rgba(0, 0, 0, 0.02)",
 					"@media (max-width: 640px)": {
-						fontVariationSettings: '"opsz" 18, "wght" 600',
+						fontWeight: "625",
 					},
 					":root[data-theme='dark'] &": {
-						fontWeight: "575",
-						fontVariationSettings: '"opsz" 20, "wght" 575',
+						fontWeight: "550", // Lighter in dark mode
 						opacity: "0.88",
-						textShadow: "0 0 1px rgba(255, 255, 255, 0.01)",
 						"@media (max-width: 640px)": {
-							fontVariationSettings: '"opsz" 18, "wght" 575',
+							fontWeight: "600",
 						},
 					},
 				},
 
-				// Special purpose typography
-				".text-meta": {
-					"@apply text--1 text-lightest uppercase tracking-wide": {},
-					"letter-spacing": "0.05em",
+				// Meta Text System - Inter optimized hierarchy
+				".meta-primary": {
+					fontSize: "var(--step--1)", // 14px equivalent
+					fontWeight: theme("fontWeight.medium"),
+					letterSpacing: theme("letterSpacing.normal"),
+					lineHeight: "1.5",
+					color: theme("colors.light"),
+					fontFamily: theme("fontFamily.sans"),
 				},
+				".meta-secondary": {
+					fontSize: "0.8125rem", // 13px
+					fontWeight: "400", 
+					letterSpacing: theme("letterSpacing.wide"),
+					lineHeight: "1.45",
+					color: theme("colors.lighter"),
+					fontFamily: theme("fontFamily.sans"),
+				},
+				".meta-tertiary": {
+					fontSize: "0.75rem", // 12px
+					fontWeight: "380",
+					letterSpacing: "0.03em", 
+					lineHeight: "1.4",
+					color: theme("colors.lightest"),
+					fontFamily: theme("fontFamily.sans"),
+				},
+				".meta-caps": {
+					fontSize: "0.6875rem", // 11px
+					fontWeight: "500",
+					textTransform: "uppercase",
+					letterSpacing: "0.08em",
+					lineHeight: "1.4",
+					color: theme("colors.light"),
+					fontFamily: theme("fontFamily.sans"),
+					fontVariantCaps: "small-caps",
+				},
+				// Legacy compatibility - removed conflicting text-meta definition
 				".text-caption": {
-					"@apply text--1 text-light italic leading-relaxed": {},
+					"@apply meta-secondary italic": {},
 				},
 				".text-quote": {
-					"@apply text-1 font-serif italic text-accent leading-relaxed": {},
+					"@apply text-1 font-headline italic text-accent leading-relaxed": {},
 				},
 
 				// Legacy component - keeping for compatibility
@@ -508,99 +545,94 @@ export default {
 			});
 			// Typography heading styles - GENERATED FROM Utopia step-map
 			addBase({
-				// Base styles for all headers - foundation for typography system
+				// Base styles for all headers - Inter typography system
 				"h1, h2, h3, h4, h5, h6": {
-					fontFamily:
-						'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
+					fontFamily: theme("fontFamily.headline"),
 					fontWeight: "400",
 					lineHeight: "1.2",
-					letterSpacing: "-0.01em",
+					letterSpacing: "-0.005em",
 					color: theme("colors.accent-base"),
 					marginTop: "0",
 					marginBottom: "0",
-					fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1',
+					fontFeatureSettings: '"kern" 1, "liga" 1, "calt" 1, "case" 1, "cpsp" 1',
 					textRendering: "optimizeLegibility",
 					"-webkit-font-smoothing": "antialiased",
 					"-moz-osx-font-smoothing": "grayscale",
 				},
-				// H1 - Largest display heading
+				// H1 - Largest display heading (Inter optimized)
 				h1: {
 					fontSize: "var(--step-5)",
-					lineHeight: "1.25",
-					fontWeight: "400",
-					fontVariationSettings: '"opsz" 72, "wght" 400',
-					letterSpacing: "-0.03em",
+					lineHeight: "1.15",
+					fontWeight: "350",
+					letterSpacing: "-0.015em",
+					// Subtle warmth with text shadow
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.02)",
 				},
-				// H2 - Major section heading
+				// H2 - Major section heading (Inter optimized)
 				h2: {
 					fontSize: "var(--step-4)",
-					lineHeight: "1.3",
-					fontWeight: "450",
-					fontVariationSettings: '"opsz" 52, "wght" 450',
-					letterSpacing: "-0.025em",
+					lineHeight: "1.25",
+					fontWeight: theme("fontWeight.medium"),
+					letterSpacing: "-0.01em",
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.015)",
 				},
-				// H3 - Subsection heading
+				// H3 - Subsection heading (Inter optimized)
 				h3: {
 					fontSize: "var(--step-3)",
-					lineHeight: "1.35",
-					fontWeight: "500",
-					fontVariationSettings: '"opsz" 36, "wght" 500',
-					letterSpacing: "-0.02em",
+					lineHeight: "1.3",
+					fontWeight: "550",
+					letterSpacing: "-0.005em",
+					textShadow: "0 0 1px rgba(0, 0, 0, 0.01)",
 				},
-				// H4 - Minor heading
+				// H4 - Minor heading (Inter optimized)
 				h4: {
 					fontSize: "var(--step-2)",
-					lineHeight: "1.4",
-					fontWeight: "550",
-					fontVariationSettings: '"opsz" 28, "wght" 550',
-					letterSpacing: "-0.015em",
+					lineHeight: "1.35",
+					fontWeight: "600",
+					letterSpacing: "0.005em",
 				},
-				// H5 - Small heading
+				// H5 - Small heading (Inter optimized)
 				h5: {
 					fontSize: "var(--step-1)",
-					lineHeight: "1.5",
-					fontWeight: "600",
-					fontVariationSettings: '"opsz" 24, "wght" 600',
-					letterSpacing: "-0.01em",
+					lineHeight: "1.4",
+					fontWeight: "650",
+					letterSpacing: "0.01em",
 				},
-				// H6 - Smallest heading
+				// H6 - Smallest heading (Inter optimized)
 				h6: {
 					fontSize: "var(--step-0)",
-					lineHeight: "1.6",
-					fontWeight: "650",
-					fontVariationSettings: '"opsz" 20, "wght" 650',
+					lineHeight: "1.5",
+					fontWeight: "600",
 					textTransform: "uppercase",
-					letterSpacing: "0.075em",
+					letterSpacing: "0.08em",
+					// Small caps effect for warmth
+					fontVariantCaps: "small-caps",
 				},
-				// Dark mode optimizations for headers
+				// Dark mode optimizations for headers (Inter adjustments)
 				':root[data-theme="dark"] h1': {
-					fontWeight: "425",
-					fontVariationSettings: '"opsz" 72, "wght" 425',
+					fontWeight: "300", // Lighter in dark mode
 					opacity: "0.95",
+					textShadow: "0 0 2px rgba(255, 255, 255, 0.02)",
 				},
 				':root[data-theme="dark"] h2': {
-					fontWeight: "450",
-					fontVariationSettings: '"opsz" 52, "wght" 450',
+					fontWeight: "400",
 					opacity: "0.93",
+					textShadow: "0 0 1px rgba(255, 255, 255, 0.015)",
 				},
 				':root[data-theme="dark"] h3': {
-					fontWeight: "475",
-					fontVariationSettings: '"opsz" 36, "wght" 475',
+					fontWeight: "500",
 					opacity: "0.92",
 				},
 				':root[data-theme="dark"] h4': {
-					fontWeight: "525",
-					fontVariationSettings: '"opsz" 28, "wght" 525',
+					fontWeight: "550",
 					opacity: "0.90",
 				},
 				':root[data-theme="dark"] h5': {
-					fontWeight: "575",
-					fontVariationSettings: '"opsz" 24, "wght" 575',
+					fontWeight: "600",
 					opacity: "0.90",
 				},
 				':root[data-theme="dark"] h6': {
-					fontWeight: "625",
-					fontVariationSettings: '"opsz" 20, "wght" 625',
+					fontWeight: "550",
 					opacity: "0.88",
 				},
 			});
@@ -614,15 +646,17 @@ export default {
 				// xl: '1200px',
 			},
 			letterSpacing: {
-				tightest: "-0.02em",
-				tighter: "-0.015em",
-				wideUpper: "0.05em",
-				nav: "0.05em",
-				"caps-generous": "0.075em",
-				"caps-loose": "0.1em",
+				// Semantic letter-spacing system (consolidated from 20+ values)
+				tight: "-0.02em",      // Headlines and display text
+				normal: "0.005em",     // Body text (subtle breathing room for Inter)
+				wide: "0.02em",        // Emphasis, buttons, interactive elements
+				caps: "0.075em",       // Small caps and uppercase text
 			},
 			fontWeight: {
-				h1: "400",
+				// Semantic font weight system (consolidated from 15+ values)
+				light: "380",      // Body text, warm and readable
+				medium: "450",     // Meta text, emphasis, secondary elements  
+				bold: "520",       // Headers, strong emphasis, calls-to-action
 			},
 			maxWidth: {
 				lg: "32rem", // default 32rem (512px)
@@ -783,17 +817,21 @@ export default {
 				},
 			},
 			fontFamily: {
-				// Headlines: Newsreader with optimized serif fallbacks
+				// Headlines: Inter with system fallbacks
 				headline: [
-					"Newsreader Variable",
-					"Playfair Display",
-					"Georgia",
-					"Times New Roman",
-					...fontFamily.serif,
+					"Inter Variable",
+					"Inter",
+					"system-ui",
+					"-apple-system",
+					"BlinkMacSystemFont",
+					"Segoe UI",
+					"Roboto",
+					...fontFamily.sans,
 				],
-				// Body text: IBM Plex Sans with optimized system fallbacks
+				// Body text: Inter with system fallbacks
 				sans: [
-					"IBM Plex Sans",
+					"Inter Variable",
+					"Inter",
 					"system-ui",
 					"-apple-system",
 					"BlinkMacSystemFont",
@@ -801,16 +839,25 @@ export default {
 					"Roboto",
 					"sans-serif",
 				],
-				// Long-form prose: IBM Plex Serif
-				serif: ["IBM Plex Serif", ...fontFamily.serif],
-				// Code/mono: IBM Plex Mono with optimized fallbacks
+				// Long-form prose: Source Serif 4
+				serif: ["Source Serif 4", "IBM Plex Serif", ...fontFamily.serif],
+				// Code/mono: JetBrains Mono with optimized fallbacks
 				mono: [
-					"IBM Plex Mono",
+					"JetBrains Mono",
 					"SFMono-Regular",
 					"Consolas",
 					"Liberation Mono",
 					"Menlo",
 					"Courier",
+					"monospace",
+				],
+				// Metadata/decorative: JetBrains Mono with fallbacks
+				meta: [
+					"JetBrains Mono",
+					"Departure Mono",
+					"SFMono-Regular",
+					"Consolas",
+					"Menlo",
 					"monospace",
 				],
 			},
@@ -834,54 +881,44 @@ export default {
 						},
 						h1: {
 							fontSize: "var(--step-5)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "450",
-							fontVariationSettings: '"opsz" 72, "wght" 450',
-							letterSpacing: "-0.025em",
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "600",
+							letterSpacing: "-0.01em",
 							marginBottom: "var(--space-4)",
 							marginTop: "0",
 							lineHeight: "1.1",
 						},
 						h2: {
 							fontSize: "var(--step-4)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "475",
-							fontVariationSettings: '"opsz" 52, "wght" 475',
-							letterSpacing: "-0.02em",
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "700",
+							letterSpacing: "-0.005em",
 							marginBottom: "var(--space-3)",
 							marginTop: "var(--space-6)",
 							lineHeight: "1.15",
 						},
 						h3: {
 							fontSize: "var(--step-3)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "500",
-							fontVariationSettings: '"opsz" 36, "wght" 500',
-							letterSpacing: "-0.015em",
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "900",
+							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
 							marginTop: "var(--space-4)",
 							lineHeight: "1.2",
 						},
 						h4: {
 							fontSize: "var(--step-2)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "525",
-							fontVariationSettings: '"opsz" 28, "wght" 525',
-							letterSpacing: "-0.01em",
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "900",
+							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
 							marginTop: "var(--space-4)",
 							lineHeight: "1.25",
 						},
 						h5: {
 							fontSize: "var(--step-1)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "550",
-							fontVariationSettings: '"opsz" 24, "wght" 550',
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-1)",
 							marginTop: "var(--space-4)",
@@ -889,10 +926,8 @@ export default {
 						},
 						h6: {
 							fontSize: "var(--step-0)",
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							fontWeight: "600",
-							fontVariationSettings: '"opsz" 20, "wght" 600',
+							fontFamily: 'var(--font-headline)',
+							fontWeight: "900",
 							textTransform: "uppercase",
 							letterSpacing: "0.05em",
 							marginBottom: "var(--space-1)",
@@ -1212,39 +1247,32 @@ export default {
 							lineHeight: "1.65", // More space in dark mode
 						},
 						"h1, h2, h3, h4, h5, h6": {
-							fontFamily:
-								'"Newsreader Variable", "Playfair Display", Georgia, "Times New Roman", serif',
-							letterSpacing: "0.01em", // Slightly more open
+							fontFamily: 'var(--font-headline)',
+							letterSpacing: "-0.005em", // Tighter for dark mode sans-serif
 						},
 						h1: {
 							opacity: "0.95",
-							fontWeight: "425",
-							fontVariationSettings: '"opsz" 72, "wght" 425',
+							fontWeight: "600",
 						},
 						h2: {
 							opacity: "0.93",
-							fontWeight: "450",
-							fontVariationSettings: '"opsz" 52, "wght" 450',
+							fontWeight: "700",
 						},
 						h3: {
 							opacity: "0.92",
-							fontWeight: "475",
-							fontVariationSettings: '"opsz" 36, "wght" 475',
+							fontWeight: "900",
 						},
 						h4: {
 							opacity: "0.90",
-							fontWeight: "500",
-							fontVariationSettings: '"opsz" 28, "wght" 500',
+							fontWeight: "900",
 						},
 						h5: {
 							opacity: "0.90",
-							fontWeight: "525",
-							fontVariationSettings: '"opsz" 24, "wght" 525',
+							fontWeight: "900",
 						},
 						h6: {
 							opacity: "0.88",
-							fontWeight: "575",
-							fontVariationSettings: '"opsz" 20, "wght" 575',
+							fontWeight: "900",
 						},
 
 						// List adjustments
@@ -1272,7 +1300,7 @@ export default {
 							backgroundColor: "hsl(0deg 0% 12%)",
 							color: "hsl(0deg 0% 88%)",
 							borderColor: "hsl(0deg 0% 20%)",
-							fontWeight: "450",
+							fontWeight: theme("fontWeight.medium"),
 						},
 						pre: {
 							backgroundColor: "hsl(0deg 0% 6%)",

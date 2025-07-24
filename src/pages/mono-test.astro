@@ -1,0 +1,132 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/PageHeader.astro";
+
+const meta = {
+  title: "Monospace Font Test",
+  description: "Testing monospace fonts for metadata",
+  articleDate: null,
+  ogImage: null
+};
+---
+
+<Base meta={meta}>
+  <div class="mx-auto max-w-3xl px-4">
+    <PageHeader>
+      Monospace Font Test
+    </PageHeader>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <div class="mb-12">
+      <div class="p-4 bg-yellow-100 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg">
+        <p class="text-sm font-semibold mb-2">About Departure Mono</p>
+        <p class="text-sm">
+          Testing Space Mono as an alternative to Departure Mono for metadata and decorative elements.
+        </p>
+      </div>
+    </div>
+
+    <!-- Metadata Comparison -->
+    <section class="mb-16">
+      <h2 class="heading-3 mb-8">Metadata Examples</h2>
+      
+      <!-- Blog Post -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">Current (IBM Plex Mono)</p>
+          <h3 class="heading-3 mb-3">Understanding Industrial Policy</h3>
+          <div class="flex flex-wrap gap-3 text-sm font-mono">
+            <span class="text-color-500">JAN 23, 2025</span>
+            <span class="text-color-500">•</span>
+            <span class="text-color-500">15 MIN READ</span>
+          </div>
+        </div>
+        
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">With Space Mono</p>
+          <h3 class="heading-3 mb-3">Understanding Industrial Policy</h3>
+          <div class="flex flex-wrap gap-3 text-sm" style="font-family: 'Space Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em;">
+            <span class="text-color-500">JAN 23, 2025</span>
+            <span class="text-color-500">•</span>
+            <span class="text-color-500">15 MIN READ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">Current Navigation</p>
+          <nav class="flex gap-6">
+            <a href="#" class="text-sm font-medium hover:underline">ABOUT</a>
+            <a href="#" class="text-sm font-medium hover:underline">RESEARCH</a>
+            <a href="#" class="text-sm font-medium hover:underline">BLOG</a>
+          </nav>
+        </div>
+        
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">Space Mono Navigation</p>
+          <nav class="flex gap-6" style="font-family: 'Space Mono', monospace;">
+            <a href="#" class="text-sm font-medium hover:underline" style="letter-spacing: 0.1em;">ABOUT</a>
+            <a href="#" class="text-sm font-medium hover:underline" style="letter-spacing: 0.1em;">RESEARCH</a>
+            <a href="#" class="text-sm font-medium hover:underline" style="letter-spacing: 0.1em;">BLOG</a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Tags and Labels -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">Current Tags</p>
+          <div class="flex gap-2">
+            <span class="px-2 py-1 bg-color-100 rounded text-xs font-mono">DRAFT</span>
+            <span class="px-2 py-1 bg-color-100 rounded text-xs font-mono">FEATURED</span>
+            <span class="px-2 py-1 bg-color-100 rounded text-xs font-mono">ECONOMICS</span>
+          </div>
+        </div>
+        
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-meta mb-4">Space Mono Tags</p>
+          <div class="flex gap-2">
+            <span class="px-2 py-1 bg-color-100 rounded text-xs" style="font-family: 'Space Mono', monospace; letter-spacing: 0.05em;">DRAFT</span>
+            <span class="px-2 py-1 bg-color-100 rounded text-xs" style="font-family: 'Space Mono', monospace; letter-spacing: 0.05em;">FEATURED</span>
+            <span class="px-2 py-1 bg-color-100 rounded text-xs" style="font-family: 'Space Mono', monospace; letter-spacing: 0.05em;">ECONOMICS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Character Comparison -->
+    <section class="mb-16">
+      <h2 class="heading-3 mb-8">Font Character Comparison</h2>
+      
+      <div class="space-y-6">
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-sm font-semibold mb-3">IBM Plex Mono (Current)</p>
+          <p class="font-mono text-2xl mb-2">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p class="font-mono text-lg mb-2">abcdefghijklmnopqrstuvwxyz</p>
+          <p class="font-mono">0123456789 • 2025-01-23 • METADATA</p>
+        </div>
+        
+        <div class="p-6 border border-color-200 rounded-lg">
+          <p class="text-sm font-semibold mb-3">Space Mono</p>
+          <p class="text-2xl mb-2" style="font-family: 'Space Mono', monospace;">ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+          <p class="text-lg mb-2" style="font-family: 'Space Mono', monospace;">abcdefghijklmnopqrstuvwxyz</p>
+          <p style="font-family: 'Space Mono', monospace;">0123456789 • 2025-01-23 • METADATA</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation -->
+    <div class="p-6 bg-color-100 rounded-lg">
+      <p class="text-sm font-semibold mb-3">To implement Space Mono:</p>
+      <ol class="text-sm list-decimal ml-6 space-y-1">
+        <li>Install: <code class="text-xs bg-color-200 px-2 py-1 rounded font-mono">npm install @fontsource/space-mono</code></li>
+        <li>Import in BaseHead.astro</li>
+        <li>Add CSS variable for metadata font</li>
+        <li>Apply to metadata elements</li>
+      </ol>
+    </div>
+  </div>
+</Base>
