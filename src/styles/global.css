@@ -453,9 +453,9 @@
 		--jetbrains-adjustment-small: -0.5px; /* Fine adjustment for smaller sizes */
 
 		/* Color/contrast compensation - JetBrains appears darker */
-		--jetbrains-opacity: 0.78; /* Light mode visual weight reduction */
-		--jetbrains-opacity-dark: 0.82; /* Dark mode compensation */
-		--jetbrains-opacity-light: 0.72; /* Light variant extra recession */
+		--jetbrains-opacity: 0.92; /* Light mode visual weight reduction - increased visibility */
+		--jetbrains-opacity-dark: 0.94; /* Dark mode compensation - increased visibility */
+		--jetbrains-opacity-light: 0.85; /* Light variant extra recession - increased visibility */
 
 		/* Spacing Scale - Grid Aligned */
 		--space-1: calc(var(--grid-unit) * 1); /* 6px - hairline */
@@ -636,8 +636,8 @@
 		/* 4. RHYTHM: Ruder's "systematic approach" to vertical spacing */
 		line-height: 1.45; /* Slightly tighter for compact metadata */
 
-		/* 5. CONTRAST: JetBrains Mono color compensation */
-		color: var(--theme-color-500);
+		/* 5. CONTRAST: JetBrains Mono color compensation - increased visibility */
+		color: var(--theme-color-650);
 		opacity: var(--jetbrains-opacity); /* Visual weight reduction - JetBrains appears darker */
 
 		/* 6. MONO-SPECIFIC: Prevent character width variations */
@@ -657,12 +657,12 @@
 	/* Simplified metadata variants - globally reusable */
 
 	.text-meta--light {
-		/* JetBrains Mono light variant with optical compensation */
+		/* JetBrains Mono light variant with optical compensation - increased visibility */
 		font-weight: calc(350 + var(--mono-weight-light-offset)); /* 275 - extra light for recession */
-		color: var(--theme-color-450);
+		color: var(--theme-color-550);
 
-		/* Enhanced recession through opacity stacking */
-		opacity: calc(var(--jetbrains-opacity) * var(--jetbrains-opacity-light)); /* ~0.56 total */
+		/* Enhanced recession through opacity stacking - increased visibility */
+		opacity: calc(var(--jetbrains-opacity) * var(--jetbrains-opacity-light)); /* ~0.78 total with new values */
 
 		/* Slightly more open spacing for lighter weight */
 		letter-spacing: 0.02em;
@@ -672,9 +672,9 @@
 	}
 
 	.text-meta--dark {
-		/* JetBrains Mono dark variant with optical compensation */
+		/* JetBrains Mono dark variant with optical compensation - increased visibility */
 		font-weight: calc(500 + var(--mono-weight-dark-offset)); /* 475 - moderated emphasis */
-		color: var(--theme-color-600);
+		color: var(--theme-color-700);
 
 		/* Balanced opacity - less reduction for emphasis */
 		opacity: calc(var(--jetbrains-opacity) + 0.15); /* ~0.93 - still visible as emphasis */
@@ -1024,8 +1024,8 @@
 		}
 
 		.text-meta--light {
-			color: var(--theme-color-400);
-			opacity: 0.85; /* Slightly more transparent in dark */
+			color: var(--theme-color-450);
+			opacity: 0.92; /* Increased visibility in dark mode */
 		}
 
 		/* JetBrains Mono dark mode with full compensation system */
@@ -1045,17 +1045,17 @@
 		}
 
 		.text-meta--light {
-			/* Maximum recession in dark mode */
+			/* Maximum recession in dark mode - increased visibility */
 			font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
 			letter-spacing: 0.03em;
-			opacity: calc(var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)); /* ~0.59 */
+			opacity: calc(var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)); /* ~0.80 with new values */
 		}
 
 		.text-meta--dark {
-			/* Balanced emphasis in dark mode */
+			/* Balanced emphasis in dark mode - increased visibility */
 			font-weight: calc(475 + var(--mono-weight-dark-offset)); /* 450 */
 			letter-spacing: 0.015em;
-			opacity: calc(var(--jetbrains-opacity-dark) + 0.1); /* ~0.92 */
+			opacity: calc(var(--jetbrains-opacity-dark) + 0.06); /* ~1.0 with new values */
 			text-shadow: 0 0 1px rgba(255, 255, 255, 0.08);
 		}
 	}
