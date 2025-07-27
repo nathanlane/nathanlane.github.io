@@ -10,7 +10,8 @@ export interface MediaItem {
 export const mediaData: Record<number, MediaItem[]> = {
 	2025: [
 		{
-			title: "The Relationship Between Competition Policy and Industrial Policy in an Era of Structural Change",
+			title:
+				"The Relationship Between Competition Policy and Industrial Policy in an Era of Structural Change",
 			outlet: "Intereconomics",
 			date: "2025-07-20",
 			type: "article",

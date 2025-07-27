@@ -1,9 +1,9 @@
 ---
 import { render } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
-import Badge from "@/components/Badge.astro";
-import BaseLayout from "@/layouts/Base.astro";
 import type { CollectionEntry } from "astro:content";
+import Badge from "@/components/Badge.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import BaseLayout from "@/layouts/Base.astro";
 
 // Accept any content collection type
 type Props = {
@@ -25,7 +25,7 @@ if (isResearch) {
     description: entry.data.description,
     publishDate: `${entry.data.paperDate}-01-01`, // Convert year to full date
     ogImage: entry.data.ogImage || `/og-image/research/${entry.id}.png`,
-    tags: entry.data.tags || [],
+    tags: ('tags' in entry.data && entry.data.tags) ? entry.data.tags : [],
   };
 
   const breadcrumbData = {
@@ -43,7 +43,7 @@ if (isResearch) {
 }
 ---
 
-<BaseLayout meta={{ title: entry.data.title, description: entry.data.description }} structuredData={structuredData}>
+<BaseLayout meta={{ title: entry.data.title, description: entry.data.description }} {... structuredData ? { structuredData } : {}}>
   <div class="gap-x-8b lg:flex lg:items-start">
     <article class="flex-grow break-words max-w-prose mx-auto measure-base space-y-4">
       <header class="mb-8b">
@@ -126,7 +126,7 @@ if (isResearch) {
         <Content />
       </div>
       
-      {entry.data.tags && entry.data.tags.length > 0 && (
+      {isResearch && 'tags' in entry.data && entry.data.tags && entry.data.tags.length > 0 && (
         <footer class="mt-12b pt-6b border-t border-color-200">
           <div class="flex flex-wrap gap-2">
             {entry.data.tags.map((tag: string) => (

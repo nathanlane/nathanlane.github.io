@@ -1,12 +1,12 @@
 ---
-import Base from "@/layouts/Base.astro";
 import PageHeader from "@/components/PageHeader.astro";
+import Base from "@/layouts/Base.astro";
 
 const meta = {
   title: "Halyard Font Test",
   description: "Testing Halyard font family",
-  articleDate: null,
-  ogImage: null
+  articleDate: undefined,
+  ogImage: undefined
 };
 ---
 
@@ -53,9 +53,7 @@ const meta = {
   </style>
 
   <div class="mx-auto max-w-3xl px-4">
-    <PageHeader>
-      Halyard Font Test
-    </PageHeader>
+    <PageHeader title="Halyard Font Test" />
 
     <div class="mb-12">
       <div class="p-4 bg-amber-100 dark:bg-amber-900/20 rounded-lg mb-8">

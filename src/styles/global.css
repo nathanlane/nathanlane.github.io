@@ -662,7 +662,9 @@
 		color: var(--theme-color-550);
 
 		/* Enhanced recession through opacity stacking - increased visibility */
-		opacity: calc(var(--jetbrains-opacity) * var(--jetbrains-opacity-light)); /* ~0.78 total with new values */
+		opacity: calc(
+			var(--jetbrains-opacity) * var(--jetbrains-opacity-light)
+		); /* ~0.78 total with new values */
 
 		/* Slightly more open spacing for lighter weight */
 		letter-spacing: 0.02em;
@@ -1048,7 +1050,9 @@
 			/* Maximum recession in dark mode - increased visibility */
 			font-weight: calc(325 + var(--mono-weight-light-offset)); /* 250 */
 			letter-spacing: 0.03em;
-			opacity: calc(var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)); /* ~0.80 with new values */
+			opacity: calc(
+				var(--jetbrains-opacity-dark) * var(--jetbrains-opacity-light)
+			); /* ~0.80 with new values */
 		}
 
 		.text-meta--dark {
