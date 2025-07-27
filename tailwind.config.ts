@@ -8,6 +8,7 @@ export default {
 	content: [
 		"./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}",
 		"!./src/pages/og-image/[slug].png.ts",
+		"!./src/pages/_test/**/*.astro",
 	],
 	corePlugins: {
 		// disable some core plugins as they are included in the css, even when unused
