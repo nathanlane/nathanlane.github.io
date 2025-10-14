@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/site.config';
+import { stripTrailingSlash, toAbsoluteUrl } from '@/utils/url';
 // This component adds JSON-LD structured data to help search engines understand your content
 import type { BreadcrumbItem, StructuredDataContent, StructuredDataProps } from '@/types';
 
@@ -9,17 +10,10 @@ const { type, data } = Astro.props;
 
 const siteBase = Astro.site ?? Astro.url;
 const configuredSiteHref = Astro.site?.toString() ?? "";
-const configuredSiteHrefNoTrailingSlash = configuredSiteHref.replace(/\/$/, "");
+const configuredSiteHrefNoTrailingSlash = stripTrailingSlash(configuredSiteHref);
 const siteHref = siteBase?.toString() ?? "";
 
-const absoluteUrl = (value?: string) => {
-  if (!value) return undefined;
-  try {
-    return siteBase ? new URL(value, siteBase).href : value;
-  } catch {
-    return value;
-  }
-};
+const absoluteUrl = (value?: string) => toAbsoluteUrl(value, siteBase);
 
 const socialProfiles = (siteConfig.socialProfiles || [])
   .map((profile) => absoluteUrl(profile) ?? profile)
