@@ -383,7 +383,7 @@ When working with this codebase, provide context on:
 
 **TypeScript Integration**
 - **Strict Mode**: Enabled for better type safety and error catching
-- **Zod Schemas**: Content validation (see `src/content/config.ts`)
+- **Zod Schemas**: Content validation (see `src/content.config.ts`)
 - **Type Inference**: Astro provides automatic types for content collections
 
 **TailwindCSS Methodology**
@@ -465,11 +465,17 @@ When making changes, document:
 
 2. **Font Evolution** (Multiple Phases)
    - **Phase 1**: Changed from SF Pro to Newsreader (serif) + IBM Plex Sans (body)
-   - **Phase 2**: Complete Inter Variable migration (July 2025)
+   - **Phase 2**: Complete Inter Variable migration (July 23, 2025)
      - All text now uses Inter Variable for consistency and warmth
      - Strategic weight progression: H1 (350) to H6 (520)
      - Organic letter-spacing for geometric font humanization
      - Contextual adjustments for dark mode and mobile
+   - **Phase 3**: JetBrains Mono integration (July 24, 2025)
+     - Replaced IBM Plex Mono with JetBrains Mono for code and metadata
+     - Comprehensive optical compensation system for perfect integration
+   - **Current Stack** (as of July 2025):
+     - Inter Variable: All headlines, body text, UI elements
+     - JetBrains Mono: Code blocks, metadata, technical text
    - Removed old font-face declarations and unused dependencies
    - Optimized font loading with metrics-matched fallbacks
 

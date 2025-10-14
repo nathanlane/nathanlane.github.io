@@ -7,10 +7,10 @@ A typography-focused personal website built with Astro. This project emphasizes 
 ### Typography System Features
 
 - **Fluid Typography**: Responsive type scale using `tailwindcss-fluid-type` plugin
-- **Professional Font Stack**: 
-  - Newsreader (serif) for headings with variable weights
-  - IBM Plex Sans for body text
-  - IBM Plex Mono for code blocks
+- **Professional Font Stack**:
+  - Inter Variable for all typography (headlines, body, UI)
+  - JetBrains Mono for code blocks and metadata
+  - Complete variable font system with optical adjustments
 - **6px Baseline Grid**: All spacing aligned to 6px increments for perfect vertical rhythm
 - **Optimized Reading Experience**:
   - Reduced base font size (15-17px) for better readability
@@ -108,6 +108,41 @@ Replace npm with your choice of npm / yarn / pnpm
 | `npm run check`  | TypeScript type checking                                       |
 | `npm run lint`   | Run Biome linting                                             |
 | `npm run format:code` | Format code with Biome and Prettier                      |
+| `npm run cms`    | Start Decap CMS proxy server for local content editing        |
+| `npm run pre-push` | Run all validation checks before pushing                    |
+
+## Content Management System (CMS)
+
+The site includes **Decap CMS** for web-based content editing. To use it:
+
+### 1. Start Both Servers
+```bash
+# Terminal 1: Start Astro dev server
+pnpm dev
+
+# Terminal 2: Start CMS proxy server
+pnpm cms
+# or: npx decap-server
+```
+
+### 2. Access the CMS
+- Open `http://localhost:4321/admin/index.html`
+- Click "Login" (any credentials work locally)
+- Edit content through the web interface
+
+### 3. What You Can Edit
+- **Blog Posts**: Create/edit posts with rich text editor
+- **Homepage**: Update bio, tagline, contact links via forms
+- **Research/Projects/Writing**: Manage all content collections
+- **Media**: Upload images to `public/images/uploads/`
+
+### 4. How It Works
+- Changes save directly to your local files
+- No authentication needed - local development only
+- Full WYSIWYG editing for markdown content
+- All edits follow the same structure as manual file editing
+
+**Note**: The CMS is intentionally configured for local-only access. When visitors go to `/admin/` on the live site, they see instructions for local setup instead of a login screen.
 
 ## Development Workflow
 
@@ -167,6 +202,15 @@ Replace npm with your choice of npm / yarn / pnpm
 - Full markdown/MDX support with frontmatter
 - Version controlled but completely excluded from website builds
 
+### Utility Scripts
+
+This project includes 29 utility scripts organized in `/scripts/`:
+- **content/**: Content validation, migration, and fixing tools
+- **maintenance/**: Ongoing tasks and optimizations
+- **validation/**: Pre-commit and pre-push checks
+
+See [scripts/README.md](scripts/README.md) for complete documentation.
+
 ## Configure
 
 - Edit the config file `src/site.config.ts` for basic site meta data and navigation links
@@ -190,7 +234,7 @@ Replace npm with your choice of npm / yarn / pnpm
   - If you would like to change the style of the generated image the Satori library creates, open up `src/pages/og-image/[slug].png.ts` to the markup function where you can edit the html/tailwind-classes as necessary. You can use this [playground](https://og-playground.vercel.app/) to aid your design.
   - You can also create your own og images and skip satori generating it for you by adding an ogImage property in the frontmatter with a link to the asset, an example can be found in `src/content/post/social-image.md`. More info on frontmatter can be found [here](#frontmatter)
 - Optional:
-  - Fonts: The theme uses Newsreader (serif) for headings and IBM Plex Sans for body text. You can change fonts in `src/styles/fonts.css` and update the font-family references in `tailwind.config.ts`.
+  - Fonts: The theme uses Inter Variable for all text and JetBrains Mono for code. Fonts are loaded via @fontsource imports in `src/components/BaseHead.astro`. You can change fonts by updating the imports and the font-family references in `tailwind.config.ts`.
 
 ## Updating
 
