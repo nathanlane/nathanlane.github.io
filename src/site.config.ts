@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
 		},
 	},
 	// Used as the default description meta property and webmanifest description
-	description: "Nathan Lane, PhD, Economist and Data Scientist",
+	description: "Nathan Lane, PhD, Economist",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
@@ -27,12 +27,12 @@ export const siteConfig: SiteConfig = {
 	// Resume PDF link - update filename as needed
 	resumeUrl: "/cv.pdf",
 	// Primary email address
-	email: "drnathanlane@gmail.com",
+	email: "n.lane@lse.ac.uk",
 	// Footer branding text - customize or set to empty string to hide
 	footerText: "🚀 Astro Theme by Nathan Lane",
 	// SEO and structured data fields
-	jobTitle: "Assistant Professor of Economics",
-	organization: "University of Oxford",
+	jobTitle: "Assistant Professor",
+	organization: "London School of Economics",
 	profileImage: "/headshot.jpg",
 	twitterHandle: "@straightedge",
 	orcid: "0000-0003-0884-8418",

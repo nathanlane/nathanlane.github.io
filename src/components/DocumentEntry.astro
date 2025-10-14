@@ -1,4 +1,5 @@
 ---
+import { normalizeStatus } from '@/utils/date';
 import MetadataLine from './MetadataLine.astro';
 
 interface Props {
@@ -38,7 +39,7 @@ const formattedDate = date ? new Date(date).toLocaleDateString('en-US', {
 const metadataItems = [
   { text: type.toUpperCase() },
   ...(formattedDate ? [{ text: formattedDate }] : []),
-  ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []),
+  ...(status ? [{ text: normalizeStatus(status) }] : []),
   ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
 ---

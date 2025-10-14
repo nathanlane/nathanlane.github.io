@@ -7,19 +7,38 @@ export interface Props extends StructuredDataProps {}
 
 const { type, data } = Astro.props;
 
-// Helper to create Person schema (reused in multiple schemas)
+const siteBase = Astro.site ?? Astro.url;
+const configuredSiteHref = Astro.site?.toString() ?? "";
+const configuredSiteHrefNoTrailingSlash = configuredSiteHref.replace(/\/$/, "");
+const siteHref = siteBase?.toString() ?? "";
+
+const absoluteUrl = (value?: string) => {
+  if (!value) return undefined;
+  try {
+    return siteBase ? new URL(value, siteBase).href : value;
+  } catch {
+    return value;
+  }
+};
+
+const socialProfiles = (siteConfig.socialProfiles || [])
+  .map((profile) => absoluteUrl(profile) ?? profile)
+  .filter(Boolean);
+
 const personSchema = {
   "@type": "Person",
-  "@id": `${Astro.site}/#author`,
+  "@id": absoluteUrl("#author"),
   "name": siteConfig.author,
-  "url": Astro.site?.toString() || "",
-  "image": siteConfig.profileImage ? `${Astro.site}${siteConfig.profileImage}` : undefined,
-  "sameAs": siteConfig.socialProfiles || [],
+  "url": configuredSiteHref || siteHref || undefined,
+  "image": absoluteUrl(siteConfig.profileImage),
+  "sameAs": socialProfiles.length ? socialProfiles : undefined,
   "jobTitle": siteConfig.jobTitle,
-  "worksFor": siteConfig.organization ? {
-    "@type": "Organization",
-    "name": siteConfig.organization
-  } : undefined
+  "worksFor": siteConfig.organization
+    ? {
+        "@type": "Organization",
+        "name": siteConfig.organization,
+      }
+    : undefined,
 };
 
 // Generate appropriate schema based on type
@@ -31,19 +50,21 @@ switch (type) {
     schema = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "@id": `${Astro.site}/#website`,
-      "url": Astro.site?.toString() || "",
+      "@id": absoluteUrl("#website"),
+      "url": configuredSiteHref || siteHref || undefined,
       "name": siteConfig.title,
       "description": siteConfig.description,
       "author": personSchema,
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": `${Astro.site}/tags/{search_term_string}/`
-        },
-        "query-input": "required name=search_term_string"
-      }
+      "potentialAction": configuredSiteHrefNoTrailingSlash
+        ? {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": `${configuredSiteHrefNoTrailingSlash}/tags/{search_term_string}/`,
+            },
+            "query-input": "required name=search_term_string",
+          }
+        : undefined,
     };
     break;
 
@@ -51,21 +72,30 @@ switch (type) {
     // Article schema - rich snippets for blog posts
     if (!data || 'items' in data) break; // Skip if it's breadcrumb data
     const articleData = data as StructuredDataContent;
+    const articleUrl = articleData.url ? absoluteUrl(articleData.url) : undefined;
+    const ogImageFallbackPath = articleData.url
+      ? `/og-image${articleData.url.replace(/\/$/, "")}.png`
+      : undefined;
+    const articleImage = absoluteUrl(articleData.ogImage ?? ogImageFallbackPath);
     schema = {
       "@context": "https://schema.org",
       "@type": "Article",
-      "@id": `${Astro.site}${articleData.url}#article`,
+      ...(articleUrl ? { "@id": `${articleUrl}#article` } : {}),
       "headline": articleData.title,
       "description": articleData.description,
       "datePublished": articleData.publishDate,
       "dateModified": articleData.updatedDate || articleData.publishDate,
       "author": personSchema,
       "publisher": personSchema,
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `${Astro.site}${articleData.url}`
-      },
-      "image": articleData.ogImage || `${Astro.site}/og-image${articleData.url?.replace(/\/$/, '')}.png`,
+      ...(articleUrl
+        ? {
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": articleUrl,
+            },
+          }
+        : {}),
+      ...(articleImage ? { "image": articleImage } : {}),
       "keywords": articleData.tags?.join(', ')
     };
     break;
@@ -102,7 +132,7 @@ switch (type) {
         "@type": "ListItem",
         "position": index + 1,
         "name": item.name,
-        "item": item.url
+        "item": absoluteUrl(item.url),
       }))
     };
     break;

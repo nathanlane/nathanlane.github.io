@@ -2,10 +2,6 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 import { slug as githubSlug } from "github-slugger";
 
-function removeDupsAndLowerCase(array: string[]) {
-	return [...new Set(array.map((str) => str.toLowerCase()))];
-}
-
 // SEO schema for all public-facing content
 const seoSchema = z.object({
 	description: z
@@ -46,7 +42,10 @@ const post = defineCollection({
 						src: image(),
 					})
 					.optional(),
-				tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+				tags: z
+					.array(z.string())
+					.default([])
+					.transform((arr) => [...new Set(arr.map((s) => s.toLowerCase()))]),
 				publishDate: z
 					.string()
 					.or(z.date())
@@ -66,27 +65,6 @@ const post = defineCollection({
 			})),
 });
 
-const _note = defineCollection({
-	loader: glob({ base: "./src/content/note", pattern: "**/*.{md,mdx}" }),
-	schema: baseSchema
-		.merge(slugSchema)
-		.extend({
-			// Notes can have shorter descriptions since they're brief content
-			description: z.string().max(160, "Description must be ≤160 characters for SEO").optional(),
-			publishDate: z
-				.string()
-				.datetime({ offset: true }) // Ensures ISO 8601 format with offsets allowed (e.g. "2024-01-01T00:00:00Z" and "2024-01-01T00:00:00+02:00")
-				.transform((val) => new Date(val)),
-			type: z.string().default("note"),
-			featured: z.boolean().default(false),
-			draft: z.boolean().default(false),
-		})
-		.transform((data) => ({
-			...data,
-			slug: data.slug || githubSlug(data.title),
-		})),
-});
-
 // Private notes collection - for personal documentation only, never web-accessible
 const privateNote = defineCollection({
 	loader: glob({
@@ -99,7 +77,10 @@ const privateNote = defineCollection({
 			.string()
 			.datetime({ offset: true })
 			.transform((val) => new Date(val)),
-		tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+		tags: z
+			.array(z.string())
+			.default([])
+			.transform((arr) => [...new Set(arr.map((s) => s.toLowerCase()))]),
 		private: z.boolean().default(true), // Always private - never web accessible
 	}),
 });
@@ -151,7 +132,10 @@ const research = defineCollection({
 			featured: z.boolean().default(false),
 
 			// Tags for categorization
-			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
+			tags: z
+				.array(z.string())
+				.default([])
+				.transform((arr) => [...new Set(arr.map((s) => s.toLowerCase()))]),
 		})
 		.transform((data) => ({
 			...data,
