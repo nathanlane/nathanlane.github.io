@@ -34,3 +34,13 @@ export function formatMonthYear(date: Date): string {
 		month: "2-digit",
 	});
 }
+
+/**
+ * Normalize status strings for display
+ * Converts hyphenated status strings to uppercase with spaces
+ * @param status - Status string (e.g., "work-in-progress")
+ * @returns Normalized status (e.g., "WORK IN PROGRESS")
+ */
+export function normalizeStatus(status: string): string {
+	return status.toUpperCase().replace(/-/g, " ");
+}

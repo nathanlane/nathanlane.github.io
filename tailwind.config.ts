@@ -721,18 +721,6 @@ export default {
 				"16b": "var(--space-16)", // 96px (16 grid units = 4 baselines)
 				"24b": "var(--space-24)", // 144px (24 grid units = 6 baselines)
 
-				// Legacy mappings for gradual migration - DEPRECATED
-				// baseline: "var(--grid-unit)",
-				// "1b": "var(--space-1)",
-				// "2b": "var(--space-2)",
-				// "3b": "var(--space-3)",
-				// "4b": "var(--space-4)",
-				// "6b": "var(--space-6)",
-				// "8b": "var(--space-8)",
-				// "12b": "var(--space-12)",
-				// "16b": "var(--space-16)",
-				// hero: "var(--space-24)",
-
 				// Semantic spacing tokens
 				"space-3xs": "var(--space-1)", // 6px — micro-spacing
 				"space-2xs": "var(--space-2)", // 12px

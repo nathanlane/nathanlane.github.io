@@ -1,4 +1,6 @@
 ---
+import { normalizeStatus } from '@/utils/date';
+
 interface Props {
   title: string;
   href: string;
@@ -25,7 +27,7 @@ const {
 
 // Build metadata items - research-specific formatting
 const metadataItems = [
-  ...(status ? [{ text: status.toUpperCase().replace('-', ' ') }] : []),
+  ...(status ? [{ text: normalizeStatus(status) }] : []),
   ...(date ? [{ text: date }] : []), // Use year directly, not formatted date
   ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
