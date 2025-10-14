@@ -29,22 +29,15 @@ const {
   link
 } = Astro.props;
 
-// Format date if provided
-const formattedDate = date ? new Date(date).toLocaleDateString('en-US', { 
-  year: 'numeric', 
-  month: 'short' 
-}) : '';
-
 // Build metadata items using simplified light system
 const metadataItems = [
   { text: type.toUpperCase() },
-  ...(formattedDate ? [{ text: formattedDate }] : []),
   ...(status ? [{ text: normalizeStatus(status) }] : []),
   ...(metadata ? [{ text: metadata }] : [])
 ].filter(Boolean);
 ---
 
-<article class="document-entry">
+<article class="document-entry mb-8b">
   <h3 class="heading-3">
     <a href={href} class="link-title">{title}</a>
   </h3>
@@ -79,11 +72,3 @@ const metadataItems = [
     </div>
   )}
 </article>
-
-<style>
-  .document-entry {
-    margin-bottom: var(--space-8); /* 48px - generous separation */
-  }
-  
-  /* All link styling handled by global link classes */
-</style> 

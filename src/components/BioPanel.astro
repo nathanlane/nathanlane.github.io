@@ -1,6 +1,6 @@
 ---
 import OptimizedImage from '@/components/OptimizedImage.astro';
-import { marked } from 'marked';
+import { renderMarkdown, renderMarkdownInline } from '@/utils/markdown';
 
 export interface Props {
   bio: {
@@ -25,7 +25,7 @@ export interface Props {
 const { bio, class: className = '' } = Astro.props;
 
 // Parse markdown in narrative
-const narrativeHtml = await marked.parse(bio.narrative);
+const narrativeHtml = await renderMarkdown(bio.narrative);
 ---
 
 <section class={`bio-panel ${className}`} data-content-type="long-form">
@@ -55,7 +55,7 @@ const narrativeHtml = await marked.parse(bio.narrative);
             />
             {bio.photo.caption && (
               <figcaption class="text--2 text-lightest mt-2b">
-                <Fragment set:html={marked.parseInline(bio.photo.caption)} />
+                <Fragment set:html={renderMarkdownInline(bio.photo.caption)} />
               </figcaption>
             )}
           </figure>
