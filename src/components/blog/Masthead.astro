@@ -5,7 +5,6 @@ import Badge from '@/components/Badge.astro';
 import { getFormattedDate } from "@/utils/date";
 import UpdatedBadge from "@/components/UpdatedBadge.astro";
 import { Icon } from "astro-icon/components";
-import Separator from "../Separator.astro";
 
 interface Props {
 	content: CollectionEntry<"post">;
@@ -77,7 +76,7 @@ const postSeries = content.data.seriesId
 	{
 		content.data.updatedDate && (
 			<>
-				<Separator type="dot" />
+				<span class="flex-shrink-0 bg-lighter mx-space-2xs w-space-1 h-space-1 rounded-full" />
 				<UpdatedBadge date={content.data.updatedDate} dateTimeOptions={dateTimeOptions} />
 			</>
 		)

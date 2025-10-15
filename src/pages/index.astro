@@ -9,7 +9,6 @@ import TableOfContents from "@/components/TableOfContents.astro";
 import { mediaData } from "@/data/media";
 import PageLayout from "@/layouts/Base.astro";
 
-
 // Get homepage content from content collection
 const homepageContent = await getEntry("homepage", "index");
 if (!homepageContent) {
@@ -20,7 +19,7 @@ const { bio, contact } = homepageContent.data;
 // Get featured research papers
 const allResearch = await getCollection("research");
 const featuredResearch = allResearch
-	.filter(paper => paper.data.featured)
+	.filter((paper) => paper.data.featured)
 	.sort((a, b) => Number.parseInt(b.data.paperDate) - Number.parseInt(a.data.paperDate))
 	.slice(0, 3);
 
@@ -40,80 +39,74 @@ const allMediaItems = Object.entries(mediaData)
 	.slice(0, 5);
 
 // Prepare Table of Contents sections for Important Links
-const importantLinksSections = contact?.items?.map((item) => ({
-	title: item.text,
-	href: item.href
-})) || [];
+const importantLinksSections =
+	contact?.items?.map((item) => ({
+		title: item.text,
+		href: item.href,
+	})) || [];
 ---
 
-<PageLayout meta={{ 
-	title: "Home",
-	description: "Nathan Lane is an Associate Professor of Economics at Oxford University, specializing in industrial policy, economic development, and the intersection of technology and economics. Co-founder of the Industrial Policy Group."
-}}>
+<PageLayout
+	meta={{
+		title: "Home",
+		description:
+			"Nathan Lane is a economics professor and empirical economist at the London School of Economics, specializing in economic development, industrial policy, political economy, and empirical methods. Co-founder of the Industrial Policy Group.",
+	}}
+>
 	<div class="homepage-document">
-		
-
-
 		<!-- Bio Panel Integration -->
-		{bio && (
-			<BioPanel bio={bio} class="mb-16b" />
-		)}
+		{bio && <BioPanel bio={bio} class="mb-16b" />}
 
 		<!-- Research Section -->
-		<DocumentSection 
-			title="Recent Research" 
-			viewAllText="View all research" 
+		<DocumentSection
+			title="Recent Research"
+			viewAllText="View all research"
 			viewAllHref="/research/"
 		>
-			{featuredResearch.map((paper) => (
-				<DocumentEntry
-					title={paper.data.title}
-					href={`/research/${paper.id}/`}
-					type="research"
-					date={paper.data.paperDate}
-					status={paper.data.status}
-					description={paper.data.description}
-					metadata={paper.data.authors}
-				/>
-			))}
+			{
+				featuredResearch.map((paper) => (
+					<DocumentEntry
+						title={paper.data.title}
+						href={`/research/${paper.id}/`}
+						type="research"
+						date={paper.data.paperDate}
+						status={paper.data.status}
+						description={paper.data.description}
+						metadata={paper.data.authors}
+					/>
+				))
+			}
 		</DocumentSection>
 
 		<!-- Writing -->
-		<DocumentSection 
-			title="Recent Writing" 
-			viewAllText="View all writing" 
-			viewAllHref="/writing/"
-		>
-			{latestWriting.map((piece) => (
-				<DocumentEntry
-					title={piece.data.title}
-					href={`/writing/${piece.id}/`}
-					type="writing"
-					date={piece.data.publishDate.toISOString()}
-					description={piece.data.description}
-				/>
-			))}
+		<DocumentSection title="Recent Writing" viewAllText="View all writing" viewAllHref="/writing/">
+			{
+				latestWriting.map((piece) => (
+					<DocumentEntry
+						title={piece.data.title}
+						href={`/writing/${piece.id}/`}
+						type="writing"
+						date={piece.data.publishDate.toISOString()}
+						description={piece.data.description}
+					/>
+				))
+			}
 		</DocumentSection>
 
 		<!-- Media & Appearances -->
-		<DocumentSection 
-			title="Recent in the News" 
-			viewAllText="View all media" 
-			viewAllHref="/media/"
-		>
+		<DocumentSection title="Recent in the News" viewAllText="View all media" viewAllHref="/media/">
 			<MediaList items={allMediaItems} />
 		</DocumentSection>
 
 		<!-- Important Links -->
 		<DocumentSection title="">
-			<TableOfContents 
+			<TableOfContents
 				sections={importantLinksSections}
 				headerText="Important Links"
 				showHeader={true}
 				showNumbers={false}
 			/>
 		</DocumentSection>
-		
 	</div>
 </PageLayout>
 
@@ -132,4 +125,3 @@ const importantLinksSections = contact?.items?.map((item) => ({
 		}
 	}
 </style>
-
