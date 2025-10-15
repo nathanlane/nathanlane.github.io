@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import CompactList from "@/components/CompactList.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import ResearchEntry from "@/components/ResearchEntry.astro";
@@ -7,6 +7,13 @@ import SectionSeparator from "@/components/SectionSeparator.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import BaseLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
+
+// Get research page content from MDX
+const researchPage = await getEntry("pages", "research");
+if (!researchPage) {
+	throw new Error("Research page not found");
+}
+const { Content: ResearchContent } = await render(researchPage);
 
 const allResearch = await getCollection("research");
 
@@ -36,12 +43,16 @@ const meta = {
 
 <BaseLayout meta={meta}>
   <div class="measure-base mx-auto px-4b py-8b">
-    
-    <!-- Reusable Page Header with proper typography and spacing -->
-    <PageHeader 
-      title="Research"
-      description='I study <a href="#published">economic change</a> with messy data. Find my work <a href="#featured">below</a>. <br><br> I work on economic and industrial development, political economy, and establishing basic facts around industrial policy. I tackle these questions with the <a href="https://www.industrialpolicygroup.com">Industrial Policy Group</a>. <br><br> I also enjoy working with computational tools and bridging the worlds of data science and economics. Find my GitHub <a href="https://github.com/nathanlane">here</a>.'
-    />
+
+    <!-- Page Header -->
+    <header class="mb-8b">
+      <h1 class="heading-1 text-accent-base mb-6b">{researchPage.data.title}</h1>
+    </header>
+
+    <!-- Research Page Narrative (MDX Content) -->
+    <div class="narrative prose prose-lane max-w-none mb-12b">
+      <ResearchContent />
+    </div>
 
     <!-- Table of Contents Block -->
     <div class="mb-12b">
@@ -147,34 +158,59 @@ const meta = {
     padding-left: 0;
     margin-left: 0;
   }
-  
+
   /* Featured title styling - elegant and refined */
   .featured-title {
     font-size: var(--step-1); /* 15.6-18px - proper hierarchy */
     font-weight: 400;
     line-height: 1.3;
     color: var(--theme-text);
-    
+
     /* Enhanced OpenType features */
     font-feature-settings:
       "kern" 1,
       "liga" 1,
       "calt" 1;
-    
+
     /* Ruder: slight negative tracking for display sizes */
     letter-spacing: -0.01em;
   }
-  
+
+  /* Narrative typography */
+  .narrative :global(p) {
+    @apply text-1 leading-relaxed mb-6b;
+  }
+
+  .narrative :global(p:last-child) {
+    @apply mb-0;
+  }
+
+  /* Apply editorial link style to narrative links */
+  .narrative a {
+    color: var(--link-color-editorial, var(--theme-accent-base));
+    font-weight: 450;
+    text-decoration: underline;
+    text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.2em;
+  }
+
+  .narrative a:hover {
+    color: var(--link-color-hover);
+    text-decoration-color: var(--link-color-hover);
+    text-decoration-thickness: 0.075em;
+  }
+
   /* Smooth scroll for anchor links */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Target highlighting when navigating to sections */
   section:target {
     scroll-margin-top: 2rem;
   }
-  
+
   /* High contrast mode support */
   @media (prefers-contrast: high) {
     .featured-title {

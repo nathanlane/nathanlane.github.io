@@ -1,45 +1,68 @@
 ---
+import { getCollection, getEntry, render } from "astro:content";
 import MediaEntry from "@/components/MediaEntry.astro";
-import PageHeader from "@/components/PageHeader.astro";
-import { type MediaItem, mediaData } from "@/data/media";
 import PageLayout from "@/layouts/Base.astro";
+
+// Get media page content from MDX
+const mediaPage = await getEntry("pages", "media");
+if (!mediaPage) {
+	throw new Error("Media page not found");
+}
+const { Content: MediaContent } = await render(mediaPage);
 
 const meta = {
   title: "Media",
   description: "Interviews, podcasts, talks, and press coverage"
 };
 
-// Get years in descending order
-const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
+const mediaEntries = await getCollection("media");
+
+const mediaByYear = mediaEntries.reduce<Record<number, typeof mediaEntries>>((acc, entry) => {
+	const year = entry.data.date.getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(entry);
+	return acc;
+}, {});
+
+const years = Object.keys(mediaByYear)
+	.map(Number)
+	.sort((a, b) => b - a);
 ---
 
 <PageLayout meta={meta}>
   <div class="measure-base mx-auto px-4b py-8b">
-    <!-- Reusable Page Header with proper typography and spacing -->
-    <PageHeader 
-      title="Media"
-      description="Interviews, podcasts, interviews, and other press coverage of my work. From 2020 to present."
-    />
+
+    <!-- Page Header -->
+    <header class="mb-8b">
+      <h1 class="heading-1 text-accent-base mb-6b">{mediaPage.data.title}</h1>
+    </header>
+
+    <!-- Media Page Narrative (MDX Content) -->
+    <div class="narrative prose prose-lane max-w-none mb-12b">
+      <MediaContent />
+    </div>
 
     <!-- Media entries organized by year with proper baseline grid spacing -->
     <div class="space-y-12b">
-      {years.map(year => (
+      {years.map((year) => (
         <section>
           <!-- Year heading using semantic typography and baseline grid -->
           <h2 class="heading-3 text-light mb-6b">{year}</h2>
           
           <!-- Media items list with proper grid spacing -->
           <div class="space-y-6b">
-            {mediaData[Number(year)]
-              ?.sort((a: MediaItem, b: MediaItem) => new Date(b.date).getTime() - new Date(a.date).getTime())
-              ?.map((item: MediaItem) => (
+            {mediaByYear[year]
+              ?.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+              ?.map((entry) => (
                 <MediaEntry 
-                  title={item.title}
-                  outlet={item.outlet}
-                  date={item.date}
-                  type={item.type}
-                  link={item.link}
-                  description={item.description}
+                  title={entry.data.title}
+                  outlet={entry.data.outlet}
+                  date={entry.data.date.toISOString()}
+                  type={entry.data.type}
+                  link={entry.data.link}
+                  description={entry.data.description}
                 />
             ))}
           </div>
@@ -48,3 +71,30 @@ const years = Object.keys(mediaData).sort((a, b) => Number(b) - Number(a));
     </div>
   </div>
 </PageLayout>
+
+<style>
+  /* Narrative typography */
+  .narrative :global(p) {
+    @apply text-1 leading-relaxed mb-6b;
+  }
+
+  .narrative :global(p:last-child) {
+    @apply mb-0;
+  }
+
+  /* Apply editorial link style to narrative links */
+  .narrative a {
+    color: var(--link-color-editorial, var(--theme-accent-base));
+    font-weight: 450;
+    text-decoration: underline;
+    text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.2em;
+  }
+
+  .narrative a:hover {
+    color: var(--link-color-hover);
+    text-decoration-color: var(--link-color-hover);
+    text-decoration-thickness: 0.075em;
+  }
+</style>
