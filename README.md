@@ -28,6 +28,11 @@ A typography-focused personal website built with Astro. This project emphasizes 
 - [Demo](#demo)
 - [Quick start](#quick-start)
 - [Commands](#commands)
+- [Content Management System (CMS)](#content-management-system-cms)
+  - [1. Start Both Servers](#1-start-both-servers)
+  - [2. Access the CMS](#2-access-the-cms)
+  - [3. What You Can Edit](#3-what-you-can-edit)
+  - [4. How It Works](#4-how-it-works)
 - [Development Workflow](#development-workflow)
   - [Getting Started](#getting-started)
   - [Development Process](#development-process)
@@ -35,6 +40,7 @@ A typography-focused personal website built with Astro. This project emphasizes 
   - [Testing Your Changes](#testing-your-changes)
   - [Key Files for Typography Work](#key-files-for-typography-work)
   - [Private Notes for Personal Documentation](#private-notes-for-personal-documentation)
+  - [Utility Scripts](#utility-scripts)
 - [Configure](#configure)
 - [Updating](#updating)
 - [Adding posts and notes](#adding-posts-and-notes)
@@ -44,6 +50,16 @@ A typography-focused personal website built with Astro. This project emphasizes 
   - [Frontmatter snippet](#frontmatter-snippet)
 - [Analytics](#analytics)
 - [Deploy](#deploy)
+- [Troubleshooting](#troubleshooting)
+  - [Development Server Issues](#development-server-issues)
+  - [Build and Production Issues](#build-and-production-issues)
+  - [Content Issues](#content-issues)
+  - [Typography and Styling Issues](#typography-and-styling-issues)
+  - [Git and Deployment Issues](#git-and-deployment-issues)
+  - [Performance Issues](#performance-issues)
+  - [Common Error Messages](#common-error-messages)
+  - [Getting Further Help](#getting-further-help)
+  - [Quick Diagnostic Checklist](#quick-diagnostic-checklist)
 - [Acknowledgment](#acknowledgment)
 - [License](#license)
 
@@ -158,7 +174,7 @@ pnpm cms
    ```bash
    npm run dev
    ```
-   
+
 3. **Open in browser:**
    - **Local**: `http://localhost:4321/`
    - **Network**: `http://192.168.1.103:4321/` (for mobile testing)
@@ -312,6 +328,173 @@ You may be asked to included a snippet inside the **HEAD** tag of your website w
 [Astro docs](https://docs.astro.build/en/guides/deploy/) has a great section and breakdown of how to deploy your own Astro site on various platforms and their idiosyncrasies.
 
 By default the site will be built (see [Commands](#commands) section above) to a `/dist` directory.
+
+## Troubleshooting
+
+### Development Server Issues
+
+**Dev server won't start**
+```bash
+# Check if port 4321 is already in use
+lsof -ti:4321 | xargs kill -9
+
+# Clear cache and reinstall
+pnpm clean
+pnpm install
+
+# Try starting again
+pnpm dev
+```
+
+**Hot reload not working**
+- Try hard refresh: Cmd/Ctrl + Shift + R
+- Check browser console for errors
+- Restart dev server: Ctrl+C, then `pnpm dev`
+
+**Node version issues**
+- Requires Node 18 or higher
+- Check version: `node --version`
+- Update if needed or use nvm/volta
+
+### Build and Production Issues
+
+**Build fails**
+```bash
+# Run full validation suite
+pnpm validate
+
+# Check TypeScript errors specifically
+pnpm check:types
+
+# Check linter errors
+pnpm lint
+
+# Review error messages carefully - they usually indicate the problem
+```
+
+**Production build works but dev server doesn't (or vice versa)**
+- Clear `.astro` cache folder: `rm -rf .astro`
+- Clear node_modules: `rm -rf node_modules && pnpm install`
+- Check for environment-specific code or imports
+
+### Content Issues
+
+**Content not showing up**
+1. Check frontmatter has all required fields (title, description, publishDate)
+2. Verify `draft: false` (drafts are hidden in production)
+3. Ensure file is in correct `src/content/` subfolder
+4. Check content collection schema in `src/content.config.ts`
+5. Look for errors in terminal during build
+
+**Frontmatter validation errors**
+- Review schema in `src/content.config.ts`
+- Check date format: `YYYY-MM-DD` or ISO 8601
+- Ensure description is between min/max length (varies by collection)
+- Title should be ≤60 chars for posts, ≤120 for research
+
+**Images not loading**
+- Place images in `public/images/` directory
+- Reference without `/public`: `![alt](/images/photo.jpg)`
+- Ensure image files exist and have correct extensions
+- Check image paths are case-sensitive on production servers
+
+### Typography and Styling Issues
+
+**Fonts not loading**
+- Clear browser cache: Cmd/Ctrl + Shift + R
+- Check Network tab in DevTools for 404s
+- Verify font files in `public/fonts/` or `node_modules/@fontsource/`
+- Check font imports in `src/components/BaseHead.astro`
+
+**Typography looks wrong**
+- Test in incognito/private browsing (eliminates extension conflicts)
+- Verify CSS variables in `src/styles/global.css`
+- Check Tailwind classes are being generated: `pnpm build`
+- Inspect element and verify computed font-family/size
+
+**Dark mode not working**
+- Check theme toggle functionality in browser console
+- Verify `data-theme` attribute on `<html>` element
+- Review CSS in `src/styles/global.css` for dark mode styles
+- Test localStorage: `localStorage.getItem('theme')`
+
+### Git and Deployment Issues
+
+**Merge conflicts**
+```bash
+# View conflicted files
+git status
+
+# For each conflicted file, resolve manually then:
+git add <file>
+
+# Complete the merge
+git merge --continue
+# or
+git rebase --continue
+```
+
+**Accidentally committed to wrong branch**
+```bash
+# Move commits to correct branch
+git checkout correct-branch
+git cherry-pick <commit-hash>
+
+# Remove from wrong branch
+git checkout wrong-branch
+git reset --hard HEAD~1  # Remove last commit (careful!)
+```
+
+### Performance Issues
+
+**Slow build times**
+- Check number of pages being generated
+- Review image optimization settings
+- Consider reducing content collections during development
+- Use `pnpm dev` instead of rebuilding repeatedly
+
+**Large bundle size**
+- Run build: `pnpm build`
+- Check `dist/` folder size
+- Review imported dependencies (especially in components)
+- Consider code splitting for large libraries
+
+### Common Error Messages
+
+**"Cannot find module '@/...'"**
+- Check `tsconfig.json` has proper path aliases
+- Restart TypeScript server in editor
+- Ensure import path starts with `@/` not `~/`
+
+**"Expected property 'X' to be present"**
+- Missing required frontmatter field
+- Check schema in `src/content.config.ts`
+- Add the missing property to your markdown file
+
+**"Module not found: Can't resolve 'X'"**
+- Install missing dependency: `pnpm install X`
+- Check if it should be in `dependencies` or `devDependencies`
+- Restart dev server after installing
+
+### Getting Further Help
+
+1. Check `CONTRIBUTING.md` for detailed workflow information
+2. Review `CLAUDE.md` for architectural context
+3. Search closed issues on GitHub for similar problems
+4. Check [Astro Discord](https://astro.build/chat) for framework questions
+5. Review component source code for implementation details
+
+### Quick Diagnostic Checklist
+
+Before asking for help, try these:
+- [ ] Clear caches: `pnpm clean && pnpm install`
+- [ ] Run validation: `pnpm validate`
+- [ ] Test in production: `pnpm build && pnpm preview`
+- [ ] Check browser console for JavaScript errors
+- [ ] Review terminal output for build errors
+- [ ] Test in incognito/private browsing mode
+- [ ] Verify Node version is 18+
+- [ ] Try restarting dev server
 
 ## Acknowledgment
 

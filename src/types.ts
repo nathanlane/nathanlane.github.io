@@ -1,24 +1,64 @@
+/**
+ * Main site configuration object.
+ * Used throughout the site for metadata, navigation, and SEO.
+ */
 export interface SiteConfig {
+	/** Site author name - used in meta tags, structured data, and bylines */
 	author: string;
+
+	/** Date formatting configuration for blog posts and metadata */
 	date: {
+		/** Locale string (e.g., 'en-GB', 'en-US') for date formatting */
 		locale: string | string[] | undefined;
+		/** Intl.DateTimeFormat options for date display */
 		options: Intl.DateTimeFormatOptions;
 	};
+
+	/** Default meta description for SEO - shown in search results */
 	description: string;
+
+	/** HTML lang attribute (e.g., 'en-GB') for accessibility and SEO */
 	lang: string;
+
+	/** OpenGraph locale (e.g., 'en_GB') for social media sharing */
 	ogLocale: string;
+
+	/** Site title - used in <title> tags, meta properties, and header */
 	title: string;
+
+	/** Whether to show the logo icon in the header */
 	showLogo?: boolean;
+
+	/** Whether to show the site title text in the header */
 	showTitle?: boolean;
+
+	/** Footer branding text - customize or set to empty string to hide */
 	footerText?: string;
+
+	/** URL path to CV/resume PDF (e.g., '/cv.pdf') */
 	resumeUrl?: string;
+
+	/** Primary email address for contact and structured data */
 	email?: string;
+
 	// SEO and structured data fields
+
+	/** Job title for structured data (e.g., 'Assistant Professor') */
 	jobTitle?: string;
+
+	/** Organization name for structured data (e.g., 'London School of Economics') */
 	organization?: string;
+
+	/** Array of social media profile URLs for structured data */
 	socialProfiles?: string[];
+
+	/** Path to profile image for structured data (e.g., '/headshot.jpg') */
 	profileImage?: string;
+
+	/** ORCID identifier for academic profiles (e.g., '0000-0003-0884-8418') */
 	orcid?: string;
+
+	/** Twitter handle for social media cards (e.g., '@straightedge') */
 	twitterHandle?: string;
 }
 

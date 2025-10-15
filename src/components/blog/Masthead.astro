@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { type CollectionEntry, getCollection } from "astro:content";
 import Badge from '@/components/Badge.astro';
-import FormattedDate from "@/components/FormattedDate.astro";
+import { getFormattedDate } from "@/utils/date";
 import UpdatedBadge from "@/components/UpdatedBadge.astro";
 import { Icon } from "astro-icon/components";
 import Separator from "../Separator.astro";
@@ -23,6 +23,10 @@ const {
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: "long",
 };
+
+const publishDate = content.data.publishDate;
+const isoDate = publishDate.toISOString();
+const formattedDate = getFormattedDate(publishDate, dateTimeOptions);
 
 const postSeries = content.data.seriesId
     ? await getCollection("series")
@@ -68,7 +72,7 @@ const postSeries = content.data.seriesId
 <div class="flex flex-wrap items-center text-lightest text-body-sm mt-space-s mx-space-2xs mb-space-2xs">
 	<span class="flex items-center h-space-m">
 		<Icon aria-hidden="true" class="flex items-center icon-base me-space-1" focusable="false" name="lucide:calendar" />
-		<FormattedDate date={content.data.publishDate} dateTimeOptions={dateTimeOptions} class="flex flex-shrink-0" />
+		<time class="flex flex-shrink-0" datetime={isoDate} title={isoDate}>{formattedDate}</time>
 	</span>
 	{
 		content.data.updatedDate && (

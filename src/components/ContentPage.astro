@@ -2,7 +2,7 @@
 import { render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Badge from "@/components/Badge.astro";
-import FormattedDate from "@/components/FormattedDate.astro";
+import { getFormattedDate } from "@/utils/date";
 import BaseLayout from "@/layouts/Base.astro";
 
 // Accept any content collection type
@@ -15,6 +15,11 @@ const { Content } = await render(entry);
 
 // Check if this is a research entry for special handling
 const isResearch = entry.collection === "research";
+
+// Format date for non-research entries
+const publishDate = !isResearch ? entry.data.publishDate : undefined;
+const isoDate = publishDate?.toISOString();
+const formattedDate = publishDate ? getFormattedDate(publishDate, { year: "numeric", month: "long", day: "2-digit" }) : undefined;
 
 // Prepare structured data for research papers
 let structuredData = undefined;
@@ -97,14 +102,11 @@ if (isResearch) {
             <p class="text-body leading-relaxed text-light">{entry.data.description}</p>
 
             <div class="mt-4b flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-light">
-              <FormattedDate
-                date={entry.data.publishDate}
-                dateTimeOptions={{
-                  year: "numeric",
-                  month: "long",
-                  day: "2-digit",
-                }}
-              />
+              {formattedDate && isoDate && (
+                <time datetime={isoDate} title={isoDate}>
+                  {formattedDate}
+                </time>
+              )}
               {entry.data.featured && (
                 <>
                   <span class="text-lighter">•</span>

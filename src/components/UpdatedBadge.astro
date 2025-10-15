@@ -1,5 +1,5 @@
 ---
-import FormattedDate from "@/components/FormattedDate.astro";
+import { getFormattedDate } from "@/utils/date";
 
 export interface Props {
   date: Date;
@@ -7,25 +7,26 @@ export interface Props {
   class?: string;
 }
 
-const { 
-  date, 
-  dateTimeOptions = { 
-    year: "numeric", 
-    month: "short", 
-    day: "2-digit" 
+const {
+  date,
+  dateTimeOptions = {
+    year: "numeric",
+    month: "short",
+    day: "2-digit"
   },
   class: className = ""
 } = Astro.props;
+
+const formattedDate = getFormattedDate(date, dateTimeOptions);
+const isoDate = date.toISOString();
 ---
 
 <span class={`updated-badge ${className}`}>
   <span class="updated-label">Updated</span>
   <span class="updated-separator">:</span>
-  <FormattedDate 
-    class="updated-date" 
-    date={date} 
-    dateTimeOptions={dateTimeOptions} 
-  />
+  <time class="updated-date" datetime={isoDate} title={isoDate}>
+    {formattedDate}
+  </time>
 </span>
 
 <style>
