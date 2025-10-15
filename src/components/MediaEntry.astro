@@ -25,12 +25,16 @@ Follows classical typography principles from Bringhurst, Ruder, Butterick, and H
 - Responsive typography scaling
 
 -->
-
 ---
-import type { MediaItem } from "@/data/media";
 import MetadataLine from './MetadataLine.astro';
 
-export interface Props extends MediaItem {
+export interface Props {
+  title: string;
+  outlet: string;
+  date: string | Date;
+  type: 'interview' | 'podcast' | 'video' | 'article' | 'press' | 'talk' | 'panel';
+  link: string;
+  description?: string;
   class?: string;
 }
 

@@ -5,7 +5,6 @@ import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
-import { mediaData } from "@/data/media";
 import PageLayout from "@/layouts/Base.astro";
 import { siteConfig, socialLinks } from "@/site.config";
 
@@ -81,10 +80,18 @@ const latestWriting = allWriting
 	.slice(0, 2);
 
 // Get latest media appearances
-const allMediaItems = Object.entries(mediaData)
-	.flatMap(([, items]) => items)
-	.sort((a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
-	.slice(0, 5);
+const mediaEntries = await getCollection("media");
+const allMediaItems = mediaEntries
+	.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+	.slice(0, 5)
+	.map((entry) => ({
+		title: entry.data.title,
+		outlet: entry.data.outlet,
+		date: entry.data.date.toISOString(),
+		type: entry.data.type,
+		link: entry.data.link,
+		description: entry.data.description,
+	}));
 
 // Prepare Table of Contents sections for Important Links
 const importantLinksSections =

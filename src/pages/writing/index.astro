@@ -1,10 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import CompactList from '@/components/CompactList.astro';
 import PageHeader from '@/components/PageHeader.astro';
 import RecentContent from '@/components/RecentContent.astro';
 import SectionSeparator from '@/components/SectionSeparator.astro';
 import BaseLayout from '@/layouts/Base.astro';
+
+// Get writing page content from MDX
+const writingPage = await getEntry("pages", "writing");
+if (!writingPage) {
+	throw new Error("Writing page not found");
+}
+const { Content: WritingContent } = await render(writingPage);
 
 const writing = await getCollection('writing');
 const blogPosts = await getCollection('post');
@@ -22,12 +29,16 @@ const recentBlog = blogPosts
 
 <BaseLayout meta={{ title: "Writing", description: "Essays, notes, and thoughts on economics, technology, and research." }}>
   <div class="measure-base mx-auto px-4b py-8b">
-    
-    <!-- Reusable Page Header - 12b bottom margin (72px) -->
-    <PageHeader 
-      title="Writing"
-      description="Non-academic publications, published essays, notes, and occasional thoughts."
-    />
+
+    <!-- Page Header -->
+    <header class="mb-8b">
+      <h1 class="heading-1 text-accent-base mb-6b">{writingPage.data.title}</h1>
+    </header>
+
+    <!-- Writing Page Narrative (MDX Content) -->
+    <div class="narrative prose prose-lane max-w-none mb-12b">
+      <WritingContent />
+    </div>
 
     <!-- Recent Writing using reusable component -->
     <RecentContent 
@@ -66,30 +77,29 @@ const recentBlog = blogPosts
   </div>
 </BaseLayout>
 
-<!-- SPACING HIERARCHY DOCUMENTATION:
+<style>
+  /* Narrative typography */
+  .narrative :global(p) {
+    @apply text-1 leading-relaxed mb-6b;
+  }
 
-## BASELINE GRID ALIGNMENT ✅
-- All spacing uses proper grid units (2b, 3b, 4b, 6b, 8b, 12b, 16b)
-- 6px base unit, 24px baseline maintained throughout
+  .narrative :global(p:last-child) {
+    @apply mb-0;
+  }
 
-## SPACING HIERARCHY:
-1. **Page Container**: py-8b (48px) - comfortable page padding
-2. **PageHeader**: mb-12b (72px) - major section separation
-3. **Section Separation**: 16b between sections (96px) - clear content zones
-4. **Section Headers**: mb-6b/8b (36px/48px) - proportional to importance
-5. **Article Separation**: mb-8b (48px) - reduced for grouping Current Thinking
-6. **Element Spacing**: mb-2b/3b (12px/18px) - tight element relationships
-7. **Archive Links**: mt-6b (36px) - breathing room from content
+  /* Apply editorial link style to narrative links */
+  .narrative a {
+    color: var(--link-color-editorial, var(--theme-accent-base));
+    font-weight: 450;
+    text-decoration: underline;
+    text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.2em;
+  }
 
-## TYPOGRAPHY HIERARCHY:
-- H1 (PageHeader): heading-1 (largest)
-- H2 (Current Thinking): heading-2 (left-aligned, prominent)
-- H2 (Sections): heading-3 (secondary sections)
-- H3 (Articles): heading-4 (individual pieces)
-
-## REUSABLE COMPONENTS:
-- PageHeader: Standardized header with HR line
-- SectionSeparator: Consistent separators across site
-- CompactList: Archive listings
-
--->
+  .narrative a:hover {
+    color: var(--link-color-hover);
+    text-decoration-color: var(--link-color-hover);
+    text-decoration-thickness: 0.075em;
+  }
+</style>

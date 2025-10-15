@@ -187,6 +187,21 @@ const writing = defineCollection({
 		})),
 });
 
+const media = defineCollection({
+	loader: glob({ base: "./src/content/media", pattern: "**/*.{md,mdx}" }),
+	schema: z.object({
+		title: z.string(),
+		outlet: z.string(),
+		date: z
+			.string()
+			.or(z.date())
+			.transform((val) => new Date(val)),
+		type: z.enum(["interview", "podcast", "video", "article", "press", "talk", "panel"]),
+		link: z.string().url(),
+		description: z.string().optional(),
+	}),
+});
+
 // End
 
 // Pages collection for static page content (about, homepage, etc.)
@@ -233,4 +248,5 @@ export const collections = {
 	research,
 	writing,
 	pages,
+	media,
 };
