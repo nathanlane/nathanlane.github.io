@@ -1,244 +1,298 @@
 ---
-import { navigationConfig } from "@/config/navigation.config";
+import { siteConfig, menuLinks, socialLinks } from "@/site.config";
 
-const { footer } = navigationConfig;
+// Build social links from siteConfig
+const elsewhereLlinks = socialLinks
+	.filter((social) => ["Github", "LinkedIn", "Twitter", "Bluesky"].includes(social.friendlyName))
+	.map((social) => ({ title: social.friendlyName, href: social.link }));
+
+// Footer sections configuration - built from siteConfig
+const footerSections = [
+	{
+		title: "Here",
+		links: [
+			{ title: "Home", href: "/" },
+			{ title: "About", href: "/about" },
+			{ title: "Research", href: "/research" },
+			{ title: "Writing", href: "/writing" },
+			{ title: "Blog", href: "/posts" },
+			{ title: "Sitemap", href: "/sitemap.xml" },
+		],
+	},
+	{
+		title: "Elsewhere",
+		links: elsewhereLlinks,
+	},
+	{
+		title: "Contact",
+		links: [
+			{ title: "Email", href: `mailto:${siteConfig.email}` },
+			{ title: "CV", href: siteConfig.resumeUrl || "/cv.pdf" },
+		],
+	},
+	{
+		title: "About this site",
+		links: [
+			{
+				title:
+					"Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind. I use Inter (body/headers) and JetBrains Mono (code) for typography.",
+				href: "#",
+			},
+		],
+	},
+];
+
 const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <!-- Main Footer Content -->
-  <div class="footer-content">
-    <!-- Navigation Grid -->
-    <nav class="footer-nav" aria-label="Footer navigation">
-      {footer.sections.map(section => (
-        <div class="footer-section">
-          <h3 class="footer-section-title">{section.title}</h3>
-          <ul class="footer-links">
-            {section.links.map(link => (
-              <li>
-                <a href={link.href} class="link-footer">
-                  {link.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
-  </div>
-  
-  <!-- Bottom Bar -->
-  <div class="footer-bottom">
-    <p class="footer-copyright">
-      © {currentYear} Nathan Lane
-    </p>
-    <nav class="footer-utility" aria-label="Utility links">
-      <a href="/privacy" class="link-nav">Privacy</a>
-      <a href="/sitemap.xml" class="link-nav">Sitemap</a>
-      <a href="/rss.xml" class="link-nav" title="All content RSS feed">RSS</a>
-    </nav>
-  </div>
+	<!-- Main Footer Content -->
+	<div class="footer-content">
+		<!-- Navigation Grid -->
+		<nav class="footer-nav" aria-label="Footer navigation">
+			{
+				footerSections.map((section) => (
+					<div class="footer-section">
+						<h3 class="footer-section-title">{section.title}</h3>
+						<ul class="footer-links">
+							{(section.links || []).map((link) => (
+								<li>
+									<a href={link.href} class="link-footer">
+										{link.title}
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</nav>
+	</div>
+
+	<!-- Bottom Bar -->
+	<div class="footer-bottom">
+		<p class="footer-copyright">
+			© {currentYear} Nathan Lane
+		</p>
+		<nav class="footer-utility" aria-label="Utility links">
+			<a href="/privacy" class="link-nav">Privacy</a>
+			<a href="/sitemap.xml" class="link-nav">Sitemap</a>
+			<a href="/rss.xml" class="link-nav" title="All content RSS feed">RSS</a>
+		</nav>
+	</div>
 </footer>
 
 <style>
-  /* Typography-focused footer following classical principles */
-  .site-footer {
-    margin-top: var(--space-16); /* 96px - Generous separation from content */
-    padding-top: var(--space-12); /* 72px - 3 baselines for strong rhythm */
-    font-size: var(--step--1); /* ~11.5-13px - Slightly larger body text size */
-    font-family: var(--font-body); /* Inter Variable for body */
-    line-height: 1.65; /* 165% - Extra generous for very small text */
-    color: var(--color-text-muted);
-    background: var(--color-bg-subtle);
-    border-top: 1px solid var(--theme-color-200); /* Full-width separator line */
-    position: relative;
-    /* Optimize Inter Variable for small text rendering */
-    font-variation-settings: "wght" 425; /* Slightly heavier for small Inter */
-    letter-spacing: 0.025em; /* More generous spacing for small sans-serif */
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
-  }
+	/* Typography-focused footer following classical principles */
+	.site-footer {
+		margin-top: var(--space-16); /* 96px - Generous separation from content */
+		padding-top: var(--space-12); /* 72px - 3 baselines for strong rhythm */
+		font-size: var(--step--1); /* ~11.5-13px - Slightly larger body text size */
+		font-family: var(--font-body); /* Inter Variable for body */
+		line-height: 1.65; /* 165% - Extra generous for very small text */
+		color: var(--color-text-muted);
+		background: var(--color-bg-subtle);
+		border-top: 1px solid var(--theme-color-200); /* Full-width separator line */
+		position: relative;
+		/* Optimize Inter Variable for small text rendering */
+		font-variation-settings: "wght" 425; /* Slightly heavier for small Inter */
+		letter-spacing: 0.025em; /* More generous spacing for small sans-serif */
+		font-feature-settings:
+			"kern" 1,
+			"liga" 1,
+			"calt" 1; /* Enable OpenType features */
+	}
 
-  .footer-content {
-    max-width: var(--container-max, 80rem);
-    margin: 0 auto;
-    padding: 0 var(--space-4) var(--space-10); /* 0 24px 60px - 2.5 baselines */
-  }
+	.footer-content {
+		max-width: var(--container-max, 80rem);
+		margin: 0 auto;
+		padding: 0 var(--space-4) var(--space-10); /* 0 24px 60px - 2.5 baselines */
+	}
 
-  /* Improved navigation grid with musical spacing */
-  .footer-nav {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: var(--space-major-third); /* 48px - Musical interval for rhythm */
-    align-items: start; /* Better baseline alignment */
-  }
+	/* Improved navigation grid with musical spacing */
+	.footer-nav {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: var(--space-major-third); /* 48px - Musical interval for rhythm */
+		align-items: start; /* Better baseline alignment */
+	}
 
-  /* Enhanced section titles with proper hierarchy */
-  .footer-section-title {
-    font-family: var(--font-body);
-    font-size: var(--step--1); /* Slightly smaller than body text */
-    font-weight: 500; /* Medium weight for subordinate headers */
-    font-variation-settings: "wght" 500; /* Precise weight control */
-    letter-spacing: 0.075em; /* Classic subordinate header spacing */
-    text-transform: uppercase; /* Classic subordinate header treatment */
-    margin-bottom: var(--space-3); /* 18px - 0.75 baseline */
-    color: var(--theme-color-550); /* Lighter text for subordinate headers */
-    line-height: 1.4; /* Slightly more generous for small headers */
-    /* No underline - clean typography principle */
-  }
+	/* Enhanced section titles with proper hierarchy */
+	.footer-section-title {
+		font-family: var(--font-body);
+		font-size: var(--step--1); /* Slightly smaller than body text */
+		font-weight: 500; /* Medium weight for subordinate headers */
+		font-variation-settings: "wght" 500; /* Precise weight control */
+		letter-spacing: 0.075em; /* Classic subordinate header spacing */
+		text-transform: uppercase; /* Classic subordinate header treatment */
+		margin-bottom: var(--space-3); /* 18px - 0.75 baseline */
+		color: var(--theme-color-550); /* Lighter text for subordinate headers */
+		line-height: 1.4; /* Slightly more generous for small headers */
+		/* No underline - clean typography principle */
+	}
 
-  .footer-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+	.footer-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
 
-  .footer-links li {
-    margin-bottom: var(--space-2); /* 12px - 0.5 baseline rhythm */
-  }
-  
-  .footer-links li:last-child {
-    margin-bottom: 0;
-  }
+	.footer-links li {
+		margin-bottom: var(--space-2); /* 12px - 0.5 baseline rhythm */
+	}
 
-  /* Footer link styles handled by links.css */
+	.footer-links li:last-child {
+		margin-bottom: 0;
+	}
 
-  /* Refined bottom bar with better spacing rhythm */
-  .footer-bottom {
-    max-width: var(--container-max, 80rem);
-    margin: 0 auto;
-    padding: var(--space-8) var(--space-4) var(--space-8); /* 48px 24px 48px - 2 baselines */
-    border-top: 1px solid var(--color-border);
-    opacity: 0.8; /* Subtle overall tone for bottom section */
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline; /* Better alignment per Bringhurst */
-    font-size: var(--step--1); /* ~11.5-13px - Increased from step--2 for better readability */
-    font-family: inherit; /* Use IBM Plex Sans from parent */
-    /* Optimize IBM Plex Sans for very small text */
-    font-variation-settings: "wght" 500; /* Heavier weight for small IBM Plex */
-    letter-spacing: 0.03em; /* More open for small sans-serif utility text */
-    line-height: 1.5; /* Generous for small text */
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
-  }
+	/* Footer link styles handled by links.css */
 
-  @media (max-width: 640px) {
-    .footer-bottom {
-      flex-direction: column;
-      gap: var(--space-3); /* 18px - More generous than previous 12px */
-      text-align: center;
-      align-items: center;
-    }
-  }
+	/* Refined bottom bar with better spacing rhythm */
+	.footer-bottom {
+		max-width: var(--container-max, 80rem);
+		margin: 0 auto;
+		padding: var(--space-8) var(--space-4) var(--space-8); /* 48px 24px 48px - 2 baselines */
+		border-top: 1px solid var(--color-border);
+		opacity: 0.8; /* Subtle overall tone for bottom section */
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline; /* Better alignment per Bringhurst */
+		font-size: var(--step--1); /* ~11.5-13px - Increased from step--2 for better readability */
+		font-family: inherit; /* Use IBM Plex Sans from parent */
+		/* Optimize IBM Plex Sans for very small text */
+		font-variation-settings: "wght" 500; /* Heavier weight for small IBM Plex */
+		letter-spacing: 0.03em; /* More open for small sans-serif utility text */
+		line-height: 1.5; /* Generous for small text */
+		font-feature-settings:
+			"kern" 1,
+			"liga" 1,
+			"calt" 1; /* Enable OpenType features */
+	}
 
-  .footer-copyright {
-    color: var(--color-text-muted);
-    margin: 0;
-    font-family: inherit; /* Use IBM Plex Sans from parent */
-    font-weight: 500; /* Heavier for very small IBM Plex copyright text */
-    font-variation-settings: "wght" 500; /* Optimized for small IBM Plex */
-    letter-spacing: 0.035em; /* Generous spacing for very small sans-serif */
-    font-feature-settings: "kern" 1, "liga" 1, "calt" 1; /* Enable OpenType features */
-  }
+	@media (max-width: 640px) {
+		.footer-bottom {
+			flex-direction: column;
+			gap: var(--space-3); /* 18px - More generous than previous 12px */
+			text-align: center;
+			align-items: center;
+		}
+	}
 
-  /* Improved utility navigation with abbreviation spacing */
-  .footer-utility {
-    display: flex;
-    gap: var(--space-4); /* 24px - More generous, baseline rhythm */
-    align-items: baseline;
-  }
+	.footer-copyright {
+		color: var(--color-text-muted);
+		margin: 0;
+		font-family: inherit; /* Use IBM Plex Sans from parent */
+		font-weight: 500; /* Heavier for very small IBM Plex copyright text */
+		font-variation-settings: "wght" 500; /* Optimized for small IBM Plex */
+		letter-spacing: 0.035em; /* Generous spacing for very small sans-serif */
+		font-feature-settings:
+			"kern" 1,
+			"liga" 1,
+			"calt" 1; /* Enable OpenType features */
+	}
 
-  /* Using consolidated link system */
-  .footer-utility a {
-    color: var(--color-text-muted);
-    font-weight: 500; /* Heavier weight for very small text */
-    font-variation-settings: "wght" 500; /* Optimized for very small IBM Plex */
-    letter-spacing: 0.045em; /* Extra generous spacing for small sans-serif abbreviations */
-  }
+	/* Improved utility navigation with abbreviation spacing */
+	.footer-utility {
+		display: flex;
+		gap: var(--space-4); /* 24px - More generous, baseline rhythm */
+		align-items: baseline;
+	}
 
-  .footer-utility a:hover {
-    color: var(--color-text);
-  }
+	/* Using consolidated link system */
+	.footer-utility a {
+		color: var(--color-text-muted);
+		font-weight: 500; /* Heavier weight for very small text */
+		font-variation-settings: "wght" 500; /* Optimized for very small IBM Plex */
+		letter-spacing: 0.045em; /* Extra generous spacing for small sans-serif abbreviations */
+	}
 
-  /* RSS abbreviation styling - per Hochuli's small caps guidance */
-  .footer-utility a[href*="rss"]::before {
-    content: attr(title);
-    position: absolute;
-    opacity: 0;
-    font-size: var(--step--2);
-    background: var(--color-bg);
-    padding: var(--space-1);
-    border-radius: 2px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transform: translateY(-100%);
-    margin-top: -var(--space-1);
-    white-space: nowrap;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-  }
+	.footer-utility a:hover {
+		color: var(--color-text);
+	}
 
-  .footer-utility a[href*="rss"]:hover::before {
-    opacity: 1;
-  }
+	/* RSS abbreviation styling - per Hochuli's small caps guidance */
+	.footer-utility a[href*="rss"]::before {
+		content: attr(title);
+		position: absolute;
+		opacity: 0;
+		font-size: var(--step--2);
+		background: var(--color-bg);
+		padding: var(--space-1);
+		border-radius: 2px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transform: translateY(-100%);
+		margin-top: -var(--space-1);
+		white-space: nowrap;
+		pointer-events: none;
+		transition: opacity 0.2s ease;
+	}
 
-  /* Enhanced responsive grid with better proportions */
-  @media (min-width: 768px) {
-    .footer-nav {
-      grid-template-columns: 1fr 1fr 1fr 2fr; /* Clean 2:1 ratio - mathematical relationship */
-      gap: var(--space-6); /* 36px - Minor third interval from design system */
-    }
-    
-    .site-footer {
-      padding-top: var(--space-16); /* 96px - More generous on larger screens */
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .footer-nav {
-      grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(200px, 2fr);
-      /* Content-driven with minimum widths, maintains 2:1 ratio */
-      justify-content: start;
-      gap: var(--space-8); /* 48px - Major third interval */
-    }
-  }
+	.footer-utility a[href*="rss"]:hover::before {
+		opacity: 1;
+	}
 
-  /* Additional footer link refinements handled by links.css */
+	/* Enhanced responsive grid with better proportions */
+	@media (min-width: 768px) {
+		.footer-nav {
+			grid-template-columns: 1fr 1fr 1fr 2fr; /* Clean 2:1 ratio - mathematical relationship */
+			gap: var(--space-6); /* 36px - Minor third interval from design system */
+		}
 
-  /* Special styling for descriptive text handled by links.css */
+		.site-footer {
+			padding-top: var(--space-16); /* 96px - More generous on larger screens */
+		}
+	}
 
-  /* Typography enhancement for different screen densities */
-  @media (-webkit-min-device-pixel-ratio: 2) {
-    .footer-section-title {
-      font-variation-settings: "wght" 475; /* Slightly lighter on crisp displays */
-      letter-spacing: 0.08em; /* More open on sharp screens */
-    }
-    
-    /* Footer link media query handled by links.css */
-    
-    .footer-utility a {
-      font-variation-settings: "wght" 450; /* Lighter IBM Plex for very small crisp text */
-      letter-spacing: 0.05em; /* Very open spacing for small sans-serif */
-    }
-  }
+	@media (min-width: 1024px) {
+		.footer-nav {
+			grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(
+					200px,
+					2fr
+				);
+			/* Content-driven with minimum widths, maintains 2:1 ratio */
+			justify-content: start;
+			gap: var(--space-8); /* 48px - Major third interval */
+		}
+	}
 
-  /* High contrast mode - accessibility per WCAG */
-  @media (prefers-contrast: high) {
-    .footer-section-title {
-      font-weight: 550; /* Slightly heavier for accessibility */
-      font-variation-settings: "wght" 550;
-      letter-spacing: 0.075em; /* Maintain classic spacing */
-      color: var(--theme-color-700); /* Darker for high contrast accessibility */
-    }
-    
-    /* Footer link high contrast handled by links.css */
-    
-    .footer-utility a {
-      font-weight: 600; /* Very heavy IBM Plex for tiny high-contrast text */
-      font-variation-settings: "wght" 600;
-      letter-spacing: 0.055em; /* Very open for tiny high-contrast sans-serif */
-    }
-    
-    .site-footer::before {
-      opacity: 0.4; /* More visible separator */
-    }
-  }
+	/* Additional footer link refinements handled by links.css */
+
+	/* Special styling for descriptive text handled by links.css */
+
+	/* Typography enhancement for different screen densities */
+	@media (-webkit-min-device-pixel-ratio: 2) {
+		.footer-section-title {
+			font-variation-settings: "wght" 475; /* Slightly lighter on crisp displays */
+			letter-spacing: 0.08em; /* More open on sharp screens */
+		}
+
+		/* Footer link media query handled by links.css */
+
+		.footer-utility a {
+			font-variation-settings: "wght" 450; /* Lighter IBM Plex for very small crisp text */
+			letter-spacing: 0.05em; /* Very open spacing for small sans-serif */
+		}
+	}
+
+	/* High contrast mode - accessibility per WCAG */
+	@media (prefers-contrast: high) {
+		.footer-section-title {
+			font-weight: 550; /* Slightly heavier for accessibility */
+			font-variation-settings: "wght" 550;
+			letter-spacing: 0.075em; /* Maintain classic spacing */
+			color: var(--theme-color-700); /* Darker for high contrast accessibility */
+		}
+
+		/* Footer link high contrast handled by links.css */
+
+		.footer-utility a {
+			font-weight: 600; /* Very heavy IBM Plex for tiny high-contrast text */
+			font-variation-settings: "wght" 600;
+			letter-spacing: 0.055em; /* Very open for tiny high-contrast sans-serif */
+		}
+
+		.site-footer::before {
+			opacity: 0.4; /* More visible separator */
+		}
+	}
 </style>

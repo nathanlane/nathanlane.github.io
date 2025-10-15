@@ -1,57 +1,71 @@
 ---
 import ThemeToggle from "@/components/ThemeToggle.astro";
-import { navigationConfig } from "@/config/navigation.config";
+import { siteConfig, menuLinks } from "@/site.config";
 import { Icon } from "astro-icon/components";
 
-const { header } = navigationConfig;
+// Header configuration from siteConfig
+const header = {
+	logo: {
+		show: siteConfig.showLogo ?? false,
+		text: siteConfig.title,
+		href: "/",
+	},
+	title: {
+		show: siteConfig.showTitle ?? false,
+		text: siteConfig.title,
+	},
+	// Convert menuLinks (path/title) to primary format (href/title)
+	primary: menuLinks.map((link) => ({ href: link.path, title: link.title })),
+};
 ---
 
-<header
-	id="main-header"
-	class="header relative top-0 left-0 z-20 w-full bg-bgColor"
->	
-	<div class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s">
+<header id="main-header" class="header relative top-0 left-0 z-20 w-full bg-bgColor">
+	<div
+		class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s"
+	>
 		<!-- Left side: Logo (if shown) -->
-		{header.logo.show && (
-			<div class="flex items-center">
-				<a
-					aria-label={header.logo.text}
-					aria-current={Astro.url.pathname === "/" ? "page" : false}
-					class="group flex h-space-l items-center hover:filter-none sm:relative"
-					href={header.logo.href}
-				>	
-					<span class="site-title text-base font-heading font-light">
-						{header.logo.text}
-					</span>
-				</a>
-			</div>
-		)}
-		
+		{
+			header.logo.show && (
+				<div class="flex items-center">
+					<a
+						aria-label={header.logo.text}
+						aria-current={Astro.url.pathname === "/" ? "page" : false}
+						class="group flex h-space-l items-center hover:filter-none sm:relative"
+						href={header.logo.href}
+					>
+						<span class="site-title text-base font-heading font-light">{header.logo.text}</span>
+					</a>
+				</div>
+			)
+		}
+
 		<!-- If no logo, add spacer div to maintain layout -->
 		{!header.logo.show && <div />}
-		
+
 		<!-- Right side: Navigation and Actions -->
 		<div class="flex items-center gap-space-xs">
 			<nav
 				aria-label="Main navigation"
 				class="nav-desktop hidden md:flex items-center gap-space-s"
 				data-context="navigation"
-			>	
-				{header.primary.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.href ? "page" : false}
-						class="link-nav"
-						data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
-						href={link.href}
-					>
-						{link.title}
-					</a>
-				))}
+			>
+				{
+					header.primary.map((link) => (
+						<a
+							aria-current={Astro.url.pathname === link.href ? "page" : false}
+							class="link-nav"
+							data-astro-prefetch={!link.href.startsWith("mailto:") ? true : undefined}
+							href={link.href}
+						>
+							{link.title}
+						</a>
+					))
+				}
 			</nav>
-			
+
 			<div class="nav-actions flex items-center gap-space-xs">
 				<ThemeToggle />
-				
+
 				<!-- Mobile menu toggle -->
 				<button
 					aria-expanded="false"
@@ -83,27 +97,24 @@ const { header } = navigationConfig;
 
 <!-- Mobile drawer menu -->
 <div id="drawer" class="fixed inset-0 z-10 hidden" aria-hidden="true">
-	<div
-		id="drawer-body"
-		class="absolute inset-0 -translate-y-full transform bg-bgColor"
-	>
-	
-		
+	<div id="drawer-body" class="absolute inset-0 -translate-y-full transform bg-bgColor">
 		<nav
 			aria-label="Mobile navigation menu"
 			class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center"
 			id="nav-menu-mobile"
 		>
-			{header.primary.map((link) => (
-				<a
-					aria-current={Astro.url.pathname === link.href ? "page" : false}
-					class="link-nav text-lg"
-					data-astro-prefetch={!link.href.startsWith('mailto:') ? true : undefined}
-					href={link.href}
-				>
-					{link.title}
-				</a>
-			))}
+			{
+				header.primary.map((link) => (
+					<a
+						aria-current={Astro.url.pathname === link.href ? "page" : false}
+						class="link-nav text-lg"
+						data-astro-prefetch={!link.href.startsWith("mailto:") ? true : undefined}
+						href={link.href}
+					>
+						{link.title}
+					</a>
+				))
+			}
 		</nav>
 	</div>
 </div>
@@ -238,7 +249,7 @@ const { header } = navigationConfig;
 
 		// Close drawer when clicking on a link
 		const mobileNavLinks = document.querySelectorAll("#nav-menu-mobile a");
-		mobileNavLinks.forEach(link => {
+		mobileNavLinks.forEach((link) => {
 			link.addEventListener("click", () => {
 				// Close the drawer
 				if (toggleNavMenuMobileButton && drawerBody && drawer) {

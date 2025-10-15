@@ -59,6 +59,77 @@ pnpm build         # Test production build
 - [ ] Check mobile responsiveness (viewport 320px-1280px)
 - [ ] No console errors in browser
 
+## Configuration Management
+
+### The Site Config Pattern
+
+**Single Source of Truth:** All identity, contact, and site metadata lives in `src/site.config.ts`.
+
+#### What Goes Where
+
+**`src/site.config.ts` (IDENTITY + METADATA):**
+- Author name, credentials, job title
+- Organization name (full and short)
+- Email, CV URL, profile images
+- ORCID, Twitter handle, social profiles
+- Site metadata (language, locale, description)
+- Navigation links (`menuLinks`)
+- Social links (`socialLinks`)
+
+**Content files (NARRATIVE ONLY):**
+- `src/content/homepage/index.yaml` - Biography prose, custom links
+- `src/data/about-config.ts` - Extended biography paragraphs
+
+#### Why This Matters
+
+This pattern ensures:
+1. **Update once, propagate everywhere** - Change your email in one place
+2. **Clear separation** - Identity data vs. narrative content
+3. **Type safety** - TypeScript enforces structure
+4. **DRY principle** - No duplicate data maintenance
+
+#### How It Works
+
+```typescript
+// src/site.config.ts exports identity data
+export const siteConfig: SiteConfig = {
+  author: "Nathan Lane",
+  email: "n.lane@lse.ac.uk",
+  organization: "London School of Economics",
+  // ...
+};
+
+// Pages import and merge with content
+import { siteConfig } from "@/site.config";
+const homepageYaml = await getEntry("homepage", "index");
+
+// Merge: config provides identity, YAML provides narrative
+const bio = {
+  title: siteConfig.fullName,
+  tagline: siteConfig.organization,
+  narrative: homepageYaml.bio.narrative,
+};
+```
+
+#### Updating Your Information
+
+**To change identity data** (name, job, org, email, CV):
+1. Edit `src/site.config.ts` only
+2. Changes automatically propagate to:
+   - Homepage (index.astro)
+   - About page (about.astro)
+   - SEO metadata (BaseHead.astro)
+   - Navigation (Header.astro, Footer.astro)
+
+**To change narrative content** (biography text):
+1. Edit `src/content/homepage/index.yaml` for homepage bio
+2. Edit `src/data/about-config.ts` for about page paragraphs
+
+**Files that should NOT be edited:**
+- ❌ `src/config/navigation.config.ts` - DELETED (was duplicate data)
+- ❌ Don't add identity fields to YAML files
+- ❌ Don't hardcode contact info in components
+
 ## Common Tasks
 
 ### Adding Blog Posts

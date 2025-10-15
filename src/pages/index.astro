@@ -1,20 +1,66 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import BioPanel from "@/components/BioPanel.astro";
-// import ContactInfo from "@/components/ContactInfo.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { mediaData } from "@/data/media";
 import PageLayout from "@/layouts/Base.astro";
+import { siteConfig, socialLinks } from "@/site.config";
 
-// Get homepage content from content collection
+// Get homepage CONTENT from YAML (narrative only, not identity data)
 const homepageContent = await getEntry("homepage", "index");
 if (!homepageContent) {
 	throw new Error("Homepage content not found");
 }
-const { bio, contact } = homepageContent.data;
+const homepageYaml = homepageContent.data;
+
+// MERGE: Config provides identity, YAML provides content
+const bio = {
+	title: siteConfig.fullName || siteConfig.title,
+	tagline: siteConfig.organization,
+	narrative: homepageYaml.bio?.narrative || "",
+	affiliations: [
+		{
+			title: siteConfig.organization || "Unknown Organization",
+			role: siteConfig.jobTitle || "Researcher",
+		},
+		// Add secondary affiliation if provided in YAML
+		...(homepageYaml.bio?.secondaryAffiliation ? [homepageYaml.bio.secondaryAffiliation] : []),
+	],
+};
+
+// Auto-generate contact from siteConfig + append custom links from YAML
+const githubLink = socialLinks.find((l) => l.friendlyName === "Github");
+const contact = {
+	title: homepageYaml.contact?.title || "Important Links",
+	email: siteConfig.email,
+	items: [
+		// Auto-generated standard links from siteConfig
+		...(githubLink
+			? [
+					{
+						label: "GitHub",
+						href: githubLink.link,
+						text: "GitHub",
+					},
+				]
+			: []),
+		{
+			label: "Email",
+			href: `mailto:${siteConfig.email}`,
+			text: "Email Me",
+		},
+		{
+			label: "CV",
+			href: siteConfig.resumeUrl || "/cv.pdf",
+			text: "Download CV",
+		},
+		// Append custom links from YAML
+		...(homepageYaml.contact?.items || []),
+	],
+};
 
 // Get featured research papers
 const allResearch = await getCollection("research");

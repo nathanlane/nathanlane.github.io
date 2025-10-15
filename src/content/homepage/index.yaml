@@ -1,8 +1,16 @@
+# Homepage Content Configuration
+#
+# This file contains CONTENT ONLY (narrative text, prose).
+# Identity data (name, email, job, CV, etc.) comes from site.config.ts
+#
+# The index.astro component merges:
+# - Identity/contact data from site.config.ts
+# - Narrative content from this YAML file
+
 bio:
-  title: Nathan Lane, PhD
-  tagline: London School of Economics
+  # Biography narrative - your story in your own words
   narrative: >+
-    I’m a economics professor and empirical economist working at the intersection of big data, economic
+    I'm a economics professor and empirical economist working at the intersection of big data, economic
     development, political economy, and industrial economics. Find my [research
     here](/research/).
 
@@ -10,37 +18,27 @@ bio:
     My work has appeared in [The New York Times](https://www.nytimes.com/2023/09/08/opinion/industrial-policy-biden.html), [The Economist](https://www.economist.com/special-report/2023/10/02/governments-across-the-world-are-discovering-homeland-economics), [The Financial Times](https://www.ft.com/content/34872d9a-3587-4b27-a01d-2905f8e23408), [The Wall Street Journal](https://www.wsj.com/articles/this-part-of-bidenomics-needs-more-economics-2cea1641?ns=prod%2Faccounts-wsj), [Noahpinion](https://www.noahpinion.blog/p/a-few-economists-are-starting-to), [Trade Talks](https://tradetalkspodcast.com/podcast/189-south-koreas-controversial-industrial-policy/), and [more](/media/).
 
 
-    See my work with The [Industrial Policy Group](https://www.industrialpolicygroup.com/), an empirical research lab. I’m an affiliate of CESifo research network and a cofounder of [Sodalabs.io](https://sodalabs.io).
+    See my work with The [Industrial Policy Group](https://www.industrialpolicygroup.com/), an empirical research lab. I'm an affiliate of CESifo research network and a cofounder of [Sodalabs.io](https://sodalabs.io).
 
+  # Secondary affiliation for display (optional)
+  secondaryAffiliation:
+    title: Industrial Policy Group
+    role: Co-Principal Investigator
 
-
-
-
-
-  affiliations:
-    - title: London School of Economics
-      role: Assistant Professor
-    - title: Industrial Policy Group
-      role: Co-Principal Investigator
+# Important Links - CUSTOM LINKS ONLY
+# Note: Email, CV, and GitHub are auto-generated from site.config.ts
+# Only add project-specific or unique links here
 contact:
   title: Important Links
-  email: n.lane@lse.ac.uk
   items:
-    - label: GitHub
-      href: https://github.com/nathanlane
-      text: GitHub
     - label: The Industrial Policy Group
       href: https://industrialpolicygroup.com
       text: industrialpolicygroup.com
     - label: Industrial Policy Data
       href: https://industrialpolicydata.com
       text: industrialpolicydata.com
-    - label: Email
-      href: mailto:n.lane@lse.ac.uk
-      text: Email Me
-    - label: CV
-      href: /cv.pdf
-      text: Download CV
+
+# Homepage sections configuration
 sections:
   research:
     title: Research

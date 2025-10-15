@@ -1,10 +1,54 @@
 /**
  * Main site configuration object.
  * Used throughout the site for metadata, navigation, and SEO.
+ * This is the single source of truth for all identity and contact data.
  */
 export interface SiteConfig {
-	/** Site author name - used in meta tags, structured data, and bylines */
+	// === IDENTITY ===
+
+	/** Site author name - short form (e.g., 'Nathan Lane') */
 	author: string;
+
+	/** Full formal name with credentials (e.g., 'Nathan Lane, PhD') */
+	fullName?: string;
+
+	/** Job title for display and structured data (e.g., 'Assistant Professor') */
+	jobTitle?: string;
+
+	/** Full organization name (e.g., 'London School of Economics') */
+	organization?: string;
+
+	/** Short organization name (e.g., 'LSE') */
+	organizationShort?: string;
+
+	// === CONTACT ===
+
+	/** Primary email address for contact and structured data */
+	email?: string;
+
+	// === RESOURCES ===
+
+	/** URL path to CV/resume PDF (e.g., '/cv.pdf') */
+	resumeUrl?: string;
+
+	/** Path to standard profile image (e.g., '/headshot.jpg') */
+	profileImage?: string;
+
+	/** Path to full-size profile image (e.g., '/headshot-full.JPG') */
+	profileImageFull?: string;
+
+	// === PROFESSIONAL PROFILES ===
+
+	/** ORCID identifier for academic profiles (e.g., '0000-0003-0884-8418') */
+	orcid?: string;
+
+	/** Twitter handle for social media cards (e.g., '@straightedge') */
+	twitterHandle?: string;
+
+	/** Array of social media profile URLs for structured data */
+	socialProfiles?: string[];
+
+	// === SITE METADATA ===
 
 	/** Date formatting configuration for blog posts and metadata */
 	date: {
@@ -26,6 +70,8 @@ export interface SiteConfig {
 	/** Site title - used in <title> tags, meta properties, and header */
 	title: string;
 
+	// === DISPLAY OPTIONS ===
+
 	/** Whether to show the logo icon in the header */
 	showLogo?: boolean;
 
@@ -34,32 +80,6 @@ export interface SiteConfig {
 
 	/** Footer branding text - customize or set to empty string to hide */
 	footerText?: string;
-
-	/** URL path to CV/resume PDF (e.g., '/cv.pdf') */
-	resumeUrl?: string;
-
-	/** Primary email address for contact and structured data */
-	email?: string;
-
-	// SEO and structured data fields
-
-	/** Job title for structured data (e.g., 'Assistant Professor') */
-	jobTitle?: string;
-
-	/** Organization name for structured data (e.g., 'London School of Economics') */
-	organization?: string;
-
-	/** Array of social media profile URLs for structured data */
-	socialProfiles?: string[];
-
-	/** Path to profile image for structured data (e.g., '/headshot.jpg') */
-	profileImage?: string;
-
-	/** ORCID identifier for academic profiles (e.g., '0000-0003-0884-8418') */
-	orcid?: string;
-
-	/** Twitter handle for social media cards (e.g., '@straightedge') */
-	twitterHandle?: string;
 }
 
 // Collection item base type matching Astro's collection structure

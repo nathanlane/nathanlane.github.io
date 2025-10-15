@@ -189,36 +189,18 @@ const writing = defineCollection({
 
 // End
 
-// Pages collection for static page content
-const pages = defineCollection({
-	loader: glob({ base: "./src/content/pages", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		// About page specific fields
-		showPhoto: z.boolean().optional(),
-		photoSrc: z.string().optional(),
-		photoAlt: z.string().optional(),
-		fullSizePhotoLink: z.string().optional(),
-	}),
-});
-
 // Homepage content collection
 const homepage = defineCollection({
 	loader: glob({ base: "./src/content/homepage", pattern: "**/*.yaml" }),
 	schema: z.object({
 		bio: z
 			.object({
-				title: z.string().optional(),
-				tagline: z.string().optional(),
 				narrative: z.string(),
-				affiliations: z
-					.array(
-						z.object({
-							title: z.string(),
-							role: z.string(),
-						}),
-					)
+				secondaryAffiliation: z
+					.object({
+						title: z.string(),
+						role: z.string(),
+					})
 					.optional(),
 				photo: z
 					.object({
@@ -230,17 +212,20 @@ const homepage = defineCollection({
 					.optional(),
 			})
 			.optional(),
-		contact: z.object({
-			title: z.string(),
-			email: z.string().email(),
-			items: z.array(
-				z.object({
-					label: z.string(),
-					href: z.string(),
-					text: z.string(),
-				}),
-			),
-		}),
+		contact: z
+			.object({
+				title: z.string().optional(),
+				items: z
+					.array(
+						z.object({
+							label: z.string(),
+							href: z.string(),
+							text: z.string(),
+						}),
+					)
+					.optional(),
+			})
+			.optional(),
 		sections: z
 			.object({
 				research: z
@@ -288,6 +273,5 @@ export const collections = {
 	projects,
 	research,
 	writing,
-	pages,
 	homepage,
 };

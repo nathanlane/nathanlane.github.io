@@ -1,9 +1,49 @@
 import type { SiteConfig } from "@/types";
 
+/**
+ * Site Configuration - Single Source of Truth
+ *
+ * This is the authoritative source for all identity, contact, and site metadata.
+ * Other files (index.yaml, about-config.ts) reference this config.
+ *
+ * To update site-wide information:
+ * - Identity: Change author, fullName, jobTitle, organization here
+ * - Contact: Change email here
+ * - Resources: Change CV, images here
+ *
+ * These values automatically propagate to:
+ * - Homepage (index.astro merges with index.yaml content)
+ * - About page (about-config.ts imports this)
+ * - SEO metadata (BaseHead.astro, StructuredData.astro)
+ * - Navigation (Header.astro, Footer.astro)
+ */
 export const siteConfig: SiteConfig = {
-	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
+	// === IDENTITY ===
 	author: "Nathan Lane",
-	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
+	fullName: "Nathan Lane, PhD",
+	jobTitle: "Assistant Professor",
+	organization: "London School of Economics",
+	organizationShort: "LSE",
+
+	// === CONTACT ===
+	email: "n.lane@lse.ac.uk",
+
+	// === RESOURCES ===
+	resumeUrl: "/cv.pdf",
+	profileImage: "/headshot.jpg",
+	profileImageFull: "/headshot-full.JPG",
+
+	// === PROFESSIONAL PROFILES ===
+	orcid: "0000-0003-0884-8418",
+	twitterHandle: "@straightedge",
+	socialProfiles: [
+		"https://twitter.com/straightedge",
+		"https://www.linkedin.com/in/drnathanlane/",
+		"https://github.com/nathanlane",
+		"https://orcid.org/0000-0003-0884-8418",
+	],
+
+	// === SITE METADATA ===
 	date: {
 		locale: "en-GB",
 		options: {
@@ -12,36 +52,15 @@ export const siteConfig: SiteConfig = {
 			year: "numeric",
 		},
 	},
-	// Used as the default description meta property and webmanifest description
 	description: "Nathan Lane, PhD, Economist and Data Scientist",
-	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
-	// Meta property, found in src/components/BaseHead.astro L:42
 	ogLocale: "en_GB",
-	// Used to construct the meta title property found in src/components/BaseHead.astro L:11, and webmanifest name found in astro.config.ts L:42
 	title: "Nathan Lane, PhD",
-	// Control visibility of the logo icon in header - set to false to hide
+
+	// === DISPLAY OPTIONS ===
 	showLogo: false,
-	// Control visibility of the site title text in header - set to false to hide
 	showTitle: false,
-	// Resume PDF link - update filename as needed
-	resumeUrl: "/cv.pdf",
-	// Primary email address
-	email: "n.lane@lse.ac.uk",
-	// Footer branding text - customize or set to empty string to hide
 	footerText: "🚀 Astro Theme by Nathan Lane",
-	// SEO and structured data fields
-	jobTitle: "Assistant Professor",
-	organization: "London School of Economics",
-	profileImage: "/headshot.jpg",
-	twitterHandle: "@straightedge",
-	orcid: "0000-0003-0884-8418",
-	socialProfiles: [
-		"https://twitter.com/straightedge",
-		"https://www.linkedin.com/in/drnathanlane/",
-		"https://github.com/nathanlane",
-		"https://orcid.org/0000-0003-0884-8418",
-	],
 };
 
 // Social media links used across the site
