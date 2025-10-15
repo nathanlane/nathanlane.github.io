@@ -1,13 +1,13 @@
 bio:
   title: Nathan Lane, PhD
-  tagline: Economics professor, University of Oxford
+  tagline: London School of Economics
   narrative: >+
-    I’m an empirical economist working at the intersection of big data, economic
+    I’m a economics professor and empirical economist working at the intersection of big data, economic
     development, political economy, and industrial economics. Find my [research
     here](/research/).
 
 
-    My work has appeared in [The New York Times](https://www.nytimes.com/2023/09/08/opinion/industrial-policy-biden.html), [The Economist](https://www.economist.com/special-report/2023/10/02/governments-across-the-world-are-discovering-homeland-economics), [The Financial Times](https://www.ft.com/content/34872d9a-3587-4b27-a01d-2905f8e23408), [The Wall Street Journal](https://www.wsj.com/articles/this-part-of-bidenomics-needs-more-economics-2cea1641?ns=prod%2Faccounts-wsj), [Noahpinion](https://www.noahpinion.blog/p/a-few-economists-are-starting-to), [Trade Talks](https://tradetalkspodcast.com/podcast/189-south-koreas-controversial-industrial-policy/), and [more](/media/). 
+    My work has appeared in [The New York Times](https://www.nytimes.com/2023/09/08/opinion/industrial-policy-biden.html), [The Economist](https://www.economist.com/special-report/2023/10/02/governments-across-the-world-are-discovering-homeland-economics), [The Financial Times](https://www.ft.com/content/34872d9a-3587-4b27-a01d-2905f8e23408), [The Wall Street Journal](https://www.wsj.com/articles/this-part-of-bidenomics-needs-more-economics-2cea1641?ns=prod%2Faccounts-wsj), [Noahpinion](https://www.noahpinion.blog/p/a-few-economists-are-starting-to), [Trade Talks](https://tradetalkspodcast.com/podcast/189-south-koreas-controversial-industrial-policy/), and [more](/media/).
 
 
     See my work with The [Industrial Policy Group](https://www.industrialpolicygroup.com/), an empirical research lab. I’m an affiliate of CESifo research network and a cofounder of [Sodalabs.io](https://sodalabs.io).
@@ -18,13 +18,13 @@ bio:
 
 
   affiliations:
-    - title: University of Oxford
+    - title: London School of Economics
       role: Assistant Professor
     - title: Industrial Policy Group
       role: Co-Principal Investigator
 contact:
   title: Important Links
-  email: drnathanlane@gmail.com
+  email: n.lane@lse.ac.uk
   items:
     - label: GitHub
       href: https://github.com/nathanlane
@@ -36,7 +36,7 @@ contact:
       href: https://industrialpolicydata.com
       text: industrialpolicydata.com
     - label: Email
-      href: mailto:drnathanlane@gmail.com
+      href: mailto:n.lane@lse.ac.uk
       text: Email Me
     - label: CV
       href: /cv.pdf

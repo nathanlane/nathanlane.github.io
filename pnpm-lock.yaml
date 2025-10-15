@@ -68,9 +68,6 @@ importers:
       katex:
         specifier: ^0.16.22
         version: 0.16.22
-      marked:
-        specifier: ^16.1.1
-        version: 16.1.1
       mdast-util-directive:
         specifier: ^3.1.0
         version: 3.1.0
@@ -3933,15 +3930,6 @@ packages:
       {
         integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==,
       }
-
-  marked@16.1.1:
-    resolution:
-      {
-        integrity: sha512-ij/2lXfCRT71L6u0M29tJPhP0bM5shLL3u5BePhFwPELj2blMJ6GDtD7PfJhRLhJ/c2UwrK17ySVcDzy2YHjHQ==,
-      }
-    engines: { node: ">= 20" }
-    hasBin: true
-
   math-intrinsics@1.1.0:
     resolution:
       {
@@ -9230,8 +9218,6 @@ snapshots:
   markdown-extensions@2.0.0: {}
 
   markdown-table@3.0.4: {}
-
-  marked@16.1.1: {}
 
   math-intrinsics@1.1.0: {}
 

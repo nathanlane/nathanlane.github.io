@@ -26,6 +26,8 @@ const { bio, class: className = '' } = Astro.props;
 
 // Parse markdown in narrative
 const narrativeHtml = await renderMarkdown(bio.narrative);
+const photoCaptionHtml =
+	bio.photo?.caption !== undefined ? await renderMarkdownInline(bio.photo.caption) : undefined;
 ---
 
 <section class={`bio-panel ${className}`} data-content-type="long-form">
@@ -53,9 +55,9 @@ const narrativeHtml = await renderMarkdown(bio.narrative);
               widths={[400, 600]}
               sizes="(max-width: 768px) 100vw, 400px"
             />
-            {bio.photo.caption && (
+            {photoCaptionHtml && (
               <figcaption class="text--2 text-lightest mt-2b">
-                <Fragment set:html={renderMarkdownInline(bio.photo.caption)} />
+                <Fragment set:html={photoCaptionHtml} />
               </figcaption>
             )}
           </figure>
