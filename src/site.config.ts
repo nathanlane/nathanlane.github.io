@@ -134,11 +134,15 @@ export const menuLinks: { path: string; title: string }[] = [
 		title: "Research",
 	},
 	{
-		path: "/about/",
-		title: "About",
+		path: "/writing/",
+		title: "Writing",
 	},
 	{
-		path: "/projects/",
-		title: "Projects",
+		path: "/media/",
+		title: "Media",
+	},
+	{
+		path: "/about/",
+		title: "About",
 	},
 ];

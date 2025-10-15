@@ -189,78 +189,37 @@ const writing = defineCollection({
 
 // End
 
-// Homepage content collection
-const homepage = defineCollection({
-	loader: glob({ base: "./src/content/homepage", pattern: "**/*.yaml" }),
+// Pages collection for static page content (about, homepage, etc.)
+const pages = defineCollection({
+	loader: glob({ base: "./src/content/pages", pattern: "**/*.mdx" }),
 	schema: z.object({
-		bio: z
-			.object({
-				narrative: z.string(),
-				secondaryAffiliation: z
-					.object({
-						title: z.string(),
-						role: z.string(),
-					})
-					.optional(),
-				photo: z
-					.object({
-						src: z.string(),
-						alt: z.string(),
-						caption: z.string().optional(),
-						display: z.boolean(),
-					})
-					.optional(),
-			})
-			.optional(),
-		contact: z
-			.object({
-				title: z.string().optional(),
-				items: z
-					.array(
-						z.object({
-							label: z.string(),
-							href: z.string(),
-							text: z.string(),
-						}),
-					)
-					.optional(),
-			})
-			.optional(),
+		title: z.string(),
+		description: z.string(),
+		showPhoto: z.boolean().default(false),
+		// About page sections
 		sections: z
+			.array(
+				z.object({
+					title: z.string(),
+					id: z.string().optional(),
+				}),
+			)
+			.optional(),
+		// Homepage-specific fields
+		secondaryAffiliation: z
 			.object({
-				research: z
-					.object({
-						title: z.string(),
-						itemCount: z.number(),
-						viewAllText: z.string(),
-						viewAllUrl: z.string(),
-					})
-					.optional(),
-				essays: z
-					.object({
-						title: z.string(),
-						itemCount: z.number(),
-						viewAllText: z.string(),
-						viewAllUrl: z.string(),
-					})
-					.optional(),
-				writing: z
-					.object({
-						title: z.string(),
-						itemCount: z.number(),
-						viewAllText: z.string(),
-						viewAllUrl: z.string(),
-					})
-					.optional(),
-				media: z
-					.object({
-						title: z.string(),
-						itemCount: z.number(),
-						viewAllText: z.string(),
-						viewAllUrl: z.string(),
-					})
-					.optional(),
+				title: z.string(),
+				role: z.string(),
 			})
+			.optional(),
+		contactLinks: z
+			.array(
+				z.object({
+					label: z.string(),
+					href: z.string(),
+					text: z.string(),
+				}),
+			)
 			.optional(),
 	}),
 });
@@ -273,5 +232,5 @@ export const collections = {
 	projects,
 	research,
 	writing,
-	homepage,
+	pages,
 };

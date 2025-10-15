@@ -119,69 +119,51 @@ collections:
         }
       - { label: "Content", name: "body", widget: "markdown" }
 
-  # Homepage Configuration
+  # Static Pages
+  - name: "pages"
+    label: "Static Pages"
+    folder: "src/content/pages"
+    create: true
+    slug: "{{slug}}"
+    extension: "mdx"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Show Photo", name: "showPhoto", widget: "boolean", default: false }
+      - label: "Sections"
+        name: "sections"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "ID", name: "id", widget: "string", required: false }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  # Homepage Configuration (MDX)
   - name: "homepage"
     label: "Homepage"
     files:
       - label: "Homepage Content"
         name: "homepage"
-        file: "src/content/homepage/index.yaml"
+        file: "src/content/pages/homepage.mdx"
+        format: "frontmatter"
         fields:
-          - label: "Bio Section"
-            name: "bio"
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - label: "Secondary Affiliation"
+            name: "secondaryAffiliation"
             widget: "object"
+            required: false
             fields:
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Tagline", name: "tagline", widget: "string" }
-              - { label: "Narrative", name: "narrative", widget: "markdown" }
-              - label: "Affiliations"
-                name: "affiliations"
-                widget: "list"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Role", name: "role", widget: "string" }
-
-          - label: "Contact Section"
-            name: "contact"
-            widget: "object"
+              - { label: "Role", name: "role", widget: "string" }
+          - label: "Contact Links"
+            name: "contactLinks"
+            widget: "list"
+            required: false
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Email", name: "email", widget: "string" }
-              - label: "Items"
-                name: "items"
-                widget: "list"
-                fields:
-                  - { label: "Label", name: "label", widget: "string" }
-                  - { label: "URL", name: "href", widget: "string" }
-                  - { label: "Display Text", name: "text", widget: "string" }
-
-          - label: "Sections Configuration"
-            name: "sections"
-            widget: "object"
-            fields:
-              - label: "Research Section"
-                name: "research"
-                widget: "object"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - { label: "View All Text", name: "viewAllText", widget: "string" }
-                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
-
-              - label: "Writing Section"
-                name: "writing"
-                widget: "object"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - { label: "View All Text", name: "viewAllText", widget: "string" }
-                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
-
-              - label: "Media Section"
-                name: "media"
-                widget: "object"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Item Count", name: "itemCount", widget: "number" }
-                  - { label: "View All Text", name: "viewAllText", widget: "string" }
-                  - { label: "View All URL", name: "viewAllUrl", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+              - { label: "Display Text", name: "text", widget: "string" }
+          - { label: "Bio Narrative", name: "body", widget: "markdown" }
