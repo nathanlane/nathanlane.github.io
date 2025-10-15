@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import BioPanel from "@/components/BioPanel.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
@@ -9,32 +9,34 @@ import { mediaData } from "@/data/media";
 import PageLayout from "@/layouts/Base.astro";
 import { siteConfig, socialLinks } from "@/site.config";
 
-// Get homepage CONTENT from YAML (narrative only, not identity data)
-const homepageContent = await getEntry("homepage", "index");
+// Get homepage CONTENT from MDX
+const homepageContent = await getEntry("pages", "homepage");
 if (!homepageContent) {
 	throw new Error("Homepage content not found");
 }
-const homepageYaml = homepageContent.data;
+const { Content } = await render(homepageContent);
+const homepageData = homepageContent.data;
 
-// MERGE: Config provides identity, YAML provides content
+// MERGE: Config provides identity data for BioPanel header
 const bio = {
 	title: siteConfig.fullName || siteConfig.title,
 	tagline: siteConfig.organization,
-	narrative: homepageYaml.bio?.narrative || "",
+	// We'll render MDX content separately, so pass empty string
+	narrative: "",
 	affiliations: [
 		{
 			title: siteConfig.organization || "Unknown Organization",
 			role: siteConfig.jobTitle || "Researcher",
 		},
-		// Add secondary affiliation if provided in YAML
-		...(homepageYaml.bio?.secondaryAffiliation ? [homepageYaml.bio.secondaryAffiliation] : []),
+		// Add secondary affiliation if provided in MDX frontmatter
+		...(homepageData.secondaryAffiliation ? [homepageData.secondaryAffiliation] : []),
 	],
 };
 
-// Auto-generate contact from siteConfig + append custom links from YAML
+// Auto-generate contact from siteConfig + append custom links from MDX
 const githubLink = socialLinks.find((l) => l.friendlyName === "Github");
 const contact = {
-	title: homepageYaml.contact?.title || "Important Links",
+	title: "Important Links",
 	email: siteConfig.email,
 	items: [
 		// Auto-generated standard links from siteConfig
@@ -57,8 +59,8 @@ const contact = {
 			href: siteConfig.resumeUrl || "/cv.pdf",
 			text: "Download CV",
 		},
-		// Append custom links from YAML
-		...(homepageYaml.contact?.items || []),
+		// Append custom links from MDX frontmatter
+		...(homepageData.contactLinks || []),
 	],
 };
 
@@ -100,8 +102,20 @@ const importantLinksSections =
 	}}
 >
 	<div class="homepage-document">
-		<!-- Bio Panel Integration -->
-		{bio && <BioPanel bio={bio} class="mb-16b" />}
+		<!-- Bio Panel Header (title and tagline only) -->
+		<header class="mb-8b">
+			<h1 class="heading-1 text-accent-base mb-3b">{bio.title}</h1>
+			{bio.tagline && (
+				<p class="text-2 text-light font-body leading-relaxed">
+					{bio.tagline}
+				</p>
+			)}
+		</header>
+
+		<!-- Homepage Bio Narrative (MDX Content) -->
+		<div class="narrative prose prose-lane max-w-none mb-16b">
+			<Content />
+		</div>
 
 		<!-- Research Section -->
 		<DocumentSection
@@ -162,6 +176,36 @@ const importantLinksSections =
 		max-width: var(--measure-base); /* Single source of truth */
 		margin: 0 auto;
 		padding: var(--space-8) var(--space-4); /* 48px 24px */
+	}
+
+	/* Homepage header styling */
+	.homepage-document header h1 {
+		letter-spacing: -0.02em;
+	}
+
+	/* Narrative typography - larger font size */
+	.narrative :global(p) {
+		@apply text-1 leading-relaxed mb-6b;
+	}
+
+	.narrative :global(p:last-child) {
+		@apply mb-0;
+	}
+
+	/* Apply editorial link style to all narrative links */
+	.narrative a {
+		color: var(--link-color-editorial, var(--theme-accent-base));
+		font-weight: 450;
+		text-decoration: underline;
+		text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+		text-decoration-thickness: 0.05em;
+		text-underline-offset: 0.2em;
+	}
+
+	.narrative a:hover {
+		color: var(--link-color-hover);
+		text-decoration-color: var(--link-color-hover);
+		text-decoration-thickness: 0.075em;
 	}
 
 	/* Responsive adjustments */
