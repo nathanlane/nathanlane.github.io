@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
+import { getFormattedDate } from "@/utils/date";
 import type { HTMLTag, Polymorphic } from "astro/types";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
@@ -9,6 +9,11 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
+
+const publishDate = post.data.publishDate;
+const isoDate = publishDate.toISOString();
+const shortDate = getFormattedDate(publishDate, { year: "numeric", month: "short", day: "2-digit" });
+const longDate = getFormattedDate(publishDate, { year: "numeric", month: "long", day: "2-digit" });
 ---
 
 <div class={withDesc ? "flex flex-col" : "flex flex-col grow sm:flex-row sm:items-center sm:justify-between"}>
@@ -20,27 +25,15 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 					{post.data.title}
 				</a>
 			</Tag>
-			<FormattedDate
-				class="shrink-0 text-lightest text--1 ml-4b"
-				date={post.data.publishDate}
-				dateTimeOptions={{
-					year: "numeric",
-					month: "short",
-					day: "2-digit",
-				}}
-			/>
+			<time class="shrink-0 text-lightest text--1 ml-4b" datetime={isoDate} title={isoDate}>
+				{shortDate}
+			</time>
 		</>
 	) : (
 		<>
-			<FormattedDate 
-				class="text-body-sm shrink-0 text-lightest" 
-				date={post.data.publishDate}
-				dateTimeOptions={{
-					year: "numeric",
-					month: "long",
-					day: "2-digit",
-				}}
-			/>
+			<time class="text-body-sm shrink-0 text-lightest" datetime={isoDate} title={isoDate}>
+				{longDate}
+			</time>
 			<Tag class="font-sans font-normal text-0 text-accent-base mt-space-2xs">
 				<a class="u-hover-underline" data-astro-prefetch href={`/posts/${post.id}/`}>
 					{post.data.title}
