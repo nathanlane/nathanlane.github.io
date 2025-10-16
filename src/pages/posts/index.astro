@@ -1,28 +1,35 @@
 ---
+import { getEntry } from "astro:content";
 import PageHeader from "@/components/PageHeader.astro";
 import RecentContent from "@/components/RecentContent.astro";
 import SectionSeparator from "@/components/SectionSeparator.astro";
 import { getAllPosts, getUniqueTags } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import { renderMarkdown } from "@/utils/markdown";
 
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);
 
 const recentPosts = allPosts.slice(0, 5);
 
-const meta = {
-  title: "Blog Posts",
-  description: "Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development."
-};
+const postsPage = await getEntry("pages", "posts");
+if (!postsPage) {
+	throw new Error("Posts page content not found");
+}
+
+const { title, description, headerDescription, headerAdditionalInfo } = postsPage.data;
+
+const headerDescriptionHtml = headerDescription ? await renderMarkdown(headerDescription) : undefined;
+const headerAdditionalInfoHtml = headerAdditionalInfo ? await renderMarkdown(headerAdditionalInfo) : undefined;
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={{ title, description }}>
   <div class="measure-base mx-auto px-4b py-8b">
     <!-- Reusable Page Header with links -->
     <PageHeader 
-      title="Blog Posts"
-      description="Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development."
-      additionalInfo={`<a href="/posts/archive">Browse all posts</a> • Also see <a href="/writing">writing here</a>`}
+      title={title}
+      {...(headerDescriptionHtml ? { description: headerDescriptionHtml } : {})}
+      {...(headerAdditionalInfoHtml ? { additionalInfo: headerAdditionalInfoHtml } : {})}
     />
 
     <!-- Recent Posts using reusable component -->

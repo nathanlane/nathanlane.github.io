@@ -32,6 +32,8 @@ export const siteConfig: SiteConfig = {
 	resumeUrl: "/cv.pdf",
 	profileImage: "/headshot.jpg",
 	profileImageFull: "/headshot-full.JPG",
+	departmentPage: "https://www.lse.ac.uk/international-development",
+	professionalPage: "https://www.lse.ac.uk/people/nathan-lane",
 
 	// === PROFESSIONAL PROFILES ===
 	orcid: "0000-0003-0884-8418",

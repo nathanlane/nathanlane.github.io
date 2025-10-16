@@ -2,9 +2,11 @@
 title: About
 description: About Nathan Lane, PhD
 headerDescription: |
-  Nathan Lane, PhD. I am an economics professor and data scientist, find my biography [below](#biography).
+  I'm faculty at LSE's [Department of International Development]({{departmentPage}}).
 
-  You can also email me [here](mailto:{{email}}). Or download my CV [here too]({{cvUrl}}).
+  Email at [{{email}}](mailto:{{email}}). For my professional site: [{{professionalPage}}]({{professionalPage}}). Find my CV [here]({{cvUrl}}).
+
+  Find me on [Twitter]({{twitterUrl}}) and [LinkedIn]({{linkedInUrl}}).
 showPhoto: true
 sections:
   - { title: "Biography", id: "biography" }
@@ -15,7 +17,7 @@ import { siteConfig } from "@/site.config";
 
 ## Biography
 
-**Nathan Lane, PhD**, is an Assistant Professor of Economic Development at the London School of Economics, in the Department of International Development. He is the co-founder of the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/), with Dr. Réka Juhász (University of British Columbia).
+**Nathan Lane, PhD**, is an Assistant Professor of Economic Development at the London School of Economics, in the <a href={siteConfig.departmentPage}>Department of International Development</a>. He is the co-founder of the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/), with Dr. Réka Juhász (University of British Columbia).
 
 His research spans applied machine learning, economic development, political economy, and industrial economics. Before joining the LSE, Dr. Lane was an Assistant Professor at the University of Oxford, a Senior Lecturer at Monash University, and a co-founder of [SodaLabs.io](https://sodalabs.io), a lab dedicated to answering social science questions using big data and computational tools. He previously served as a postdoctoral researcher at the Massachusetts Institute of Technology under Professor Daron Acemoglu.
 
@@ -23,4 +25,4 @@ Dr. Lane’s research agenda focuses on establishing fundamental facts about eco
 
 Dr. Lane is passionate about computational methods, machine learning, and unstructured data. He has been a Linux user for 30 years. Outside academia, he enjoys comedy, hardcore punk music, and exercise science.
 
-More info: [CV](/cv.pdf) or <a href={`mailto:${siteConfig.email}`}>email me</a>.
+More info: <a href={siteConfig.resumeUrl}>CV</a> or <a href={`mailto:${siteConfig.email}`}>email me</a>.
