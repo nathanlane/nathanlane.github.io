@@ -26,14 +26,22 @@ const header = {
 		<!-- Left side: Logo (if shown) -->
 		{
 			header.logo.show && (
-				<div class="flex items-center">
+				<div class="flex items-center flex-shrink-0 mr-8b">
 					<a
 						aria-label={header.logo.text}
 						aria-current={Astro.url.pathname === "/" ? "page" : false}
-						class="group flex h-space-l items-center hover:filter-none sm:relative"
+						class="logo-link group flex-nowrap items-center gap-2b hover:filter-none sm:relative"
 						href={header.logo.href}
 					>
-						<span class="site-title text-base font-heading font-light">{header.logo.text}</span>
+						<!-- Logo Image -->
+						<img
+							src="/logo.svg"
+							alt=""
+							class="logo-image h-6b w-auto flex-shrink-0 max-w-[120px]"
+							aria-hidden="true"
+						/>
+						<!-- Optional: Site title next to logo (can be removed if you want logo only) -->
+						<span class="site-title font-heading font-light whitespace-nowrap flex-shrink-0">{header.logo.text}</span>
 					</a>
 				</div>
 			)
@@ -43,7 +51,7 @@ const header = {
 		{!header.logo.show && <div />}
 
 		<!-- Right side: Navigation and Actions -->
-		<div class="flex items-center gap-space-xs">
+		<div class="flex items-center gap-space-xs ml-auto pl-12b">
 			<nav
 				aria-label="Main navigation"
 				class="nav-desktop hidden md:flex items-center gap-space-s"
@@ -53,7 +61,7 @@ const header = {
 					header.primary.map((link) => (
 						<a
 							aria-current={Astro.url.pathname === link.href ? "page" : false}
-							class="link-nav"
+							class="link-nav text--2"
 							data-astro-prefetch={!link.href.startsWith("mailto:") ? true : undefined}
 							href={link.href}
 						>
@@ -100,14 +108,14 @@ const header = {
 	<div id="drawer-body" class="absolute inset-0 -translate-y-full transform bg-bgColor">
 		<nav
 			aria-label="Mobile navigation menu"
-			class="text-lg absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center"
+			class="absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center"
 			id="nav-menu-mobile"
 		>
 			{
 				header.primary.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.href ? "page" : false}
-						class="link-nav text-lg"
+						class="link-nav text-1"
 						data-astro-prefetch={!link.href.startsWith("mailto:") ? true : undefined}
 						href={link.href}
 					>
@@ -126,6 +134,30 @@ const header = {
 		height: var(--header-height);
 	}
 
+	/* Logo image */
+	.logo-image {
+		/* Baseline grid aligned: h-6b = 36px */
+		height: var(--space-6); /* 36px - good size for header logos */
+		width: auto;
+		display: block;
+		transition: opacity 200ms ease;
+	}
+
+	.logo-image:hover {
+		opacity: 0.8;
+	}
+
+	/* Dark mode logo adjustments (if needed for visibility) */
+	:global(.dark) .logo-image {
+		/* Uncomment if you need to invert logo colors in dark mode */
+		/* filter: invert(1); */
+	}
+
+	/* Force flex display on logo link (override default inline) */
+	.logo-link {
+		display: flex !important;
+	}
+
 	/* Site title - using nav link behavior but darker default */
 	.site-title {
 		color: var(--theme-text);
@@ -140,8 +172,7 @@ const header = {
 	.nav-link {
 		/* Custom padding for header context */
 		padding: var(--space-xs) var(--space-xs);
-		/* Custom font size for header */
-		font-size: var(--step--1);
+		/* Font size controlled by Tailwind utility classes (text--2, text--1, etc.) */
 	}
 
 	/* Active page state - using existing link-nav behavior */
