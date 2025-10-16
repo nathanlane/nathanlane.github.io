@@ -58,7 +58,7 @@ export const siteConfig: SiteConfig = {
 	title: "Nathan Lane, PhD",
 
 	// === DISPLAY OPTIONS ===
-	showLogo: false,
+	showLogo: true,
 	showTitle: false,
 	footerText: "🚀 Astro Theme by Nathan Lane",
 };

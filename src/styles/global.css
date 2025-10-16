@@ -2064,7 +2064,7 @@
 	/* Site title with optical adjustments */
 	.site-title {
 		font-family: var(--font-headline);
-		font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+		font-size: var(--step--1); /* 12.8-14.4px fluid - one step below base */
 		font-weight: 400;
 		letter-spacing: -0.01em;
 		font-feature-settings:
@@ -2255,7 +2255,7 @@
 	/* Navigation actions spacing */
 	.nav-actions {
 		gap: var(--space-3); /* 18px */
-		margin-left: var(--space-major-third); /* Echo the major third */
+		margin-left: 0; /* Spacing controlled by parent container pl-12b */
 	}
 }
 
