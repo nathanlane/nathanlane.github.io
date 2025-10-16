@@ -37,6 +37,12 @@ export interface SiteConfig {
 	/** Path to full-size profile image (e.g., '/headshot-full.JPG') */
 	profileImageFull?: string;
 
+	/** URL to department/institution page (e.g., 'https://www.lse.ac.uk/international-development') */
+	departmentPage?: string;
+
+	/** URL to personal professional page (e.g., 'https://www.lse.ac.uk/people/nathan-lane') */
+	professionalPage?: string;
+
 	// === PROFESSIONAL PROFILES ===
 
 	/** ORCID identifier for academic profiles (e.g., '0000-0003-0884-8418') */

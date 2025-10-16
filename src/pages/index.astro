@@ -1,6 +1,5 @@
 ---
 import { getCollection, getEntry, render } from "astro:content";
-import BioPanel from "@/components/BioPanel.astro";
 import DocumentEntry from "@/components/DocumentEntry.astro";
 import DocumentSection from "@/components/DocumentSection.astro";
 import MediaList from "@/components/MediaList.astro";
@@ -19,7 +18,7 @@ const homepageData = homepageContent.data;
 // MERGE: Config provides identity data for BioPanel header
 const bio = {
 	title: siteConfig.fullName || siteConfig.title,
-	//tagline: siteConfig.organization,
+	tagline: undefined, // Explicitly set to undefined since it's not used
 	// We'll render MDX content separately, so pass empty string
 	narrative: "",
 	affiliations: [

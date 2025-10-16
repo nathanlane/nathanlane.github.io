@@ -2,7 +2,7 @@
 import { getEntry, render } from "astro:content";
 import PageHeader from "@/components/PageHeader.astro";
 import PageLayout from "@/layouts/Base.astro";
-import { siteConfig } from "@/site.config";
+import { siteConfig, socialLinks } from "@/site.config";
 import { renderMarkdown } from "@/utils/markdown";
 
 const aboutPage = await getEntry("pages", "about");
@@ -11,9 +11,19 @@ if (!aboutPage) throw new Error("About page not found");
 const { Content } = await render(aboutPage);
 const { title, description, showPhoto, headerDescription } = aboutPage.data;
 
+// Get social links from single source of truth
+const twitterLink = socialLinks.find((l) => l.friendlyName === "Twitter")?.link || "";
+const linkedInLink = socialLinks.find((l) => l.friendlyName === "LinkedIn")?.link || "";
+
 const headerDescriptionMarkdown = headerDescription
-	?.replaceAll("{{email}}", siteConfig.email)
-	.replaceAll("{{cvUrl}}", siteConfig.resumeUrl || "/cv.pdf");
+	? headerDescription
+			.replaceAll("{{email}}", siteConfig.email || "")
+			.replaceAll("{{cvUrl}}", siteConfig.resumeUrl || "/cv.pdf")
+			.replaceAll("{{twitterUrl}}", twitterLink)
+			.replaceAll("{{linkedInUrl}}", linkedInLink)
+			.replaceAll("{{departmentPage}}", siteConfig.departmentPage || "")
+			.replaceAll("{{professionalPage}}", siteConfig.professionalPage || "")
+	: undefined;
 
 const headerDescriptionHtml = headerDescriptionMarkdown
 	? await renderMarkdown(headerDescriptionMarkdown)

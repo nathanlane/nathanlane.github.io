@@ -211,6 +211,7 @@ const pages = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		headerDescription: z.string().optional(),
+		headerAdditionalInfo: z.string().optional(),
 		showPhoto: z.boolean().default(false),
 		// About page sections
 		sections: z
