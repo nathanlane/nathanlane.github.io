@@ -34,10 +34,10 @@
 	/* Underline properties */
 	--link-underline-color-default: hsl(0deg 0% 60%);
 	--link-underline-color-hover: var(--theme-accent-base);
-	--link-underline-thickness-default: 1px;
-	--link-underline-thickness-hover: 1.5px;
-	--link-underline-thickness-thin: 1px;
-	--link-underline-thickness-thin-hover: 2px;
+	--link-underline-thickness-default: 1.5px;
+	--link-underline-thickness-hover: 2px;
+	--link-underline-thickness-thin: 1.5px;
+	--link-underline-thickness-thin-hover: 2.5px;
 	--link-underline-offset-default: 0.1em;
 	--link-underline-offset-inline: 0.15em;
 	--link-underline-offset-thin: 0.2em;
