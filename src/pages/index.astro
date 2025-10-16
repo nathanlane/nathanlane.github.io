@@ -19,7 +19,7 @@ const homepageData = homepageContent.data;
 // MERGE: Config provides identity data for BioPanel header
 const bio = {
 	title: siteConfig.fullName || siteConfig.title,
-	tagline: siteConfig.organization,
+	//tagline: siteConfig.organization,
 	// We'll render MDX content separately, so pass empty string
 	narrative: "",
 	affiliations: [
@@ -112,11 +112,7 @@ const importantLinksSections =
 		<!-- Bio Panel Header (title and tagline only) -->
 		<header class="mb-8b">
 			<h1 class="heading-1 text-accent-base mb-3b">{bio.title}</h1>
-			{bio.tagline && (
-				<p class="text-2 text-light font-body leading-relaxed">
-					{bio.tagline}
-				</p>
-			)}
+			{bio.tagline && <p class="text-2 text-light font-body leading-relaxed">{bio.tagline}</p>}
 		</header>
 
 		<!-- Homepage Bio Narrative (MDX Content) -->

@@ -210,6 +210,7 @@ const pages = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
+		headerDescription: z.string().optional(),
 		showPhoto: z.boolean().default(false),
 		// About page sections
 		sections: z
