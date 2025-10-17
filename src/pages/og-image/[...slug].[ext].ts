@@ -116,7 +116,11 @@ export async function GET(context: APIContext) {
 	// Check if user is requesting PNG
 	if (context.url.pathname.endsWith(".png")) {
 		const pngBytes = new Resvg(svg).render().asPng();
-		return new Response(pngBytes, {
+		const pngBuffer = pngBytes.buffer.slice(
+			pngBytes.byteOffset,
+			pngBytes.byteOffset + pngBytes.byteLength,
+		) as ArrayBuffer;
+		return new Response(pngBuffer, {
 			headers: {
 				"Cache-Control": "public, max-age=31536000, immutable",
 				"Content-Type": "image/png",
