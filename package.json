@@ -93,5 +93,11 @@
 			"undici": "6.21.2",
 			"brace-expansion": "2.0.2"
 		}
+	},
+	"overrides": {
+		"tar-fs": "3.0.9",
+		"prismjs": "1.30.0",
+		"undici": "6.21.2",
+		"brace-expansion": "2.0.2"
 	}
 }
