@@ -39,7 +39,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
-      - { label: "Authors", name: "authors", widget: "list" }
+      - { label: "Authors", name: "authors", widget: "string", hint: "Comma-separated: John Smith, Jane Doe" }
       - { label: "Publication", name: "publication", widget: "string", required: false }
       - {
           label: "Status",
@@ -130,6 +130,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text" }
+      - { label: "Header Description", name: "headerDescription", widget: "text", required: false, hint: "Supports dynamic variables: {{email}}, {{cvUrl}}, {{twitterUrl}}, {{linkedInUrl}}, {{departmentPage}}, {{professionalPage}}" }
       - { label: "Show Photo", name: "showPhoto", widget: "boolean", default: false }
       - label: "Sections"
         name: "sections"

@@ -65,9 +65,7 @@ A typography-focused personal website built with Astro. This project emphasizes 
 
 ## 📚 Documentation
 
-- **[Webmaster Guide](WEBMASTER_GUIDE.md)** - Complete guide for managing and deploying the site (also available at `/series/lane-docs/webmaster-guide/`)
-- **[Claude.md](CLAUDE.md)** - AI assistant instructions and project context
-- **[Changelog](Changelog.md)** - Detailed record of all changes and improvements
+- **[CLAUDE.md](CLAUDE.md)** - AI assistant instructions and project context
 
 ## Key Features
 
@@ -129,20 +127,20 @@ Replace npm with your choice of npm / yarn / pnpm
 
 ## Content Management System (CMS)
 
-The site includes **Decap CMS** for web-based content editing. To use it:
+The site includes **Decap CMS** for web-based content editing - completely local and secure.
 
 ### 1. Start Both Servers
 ```bash
 # Terminal 1: Start Astro dev server
 pnpm dev
 
-# Terminal 2: Start CMS proxy server
+# Terminal 2: Start CMS proxy server (required for local backend)
 pnpm cms
-# or: npx decap-server
 ```
 
 ### 2. Access the CMS
-- Open `http://localhost:4321/admin/index.html`
+- Open `http://localhost:4321/admin/index.html` (must include `index.html`)
+- If port changes, check terminal output (may be 4322)
 - Click "Login" (any credentials work locally)
 - Edit content through the web interface
 
@@ -156,9 +154,14 @@ pnpm cms
 - Changes save directly to your local files
 - No authentication needed - local development only
 - Full WYSIWYG editing for markdown content
-- All edits follow the same structure as manual file editing
+- Stop both servers with Ctrl+C when done
 
-**Note**: The CMS is intentionally configured for local-only access. When visitors go to `/admin/` on the live site, they see instructions for local setup instead of a login screen.
+### 5. Troubleshooting
+- **CMS won't load**: Ensure both servers are running
+- **Port 8081 in use**: Kill process with `lsof -i :8081` then `kill <PID>`
+- **Changes not showing**: Refresh CMS page, check `git status`
+
+**Note**: Production site shows setup instructions at `/admin/`, not a login screen. Completely secure.
 
 ## Development Workflow
 
@@ -478,8 +481,8 @@ git reset --hard HEAD~1  # Remove last commit (careful!)
 
 ### Getting Further Help
 
-1. Check `CONTRIBUTING.md` for detailed workflow information
-2. Review `CLAUDE.md` for architectural context
+1. Review `CLAUDE.md` for architectural context and development guidelines
+2. Check `CONTRIBUTING.md` for detailed workflow information
 3. Search closed issues on GitHub for similar problems
 4. Check [Astro Discord](https://astro.build/chat) for framework questions
 5. Review component source code for implementation details
