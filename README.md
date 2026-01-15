@@ -33,6 +33,7 @@ A typography-focused personal website built with Astro. This project emphasizes 
   - [2. Access the CMS](#2-access-the-cms)
   - [3. What You Can Edit](#3-what-you-can-edit)
   - [4. How It Works](#4-how-it-works)
+  - [5. Troubleshooting](#5-troubleshooting)
 - [Development Workflow](#development-workflow)
   - [Getting Started](#getting-started)
   - [Development Process](#development-process)
@@ -115,15 +116,15 @@ Replace npm with your choice of npm / yarn / pnpm
 
 | Command          | Action                                                         |
 | :--------------- | :------------------------------------------------------------- |
-| `npm install`    | Installs dependencies                                          |
-| `npm run dev`    | Starts local dev server at `localhost:4321`                   |
-| `npm run build`  | Build your production site to `./dist/`                       |
-| `npm run preview` | Preview your build locally, before deploying                 |
-| `npm run check`  | TypeScript type checking                                       |
-| `npm run lint`   | Run Biome linting                                             |
-| `npm run format:code` | Format code with Biome and Prettier                      |
-| `npm run cms`    | Start Decap CMS proxy server for local content editing        |
-| `npm run pre-push` | Run all validation checks before pushing                    |
+| `pnpm install`    | Installs dependencies                                          |
+| `pnpm run dev`    | Starts local dev server at `localhost:4321`                   |
+| `pnpm run build`  | Build your production site to `./dist/`                       |
+| `pnpm run preview` | Preview your build locally, before deploying                 |
+| `pnpm run check`  | TypeScript type checking                                       |
+| `pnpm run lint`   | Run Biome linting                                             |
+| `pnpm run format:code` | Format code with Biome and Prettier                      |
+| `pnpm run cms`    | Start Decap CMS proxy server for local content editing        |
+
 
 ## Content Management System (CMS)
 
