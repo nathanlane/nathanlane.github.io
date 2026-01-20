@@ -115,15 +115,10 @@
 	/* Interactive Components
      ---------------------- */
 
-	/* Card with hover state - used 3 times */
-	.card-interactive {
-		@apply block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200;
-	}
-
-	/* Link Components (already well-defined)
-     --------------------------------------- */
-	/* Note: inline-link, nav-link, feature-link patterns
-     are already properly extracted in the codebase */
+		/* Link Components (already well-defined)
+	     --------------------------------------- */
+		/* Note: inline-link, nav-link, feature-link patterns
+	     are already properly extracted in the codebase */
 
 	/* Utility Helpers
      --------------- */

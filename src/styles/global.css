@@ -500,8 +500,8 @@
 		--code-line-diff-remove: hsl(0deg 40% 93% / 0.5);
 
 		--font-mono:
-			"IBM Plex Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-	}
+			"JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+		}
 
 	html {
 		letter-spacing: 0.025em;
@@ -2196,18 +2196,10 @@
 		display: none;
 	}
 
-	/* Mobile nav link styling */
-	#nav-menu-mobile .nav-link {
-		font-size: 1.125rem;
-		padding: var(--space-2) var(--space-3);
-		display: block;
-		text-align: center;
-	}
-
-	/* Mobile menu items - no animations */
-	#drawer.open #nav-menu-mobile a {
-		opacity: 1;
-	}
+		/* Mobile menu items - no animations */
+		#drawer.open #nav-menu-mobile a {
+			opacity: 1;
+		}
 }
 
 /* === Link System Refinements === */
