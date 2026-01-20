@@ -314,17 +314,5 @@ a[class*="hover:text-"]:hover {
 		font-size: inherit !important;
 	}
 
-	/* Temporary backward compatibility for build process */
-	.inline-link {
-		@apply link-inline;
-	}
-	.nav-link {
-		@apply link-nav;
-	}
-	.feature-link {
-		@apply link-title;
-	}
-	.footer-link {
-		@apply link-footer;
-	}
-} /* End @layer components */
+		/* Backward-compatibility aliases removed (canonical: link-inline/link-nav/link-title/link-footer) */
+	} /* End @layer components */

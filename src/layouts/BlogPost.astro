@@ -6,6 +6,7 @@ import WebMentions from "@/components/blog/webmentions/index.astro";
 import type { LayoutStructuredData } from "@/types";
 import { Icon } from "astro-icon/components";
 import BaseLayout from "./Base.astro";
+import { formatDate as formatDateLong } from "@/utils/date";
 
 interface Props {
 	post: CollectionEntry<"post">;
@@ -21,14 +22,8 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 // Calculate word count
 const wordCount = remarkPluginFrontmatter?.words || 1000;
 
-// Format date for display
-const formatDate = (date: Date) => {
-	return date.toLocaleDateString("en-US", { 
-		year: "numeric", 
-		month: "long", 
-		day: "numeric" 
-	}).toUpperCase();
-};
+// Format date for display (match prior casing)
+const formatDate = (date: Date) => formatDateLong(date).toUpperCase();
 
 // Prepare article data for structured data
 const articleData = {
@@ -72,10 +67,10 @@ const structuredData: LayoutStructuredData[] = [
 		<header class="essay-header">
 			<h1 class="essay-title">{title}</h1>
 			<hr class="essay-separator" />
-			<div class="essay-metadata">
-				ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS
-			</div>
-		</header>
+				<div class="essay-metadata">
+					ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS
+				</div>
+			</header>
 
 		<!-- Essay content with prose styling -->
 		<div class="essay-content prose prose-lane max-w-none">
@@ -106,80 +101,35 @@ const structuredData: LayoutStructuredData[] = [
 			aria-label="Toggle Series Panel"
 		>
 			<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
-				<Icon class="icon-action" name="lucide:file-text"/>
+				<Icon class="icon-action" name="lucide:file-text" />
 			</span>
 		</mobile-button>
 	)}
 </BaseLayout>
 
-<!-- Copy code button -->
 <script>
-	// Wait for the content to fully load
-	document.addEventListener("DOMContentLoaded", () => {
-		// Find all pre blocks
-		document.querySelectorAll("pre").forEach((pre) => {
-			// Check if the button already exists
-			if (!pre.querySelector(".copy-code")) {
-				// Ensure pre has position relative for absolute button
-				pre.style.position = "relative";
-				
-				// Create the button
-				const copyButton = document.createElement("button");
-				copyButton.className =
-				"copy-code absolute flex items-center justify-center font-medium rounded-md font-sans text-xs top-3 right-3 z-10 border border-color-200 bg-bgColor/90 backdrop-blur-sm hover:bg-bgColor hover:border-color-300 transition-all duration-150";
+	import { initializeCopyCodeButtons } from "@/utils/copyCodeButton";
+	import { initializePanelToggle } from "@/utils/panelToggle";
 
-				// Create the span element that will hold the button text
-				const buttonText = document.createElement("span");
-				buttonText.innerText = "Copy"; // Initial text
-				buttonText.className = "flex items-center px-3 py-1 text-xs font-medium text-light"; // Elegant button styling
+	initializeCopyCodeButtons();
 
-				copyButton.appendChild(buttonText); // Append span to the button
-
-				// Add the button inside pre
-				pre.appendChild(copyButton);
-
-				// Event handler for copying text
-				copyButton.addEventListener("click", async () => {
-					const code = pre.querySelector("code")?.textContent;
-					if (code) {
-						await navigator.clipboard.writeText(code);
-						buttonText.innerText = "Copied!";
-						copyButton.classList.add("text-accent-base");
-						copyButton.classList.remove("text-light");
-						// Reset after 2 seconds
-						setTimeout(() => {
-							buttonText.innerText = "Copy";
-							copyButton.classList.remove("text-accent-base");
-							copyButton.classList.add("text-light");
-						}, 2000);
-					}
-				});
-			}
-		});
-	});
-</script>
-
-<script>
-	import { initializePanelToggle } from '@/utils/panelToggle';
-	
 	// Initialize Series Panel toggle
 	initializePanelToggle({
-		panelId: 'series-panel',
-		toggleButtonId: 'toggle-panel',
-		mobileToggleButtonId: 'toggle-panel-mobile',
-		closeButtonId: 'close-panel',
-		breakpoint: 'lg',
-		visibleClass: 'lg:block'
+		panelId: "series-panel",
+		toggleButtonId: "toggle-panel",
+		mobileToggleButtonId: "toggle-panel-mobile",
+		closeButtonId: "close-panel",
+		breakpoint: "lg",
+		visibleClass: "lg:block",
 	});
-	
+
 	// Initialize TOC Panel toggle
 	initializePanelToggle({
-		panelId: 'toc-panel',
-		toggleButtonId: 'toggle-toc',
-		mobileToggleButtonId: 'toggle-toc-mobile',
-		closeButtonId: 'close-toc',
-		breakpoint: 'md',
-		visibleClass: 'md:block'
+		panelId: "toc-panel",
+		toggleButtonId: "toggle-toc",
+		mobileToggleButtonId: "toggle-toc-mobile",
+		closeButtonId: "close-toc",
+		breakpoint: "md",
+		visibleClass: "md:block",
 	});
 </script>
-
