@@ -977,7 +977,7 @@ export default {
 						},
 
 						a: {
-							"@apply inline-link": "",
+							"@apply link-inline": "",
 						},
 						// Blockquote aligned to grid
 						blockquote: {
