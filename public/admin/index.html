@@ -5,9 +5,88 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="robots" content="noindex" />
 		<title>Content Manager</title>
+		<style>
+			:root {
+				color-scheme: light dark;
+				font-family:
+					Inter,
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe UI",
+					sans-serif;
+			}
+
+			body {
+				margin: 0;
+				background: #f8f8f8;
+				color: #1f2933;
+			}
+
+			main {
+				box-sizing: border-box;
+				max-width: 44rem;
+				margin: 0 auto;
+				padding: 3rem 1.5rem 4rem;
+			}
+
+			h1 {
+				margin-bottom: 1rem;
+				color: #224d67;
+				font-size: clamp(2rem, 4vw, 2.75rem);
+				line-height: 1.1;
+			}
+
+			p,
+			li {
+				line-height: 1.6;
+			}
+
+			code {
+				padding: 0.15rem 0.35rem;
+				border-radius: 0.25rem;
+				background: rgba(34, 77, 103, 0.08);
+				font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+			}
+		</style>
 	</head>
 	<body>
-		<!-- Include the script that builds the page and powers Decap CMS -->
-		<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+		<main id="app">
+			<p>Checking whether this is a local editing session…</p>
+		</main>
+		<script>
+			const app = document.getElementById("app");
+			const localHosts = new Set(["localhost", "127.0.0.1", "::1"]);
+			const isLocalHost = localHosts.has(window.location.hostname);
+
+			if (!app) {
+				throw new Error("CMS root element not found");
+			}
+
+			if (isLocalHost) {
+				app.innerHTML = "<p>Loading the local Decap CMS interface…</p>";
+				const cmsScript = document.createElement("script");
+				cmsScript.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
+				cmsScript.async = true;
+				cmsScript.onerror = () => {
+					app.innerHTML = `
+						<h1>Decap CMS failed to load</h1>
+						<p>Make sure you are online, then restart <code>pnpm dev</code> and <code>pnpm cms</code>.</p>
+					`;
+				};
+				document.body.appendChild(cmsScript);
+			} else {
+				app.innerHTML = `
+					<h1>Local CMS only</h1>
+					<p>This repository supports Decap CMS as a local contributor workflow. The deployed site does not expose a production editor.</p>
+					<p>To edit content with the CMS:</p>
+					<ol>
+						<li>Run <code>pnpm dev</code> in one terminal.</li>
+						<li>Run <code>pnpm cms</code> in another terminal.</li>
+						<li>Open <code>http://localhost:4321/admin/index.html</code>.</li>
+					</ol>
+				`;
+			}
+		</script>
 	</body>
 </html>

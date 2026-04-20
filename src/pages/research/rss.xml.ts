@@ -14,7 +14,7 @@ export const GET = async () => {
 		title: `${siteConfig.title} - Research Papers`,
 		description:
 			"Academic research papers, working papers, and reports on economic development, state formation, and computational methods.",
-		site: import.meta.env.SITE,
+		site: siteConfig.canonicalUrl,
 		items: sortedResearch.map((item) => ({
 			title: item.data.title,
 			description: item.data.description,
@@ -23,7 +23,7 @@ export const GET = async () => {
 			content: item.body || "",
 			categories: item.data.tags || [],
 			customData: `
-        <guid isPermaLink="true">${import.meta.env.SITE}/research/${item.id}/</guid>
+        <guid isPermaLink="true">${siteConfig.canonicalUrl}/research/${item.id}/</guid>
         <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">${item.data.authors}</dc:creator>
         <status>${item.data.status}</status>
         <type>${item.data.type}</type>

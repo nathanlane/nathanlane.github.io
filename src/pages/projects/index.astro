@@ -2,17 +2,24 @@
 import { getCollection } from "astro:content";
 import ProjectCard from "@/components/ProjectCard.astro";
 import BaseLayout from "@/layouts/Base.astro";
+import { isPublishedEntry } from "@/utils/content";
 
-const allProjects = await getCollection("projects");
+const allProjects = (await getCollection("projects")).filter(isPublishedEntry);
 const sortedProjects = allProjects.sort((a, b) =>
-	b.data.publishDate.getTime() - a.data.publishDate.getTime()
+	b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 );
 
-const featuredProjects = sortedProjects.filter(project => project.data.featured);
-const otherProjects = sortedProjects.filter(project => !project.data.featured);
+const featuredProjects = sortedProjects.filter((project) => project.data.featured);
+const otherProjects = sortedProjects.filter((project) => !project.data.featured);
 ---
 
-<BaseLayout meta={{ title: "Projects", description: "A collection of design and development projects focused on typography and user experience." }}>
+<BaseLayout
+	meta={{
+		title: "Projects",
+		description:
+			"A collection of design and development projects focused on typography and user experience.",
+	}}
+>
 	<h1>Projects</h1>
 
 	<p class="text-fluid-1 text-light mb-8b max-w-2xl">

@@ -1,10 +1,11 @@
 ---
-import { getCollection, getEntry, render } from 'astro:content';
-import CompactList from '@/components/CompactList.astro';
-import PageHeader from '@/components/PageHeader.astro';
-import RecentContent from '@/components/RecentContent.astro';
-import SectionSeparator from '@/components/SectionSeparator.astro';
-import BaseLayout from '@/layouts/Base.astro';
+import { getCollection, getEntry, render } from "astro:content";
+import CompactList from "@/components/CompactList.astro";
+import RecentContent from "@/components/RecentContent.astro";
+import SectionSeparator from "@/components/SectionSeparator.astro";
+import { getAllPosts } from "@/data/post";
+import BaseLayout from "@/layouts/Base.astro";
+import { isPublishedEntry } from "@/utils/content";
 
 // Get writing page content from MDX
 const writingPage = await getEntry("pages", "writing");
@@ -13,93 +14,97 @@ if (!writingPage) {
 }
 const { Content: WritingContent } = await render(writingPage);
 
-const writing = await getCollection('writing');
-const blogPosts = await getCollection('post');
+const writing = (await getCollection("writing")).filter(isPublishedEntry);
+const blogPosts = await getAllPosts();
 
 // Get the last 3 writing pieces for Current Thinking
 const latestWriting = writing
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 5);
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+	.slice(0, 5);
 
 // Get recent blog posts for archive section
 const recentBlog = blogPosts
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 5);
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+	.slice(0, 5);
 ---
 
-<BaseLayout meta={{ title: "Writing", description: "Essays, notes, and thoughts on economics, technology, and research." }}>
-  <div class="measure-base mx-auto px-4b py-8b">
+<BaseLayout
+	meta={{
+		title: "Writing",
+		description: "Essays, notes, and thoughts on economics, technology, and research.",
+	}}
+>
+	<div class="measure-base mx-auto px-4b py-8b">
+		<!-- Page Header -->
+		<header class="mb-8b">
+			<h1 class="heading-1 text-accent-base mb-6b">{writingPage.data.title}</h1>
+		</header>
 
-    <!-- Page Header -->
-    <header class="mb-8b">
-      <h1 class="heading-1 text-accent-base mb-6b">{writingPage.data.title}</h1>
-    </header>
+		<!-- Writing Page Narrative (MDX Content) -->
+		<div class="narrative prose prose-lane max-w-none mb-12b">
+			<WritingContent />
+		</div>
 
-    <!-- Writing Page Narrative (MDX Content) -->
-    <div class="narrative prose prose-lane max-w-none mb-12b">
-      <WritingContent />
-    </div>
+		<!-- Recent Writing using reusable component -->
+		<RecentContent
+			title="Recent Writing & Notes"
+			items={latestWriting}
+			linkBase="/writing"
+			archiveLink="/writing/archive"
+			archiveLinkText="→ View all writing"
+			showMetadata={true}
+			maxItems={3}
+			class="mb-16b"
+		/>
 
-    <!-- Recent Writing using reusable component -->
-    <RecentContent 
-      title="Recent Writing & Notes"
-      items={latestWriting}
-      linkBase="/writing"
-      archiveLink="/writing/archive"
-      archiveLinkText="→ View all writing"
-      showMetadata={true}
-      maxItems={3}
-      class="mb-16b"
-    />
+		<!-- Wide Full Header Line Separator -->
+		<SectionSeparator variant="full-width" spacing="normal" />
 
-    <!-- Wide Full Header Line Separator -->
-    <SectionSeparator variant="full-width" spacing="normal" />
+		<!-- Recent Blog Posts -->
+		<section class="mb-16b">
+			<h2 class="heading-3 mb-8b">Recent Blog Posts</h2>
 
-    <!-- Recent Blog Posts -->
-    <section class="mb-16b">
-      <h2 class="heading-3 mb-8b">Recent Blog Posts</h2>
-      
-      <CompactList 
-        items={recentBlog.map(post => ({
-          title: post.data.title,
-          description: post.data.description,
-          url: `/posts/${post.id}`,
-          date: post.data.publishDate
-        }))}
-      />
-      
-      <div class="mt-6b">
-        <a href="/posts/archive" class="link-nav text-body-sm uppercase tracking-wide">
-          → View blog archive
-        </a>
-      </div>
-    </section>
-  </div>
+			<CompactList
+				items={recentBlog.map((post) => ({
+					title: post.data.title,
+					description: post.data.description,
+					url: `/posts/${post.id}`,
+					date: post.data.publishDate,
+				}))}
+			/>
+
+			<div class="mt-6b">
+				<a href="/posts/archive" class="link-nav text-body-sm uppercase tracking-wide">
+					→ View blog archive
+				</a>
+			</div>
+		</section>
+	</div>
 </BaseLayout>
 
 <style>
-  /* Narrative typography */
-  .narrative :global(p) {
-    @apply text-1 leading-relaxed mb-6b;
-  }
+	/* Narrative typography */
+	.narrative :global(p) {
+		@apply text-1 leading-relaxed mb-6b;
+	}
 
-  .narrative :global(p:last-child) {
-    @apply mb-0;
-  }
+	.narrative :global(p:last-child) {
+		@apply mb-0;
+	}
 
-  /* Apply editorial link style to narrative links */
-  .narrative a {
-    color: var(--link-color-editorial, var(--theme-accent-base));
-    font-weight: 450;
-    text-decoration: underline;
-    text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
-    text-decoration-thickness: 0.05em;
-    text-underline-offset: 0.2em;
-  }
+	/* Apply editorial link style to narrative links */
+	.narrative a {
+		color: var(--link-color-editorial, var(--theme-accent-base));
+		font-weight: 450;
+		text-decoration: underline;
+		text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+		text-decoration-thickness: 0.05em;
+		text-underline-offset: 0.2em;
+	}
 
-  .narrative a:hover {
-    color: var(--link-color-hover);
-    text-decoration-color: var(--link-color-hover);
-    text-decoration-thickness: 0.075em;
-  }
+	.narrative a:hover {
+		color: var(--link-color-hover);
+		text-decoration-color: var(--link-color-hover);
+		text-decoration-thickness: 0.075em;
+	}
 </style>

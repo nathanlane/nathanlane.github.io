@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, feat/dramatic-edits]
+    branches: [main, private-dev]
   pull_request:
-    branches: [main]
+    branches: [main, private-dev]
 
 jobs:
   build:
@@ -52,17 +52,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # Run type checking
-      - name: Type check
-        run: pnpm run check
-
-      # Run linting
-      - name: Lint code
-        run: pnpm biome lint .
-
-      # Build the project
-      - name: Build project
-        run: pnpm run build
+      # Run the authoritative repository validation contract
+      - name: Validate repository
+        run: pnpm run validate
 
       # Run security audit
       - name: Security audit

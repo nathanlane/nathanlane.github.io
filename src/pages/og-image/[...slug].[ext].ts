@@ -1,8 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 // Using fontsource fonts for OG image generation
+import { getCollection } from "astro:content";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
+import { isPublishedEntry } from "@/utils/content";
 import { getFormattedDate } from "@/utils/date";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIContext, InferGetStaticPropsType } from "astro";
@@ -21,13 +23,13 @@ const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
 		{
-			data: Buffer.from(interRegular),
+			data: interRegular,
 			name: "Inter",
 			style: "normal",
 			weight: 400,
 		},
 		{
-			data: Buffer.from(interBold),
+			data: interBold,
 			name: "Inter",
 			style: "normal",
 			weight: 700,
@@ -37,10 +39,10 @@ const ogOptions: SatoriOptions = {
 	width: 1200,
 };
 
-const markup = (title: string, pubDate: string) =>
+const markup = (title: string, dateLabel: string) =>
 	html` <div tw="flex flex-col w-full h-full bg-[#f2f2f2] text-[#6b6b6b]">
 		<div tw="flex flex-col flex-1 w-full p-10 justify-center">
-			<p tw="text-3xl mb-6 text-[#8e8e8e] font-medium">${pubDate}</p>
+			<p tw="text-3xl mb-6 text-[#8e8e8e] font-medium">${dateLabel}</p>
 			<h1 tw="text-6xl font-semibold leading-snug text-[#224d67]">${title}</h1>
 		</div>
 		<div
@@ -105,13 +107,33 @@ const markup = (title: string, pubDate: string) =>
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
-export async function GET(context: APIContext) {
-	const { pubDate, title } = context.props as Props;
-	const postDate = getFormattedDate(pubDate, {
+function formatOgDate(value: Date | string) {
+	if (typeof value === "string" && /^\d{4}$/.test(value)) {
+		return value;
+	}
+
+	return getFormattedDate(value instanceof Date ? value : new Date(value), {
 		month: "long",
 		weekday: "long",
 	});
-	const svg = await satori(markup(title, postDate), ogOptions);
+}
+
+function createStaticImageEntries(slug: string, title: string, dateLabel: string) {
+	return [
+		{
+			params: { slug, ext: "png" },
+			props: { dateLabel, title },
+		},
+		{
+			params: { slug, ext: "svg" },
+			props: { dateLabel, title },
+		},
+	];
+}
+
+export async function GET(context: APIContext) {
+	const { dateLabel, title } = context.props as Props;
+	const svg = await satori(markup(title, dateLabel), ogOptions);
 
 	// Check if user is requesting PNG
 	if (context.url.pathname.endsWith(".png")) {
@@ -144,24 +166,46 @@ export async function GET(context: APIContext) {
 
 export async function getStaticPaths() {
 	const posts = await getAllPosts();
-	return posts
-		.filter(({ data }) => !data.ogImage)
-		.flatMap((post) => {
-			return [
-				{
-					params: { slug: post.id, ext: "png" },
-					props: {
-						pubDate: post.data.updatedDate ?? post.data.publishDate,
-						title: post.data.title,
-					},
-				},
-				{
-					params: { slug: post.id, ext: "svg" },
-					props: {
-						pubDate: post.data.updatedDate ?? post.data.publishDate,
-						title: post.data.title,
-					},
-				},
-			];
-		});
+	const research = await getCollection("research");
+	const writing = (await getCollection("writing")).filter(isPublishedEntry);
+	const projects = (await getCollection("projects")).filter(isPublishedEntry);
+
+	return [
+		...posts
+			.filter(({ data }) => !data.ogImage)
+			.flatMap((post) =>
+				createStaticImageEntries(
+					post.id,
+					post.data.title,
+					formatOgDate(post.data.updatedDate ?? post.data.publishDate),
+				),
+			),
+		...research
+			.filter(({ data }) => !data.ogImage)
+			.flatMap((entry) =>
+				createStaticImageEntries(
+					`research/${entry.id}`,
+					entry.data.title,
+					formatOgDate(entry.data.paperDate),
+				),
+			),
+		...writing
+			.filter(({ data }) => !data.ogImage)
+			.flatMap((entry) =>
+				createStaticImageEntries(
+					`writing/${entry.id}`,
+					entry.data.title,
+					formatOgDate(entry.data.publishDate),
+				),
+			),
+		...projects
+			.filter(({ data }) => !data.ogImage)
+			.flatMap((entry) =>
+				createStaticImageEntries(
+					`projects/${entry.id}`,
+					entry.data.title,
+					formatOgDate(entry.data.publishDate),
+				),
+			),
+	];
 }

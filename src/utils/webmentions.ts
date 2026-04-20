@@ -1,38 +1,45 @@
 import * as fs from "node:fs";
 import { WEBMENTION_API_KEY } from "astro:env/server";
 import type { WebmentionsCache, WebmentionsChildren, WebmentionsFeed } from "@/types";
+import { getSupportedWebmentionHostNames, normalizeWebmentionTarget } from "./webmentionTargets";
 
-const DOMAIN = import.meta.env.SITE;
 const CACHE_DIR = ".data";
 const filePath = `${CACHE_DIR}/webmentions.json`;
 const validWebmentionTypes = ["like-of", "mention-of", "in-reply-to"];
 
-const hostName = new URL(DOMAIN).hostname;
-
 // Calls webmention.io api.
 async function fetchWebmentions(timeFrom: string | null, perPage = 1000) {
-	if (!DOMAIN) {
-		console.warn("No domain specified. Please set in astro.config.ts");
-		return null;
-	}
-
 	if (!WEBMENTION_API_KEY) {
-		console.warn("No webmention api token specified in .env");
 		return null;
 	}
 
-	let url = `https://webmention.io/api/mentions.jf2?domain=${hostName}&token=${WEBMENTION_API_KEY}&sort-dir=up&per-page=${perPage}`;
+	const feeds = await Promise.all(
+		getSupportedWebmentionHostNames().map(async (hostName) => {
+			let url = `https://webmention.io/api/mentions.jf2?domain=${hostName}&token=${WEBMENTION_API_KEY}&sort-dir=up&per-page=${perPage}`;
 
-	if (timeFrom) url += `&since${timeFrom}`;
+			if (timeFrom) {
+				url += `&since=${timeFrom}`;
+			}
 
-	const res = await fetch(url);
+			const res = await fetch(url);
+			if (!res.ok) {
+				return null;
+			}
 
-	if (res.ok) {
-		const data = (await res.json()) as WebmentionsFeed;
-		return data;
+			return (await res.json()) as WebmentionsFeed;
+		}),
+	);
+
+	if (feeds.some((feed) => feed === null)) {
+		return null;
 	}
 
-	return null;
+	const children = feeds.flatMap((feed) => feed?.children ?? []);
+	return {
+		children,
+		name: "webmentions",
+		type: "feed",
+	} satisfies WebmentionsFeed;
 }
 
 // Merge cached entries [a] with fresh webmentions [b], merge by wm-id
@@ -65,14 +72,10 @@ function writeToCache(data: WebmentionsCache) {
 
 	// create cache folder if it doesn't exist already
 	if (!fs.existsSync(CACHE_DIR)) {
-		fs.mkdirSync(CACHE_DIR);
+		fs.mkdirSync(CACHE_DIR, { recursive: true });
 	}
 
-	// write data to cache json file
-	fs.writeFile(filePath, fileContent, (err) => {
-		if (err) throw err;
-		console.log(`Webmentions saved to ${filePath}`);
-	});
+	fs.writeFileSync(filePath, fileContent);
 }
 
 function getFromCache(): WebmentionsCache {
@@ -111,5 +114,8 @@ let webMentions: WebmentionsCache;
 export async function getWebmentionsForUrl(url: string) {
 	if (!webMentions) webMentions = await getAndCacheWebmentions();
 
-	return webMentions.children.filter((entry) => entry["wm-target"] === url);
+	const normalizedTarget = normalizeWebmentionTarget(url);
+	return webMentions.children.filter(
+		(entry) => normalizeWebmentionTarget(entry["wm-target"]) === normalizedTarget,
+	);
 }

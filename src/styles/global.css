@@ -501,7 +501,7 @@
 
 		--font-mono:
 			"JetBrains Mono", SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-		}
+	}
 
 	html {
 		letter-spacing: 0.025em;
@@ -2196,10 +2196,10 @@
 		display: none;
 	}
 
-		/* Mobile menu items - no animations */
-		#drawer.open #nav-menu-mobile a {
-			opacity: 1;
-		}
+	/* Mobile menu items - no animations */
+	#drawer.open #nav-menu-mobile a {
+		opacity: 1;
+	}
 }
 
 /* === Link System Refinements === */
