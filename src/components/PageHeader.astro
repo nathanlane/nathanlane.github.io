@@ -28,8 +28,8 @@ const processedAdditionalInfo = additionalInfo?.replace(
 	<!-- Body description text - baseline size, generous reading measure -->
 	{
 		processedDescription && (
-			<div class="text-0 text-base leading-relaxed measure-base mb-2b">
-				<p set:html={processedDescription} />
+			<div class="page-header-copy text-0 text-base leading-relaxed measure-base mb-2b">
+				<div set:html={processedDescription} />
 			</div>
 		)
 	}
@@ -42,8 +42,8 @@ const processedAdditionalInfo = additionalInfo?.replace(
 	<!-- Additional info - baseline text size, muted, connected to rule -->
 	{
 		processedAdditionalInfo && (
-			<div class="text-0 text-light leading-relaxed mb-4b">
-				<p set:html={processedAdditionalInfo} />
+			<div class="page-header-copy page-header-copy--muted text-0 text-light leading-relaxed mb-4b">
+				<div set:html={processedAdditionalInfo} />
 			</div>
 		)
 	}
@@ -56,9 +56,12 @@ const processedAdditionalInfo = additionalInfo?.replace(
 		margin-right: auto;
 	}
 
-	/* Enhanced typography for description */
-	header p {
-		margin: 0; /* Reset default margins for clean spacing */
+	:global(.page-header-copy p) {
+		margin: 0;
+	}
+
+	:global(.page-header-copy p + p) {
+		margin-top: var(--space-2);
 	}
 
 	/* Responsive adjustments */

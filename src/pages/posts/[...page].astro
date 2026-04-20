@@ -17,10 +17,13 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const allPosts = await getAllPosts();
 	const allPostsCount = allPosts.length;
 	const uniqueTags = getUniqueTags(allPosts).slice(0, MAX_TAGS);
-	  return paginate(allPosts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()), {
-		pageSize: MAX_POSTS_PER_PAGE,
-		props: { uniqueTags, allPostsCount },
-	});
+	return paginate(
+		allPosts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()),
+		{
+			pageSize: MAX_POSTS_PER_PAGE,
+			props: { uniqueTags, allPostsCount },
+		},
+	).filter(({ params }) => params.page);
 }) satisfies GetStaticPaths;
 
 interface Props {

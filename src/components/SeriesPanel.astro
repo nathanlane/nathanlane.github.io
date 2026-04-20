@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Button from "@/components/Button.astro";
+import { getAllPosts } from "@/data/post";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
@@ -10,7 +11,7 @@ export interface Props {
 const { seriesId } = Astro.props as Props;
 const currentPath = Astro.url.pathname;
 
-const posts = await getCollection("post");
+const posts = await getAllPosts();
 const series = await getCollection("series");
 
 // Find series by the passed `seriesId` specified in the post

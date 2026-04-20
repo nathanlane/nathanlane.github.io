@@ -6,6 +6,7 @@ import MediaList from "@/components/MediaList.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import PageLayout from "@/layouts/Base.astro";
 import { siteConfig, socialLinks } from "@/site.config";
+import { isPublishedEntry } from "@/utils/content";
 
 // Get homepage CONTENT from MDX
 const homepageContent = await getEntry("pages", "homepage");
@@ -73,7 +74,7 @@ const featuredResearch = allResearch
 // Keep import as it may be needed for future features
 
 // Get latest writing pieces
-const allWriting = await getCollection("writing");
+const allWriting = (await getCollection("writing")).filter(isPublishedEntry);
 const latestWriting = allWriting
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 2);

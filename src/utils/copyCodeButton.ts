@@ -56,4 +56,3 @@ export function initializeCopyCodeButtons(options?: CopyCodeButtonOptions) {
 
 	attachCopyButtons(options);
 }
-

@@ -22,6 +22,8 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 import { transformerMetaHighlight, transformerNotationDiff } from "@shikijs/transformers";
 import rehypePrettyCode from "rehype-pretty-code";
 
+process.env.BROWSERSLIST_IGNORE_OLD_DATA ??= "1";
+
 // https://astro.build/config
 export default defineConfig({
 	image: {
@@ -140,11 +142,23 @@ export default defineConfig({
 	},
 	// https://docs.astro.build/en/guides/prefetch/
 	prefetch: true,
-	// ! Please remember to replace the following site property with your own domain
-	site: "https://nathanlane.github.io/",
+	site: siteConfig.canonicalUrl,
 	vite: {
 		build: {
 			sourcemap: false, // Disabled for production security
+			rollupOptions: {
+				onwarn(warning, defaultHandler) {
+					if (
+						warning.code === "UNUSED_EXTERNAL_IMPORT" &&
+						typeof warning.message === "string" &&
+						warning.message.includes("@astrojs/internal-helpers/remote")
+					) {
+						return;
+					}
+
+					defaultHandler(warning);
+				},
+			},
 		},
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],

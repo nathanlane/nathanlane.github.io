@@ -314,5 +314,5 @@ a[class*="hover:text-"]:hover {
 		font-size: inherit !important;
 	}
 
-		/* Backward-compatibility aliases removed (canonical: link-inline/link-nav/link-title/link-footer) */
-	} /* End @layer components */
+	/* Backward-compatibility aliases removed (canonical: link-inline/link-nav/link-title/link-footer) */
+} /* End @layer components */

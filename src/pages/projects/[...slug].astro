@@ -1,10 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import ContentPage from "@/components/ContentPage.astro";
+import { isPublishedEntry } from "@/utils/content";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
-	const projects = await getCollection("projects");
+	const projects = (await getCollection("projects")).filter(isPublishedEntry);
 	return projects.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },

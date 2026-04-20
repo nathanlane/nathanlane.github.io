@@ -5,6 +5,8 @@ node_modules/
 dist/
 .astro/
 .cache/
+.data/
+coverage/
 
 # Logs
 *.log

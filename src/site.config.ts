@@ -18,6 +18,12 @@ import type { SiteConfig } from "@/types";
  * - Navigation (Header.astro, Footer.astro)
  */
 export const siteConfig: SiteConfig = {
+	canonicalUrl: "https://nathanlane.info",
+	supportedOrigins: ["https://nathanlane.info", "https://nathanlane.github.io"],
+	defaultSocialCardPath: "/social-card.png",
+	cmsRepo: "nathanlane/nathanlane.github.io",
+	cmsBranch: "main",
+
 	// === IDENTITY ===
 	author: "Nathan Lane",
 	fullName: "Nathan Lane, PhD",

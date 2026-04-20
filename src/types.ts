@@ -4,6 +4,21 @@
  * This is the single source of truth for all identity and contact data.
  */
 export interface SiteConfig {
+	/** Canonical public site URL used for metadata, feeds, and SEO */
+	canonicalUrl: string;
+
+	/** Additional supported origins that should continue serving the same static site */
+	supportedOrigins: string[];
+
+	/** Default OG/social card asset path */
+	defaultSocialCardPath: string;
+
+	/** GitHub repository used for local CMS configuration */
+	cmsRepo: string;
+
+	/** Default branch used for local CMS configuration */
+	cmsBranch: string;
+
 	// === IDENTITY ===
 
 	/** Site author name - short form (e.g., 'Nathan Lane') */

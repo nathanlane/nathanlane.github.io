@@ -14,10 +14,10 @@
     
     <!-- Title -->
     <text x="0" y="260" font-family="Arial, sans-serif" font-size="36" fill="#666">
-      Associate Professor of Economics
+      Assistant Professor
     </text>
     <text x="0" y="310" font-family="Arial, sans-serif" font-size="36" fill="#666">
-      Oxford University
+      London School of Economics
     </text>
     
     <!-- Tagline -->
@@ -30,7 +30,7 @@
   <g transform="translate(80, 550)">
     <!-- Website -->
     <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" fill="#999">
-      nathanlane.github.io
+      nathanlane.info
     </text>
   </g>
   

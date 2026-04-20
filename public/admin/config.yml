@@ -1,170 +1,585 @@
-# Decap CMS Configuration for Nathan Lane's Website
+# This file is generated from src/content.contract.mjs.
+# Run `pnpm run generate:cms` after editing the shared CMS contract.
 backend:
-  name: git-gateway
+  name: github
+  repo: nathanlane/nathanlane.github.io
   branch: main
-
-# Always use local backend - no production authentication
 local_backend: true
-
-# Media files will be stored in the repository
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
-
-# Collections configuration
+media_folder: public/images/uploads
+public_folder: /images/uploads
 collections:
-  # Blog Posts - Simplified to match existing structure
-  - name: "posts"
-    label: "Blog Posts"
-    folder: "src/content/post"
+  - name: posts
+    label: Blog Posts
+    folder: src/content/post
     create: true
     slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
+    extension: md
+    format: frontmatter
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Publish Date", name: "publishDate", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list", default: [] }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
-      - { label: "Body", name: "body", widget: "markdown" }
-
-  # Research Papers
-  - name: "research"
-    label: "Research"
-    folder: "src/content/research"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Authors", name: "authors", widget: "string", hint: "Comma-separated: John Smith, Jane Doe" }
-      - { label: "Publication", name: "publication", widget: "string", required: false }
-      - {
-          label: "Status",
-          name: "status",
-          widget: "select",
-          options: ["published", "working-paper", "draft"],
-          default: "working-paper",
-        }
-      - {
-          label: "Type",
-          name: "type",
-          widget: "select",
-          options: ["paper", "book-chapter", "book"],
-          default: "paper",
-        }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
-      - { label: "PDF URL", name: "pdfUrl", widget: "string", required: false }
-      - { label: "DOI", name: "doi", widget: "string", required: false }
-      - { label: "Abstract", name: "body", widget: "markdown" }
-
-  # Projects
-  - name: "projects"
-    label: "Projects"
-    folder: "src/content/projects"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Featured", name: "featured", widget: "boolean", default: false, required: false }
-      - { label: "Demo URL", name: "demoUrl", widget: "string", required: false }
-      - { label: "Repository URL", name: "repoUrl", widget: "string", required: false }
-      - { label: "Tech Stack", name: "techStack", widget: "list", default: [] }
-      - { label: "Content", name: "body", widget: "markdown" }
-
-  # Creative Writing
-  - name: "writing"
-    label: "Writing"
-    folder: "src/content/writing"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Genre", name: "genre", widget: "string", required: false }
-      - { label: "Word Count", name: "wordCount", widget: "number", required: false }
-      - { label: "Content", name: "body", widget: "markdown" }
-
-  # Series
-  - name: "series"
-    label: "Series"
-    folder: "src/content/series"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - {
-          label: "Cover Image",
-          name: "coverImage",
-          widget: "object",
-          required: false,
-          fields:
-            [
-              { label: "Source", name: "src", widget: "image", required: false },
-              { label: "Alt Text", name: "alt", widget: "string", required: false },
-            ],
-        }
-      - { label: "Content", name: "body", widget: "markdown" }
-
-  # Static Pages
-  - name: "pages"
-    label: "Static Pages"
-    folder: "src/content/pages"
-    create: true
-    slug: "{{slug}}"
-    extension: "mdx"
-    format: "frontmatter"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Header Description", name: "headerDescription", widget: "text", required: false, hint: "Supports dynamic variables: {{email}}, {{cvUrl}}, {{twitterUrl}}, {{linkedInUrl}}, {{departmentPage}}, {{professionalPage}}" }
-      - { label: "Show Photo", name: "showPhoto", widget: "boolean", default: false }
-      - label: "Sections"
-        name: "sections"
-        widget: "list"
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+      - label: Updated Date
+        name: updatedDate
+        widget: datetime
         required: false
-        fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "ID", name: "id", widget: "string", required: false }
-      - { label: "Content", name: "body", widget: "markdown" }
-
-  # Homepage Configuration (MDX)
-  - name: "homepage"
-    label: "Homepage"
+      - label: Slug
+        name: slug
+        widget: string
+        required: false
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+      - label: Series ID
+        name: seriesId
+        widget: string
+        required: false
+      - label: Order In Series
+        name: orderInSeries
+        widget: number
+        required: false
+        value_type: int
+      - label: OG Image
+        name: ogImage
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: posts_mdx
+    label: Blog Posts (MDX)
+    folder: src/content/post
+    create: false
+    slug: "{{slug}}"
+    extension: mdx
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+      - label: Updated Date
+        name: updatedDate
+        widget: datetime
+        required: false
+      - label: Slug
+        name: slug
+        widget: string
+        required: false
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+      - label: Series ID
+        name: seriesId
+        widget: string
+        required: false
+      - label: Order In Series
+        name: orderInSeries
+        widget: number
+        required: false
+        value_type: int
+      - label: OG Image
+        name: ogImage
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: research
+    label: Research
+    folder: src/content/research
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Slug
+        name: slug
+        widget: string
+        required: false
+      - label: Paper Year
+        name: paperDate
+        widget: string
+        hint: YYYY
+      - label: Authors
+        name: authors
+        widget: string
+      - label: Publication
+        name: publication
+        widget: string
+        required: false
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - work-in-progress
+          - working-paper
+          - published
+          - archived
+        default: working-paper
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - paper
+          - report
+          - chapter
+        default: paper
+      - label: Download URL
+        name: download
+        widget: string
+        required: false
+      - label: External Link
+        name: link
+        widget: string
+        required: false
+      - label: OG Image
+        name: ogImage
+        widget: string
+        required: false
+      - label: Canonical URL
+        name: canonical
+        widget: string
+        required: false
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Tags
+        name: tags
+        widget: list
+        default: []
+      - label: Body
+        name: body
+        widget: markdown
+  - name: projects
+    label: Projects
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+      - label: Slug
+        name: slug
+        widget: string
+        required: false
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Technologies
+        name: technologies
+        widget: list
+        required: false
+      - label: Demo URL
+        name: demo
+        widget: string
+        required: false
+      - label: GitHub URL
+        name: github
+        widget: string
+        required: false
+      - label: OG Image
+        name: ogImage
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: writing
+    label: Writing
+    folder: src/content/writing
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+      - label: Publish Date
+        name: publishDate
+        widget: datetime
+      - label: Slug
+        name: slug
+        widget: string
+        required: false
+      - label: Draft
+        name: draft
+        widget: boolean
+        default: false
+      - label: Featured
+        name: featured
+        widget: boolean
+        default: false
+      - label: Genre
+        name: genre
+        widget: string
+        required: false
+      - label: Word Count
+        name: wordCount
+        widget: number
+        required: false
+      - label: OG Image
+        name: ogImage
+        widget: string
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: media
+    label: Media
+    folder: src/content/media
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Outlet
+        name: outlet
+        widget: string
+      - label: Date
+        name: date
+        widget: datetime
+      - label: Type
+        name: type
+        widget: select
+        options:
+          - interview
+          - podcast
+          - video
+          - article
+          - press
+          - talk
+          - panel
+        default: interview
+      - label: Link
+        name: link
+        widget: string
+      - label: Description
+        name: description
+        widget: text
+        required: false
+      - label: Body
+        name: body
+        widget: markdown
+  - name: pages
+    label: Pages
     files:
-      - label: "Homepage Content"
-        name: "homepage"
-        file: "src/content/pages/homepage.mdx"
-        format: "frontmatter"
+      - label: About
+        name: about
+        file: src/content/pages/about.mdx
+        format: frontmatter
         fields:
-          - { label: "Title", name: "title", widget: "string" }
-          - { label: "Description", name: "description", widget: "text" }
-          - label: "Secondary Affiliation"
-            name: "secondaryAffiliation"
-            widget: "object"
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
             required: false
             fields:
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Role", name: "role", widget: "string" }
-          - label: "Contact Links"
-            name: "contactLinks"
-            widget: "list"
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Posts
+        name: posts
+        file: src/content/pages/posts.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
             required: false
             fields:
-              - { label: "Label", name: "label", widget: "string" }
-              - { label: "URL", name: "href", widget: "string" }
-              - { label: "Display Text", name: "text", widget: "string" }
-          - { label: "Bio Narrative", name: "body", widget: "markdown" }
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Research
+        name: research
+        file: src/content/pages/research.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
+            required: false
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Writing
+        name: writing
+        file: src/content/pages/writing.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
+            required: false
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Writing Archive
+        name: writingArchive
+        file: src/content/pages/writing-archive.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
+            required: false
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Media
+        name: media
+        file: src/content/pages/media.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Header Description
+            name: headerDescription
+            widget: text
+            required: false
+          - label: Header Additional Info
+            name: headerAdditionalInfo
+            widget: text
+            required: false
+          - label: Show Photo
+            name: showPhoto
+            widget: boolean
+            default: false
+          - label: Sections
+            name: sections
+            widget: list
+            required: false
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: ID
+                name: id
+                widget: string
+                required: false
+          - label: Body
+            name: body
+            widget: markdown
+  - name: homepage
+    label: Homepage
+    files:
+      - label: Homepage
+        name: homepage
+        file: src/content/pages/homepage.mdx
+        format: frontmatter
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Description
+            name: description
+            widget: text
+          - label: Secondary Affiliation
+            name: secondaryAffiliation
+            widget: object
+            required: false
+            fields:
+              - label: Title
+                name: title
+                widget: string
+              - label: Role
+                name: role
+                widget: string
+          - label: Contact Links
+            name: contactLinks
+            widget: list
+            required: false
+            fields:
+              - label: Label
+                name: label
+                widget: string
+              - label: URL
+                name: href
+                widget: string
+              - label: Display Text
+                name: text
+                widget: string
+          - label: Body
+            name: body
+            widget: markdown
