@@ -71,4 +71,25 @@ describe("public link hygiene", () => {
 		expect(source).toContain("(https://www.giorcellimichela.com/");
 		expect(source).toContain("](/posts/social-image/)");
 	});
+
+	it("does not contain known rendered links to missing local routes", () => {
+		const checkedFiles = [
+			"src/content/post/lane-docs/comprehensive-site-maintenance.md",
+			"src/content/post/remark-rehype.md",
+		];
+		const source = checkedFiles
+			.map((relativePath) => fs.readFileSync(path.join(repoRoot, relativePath), "utf8"))
+			.join("\n");
+
+		expect(source).not.toContain("](./seo-structured-data-maintenance)");
+		expect(source).not.toContain("](./adding-documentation-pages)");
+		expect(source).not.toContain("](./design-system)");
+		expect(source).not.toContain("[license]: license");
+		expect(source).toContain("](/posts/lane-docs/seo-structured-data-maintenance/)");
+		expect(source).toContain("](/posts/lane-docs/adding-docs-guide/)");
+		expect(source).toContain("](/posts/lane-docs/design-system/)");
+		expect(source).toContain(
+			"[license]: https://github.com/remarkjs/remark-rehype/blob/main/license",
+		);
+	});
 });
