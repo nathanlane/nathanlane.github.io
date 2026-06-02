@@ -13,7 +13,7 @@ tags: ["fonts", "optimization", "web performance"]
 
 Font files often contain thousands of glyphs, including symbols and characters for multiple languages. Subsetting removes unnecessary glyphs, reducing file size and improving website performance. This is particularly useful when only a specific language set or symbols are needed.
 
-For example, I encountered an issue when using the SF Pro Rounded font with the Satori library for generating OG images, as described in this post: [Example OG Social Image](posts/social-image/). When using multiple font variants, the project failed to build due to memory overflow errors. Increasing the memory limit did not help. Moreover, using even a single font file larger than ~3.5MB is considered bad practice, let alone multiple variants at the same time.
+For example, I encountered an issue when using the SF Pro Rounded font with the Satori library for generating OG images, as described in this post: [Example OG Social Image](/posts/social-image/). When using multiple font variants, the project failed to build due to memory overflow errors. Increasing the memory limit did not help. Moreover, using even a single font file larger than ~3.5MB is considered bad practice, let alone multiple variants at the same time.
 
 After subsetting the font, I ended up with two subsets, both containing **only Latin characters**: one slightly over 100KB and another around 355KB. This significantly reduced the overall font size while keeping the necessary glyphs.
 
