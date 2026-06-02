@@ -33,6 +33,13 @@ const tagCategories = {
   ).sort()
 };
 
+const visibleTagCategories = Object.entries(tagCategories)
+  .map(([category, tags]) => ({
+    category,
+    tags: tags.filter((tag) => uniqueTags.includes(tag)),
+  }))
+  .filter(({ tags }) => tags.length > 0);
+
 const meta = {
   title: "Blog Archive",
   description: `A smattering of old posts from ${oldestYear} to ${newestYear}. Browse by year, topic, or search the complete archive.`
@@ -106,8 +113,7 @@ const getPrimaryTag = (post: CollectionItemBase) => {
       <h2 class="heading-2 mb-6b">Browse by Topic</h2>
       
       <div class="space-y-6b">
-        {Object.entries(tagCategories).map(([category, tags]) => (
-          tags.length > 0 && (
+        {visibleTagCategories.map(({ category, tags }) => (
             <div>
               <h3 class="heading-4 mb-3b">{category}</h3>
               <div class="flex flex-wrap gap-2b">
@@ -121,7 +127,6 @@ const getPrimaryTag = (post: CollectionItemBase) => {
                 })}
               </div>
             </div>
-          )
         ))}
       </div>
     </section>

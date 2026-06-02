@@ -12,7 +12,7 @@ By Nathan Lane
 
 *September 15, 2021*
 
-*From the Boston Review's Forum on industrial policy [[Original post here](https://www.bostonreview.net/forum/industrial-policys-comeback/a-flight-plan-that-fails/)]. [A debate]((https://www.bostonreview.net/forum/industrial-policys-comeback/a-flight-plan-that-fails/)) with Mariana Mazzucato, Rainer Kattel, Josh Ryan-Collins.*
+*From the Boston Review's Forum on industrial policy [[Original post here](https://www.bostonreview.net/forum/industrial-policys-comeback/a-flight-plan-that-fails/)]. [A debate](https://www.bostonreview.net/forum/industrial-policys-comeback/a-flight-plan-that-fails/) with Mariana Mazzucato, Rainer Kattel, Josh Ryan-Collins.*
 
 It's a weird time to be an industrial policy researcher. "[The Return of the Policy That Shall Not Be Named](https://www.imf.org/en/Publications/WP/Issues/2019/03/26/The-Return-of-the-Policy-That-Shall-Not-Be-Named-Principles-of-Industrial-Policy-46710)" caught us off guard, and the demand for prescriptions looms over an embarrassingly scant body of knowledge—especially within the field of economics, which for the past few decades has offered little more than Gary Becker's 1985 quip that "the best industrial policy is none at all." At a time when governments are returning to industrial policy, we are largely clueless about how to make it work.
 
