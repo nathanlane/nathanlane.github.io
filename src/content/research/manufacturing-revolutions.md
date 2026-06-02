@@ -21,8 +21,8 @@ tags:
   - East Asian miracle
   - HCI Drive
 paperDate: "2025"
-link: https://academic.oup.com/qje/advance-article-abstract/doi/10.1093/qje/qjae030/7857207
-pdfUrl: https://academic.oup.com/qje/article/140/3/1683/8152916
+link: https://academic.oup.com/qje/article/140/1/403/7926978
+pdfUrl: https://academic.oup.com/qje/article/140/1/403/7926978
 ---
 
 ## Abstract
@@ -33,7 +33,7 @@ I study the impact of industrial policy on industrial development by considering
 
 ## Resources
 
-- [QJE Article (Open Access)](https://academic.oup.com/qje/article/140/3/1683/8152916)
+- [QJE Article (Open Access)](https://academic.oup.com/qje/article/140/1/403/7926978)
 - [Pre-Print](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/Lane_QJE_2025_Manufacturing_Revolutions.pdf)
 - [ArXiv Version](https://arxiv.org/abs/2505.20566)
 - [SocArxiv](https://osf.io/preprints/socarxiv/6tqax)
