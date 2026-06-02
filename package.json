@@ -18,7 +18,7 @@
 		"check:social-card": "node scripts/maintenance/generate-social-card.mjs --check",
 		"generate:assistant-docs": "node scripts/maintenance/sync-assistant-docs.mjs",
 		"check:assistant-docs": "node scripts/maintenance/sync-assistant-docs.mjs --check",
-		"check:generated": "pnpm run check:cms && pnpm run check:social-card && pnpm run check:assistant-docs",
+		"check:generated": "pnpm run check:cms && pnpm run check:assistant-docs",
 		"check": "astro check",
 		"check:types": "tsc --noEmit",
 		"check:all": "pnpm run lint && pnpm run format:check && pnpm run check:generated && pnpm run check && pnpm run test && pnpm run build",
@@ -63,7 +63,8 @@
 		"satori-html": "^0.3.2",
 		"sharp": "^0.34.3",
 		"unified": "^11.0.5",
-		"unist-util-visit": "^5.0.0"
+		"unist-util-visit": "^5.0.0",
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.4",

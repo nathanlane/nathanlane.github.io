@@ -1,0 +1,13 @@
+# Local tooling / machine-specific settings (not source to format)
+.claude/
+
+# Build output and generated artifacts
+dist/
+.astro/
+
+# Dependencies and lockfile
+node_modules/
+pnpm-lock.yaml
+
+# Coverage
+coverage/
