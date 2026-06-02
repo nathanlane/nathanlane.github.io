@@ -131,7 +131,7 @@ showcase:
 
 ## SEO and Structured Data
 
-See the dedicated [SEO & Structured Data Maintenance Guide](./seo-structured-data-maintenance) for:
+See the dedicated [SEO & Structured Data Maintenance Guide](/posts/lane-docs/seo-structured-data-maintenance/) for:
 - Updating structured data schemas
 - Testing SEO implementations
 - Managing meta tags
@@ -282,9 +282,9 @@ pnpm check
 - [TypeScript Documentation](https://www.typescriptlang.org/docs)
 
 ### Project-Specific Guides
-- [Adding Documentation Pages](./adding-documentation-pages)
-- [Understanding the Design System](./design-system)
-- [SEO & Structured Data](./seo-structured-data-maintenance)
+- [Adding Documentation Pages](/posts/lane-docs/adding-docs-guide/)
+- [Understanding the Design System](/posts/lane-docs/design-system/)
+- [SEO & Structured Data](/posts/lane-docs/seo-structured-data-maintenance/)
 
 ### Support Channels
 - GitHub Issues for bug reports
