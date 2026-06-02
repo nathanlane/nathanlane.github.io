@@ -707,7 +707,7 @@ abide by its terms.
 
 [coc]: https://github.com/remarkjs/.github/blob/main/code-of-conduct.md
 
-[license]: license
+[license]: https://github.com/remarkjs/remark-rehype/blob/main/license
 
 [author]: https://wooorm.com
 
