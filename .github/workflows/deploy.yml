@@ -44,8 +44,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build with Astro
-        run: pnpm run build
+      - name: Validate and build
+        # Full contract: lint, format:check, generated-file sync, astro check,
+        # tests, then build. Produces dist/ for the upload step below.
+        # If this fails, the deploy job (needs: build) is skipped and Pages
+        # keeps the last good version — fails safe.
+        run: pnpm run validate
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
