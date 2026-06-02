@@ -21,7 +21,8 @@
  * Exit code: 0 if every check passes, 1 if any fail.
  */
 
-const baseUrl = (process.argv[2] || "http://localhost:4321").replace(/\/$/, "");
+const cliArgs = process.argv.slice(2).filter((arg) => arg !== "--");
+const baseUrl = (cliArgs[0] || "http://localhost:4321").replace(/\/$/, "");
 
 /**
  * Each check: { path, status?, marker?, contentType? }

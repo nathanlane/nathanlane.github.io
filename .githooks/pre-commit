@@ -1,0 +1,27 @@
+#!/bin/sh
+# Pre-commit hook: reject staging of local-only agentic files
+#
+# AGENTS.md and CLAUDE.md are generated from docs/assistant-workflow.md
+# and are kept local-only (gitignored). .claude/ holds subagents, slash
+# commands, prompts, and settings — also local-only.
+#
+# The .gitignore normally prevents these from being staged, but
+# `git add --force` bypasses gitignore. This hook is the backstop.
+
+PRIVATE=$(git diff --cached --name-only 2>/dev/null | grep -E '^(AGENTS\.md|CLAUDE\.md|\.claude/)')
+
+if [ -n "$PRIVATE" ]; then
+    echo ""
+    echo "ERROR: Refusing to commit local-only agentic files:"
+    echo "$PRIVATE" | sed 's/^/  /'
+    echo ""
+    echo "These are gitignored for a reason — they must not be published"
+    echo "to the public repo. Remove them from staging:"
+    echo ""
+    echo "  git restore --staged AGENTS.md CLAUDE.md"
+    echo "  git restore --staged .claude/"
+    echo ""
+    exit 1
+fi
+
+exit 0

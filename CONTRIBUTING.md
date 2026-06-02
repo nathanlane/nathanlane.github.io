@@ -6,10 +6,15 @@ This repository is maintained as a static Astro site deployed on GitHub Pages. K
 
 ```bash
 pnpm install
+git config core.hooksPath .githooks
 pnpm dev
 ```
 
 The dev server runs at `http://localhost:4321/`.
+
+The `git config` step activates the hooks in `.githooks/` — a pre-push validation hook and
+a pre-commit hook that blocks accidental commits of local-only agentic files (`AGENTS.md`,
+`CLAUDE.md`, `.claude/`). This is a per-clone local setting; it is not stored in the repo.
 
 ## Branching and deployment
 
