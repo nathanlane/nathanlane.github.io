@@ -25,8 +25,13 @@ Thumbs.db
 
 # Private files
 PRIVATE_*.md
-# Note: CLAUDE.md, private_notes/, and dev files are not ignored on private-dev branch
-# These files are organized in private_notes/ on private-dev branch only
+# Private overlay: a separate PRIVATE git repo cloned here (backlog, notes, agentic
+# infra). Versioned + synced via its own remote; never part of this public repo.
+.private/
+# Generated assistant instruction files (read locally by the agent; kept out of the
+# public repo). Regenerate with `pnpm run generate:assistant-docs`.
+/AGENTS.md
+/CLAUDE.md
 
 # Security & Secrets
 # API Keys and secrets

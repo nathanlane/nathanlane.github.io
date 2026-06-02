@@ -2,7 +2,6 @@ import fs from "node:fs";
 import path from "node:path";
 import { load } from "js-yaml";
 import { describe, expect, it } from "vitest";
-import { buildAssistantDoc } from "../../scripts/maintenance/sync-assistant-docs.mjs";
 import { buildCmsConfigYaml } from "../../scripts/maintenance/generate-cms-config.mjs";
 
 const repoRoot = process.cwd();
@@ -26,17 +25,5 @@ describe("generated files", () => {
 				expect.objectContaining({ create: false, extension: "mdx", name: "posts_mdx" }),
 			]),
 		);
-	});
-
-	it("keeps assistant instruction files in sync and as regular files", () => {
-		for (const target of ["AGENTS.md", "CLAUDE.md"] as const) {
-			const absolutePath = path.join(repoRoot, target);
-			const stats = fs.lstatSync(absolutePath);
-			const actual = fs.readFileSync(absolutePath, "utf8");
-
-			expect(stats.isFile()).toBe(true);
-			expect(stats.isSymbolicLink()).toBe(false);
-			expect(actual).toBe(buildAssistantDoc(target));
-		}
 	});
 });

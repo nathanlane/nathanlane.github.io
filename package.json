@@ -18,7 +18,7 @@
 		"check:social-card": "node scripts/maintenance/generate-social-card.mjs --check",
 		"generate:assistant-docs": "node scripts/maintenance/sync-assistant-docs.mjs",
 		"check:assistant-docs": "node scripts/maintenance/sync-assistant-docs.mjs --check",
-		"check:generated": "pnpm run check:cms && pnpm run check:assistant-docs",
+		"check:generated": "pnpm run check:cms",
 		"check": "astro check",
 		"check:types": "tsc --noEmit",
 		"check:all": "pnpm run lint && pnpm run format:check && pnpm run check:generated && pnpm run check && pnpm run test && pnpm run build",
