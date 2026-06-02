@@ -29,6 +29,43 @@ Use this document to keep assistant-facing instructions aligned across tools. Th
 - `pnpm cms` for the local Decap backend proxy
 - `pnpm validate` for the full validation contract
 - `pnpm test` for the Vitest suite
+- `pnpm smoke:local` to smoke-test a local `pnpm preview` server
+- `pnpm smoke:live` to smoke-test both live origins after deployment
+
+## Website verification protocol
+
+After changes that affect the rendered website, verify both the build contract and actual page rendering.
+
+Local release check:
+
+```bash
+pnpm validate
+pnpm build
+pnpm preview
+```
+
+With `pnpm preview` still running, use a second terminal to smoke-test the rendered local site:
+
+```bash
+pnpm smoke:local
+```
+
+If Astro reports a different preview port, pass that displayed URL explicitly:
+
+```bash
+pnpm smoke -- http://localhost:<port>
+```
+
+After pushing or merging to `main`, if network access is available, check the latest deployment and smoke-test both live origins:
+
+```bash
+gh run list --workflow deploy.yml --branch main --limit 1
+pnpm smoke:live
+```
+
+Report the exact commands run and whether they passed. If a live smoke check fails immediately after deployment, retry after a short delay before treating it as a production failure.
+
+Smoke testing production means making a small set of real HTTP requests against the deployed website to confirm that the live site basically works. It is not a full test suite. The smoke test checks representative pages, feeds, generated assets, and 404 behavior.
 
 ## Documentation ownership
 
