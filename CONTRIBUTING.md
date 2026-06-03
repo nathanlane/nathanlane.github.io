@@ -61,10 +61,8 @@ Do not treat `/admin/` on the deployed site as a production editing surface.
 ## Documentation rules
 
 - Keep [README.md](./README.md) short and operational
-- Put topic-specific guidance in the matching doc under `docs/`
-- Keep deployment guidance in [docs/deployment.md](./docs/deployment.md)
-- Keep content model guidance in [docs/content.md](./docs/content.md)
-- Keep typography guidance in [docs/typography.md](./docs/typography.md)
-- Keep assistant conventions in [docs/assistant-workflow.md](./docs/assistant-workflow.md)
+- Internal docs (deployment, content, typography, assistant workflow) live in `.private/docs/`
+- Update the relevant doc in `.private/docs/` when a workflow or convention changes
+- `AGENTS.md` and `CLAUDE.md` are generated from `.private/docs/assistant-workflow.md` — run `pnpm run generate:assistant-docs` after updating that source
 
 If a file path, command, or workflow changes, update the authoritative doc in the same change.

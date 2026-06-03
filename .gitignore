@@ -28,10 +28,12 @@ PRIVATE_*.md
 # Private overlay: a separate PRIVATE git repo cloned here (backlog, notes, agentic
 # infra). Versioned + synced via its own remote; never part of this public repo.
 .private/
+# Internal docs (live in .private/docs/ — source for generation and reference)
+docs/
 # Agentic infrastructure (all local-only; never publish to the public repo)
 # ---
 # Generated instruction files — rebuild with `pnpm run generate:assistant-docs`
-# from the canonical source at docs/assistant-workflow.md (which IS tracked).
+# (reads from .private/docs/assistant-workflow.md)
 /AGENTS.md
 /CLAUDE.md
 # Claude Code project directory: subagents, slash commands, prompts, settings.
