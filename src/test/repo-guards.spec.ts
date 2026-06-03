@@ -93,3 +93,21 @@ describe("public link hygiene", () => {
 		);
 	});
 });
+
+describe("verification command wiring", () => {
+	it("keeps live smoke checking both the canonical site and the Pages origin policy", () => {
+		const packageJson = JSON.parse(
+			fs.readFileSync(path.join(repoRoot, "package.json"), "utf8"),
+		) as {
+			scripts?: Record<string, string>;
+		};
+
+		expect(packageJson.scripts?.["smoke:prod"]).toBe(
+			"node scripts/validation/smoke-test.mjs https://nathanlane.info",
+		);
+		expect(packageJson.scripts?.["smoke:pages"]).toBe(
+			"node scripts/validation/pages-origin-redirect-smoke.mjs",
+		);
+		expect(packageJson.scripts?.["smoke:live"]).toBe("pnpm run smoke:prod && pnpm run smoke:pages");
+	});
+});

@@ -1,6 +1,6 @@
 # nathanlane.github.io
 
-A personal site built with Astro, TypeScript, and TailwindCSS. The site is published on GitHub Pages, uses `https://nathanlane.info` as the public domain, and must continue to work from `https://nathanlane.github.io` as the Pages origin.
+A personal site built with Astro, TypeScript, and TailwindCSS. The site is published on GitHub Pages, uses `https://nathanlane.info` as the public domain, and preserves `https://nathanlane.github.io` as the GitHub Pages origin via equivalent redirects to the canonical site.
 
 ## Operating model
 
@@ -79,4 +79,4 @@ Internal docs (deployment, content, typography, assistant workflow) live in the 
 
 Deployment is GitHub Pages only. `main` is the publishing branch and `.github/workflows/deploy.yml` performs the build. The `nathanlane.info` custom domain is bound through the repo's **GitHub Pages settings** (Settings → Pages), not through a `CNAME` file — the workflow-based Pages setup ignores a root `CNAME`. See `.private/docs/deployment.md` for details.
 
-The custom domain is the public-facing canonical identity. The GitHub Pages origin still matters operationally and must continue to serve the same site. Keep normal page links and assets relative or root-relative rather than hardcoding either domain into page content.
+The custom domain is the public-facing canonical identity. The GitHub Pages origin still matters operationally and should preserve equivalent paths by redirecting to the canonical site. Keep normal page links and assets relative or root-relative rather than hardcoding either domain into page content.

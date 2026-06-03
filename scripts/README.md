@@ -7,6 +7,8 @@ This directory contains a mix of active maintenance utilities and older migratio
 | Script | Purpose | Typical use |
 | --- | --- | --- |
 | `scripts/validation/pre-push-check.js` | Run the current pre-push validation sequence | `pnpm run pre-push` |
+| `scripts/validation/smoke-test.mjs` | Smoke-test rendered pages on a local preview server or the canonical production domain | `pnpm smoke:local`, `pnpm smoke:prod`, or `pnpm smoke -- http://localhost:<port>` |
+| `scripts/validation/pages-origin-redirect-smoke.mjs` | Verify that `nathanlane.github.io` redirects representative paths to the canonical site without path loss | `pnpm run smoke:pages`; also runs after `smoke:prod` in fail-fast `pnpm run smoke:live` |
 | `scripts/maintenance/generate-cms-config.mjs` | Generate or check the Decap CMS config from the shared content contract | `pnpm run generate:cms` or `pnpm run check:cms` |
 | `scripts/maintenance/generate-social-card.mjs` | Generate or check `public/social-card.png` from the SVG source | `pnpm run generate:social-card` or `pnpm run check:social-card` |
 | `scripts/maintenance/sync-assistant-docs.mjs` | Generate or check the root assistant instruction files from the canonical workflow doc | `pnpm run generate:assistant-docs` or `pnpm run check:assistant-docs` |
@@ -27,7 +29,10 @@ For day-to-day work, prefer the package scripts first:
 pnpm validate
 pnpm run pre-push
 pnpm test
+pnpm run smoke:live
 ```
+
+`pnpm run smoke:live` is fail-fast: it runs the canonical production smoke first, then runs the Pages-origin redirect smoke only if production smoke passes.
 
 ## Archive material
 
