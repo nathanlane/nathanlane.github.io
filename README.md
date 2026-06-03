@@ -71,14 +71,12 @@ The CMS workflow is local-only. The deployed site should not be treated as a pro
 ## Documentation
 
 - [Contributing](./CONTRIBUTING.md)
-- [Deployment](./docs/deployment.md)
-- [Content](./docs/content.md)
-- [Typography](./docs/typography.md)
-- [Assistant workflow](./docs/assistant-workflow.md)
 - [Scripts](./scripts/README.md)
+
+Internal docs (deployment, content, typography, assistant workflow) live in the private companion repo at `.private/docs/`.
 
 ## Deployment summary
 
-Deployment is GitHub Pages only. `main` is the publishing branch and `.github/workflows/deploy.yml` performs the build. The `nathanlane.info` custom domain is bound through the repo's **GitHub Pages settings** (Settings → Pages), not through a `CNAME` file — the workflow-based Pages setup ignores a root `CNAME`. See [docs/deployment.md](./docs/deployment.md) for details.
+Deployment is GitHub Pages only. `main` is the publishing branch and `.github/workflows/deploy.yml` performs the build. The `nathanlane.info` custom domain is bound through the repo's **GitHub Pages settings** (Settings → Pages), not through a `CNAME` file — the workflow-based Pages setup ignores a root `CNAME`. See `.private/docs/deployment.md` for details.
 
 The custom domain is the public-facing canonical identity. The GitHub Pages origin still matters operationally and must continue to serve the same site. Keep normal page links and assets relative or root-relative rather than hardcoding either domain into page content.
