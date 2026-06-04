@@ -1,7 +1,25 @@
 #!/bin/sh
-# Pre-commit hook: reject staging of local-only agentic files
-#
-# AGENTS.md and CLAUDE.md are generated from docs/assistant-workflow.md
+# Pre-commit hook
+# 1. Scan staged changes for secrets (gitleaks)
+# 2. Reject staging of local-only agentic files
+
+# --- Secret scanning ---
+if command -v gitleaks > /dev/null 2>&1; then
+    gitleaks protect --staged --no-banner
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "ERROR: gitleaks detected a potential secret in staged changes."
+        echo "Review the output above and remove any credentials before committing."
+        echo "If this is a false positive, add an allow-list entry to .gitleaks.toml"
+        exit 1
+    fi
+else
+    echo "WARNING: gitleaks not installed — secret scan skipped."
+    echo "Install: brew install gitleaks  (CI always scans regardless)"
+fi
+
+# --- Agentic file protection ---
+# AGENTS.md and CLAUDE.md are generated from .private/docs/assistant-workflow.md
 # and are kept local-only (gitignored). .claude/ holds subagents, slash
 # commands, prompts, and settings — also local-only.
 #
