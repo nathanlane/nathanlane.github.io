@@ -7,7 +7,11 @@ const elsewhereLlinks = socialLinks
 	.map((social) => ({ title: social.friendlyName, href: social.link }));
 
 // Footer sections configuration - built from siteConfig
-const footerSections = [
+const footerSections: {
+	title: string;
+	links?: { title: string; href: string }[];
+	text?: string;
+}[] = [
 	{
 		title: "Here",
 		links: [
@@ -32,13 +36,7 @@ const footerSections = [
 	},
 	{
 		title: "About this site",
-		links: [
-			{
-				title:
-					"Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind. I use Inter (body/headers) and JetBrains Mono (code) for typography.",
-				href: "#",
-			},
-		],
+		text: "Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind. I use Inter (body/headers) and JetBrains Mono (code) for typography.",
 	},
 ];
 
@@ -53,16 +51,20 @@ const currentYear = new Date().getFullYear();
 			{
 				footerSections.map((section) => (
 					<div class="footer-section">
-						<h3 class="footer-section-title">{section.title}</h3>
-						<ul class="footer-links">
-							{(section.links || []).map((link) => (
-								<li>
-									<a href={link.href} class="link-footer">
-										{link.title}
-									</a>
-								</li>
-							))}
-						</ul>
+						<h2 class="footer-section-title">{section.title}</h2>
+						{section.text ? (
+							<p class="footer-section-text">{section.text}</p>
+						) : (
+							<ul class="footer-links">
+								{(section.links || []).map((link) => (
+									<li>
+										<a href={link.href} class="link-footer">
+											{link.title}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
 					</div>
 				))
 			}
@@ -106,6 +108,14 @@ const currentYear = new Date().getFullYear();
 		max-width: var(--container-max, 80rem);
 		margin: 0 auto;
 		padding: 0 var(--space-4) var(--space-10); /* 0 24px 60px - 2.5 baselines */
+	}
+
+	/* Informational footer copy (non-link section) */
+	.footer-section-text {
+		max-width: 34ch;
+		line-height: 1.5;
+		opacity: 0.64;
+		color: var(--theme-color-600);
 	}
 
 	/* Improved navigation grid with musical spacing */

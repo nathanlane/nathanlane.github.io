@@ -42,7 +42,7 @@ REAL_SECRET_PATTERNS='["'"'"'`].*api[_-]?key["'"'"'`]?\s*[:=]\s*["'"'"'`][A-Za-z
 if [ -f .gitsecret ]; then
     EXCLUDE_PATTERNS=$(grep -A20 "exclude_paths:" .gitsecret | grep "^  - " | sed 's/^  - "\(.*\)"$/\1/' | tr '\n' '|' | sed 's/|$//')
 else
-    EXCLUDE_PATTERNS="CHANGELOG|Changelog|SECURITY|README|CLAUDE\.md|\.test\.|\.spec\.|private_notes/"
+    EXCLUDE_PATTERNS="CHANGELOG|Changelog|SECURITY|README|CLAUDE\.md|\.test\.|\.spec\.|\.private/"
 fi
 
 # Function to check if content is likely documentation
