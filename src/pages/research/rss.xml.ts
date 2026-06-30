@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import { siteConfig } from "@/site.config";
+import { escapeXml } from "@/utils/xml";
 import rss from "@astrojs/rss";
 
 export const GET = async () => {
@@ -23,11 +24,11 @@ export const GET = async () => {
 			content: item.body || "",
 			categories: item.data.tags || [],
 			customData: `
-        <guid isPermaLink="true">${siteConfig.canonicalUrl}/research/${item.id}/</guid>
-        <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">${item.data.authors}</dc:creator>
-        <status>${item.data.status}</status>
-        <type>${item.data.type}</type>
-        ${item.data.publication ? `<publication>${item.data.publication}</publication>` : ""}
+        <guid isPermaLink="true">${escapeXml(`${siteConfig.canonicalUrl}/research/${item.id}/`)}</guid>
+        <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">${escapeXml(item.data.authors)}</dc:creator>
+        <status>${escapeXml(item.data.status)}</status>
+        <type>${escapeXml(item.data.type)}</type>
+        ${item.data.publication ? `<publication>${escapeXml(item.data.publication)}</publication>` : ""}
       `,
 		})),
 		customData: `

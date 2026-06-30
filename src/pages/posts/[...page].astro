@@ -4,7 +4,7 @@ import Badge from "@/components/Badge.astro";
 import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import PostSearch from "@/components/blog/PostSearch.astro";
-import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
+import { getAllPosts, getUniqueTagsWithCount, groupPostsByYear } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import type { Page } from "@/types";
 
@@ -16,7 +16,9 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_TAGS = 12;
 	const allPosts = await getAllPosts();
 	const allPostsCount = allPosts.length;
-	const uniqueTags = getUniqueTags(allPosts).slice(0, MAX_TAGS);
+	const uniqueTags = getUniqueTagsWithCount(allPosts)
+		.slice(0, MAX_TAGS)
+		.map(([tag]) => tag);
 	return paginate(
 		allPosts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()),
 		{
