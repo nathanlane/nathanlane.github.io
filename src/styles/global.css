@@ -815,7 +815,7 @@
 	/* Keyboard focus - visible and consistent */
 	:focus-visible {
 		outline: 2px solid var(--theme-accent);
-		outline-offset: var(--space-0 0.5); /* 3px = 0.5 grid units */
+		outline-offset: 3px; /* 0.5 grid units */
 	}
 
 	/* Dark mode focus adjustment */

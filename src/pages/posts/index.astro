@@ -10,7 +10,9 @@ import { renderMarkdown } from "@/utils/markdown";
 const allPosts = await getAllPosts();
 const uniqueTags = getUniqueTags(allPosts);
 
-const recentPosts = allPosts.slice(0, 5);
+const recentPosts = [...allPosts]
+	.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+	.slice(0, 5);
 
 const postsPage = await getEntry("pages", "posts");
 if (!postsPage) {
