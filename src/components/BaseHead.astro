@@ -13,7 +13,7 @@ import "@fontsource-variable/inter";
 
 type Props = SiteMeta;
 
-const { articleDate, description, ogImage, title } = Astro.props;
+const { articleDate, description, ogImage, title, hasMath } = Astro.props;
 
 const titleSeparator = "•";
 const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
@@ -136,8 +136,8 @@ const socialImageURL = new URL(
 
 
 
-{/* KaTeX CSS for LaTeX math rendering */}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" />
+{/* Self-hosted KaTeX CSS — loaded only on pages that render LaTeX math */}
+{hasMath && <link rel="stylesheet" href="/katex/katex.min.css" />}
 
 {/* Webmentions */}
 {

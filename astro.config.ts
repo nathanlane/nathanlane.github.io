@@ -11,6 +11,7 @@ import { siteConfig } from "./src/site.config";
 import remarkDirective from "remark-directive"; /* handle ::: directives as nodes */
 import remarkMath from "remark-math"; /* handle LaTeX math syntax */
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* add admonitions */
+import { remarkMathDetect } from "./src/plugins/remark-math-detect"; /* flag pages that use math */
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
 // Rehype plugins
@@ -107,7 +108,13 @@ export default defineConfig({
 		// Enable smartypants for better typography (Tim Brown principle)
 		smartypants: true,
 
-		remarkPlugins: [remarkReadingTime, remarkDirective, remarkMath, remarkAdmonitions],
+		remarkPlugins: [
+			remarkReadingTime,
+			remarkDirective,
+			remarkMath,
+			remarkMathDetect,
+			remarkAdmonitions,
+		],
 		remarkRehype: {
 			footnoteLabelProperties: {
 				className: [""],

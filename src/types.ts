@@ -189,6 +189,8 @@ export interface SiteMeta {
 	description?: string;
 	ogImage?: string | undefined;
 	title: string;
+	/** True when the page renders LaTeX math; loads the self-hosted KaTeX stylesheet. */
+	hasMath?: boolean | undefined;
 }
 
 /** Webmentions */
