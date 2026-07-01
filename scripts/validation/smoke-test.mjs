@@ -34,8 +34,10 @@ const CHECKS = [
 	{ path: "/", marker: "Nathan Lane" },
 	{ path: "/about/", marker: "Nathan Lane" },
 	{ path: "/research/", marker: "Nathan Lane" },
-	// katex math must render in this paper page
-	{ path: "/research/manufacturing-revolutions/", marker: "katex" },
+	{ path: "/research/manufacturing-revolutions/", marker: "Nathan Lane" },
+	// KaTeX renders on a page that actually contains math; its self-hosted CSS is
+	// now loaded conditionally, so this must be a genuine math page (not any page).
+	{ path: "/posts/uncomtrade/", marker: "katex" },
 	{ path: "/writing/", marker: "Nathan Lane" },
 	{ path: "/writing/a-flight-plan-that-fails-boston-review/", marker: "Nathan Lane" },
 	{ path: "/posts/", marker: "Nathan Lane" },
