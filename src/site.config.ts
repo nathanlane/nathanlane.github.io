@@ -60,7 +60,8 @@ export const siteConfig: SiteConfig = {
 			year: "numeric",
 		},
 	},
-	description: "Nathan Lane, PhD, Economist and Data Scientist",
+	description:
+		"Nathan Lane is an economist and data scientist at the London School of Economics studying industrial policy, economic development, and economic history.",
 	lang: "en-GB",
 	ogLocale: "en_GB",
 	title: "Nathan Lane, PhD",

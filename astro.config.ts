@@ -50,7 +50,7 @@ export default defineConfig({
 			nesting: true,
 		}),
 		sitemap({
-			filter: (page) => !page.includes("/admin"),
+			filter: (page) => !page.includes("/admin") && !page.includes("/og-image/"),
 		}),
 		mdx(),
 		robotsTxt({
