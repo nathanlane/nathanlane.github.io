@@ -28,12 +28,6 @@ const socialImageURL = new URL(
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <title>{siteTitle}</title>
 
-{/* Font Preloading for Critical Fonts */}
-{/* Preconnect to speed up font loading */}
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-{/* DNS prefetch as fallback for browsers that don't support preconnect */}
-<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-
 {/* Enhanced Font Loading Strategy - Critical Fonts with Metrics-Matched Fallbacks */}
 <style>
   /* Metrics-matched fallback system to prevent layout shift */
@@ -127,6 +121,7 @@ const socialImageURL = new URL(
 <meta content={siteConfig.title} property="og:site_name" />
 <meta content={siteConfig.ogLocale} property="og:locale" />
 <meta content={socialImageURL} property="og:image" />
+<meta content={title} property="og:image:alt" />
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
 {
@@ -139,15 +134,16 @@ const socialImageURL = new URL(
 }
 
 {/* Twitter */}
-<meta content="summary_large_image" property="twitter:card" />
-<meta content={canonicalURL} property="twitter:url" />
-<meta content={title} property="twitter:title" />
-<meta content={description} property="twitter:description" />
-<meta content={socialImageURL} property="twitter:image" />
+<meta content="summary_large_image" name="twitter:card" />
+<meta content={canonicalURL} name="twitter:url" />
+<meta content={title} name="twitter:title" />
+<meta content={description} name="twitter:description" />
+<meta content={socialImageURL} name="twitter:image" />
+<meta content={title} name="twitter:image:alt" />
 {siteConfig.twitterHandle && (
   <>
-    <meta content={siteConfig.twitterHandle} property="twitter:site" />
-    <meta content={siteConfig.twitterHandle} property="twitter:creator" />
+    <meta content={siteConfig.twitterHandle} name="twitter:site" />
+    <meta content={siteConfig.twitterHandle} name="twitter:creator" />
   </>
 )}
 

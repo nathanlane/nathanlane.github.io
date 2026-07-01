@@ -2,7 +2,7 @@
 import { siteConfig } from '@/site.config';
 // This component adds JSON-LD structured data to help search engines understand your content
 import type { BreadcrumbItem, StructuredDataContent, StructuredDataProps } from '@/types';
-import { stripTrailingSlash, toAbsoluteUrl } from '@/utils/url';
+import { toAbsoluteUrl } from '@/utils/url';
 
 export interface Props extends StructuredDataProps {}
 
@@ -10,7 +10,6 @@ const { type, data } = Astro.props;
 
 const siteBase = siteConfig.canonicalUrl;
 const configuredSiteHref = siteConfig.canonicalUrl;
-const configuredSiteHrefNoTrailingSlash = stripTrailingSlash(configuredSiteHref);
 const siteHref = siteBase?.toString() ?? "";
 
 const absoluteUrl = (value?: string) => toAbsoluteUrl(value, siteBase);
@@ -49,16 +48,6 @@ switch (type) {
       "name": siteConfig.title,
       "description": siteConfig.description,
       "author": personSchema,
-      "potentialAction": configuredSiteHrefNoTrailingSlash
-        ? {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": `${configuredSiteHrefNoTrailingSlash}/tags/{search_term_string}/`,
-            },
-            "query-input": "required name=search_term_string",
-          }
-        : undefined,
     };
     break;
 

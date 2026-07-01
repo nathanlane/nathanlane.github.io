@@ -46,29 +46,41 @@ const currentYear = new Date().getFullYear();
 <footer class="site-footer">
 	<!-- Main Footer Content -->
 	<div class="footer-content">
-		<!-- Navigation Grid -->
-		<nav class="footer-nav" aria-label="Footer navigation">
+		<!-- Navigation Grid: the nav landmark wraps only the link columns
+		     (display:contents keeps them as direct grid items); informational
+		     copy renders as a sibling, outside the nav landmark. -->
+		<div class="footer-nav">
+			<nav class="footer-nav-links" aria-label="Footer navigation">
+				{
+					footerSections
+						.filter((section) => section.links)
+						.map((section) => (
+							<div class="footer-section">
+								<h2 class="footer-section-title">{section.title}</h2>
+								<ul class="footer-links">
+									{(section.links || []).map((link) => (
+										<li>
+											<a href={link.href} class="link-footer">
+												{link.title}
+											</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						))
+				}
+			</nav>
 			{
-				footerSections.map((section) => (
-					<div class="footer-section">
-						<h2 class="footer-section-title">{section.title}</h2>
-						{section.text ? (
+				footerSections
+					.filter((section) => section.text)
+					.map((section) => (
+						<div class="footer-section">
+							<h2 class="footer-section-title">{section.title}</h2>
 							<p class="footer-section-text">{section.text}</p>
-						) : (
-							<ul class="footer-links">
-								{(section.links || []).map((link) => (
-									<li>
-										<a href={link.href} class="link-footer">
-											{link.title}
-										</a>
-									</li>
-								))}
-							</ul>
-						)}
-					</div>
-				))
+						</div>
+					))
 			}
-		</nav>
+		</div>
 	</div>
 
 	<!-- Bottom Bar -->
@@ -116,6 +128,12 @@ const currentYear = new Date().getFullYear();
 		line-height: 1.5;
 		opacity: 0.64;
 		color: var(--theme-color-600);
+	}
+
+	/* nav landmark wraps only the link columns without forming its own grid box,
+	   so its children participate directly in the .footer-nav grid */
+	.footer-nav-links {
+		display: contents;
 	}
 
 	/* Improved navigation grid with musical spacing */
