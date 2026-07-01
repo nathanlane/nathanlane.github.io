@@ -12,7 +12,7 @@ type Props = {
 };
 
 const { entry } = Astro.props;
-const { Content } = await render(entry);
+const { Content, remarkPluginFrontmatter } = await render(entry);
 
 // Check if this is a research entry for special handling
 const isResearch = entry.collection === "research";
@@ -55,7 +55,7 @@ if (isResearch) {
 ---
 
 <BaseLayout
-	meta={{ title: entry.data.title, description: entry.data.description, ogImage: socialImage }}
+	meta={{ title: entry.data.title, description: entry.data.description, ogImage: socialImage, hasMath: remarkPluginFrontmatter?.hasMath }}
 	{... structuredData ? { structuredData } : {}}
 >
   <div class="gap-x-8b lg:flex lg:items-start">

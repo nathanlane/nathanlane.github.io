@@ -53,7 +53,7 @@ const structuredData: LayoutStructuredData[] = [
 ];
 ---
 
-<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title }} structuredData={structuredData}>
+<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title, hasMath: remarkPluginFrontmatter?.hasMath }} structuredData={structuredData}>
  	<!-- SeriesPanel is inserted into the named slot "sidebar" -->
 	{seriesId && (<SeriesPanel slot="sidebar" seriesId={seriesId} />)}
 
