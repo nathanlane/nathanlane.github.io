@@ -12,6 +12,8 @@ This directory contains a mix of active maintenance utilities and older migratio
 | `scripts/maintenance/generate-cms-config.mjs` | Generate or check the Decap CMS config from the shared content contract | `pnpm run generate:cms` or `pnpm run check:cms` |
 | `scripts/maintenance/generate-social-card.mjs` | Generate or check `public/social-card.png` from the SVG source | `pnpm run generate:social-card` or `pnpm run check:social-card` |
 | `scripts/maintenance/sync-assistant-docs.mjs` | Generate or check the root assistant instruction files from the canonical workflow doc | `pnpm run generate:assistant-docs` or `pnpm run check:assistant-docs` |
+| `scripts/maintenance/sync-main.sh` | Fast-forward local `main` and prune local branches whose remote was deleted (post-merge cleanup) | `pnpm run sync` |
+| `scripts/validation/verify-deploy.sh` | Wait for the latest `main` Pages deploy to finish, then run the live smoke suite | `pnpm run verify:deploy` |
 | `scripts/diagnose-deps.sh` | Quick dependency and environment diagnostics | `./scripts/diagnose-deps.sh` |
 | `scripts/find-content-issues.js` | Scan content for frontmatter or quality issues | `node scripts/find-content-issues.js` |
 | `scripts/fix-content.js` | Apply automatic fixes to common content issues | `node scripts/fix-content.js` |
