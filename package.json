@@ -1,6 +1,10 @@
 {
 	"name": "nathanlane.github.io",
 	"version": "1.0.0",
+	"packageManager": "pnpm@11.9.0",
+	"engines": {
+		"node": ">=20"
+	},
 	"scripts": {
 		"dev": "astro dev --port 4321",
 		"start": "astro dev",

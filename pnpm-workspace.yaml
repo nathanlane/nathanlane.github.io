@@ -3,11 +3,6 @@ allowBuilds:
   esbuild: true
   sharp: true
 
-onlyBuiltDependencies:
-  - "@biomejs/biome"
-  - esbuild
-  - sharp
-
 overrides:
   "tar-fs@2": "2.1.4"
   "tar-fs@3": "3.1.2"
