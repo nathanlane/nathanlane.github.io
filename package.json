@@ -29,6 +29,8 @@
 		"smoke:prod": "node scripts/validation/smoke-test.mjs https://nathanlane.info",
 		"smoke:pages": "node scripts/validation/pages-origin-redirect-smoke.mjs",
 		"smoke:live": "pnpm run smoke:prod && pnpm run smoke:pages",
+		"sync": "bash scripts/maintenance/sync-main.sh",
+		"verify:deploy": "bash scripts/validation/verify-deploy.sh",
 		"test": "vitest --run",
 		"test:ui": "vitest --ui",
 		"pre-push": "pnpm run validate",
