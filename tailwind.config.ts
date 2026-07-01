@@ -870,7 +870,7 @@ export default {
 						},
 						h1: {
 							fontSize: "var(--step-5)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "600",
 							letterSpacing: "-0.01em",
 							marginBottom: "var(--space-4)",
@@ -879,7 +879,7 @@ export default {
 						},
 						h2: {
 							fontSize: "var(--step-4)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "700",
 							letterSpacing: "-0.005em",
 							marginBottom: "var(--space-3)",
@@ -888,7 +888,7 @@ export default {
 						},
 						h3: {
 							fontSize: "var(--step-3)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
@@ -897,7 +897,7 @@ export default {
 						},
 						h4: {
 							fontSize: "var(--step-2)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-3)",
@@ -906,7 +906,7 @@ export default {
 						},
 						h5: {
 							fontSize: "var(--step-1)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "900",
 							letterSpacing: "0",
 							marginBottom: "var(--space-1)",
@@ -915,7 +915,7 @@ export default {
 						},
 						h6: {
 							fontSize: "var(--step-0)",
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							fontWeight: "900",
 							textTransform: "uppercase",
 							letterSpacing: "0.05em",
@@ -1236,7 +1236,7 @@ export default {
 							lineHeight: "1.65", // More space in dark mode
 						},
 						"h1, h2, h3, h4, h5, h6": {
-							fontFamily: "var(--font-headline)",
+							fontFamily: "var(--font-body)",
 							letterSpacing: "-0.005em", // Tighter for dark mode sans-serif
 						},
 						h1: {
