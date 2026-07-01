@@ -1812,7 +1812,7 @@
 	.essay-title {
 		@apply heading-3; /* 29.3-33.2px - more modest than heading-5 */
 		margin-bottom: var(--space-4); /* 24px */
-		font-family: var(--font-headline);
+		font-family: var(--font-body);
 	}
 
 	.essay-separator {
@@ -1851,7 +1851,7 @@
 
 	.essay-wrapper .prose > p:first-of-type::first-letter {
 		float: left;
-		font-family: var(--font-headline);
+		font-family: var(--font-body);
 		font-size: calc(var(--step-5) * 1.2); /* ~55-62px */
 		line-height: 0.8;
 		margin-right: var(--space-1); /* 6px */
@@ -2063,7 +2063,7 @@
 @layer components {
 	/* Site title with optical adjustments */
 	.site-title {
-		font-family: var(--font-headline);
+		font-family: var(--font-body);
 		font-size: var(--step--1); /* 12.8-14.4px fluid - one step below base */
 		font-weight: 400;
 		letter-spacing: -0.01em;

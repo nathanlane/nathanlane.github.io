@@ -41,26 +41,9 @@ const socialImageURL = new URL(
     size-adjust: 107%;
   }
   
-  @font-face {
-    font-family: 'Inter Fallback Body';
-    src: local('system-ui'), local('-apple-system'), local('Segoe UI');
-    font-display: block;
-    ascent-override: 90%;
-    descent-override: 22%;
-    line-gap-override: 0%;
-    size-adjust: 107%;
-  }
-
   /* Primary font faces with optimized loading */
   @font-face {
     font-family: 'Inter';
-    font-weight: 100 900;
-    font-display: swap;
-    src: local('Inter Variable');
-  }
-  
-  @font-face {
-    font-family: 'Inter Body';
     font-weight: 100 900;
     font-display: swap;
     src: local('Inter Variable');
@@ -80,9 +63,7 @@ const socialImageURL = new URL(
 
   /* Layout shift prevention with fallback stacks */
   :root {
-    --font-headline: 'Inter Variable', 'Inter', 'Inter Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-body: 'Inter Variable', 'Inter', 'Inter Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Inter Variable', 'Inter', 'Inter Fallback', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', monospace;
     --font-meta: 'JetBrains Mono', 'Departure Mono', 'Menlo', 'Monaco', monospace;
   }
