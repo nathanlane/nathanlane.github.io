@@ -61,7 +61,7 @@
 		"astro-webmanifest": "^1.0.0",
 		"github-slugger": "^2.0.0",
 		"hastscript": "^9.0.1",
-		"js-yaml": "^4.2.0",
+		"js-yaml": "^4.3.0",
 		"katex": "^0.16.22",
 		"mdast-util-directive": "^3.1.0",
 		"mdast-util-to-markdown": "^2.1.2",
