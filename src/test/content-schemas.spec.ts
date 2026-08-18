@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import {
 	createMediaSchema,
 	createPostSchema,
-	createProjectSchema,
 	createResearchSchema,
 	createWritingSchema,
 	pagesSchema,
@@ -69,12 +68,7 @@ describe("content schemas", () => {
 		expect(parsed.tags).toEqual(["policy", "trade"]);
 	});
 
-	it("parses representative project, writing, media, and page entries", () => {
-		const project = createProjectSchema().parse({
-			title: "Placeholder Project",
-			description: "A representative project fixture that exercises the public project schema.",
-			publishDate: "2026-01-01",
-		});
+	it("parses representative writing, media, and page entries", () => {
 		const writing = createWritingSchema().parse({
 			title: "A Writing Fixture",
 			description: "A representative writing fixture that exercises the writing collection schema.",
@@ -94,7 +88,6 @@ describe("content schemas", () => {
 			showPhoto: true,
 		});
 
-		expect(project.slug).toBe("placeholder-project");
 		expect(writing.slug).toBe("a-writing-fixture");
 		expect(media.date).toBeInstanceOf(Date);
 		expect(page.showPhoto).toBe(true);

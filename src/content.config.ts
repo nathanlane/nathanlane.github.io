@@ -4,7 +4,6 @@ import {
 	baseSchema,
 	createMediaSchema,
 	createPostSchema,
-	createProjectSchema,
 	createResearchSchema,
 	createWritingSchema,
 	pagesSchema,
@@ -52,11 +51,6 @@ const research = defineCollection({
 	schema: createResearchSchema(),
 });
 
-const projects = defineCollection({
-	loader: glob({ base: "./src/content/projects", pattern: "**/*.{md,mdx}" }),
-	schema: createProjectSchema(),
-});
-
 const writing = defineCollection({
 	loader: glob({ base: "./src/content/writing", pattern: "**/*.{md,mdx}" }),
 	schema: createWritingSchema(),
@@ -80,7 +74,6 @@ export const collections = {
 	post,
 	privateNote,
 	series,
-	projects,
 	research,
 	writing,
 	pages,

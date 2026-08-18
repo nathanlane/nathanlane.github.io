@@ -168,7 +168,6 @@ export async function getStaticPaths() {
 	const posts = await getAllPosts();
 	const research = await getCollection("research");
 	const writing = (await getCollection("writing")).filter(isPublishedEntry);
-	const projects = (await getCollection("projects")).filter(isPublishedEntry);
 
 	return [
 		...posts
@@ -194,15 +193,6 @@ export async function getStaticPaths() {
 			.flatMap((entry) =>
 				createStaticImageEntries(
 					`writing/${entry.id}`,
-					entry.data.title,
-					formatOgDate(entry.data.publishDate),
-				),
-			),
-		...projects
-			.filter(({ data }) => !data.ogImage)
-			.flatMap((entry) =>
-				createStaticImageEntries(
-					`projects/${entry.id}`,
 					entry.data.title,
 					formatOgDate(entry.data.publishDate),
 				),
