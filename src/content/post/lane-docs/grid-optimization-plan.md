@@ -1,6 +1,6 @@
 ---
 title: "Grid System Optimization Plan"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Comprehensive plan for transitioning from 4px to 6px grid system with typography-driven vertical rhythm"
 seriesId: lane-docs
 orderInSeries: 6

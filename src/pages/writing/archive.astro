@@ -25,7 +25,7 @@ const sortedWriting = allWriting.sort((a, b) =>
 // Group by year
 const writingByYear: Record<number, typeof allWriting> = {};
 sortedWriting.forEach(post => {
-  const year = new Date(post.data.publishDate).getFullYear();
+  const year = post.data.publishDate.getUTCFullYear();
   if (!writingByYear[year]) {
     writingByYear[year] = [];
   }
@@ -37,9 +37,10 @@ const years = Object.keys(writingByYear).sort((a, b) => Number(b) - Number(a));
 
 // Helper function to format date
 const formatDate = (date: Date) => {
-  return date.toLocaleDateString('en-US', { 
-    month: 'short', 
-    year: 'numeric'
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
   });
 };
 

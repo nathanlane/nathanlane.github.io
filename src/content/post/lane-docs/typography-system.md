@@ -1,6 +1,6 @@
 ---
 title: "Typography System Implementation"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Complete documentation of the typography system implementation phases and current state"
 seriesId: lane-docs
 orderInSeries: 5

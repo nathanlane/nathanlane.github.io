@@ -1,7 +1,7 @@
 ---
 title: "Local .gitignore"  
 description: "How to create an additional .gitignore file"  
-publishDate: "05 Mar 2025"  
+publishDate: '2025-03-05'
 tags: ["git", "gitignore"]  
 draft: true
 ---

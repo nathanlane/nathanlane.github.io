@@ -31,7 +31,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 				
 				{item.date && (
 					<time class="entry-date" datetime={item.date.toISOString()}>
-						{item.date.getFullYear()}
+						{item.date.getUTCFullYear()}
 					</time>
 				)}
 			</div>

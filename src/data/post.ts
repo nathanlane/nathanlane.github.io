@@ -12,7 +12,7 @@ export async function getAllPosts(): Promise<CollectionEntry<"post">[]> {
  */
 export function groupPostsByYear(posts: CollectionEntry<"post">[]) {
 	return posts.reduce<Record<string, CollectionEntry<"post">[]>>((acc, post) => {
-		const year = post.data.publishDate.getFullYear();
+		const year = post.data.publishDate.getUTCFullYear();
 		if (!acc[year]) {
 			acc[year] = [];
 		}
