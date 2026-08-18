@@ -15,13 +15,3 @@ export async function renderMarkdown(markdown: string) {
 	const { code } = await processor.render(markdown);
 	return code;
 }
-
-export async function renderMarkdownInline(markdown: string) {
-	const html = await renderMarkdown(markdown);
-	const trimmed = html.trim();
-	if (trimmed.startsWith("<p>") && trimmed.endsWith("</p>")) {
-		return trimmed.slice(3, -4);
-	}
-
-	return trimmed;
-}
