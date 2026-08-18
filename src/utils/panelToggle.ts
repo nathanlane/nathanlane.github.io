@@ -45,9 +45,11 @@ export interface PanelToggleConfig {
 export function initializePanelToggle(config: PanelToggleConfig): void {
 	const panel = document.getElementById(config.panelId);
 
-	// Panel is required
+	// Panel is optional at runtime: layouts initialize several panels unconditionally and
+	// only some of them render on a given page (e.g. the series panel only exists on posts
+	// that belong to a series). Absence is legitimate, so no-op instead of throwing.
 	if (!panel) {
-		throw new Error(`Panel with id "${config.panelId}" is required`);
+		return;
 	}
 
 	// Get buttons if they exist
