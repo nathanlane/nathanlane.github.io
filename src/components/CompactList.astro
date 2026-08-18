@@ -82,7 +82,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 	/* Title styling following Hochuli's principles */
 	.entry-title {
 		/* Typography */
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		font-size: var(--step-0); /* 15.6-17px - body size */
 		font-weight: 450; /* Slightly heavier for hierarchy */
 		line-height: 1.4; /* Tighter leading for single lines */
@@ -115,7 +115,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 	/* Date styling - metadata hierarchy */
 	.entry-date {
 		/* Typography following site's metadata pattern */
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		font-size: var(--step--1); /* 12.8-14.4px */
 		font-variant-numeric: lining-nums; /* Align numbers */
 		color: var(--theme-color-500);
@@ -130,7 +130,7 @@ const { items, class: className = "", showDescriptions = true } = Astro.props;
 	/* Description styling - secondary information */
 	.entry-description {
 		/* Typography for comfortable reading */
-		font-family: var(--font-sans);
+		font-family: var(--font-body);
 		font-size: var(--step--1); /* 12.8-14.4px */
 		line-height: 1.5; /* Generous leading for small text */
 		color: var(--theme-color-600);
