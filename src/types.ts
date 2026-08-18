@@ -108,7 +108,6 @@ export interface CollectionItemBase {
 	id: string;
 	collection: string;
 	data: {
-		slug: string;
 		title: string;
 		description?: string;
 		publishDate?: Date;

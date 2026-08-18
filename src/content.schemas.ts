@@ -1,4 +1,3 @@
-import { slug as githubSlug } from "github-slugger";
 import { z } from "zod";
 import {
 	mediaTypeOptions,
@@ -21,9 +20,7 @@ export const seoSchema = z.object({
 		.min(20, "Description should be at least 20 characters")
 		.max(300, "Description must be ≤300 characters"),
 	ogImage: z.string().optional(),
-	canonical: z.string().url().optional(),
 	draft: z.boolean().default(sharedBooleanDefaults.draft),
-	lang: z.string().default("en-GB"),
 });
 
 export const baseSchema = z.object({
@@ -32,10 +29,6 @@ export const baseSchema = z.object({
 
 export const researchBaseSchema = z.object({
 	title: z.string().max(120, "Title must be ≤120 characters"),
-});
-
-export const slugSchema = z.object({
-	slug: z.string().optional(),
 });
 
 const uniqueLowercaseTags = z
@@ -141,61 +134,40 @@ const isoDate = z
 	});
 
 export const createPostSchema = (image?: () => z.ZodTypeAny) =>
-	baseSchema
-		.merge(seoSchema)
-		.merge(slugSchema)
-		.extend({
-			coverImage: createCoverImageSchema(image),
-			tags: uniqueSlugTags,
-			publishDate: isoDate,
-			updatedDate: isoDate.optional(),
-			seriesId: z.string().optional(),
-			orderInSeries: z.number().optional(),
-		})
-		.transform((data) => ({
-			...data,
-			slug: data.slug || githubSlug(data.title),
-		}));
+	baseSchema.merge(seoSchema).extend({
+		coverImage: createCoverImageSchema(image),
+		tags: uniqueSlugTags,
+		publishDate: isoDate,
+		updatedDate: isoDate.optional(),
+		seriesId: z.string().optional(),
+		orderInSeries: z.number().optional(),
+	});
 
 export const createResearchSchema = () =>
-	researchBaseSchema
-		.merge(slugSchema)
-		.merge(seoSchema.pick({ ogImage: true, canonical: true, lang: true }))
-		.extend({
-			description: z
-				.string()
-				.min(50, "Research description should be at least 50 characters")
-				.max(400, "Research description should be ≤400 characters for abstracts"),
-			status: z.enum(researchStatusValues).transform((value): ResearchStatus => value),
-			type: z.enum(researchTypeValues).transform((value): ResearchType => value),
-			paperDate: z.string().regex(/^\d{4}$/, "Must be 4-digit year"),
-			authors: z.string(),
-			publication: z.string().optional(),
-			download: z.string().url().optional(),
-			link: z.string().url().optional(),
-			featured: z.boolean().default(sharedBooleanDefaults.featured),
-			tags: uniqueLowercaseTags,
-		})
-		.transform((data) => ({
-			...data,
-			slug: data.slug || githubSlug(data.title),
-		}));
+	researchBaseSchema.merge(seoSchema.pick({ ogImage: true })).extend({
+		description: z
+			.string()
+			.min(50, "Research description should be at least 50 characters")
+			.max(400, "Research description should be ≤400 characters for abstracts"),
+		status: z.enum(researchStatusValues).transform((value): ResearchStatus => value),
+		type: z.enum(researchTypeValues).transform((value): ResearchType => value),
+		paperDate: z.string().regex(/^\d{4}$/, "Must be 4-digit year"),
+		authors: z.string(),
+		publication: z.string().optional(),
+		download: z.string().url().optional(),
+		link: z.string().url().optional(),
+		featured: z.boolean().default(sharedBooleanDefaults.featured),
+		tags: uniqueLowercaseTags,
+	});
 
 export const createWritingSchema = () =>
-	baseSchema
-		.merge(seoSchema)
-		.merge(slugSchema)
-		.extend({
-			publishDate: isoDate,
-			type: z.string().default("writing"),
-			featured: z.boolean().default(sharedBooleanDefaults.featured),
-			genre: z.string().optional(),
-			wordCount: z.number().optional(),
-		})
-		.transform((data) => ({
-			...data,
-			slug: data.slug || githubSlug(data.title),
-		}));
+	baseSchema.merge(seoSchema).extend({
+		publishDate: isoDate,
+		type: z.string().default("writing"),
+		featured: z.boolean().default(sharedBooleanDefaults.featured),
+		genre: z.string().optional(),
+		wordCount: z.number().optional(),
+	});
 
 export const createMediaSchema = () =>
 	z.object({
