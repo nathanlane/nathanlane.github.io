@@ -21,12 +21,18 @@ async function fetchWebmentions(timeFrom: string | null, perPage = 1000) {
 				url += `&since=${timeFrom}`;
 			}
 
-			const res = await fetch(url);
-			if (!res.ok) {
+			// A third-party outage must not take the build down: callers already treat a
+			// null feed as "no new data" and fall back to the cache.
+			try {
+				const res = await fetch(url);
+				if (!res.ok) {
+					return null;
+				}
+
+				return (await res.json()) as WebmentionsFeed;
+			} catch {
 				return null;
 			}
-
-			return (await res.json()) as WebmentionsFeed;
 		}),
 	);
 

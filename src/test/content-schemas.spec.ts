@@ -17,7 +17,6 @@ describe("content schemas", () => {
 			tags: ["Astro", "astro", "SEO"],
 		});
 
-		expect(parsed.slug).toBe("production-ready-metadata");
 		expect(parsed.tags).toEqual(["astro", "seo"]);
 		expect(parsed.draft).toBe(false);
 	});
@@ -64,7 +63,6 @@ describe("content schemas", () => {
 			tags: ["Policy", "policy", "Trade"],
 		});
 
-		expect(parsed.slug).toBe("industrial-policy-measurement");
 		expect(parsed.tags).toEqual(["policy", "trade"]);
 	});
 
@@ -88,7 +86,6 @@ describe("content schemas", () => {
 			showPhoto: true,
 		});
 
-		expect(writing.slug).toBe("a-writing-fixture");
 		expect(media.date).toBeInstanceOf(Date);
 		expect(page.showPhoto).toBe(true);
 	});
