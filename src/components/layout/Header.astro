@@ -77,7 +77,7 @@ const header = {
 				<!-- Mobile menu toggle -->
 				<button
 					aria-expanded="false"
-					aria-haspopup="menu"
+					aria-controls="drawer"
 					aria-label="Open navigation menu"
 					class="mobile-menu-toggle md:hidden"
 					id="toggle-nav-menu-mobile"
@@ -242,55 +242,65 @@ const header = {
 			return;
 		}
 
-		toggleNavMenuMobileButton.addEventListener("click", () => {
-			const isOpen = toggleNavMenuMobileButton.getAttribute("aria-expanded") === "true";
+		// The drawer is a hidden overlay until opened. `aria-hidden` has to track that:
+		// while it said "true" with the drawer open, its links stayed focusable inside a
+		// subtree hidden from assistive technology (axe: aria-hidden-focus, WCAG 4.1.2).
+		const setDrawerOpen = (open: boolean): void => {
+			drawer.classList.toggle("hidden", !open);
+			drawer.classList.toggle("open", open);
+			drawer.setAttribute("aria-hidden", String(!open));
 
-			if (isOpen) {
-				// Close menu
-				drawer.classList.add("hidden");
-				drawer.classList.remove("open");
-				drawerBody.classList.add("-translate-y-full");
-				drawerBody.classList.remove("translate-y-0");
+			drawerBody.classList.toggle("-translate-y-full", !open);
+			drawerBody.classList.toggle("translate-y-0", open);
 
-				// Switch icons
-				openMenuIcon.classList.remove("scale-0", "opacity-0");
-				closeMenuIcon.classList.add("scale-0", "opacity-0");
-			} else {
-				// Show menu
-				drawer.classList.remove("hidden");
-				drawer.classList.add("open");
-				drawerBody.classList.add("translate-y-0");
-				drawerBody.classList.remove("-translate-y-full");
+			openMenuIcon.classList.toggle("scale-0", open);
+			openMenuIcon.classList.toggle("opacity-0", open);
+			closeMenuIcon.classList.toggle("scale-0", !open);
+			closeMenuIcon.classList.toggle("opacity-0", !open);
 
-				// Switch icons
-				openMenuIcon.classList.add("scale-0", "opacity-0");
-				closeMenuIcon.classList.remove("scale-0", "opacity-0");
+			toggleNavMenuMobileButton.setAttribute("aria-expanded", String(open));
+			toggleNavMenuMobileButton.setAttribute(
+				"aria-label",
+				open ? "Close navigation menu" : "Open navigation menu",
+			);
+		};
+
+		const isDrawerOpen = (): boolean =>
+			toggleNavMenuMobileButton.getAttribute("aria-expanded") === "true";
+
+		const closeDrawer = (returnFocus: boolean): void => {
+			setDrawerOpen(false);
+			if (returnFocus) {
+				toggleNavMenuMobileButton.focus();
 			}
+		};
 
-			// Update button state
-			toggleNavMenuMobileButton.setAttribute("aria-expanded", (!isOpen).toString());
+		toggleNavMenuMobileButton.addEventListener("click", () => {
+			const open = !isDrawerOpen();
+			setDrawerOpen(open);
+
+			// Move focus into the drawer so keyboard users land on the navigation they
+			// just opened rather than continuing from the toggle button.
+			if (open) {
+				const firstLink = drawer.querySelector<HTMLAnchorElement>("#nav-menu-mobile a");
+				firstLink?.focus();
+			}
 		});
 
-		// Close drawer when clicking on a link
+		// Escape closes the drawer and returns focus to the control that opened it.
+		document.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && isDrawerOpen()) {
+				closeDrawer(true);
+			}
+		});
+
+		// Close drawer when clicking on a link (focus follows the navigation itself).
 		const mobileNavLinks = document.querySelectorAll("#nav-menu-mobile a");
 		mobileNavLinks.forEach((link) => {
-			link.addEventListener("click", () => {
-				// Close the drawer
-				if (toggleNavMenuMobileButton && drawerBody && drawer) {
-					drawer.classList.add("hidden");
-					drawer.classList.remove("open");
-					drawerBody.classList.add("-translate-y-full");
-					drawerBody.classList.remove("translate-y-0");
-
-					// Reset icons
-					if (openMenuIcon && closeMenuIcon) {
-						openMenuIcon.classList.remove("scale-0", "opacity-0");
-						closeMenuIcon.classList.add("scale-0", "opacity-0");
-					}
-
-					toggleNavMenuMobileButton.setAttribute("aria-expanded", "false");
-				}
-			});
+			link.addEventListener("click", () => closeDrawer(false));
 		});
+
+		// Publish the initial closed state.
+		setDrawerOpen(false);
 	});
 </script>

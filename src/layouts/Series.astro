@@ -22,6 +22,7 @@ const { headings } = await render(series);
 
 	<div class="flex items-center">
 		<button
+			type="button"
 			id="toggle-panel"
 			class="hidden md:flex z-30 mr-2b btn-icon-nav"
 			aria-label="Toggle Series Panel"
@@ -30,9 +31,11 @@ const { headings } = await render(series);
 			<Icon aria-hidden="true" class="flex-shrink-0 icon-action" focusable="false" name="lucide:file-text" />
 		</button>
 		<button
+			type="button"
 			id="toggle-toc"
 			class="hidden md:flex z-30 mr-2b btn-icon-nav"
-			aria-label="Table of Contents"
+			aria-label="Toggle Table of Contents"
+			aria-controls="toc-panel"
 		>	
 			<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
 		</button>
@@ -65,15 +68,17 @@ const { headings } = await render(series);
 
 
 	<!-- Series button for mobile screens -->
-	<mobile-button
+	<button
+		type="button"
 		id="toggle-panel-mobile"
 		class="btn-icon-fab block sm:hidden absolute bottom-4 right-4 z-50"
 		aria-label="Toggle Series Panel"
+		aria-controls="series-panel"
 	>
 		<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
 			<Icon class="icon-action" name="lucide:file-text"/>
 		</span>
-	</mobile-button>
+	</button>
 </BaseLayout>
 
 <script>
