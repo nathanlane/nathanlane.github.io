@@ -1,6 +1,6 @@
 ---
 title: "Font System Documentation"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Complete guide to the font implementation, loading strategy, and usage patterns"
 seriesId: lane-docs
 orderInSeries: 8

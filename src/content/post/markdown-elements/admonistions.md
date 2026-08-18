@@ -4,7 +4,7 @@ description: >-
   This post provides a detailed demonstration of how to use the Markdown
   admonition feature in Astro Citrus, showcasing its ability to highlight
   important...
-publishDate: 25 Aug 2024
+publishDate: '2024-08-25'
 seriesId: markdown-elements
 orderInSeries: 2
 tags:

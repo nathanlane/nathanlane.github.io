@@ -1,10 +1,10 @@
 ---
 title: "Setup Citrus"
-publishDate: "21 December 2024"
+publishDate: '2024-12-21'
 description: "An example second post for Citrus Docs series"
 seriesId: lane-docs
 orderInSeries: 3
-updatedDate: "22 December 2024"
+updatedDate: '2024-12-22'
 featured: false
 tags: ["example", "series", "citrus"]
 ogImage: ""

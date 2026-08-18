@@ -1,6 +1,6 @@
 ---
 title: "Design System Documentation"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Complete guide to the typography and spacing system built on mathematical foundations"
 seriesId: lane-docs
 orderInSeries: 4

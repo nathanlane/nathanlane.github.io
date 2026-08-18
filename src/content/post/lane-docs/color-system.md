@@ -1,6 +1,6 @@
 ---
 title: "Color System Documentation"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Complete guide to the refined color system with warm neutrals and sophisticated palette"
 seriesId: lane-docs
 orderInSeries: 7

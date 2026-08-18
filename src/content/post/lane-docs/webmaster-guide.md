@@ -1,6 +1,6 @@
 ---
 title: "Webmaster Guide"
-publishDate: "16 July 2025"
+publishDate: '2025-07-16'
 description: "Complete guide for managing and deploying the website after production readiness improvements"
 seriesId: lane-docs
 orderInSeries: 15

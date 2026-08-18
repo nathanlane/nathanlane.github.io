@@ -1,6 +1,6 @@
 ---
 title: "Documentation Index"
-publishDate: "July 14 2025"
+publishDate: '2025-07-14'
 description: "Complete documentation for the website's design system, implementation guides, and technical references"
 seriesId: lane-docs
 orderInSeries: 0

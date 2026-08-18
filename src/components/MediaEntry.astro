@@ -49,10 +49,11 @@ const {
 } = Astro.props;
 
 // Format date for better readability
-const formattedDate = new Date(date).toLocaleDateString('en-US', { 
-  month: 'short', 
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  month: 'short',
   day: 'numeric',
-  year: 'numeric'
+  year: 'numeric',
+  timeZone: 'UTC',
 });
 
 // Type display mapping for better readability

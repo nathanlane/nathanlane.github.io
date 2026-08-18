@@ -72,6 +72,74 @@ const createCoverImageSchema = (image?: () => z.ZodTypeAny) =>
 		})
 		.optional();
 
+// Returns days in the given 1-indexed month, accounting for leap years.
+const daysInMonth = (year: number, month: number) =>
+	new Date(Date.UTC(year, month, 0)).getUTCDate();
+
+// Date-only: YYYY-MM-DD with no time component.
+const DATE_ONLY = /^(\d{4})-(\d{2})-(\d{2})$/;
+
+// Full ISO timestamp with constrained time fields and a required explicit timezone offset.
+// Hours 00-23, minutes 00-59, seconds 00-59, optional fractional seconds, then Z or ±HH:MM
+// with offset hours 00-23 and offset minutes 00-59.  The tight ranges prevent malformed values
+// like T99:99:99Z or T.Z from slipping through to new Date() and producing Invalid Date.
+const DATETIME_WITH_OFFSET =
+	/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d+)?(?:Z|[-+](?:[01]\d|2[0-3]):[0-5]\d)$/;
+
+// Accepts a YYYY-MM-DD string, a full ISO timestamp with an explicit timezone offset (Z or
+// ±HH:MM), or a YAML date object.  Rejects non-ISO strings, zone-less timestamps, impossible
+// calendar dates (e.g. "2025-02-30"), and malformed time/offset fields.
+// Normalises to UTC midnight so the authored calendar day is stable on any build machine.
+const isoDate = z
+	.string()
+	.or(z.date())
+	.superRefine((val, ctx) => {
+		if (typeof val !== "string") return; // YAML Date objects: pass through
+		const dm = DATE_ONLY.exec(val);
+		if (dm) {
+			const year = Number(dm[1]);
+			const month = Number(dm[2]);
+			const day = Number(dm[3]);
+			if (month < 1 || month > 12 || day < 1 || day > daysInMonth(year, month)) {
+				ctx.addIssue({ code: z.ZodIssueCode.custom, message: `Invalid calendar date: "${val}"` });
+			}
+			return;
+		}
+		if (DATETIME_WITH_OFFSET.test(val)) {
+			const year = Number(val.slice(0, 4));
+			const month = Number(val.slice(5, 7));
+			const day = Number(val.slice(8, 10));
+			if (month < 1 || month > 12 || day < 1 || day > daysInMonth(year, month)) {
+				ctx.addIssue({ code: z.ZodIssueCode.custom, message: `Invalid calendar date: "${val}"` });
+				return;
+			}
+			// Belt-and-suspenders: the tight regex should prevent this, but guard against any gap.
+			if (Number.isNaN(new Date(val).getTime())) {
+				ctx.addIssue({ code: z.ZodIssueCode.custom, message: `Invalid timestamp: "${val}"` });
+			}
+			return;
+		}
+		ctx.addIssue({
+			code: z.ZodIssueCode.custom,
+			message: `Date must be YYYY-MM-DD or a full ISO timestamp with explicit timezone offset: "${val}"`,
+		});
+	})
+	.transform((val) => {
+		if (typeof val === "string") {
+			if (!val.includes("T")) {
+				// Date-only: extract calendar parts from the literal to avoid any timezone influence.
+				return new Date(
+					Date.UTC(Number(val.slice(0, 4)), Number(val.slice(5, 7)) - 1, Number(val.slice(8, 10))),
+				);
+			}
+			// Offset timestamp: explicit offset makes the UTC date deterministic across machines.
+			const d = new Date(val);
+			return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+		}
+		// YAML Date object: extract UTC components.
+		return new Date(Date.UTC(val.getUTCFullYear(), val.getUTCMonth(), val.getUTCDate()));
+	});
+
 export const createPostSchema = (image?: () => z.ZodTypeAny) =>
 	baseSchema
 		.merge(seoSchema)
@@ -79,14 +147,8 @@ export const createPostSchema = (image?: () => z.ZodTypeAny) =>
 		.extend({
 			coverImage: createCoverImageSchema(image),
 			tags: uniqueSlugTags,
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
+			publishDate: isoDate,
+			updatedDate: isoDate.optional(),
 			seriesId: z.string().optional(),
 			orderInSeries: z.number().optional(),
 		})
@@ -124,10 +186,7 @@ export const createWritingSchema = () =>
 		.merge(seoSchema)
 		.merge(slugSchema)
 		.extend({
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
+			publishDate: isoDate,
 			type: z.string().default("writing"),
 			featured: z.boolean().default(sharedBooleanDefaults.featured),
 			genre: z.string().optional(),
@@ -142,10 +201,7 @@ export const createMediaSchema = () =>
 	z.object({
 		title: z.string(),
 		outlet: z.string(),
-		date: z
-			.string()
-			.or(z.date())
-			.transform((val) => new Date(val)),
+		date: isoDate,
 		type: z.enum(mediaTypeValues).transform((value): MediaType => value),
 		link: z.string().url(),
 		description: z.string().optional(),

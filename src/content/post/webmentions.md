@@ -4,12 +4,12 @@ description: >-
   This post describes the detailed process of adding webmentions to your own
   site, including setup, configuration, and integration with webmention
   services.
-publishDate: 11 Oct 2023
+publishDate: '2023-10-11'
 tags:
   - webmentions
   - astro
   - social
-updatedDate: 6 December 2024
+updatedDate: '2024-12-06'
 ---
 
 ## TLDR
