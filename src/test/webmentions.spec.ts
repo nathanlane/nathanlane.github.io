@@ -1,9 +1,9 @@
+import { describe, expect, it } from "vitest";
 import {
 	getSupportedWebmentionHostNames,
 	getSupportedWebmentionOrigins,
 	normalizeWebmentionTarget,
 } from "../utils/webmentionTargets";
-import { describe, expect, it } from "vitest";
 
 describe("webmention origin support", () => {
 	it("derives supported origins and host names from site configuration", () => {

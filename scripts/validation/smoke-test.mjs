@@ -22,6 +22,8 @@
  */
 
 const cliArgs = process.argv.slice(2).filter((arg) => arg !== "--");
+import { JSDOM } from "jsdom";
+
 const baseUrl = (cliArgs[0] || "http://localhost:4321").replace(/\/$/, "");
 
 /**
@@ -30,6 +32,49 @@ const baseUrl = (cliArgs[0] || "http://localhost:4321").replace(/\/$/, "");
  * - marker: substring that must appear in the body (HTML/XML)
  * - contentType: substring that must appear in the content-type header
  */
+/**
+ * Feed integrity check.
+ *
+ * Deliberately does NOT try to infer whether a body "looks like" markdown. This site's
+ * content is partly documentation *about* markdown and HTML, so posts legitimately
+ * contain literal `##`, `**`, escaped code fences and raw `<h2>` examples. Character
+ * level heuristics tried here produced either a false positive on such a post or a
+ * false negative on a genuine leak. The precise contract -- markdown renders to HTML,
+ * MDX falls back to its description -- is pinned by unit tests on feedContent instead.
+ *
+ * What is asserted here is what the built feed can actually prove: it parses as XML,
+ * every item carries a content element, and at least one carries real content.
+ */
+function feedIsWellFormed(body) {
+	let doc;
+	try {
+		doc = new JSDOM(body, { contentType: "text/xml" }).window.document;
+	} catch (error) {
+		return `feed is not well-formed XML: ${error.message}`;
+	}
+	if (doc.querySelector("parsererror")) {
+		return "feed is not well-formed XML";
+	}
+
+	const items = [...doc.querySelectorAll("item")];
+	if (items.length === 0) return "feed contains no items";
+
+	let withContent = 0;
+	for (const item of items) {
+		const title = item.querySelector("title")?.textContent ?? "unknown item";
+		const encoded = item.getElementsByTagName("content:encoded")[0];
+
+		// The element must exist on every item. An empty body serialises as
+		// <content:encoded/>, which is legitimate; an absent element means the
+		// endpoint stopped emitting content for that item.
+		if (!encoded) return `feed item "${title}" has no content:encoded element`;
+		if ((encoded.textContent ?? "").trim() !== "") withContent += 1;
+	}
+
+	if (withContent === 0) return `no feed item carries any content (${items.length} items)`;
+	return null;
+}
+
 const CHECKS = [
 	{ path: "/", marker: "Nathan Lane" },
 	{ path: "/about/", marker: "Nathan Lane" },
@@ -47,8 +92,8 @@ const CHECKS = [
 	// merged tag page, and a redirect from the old space-containing URL it replaced
 	{ path: "/tags/static-sites/", marker: "Nathan Lane" },
 	{ path: "/tags/best%20practices/", marker: "/tags/best-practices" },
-	{ path: "/rss.xml", marker: "<rss" },
-	{ path: "/research/rss.xml", marker: "<rss" },
+	{ path: "/rss.xml", marker: "<rss", assert: feedIsWellFormed },
+	{ path: "/research/rss.xml", marker: "<rss", assert: feedIsWellFormed },
 	{ path: "/sitemap-index.xml", marker: "<sitemapindex" },
 	// satori + resvg rendered OG image
 	{ path: "/og-image/deepseek.png", contentType: "image/png" },
@@ -82,10 +127,14 @@ async function run() {
 				problems.push(`content-type "${ct}" missing "${check.contentType}"`);
 			}
 		}
-		if (check.marker) {
+		if (check.marker || check.assert) {
 			const body = await res.text();
-			if (!body.includes(check.marker)) {
+			if (check.marker && !body.includes(check.marker)) {
 				problems.push(`body missing marker "${check.marker}"`);
+			}
+			if (check.assert) {
+				const failure = check.assert(body);
+				if (failure) problems.push(failure);
 			}
 		}
 
