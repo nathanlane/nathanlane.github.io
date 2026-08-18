@@ -23,6 +23,36 @@ describe("content schemas", () => {
 		expect(parsed.draft).toBe(false);
 	});
 
+	it("rejects a post tag that is not already a slug", () => {
+		// Post tags become URL segments, so a space or slash would produce a broken URL.
+		for (const tag of ["best practices", "CI/CD", "trailing-"]) {
+			const result = createPostSchema().safeParse({
+				title: "Tag Validation",
+				description: "A fixture asserting that post tags must be slugs before they become URLs.",
+				publishDate: "2026-03-29",
+				tags: [tag],
+			});
+
+			expect(result.success, `expected "${tag}" to be rejected`).toBe(false);
+		}
+	});
+
+	it("still allows human-readable research tags", () => {
+		// Research tags are display labels and are never used as URLs.
+		const parsed = createResearchSchema().parse({
+			title: "Semiconductor Policy",
+			description:
+				"A representative research fixture that is long enough to satisfy the abstract length requirement for the collection schema.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "2026",
+			authors: "Nathan Lane",
+			tags: ["CHIPS Act", "South Korea"],
+		});
+
+		expect(parsed.tags).toEqual(["chips act", "south korea"]);
+	});
+
 	it("parses a representative research entry", () => {
 		const parsed = createResearchSchema().parse({
 			title: "Industrial Policy Measurement",

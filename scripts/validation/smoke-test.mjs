@@ -44,6 +44,9 @@ const CHECKS = [
 	// page 1 of the paginated post list; regression guard for the dropped-page-1 bug
 	{ path: "/posts/1/", marker: "Nathan Lane" },
 	{ path: "/tags/", marker: "Nathan Lane" },
+	// merged tag page, and a redirect from the old space-containing URL it replaced
+	{ path: "/tags/static-sites/", marker: "Nathan Lane" },
+	{ path: "/tags/best%20practices/", marker: "/tags/best-practices" },
 	{ path: "/rss.xml", marker: "<rss" },
 	{ path: "/research/rss.xml", marker: "<rss" },
 	{ path: "/sitemap-index.xml", marker: "<sitemapindex" },

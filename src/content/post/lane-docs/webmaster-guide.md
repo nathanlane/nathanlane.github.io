@@ -5,7 +5,7 @@ description: "Complete guide for managing and deploying the website after produc
 seriesId: lane-docs
 orderInSeries: 15
 featured: false
-tags: ["documentation", "deployment", "CI/CD", "maintenance"]
+tags: ["documentation", "deployment", "ci-cd", "maintenance"]
 ogImage: ""
 ---
 

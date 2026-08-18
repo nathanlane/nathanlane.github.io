@@ -6,9 +6,9 @@ description: >-
 publishDate: '2024-07-04'
 tags:
   - astro
-  - web development
-  - static sites
-  - best practices
+  - web-development
+  - static-sites
+  - best-practices
   - tutorial
 ---
 

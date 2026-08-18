@@ -43,6 +43,27 @@ const uniqueLowercaseTags = z
 	.default([])
 	.transform((arr) => [...new Set(arr.map((s) => s.toLowerCase()))]);
 
+/**
+ * Post tags are used verbatim as URL segments by /tags/[tag], so they must already be
+ * slugs. A tag containing a space produced a URL with a literal space in it, and one
+ * containing a slash produced a nested directory that collided with the tag route's own
+ * pagination. Enforced rather than silently transformed: rewriting here would leave the
+ * frontmatter saying one thing and the site doing another.
+ *
+ * Research tags are display labels only -- nothing links them -- so they keep
+ * uniqueLowercaseTags and stay human readable ("CHIPS Act", "South Korea").
+ */
+const uniqueSlugTags = uniqueLowercaseTags.superRefine((tags, ctx) => {
+	for (const tag of tags) {
+		if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(tag)) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: `Tag "${tag}" must be a slug: lowercase alphanumerics separated by single hyphens.`,
+			});
+		}
+	}
+});
+
 const createCoverImageSchema = (image?: () => z.ZodTypeAny) =>
 	z
 		.object({
@@ -57,7 +78,7 @@ export const createPostSchema = (image?: () => z.ZodTypeAny) =>
 		.merge(slugSchema)
 		.extend({
 			coverImage: createCoverImageSchema(image),
-			tags: uniqueLowercaseTags,
+			tags: uniqueSlugTags,
 			publishDate: z
 				.string()
 				.or(z.date())
