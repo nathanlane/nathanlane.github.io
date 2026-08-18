@@ -60,9 +60,33 @@ const structuredData: LayoutStructuredData[] = [
 
 	<!-- Essay layout with editorial aesthetic -->
 	<article class="essay-wrapper" data-content-type="long-form">
-		<!-- Back navigation -->
-		<nav class="essay-nav-inline">
-			<a href="/posts" class="link-nav" data-variant="back">← All Essays</a>
+		<!-- Back navigation, plus the desktop panel toggles. Both the TOC and the series
+		     panel render a close button, so without these the panels could be dismissed
+		     with no way to bring them back. -->
+		<nav class="essay-nav-inline flex items-center gap-x-2b">
+			<a href="/posts/" class="link-nav" data-variant="back">← All Essays</a>
+			{seriesId && (
+				<button
+					type="button"
+					id="toggle-panel"
+					class="hidden md:flex btn-icon-nav"
+					aria-label="Toggle Series Panel"
+					aria-controls="series-panel"
+				>
+					<Icon aria-hidden="true" class="flex-shrink-0 icon-action" focusable="false" name="lucide:file-text" />
+				</button>
+			)}
+			{!!headings.length && (
+				<button
+					type="button"
+					id="toggle-toc"
+					class="hidden md:flex btn-icon-nav"
+					aria-label="Toggle Table of Contents"
+					aria-controls="toc-panel"
+				>
+					<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
+				</button>
+			)}
 		</nav>
 
 		<!-- Essay header with metadata -->
@@ -97,15 +121,17 @@ const structuredData: LayoutStructuredData[] = [
 
 	<!-- Series button for mobile screens -->
 	{seriesId && (
-		<mobile-button
+		<button
+			type="button"
 			id="toggle-panel-mobile"
 			class="btn-icon-fab block sm:hidden absolute bottom-space-s right-space-s z-50"
 			aria-label="Toggle Series Panel"
+			aria-controls="series-panel"
 		>
 			<span class="absolute inset-0 rounded-lg flex items-center justify-center bg-special-light hover:text-accent-base/90">
 				<Icon class="icon-action" name="lucide:file-text" />
 			</span>
-		</mobile-button>
+		</button>
 	)}
 </BaseLayout>
 

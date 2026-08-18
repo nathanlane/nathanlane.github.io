@@ -71,16 +71,28 @@ export function initializePanelToggle(config: PanelToggleConfig): void {
 		);
 	};
 
+	// Keep assistive technology in step with the visual state: a panel that is visually
+	// hidden must not expose its links to screen readers or the tab order, and the toggle
+	// buttons must report whether the panel they control is currently open.
+	const syncAria = (visible: boolean): void => {
+		panel.setAttribute("aria-hidden", String(!visible));
+		for (const btn of [toggleBtn, mobileToggleBtn]) {
+			btn?.setAttribute("aria-expanded", String(visible));
+		}
+	};
+
 	// Hide panel
 	const hidePanel = (): void => {
 		panel.classList.add("hidden");
 		panel.classList.remove("block", config.visibleClass);
+		syncAria(false);
 	};
 
 	// Show panel
 	const showPanel = (): void => {
 		panel.classList.remove("hidden");
 		panel.classList.add("block", config.visibleClass);
+		syncAria(true);
 	};
 
 	// Toggle panel
@@ -104,4 +116,11 @@ export function initializePanelToggle(config: PanelToggleConfig): void {
 	if (closeBtn) {
 		closeBtn.addEventListener("click", hidePanel);
 	}
+
+	// Publish the initial state, and keep it correct across the breakpoint: the panel's
+	// visibility is class-driven and responsive, so the rendered state can change without
+	// any click.
+	const breakpointQuery = window.matchMedia(`(min-width: ${breakpointSize})`);
+	syncAria(isPanelVisible());
+	breakpointQuery.addEventListener("change", () => syncAria(isPanelVisible()));
 }
