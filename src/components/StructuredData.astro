@@ -23,7 +23,7 @@ const personSchema = {
   "@id": absoluteUrl("#author"),
   "name": siteConfig.author,
   "url": configuredSiteHref || siteHref || undefined,
-  "image": absoluteUrl(siteConfig.profileImageFull ?? siteConfig.profileImage),
+  "image": absoluteUrl(siteConfig.profileImageFull),
   "sameAs": socialProfiles.length ? socialProfiles : undefined,
   "jobTitle": siteConfig.jobTitle,
   "worksFor": siteConfig.organization

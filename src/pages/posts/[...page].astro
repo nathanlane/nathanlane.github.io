@@ -96,7 +96,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			</a>
 		</h1>
 		<div class="flex gap-4b text-sm">
-			<a href="/posts/archive" class="link-inline">
+			<a href="/posts/archive/" class="link-inline">
 				Browse Archive ({allPostsCount} posts)
 			</a>
 			<a href="/tags/" class="link-inline">
@@ -111,7 +111,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 	<!-- Popular Tags -->
 	{page.currentPage === 1 && (
 		<div class="mb-6b">
-			<h3 class="heading-4 mb-3b">Popular Topics</h3>
+			<h2 class="heading-4 mb-3b">Popular Topics</h2>
 			<div class="flex flex-wrap gap-2b">
 				{uniqueTags.map(tag => (
 					<a href={`/tags/${tag}/`}>
@@ -127,7 +127,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			{
 				descYearKeys.map((yearKey) => (
 					<>
-						<h4 class="heading-4" data-year-header={yearKey}>{yearKey}</h4>
+						<h3 class="heading-4" data-year-header={yearKey}>{yearKey}</h3>
 						<ul class="mb-8b mt-4b space-y-8b text-start">
 							{groupedByYear[yearKey]?.map((p) => (
 								<li 

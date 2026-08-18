@@ -36,7 +36,6 @@ export const siteConfig: SiteConfig = {
 
 	// === RESOURCES ===
 	resumeUrl: "/cv.pdf",
-	profileImage: "/headshot.jpg",
 	profileImageFull: "/headshot-full.JPG",
 	departmentPage: "https://www.lse.ac.uk/international-development",
 	professionalPage: "https://www.lse.ac.uk/people/nathan-lane",
