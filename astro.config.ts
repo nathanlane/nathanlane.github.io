@@ -26,6 +26,22 @@ process.env.BROWSERSLIST_IGNORE_OLD_DATA ??= "1";
 
 // https://astro.build/config
 export default defineConfig({
+	/**
+	 * Tags were previously used verbatim as URL segments, so tags containing a space or a
+	 * slash produced live URLs like /tags/best%20practices/ and a nested /tags/ci/cd/.
+	 * Those tags are now slugs; these redirects keep the published URLs working.
+	 */
+	redirects: {
+		"/tags/best practices": "/tags/best-practices",
+		"/tags/color theory": "/tags/color-theory",
+		"/tags/ibm plex": "/tags/ibm-plex",
+		"/tags/static sites": "/tags/static-sites",
+		"/tags/web development": "/tags/web-development",
+		"/tags/web performance": "/tags/web-performance",
+		"/tags/ci/cd": "/tags/ci-cd",
+		// merged into static-sites
+		"/tags/static-site": "/tags/static-sites",
+	},
 	image: {
 		domains: ["webmention.io"],
 	},
