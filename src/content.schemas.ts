@@ -98,26 +98,6 @@ export const createResearchSchema = () =>
 			slug: data.slug || githubSlug(data.title),
 		}));
 
-export const createProjectSchema = () =>
-	baseSchema
-		.merge(seoSchema)
-		.merge(slugSchema)
-		.extend({
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			type: z.string().default("projects"),
-			featured: z.boolean().default(sharedBooleanDefaults.featured),
-			technologies: z.array(z.string()).optional(),
-			demo: z.string().url().optional(),
-			github: z.string().url().optional(),
-		})
-		.transform((data) => ({
-			...data,
-			slug: data.slug || githubSlug(data.title),
-		}));
-
 export const createWritingSchema = () =>
 	baseSchema
 		.merge(seoSchema)
