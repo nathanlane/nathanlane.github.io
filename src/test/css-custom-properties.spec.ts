@@ -70,3 +70,47 @@ describe("css custom properties", () => {
 		expect(undefinedUses).toEqual([]);
 	});
 });
+
+/**
+ * Tokens whose value is a bare HSL channel triple (e.g. `0deg 0% 15%`) rather than a
+ * complete colour. They are designed to be consumed as `hsl(var(--token))` so that an
+ * alpha can be applied; used directly as a colour they are invalid, and the whole
+ * declaration is silently discarded.
+ */
+const CHANNEL_VALUE = /^\s*-?[\d.]+(deg)?\s+[\d.]+%\s+[\d.]+%\s*$/;
+const COMPOSED_CHANNEL = new Set(["--theme-bg", "--theme-fg"]);
+
+const channelTokens = new Set<string>(COMPOSED_CHANNEL);
+for (const source of sources.values()) {
+	for (const match of source.matchAll(/(--[a-zA-Z0-9_-]+)\s*:\s*([^;]+);/g)) {
+		const [, name, value] = match;
+		if (name && value && CHANNEL_VALUE.test(value)) {
+			channelTokens.add(name);
+		}
+	}
+}
+
+describe("hsl channel tokens", () => {
+	it("is never used as a complete colour", () => {
+		const bareUses: string[] = [];
+
+		for (const [file, source] of sources) {
+			source.split("\n").forEach((line, index) => {
+				for (const token of channelTokens) {
+					let from = 0;
+					const needle = `var(${token})`;
+					while (true) {
+						const at = line.indexOf(needle, from);
+						if (at === -1) break;
+						from = at + needle.length;
+						// Already inside an hsl()/hsla() call on this line?
+						if (/hsla?\([^)]*$/.test(line.slice(0, at))) continue;
+						bareUses.push(`${path.relative(repoRoot, file)}:${index + 1} ${token}`);
+					}
+				}
+			});
+		}
+
+		expect(bareUses).toEqual([]);
+	});
+});

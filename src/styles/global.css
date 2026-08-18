@@ -258,7 +258,7 @@
 
 		/* Ensure maximum contrast for links and interactive elements */
 		a {
-			color: var(--theme-link);
+			color: hsl(var(--theme-link));
 			text-decoration: underline;
 			text-decoration-thickness: 0.125em;
 			text-underline-offset: 0.25em;
@@ -274,7 +274,7 @@
 		position: absolute;
 		top: -40px;
 		left: 6px;
-		background: var(--theme-link);
+		background: hsl(var(--theme-link));
 		color: white;
 		padding: 8px;
 		text-decoration: none;
@@ -1023,7 +1023,7 @@
 
 		/* Research typography dark mode adjustments */
 		.text-publication {
-			color: var(--theme-accent-one); /* Maintain accent but adapted for dark */
+			color: hsl(var(--theme-accent-one)); /* Maintain accent but adapted for dark */
 			font-weight: 425; /* Slightly lighter than light mode */
 		}
 
@@ -1610,7 +1610,7 @@
 	/* Enhanced copy button for code blocks */
 	.copy-code-button {
 		@apply absolute text-accent-base;
-		background: var(--theme-bg);
+		background: hsl(var(--theme-bg));
 		border: 1px solid var(--theme-color-200);
 		top: 0.75rem; /* 3b */
 		right: 0.75rem; /* 3b */
@@ -1725,7 +1725,7 @@
 			bottom: 0.75rem; /* 3b */
 			left: 0.75rem; /* 3b */
 			padding: 0.25rem 0.625rem; /* 1b 2.5b */
-			background: var(--theme-bg);
+			background: hsl(var(--theme-bg));
 			border: 1px solid var(--theme-color-200);
 			color: var(--theme-color-600);
 			font-size: var(--step--2); /* Use design token */
@@ -2208,7 +2208,7 @@
 
 	/* Mobile navigation refinements */
 	#drawer-body {
-		background: var(--theme-bg);
+		background: hsl(var(--theme-bg));
 	}
 
 	/* Remove gradient decorations from mobile nav */
@@ -2431,7 +2431,7 @@
 	letter-spacing: 0.05em; /* More generous for distinction */
 
 	/* Jason Santa Maria: Create visual anchors through strategic color */
-	color: var(--theme-accent-base); /* Accent color for visual anchor */
+	color: hsl(var(--theme-accent-base)); /* Accent color for visual anchor */
 	line-height: 1.4; /* Comfortable for small text */
 
 	/* No transform - using real small caps */
@@ -2462,7 +2462,7 @@
 }
 
 .link-research-action:hover {
-	color: var(--theme-accent-base);
+	color: hsl(var(--theme-accent-base));
 	opacity: 1;
 	/* No weight change - avoiding size shifts */
 }

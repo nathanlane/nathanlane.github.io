@@ -29,11 +29,11 @@
 	--link-color-default: inherit;
 	--link-color-nav: var(--theme-color-600);
 	--link-color-nav-subtle: var(--theme-color-500);
-	--link-color-hover: var(--theme-accent-base);
+	--link-color-hover: hsl(var(--theme-accent-base));
 
 	/* Underline properties */
 	--link-underline-color-default: hsl(0deg 0% 60%);
-	--link-underline-color-hover: var(--theme-accent-base);
+	--link-underline-color-hover: hsl(var(--theme-accent-base));
 	--link-underline-thickness-default: 1.5px;
 	--link-underline-thickness-hover: 2px;
 	--link-underline-thickness-thin: 1.5px;
@@ -245,10 +245,10 @@ a[class*="hover:text-"]:hover {
 
 	/* Editorial prose variant - for prominent links in About page and headers */
 	.link-inline[data-variant="editorial"] {
-		color: var(--link-color-editorial, var(--theme-accent-base));
+		color: var(--link-color-editorial, hsl(var(--theme-accent-base)));
 		font-weight: 450; /* Slightly bolder, no animation */
 		text-decoration: underline;
-		text-decoration-color: var(--link-color-editorial, var(--theme-accent-base));
+		text-decoration-color: var(--link-color-editorial, hsl(var(--theme-accent-base)));
 		text-decoration-thickness: 0.05em; /* Hair-thin, elegant */
 		text-underline-offset: 0.2em; /* Generous breathing room */
 		position: relative;
