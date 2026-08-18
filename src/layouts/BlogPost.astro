@@ -20,8 +20,9 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 
-// Calculate word count
-const wordCount = remarkPluginFrontmatter?.words || 1000;
+// Word count comes from the remark-reading-time plugin. It is absent only when a page is
+// rendered without that plugin, in which case the segment is omitted rather than guessed.
+const wordCount: number | undefined = remarkPluginFrontmatter?.words;
 
 // Format date for display (match prior casing)
 const formatDate = (date: Date) => formatDateLong(date).toUpperCase();
@@ -69,7 +70,7 @@ const structuredData: LayoutStructuredData[] = [
 			<h1 class="essay-title">{title}</h1>
 			<hr class="essay-separator" />
 				<div class="essay-metadata">
-					ESSAY • {formatDate(publishDate)} • {wordCount.toLocaleString()} WORDS
+					ESSAY • {formatDate(publishDate)}{wordCount ? ` • ${wordCount.toLocaleString()} WORDS` : ""}
 				</div>
 			</header>
 

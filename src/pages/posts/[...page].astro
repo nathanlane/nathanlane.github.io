@@ -19,13 +19,39 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const uniqueTags = getUniqueTagsWithCount(allPosts)
 		.slice(0, MAX_TAGS)
 		.map(([tag]) => tag);
+	// Astro emits page 1 with `params.page === undefined`, i.e. at the bare `/posts/` URL,
+	// which collides with the standalone `/posts/` summary route. Page 1 used to be dropped
+	// to resolve that collision, but the summary route only lists 5 posts while page 2
+	// starts at post 11, so posts 6-10 were unreachable. Give page 1 an explicit `/posts/1/`
+	// URL instead, and rewrite every generated link that still points at the bare index.
+	const PAGE_ONE_URL = "/posts/1/";
+	const toPageOne = (url: string | undefined): string | undefined =>
+		url !== undefined && /^\/posts\/?$/.test(url) ? PAGE_ONE_URL : url;
+
 	return paginate(
 		allPosts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()),
 		{
 			pageSize: MAX_POSTS_PER_PAGE,
 			props: { uniqueTags, allPostsCount },
 		},
-	).filter(({ params }) => params.page);
+	).map((entry) => ({
+		...entry,
+		params: { page: entry.params.page ?? "1" },
+		props: {
+			...entry.props,
+			page: {
+				...entry.props.page,
+				url: {
+					...entry.props.page.url,
+					current: toPageOne(entry.props.page.url.current) ?? entry.props.page.url.current,
+					prev: toPageOne(entry.props.page.url.prev),
+					next: toPageOne(entry.props.page.url.next),
+					first: toPageOne(entry.props.page.url.first),
+					last: toPageOne(entry.props.page.url.last),
+				},
+			},
+		},
+	}));
 }) satisfies GetStaticPaths;
 
 interface Props {
