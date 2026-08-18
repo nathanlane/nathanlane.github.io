@@ -470,6 +470,26 @@
 		--space-16: calc(var(--grid-unit) * 16); /* 96px - huge (4 baselines) */
 		--space-24: calc(var(--grid-unit) * 24); /* 144px - massive (6 baselines) */
 
+		/* Semantic spacing aliases.
+		   These names are already the project's vocabulary via the Tailwind spacing
+		   scale (gap-space-xs, mb-space-l, ...), but they existed only as Tailwind
+		   keys, so hand-written CSS using var(--space-l) resolved to nothing and the
+		   declaration was dropped. The values mirror tailwind.config.ts exactly. */
+		--space-3xs: var(--space-1); /* 6px  - micro-spacing */
+		--space-2xs: var(--space-2); /* 12px */
+		--space-xs: var(--space-3); /* 18px */
+		--space-s: var(--space-4); /* 24px - base rhythm unit */
+		--space-m: var(--space-4); /* 24px - paragraph gap */
+		--space-l: var(--space-6); /* 36px - before headings */
+		--space-xl: var(--space-8); /* 48px - regular section spacing */
+		--space-2xl: var(--space-12); /* 72px - large section spacing */
+		--space-3xl: var(--space-16); /* 96px - hero / major break */
+
+		/* Named line heights used by the archive and media entry components. */
+		--line-height-heading: 1.2;
+		--line-height-base: var(--base-line-height); /* 1.5 */
+		--line-height-relaxed: 1.6;
+
 		/* Gradations of base color for text and elements */
 		--theme-color-900: hsl(var(--theme-fg) / 1);
 		--theme-color-850: hsl(var(--theme-fg) / 0.9675);
@@ -726,7 +746,7 @@
 		font-weight: 400;
 		font-style: italic;
 		letter-spacing: 0.008em;
-		color: var(--theme-text-lighter);
+		color: var(--theme-lighter);
 	}
 
 	/* Context-sensitive typography adjustments - preserve grid */
@@ -820,7 +840,7 @@
 
 	/* Dark mode focus adjustment */
 	:root[data-theme="dark"] :focus-visible {
-		outline-color: var(--theme-accent-light);
+		outline-color: hsl(var(--theme-accent-one));
 	}
 
 	/* High contrast mode support */
@@ -1404,7 +1424,7 @@
 			-webkit-overflow-scrolling: touch;
 			background: transparent; /* Use figure background instead */
 			/* Subtle background */
-			background: var(--theme-color-25);
+			background: var(--theme-color-50);
 			border-radius: 0 0 0.5rem 0.5rem;
 
 			/* Font optimization for code */
@@ -1428,11 +1448,11 @@
 			}
 
 			&::-webkit-scrollbar-thumb {
-				background-color: var(--color-300);
+				background-color: var(--theme-color-300);
 				border-radius: 0.25rem; /* 1b */
 
 				&:hover {
-					background-color: var(--color-400);
+					background-color: var(--theme-color-400);
 				}
 			}
 
@@ -1484,7 +1504,7 @@
 				/* Enhanced highlighted lines */
 				[data-highlighted-line] {
 					background-color: var(--code-line-highlight);
-					border-left: 3px solid var(--accent-base); /* Left border accent */
+					border-left: 3px solid hsl(var(--theme-accent-base)); /* Left border accent */
 
 					&:hover {
 						background-color: var(--code-line-highlight);
@@ -2135,14 +2155,14 @@
 	}
 
 	.btn-icon-toggle:hover {
-		background: var(--color-bg-subtle);
-		color: var(--color-text);
+		background: var(--theme-special-lighter);
+		color: var(--theme-text);
 	}
 
 	.icon-toggle {
 		width: 20px;
 		height: 20px;
-		color: var(--color-text-muted);
+		color: var(--theme-color-600);
 		stroke-width: 1.5;
 	}
 

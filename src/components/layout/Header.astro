@@ -172,22 +172,19 @@ const header = {
 		/* link-nav already handles aria-current="page" styling */
 
 	/* Mobile menu toggle */
+	/* Box, layout and reset live in the global .mobile-menu-toggle rule (global.css,
+	   @layer components) which sizes this control at 40px. This block previously
+	   duplicated all of that but sized it with an undefined --space-l, so its width
+	   and height were invalid at computed-value time and fell back to `auto` --
+	   collapsing the button to zero width, since both icons are absolutely
+	   positioned and contribute no in-flow size. Only the additions remain here. */
 	.mobile-menu-toggle {
-		position: relative;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: var(--space-l);
-		height: var(--space-l);
 		padding: 0;
-		background: transparent;
-		border: none;
-		color: var(--color-text);
-		cursor: pointer;
+		color: var(--theme-text);
 	}
 
 	.mobile-menu-toggle:hover {
-		color: var(--color-text-muted);
+		color: var(--theme-color-600);
 	}
 
 	.icon-nav {
@@ -210,9 +207,9 @@ const header = {
 	}
 
 	.mobile-nav-heading {
-		font-size: var(--text--1);
+		font-size: var(--step--1);
 		font-weight: 500;
-		color: var(--color-text-muted);
+		color: var(--theme-color-600);
 		margin-bottom: var(--space-xs);
 		text-transform: uppercase;
 		letter-spacing: 0.05em; /* matches .tracking-nav utility */

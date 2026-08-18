@@ -103,8 +103,8 @@ const currentYear = new Date().getFullYear();
 		font-size: var(--step--1); /* ~11.5-13px - Slightly larger body text size */
 		font-family: var(--font-body); /* Inter Variable for body */
 		line-height: 1.65; /* 165% - Extra generous for very small text */
-		color: var(--color-text-muted);
-		background: var(--color-bg-subtle);
+		color: var(--theme-color-600);
+		background: var(--theme-special-lighter);
 		border-top: 1px solid var(--theme-color-200); /* Full-width separator line */
 		position: relative;
 		/* Optimize Inter Variable for small text rendering */
@@ -179,7 +179,7 @@ const currentYear = new Date().getFullYear();
 		max-width: var(--container-max, 80rem);
 		margin: 0 auto;
 		padding: var(--space-8) var(--space-4) var(--space-8); /* 48px 24px 48px - 2 baselines */
-		border-top: 1px solid var(--color-border);
+		border-top: 1px solid var(--theme-special-light);
 		opacity: 0.8; /* Subtle overall tone for bottom section */
 		display: flex;
 		justify-content: space-between;
@@ -206,7 +206,7 @@ const currentYear = new Date().getFullYear();
 	}
 
 	.footer-copyright {
-		color: var(--color-text-muted);
+		color: var(--theme-color-600);
 		margin: 0;
 		font-family: inherit; /* Use IBM Plex Sans from parent */
 		font-weight: 500; /* Heavier for very small IBM Plex copyright text */
@@ -227,14 +227,14 @@ const currentYear = new Date().getFullYear();
 
 	/* Using consolidated link system */
 	.footer-utility a {
-		color: var(--color-text-muted);
+		color: var(--theme-color-600);
 		font-weight: 500; /* Heavier weight for very small text */
 		font-variation-settings: "wght" 500; /* Optimized for very small IBM Plex */
 		letter-spacing: 0.045em; /* Extra generous spacing for small sans-serif abbreviations */
 	}
 
 	.footer-utility a:hover {
-		color: var(--color-text);
+		color: var(--theme-text);
 	}
 
 	/* RSS abbreviation styling - per Hochuli's small caps guidance */
@@ -243,7 +243,7 @@ const currentYear = new Date().getFullYear();
 		position: absolute;
 		opacity: 0;
 		font-size: var(--step--2);
-		background: var(--color-bg);
+		background: hsl(var(--theme-bg));
 		padding: var(--space-1);
 		border-radius: 2px;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);

@@ -198,10 +198,9 @@ a[class*="hover:text-"]:hover {
 		text-decoration-thickness: 0.05em; /* Hair-thin elegance */
 		text-underline-offset: 0.2em; /* Generous breathing room */
 		font-weight: var(--link-weight-default);
-		transition:
-			var(--link-transition),
-			text-decoration-color var(--link-transition-duration) ease,
-			opacity var(--link-transition-duration) ease;
+		/* --link-transition already covers text-decoration-color and opacity at 200ms;
+		   the extra entries duplicated that using an undefined duration token. */
+		transition: var(--link-transition);
 	}
 
 	.link-footer:hover {
