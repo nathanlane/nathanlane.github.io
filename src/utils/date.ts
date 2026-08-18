@@ -1,4 +1,3 @@
-import type { CollectionEntry } from "astro:content";
 import { siteConfig } from "@/site.config";
 
 export function getFormattedDate(
@@ -15,24 +14,12 @@ export function getFormattedDate(
 	}).format(date);
 }
 
-export function collectionDateSort(a: CollectionEntry<"post">, b: CollectionEntry<"post">) {
-	return b.data.publishDate.getTime() - a.data.publishDate.getTime();
-}
-
 // Helper functions for writing page
 export function formatDate(date: Date): string {
 	return date.toLocaleDateString("en-US", {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
-		timeZone: "UTC",
-	});
-}
-
-export function formatMonthYear(date: Date): string {
-	return date.toLocaleDateString("en-US", {
-		year: "numeric",
-		month: "2-digit",
 		timeZone: "UTC",
 	});
 }

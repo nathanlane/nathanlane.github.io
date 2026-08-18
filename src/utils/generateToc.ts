@@ -25,7 +25,8 @@ export function generateToc(
 	headings: ReadonlyArray<MarkdownHeading>,
 	{ maxHeadingLevel = 6, minHeadingLevel = 1 }: TocOpts = {},
 ) {
-	// by default this ignores/filters out h1 and h5 heading(s)
+	// by default every heading level is included; callers narrow the range via
+	// minHeadingLevel/maxHeadingLevel.
 	const bodyHeadings = headings.filter(
 		({ depth }) => depth >= minHeadingLevel && depth <= maxHeadingLevel,
 	);
