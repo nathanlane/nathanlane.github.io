@@ -107,3 +107,6 @@ firebase-adminsdk-*.json
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# local ticket scratch space (to-tickets output)
+.scratch/
