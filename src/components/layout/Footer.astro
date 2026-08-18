@@ -126,8 +126,10 @@ const currentYear = new Date().getFullYear();
 	.footer-section-text {
 		max-width: 34ch;
 		line-height: 1.5;
-		opacity: 0.64;
-		color: var(--theme-color-600);
+		/* Was --theme-color-600 at opacity 0.64, which computed to roughly 3.1:1 on
+		   white at this size -- below the 4.5:1 AA threshold. The token carries the
+		   intended weight on its own. */
+		color: var(--theme-color-700);
 	}
 
 	/* nav landmark wraps only the link columns without forming its own grid box,

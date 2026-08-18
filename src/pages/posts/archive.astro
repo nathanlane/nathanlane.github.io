@@ -121,7 +121,7 @@ const getPrimaryTag = (post: CollectionItemBase) => {
                 {tags.map(tag => {
                   const count = allPosts.filter(p => p.data.tags?.includes(tag)).length;
                   return (
-                    <a href={`/tags/${tag}`} class="inline-block">
+                    <a href={`/tags/${tag}/`} class="inline-block">
                       <Badge variant="secondary">{tag} ({count})</Badge>
                     </a>
                   );

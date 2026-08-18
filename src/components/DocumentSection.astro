@@ -1,6 +1,7 @@
 ---
 interface Props {
-  title: string;
+  /** Optional: a section with no title renders no header rather than an empty <h2>. */
+  title?: string;
   viewAllText?: string;
   viewAllHref?: string;
 }
@@ -9,12 +10,14 @@ const { title, viewAllText, viewAllHref } = Astro.props;
 ---
 
 <section class="document-section">
+  {(title || (viewAllHref && viewAllText)) && (
   <header class="section-header">
-    <h2 class="heading-2">{title}</h2>
+    {title && <h2 class="heading-2">{title}</h2>}
     {viewAllHref && viewAllText && (
       <a href={viewAllHref} class="section-link link-nav">{viewAllText}</a>
     )}
   </header>
+  )}
   
   <div class="section-content">
     <slot />
