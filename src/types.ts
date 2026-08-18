@@ -47,7 +47,6 @@ export interface SiteConfig {
 	resumeUrl?: string;
 
 	/** Path to standard profile image (e.g., '/headshot.jpg') */
-	profileImage?: string;
 
 	/** Path to full-size profile image (e.g., '/headshot-full.JPG') */
 	profileImageFull?: string;

@@ -1,5 +1,4 @@
 ---
-id: lane-docs
 title: "Site Docs"
 description: "Documentation for the website template, outlining key aspects of the site's functionality for blog management and project documentation"
 featured: true

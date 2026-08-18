@@ -33,7 +33,11 @@ const socialImageURL = new URL(
   /* Metrics-matched fallback system to prevent layout shift */
   @font-face {
     font-family: 'Inter Fallback';
-    src: local('system-ui'), local('-apple-system'), local('Segoe UI');
+    /* local() needs a real installed face name; 'system-ui' and '-apple-system' are CSS
+       generics and never match, so the metric overrides below were never applied and the
+       swap still shifted layout. Arial and Helvetica are real faces present on the
+       platforms this targets. */
+    src: local('Arial'), local('Helvetica Neue'), local('Segoe UI');
     font-display: block;
     ascent-override: 90%;
     descent-override: 22%;

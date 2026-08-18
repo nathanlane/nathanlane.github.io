@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import headshot from "@/assets/headshot.jpg";
 import { getEntry, render } from "astro:content";
 import PageHeader from "@/components/PageHeader.astro";
 import StructuredData from "@/components/StructuredData.astro";
@@ -48,11 +50,13 @@ const headerDescriptionHtml = headerDescriptionMarkdown
 			{showPhoto && (
 				<figure class="float-right ml-6b mb-6b w-48 sm:w-56 -mt-2b">
 					<div class="overflow-hidden border border-color-200 dark:border-color-700">
-						<img
-							src={siteConfig.profileImageFull || siteConfig.profileImage || "/headshot.jpg"}
+						<Image
+							src={headshot}
 							alt={`${siteConfig.author} headshot`}
-							width={400}
-							height={400}
+							widths={[224, 448]}
+							sizes="(min-width: 640px) 224px, 192px"
+							loading="lazy"
+							decoding="async"
 							class="w-full h-auto aspect-square object-cover"
 						/>
 					</div>

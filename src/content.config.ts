@@ -38,7 +38,9 @@ const privateNote = defineCollection({
 const series = defineCollection({
 	loader: glob({ base: "./src/content/series", pattern: "**/*.{md,mdx}" }),
 	schema: z.object({
-		id: z.string(),
+		// No `id` here: every consumer keys off the file-derived entry id
+		// (SeriesPanel, the series route, Series layout), so a frontmatter id was
+		// a second source of truth that could silently disagree with the filename.
 		title: z.string(),
 		description: z.string(),
 		featured: z.boolean().default(false), // Flag for popular series
