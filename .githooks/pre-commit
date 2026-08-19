@@ -10,7 +10,7 @@ if command -v gitleaks > /dev/null 2>&1; then
         echo ""
         echo "ERROR: gitleaks detected a potential secret in staged changes."
         echo "Review the output above and remove any credentials before committing."
-        echo "If this is a false positive, add an allow-list entry to .gitleaks.toml"
+        echo "If this is a false positive, add a .gitleaks.toml allow-list at the repo root (see: gitleaks help protect)"
         exit 1
     fi
 else

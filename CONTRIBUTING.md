@@ -19,7 +19,7 @@ a pre-commit hook that blocks accidental commits of local-only agentic files (`A
 ## Branching and deployment
 
 - `main` is the deploy branch for GitHub Pages.
-- Use a feature branch for discrete work. If you maintain a long-lived personal branch such as `private-dev`, rebase or merge it regularly from `main`.
+- Use a feature branch for discrete work.
 - Do not document or add Netlify-specific deployment steps. GitHub Pages is the active platform.
 
 ## Before you merge
@@ -41,7 +41,7 @@ At minimum:
 ## Content work
 
 - Add or edit entries in `src/content/`
-- Follow the collection rules in [docs/content.md](./docs/content.md)
+- Follow the collection schema and frontmatter rules (see the private `docs/content.md` in `.private/docs/`)
 - Use root-relative links for internal navigation and assets
 - Do not hardcode `nathanlane.info` or `nathanlane.github.io` into normal page body copy unless the URL itself is the subject of the content
 

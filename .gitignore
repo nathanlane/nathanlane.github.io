@@ -110,3 +110,6 @@ Temporary Items
 
 # local ticket scratch space (to-tickets output)
 .scratch/
+
+# Local personal notes (never part of the public repo)
+private_notes/
