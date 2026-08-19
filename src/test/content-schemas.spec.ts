@@ -203,3 +203,79 @@ describe("draft filtering", () => {
 		expect(isPublishedEntry({ data: {} })).toBe(true);
 	});
 });
+
+describe("schema field constraints — negative cases", () => {
+	// These tests would pass even if a constraint were REMOVED from the schema,
+	// making them the regression guard for the happy-path-only coverage gap.
+
+	it("rejects a post title that exceeds 60 characters", () => {
+		const result = createPostSchema().safeParse({
+			title: "A".repeat(61),
+			description: "A description long enough to satisfy the minimum length requirement.",
+			publishDate: "2026-01-01",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a post description shorter than 20 characters", () => {
+		const result = createPostSchema().safeParse({
+			title: "Short Desc",
+			description: "Too short.",
+			publishDate: "2026-01-01",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a post description longer than 300 characters", () => {
+		const result = createPostSchema().safeParse({
+			title: "Long Desc",
+			description: "A".repeat(301),
+			publishDate: "2026-01-01",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a post missing the required publishDate", () => {
+		const result = createPostSchema().safeParse({
+			title: "No Date",
+			description: "A description long enough to satisfy the minimum length requirement.",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a research description shorter than 50 characters", () => {
+		const result = createResearchSchema().safeParse({
+			title: "Policy",
+			description: "Too short for research.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "2026",
+			authors: "Nathan Lane",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a research paperDate that is not a 4-digit year", () => {
+		const result = createResearchSchema().safeParse({
+			title: "Policy Study",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "26",
+			authors: "Nathan Lane",
+		});
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects a media entry with a non-URL link", () => {
+		const result = createMediaSchema().safeParse({
+			title: "Episode 1",
+			outlet: "Podcast FM",
+			date: "2026-01-01",
+			type: "podcast",
+			link: "not-a-url",
+		});
+		expect(result.success).toBe(false);
+	});
+});
