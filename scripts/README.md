@@ -4,6 +4,11 @@ This directory contains active maintenance and validation utilities. Everything 
 
 Older one-shot migration tools live in `scripts/archive/` and are not part of the standard workflow.
 
+One exception to "runs from a clean clone": `sync-assistant-docs.mjs` reads its source from the
+gitignored `.private/` overlay, so `generate:assistant-docs` and `check:assistant-docs` only work
+for contributors who have that companion repo checked out. This is why they are deliberately not
+part of `validate` or CI.
+
 ## Active entrypoints
 
 | Script | Purpose | Command |
