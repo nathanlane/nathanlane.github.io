@@ -17,7 +17,7 @@ updates:
   #
   # Grouping rule: batch only what is safe to review as a batch. A group that
   # batches breaking changes produces a pull request that cannot be reviewed or
-  # bisected — the first run of this config bundled zod 3 to 4,
+  # bisected — the first run under this config bundled zod 3 to 4,
   # @shikijs/transformers 1 to 4 and satori 0.12 to 0.29 into one 16-package
   # change. Anything excluded from a group still gets its own pull request; it
   # is not ignored.
@@ -31,14 +31,19 @@ updates:
   #    update-types cannot tell the difference — satori 0.12 to 0.29 and sharp
   #    0.34 to 0.35 both classify as minor. This list needs revisiting when one
   #    of these reaches 1.0, at which point the entry can be dropped.
-  #    Dev-only 0.x packages that reach the development group are left
-  #    batched: they do not ship to the site.
+  #    Dev-only 0.x packages that reach the development group are left batched:
+  #    they do not ship to the site.
   #
-  # Astro is grouped separately and deliberately takes majors, because astro,
-  # its first-party @astrojs/* integrations and the third-party astro-* ones are
-  # version-coupled and have to move together. Listing this group first means
-  # those packages never fall into the generic production or development groups;
-  # a dependency joins only the first group it matches.
+  # Deliberately NO `patterns` group here. An earlier revision grouped astro and
+  # its integrations so they would move in lockstep. It never matched — the
+  # scoped form `@astrojs/*` did not capture @astrojs/rss, @astrojs/sitemap or
+  # @astrojs/check, which fell through to the groups below — and pattern-matched
+  # groups are exposed to dependabot-core#14202, where a matched dependency is
+  # marked handled regardless of update-types and its individual major pull
+  # request is silently suppressed. Filtering by dependency-type only avoids
+  # that code path. Astro and its integrations are version-coupled and must
+  # still move together; that coordination happens in the upgrade itself, not
+  # in this file.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -48,11 +53,6 @@ updates:
     # them to a later run in a busy week.
     open-pull-requests-limit: 10
     groups:
-      astro:
-        patterns:
-          - "astro"
-          - "@astrojs/*"
-          - "astro-*"
       npm-development:
         dependency-type: "development"
         update-types:
