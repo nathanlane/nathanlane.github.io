@@ -1,0 +1,25 @@
+version: 2
+
+updates:
+  # Keep GitHub Actions current. Actions are pinned to commit SHAs in the
+  # workflows; Dependabot bumps both the SHA and its `# vX.Y.Z` comment so the
+  # pins stay patched instead of frozen.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  # Keep npm dependencies current (pnpm lockfile).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      npm-development:
+        dependency-type: "development"
+      npm-production:
+        dependency-type: "production"

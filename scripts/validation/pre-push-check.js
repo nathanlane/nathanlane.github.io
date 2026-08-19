@@ -7,7 +7,7 @@
  * Purpose: Runs all validation checks before pushing to prevent CI failures
  *
  * Usage: node scripts/validation/pre-push-check.js
- *        or: pnpm run pre-push
+ *        or: pnpm run validate
  *
  * Prerequisites:
  * - Node.js installed
