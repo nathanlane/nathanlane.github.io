@@ -5,8 +5,9 @@ import { describe, expect, it } from "vitest";
 const repoRoot = process.cwd();
 
 describe("public post consumers", () => {
-	// Source guard: verifies that every page which lists posts goes through getAllPosts,
-	// which is the only entry point that applies the draft-exclusion env gate.
+	// Source guard: samples the two consumers that previously called getCollection("post")
+	// directly, bypassing getAllPosts — the only entry point that applies the
+	// draft-exclusion env gate. Not exhaustive; it pins the two known regressions.
 	// Replacing this with a runtime check would require a full Astro build.
 	it("routes public-facing post lookups through the shared helper", () => {
 		for (const relativePath of [
