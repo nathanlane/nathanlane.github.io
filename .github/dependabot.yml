@@ -14,12 +14,58 @@ updates:
           - "*"
 
   # Keep npm dependencies current (pnpm lockfile).
+  #
+  # Grouping rule: batch only what is safe to review as a batch. A group that
+  # batches breaking changes produces a pull request that cannot be reviewed or
+  # bisected — the first run of this config bundled zod 3 to 4,
+  # @shikijs/transformers 1 to 4 and satori 0.12 to 0.29 into one 16-package
+  # change. Anything excluded from a group still gets its own pull request; it
+  # is not ignored.
+  #
+  # Two exclusions, for two different reasons:
+  #
+  # 1. Majors, via update-types. Batched minors and patches only.
+  #
+  # 2. Production packages still on 0.x, by name. Semver gives 0.x releases no
+  #    stability guarantee, so a "minor" there can be as breaking as a major and
+  #    update-types cannot tell the difference — satori 0.12 to 0.29 and sharp
+  #    0.34 to 0.35 both classify as minor. This list needs revisiting when one
+  #    of these reaches 1.0, at which point the entry can be dropped.
+  #    Dev-only 0.x packages that reach the development group are left
+  #    batched: they do not ship to the site.
+  #
+  # Astro is grouped separately and deliberately takes majors, because astro,
+  # its first-party @astrojs/* integrations and the third-party astro-* ones are
+  # version-coupled and have to move together. Listing this group first means
+  # those packages never fall into the generic production or development groups;
+  # a dependency joins only the first group it matches.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+    # The exclusions below deliberately trade batch size for reviewability, which
+    # means more open pull requests. The default limit of 5 would defer some of
+    # them to a later run in a busy week.
+    open-pull-requests-limit: 10
     groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "astro-*"
       npm-development:
         dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
       npm-production:
         dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+        exclude-patterns:
+          - "katex"
+          - "rehype-pretty-code"
+          - "satori"
+          - "satori-html"
+          - "sharp"
