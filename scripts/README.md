@@ -9,11 +9,17 @@ gitignored `.private/` overlay, so `generate:assistant-docs` and `check:assistan
 for contributors who have that companion repo checked out. This is why they are deliberately not
 part of `validate` or CI.
 
+`check:social-card` is also deliberately kept out of `validate`, `check:generated`, and CI. The
+card's SVG uses system fonts (`Georgia`, `Arial`) that a stock Linux runner lacks, so `resvg`
+renders different bytes there than on the committer's machine. The generated PNG is therefore not
+byte-reproducible across platforms and a drift check would produce false failures. Regenerate and
+review `public/social-card.png` by hand when the SVG source changes.
+
 ## Active entrypoints
 
 | Script | Purpose | Command |
 | --- | --- | --- |
-| `scripts/validation/pre-push-check.js` | Run the full pre-push validation sequence | `pnpm run validate` / `pnpm run pre-push` |
+| `scripts/validation/pre-push-check.js` | Run the full pre-push validation sequence | `pnpm run validate` |
 | `scripts/validation/smoke-test.mjs` | Smoke-test rendered pages on a local server or production | `pnpm smoke:local`, `pnpm smoke:prod`, `pnpm smoke -- <url>` |
 | `scripts/validation/pages-origin-redirect-smoke.mjs` | Verify `nathanlane.github.io` redirects to the canonical domain without path loss | `pnpm run smoke:pages` |
 | `scripts/validation/verify-deploy.sh` | Wait for the latest Pages deploy, then run the live smoke suite | `pnpm run verify:deploy` |
@@ -29,7 +35,6 @@ For day-to-day work, prefer the package scripts:
 
 ```bash
 pnpm validate
-pnpm run pre-push
 pnpm test
 pnpm run smoke:live
 ```

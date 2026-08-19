@@ -26,7 +26,6 @@
 		"check:assistant-docs": "node scripts/maintenance/sync-assistant-docs.mjs --check",
 		"check:generated": "pnpm run check:cms && pnpm run check:katex",
 		"check": "astro check",
-		"check:types": "tsc --noEmit",
 		"check:all": "pnpm run lint && pnpm run format:check && pnpm run check:generated && pnpm run check && pnpm run test && pnpm run build",
 		"fix:all": "pnpm run lint:fix && pnpm run format && pnpm run check",
 		"clean": "rm -rf dist .astro node_modules/.cache",
@@ -39,7 +38,6 @@
 		"verify:deploy": "bash scripts/validation/verify-deploy.sh",
 		"test": "vitest --run",
 		"test:ui": "vitest --ui",
-		"pre-push": "pnpm run validate",
 		"validate": "node scripts/validation/pre-push-check.js",
 		"cms": "decap-server"
 	},
