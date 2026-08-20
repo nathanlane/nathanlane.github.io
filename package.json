@@ -52,7 +52,7 @@
 		"@iconify-json/lucide": "^1.2.123",
 		"@shikijs/transformers": "^1.29.2",
 		"@types/js-yaml": "^4.0.9",
-		"astro": "^5.18.2",
+		"astro": "^7.1.1",
 		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
 		"astro-webmanifest": "^1.0.0",
