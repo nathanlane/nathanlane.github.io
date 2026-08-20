@@ -55,9 +55,6 @@ importers:
       '@astrojs/sitemap':
         specifier: 3.7.3
         version: 3.7.3
-      '@astrojs/tailwind':
-        specifier: 6.0.2
-        version: 6.0.2(astro@5.18.2(@types/node@26.2.0)(jiti@1.21.7)(rollup@4.61.0)(typescript@5.9.3)(yaml@2.9.0))(tailwindcss@3.4.17)
       '@fontsource-variable/inter':
         specifier: ^5.3.0
         version: 5.3.0
@@ -170,6 +167,9 @@ importers:
       '@types/mdast':
         specifier: ^4.0.4
         version: 4.0.4
+      autoprefixer:
+        specifier: ^10.4.21
+        version: 10.4.21(postcss@8.5.26)
       decap-server:
         specifier: ^3.10.0
         version: 3.10.0
@@ -179,6 +179,9 @@ importers:
       jsdom:
         specifier: ^30.0.1
         version: 30.0.1
+      postcss:
+        specifier: 8.5.26
+        version: 8.5.26
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
@@ -278,12 +281,6 @@ packages:
 
   '@astrojs/sitemap@3.7.3':
     resolution: {integrity: sha512-f8euLVsyeAmAkSm/1M2Kb8sL8byQmfgbvBNaHFItCheTj/IpiJYSEWVcqDHZ/yEHxiS7+w87mQkzwZaPHmk5GA==}
-
-  '@astrojs/tailwind@6.0.2':
-    resolution: {integrity: sha512-j3mhLNeugZq6A8dMNXVarUa8K6X9AW+QHU9u3lKNrPLMHhOQ0S7VeWhHwEeJFpEK1BTKEUY1U78VQv2gN6hNGg==}
-    peerDependencies:
-      astro: ^3.0.0 || ^4.0.0 || ^5.0.0
-      tailwindcss: ^3.0.24
 
   '@astrojs/telemetry@3.3.0':
     resolution: {integrity: sha512-UFBgfeldP06qu6khs/yY+q1cDAaArM2/7AEIqQ9Cuvf7B1hNLq0xDrZkct+QoIGyjq56y8IaE2I3CTvG99mlhQ==}
@@ -1561,6 +1558,11 @@ packages:
     resolution: {integrity: sha512-3XSA2cR/h/73EzlXXdU6YNycmYI7+kicTxks4eJg2g39biHR84slg2+des+p7iHYhbRg/udIS4TD53WabcOUkw==}
     engines: {node: '>= 0.4'}
 
+  baseline-browser-mapping@2.11.15:
+    resolution: {integrity: sha512-FwMjJJ7HnyZpWe+oWxegG0fezZyBZUagI5LZEoO3GCbtbKNwRfMH9Ue5d5v01PNePBy1QSfPSDTTeVL0Hb9EzA==}
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+
   basic-auth@2.0.1:
     resolution: {integrity: sha512-NF+epuEdnUYVlGuhaxbbq+dvJttwLnGY+YixlXlME5KpQ5W3CnXA5cVTneY3SPbPDRkcjMbifrwmFYcClgOZeg==}
     engines: {node: '>= 0.8'}
@@ -1587,8 +1589,8 @@ packages:
     resolution: {integrity: sha512-yQbXgO/OSZVD2IsiLlro+7Hf6Q18EJrKSEsdoMzKePKXct3gvD8oLcOQdIzGupr5Fj+EDe8gO/lxc1BzfMpxvA==}
     engines: {node: '>=8'}
 
-  browserslist@4.25.1:
-    resolution: {integrity: sha512-KGj0KoOMXLpSNkkEI6Z6mShmQy0bc1I+T7K9N81k4WWMrfz+6fQ6es80B/YLAeRoKvjYE1YSHHOW1qe9xIVzHw==}
+  browserslist@4.28.8:
+    resolution: {integrity: sha512-V2NpofLblG64mfOtSgDhOJESZEGogzDMBv/q+W6oc4LXWP/q75eOXoOaaOu1EOadB9U4Bwx/e0yzbvwKH8zalA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
@@ -1620,6 +1622,9 @@ packages:
 
   caniuse-lite@1.0.30001727:
     resolution: {integrity: sha512-pB68nIHmbN6L/4C6MH1DokyR3bYqFwjaSs/sWDHGj4CTcFtQUQMuJftVwWkXq7mNWOybD3KhUv3oWHoGxgP14Q==}
+
+  caniuse-lite@1.0.30001809:
+    resolution: {integrity: sha512-xxWVywk6a6Arlk+hymeycyn/VgqEfLDxupvhH/xiY5SJ/18kmi9o6MiO320DCUzypORHLtvh0I4i04tUhCNHNQ==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1920,8 +1925,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.187:
-    resolution: {integrity: sha512-cl5Jc9I0KGUoOoSbxvTywTa40uspGJt/BDBoDLoxJRSBpWh4FFXBsjNRHfQrONsV/OoEjDfHUmZQa2d6Ze4YgA==}
+  electron-to-chromium@1.5.411:
+    resolution: {integrity: sha512-gglkxzokjHfawpGxq75XdBV2/l3BAPzrsMs70qgaZdTW5rpV1tC4MdgJVP9fN126bODA4ZJQkn1wryEzJyQXIg==}
 
   emmet@2.4.11:
     resolution: {integrity: sha512-23QPJB3moh/U9sT4rQzGgeyyGIrcM+GH5uVYg2C6wZIxAIJq7Ng3QLT79tl8FUwDXhyq9SusfknOrofAKqvgyQ==}
@@ -2750,8 +2755,9 @@ packages:
   node-mock-http@1.0.4:
     resolution: {integrity: sha512-8DY+kFsDkNXy1sJglUfuODx1/opAGJGyrTuFqEoN90oRc2Vk0ZbD4K2qmKXBBEhZQzdKHIVfEJpDU8Ak2NJEvQ==}
 
-  node-releases@2.0.19:
-    resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+  node-releases@2.0.53:
+    resolution: {integrity: sha512-D9UOmYG3UH1V+ENW56t5QXBwJw1YEY18ruVeus89Rw+SyIgjPkCO84bRzO3uNIYosJbNwiabWVn48o3uJLjxFQ==}
+    engines: {node: '>=18'}
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -3671,8 +3677,8 @@ packages:
       uploadthing:
         optional: true
 
-  update-browserslist-db@1.1.3:
-    resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==}
+  update-browserslist-db@1.3.1:
+    resolution: {integrity: sha512-ZZ61DsRsOnakl74HAmp3oSN4aXUmEWXf+i/yv0h7tIBfICc3VdrFErQKUUKPgu3AMsTUMbcongALEN4l6GSUrQ==}
     hasBin: true
     peerDependencies:
       browserslist: '>= 4.21.0'
@@ -4193,16 +4199,6 @@ snapshots:
       sitemap: 9.0.1
       stream-replace-string: 2.0.0
       zod: 4.4.3
-
-  '@astrojs/tailwind@6.0.2(astro@5.18.2(@types/node@26.2.0)(jiti@1.21.7)(rollup@4.61.0)(typescript@5.9.3)(yaml@2.9.0))(tailwindcss@3.4.17)':
-    dependencies:
-      astro: 5.18.2(@types/node@26.2.0)(jiti@1.21.7)(rollup@4.61.0)(typescript@5.9.3)(yaml@2.9.0)
-      autoprefixer: 10.4.21(postcss@8.5.26)
-      postcss: 8.5.26
-      postcss-load-config: 4.0.2(postcss@8.5.26)
-      tailwindcss: 3.4.17
-    transitivePeerDependencies:
-      - ts-node
 
   '@astrojs/telemetry@3.3.0':
     dependencies:
@@ -5340,7 +5336,7 @@ snapshots:
 
   autoprefixer@10.4.21(postcss@8.5.26):
     dependencies:
-      browserslist: 4.25.1
+      browserslist: 4.28.8
       caniuse-lite: 1.0.30001727
       fraction.js: 4.3.7
       normalize-range: 0.1.2
@@ -5355,6 +5351,8 @@ snapshots:
   base-64@1.0.0: {}
 
   base64-js@0.0.8: {}
+
+  baseline-browser-mapping@2.11.15: {}
 
   basic-auth@2.0.1:
     dependencies:
@@ -5400,12 +5398,13 @@ snapshots:
     dependencies:
       fill-range: 7.1.1
 
-  browserslist@4.25.1:
+  browserslist@4.28.8:
     dependencies:
-      caniuse-lite: 1.0.30001727
-      electron-to-chromium: 1.5.187
-      node-releases: 2.0.19
-      update-browserslist-db: 1.1.3(browserslist@4.25.1)
+      baseline-browser-mapping: 2.11.15
+      caniuse-lite: 1.0.30001809
+      electron-to-chromium: 1.5.411
+      node-releases: 2.0.53
+      update-browserslist-db: 1.3.1(browserslist@4.28.8)
 
   buffer-crc32@0.2.13: {}
 
@@ -5428,6 +5427,8 @@ snapshots:
   camelize@1.0.1: {}
 
   caniuse-lite@1.0.30001727: {}
+
+  caniuse-lite@1.0.30001809: {}
 
   ccount@2.0.1: {}
 
@@ -5702,7 +5703,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.187: {}
+  electron-to-chromium@1.5.411: {}
 
   emmet@2.4.11:
     dependencies:
@@ -6999,7 +7000,7 @@ snapshots:
 
   node-mock-http@1.0.4: {}
 
-  node-releases@2.0.19: {}
+  node-releases@2.0.53: {}
 
   normalize-path@3.0.0: {}
 
@@ -8043,9 +8044,9 @@ snapshots:
       ofetch: 1.5.1
       ufo: 1.6.4
 
-  update-browserslist-db@1.1.3(browserslist@4.25.1):
+  update-browserslist-db@1.3.1(browserslist@4.28.8):
     dependencies:
-      browserslist: 4.25.1
+      browserslist: 4.28.8
       escalade: 3.2.0
       picocolors: 1.1.1
 
