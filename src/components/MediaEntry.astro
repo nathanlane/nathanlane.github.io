@@ -1,4 +1,5 @@
-<!--
+---
+/*
 # MediaEntry Component
 
 A refined typographic component for displaying individual media entries.
@@ -24,8 +25,7 @@ Follows classical typography principles from Bringhurst, Ruder, Butterick, and H
 - Refined link styling with accessibility considerations
 - Responsive typography scaling
 
--->
----
+*/
 import MetadataLine from './MetadataLine.astro';
 
 export interface Props {
@@ -34,7 +34,7 @@ export interface Props {
   date: string | Date;
   type: 'interview' | 'podcast' | 'video' | 'article' | 'press' | 'talk' | 'panel';
   link: string;
-  description?: string;
+  description?: string | undefined;
   class?: string;
 }
 
