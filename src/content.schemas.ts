@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro/zod";
 import {
 	mediaTypeOptions,
 	researchStatusOptions,

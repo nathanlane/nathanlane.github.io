@@ -1,4 +1,5 @@
-<!--
+---
+/*
 # ArchiveEntry Component
 
 A reusable typographic component for displaying archive entries across different content types.
@@ -52,14 +53,12 @@ Follows classical typography principles from Bringhurst, Ruder, Butterick, and H
 - Responsive typography scaling
 - Flexible metadata structure for different content types
 
--->
-
----
+*/
 export interface Props {
   title: string;
   primaryMeta: string;      // e.g., "Essay", "Research Paper", "Project"
   secondaryMeta: string;    // e.g., "March 2024", "2023-2024"
-  tertiaryMeta?: string;    // e.g., "Design Systems", "Economics", "Featured"
+  tertiaryMeta?: string | undefined;    // e.g., "Design Systems", "Economics", "Featured"
   link: string;
   description?: string;
   class?: string;
