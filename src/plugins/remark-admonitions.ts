@@ -49,11 +49,12 @@ function transformUnhandledDirective(
 }
 
 /** From Astro Starlight: Function that generates an mdast HTML tree ready for conversion to HTML by rehype. */
-// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-function h(el: string, attrs: Properties = {}, children: any[] = []): P {
+function h(el: string, attrs: Properties = {}, children: Node[] = []): P {
 	const { properties, tagName } = _h(el, attrs);
+	// The node is a paragraph in name only: data.hName re-tags it during the
+	// mdast-to-hast conversion, so it legitimately carries block-level children.
 	return {
-		children,
+		children: children as P["children"],
 		data: { hName: tagName, hProperties: properties },
 		type: "paragraph",
 	};
