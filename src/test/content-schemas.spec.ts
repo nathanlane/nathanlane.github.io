@@ -86,6 +86,7 @@ describe("content schemas", () => {
 			showPhoto: true,
 		});
 
+		expect(writing.draft).toBe(true);
 		expect(media.date).toBeInstanceOf(Date);
 		expect(page.showPhoto).toBe(true);
 	});

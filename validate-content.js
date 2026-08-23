@@ -120,7 +120,9 @@ if (errors.length > 0) {
 	console.log("\n❌ ERRORS (must fix before running dev):\n");
 	errors.forEach(({ file, errors }) => {
 		console.log(`📄 ${file}`);
-		errors.forEach((err) => console.log(`   • ${err}`));
+		errors.forEach((err) => {
+			console.log(`   • ${err}`);
+		});
 		console.log("");
 	});
 }
@@ -130,7 +132,9 @@ if (warnings.length > 0) {
 	console.log("\n⚠️  WARNINGS (consider fixing):\n");
 	warnings.forEach(({ file, warnings }) => {
 		console.log(`📄 ${file}`);
-		warnings.forEach((warn) => console.log(`   • ${warn}`));
+		warnings.forEach((warn) => {
+			console.log(`   • ${warn}`);
+		});
 		console.log("");
 	});
 }
