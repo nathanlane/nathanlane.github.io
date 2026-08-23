@@ -67,7 +67,7 @@
 		"rehype-katex": "^7.0.1",
 		"rehype-pretty-code": "^0.14.5",
 		"rehype-unwrap-images": "^1.0.0",
-		"remark-directive": "^3.0.1",
+		"remark-directive": "^4.0.0",
 		"remark-math": "^6.0.0",
 		"satori": "0.29.0",
 		"satori-html": "^0.3.2",
