@@ -4,6 +4,8 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
 	resolve: {
 		alias: {
+			// Mirrors the "@/*" path mapping in tsconfig.json; Vite does not read it.
+			"@": fileURLToPath(new URL("./src", import.meta.url)),
 			// astro:content and astro:env/server are virtual modules provided by the Astro
 			// build pipeline, which is not available in the plain Vitest environment.
 			// The stubs below let unit tests import modules that transitively use them.
