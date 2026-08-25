@@ -39,6 +39,7 @@
 		"test": "vitest --run",
 		"test:ui": "vitest --ui",
 		"validate": "node scripts/validation/pre-push-check.js",
+		"check:lockfile": "node scripts/validation/lockfile-regression-check.mjs",
 		"cms": "decap-server"
 	},
 	"dependencies": {

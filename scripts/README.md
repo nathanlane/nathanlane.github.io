@@ -20,6 +20,7 @@ review `public/social-card.png` by hand when the SVG source changes.
 | Script | Purpose | Command |
 | --- | --- | --- |
 | `scripts/validation/pre-push-check.js` | Run the full pre-push validation sequence | `pnpm run validate` |
+| `scripts/validation/lockfile-regression-check.mjs` | Fail if any package's max resolved version is lower on the branch than on main — guards against silent Dependabot downgrades | `pnpm run check:lockfile <base-lock> <branch-lock>` |
 | `scripts/validation/smoke-test.mjs` | Smoke-test rendered pages on a local server or production | `pnpm smoke:local`, `pnpm smoke:prod`, `pnpm smoke -- <url>` |
 | `scripts/validation/pages-origin-redirect-smoke.mjs` | Verify `nathanlane.github.io` redirects to the canonical domain without path loss | `pnpm run smoke:pages` |
 | `scripts/validation/verify-deploy.sh` | Wait for the latest Pages deploy, then run the live smoke suite | `pnpm run verify:deploy` |
