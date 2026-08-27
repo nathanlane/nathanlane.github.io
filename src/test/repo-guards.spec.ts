@@ -114,6 +114,55 @@ describe("public link hygiene", () => {
 	});
 });
 
+describe("deterministic build output", () => {
+	// Source guard: entropy or a clock reading anywhere in the render path makes two
+	// builds of the same commit differ, which is what turns a byte-comparison of dist/
+	// from a clean check into a hand-triage. Both known sources are pinned here.
+	// Observing the actual regression needs two full builds.
+	const renderedSourceDirs = [
+		"src/components",
+		"src/layouts",
+		"src/pages",
+		"src/plugins",
+		"src/utils",
+	];
+
+	function collectSources(relativeDir: string): string[] {
+		const absoluteDir = path.join(repoRoot, relativeDir);
+		if (!fs.existsSync(absoluteDir)) return [];
+
+		return fs.readdirSync(absoluteDir, { withFileTypes: true }).flatMap((entry) => {
+			const entryPath = path.join(relativeDir, entry.name);
+			if (entry.isDirectory()) return collectSources(entryPath);
+			return /\.(astro|ts|tsx|mjs|js)$/.test(entry.name) ? [entryPath] : [];
+		});
+	}
+
+	it("does not seed rendered output from entropy or the wall clock", () => {
+		const offenders = renderedSourceDirs.flatMap(collectSources).filter((relativePath) => {
+			const source = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
+			return source.includes("Math.random(") || source.includes("Date.now(");
+		});
+
+		expect(offenders).toEqual([]);
+	});
+
+	// The feeds are the one place a build-time clock reading is tempting. lastBuildDate
+	// means "when the channel last changed", so the newest item's date is both the
+	// reproducible value and the correct one.
+	it("derives feed lastBuildDate from content rather than the build clock", () => {
+		for (const relativePath of ["src/pages/rss.xml.ts", "src/pages/research/rss.xml.ts"]) {
+			const source = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
+
+			expect(source).not.toMatch(/<lastBuildDate>\$\{new Date\(\)/);
+			expect(source).toMatch(/<lastBuildDate>\$\{lastBuildDate\}<\/lastBuildDate>/);
+			expect(source).toMatch(
+				/const lastBuildDate = new Date\(\w+\[0\]\?\.pubDate \?\? 0\)\.toUTCString\(\)/,
+			);
+		}
+	});
+});
+
 describe("verification command wiring", () => {
 	it("keeps live smoke checking both the canonical site and the Pages origin policy", () => {
 		const packageJson = JSON.parse(

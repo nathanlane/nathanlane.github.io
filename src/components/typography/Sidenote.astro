@@ -11,8 +11,10 @@ const {
   class: className = '' 
 } = Astro.props;
 
-// Generate unique ID for ARIA relationships
-const noteId = `sidenote-${number || Math.random().toString(36).substring(2, 11)}`;
+// ID for the ARIA relationships below. Only a numbered sidenote renders a
+// reference to link against, so an unnumbered one needs no id at all --
+// generating one at random made the build output differ run to run.
+const noteId = number === undefined ? undefined : `sidenote-${number}`;
 ---
 
 <span class={`sidenote-wrapper ${hover ? 'sidenote-wrapper--hover' : ''} ${className}`}>
@@ -32,7 +34,7 @@ const noteId = `sidenote-${number || Math.random().toString(36).substring(2, 11)
     class="sidenote" 
     id={noteId}
     role="note"
-    aria-label={number ? `Sidenote ${number}` : 'Sidenote'}
+    aria-label={number === undefined ? 'Sidenote' : `Sidenote ${number}`}
   >
     <span class="sidenote__content">
       {number !== undefined && (
