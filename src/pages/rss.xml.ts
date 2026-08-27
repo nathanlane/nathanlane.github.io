@@ -43,6 +43,11 @@ export const GET = async () => {
 		(a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime(),
 	);
 
+	// The newest item's date, not the build time. lastBuildDate means "when the
+	// channel last changed", so deriving it from the content keeps rebuilds of an
+	// unchanged site byte-identical.
+	const lastBuildDate = new Date(sorted[0]?.pubDate ?? 0).toUTCString();
+
 	return rss({
 		title: siteConfig.title,
 		description: siteConfig.description,
@@ -53,7 +58,7 @@ export const GET = async () => {
       <managingEditor>${escapeXml(siteConfig.email ?? "")} (${escapeXml(siteConfig.author)})</managingEditor>
       <webMaster>${escapeXml(siteConfig.email ?? "")} (${escapeXml(siteConfig.author)})</webMaster>
       <copyright>Copyright ${new Date().getFullYear()} ${escapeXml(siteConfig.author)}</copyright>
-      <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+      <lastBuildDate>${lastBuildDate}</lastBuildDate>
       <generator>Astro</generator>
     `,
 		stylesheet: "/rss-styles.xsl",

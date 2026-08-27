@@ -114,6 +114,63 @@ describe("public link hygiene", () => {
 	});
 });
 
+describe("deterministic build output", () => {
+	// Source guard: entropy or a clock reading in the render path makes two builds of
+	// the same commit differ, which is what turns a byte-comparison of dist/ from a
+	// clean check into a hand-triage. Observing the actual regression needs two full
+	// builds, so this pins the source instead.
+	//
+	// The walk covers all of src/ except the two directories that are not render-path
+	// code: src/test (which holds this guard's own literals) and src/content (authored
+	// posts). It deliberately does not ban `new Date()` — the copyright year in both
+	// feeds and in Footer.astro reads the clock legitimately and is stable within a
+	// calendar year. The one `new Date()` that did break reproducibility, the feeds'
+	// lastBuildDate, is pinned by the next test.
+	const excludedDirs = new Set(["src/test", "src/content"]);
+
+	function collectSources(relativeDir: string): string[] {
+		return fs
+			.readdirSync(path.join(repoRoot, relativeDir), { withFileTypes: true })
+			.flatMap((entry) => {
+				const entryPath = path.join(relativeDir, entry.name);
+				if (entry.isDirectory()) {
+					return excludedDirs.has(entryPath) ? [] : collectSources(entryPath);
+				}
+				return /\.(astro|ts|tsx|mjs|js)$/.test(entry.name) ? [entryPath] : [];
+			});
+	}
+
+	it("keeps entropy and Date.now out of the render path", () => {
+		const sources = collectSources("src");
+		// Walking the tree rather than a fixed directory list means moving code around
+		// cannot silently shrink coverage. This floor (82 files today) is the backstop
+		// against the walk collapsing to nothing and passing vacuously.
+		expect(sources.length).toBeGreaterThan(50);
+
+		const offenders = sources.filter((relativePath) => {
+			const source = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
+			return source.includes("Math.random(") || source.includes("Date.now(");
+		});
+
+		expect(offenders).toEqual([]);
+	});
+
+	// The feeds are the one place a build-time clock reading is tempting. lastBuildDate
+	// means "when the channel last changed", so the newest item's date is both the
+	// reproducible value and the correct one.
+	it("derives feed lastBuildDate from content rather than the build clock", () => {
+		for (const relativePath of ["src/pages/rss.xml.ts", "src/pages/research/rss.xml.ts"]) {
+			const source = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
+
+			expect(source).not.toMatch(/<lastBuildDate>\$\{new Date\(\)/);
+			expect(source).toMatch(/<lastBuildDate>\$\{lastBuildDate\}<\/lastBuildDate>/);
+			expect(source).toMatch(
+				/const lastBuildDate = new Date\(\w+\[0\]\?\.pubDate \?\? 0\)\.toUTCString\(\)/,
+			);
+		}
+	});
+});
+
 describe("verification command wiring", () => {
 	it("keeps live smoke checking both the canonical site and the Pages origin policy", () => {
 		const packageJson = JSON.parse(
