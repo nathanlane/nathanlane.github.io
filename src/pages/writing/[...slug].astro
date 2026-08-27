@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import ContentPage from "@/components/ContentPage.astro";
 import { isPublishedEntry } from "@/utils/content";
-import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 
 export const getStaticPaths = (async () => {
 	const writing = (await getCollection("writing")).filter(isPublishedEntry);

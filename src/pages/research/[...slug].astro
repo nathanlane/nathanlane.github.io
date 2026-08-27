@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import ContentPage from "@/components/ContentPage.astro";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import ContentPage from "@/components/ContentPage.astro";
 
 export const getStaticPaths = (async () => {
 	const essays = await getCollection("research");

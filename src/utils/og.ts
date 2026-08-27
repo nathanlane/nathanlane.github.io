@@ -1,5 +1,5 @@
-import { siteConfig } from "@/site.config";
 import { html } from "satori-html";
+import { siteConfig } from "@/site.config";
 
 type SatoriNode = {
 	type: string;

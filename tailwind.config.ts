@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
-// @ts-expect-error – external plugin lacks TS typings
-import fluidType from "tailwindcss-fluid-type";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
+// @ts-expect-error – external plugin lacks TS typings
+import fluidType from "tailwindcss-fluid-type";
 
 export default {
 	content: [

@@ -1,14 +1,14 @@
-import fs from "node:fs";
-import path from "node:path";
 // Using fontsource fonts for OG image generation
 import { getCollection } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
+import { Resvg } from "@resvg/resvg-js";
+import type { APIContext, InferGetStaticPropsType } from "astro";
+import satori, { type SatoriOptions } from "satori";
 import { getAllPosts } from "@/data/post";
 import { isPublishedEntry } from "@/utils/content";
 import { getFormattedDate } from "@/utils/date";
 import { ogMarkup } from "@/utils/og";
-import { Resvg } from "@resvg/resvg-js";
-import type { APIContext, InferGetStaticPropsType } from "astro";
-import satori, { type SatoriOptions } from "satori";
 
 // Load Inter fonts for OG images (using WOFF for Satori compatibility)
 const interRegular = fs.readFileSync(

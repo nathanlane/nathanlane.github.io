@@ -22,6 +22,7 @@
  */
 
 const cliArgs = process.argv.slice(2).filter((arg) => arg !== "--");
+
 import { JSDOM } from "jsdom";
 
 const baseUrl = (cliArgs[0] || "http://localhost:4321").replace(/\/$/, "");

@@ -1,8 +1,8 @@
 import { getCollection } from "astro:content";
+import rss from "@astrojs/rss";
 import { siteConfig } from "@/site.config";
 import { feedContent } from "@/utils/markdown";
 import { escapeXml } from "@/utils/xml";
-import rss from "@astrojs/rss";
 
 export const GET = async () => {
 	const research = await getCollection("research");
