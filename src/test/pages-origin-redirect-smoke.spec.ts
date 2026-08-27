@@ -1,11 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+	buildExpectedLocation,
 	CANONICAL_ORIGIN,
+	checkRedirects,
 	EXPECTED_REDIRECT_STATUS,
 	PAGES_ORIGIN,
 	REDIRECT_CHECKS,
-	buildExpectedLocation,
-	checkRedirects,
 } from "../../scripts/validation/pages-origin-redirect-smoke.mjs";
 
 describe("pages origin redirect smoke", () => {

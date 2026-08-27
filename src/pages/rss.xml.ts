@@ -1,10 +1,10 @@
 import { getCollection } from "astro:content";
+import rss from "@astrojs/rss";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 import { isPublishedEntry } from "@/utils/content";
 import { feedContent } from "@/utils/markdown";
 import { escapeXml } from "@/utils/xml";
-import rss from "@astrojs/rss";
 
 export const GET = async () => {
 	const posts = await getAllPosts();

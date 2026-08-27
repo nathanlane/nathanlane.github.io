@@ -1,25 +1,22 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { transformerMetaHighlight, transformerNotationDiff } from "@shikijs/transformers";
+import { defineConfig, envField } from "astro/config";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
-import { defineConfig, envField } from "astro/config";
-import { siteConfig } from "./src/site.config";
-
+// Rehype plugins
+import rehypeExternalLinks from "rehype-external-links";
+import rehypeKatex from "rehype-katex"; /* render LaTeX math with KaTeX */
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 // Remark plugins
 import remarkDirective from "remark-directive"; /* handle ::: directives as nodes */
 import remarkMath from "remark-math"; /* handle LaTeX math syntax */
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* add admonitions */
 import { remarkMathDetect } from "./src/plugins/remark-math-detect"; /* flag pages that use math */
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
-
-// Rehype plugins
-import rehypeExternalLinks from "rehype-external-links";
-import rehypeKatex from "rehype-katex"; /* render LaTeX math with KaTeX */
-import rehypeUnwrapImages from "rehype-unwrap-images";
-
-import { transformerMetaHighlight, transformerNotationDiff } from "@shikijs/transformers";
-import rehypePrettyCode from "rehype-pretty-code";
+import { siteConfig } from "./src/site.config";
 
 process.env.BROWSERSLIST_IGNORE_OLD_DATA ??= "1";
 

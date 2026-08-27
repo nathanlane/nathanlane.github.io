@@ -1,12 +1,12 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import SeriesPanel from "@/components/SeriesPanel.astro";
+import { Icon } from "astro-icon/components";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
+import SeriesPanel from "@/components/SeriesPanel.astro";
 import { siteConfig } from "@/site.config";
 import type { LayoutStructuredData } from "@/types";
 import { formatDate as formatDateLong } from "@/utils/date";
-import { Icon } from "astro-icon/components";
 import BaseLayout from "./Base.astro";
 
 interface Props {
