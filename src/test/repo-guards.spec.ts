@@ -115,31 +115,39 @@ describe("public link hygiene", () => {
 });
 
 describe("deterministic build output", () => {
-	// Source guard: entropy or a clock reading anywhere in the render path makes two
-	// builds of the same commit differ, which is what turns a byte-comparison of dist/
-	// from a clean check into a hand-triage. Both known sources are pinned here.
-	// Observing the actual regression needs two full builds.
-	const renderedSourceDirs = [
-		"src/components",
-		"src/layouts",
-		"src/pages",
-		"src/plugins",
-		"src/utils",
-	];
+	// Source guard: entropy or a clock reading in the render path makes two builds of
+	// the same commit differ, which is what turns a byte-comparison of dist/ from a
+	// clean check into a hand-triage. Observing the actual regression needs two full
+	// builds, so this pins the source instead.
+	//
+	// The walk covers all of src/ except the two directories that are not render-path
+	// code: src/test (which holds this guard's own literals) and src/content (authored
+	// posts). It deliberately does not ban `new Date()` — the copyright year in both
+	// feeds and in Footer.astro reads the clock legitimately and is stable within a
+	// calendar year. The one `new Date()` that did break reproducibility, the feeds'
+	// lastBuildDate, is pinned by the next test.
+	const excludedDirs = new Set(["src/test", "src/content"]);
 
 	function collectSources(relativeDir: string): string[] {
-		const absoluteDir = path.join(repoRoot, relativeDir);
-		if (!fs.existsSync(absoluteDir)) return [];
-
-		return fs.readdirSync(absoluteDir, { withFileTypes: true }).flatMap((entry) => {
-			const entryPath = path.join(relativeDir, entry.name);
-			if (entry.isDirectory()) return collectSources(entryPath);
-			return /\.(astro|ts|tsx|mjs|js)$/.test(entry.name) ? [entryPath] : [];
-		});
+		return fs
+			.readdirSync(path.join(repoRoot, relativeDir), { withFileTypes: true })
+			.flatMap((entry) => {
+				const entryPath = path.join(relativeDir, entry.name);
+				if (entry.isDirectory()) {
+					return excludedDirs.has(entryPath) ? [] : collectSources(entryPath);
+				}
+				return /\.(astro|ts|tsx|mjs|js)$/.test(entry.name) ? [entryPath] : [];
+			});
 	}
 
-	it("does not seed rendered output from entropy or the wall clock", () => {
-		const offenders = renderedSourceDirs.flatMap(collectSources).filter((relativePath) => {
+	it("keeps entropy and Date.now out of the render path", () => {
+		const sources = collectSources("src");
+		// Walking the tree rather than a fixed directory list means moving code around
+		// cannot silently shrink coverage. This floor (82 files today) is the backstop
+		// against the walk collapsing to nothing and passing vacuously.
+		expect(sources.length).toBeGreaterThan(50);
+
+		const offenders = sources.filter((relativePath) => {
 			const source = fs.readFileSync(path.join(repoRoot, relativePath), "utf8");
 			return source.includes("Math.random(") || source.includes("Date.now(");
 		});
