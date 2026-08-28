@@ -18,9 +18,14 @@ import { createRequire } from "node:module";
 import path from "node:path";
 
 const require = createRequire(import.meta.url);
-const katexDist = path.join(path.dirname(require.resolve("katex/package.json")), "dist");
+const katexPackage = require.resolve("katex/package.json");
+const katexDist = path.join(path.dirname(katexPackage), "dist");
 const srcCss = path.join(katexDist, "katex.min.css");
 const srcFonts = path.join(katexDist, "fonts");
+
+const rehypeKatexRequire = createRequire(require.resolve("rehype-katex"));
+const rendererKatexPackage = rehypeKatexRequire.resolve("katex/package.json");
+const rendererCss = path.join(path.dirname(rendererKatexPackage), "dist", "katex.min.css");
 
 const outDir = path.resolve("public/katex");
 const outCss = path.join(outDir, "katex.min.css");
@@ -32,7 +37,14 @@ const filesEqual = (a, b) =>
 	fs.existsSync(b) &&
 	Buffer.compare(fs.readFileSync(a), fs.readFileSync(b)) === 0;
 
+const assertRendererCssMatches = () => {
+	if (!filesEqual(srcCss, rendererCss)) {
+		throw new Error("Top-level KaTeX CSS differs from the KaTeX CSS resolved from rehype-katex.");
+	}
+};
+
 export function syncKatexAssets({ check = false } = {}) {
+	assertRendererCssMatches();
 	const srcFontFiles = listDir(srcFonts);
 
 	if (check) {
