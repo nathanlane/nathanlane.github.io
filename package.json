@@ -60,7 +60,7 @@
 		"github-slugger": "^2.0.0",
 		"hastscript": "^9.0.1",
 		"js-yaml": "^5.4.0",
-		"katex": "^0.16.22",
+		"katex": "^0.18.4",
 		"mdast-util-directive": "^3.1.0",
 		"mdast-util-to-markdown": "^2.1.2",
 		"mdast-util-to-string": "^4.0.0",
