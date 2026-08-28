@@ -1,8 +1,8 @@
 import { getCollection } from "astro:content";
+import rss from "@astrojs/rss";
 import { siteConfig } from "@/site.config";
 import { feedContent } from "@/utils/markdown";
 import { escapeXml } from "@/utils/xml";
-import rss from "@astrojs/rss";
 
 export const GET = async () => {
 	const research = await getCollection("research");
@@ -29,6 +29,11 @@ export const GET = async () => {
 		})),
 	);
 
+	// The newest item's date, not the build time. lastBuildDate means "when the
+	// channel last changed", so deriving it from the content keeps rebuilds of an
+	// unchanged site byte-identical.
+	const lastBuildDate = new Date(items[0]?.pubDate ?? 0).toUTCString();
+
 	return rss({
 		title: `${siteConfig.title} - Research Papers`,
 		description:
@@ -40,7 +45,7 @@ export const GET = async () => {
       <managingEditor>${escapeXml(siteConfig.email ?? "")} (${escapeXml(siteConfig.author)})</managingEditor>
       <webMaster>${escapeXml(siteConfig.email ?? "")} (${escapeXml(siteConfig.author)})</webMaster>
       <copyright>Copyright ${new Date().getFullYear()} ${escapeXml(siteConfig.author)}</copyright>
-      <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+      <lastBuildDate>${lastBuildDate}</lastBuildDate>
       <generator>Astro</generator>
       <category>Academic Research</category>
     `,

@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { JSDOM } from "jsdom";
+
 /**
  * Smoke test
  * ==========
@@ -22,7 +27,6 @@
  */
 
 const cliArgs = process.argv.slice(2).filter((arg) => arg !== "--");
-import { JSDOM } from "jsdom";
 
 const baseUrl = (cliArgs[0] || "http://localhost:4321").replace(/\/$/, "");
 
@@ -75,6 +79,24 @@ function feedIsWellFormed(body) {
 	return null;
 }
 
+export function findBuildIdentityProblem(builtHtml, servedHtml) {
+	const builtDocument = new JSDOM(builtHtml).window.document;
+	const servedDocument = new JSDOM(servedHtml).window.document;
+	const currentStylesheet = builtDocument
+		.querySelector('link[rel~="stylesheet"][href]')
+		?.getAttribute("href");
+
+	if (!currentStylesheet) return "current dist/index.html has no stylesheet reference";
+
+	const servesCurrentBuild = [
+		...servedDocument.querySelectorAll('link[rel~="stylesheet"][href]'),
+	].some((link) => link.getAttribute("href") === currentStylesheet);
+
+	return servesCurrentBuild
+		? null
+		: `served homepage is missing current build stylesheet "${currentStylesheet}"`;
+}
+
 const CHECKS = [
 	{ path: "/", marker: "Nathan Lane" },
 	{ path: "/about/", marker: "Nathan Lane" },
@@ -104,6 +126,16 @@ const CHECKS = [
 async function run() {
 	console.log(`Smoke testing ${baseUrl}\n`);
 	const failures = [];
+	let builtHomepage = null;
+
+	if (new URL(baseUrl).hostname === "localhost") {
+		try {
+			builtHomepage = await readFile("dist/index.html", "utf8");
+		} catch (error) {
+			console.error(`Smoke test FAILED: cannot read dist/index.html: ${error.message}`);
+			process.exit(1);
+		}
+	}
 
 	for (const check of CHECKS) {
 		const expectedStatus = check.status ?? 200;
@@ -136,6 +168,10 @@ async function run() {
 				const failure = check.assert(body);
 				if (failure) problems.push(failure);
 			}
+			if (check.path === "/" && builtHomepage !== null) {
+				const failure = findBuildIdentityProblem(builtHomepage, body);
+				if (failure) problems.push(failure);
+			}
 		}
 
 		if (problems.length > 0) {
@@ -154,4 +190,6 @@ async function run() {
 	console.log(`Smoke test passed: ${CHECKS.length}/${CHECKS.length} checks OK.`);
 }
 
-run();
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+	run();
+}

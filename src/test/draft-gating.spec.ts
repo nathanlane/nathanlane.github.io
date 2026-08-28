@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getCollection as _getCollection } from "astro:content";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getAllPosts } from "../data/post";
 
 // The resolve.alias in vitest.config.ts routes astro:content to the vi.fn() stub at

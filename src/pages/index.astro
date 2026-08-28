@@ -132,7 +132,6 @@ const importantLinksSections =
 						title={paper.data.title}
 						href={`/research/${paper.id}/`}
 						type="research"
-						date={paper.data.paperDate}
 						status={paper.data.status}
 						description={paper.data.description}
 						metadata={paper.data.authors}
@@ -149,7 +148,6 @@ const importantLinksSections =
 						title={piece.data.title}
 						href={`/writing/${piece.id}/`}
 						type="writing"
-						date={piece.data.publishDate.toISOString()}
 						description={piece.data.description}
 					/>
 				))
