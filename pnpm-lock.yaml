@@ -93,8 +93,8 @@ importers:
         specifier: ^5.4.0
         version: 5.4.0
       katex:
-        specifier: ^0.18.4
-        version: 0.18.4
+        specifier: ^0.16.47
+        version: 0.16.47
       mdast-util-directive:
         specifier: ^3.1.0
         version: 3.1.0
@@ -2264,10 +2264,6 @@ packages:
 
   katex@0.16.47:
     resolution: {integrity: sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==}
-    hasBin: true
-
-  katex@0.18.4:
-    resolution: {integrity: sha512-IMPntbRLOU+eu88XDiFKqQ8Akhr9Tv7jDMXqPhjG9SI1JMA4DIgXk4x9k4skJz2NZJXBRbC+2pYBLj9olqcZow==}
     hasBin: true
 
   kind-of@6.0.3:
@@ -5973,10 +5969,6 @@ snapshots:
   jsonc-parser@3.3.1: {}
 
   katex@0.16.47:
-    dependencies:
-      commander: 8.3.0
-
-  katex@0.18.4:
     dependencies:
       commander: 8.3.0
 
