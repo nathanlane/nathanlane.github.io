@@ -80,7 +80,7 @@ While many OCRing suites, like ABBYY FineReader, also have solid pre-processing 
 
 #### Other open source and programmatic tools for pre-processing.
 
-While most people use ImageMagick for basic image conversion tasks, many people utilize its powerful features for **<a href="http://www.fmwconcepts.com/imagemagick/textcleaner/index.php" target="_blank">batch document cleaning scripts</a>**. **<a href="www.gimp.org/" target="_blank">GIMP</a>**, the popular open source graphic suite, also has promising batch pre-processing capabilities: people have had success with **<a href="http://gimper.net/resources/nuvola-tools.582/" target="_blank">Nuvola tools for cleaning up greyscale scans</a>**.
+While most people use ImageMagick for basic image conversion tasks, many people utilize its powerful features for **<a href="http://www.fmwconcepts.com/imagemagick/textcleaner/index.php" target="_blank">batch document cleaning scripts</a>**. **<a href="https://www.gimp.org/" target="_blank">GIMP</a>**, the popular open source graphic suite, also has promising batch pre-processing capabilities: people have had success with **<a href="http://gimper.net/resources/nuvola-tools.582/" target="_blank">Nuvola tools for cleaning up greyscale scans</a>**.
 
 ### 3. OCRing with ABBYY FineReader 12.
 

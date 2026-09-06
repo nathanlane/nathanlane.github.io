@@ -10,7 +10,7 @@ draft: true
 ---
 
 
-<table class="image"><tbody><tr><td>![Image](/images/blog/assets/facing.jpg)</td></tr></tbody><caption align="bottom">More at **<a href="chieu-hoi.com/" target="_blank">chieu-hoi.com</a>**.</caption></table>
+<table class="image"><tbody><tr><td>![Image](/images/blog/assets/facing.jpg)</td></tr></tbody><caption align="bottom">More at **<a href="http://web.archive.org/web/20180827070818/http://www.chieu-hoi.com/" target="_blank">chieu-hoi.com</a>**.</caption></table>
 
 
 
