@@ -94,6 +94,12 @@ export function isHttpUrl(value) {
 // of. This is a personal/academic blog, so a bare relative filename is just as likely to
 // be a data or manuscript file (`data.dta`, `paper.tex`, `deck.pptx`) as a web asset —
 // the list covers common document, data, and code file extensions, not just web ones.
+//
+// Trade-off, accepted deliberately: `do`, `md`, and `py` are also real ccTLDs (Dominican
+// Republic, Moldova, Paraguay), so a schemeless link to one of those would be ignored
+// rather than flagged malformed. Given this repo's content, a bare relative reference is
+// overwhelmingly more likely to be a Stata .do file, a Markdown note, or a Python script
+// than a link to one of those three ccTLDs, so this list optimizes for the common case.
 const WEB_ASSET_EXTENSIONS = new Set([
 	// Web
 	"html",
@@ -276,6 +282,14 @@ const URL_FIELD_NAMES = new Set(["link", "download", "href"]);
  * path. A well-formed absolute http(s) URL in any field is always collected (`kind:
  * "http"`); the malformed check additionally runs, but only on `link`/`download`/`href`
  * fields specifically, since that check assumes the value is meant to be a URL at all.
+ *
+ * Accepted gap: whitespace junk in one of those fields (a stray sentence where a URL
+ * should be) is silently dropped rather than flagged malformed, because the whitespace
+ * guard above excludes it before `classifyHref` ever sees it. That guard exists to keep
+ * ordinary prose fields out of the malformed check (see the false positive on
+ * `contactLinks[].text` below); the same guard just also swallows this rarer, genuinely
+ * malformed case. `content.schemas.ts`'s `href: z.string()` has no `.url()`, so nothing
+ * else catches it either — judged negligible for this repo's content, not fixed here.
  */
 export function collectFrontmatterUrls(data, keyPath = []) {
 	const found = [];
@@ -341,26 +355,31 @@ export function collectBodyUrls(html) {
 /**
  * Walks every content collection, rendering each file's body through the site's real
  * markdown processor and collecting URLs from both the rendered body and frontmatter.
+ *
+ * `contentRoot` defaults to the real `src/content/` and is only overridden by tests, so
+ * this can run end-to-end against a small fixture tree instead of only unit-testing the
+ * collector functions in isolation — a collector returning the right classification is
+ * not proof that `extractAll` actually keeps it.
  */
-async function extractAll() {
+export async function extractAll(contentRoot = CONTENT_ROOT) {
 	const processor = await createMarkdownProcessor({ syntaxHighlight: false });
 	const files = [];
 	for (const dir of COLLECTION_DIRS) {
-		files.push(...(await walk(path.join(CONTENT_ROOT, dir))));
+		files.push(...(await walk(path.join(contentRoot, dir))));
 	}
 	files.sort();
 
 	const occurrences = [];
 	const researchEntries = [];
-	const researchDir = path.join(CONTENT_ROOT, "research");
+	const researchDir = path.join(contentRoot, "research");
 
 	for (const file of files) {
 		const raw = await readFile(file, "utf8");
 		const { data, content } = matter(raw);
 		const relFile = path.relative(process.cwd(), file);
 
-		for (const { url, location } of collectFrontmatterUrls(data)) {
-			occurrences.push({ url, file: relFile, location, kind: "http" });
+		for (const { url, location, kind, reason } of collectFrontmatterUrls(data)) {
+			occurrences.push({ url, file: relFile, location, kind, reason });
 		}
 
 		if (file.startsWith(researchDir + path.sep) && typeof data.link === "string") {

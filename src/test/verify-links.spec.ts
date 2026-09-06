@@ -1,3 +1,6 @@
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	checkUrl,
@@ -6,6 +9,7 @@ import {
 	collectBodyUrls,
 	collectFrontmatterUrls,
 	describeError,
+	extractAll,
 	extractSurnames,
 	isHttpUrl,
 } from "../../scripts/validation/verify-links.mjs";
@@ -306,6 +310,55 @@ describe("checkUrl", () => {
 
 		expect(methodsCalled).toEqual(["HEAD"]);
 		expect(result.class).toBe("unverifiable");
+	});
+});
+
+describe("extractAll", () => {
+	let fixtureRoot: string;
+
+	afterEach(() => {
+		if (fixtureRoot) rmSync(fixtureRoot, { recursive: true, force: true });
+	});
+
+	it("keeps a schemeless frontmatter URL classified malformed end-to-end, not silently retagged http", async () => {
+		// Regression: collectFrontmatterUrls correctly returns kind "malformed" for this,
+		// but extractAll used to hardcode `kind: "http"` on every frontmatter occurrence,
+		// discarding that classification. The bug lived in extractAll wiring the collector
+		// up, not in the collector itself -- a unit test on the collector alone can't catch
+		// it, hence exercising the real end-to-end path here.
+		fixtureRoot = mkdtempSync(join(tmpdir(), "verify-links-fixture-"));
+		mkdirSync(join(fixtureRoot, "research"), { recursive: true });
+		writeFileSync(
+			join(fixtureRoot, "research", "test-paper.md"),
+			["---", "title: Test Paper", "link: www.foo.com", "---", "", "Body text.", ""].join("\n"),
+		);
+
+		const { occurrences } = await extractAll(fixtureRoot);
+		const entry = occurrences.find((o: { url: string }) => o.url === "www.foo.com");
+
+		expect(entry).toMatchObject({ kind: "malformed", location: "frontmatter:link" });
+	});
+
+	it("keeps a well-formed frontmatter URL classified http end-to-end", async () => {
+		fixtureRoot = mkdtempSync(join(tmpdir(), "verify-links-fixture-"));
+		mkdirSync(join(fixtureRoot, "research"), { recursive: true });
+		writeFileSync(
+			join(fixtureRoot, "research", "test-paper.md"),
+			[
+				"---",
+				"title: Test Paper",
+				"link: https://example.com/paper",
+				"---",
+				"",
+				"Body text.",
+				"",
+			].join("\n"),
+		);
+
+		const { occurrences } = await extractAll(fixtureRoot);
+		const entry = occurrences.find((o: { url: string }) => o.url === "https://example.com/paper");
+
+		expect(entry).toMatchObject({ kind: "http", location: "frontmatter:link" });
 	});
 });
 
