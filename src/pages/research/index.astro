@@ -6,6 +6,7 @@ import SectionSeparator from "@/components/SectionSeparator.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import BaseLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
+import { compareResearch } from "@/utils/content";
 
 // Get research page content from MDX
 const researchPage = await getEntry("pages", "research");
@@ -21,9 +22,10 @@ const featuredPapers = allResearch.filter(paper => paper.data.featured === true)
 const publishedPapers = allResearch.filter(paper => paper.data.status === "published");
 const workingPapers = allResearch.filter(paper => paper.data.status === "working-paper");
 const worksInProgress = allResearch.filter(paper => paper.data.status === "work-in-progress");
+const archivedPapers = allResearch.filter(paper => paper.data.status === "archived");
 
-// Sort by year (newest first)
-const sortByYear = (papers: typeof allResearch) => [...papers].sort((a, b) => b.data.paperDate.localeCompare(a.data.paperDate));
+// Newest year first, with `order` breaking ties within a year.
+const sortResearch = (papers: typeof allResearch) => [...papers].sort(compareResearch);
 
 // Create table of contents data
 const tocSections = [
@@ -31,6 +33,9 @@ const tocSections = [
   { title: "Published Papers", href: "#published", count: publishedPapers.length },
   { title: "Working Papers", href: "#working", count: workingPapers.length },
   { title: "Works in Progress", href: "#wip", count: worksInProgress.length },
+  ...(archivedPapers.length > 0
+    ? [{ title: "Archived", href: "#archived", count: archivedPapers.length }]
+    : []),
   { title: "Curriculum Vitae", href: siteConfig.resumeUrl || "/cv.pdf" }
 ];
 
@@ -63,7 +68,7 @@ const meta = {
       <section id="featured" class="mb-16b">
         <h2 class="heading-2 mb-8b">New and Recently Updated</h2>
         <ul class="space-y-3b list-none">
-          {sortByYear(featuredPapers).map((paper) => (
+          {sortResearch(featuredPapers).map((paper) => (
             <li class="flex items-baseline justify-between gap-4b">
               <span class="featured-title flex-1">{paper.data.title}</span>
               <a href={`/research/${paper.id}/`} class="link-research-action">
@@ -82,7 +87,7 @@ const meta = {
       <section id="published" class="mb-16b">
         <h2 class="heading-2 mb-8b">Published Papers</h2>
         <div class="space-y-8b">
-          {sortByYear(publishedPapers).map((paper) => (
+          {sortResearch(publishedPapers).map((paper) => (
             <ResearchEntry
               title={paper.data.title}
               href={`/research/${paper.id}/`}
@@ -109,7 +114,7 @@ const meta = {
       <section id="working" class="mb-16b">
         <h2 class="heading-2 mb-8b">Working Papers</h2>
         <div class="space-y-8b">
-          {sortByYear(workingPapers).map((paper) => (
+          {sortResearch(workingPapers).map((paper) => (
             <ResearchEntry
               title={paper.data.title}
               href={`/research/${paper.id}/`}
@@ -136,7 +141,7 @@ const meta = {
       <section id="wip" class="mb-16b">
         <h2 class="heading-2 mb-8b">Works in Progress</h2>
         <CompactList 
-          items={sortByYear(worksInProgress).map((paper) => ({
+          items={sortResearch(worksInProgress).map((paper) => ({
             title: paper.data.title,
             description: `${paper.data.authors} • ${paper.data.paperDate}`,
             url: `/research/${paper.id}/`,
@@ -145,7 +150,25 @@ const meta = {
       </section>
     )}
 
+    <!-- Wide Full Header Line Separator -->
+    {(publishedPapers.length > 0 || workingPapers.length > 0 || worksInProgress.length > 0) &&
+      archivedPapers.length > 0 && (
+      <SectionSeparator variant="full-width" spacing="normal" />
+    )}
 
+    <!-- Archived -->
+    {archivedPapers.length > 0 && (
+      <section id="archived" class="mb-16b">
+        <h2 class="heading-2 mb-8b">Archived</h2>
+        <CompactList
+          items={sortResearch(archivedPapers).map((paper) => ({
+            title: paper.data.title,
+            description: `${paper.data.authors} • ${paper.data.paperDate}`,
+            url: `/research/${paper.id}/`,
+          }))}
+        />
+      </section>
+    )}
 
   </div>
 </BaseLayout>
