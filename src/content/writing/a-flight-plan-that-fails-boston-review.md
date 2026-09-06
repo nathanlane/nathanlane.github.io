@@ -5,7 +5,6 @@ description: Some sweeping Moonshot thinking fails as a guide to the future of
   lack the messy details of practical deployment. Industrial policy needs to be
   ambitious, but even more urgently, detailed and precise.
 publishDate: 2021-09-15
-date: 2021-09-15T12:12:00.000-07:00
 ---
 # A Flight Plan That Fails
 By Nathan Lane
@@ -26,7 +25,7 @@ First, this paradigm largely avoids any specificity about the hard decisions to 
 
 Start with Mazzucato and colleagues' portrait of industrial policy's past. They are right that the Washington Consensus viewed industrial policy as a failed vestige of postwar developmentalism. In the last two decades of the twentieth century, most academic economists who had anything to say about industrial policy quibbled over its theoretical flaws.
 
-But even as the discipline deemed industrial policy implausible, the world has kept using it—and we are finally learning more about the complexity of these real world efforts in the wake of our field's "empirical revolution." Budding work over the last few years [has painted a rich, varied picture](http://nathanlane.info/assets/papers/NathanLane_New_Empirics_of_Industrial_Policy_current.pdf) of industrial policy in practice, not just in theory. Nearly every paper complicates received wisdom about how industrial policy worked, or didn't. As an empiricist and economic historian who has learned a great deal from this work, I don't recognize the tepidness that Mazzucato and colleagues think characterize postwar policies across the board: those Cold War interventions fixated on "narrowly defined technological goals and specific sectors" that they take as a foil.
+But even as the discipline deemed industrial policy implausible, the world has kept using it—and we are finally learning more about the complexity of these real world efforts in the wake of our field's "empirical revolution." Budding work over the last few years [has painted a rich, varied picture](/research/new-empirics-industrial-policy/) of industrial policy in practice, not just in theory. Nearly every paper complicates received wisdom about how industrial policy worked, or didn't. As an empiricist and economic historian who has learned a great deal from this work, I don't recognize the tepidness that Mazzucato and colleagues think characterize postwar policies across the board: those Cold War interventions fixated on "narrowly defined technological goals and specific sectors" that they take as a foil.
 
 > Industrial history tells us that grand, mission-oriented policies do not absolve us from having to think about details.
 

@@ -6,7 +6,7 @@ import {
 	createWritingSchema,
 	pagesSchema,
 } from "../content.schemas";
-import { isPublishedEntry } from "../utils/content";
+import { compareResearch, isPublishedEntry } from "../utils/content";
 
 describe("content schemas", () => {
 	it("parses a representative post entry and generates a slug", () => {
@@ -269,6 +269,133 @@ describe("schema field constraints — negative cases", () => {
 		expect(result.success).toBe(false);
 	});
 
+	it("accepts an unquoted paperDate year, which YAML hands over as a number", () => {
+		// `paperDate: 2026` in frontmatter is a number, not a string.  It is valid
+		// authoring, so the schema normalises it rather than failing on the type.
+		const parsed = createResearchSchema().parse({
+			title: "Unquoted Year",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: 2026,
+			authors: "Nathan Lane",
+		});
+
+		expect(parsed.paperDate).toBe("2026");
+	});
+
+	it("rejects a paperDate that YAML parsed into a date", () => {
+		// `paperDate: 2026-01-01` is a Date.  Taking its year would silently move a
+		// paper across a year boundary depending on the timezone, so it is an error.
+		const result = createResearchSchema().safeParse({
+			title: "Date Not Year",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: new Date("2026-01-01T00:00:00Z"),
+			authors: "Nathan Lane",
+		});
+
+		expect(result.success).toBe(false);
+	});
+
+	it("rejects unknown frontmatter keys instead of silently dropping them", () => {
+		// Zod strips unknown keys by default, which let dead fields and typos for real
+		// fields sit in content looking authoritative while nothing read them.
+		const base = {
+			title: "Strict Frontmatter",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper" as const,
+			type: "paper" as const,
+			paperDate: "2026",
+			authors: "Nathan Lane",
+		};
+
+		expect(createResearchSchema().safeParse(base).success).toBe(true);
+		expect(
+			createResearchSchema().safeParse({ ...base, pdfUrl: "https://example.com" }).success,
+		).toBe(false);
+		expect(createResearchSchema().safeParse({ ...base, date: "2026-01-01" }).success).toBe(false);
+	});
+
+	it("rejects a post that uses `series` where the schema says `seriesId`", () => {
+		// The typo that made a real post drop out of its series without any warning.
+		const result = createPostSchema().safeParse({
+			title: "Series Typo",
+			description: "A representative post fixture for validating the shared content schema.",
+			publishDate: "2026-03-29",
+			series: "lane-docs",
+		});
+
+		expect(result.success).toBe(false);
+	});
+
+	it("accepts an optional research `order`", () => {
+		const parsed = createResearchSchema().parse({
+			title: "Ordered Paper",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "2026",
+			authors: "Nathan Lane",
+			order: 2,
+		});
+
+		expect(parsed.order).toBe(2);
+	});
+
+	it("treats a blank optional URL as absent rather than invalid", () => {
+		// A CMS writes "" for an optional field left blank; "" is not an absent key, so it
+		// used to pass `.optional()` and then fail `.url()`.
+		const parsed = createResearchSchema().parse({
+			title: "Blank Links",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "2026",
+			authors: "Nathan Lane",
+			link: "",
+			download: "",
+			ogImage: "",
+		});
+
+		expect(parsed.link).toBeUndefined();
+		expect(parsed.download).toBeUndefined();
+		expect(parsed.ogImage).toBeUndefined();
+	});
+
+	it("still rejects a non-empty malformed URL", () => {
+		const result = createResearchSchema().safeParse({
+			title: "Bad Link",
+			description:
+				"A description long enough to satisfy the minimum length requirement for research abstracts.",
+			status: "working-paper",
+			type: "paper",
+			paperDate: "2026",
+			authors: "Nathan Lane",
+			link: "not-a-url",
+		});
+
+		expect(result.success).toBe(false);
+	});
+
+	it("treats a blank post ogImage as absent so the `??` fallback still fires", () => {
+		// `ogImage: ""` validated fine, then defeated `ogImage ?? generatedPath` downstream.
+		const parsed = createPostSchema().parse({
+			title: "Blank Og Image",
+			description: "A representative post fixture for validating the shared content schema.",
+			publishDate: "2026-03-29",
+			ogImage: "",
+		});
+
+		expect(parsed.ogImage).toBeUndefined();
+	});
+
 	it("rejects a media entry with a non-URL link", () => {
 		const result = createMediaSchema().safeParse({
 			title: "Episode 1",
@@ -278,5 +405,44 @@ describe("schema field constraints — negative cases", () => {
 			link: "not-a-url",
 		});
 		expect(result.success).toBe(false);
+	});
+});
+
+describe("compareResearch", () => {
+	const paper = (id: string, paperDate: string, order?: number) => ({
+		id,
+		data: { paperDate, ...(order === undefined ? {} : { order }) },
+	});
+
+	const ids = (entries: ReturnType<typeof paper>[]) =>
+		[...entries].sort(compareResearch).map((e) => e.id);
+
+	it("puts the newest year first", () => {
+		expect(ids([paper("older", "2024"), paper("newer", "2026")])).toEqual(["newer", "older"]);
+	});
+
+	it("breaks a same-year tie with `order`, lowest first", () => {
+		// Without a tiebreaker these three tied and fell back to filename order.
+		expect(ids([paper("c", "2026", 3), paper("a", "2026", 1), paper("b", "2026", 2)])).toEqual([
+			"a",
+			"b",
+			"c",
+		]);
+	});
+
+	it("keeps papers without `order` behind those that set one", () => {
+		expect(ids([paper("unset", "2026"), paper("set", "2026", 5)])).toEqual(["set", "unset"]);
+	});
+
+	it("leaves papers that both omit `order` in their existing relative order", () => {
+		expect(ids([paper("first", "2026"), paper("second", "2026")])).toEqual(["first", "second"]);
+	});
+
+	it("does not let `order` override the year", () => {
+		// A low order on an older paper must not float it above a newer one.
+		expect(ids([paper("old-but-ordered", "2020", 1), paper("new", "2026")])).toEqual([
+			"new",
+			"old-but-ordered",
+		]);
 	});
 });

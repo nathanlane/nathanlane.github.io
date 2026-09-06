@@ -4,7 +4,6 @@ publishDate: '2024-12-20'
 description: "A versatile Astro template for managing blogs and creating comprehensive project documentation"
 seriesId: lane-docs
 orderInSeries: 1
-featured: false
 tags: ["example", "series", "documentation"]
 ogImage: ""
 ---

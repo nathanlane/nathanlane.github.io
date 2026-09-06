@@ -4,7 +4,7 @@ import { render } from "astro:content";
 import Badge from "@/components/Badge.astro";
 import BaseLayout from "@/layouts/Base.astro";
 import { siteConfig } from "@/site.config";
-import { getFormattedDate } from "@/utils/date";
+import { getFormattedDate, normalizeStatus } from "@/utils/date";
 
 // Accept any content collection type
 type Props = {
@@ -16,6 +16,10 @@ const { Content, remarkPluginFrontmatter } = await render(entry);
 
 // Check if this is a research entry for special handling
 const isResearch = entry.collection === "research";
+
+// Status labels are derived from the status value via normalizeStatus rather than matched
+// case by case, so a value added to the enum cannot fall through and leave the separator
+// bullet standing on its own -- which is what `archived` used to do.
 
 // Format date for non-research entries
 const publishDate = !isResearch ? entry.data.publishDate : undefined;
@@ -82,11 +86,7 @@ if (isResearch) {
               {entry.data.status && (
                 <>
                   <span class="text-meta__separator">•</span>
-                  <span class="text-accent-two">
-                    {entry.data.status === "published" && "PUBLISHED"}
-                    {entry.data.status === "working-paper" && "WORKING PAPER"}
-                    {entry.data.status === "work-in-progress" && "WORK IN PROGRESS"}
-                  </span>
+                  <span class="text-accent-two">{normalizeStatus(entry.data.status)}</span>
                 </>
               )}
             </div>

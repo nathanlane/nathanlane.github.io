@@ -80,12 +80,13 @@ describe("public link hygiene", () => {
 
 		expect(source).not.toContain("https://doi.org/https://doi.org/");
 		expect(source).not.toContain("(walkerhanlon.com/papers/hanlon_shipbuilding.pdf)");
+		// eh.net stopped serving this PDF; the citation now points at the paper's own page.
+		// The negative guard stays: a scheme-less link here was the original defect.
 		expect(source).not.toContain("(eh.net/eha/images/blog/Lane.pdf)");
 		expect(source).not.toContain("(www.giorcellimichela.com/");
 		expect(source).not.toContain("]((https://www.bostonreview.net/");
 		expect(source).not.toContain("](posts/social-image/)");
 		expect(source).toContain("(https://walkerhanlon.com/papers/hanlon_shipbuilding.pdf)");
-		expect(source).toContain("(https://eh.net/eha/images/blog/Lane.pdf)");
 		expect(source).toContain("(https://www.giorcellimichela.com/");
 		expect(source).toContain("](/posts/social-image/)");
 	});

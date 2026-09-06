@@ -4,7 +4,6 @@ publishDate: '2025-07-16'
 description: "Complete guide for managing and deploying the website after production readiness improvements"
 seriesId: lane-docs
 orderInSeries: 15
-featured: false
 tags: ["documentation", "deployment", "ci-cd", "maintenance"]
 ogImage: ""
 ---
@@ -256,9 +255,11 @@ Create in `src/content/research/`:
 title: "Paper Title"
 authors: "You, Co-author"
 paperDate: "2025"
-status: "published" # or "working-paper", "work-in-progress"
+status: "published" # or "working-paper", "work-in-progress", "archived"
+type: "paper" # or "report", "chapter"
 publication: "Journal Name"
 featured: true # Shows on homepage
+order: 1 # Optional; breaks ties between papers from the same year, lowest first
 description: "Brief description"
 ---
 ```

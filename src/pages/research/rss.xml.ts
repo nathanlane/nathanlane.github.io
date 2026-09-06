@@ -1,16 +1,15 @@
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import { siteConfig } from "@/site.config";
+import { compareResearch } from "@/utils/content";
 import { feedContent } from "@/utils/markdown";
 import { escapeXml } from "@/utils/xml";
 
 export const GET = async () => {
 	const research = await getCollection("research");
 
-	// Sort by paper date (most recent first)
-	const sortedResearch = research.sort(
-		(a, b) => Number.parseInt(b.data.paperDate) - Number.parseInt(a.data.paperDate),
-	);
+	// Same ordering as the research pages, so the feed and the site agree.
+	const sortedResearch = [...research].sort(compareResearch);
 
 	const items = await Promise.all(
 		sortedResearch.map(async (item) => ({

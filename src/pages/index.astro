@@ -6,7 +6,7 @@ import MediaList from "@/components/MediaList.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import PageLayout from "@/layouts/Base.astro";
 import { siteConfig, socialLinks } from "@/site.config";
-import { isPublishedEntry } from "@/utils/content";
+import { compareResearch, isPublishedEntry } from "@/utils/content";
 
 // Get homepage CONTENT from MDX
 const homepageContent = await getEntry("pages", "homepage");
@@ -63,12 +63,11 @@ const contact = {
 	],
 };
 
-// Get featured research papers
+// Get featured research papers. Every featured paper is shown: the previous `.slice(0, 3)`
+// meant marking a fourth paper `featured: true` silently dropped one from the homepage with
+// no warning, so `featured` is now the only thing that decides what appears here.
 const allResearch = await getCollection("research");
-const featuredResearch = allResearch
-	.filter((paper) => paper.data.featured)
-	.sort((a, b) => Number.parseInt(b.data.paperDate) - Number.parseInt(a.data.paperDate))
-	.slice(0, 3);
+const featuredResearch = allResearch.filter((paper) => paper.data.featured).sort(compareResearch);
 
 // Note: getAllPosts is imported but not used directly on homepage
 // Keep import as it may be needed for future features
