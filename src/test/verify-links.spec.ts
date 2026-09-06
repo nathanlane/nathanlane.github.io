@@ -1,5 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+	checkUrl,
 	classifyHref,
 	classifyResult,
 	collectBodyUrls,
@@ -8,6 +9,11 @@ import {
 	extractSurnames,
 	isHttpUrl,
 } from "../../scripts/validation/verify-links.mjs";
+
+/** A minimal fetch Response stand-in: attemptFetch only reads .status and cancels .body. */
+function fakeResponse(status: number) {
+	return { status, body: { cancel: async () => {} } };
+}
 
 describe("isHttpUrl", () => {
 	it("accepts absolute http(s) URLs", () => {
@@ -40,10 +46,14 @@ describe("collectFrontmatterUrls", () => {
 		expect(found).toContainEqual({
 			url: "https://example.com/paper",
 			location: "frontmatter:link",
+			kind: "http",
+			reason: undefined,
 		});
 		expect(found).toContainEqual({
 			url: "https://nathanlane.info",
 			location: "frontmatter:contactLinks.1.href",
+			kind: "http",
+			reason: undefined,
 		});
 		expect(found).not.toContainEqual(
 			expect.objectContaining({ url: expect.stringContaining("mailto:") }),
@@ -52,6 +62,54 @@ describe("collectFrontmatterUrls", () => {
 
 	it("returns nothing for frontmatter with no absolute URLs", () => {
 		expect(collectFrontmatterUrls({ title: "Untitled", draft: false })).toEqual([]);
+	});
+
+	it("flags a schemeless single-token field as malformed, not just silently dropped", () => {
+		// The exact silent-drop failure this tool exists to fix: a `link: www.foo.com`
+		// with no scheme previously failed isHttpUrl and vanished without a trace.
+		const found = collectFrontmatterUrls({ link: "www.foo.com" });
+		expect(found).toEqual([
+			expect.objectContaining({
+				url: "www.foo.com",
+				location: "frontmatter:link",
+				kind: "malformed",
+			}),
+		]);
+	});
+
+	it("does not flag a display-label field that mirrors its sibling href as a bare domain", () => {
+		// Regression: src/content/pages/homepage.mdx has contactLinks entries like
+		// { href: "https://industrialpolicygroup.com", text: "industrialpolicygroup.com" } —
+		// `text` is a display label, not a link, even though it's schemeless and
+		// domain-shaped. Only `link`/`download`/`href` get the malformed check.
+		const found = collectFrontmatterUrls({
+			contactLinks: [
+				{
+					label: "Site",
+					href: "https://industrialpolicygroup.com",
+					text: "industrialpolicygroup.com",
+				},
+			],
+		});
+		expect(found).toEqual([
+			{
+				url: "https://industrialpolicygroup.com",
+				location: "frontmatter:contactLinks.0.href",
+				kind: "http",
+			},
+		]);
+	});
+
+	it("does not flag ordinary multi-word prose fields, even ones that mention a domain", () => {
+		// Applying the malformed check to every string field would flag nearly every
+		// title/description in the collection; only whitespace-free (URL-shaped) values
+		// are considered.
+		const found = collectFrontmatterUrls({
+			title: "A Paper",
+			description: "See sodalabs.io for more on this project, a lab I co-founded in 2016.",
+			authors: "Nathan Lane, Réka Juhász, and Dani Rodrik",
+		});
+		expect(found).toEqual([]);
 	});
 });
 
@@ -158,6 +216,96 @@ describe("classifyHref", () => {
 	it("treats localhost and IPv4 hosts as plausible, not malformed", () => {
 		expect(classifyHref("http://localhost:3000").kind).toBe("http");
 		expect(classifyHref("http://127.0.0.1:8080/").kind).toBe("http");
+	});
+
+	it("ignores a root-relative path containing a space, rather than flagging it malformed", () => {
+		// Ordering regression: the whitespace check must not fire before the leading-marker
+		// relative-path check. "/files/my paper.pdf" is a legal href.
+		expect(classifyHref("/files/my paper.pdf").kind).toBe("ignore");
+		expect(classifyHref("#a section").kind).toBe("ignore");
+	});
+
+	it("ignores bare relative document/data/code filenames, not just web assets", () => {
+		// This is a personal/academic blog: a bare relative reference is at least as likely
+		// to be a manuscript or data file as a web asset.
+		expect(classifyHref("paper.tex").kind).toBe("ignore");
+		expect(classifyHref("notes.md").kind).toBe("ignore");
+		expect(classifyHref("data.dta").kind).toBe("ignore");
+		expect(classifyHref("deck.pptx").kind).toBe("ignore");
+	});
+});
+
+describe("checkUrl", () => {
+	afterEach(() => {
+		vi.unstubAllGlobals();
+	});
+
+	function stubFetch(respond: (method: string) => number) {
+		const methodsCalled: string[] = [];
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async (_url: string, init: { method: string }) => {
+				methodsCalled.push(init.method);
+				return fakeResponse(respond(init.method));
+			}),
+		);
+		return methodsCalled;
+	}
+
+	it("confirms a HEAD 404 with a GET, and trusts the GET's answer when it differs", async () => {
+		// The Medium finding: a server that mishandles HEAD (404ing it while GET serves the
+		// real page) must not be reported dead on the strength of HEAD alone.
+		const methodsCalled = stubFetch((method) => (method === "HEAD" ? 404 : 200));
+
+		const result = await checkUrl("https://example.com/paper");
+
+		expect(methodsCalled).toEqual(["HEAD", "GET"]);
+		expect(result.class).toBe("ok");
+	});
+
+	it("classifies as dead only once GET also confirms 404", async () => {
+		const methodsCalled = stubFetch(() => 404);
+
+		const result = await checkUrl("https://example.com/gone");
+
+		expect(methodsCalled).toEqual(["HEAD", "GET"]);
+		expect(result.class).toBe("dead");
+	});
+
+	it("also GET-confirms a HEAD 410, not just 404", async () => {
+		const methodsCalled = stubFetch((method) => (method === "HEAD" ? 410 : 200));
+
+		const result = await checkUrl("https://example.com/moved");
+
+		expect(methodsCalled).toEqual(["HEAD", "GET"]);
+		expect(result.class).toBe("ok");
+	});
+
+	it("falls back to GET when the server doesn't support HEAD (405)", async () => {
+		const methodsCalled = stubFetch((method) => (method === "HEAD" ? 405 : 200));
+
+		const result = await checkUrl("https://example.com/head-not-allowed");
+
+		expect(methodsCalled).toEqual(["HEAD", "GET"]);
+		expect(result.class).toBe("ok");
+	});
+
+	it("does not issue a second request when HEAD succeeds normally", async () => {
+		const methodsCalled = stubFetch(() => 200);
+
+		const result = await checkUrl("https://example.com/fine");
+
+		expect(methodsCalled).toEqual(["HEAD"]);
+		expect(result.class).toBe("ok");
+	});
+
+	it("does not retry or escalate a HEAD 403 — bot-blocking is not a dead-link signal", async () => {
+		const methodsCalled = stubFetch(() => 403);
+
+		const result = await checkUrl("https://example.com/blocked");
+
+		expect(methodsCalled).toEqual(["HEAD"]);
+		expect(result.class).toBe("unverifiable");
 	});
 });
 

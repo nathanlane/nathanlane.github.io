@@ -24,7 +24,12 @@ import { JSDOM } from "jsdom";
  *
  * Every href/src is classified as one of:
  *   - ok            reachable (2xx/3xx)
- *   - dead          the origin server has confirmed the resource is gone (404/410)
+ *   - dead          the URL itself returns HTTP 404/410, GET-confirmed. That's the best
+ *                   signal this tool has that a resource is gone, but it isn't proof: a
+ *                   typo'd URL 404s against a real, live site just as readily as a
+ *                   genuinely removed page does, so "dead" means "this exact URL is
+ *                   broken," which might be fixed by editing the URL rather than by
+ *                   finding a replacement for the thing it once pointed at.
  *   - unverifiable  everything else: auth/bot-blocking (401/403), rate limiting
  *                   (429), server errors, or a network failure that persisted
  *                   through retries. None of these prove the link is dead — a
@@ -70,7 +75,8 @@ const MAX_ATTEMPTS = 3;
 const RETRY_BASE_DELAY_MS = 1000;
 const CONCURRENCY = 8;
 
-// Statuses the origin server uses to say "this resource is confirmed gone".
+// Statuses that mean "this exact URL is broken" — not necessarily that the destination
+// itself is gone; the URL could just be wrong. GET-confirmed before being trusted.
 const DEAD_STATUSES = new Set([404, 410]);
 // Worth retrying: transient server trouble or rate limiting, not proof of anything.
 const RETRYABLE_STATUSES = new Set([408, 425, 429, 500, 502, 503, 504]);
@@ -85,9 +91,11 @@ export function isHttpUrl(value) {
 
 // Extensions that make a schemeless "authority.tld"-shaped string a relative filename
 // (`photo.jpg`, `app.js`) rather than a domain someone forgot to put a scheme in front
-// of. Deliberately small: it only has to beat the extensions actually seen in this repo's
-// bare-relative img/script src attributes, not enumerate every possible file type.
+// of. This is a personal/academic blog, so a bare relative filename is just as likely to
+// be a data or manuscript file (`data.dta`, `paper.tex`, `deck.pptx`) as a web asset —
+// the list covers common document, data, and code file extensions, not just web ones.
 const WEB_ASSET_EXTENSIONS = new Set([
+	// Web
 	"html",
 	"htm",
 	"css",
@@ -97,6 +105,7 @@ const WEB_ASSET_EXTENSIONS = new Set([
 	"xml",
 	"txt",
 	"csv",
+	"tsv",
 	"jpg",
 	"jpeg",
 	"png",
@@ -107,12 +116,50 @@ const WEB_ASSET_EXTENSIONS = new Set([
 	"ico",
 	"pdf",
 	"zip",
+	"tar",
+	"gz",
 	"mp4",
 	"mp3",
 	"woff",
 	"woff2",
 	"ttf",
 	"eot",
+	// Documents
+	"doc",
+	"docx",
+	"xls",
+	"xlsx",
+	"ppt",
+	"pptx",
+	"rtf",
+	"epub",
+	"pages",
+	"key",
+	"numbers",
+	// Manuscript / notes
+	"tex",
+	"bib",
+	"md",
+	"markdown",
+	"rmd",
+	// Data
+	"dta",
+	"sav",
+	"sas7bdat",
+	"rds",
+	"rdata",
+	"parquet",
+	"dat",
+	// Code / config
+	"py",
+	"ipynb",
+	"r",
+	"do",
+	"sql",
+	"yaml",
+	"yml",
+	"toml",
+	"log",
 ]);
 
 function hasWebAssetExtension(authority) {
@@ -149,6 +196,11 @@ export function classifyHref(rawValue) {
 	const value = rawValue.trim();
 	if (!value) return { kind: "ignore", value };
 
+	// A leading /, #, ?, or . is a legitimate site-relative reference regardless of what
+	// else is in it — a path segment like "/files/my paper.pdf" is valid HTML, and must be
+	// recognised before the whitespace check below would otherwise flag it as malformed.
+	if (/^[/#?.]/.test(value)) return { kind: "ignore", value };
+
 	if (/\s/.test(value)) {
 		return { kind: "malformed", value, reason: "contains whitespace; not a valid URL or path" };
 	}
@@ -173,9 +225,7 @@ export function classifyHref(rawValue) {
 		return { kind: "http", value };
 	}
 
-	// No scheme. A leading /, #, ?, or . is a legitimate site-relative reference.
-	if (/^[/#?.]/.test(value)) return { kind: "ignore", value };
-
+	// No scheme, and not a leading-marker relative path (checked above).
 	if (isEmailLike(value)) {
 		return {
 			kind: "malformed",
@@ -214,11 +264,37 @@ async function walk(dir) {
 	return out;
 }
 
-/** Recursively collects every absolute http(s) string in a frontmatter value, tagged by key path. */
+// Frontmatter keys documented above as holding a URL (research.link/.download,
+// media.link, pages.contactLinks[].href). The fuller malformed check is scoped to
+// exactly these: `pages.contactLinks[].text` is a display label that legitimately holds
+// a bare domain-looking string ("industrialpolicygroup.com") backed by a real `href` —
+// it was never a link itself, and flagging it would be a false positive, not a catch.
+const URL_FIELD_NAMES = new Set(["link", "download", "href"]);
+
+/**
+ * Recursively collects every URL-shaped string in a frontmatter value, tagged by key
+ * path. A well-formed absolute http(s) URL in any field is always collected (`kind:
+ * "http"`); the malformed check additionally runs, but only on `link`/`download`/`href`
+ * fields specifically, since that check assumes the value is meant to be a URL at all.
+ */
 export function collectFrontmatterUrls(data, keyPath = []) {
 	const found = [];
-	if (isHttpUrl(data)) {
-		found.push({ url: data.trim(), location: `frontmatter:${keyPath.join(".")}` });
+	if (typeof data === "string") {
+		const value = data.trim();
+		const lastKey = keyPath[keyPath.length - 1];
+		if (value && URL_FIELD_NAMES.has(lastKey) && !/\s/.test(value)) {
+			const classified = classifyHref(value);
+			if (classified.kind !== "ignore") {
+				found.push({
+					url: classified.value,
+					location: `frontmatter:${keyPath.join(".")}`,
+					kind: classified.kind,
+					reason: classified.reason,
+				});
+			}
+		} else if (isHttpUrl(value)) {
+			found.push({ url: value, location: `frontmatter:${keyPath.join(".")}`, kind: "http" });
+		}
 		return found;
 	}
 	if (Array.isArray(data)) {
@@ -357,11 +433,20 @@ export function classifyResult(result) {
 }
 
 /** Checks one URL, retrying network failures and transient server errors, and classifies it. */
-async function checkUrl(url) {
-	// HEAD first to avoid downloading bodies (some of these are multi-MB PDFs); a
-	// method-not-allowed response means the server only understands GET.
+export async function checkUrl(url) {
+	// HEAD first to avoid downloading bodies (some of these are multi-MB PDFs). Fall back
+	// to GET whenever HEAD didn't give a trustworthy answer: a network error, a
+	// method-not-allowed response, or a 404/410. That last one matters most — a server
+	// that mishandles HEAD by 404ing it while GET serves the real page is a known
+	// link-checker pitfall, and a false "dead" is the one verdict this tool must never
+	// produce, since it sends someone off to fix a citation that was never broken.
 	let result = await attemptFetch(url, "HEAD");
-	if (!result.ok || result.status === 405 || result.status === 501) {
+	if (
+		!result.ok ||
+		result.status === 405 ||
+		result.status === 501 ||
+		DEAD_STATUSES.has(result.status)
+	) {
 		result = await attemptFetch(url, "GET");
 	}
 
@@ -465,7 +550,14 @@ async function writeJobSummary({ byClass, malformed, occurrences, contentMismatc
 	];
 
 	if (byClass.dead.length > 0) {
-		lines.push("### Dead links", "", "| URL | Detail | Found in |", "| --- | --- | --- |");
+		lines.push(
+			"### Dead links",
+			"",
+			"HTTP 404/410 — the destination may be gone, or the URL may be wrong.",
+			"",
+			"| URL | Detail | Found in |",
+			"| --- | --- | --- |",
+		);
 		for (const { url, detail } of byClass.dead) {
 			lines.push(`| ${url} | ${detail} | ${formatOccurrences(url, occurrences)} |`);
 		}
@@ -539,7 +631,9 @@ async function main() {
 	console.log(`malformed:     ${malformed.length}`);
 
 	if (byClass.dead.length > 0) {
-		console.log("\nDead links (confirmed 404/410):");
+		console.log(
+			"\nDead links (HTTP 404/410 — the destination may be gone, or the URL may be wrong):",
+		);
 		for (const { url, detail } of byClass.dead) {
 			console.log(`  ✗ ${url} — ${detail}`);
 			console.log(`      in: ${formatOccurrences(url, occurrences)}`);
@@ -579,12 +673,12 @@ async function main() {
 	console.log("");
 	if (byClass.dead.length > 0 || malformed.length > 0) {
 		console.error(
-			`verify:links FAILED: ${byClass.dead.length} confirmed dead link(s), ` +
+			`verify:links FAILED: ${byClass.dead.length} link(s) returning 404/410, ` +
 				`${malformed.length} malformed href(s).`,
 		);
 		process.exitCode = 1;
 	} else {
-		console.log("verify:links passed: no confirmed dead links or malformed hrefs.");
+		console.log("verify:links passed: no 404/410 links or malformed hrefs.");
 	}
 }
 
