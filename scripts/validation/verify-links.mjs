@@ -22,7 +22,7 @@ import { JSDOM } from "jsdom";
  * (a title in quotes, a URL containing a space) broke the pipeline; a real
  * parser handles that syntax the same way the rendered site does.
  *
- * Every URL is classified as one of:
+ * Every href/src is classified as one of:
  *   - ok            reachable (2xx/3xx)
  *   - dead          the origin server has confirmed the resource is gone (404/410)
  *   - unverifiable  everything else: auth/bot-blocking (401/403), rate limiting
@@ -31,6 +31,15 @@ import { JSDOM } from "jsdom";
  *                   403 is as likely to be a publisher blocking scripted
  *                   clients as it is a removed page — so they are reported but
  *                   do not fail the run.
+ *   - malformed     not a fetchable URL at all, and not a legitimate site-relative
+ *                   reference either: a schemeless value that looks like a domain
+ *                   (`tabula.nerdpower.org`) or an email missing `mailto:`, a
+ *                   value with two schemes stuck together (`http://http//x.org`),
+ *                   or anything else a browser cannot resolve as intended. A
+ *                   browser resolves a schemeless "domain" as a same-site
+ *                   relative path, so these silently 404 rather than erroring
+ *                   loudly — no network check is needed to know that; this is a
+ *                   deterministic, offline source bug.
  *
  * For research entries whose `link` resolves `ok`, the linked page's <title>
  * is additionally checked against the frontmatter `authors` surnames (the
@@ -41,8 +50,10 @@ import { JSDOM } from "jsdom";
  * verdict. `download` targets are not content-checked — most are PDFs, and
  * parsing them would need a new dependency.
  *
- * Exit code: 1 if any URL is classified `dead`, 0 otherwise (including when
- * URLs are `unverifiable` — network flakiness must never fail this job).
+ * Exit code: 1 if any href/src is classified `dead` or `malformed`, 0 otherwise
+ * (including when URLs are `unverifiable` — network flakiness must never fail
+ * this job). `malformed` fails the run alongside `dead` because it is just as
+ * definite and, unlike reachability, needs no network at all to prove.
  *
  * Usage:
  *   node scripts/validation/verify-links.mjs
@@ -70,6 +81,118 @@ function sleep(ms) {
 
 export function isHttpUrl(value) {
 	return typeof value === "string" && /^https?:\/\//i.test(value.trim());
+}
+
+// Extensions that make a schemeless "authority.tld"-shaped string a relative filename
+// (`photo.jpg`, `app.js`) rather than a domain someone forgot to put a scheme in front
+// of. Deliberately small: it only has to beat the extensions actually seen in this repo's
+// bare-relative img/script src attributes, not enumerate every possible file type.
+const WEB_ASSET_EXTENSIONS = new Set([
+	"html",
+	"htm",
+	"css",
+	"js",
+	"mjs",
+	"json",
+	"xml",
+	"txt",
+	"csv",
+	"jpg",
+	"jpeg",
+	"png",
+	"gif",
+	"svg",
+	"webp",
+	"avif",
+	"ico",
+	"pdf",
+	"zip",
+	"mp4",
+	"mp3",
+	"woff",
+	"woff2",
+	"ttf",
+	"eot",
+]);
+
+function hasWebAssetExtension(authority) {
+	const ext = authority.split(".").pop()?.toLowerCase();
+	return Boolean(ext) && WEB_ASSET_EXTENSIONS.has(ext);
+}
+
+/** A hostname a real absolute URL could plausibly have — not proof it exists, just that its shape isn't a typo. */
+function isPlausibleHostname(host) {
+	if (!host) return false;
+	if (host.toLowerCase() === "localhost") return true;
+	if (/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) return true; // IPv4
+	if (host.includes(":")) return true; // IPv6 literal
+	return /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i.test(host);
+}
+
+function isEmailLike(value) {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+/**
+ * Classifies a raw href/src attribute value with no network I/O: is this a fetchable
+ * http(s) URL, a source bug that will never resolve as intended ("malformed"), or
+ * something outside this tool's remit (a site-relative path, a mailto:/tel: link) that
+ * should be silently ignored?
+ *
+ * "Malformed" exists because a browser doesn't error loudly on a schemeless href like
+ * `tabula.nerdpower.org` — it resolves it as a path relative to the current page, so the
+ * link silently 404s on this site instead of on the domain the author meant. That's a
+ * deterministic, offline-provable defect, unlike third-party reachability.
+ */
+export function classifyHref(rawValue) {
+	if (typeof rawValue !== "string") return { kind: "ignore", value: rawValue };
+	const value = rawValue.trim();
+	if (!value) return { kind: "ignore", value };
+
+	if (/\s/.test(value)) {
+		return { kind: "malformed", value, reason: "contains whitespace; not a valid URL or path" };
+	}
+
+	const schemeMatch = /^([a-z][a-z0-9+.-]*):/i.exec(value);
+	if (schemeMatch) {
+		if (!/^https?$/i.test(schemeMatch[1])) {
+			// mailto:, tel:, javascript:, data:, etc. — an intentional non-web scheme.
+			return { kind: "ignore", value };
+		}
+		let hostname;
+		try {
+			hostname = new URL(value).hostname;
+		} catch {
+			return { kind: "malformed", value, reason: "not a parseable URL" };
+		}
+		if (!isPlausibleHostname(hostname)) {
+			// Catches e.g. "http://http//openrefine.org/" — a doubled scheme parses fine as
+			// a URL with hostname "http", which no real link is ever actually pointing at.
+			return { kind: "malformed", value, reason: `host "${hostname}" is not a plausible hostname` };
+		}
+		return { kind: "http", value };
+	}
+
+	// No scheme. A leading /, #, ?, or . is a legitimate site-relative reference.
+	if (/^[/#?.]/.test(value)) return { kind: "ignore", value };
+
+	if (isEmailLike(value)) {
+		return {
+			kind: "malformed",
+			value,
+			reason: "looks like an email address missing its mailto: scheme",
+		};
+	}
+
+	const authority = value.split(/[/?#]/)[0];
+	if (isPlausibleHostname(authority) && !hasWebAssetExtension(authority)) {
+		return {
+			kind: "malformed",
+			value,
+			reason: `no scheme; "${authority}" looks like an external domain and will resolve as a same-site relative path`,
+		};
+	}
+	return { kind: "ignore", value };
 }
 
 async function walk(dir) {
@@ -112,17 +235,29 @@ export function collectFrontmatterUrls(data, keyPath = []) {
 	return found;
 }
 
-/** Collects every absolute http(s) link/image src from rendered body HTML. */
+/**
+ * Collects every link/image reference from rendered body HTML that is either a fetchable
+ * http(s) URL or a malformed one — site-relative paths and other schemes (mailto:, tel:)
+ * are classified `ignore` by `classifyHref` and dropped here.
+ */
 export function collectBodyUrls(html) {
 	const dom = new JSDOM(html);
 	const found = [];
+	const collect = (rawValue, location) => {
+		const classified = classifyHref(rawValue);
+		if (classified.kind === "ignore") return;
+		found.push({
+			url: classified.value,
+			location,
+			kind: classified.kind,
+			reason: classified.reason,
+		});
+	};
 	for (const anchor of dom.window.document.querySelectorAll("a[href]")) {
-		const href = anchor.getAttribute("href");
-		if (isHttpUrl(href)) found.push({ url: href.trim(), location: "body:a" });
+		collect(anchor.getAttribute("href"), "body:a");
 	}
 	for (const img of dom.window.document.querySelectorAll("img[src]")) {
-		const src = img.getAttribute("src");
-		if (isHttpUrl(src)) found.push({ url: src.trim(), location: "body:img" });
+		collect(img.getAttribute("src"), "body:img");
 	}
 	return found;
 }
@@ -149,7 +284,7 @@ async function extractAll() {
 		const relFile = path.relative(process.cwd(), file);
 
 		for (const { url, location } of collectFrontmatterUrls(data)) {
-			occurrences.push({ url, file: relFile, location });
+			occurrences.push({ url, file: relFile, location, kind: "http" });
 		}
 
 		if (file.startsWith(researchDir + path.sep) && typeof data.link === "string") {
@@ -163,8 +298,8 @@ async function extractAll() {
 			console.error(`  ! could not render ${relFile}, skipping body: ${error.message}`);
 			continue;
 		}
-		for (const { url, location } of collectBodyUrls(rendered)) {
-			occurrences.push({ url, file: relFile, location });
+		for (const { url, location, kind, reason } of collectBodyUrls(rendered)) {
+			occurrences.push({ url, file: relFile, location, kind, reason });
 		}
 	}
 
@@ -313,7 +448,7 @@ function formatOccurrences(url, occurrences) {
 	return forUrl.map((o) => `${o.file} (${o.location})`).join(", ");
 }
 
-async function writeJobSummary({ byClass, occurrences, contentMismatches }) {
+async function writeJobSummary({ byClass, malformed, occurrences, contentMismatches }) {
 	const summaryPath = process.env.GITHUB_STEP_SUMMARY;
 	if (!summaryPath) return;
 
@@ -325,6 +460,7 @@ async function writeJobSummary({ byClass, occurrences, contentMismatches }) {
 		`| ok | ${byClass.ok.length} |`,
 		`| dead | ${byClass.dead.length} |`,
 		`| unverifiable | ${byClass.unverifiable.length} |`,
+		`| malformed | ${malformed.length} |`,
 		"",
 	];
 
@@ -332,6 +468,14 @@ async function writeJobSummary({ byClass, occurrences, contentMismatches }) {
 		lines.push("### Dead links", "", "| URL | Detail | Found in |", "| --- | --- | --- |");
 		for (const { url, detail } of byClass.dead) {
 			lines.push(`| ${url} | ${detail} | ${formatOccurrences(url, occurrences)} |`);
+		}
+		lines.push("");
+	}
+
+	if (malformed.length > 0) {
+		lines.push("### Malformed hrefs", "", "| Value | Reason | Found in |", "| --- | --- | --- |");
+		for (const { url, reason } of malformed) {
+			lines.push(`| ${url} | ${reason} | ${formatOccurrences(url, occurrences)} |`);
 		}
 		lines.push("");
 	}
@@ -352,22 +496,35 @@ async function writeJobSummary({ byClass, occurrences, contentMismatches }) {
 	await appendFile(summaryPath, `${lines.join("\n")}\n`);
 }
 
+/** Dedupes malformed occurrences by URL, keeping the first reason seen for each. */
+function collectMalformed(occurrences) {
+	const byUrl = new Map();
+	for (const o of occurrences) {
+		if (o.kind === "malformed" && !byUrl.has(o.url)) {
+			byUrl.set(o.url, o.reason);
+		}
+	}
+	return [...byUrl.entries()].map(([url, reason]) => ({ url, reason }));
+}
+
 async function main() {
 	console.log("Extracting URLs from src/content/ ...");
 	const { occurrences, researchEntries, fileCount } = await extractAll();
-	const uniqueUrls = [...new Set(occurrences.map((o) => o.url))];
+	const httpUrls = [...new Set(occurrences.filter((o) => o.kind === "http").map((o) => o.url))];
+	const malformed = collectMalformed(occurrences);
 	console.log(
-		`Found ${occurrences.length} URL reference(s) (${uniqueUrls.length} unique) across ${fileCount} file(s).\n`,
+		`Found ${occurrences.length} reference(s) (${httpUrls.length} unique checkable URL(s), ` +
+			`${malformed.length} malformed) across ${fileCount} file(s).\n`,
 	);
 
-	console.log(`Checking ${uniqueUrls.length} unique URL(s) ...`);
+	console.log(`Checking ${httpUrls.length} unique URL(s) ...`);
 	const resultsByUrl = new Map();
-	await mapWithConcurrency(uniqueUrls, CONCURRENCY, async (url) => {
+	await mapWithConcurrency(httpUrls, CONCURRENCY, async (url) => {
 		resultsByUrl.set(url, await checkUrl(url));
 	});
 
 	const byClass = { ok: [], dead: [], unverifiable: [] };
-	for (const url of uniqueUrls) {
+	for (const url of httpUrls) {
 		const result = resultsByUrl.get(url);
 		byClass[result.class].push({ url, ...result });
 	}
@@ -379,11 +536,22 @@ async function main() {
 	console.log(`ok:            ${byClass.ok.length}`);
 	console.log(`dead:          ${byClass.dead.length}`);
 	console.log(`unverifiable:  ${byClass.unverifiable.length}`);
+	console.log(`malformed:     ${malformed.length}`);
 
 	if (byClass.dead.length > 0) {
 		console.log("\nDead links (confirmed 404/410):");
 		for (const { url, detail } of byClass.dead) {
 			console.log(`  ✗ ${url} — ${detail}`);
+			console.log(`      in: ${formatOccurrences(url, occurrences)}`);
+		}
+	}
+
+	if (malformed.length > 0) {
+		console.log(
+			"\nMalformed hrefs (source bugs, not reachability — fixable without a network call):",
+		);
+		for (const { url, reason } of malformed) {
+			console.log(`  ✗ ${url} — ${reason}`);
 			console.log(`      in: ${formatOccurrences(url, occurrences)}`);
 		}
 	}
@@ -406,14 +574,17 @@ async function main() {
 		}
 	}
 
-	await writeJobSummary({ byClass, occurrences, contentMismatches });
+	await writeJobSummary({ byClass, malformed, occurrences, contentMismatches });
 
 	console.log("");
-	if (byClass.dead.length > 0) {
-		console.error(`verify:links FAILED: ${byClass.dead.length} confirmed dead link(s).`);
+	if (byClass.dead.length > 0 || malformed.length > 0) {
+		console.error(
+			`verify:links FAILED: ${byClass.dead.length} confirmed dead link(s), ` +
+				`${malformed.length} malformed href(s).`,
+		);
 		process.exitCode = 1;
 	} else {
-		console.log("verify:links passed: no confirmed dead links.");
+		console.log("verify:links passed: no confirmed dead links or malformed hrefs.");
 	}
 }
 

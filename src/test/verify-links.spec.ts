@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+	classifyHref,
 	classifyResult,
 	collectBodyUrls,
 	collectFrontmatterUrls,
@@ -55,7 +56,7 @@ describe("collectFrontmatterUrls", () => {
 });
 
 describe("collectBodyUrls", () => {
-	it("collects link hrefs and image srcs, ignoring relative and non-http URLs", () => {
+	it("collects checkable links/images and drops relative or non-web-scheme references", () => {
 		const html = `
 			<p><a href="https://example.com/a">A</a></p>
 			<p><a href="/local/relative">local</a></p>
@@ -66,19 +67,97 @@ describe("collectBodyUrls", () => {
 
 		const found = collectBodyUrls(html);
 
-		expect(found).toContainEqual({ url: "https://example.com/a", location: "body:a" });
-		expect(found).toContainEqual({ url: "https://example.com/pic.png", location: "body:img" });
+		expect(found).toContainEqual({
+			url: "https://example.com/a",
+			location: "body:a",
+			kind: "http",
+		});
+		expect(found).toContainEqual({
+			url: "https://example.com/pic.png",
+			location: "body:img",
+			kind: "http",
+		});
 		expect(found).toHaveLength(2);
 	});
 
 	it("picks up a malformed href exactly as authored, trailing parenthesis included", () => {
 		// Regression: src/content/post/a-basic-tutorial-for-digitizing-historic-tabular-data.md
 		// has a literal `<a href="http://www.imagemagick.org/)">` in its raw HTML — the checker
-		// must report the href actually in the document, not a "cleaned up" guess at it.
+		// must report the href actually in the document, not a "cleaned up" guess at it. `)` is
+		// a legal path character, so this is still a checkable http(s) URL, not "malformed".
 		const html = `<a href="http://www.imagemagick.org/)">ImageMagick</a>`;
 		expect(collectBodyUrls(html)).toEqual([
-			{ url: "http://www.imagemagick.org/)", location: "body:a" },
+			{ url: "http://www.imagemagick.org/)", location: "body:a", kind: "http" },
 		]);
+	});
+
+	it("reports a schemeless domain-shaped href as malformed instead of silently dropping it", () => {
+		// Regression: src/content/post/a-basic-tutorial-for-digitizing-historic-tabular-data.md
+		// has `<a href="tabula.nerdpower.org">` — no scheme, so a browser resolves it as a
+		// same-site relative path and it 404s here, not on nerdpower.org. Previously this
+		// failed `isHttpUrl` and was dropped without a trace.
+		const html = `<a href="tabula.nerdpower.org">Tabula</a>`;
+		const found = collectBodyUrls(html);
+		expect(found).toHaveLength(1);
+		expect(found[0]).toMatchObject({ url: "tabula.nerdpower.org", kind: "malformed" });
+	});
+});
+
+describe("classifyHref", () => {
+	it("accepts a normal http(s) URL", () => {
+		expect(classifyHref("https://example.com/paper")).toEqual({
+			kind: "http",
+			value: "https://example.com/paper",
+		});
+	});
+
+	it("ignores site-relative references and non-web schemes", () => {
+		expect(classifyHref("/posts/foo/").kind).toBe("ignore");
+		expect(classifyHref("#section").kind).toBe("ignore");
+		expect(classifyHref("?query=1").kind).toBe("ignore");
+		expect(classifyHref("./relative").kind).toBe("ignore");
+		expect(classifyHref("mailto:nathan@example.com").kind).toBe("ignore");
+		expect(classifyHref("tel:+1234567890").kind).toBe("ignore");
+	});
+
+	it("ignores a bare relative filename that merely contains a dot", () => {
+		// "app.js" must not be mistaken for a domain named "app" with TLD "js".
+		expect(classifyHref("app.js").kind).toBe("ignore");
+		expect(classifyHref("images/photo.jpg").kind).toBe("ignore");
+	});
+
+	it("flags a schemeless domain-shaped href as malformed", () => {
+		expect(classifyHref("tabula.nerdpower.org").kind).toBe("malformed");
+		expect(classifyHref("www.gimp.org/").kind).toBe("malformed");
+		expect(classifyHref("chieu-hoi.com/").kind).toBe("malformed");
+	});
+
+	it("flags a bare email address missing its mailto: scheme as malformed", () => {
+		// Regression: src/content/post/historic-aggregate-data-for-korea-1910-1945-and.md
+		// has `<a href="nlane@fas.harvard.edu">`.
+		const result = classifyHref("nlane@fas.harvard.edu");
+		expect(result.kind).toBe("malformed");
+		expect(result.reason).toContain("mailto:");
+	});
+
+	it("flags a doubled scheme as malformed even though it parses as a URL", () => {
+		// Regression: src/content/post/a-basic-tutorial-for-digitizing-historic-tabular-data.md
+		// has `<a href="http://http//openrefine.org/">` — `new URL()` happily parses this with
+		// hostname "http", which is never what a real link is pointing at.
+		const result = classifyHref("http://http//openrefine.org/");
+		expect(result.kind).toBe("malformed");
+		expect(result.reason).toContain("http");
+	});
+
+	it("flags an href containing whitespace as malformed", () => {
+		expect(classifyHref("I highly recommend checking out the github for the project").kind).toBe(
+			"malformed",
+		);
+	});
+
+	it("treats localhost and IPv4 hosts as plausible, not malformed", () => {
+		expect(classifyHref("http://localhost:3000").kind).toBe("http");
+		expect(classifyHref("http://127.0.0.1:8080/").kind).toBe("http");
 	});
 });
 
