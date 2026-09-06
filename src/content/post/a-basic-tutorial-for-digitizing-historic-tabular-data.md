@@ -21,7 +21,7 @@ For those more comfortable with the command line and programming, or for open so
 
 
 
-<a href="http://www.nathanlane.info/?p=281" target="_blank">![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/teletype2.jpg)</a> Oh, the enraging heritage of old data. (From the Mad Men Mondays "Data's First Class Economy Set" Repository: Hartman Center, Rubenstein Library, Duke University.)
+Oh, the enraging heritage of old data. (From the Mad Men Mondays "Data's First Class Economy Set" Repository: Hartman Center, Rubenstein Library, Duke University.)
 
 
 
@@ -96,15 +96,11 @@ Training is the next crucial step. With historic data, you will likely get poor 
 
 In general, training improves the ability of OCR algorithms to correctly classify characters by "tuning" the algorithm on a sample of your document. In FineReader, training is a trivial task, where you walk the program through recognizing a sample set of characters from your document. You can easily append and save these training files, called "**User Patterns**."
 
-![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbytraining.png)
-
 <smaller>Training ABBYY FineReader's OCR engine on a sample document.</smaller>
 
 #### "Analyzing" & "Reading" - Table recognition & OCRing in FineReader.
 
 In FineReader, layout recognition and OCR are known as "analyzing" and "reading", respectively. Unlike straight forward digitization of textual material, we want to make sure FineReader recognizes our table layouts and correct mishaps before it reads the content of individual table cells: First, the **Analyze Selected Pages** command detects the content of our pages (i.e. finds our tables). We then confirm that FineReader has recognized tables and table cells correctly, adjusting mistakes "by hand" with the built-in table editing tools. Second, we OCR the table contents with the **Read Selected Pages** command.
-
-![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbyytable.png)
 
 #### Check for mistakes, tweak, & repeat.
 
@@ -117,8 +113,6 @@ After the first OCR session it is best to get a sense of how successful characte
 Ultimately, FineReader will spit out.csv or.xlsx files, but newly digitized content still needs to be tidied up.
 
 Especially if you're working with old documents, OCRing produces some junk output. Dust, scratches, and page discoloration can get picked up as weird symbols: *, ^,, etc.. You can easily correct these blemishes </span><a style="color: #7a7a7a;" href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank"><span style="font-weight: bold;">using regular expressions</span></a><span style="color: #666666;"> in your preferred scripting language (using </span><span style="font-weight: bold; color: #666666;">sub/gsub</span><span style="color: #666666;"> commands in R,</span><span style="font-weight: bold; color: #666666;"> re.sub</span><span style="color: #666666;"> type commands in Python). Better yet,</span><span style="font-weight: bold; color: #666666;"> <a style="color: #7a7a7a;" href="http://openrefine.org/" target="_blank">OpenRefine</a> </span><span style="color: #666666;">provides some extremely flexible tools for wrangling OCRd output, making most cleaning tasks trivial while also supporting advanced regular expression use.
-
-<a href="http://openrefine.org/">![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/openrefinelogo.png)</a>
 
 Clean up weird OCR output using OpenRefine and regular expressions.
 
