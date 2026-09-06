@@ -10,7 +10,7 @@ draft: true
 
 ![Image](/images/blog/assets/surahammarssweden.jpg)
 Surahammars Ironworks/Surahammars Järnbruk, Sweden, 1919.
-<a href="www.tekniskamuseet.se/1/706.html">From Sweden's Tekniska Museet photo collection</a>.
+<a href="http://web.archive.org/web/20161002225915/http://www.tekniskamuseet.se/1/706.html">From Sweden's Tekniska Museet photo collection</a>.
 
 In input-output economics, the **Leontief inverse** (i.e. [I-A]^-1) is ubiquitous. Named after the father of input-output economics, <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/1973/leontief-bio.html">Wassily Leontief</a>, the matrix is a compact representation of the ripple effects in an economy where industries are interconnected. A lone matrix coefficient conveys all direct and indirect effects on output in one sector required by a unit of output from another sector.
 

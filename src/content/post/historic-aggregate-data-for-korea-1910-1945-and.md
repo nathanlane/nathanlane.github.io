@@ -23,6 +23,6 @@ As opposed to doing Western economic history, there isn't a "users group" for co
 
 That said, I'm going to post historic electronic data resources I find for the developing world. I am working on a long term project on Asian structural change with wonderful folks at Harvard, Tufts, and NYU, so we come across some cool stuff from time to time.
 
-If you find anything cool, or have a dataset to share, email me: <a href="nlane@fas.harvard.edu">![image](/images/blog/assets/614ae228bf51e8ec03352e1c00861621.png)</a>
+If you find anything cool, or have a dataset to share, email me: <a href="mailto:nlane@fas.harvard.edu">![image](/images/blog/assets/614ae228bf51e8ec03352e1c00861621.png)</a>
 
 </div>

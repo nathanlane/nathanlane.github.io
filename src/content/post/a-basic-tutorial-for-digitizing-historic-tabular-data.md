@@ -21,7 +21,7 @@ For those more comfortable with the command line and programming, or for open so
 
 
 
-<a href="http://www.nathanlane.info/?p=281" target="_blank">![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/teletype2.jpg)</a> Oh, the enraging heritage of old data. (From the Mad Men Mondays "Data's First Class Economy Set" Repository: Hartman Center, Rubenstein Library, Duke University.)
+<a href="http://www.nathanlane.info/?p=281" target="_blank">![Image](/images/blog/assets/teletype2.jpg)</a> Oh, the enraging heritage of old data. (From the Mad Men Mondays "Data's First Class Economy Set" Repository: Hartman Center, Rubenstein Library, Duke University.)
 
 
 
@@ -66,9 +66,9 @@ Splitting and converting a multi-page PDF to TIFF in Acrobat Pro.
 
 #### Open source alternatives:
 
-If you don't have access to Acrobat Pro, you're in luck. There are oodles of open source tools for breaking apart PDFs and/or batch conversion. **<a href="http://www.imagemagick.org/)" target="_blank">ImageMagick</a>** is the workhorse open source tool for command line-based image manipulation and is incorporated into many digitization projects. It is cross-platform and can be integrated into most major programming languages. For OSX, **<a href="https://github.com/thejefflarson/pdf-splitter" target="_blank">Pdf-Splitter</a>** by Pro-Publica's Jeff Larson is a simple command line tool that utilizes native OSX libraries. Born from the frustration of dealing with PDFs, there are many Python packages for deconstructing documents. For instance, the **<a href="https://pypi.python.org/pypi/pdfserenitynow/0.6.7" target="_blank">pdfserenity</a>** package converts multi-page PDFs into TIFFs.
+If you don't have access to Acrobat Pro, you're in luck. There are oodles of open source tools for breaking apart PDFs and/or batch conversion. **<a href="http://www.imagemagick.org/" target="_blank">ImageMagick</a>** is the workhorse open source tool for command line-based image manipulation and is incorporated into many digitization projects. It is cross-platform and can be integrated into most major programming languages. For OSX, **<a href="https://github.com/thejefflarson/pdf-splitter" target="_blank">Pdf-Splitter</a>** by Pro-Publica's Jeff Larson is a simple command line tool that utilizes native OSX libraries. Born from the frustration of dealing with PDFs, there are many Python packages for deconstructing documents. For instance, the **<a href="https://pypi.python.org/pypi/pdfserenitynow/0.6.7" target="_blank">pdfserenity</a>** package converts multi-page PDFs into TIFFs.
 
-The <a href="https://pythonhosted.org/PyPDF2/" target="_blank">**pyPDF2**</a> package in Python is especially useful at manipulating PDFs, which I cover in **<a href="http://www.nathanlane.info/?p=369" target="_blank">this post here</a>**. Also, it's pretty darn fast!
+The <a href="https://pypdf2.readthedocs.io/en/3.x/" target="_blank">**pyPDF2**</a> package in Python is especially useful at manipulating PDFs, which I cover in **<a href="http://www.nathanlane.info/?p=369" target="_blank">this post here</a>**. Also, it's pretty darn fast!
 
 ### 2. Pre-process TIFFS with ScanTailor.
 
@@ -80,7 +80,7 @@ While many OCRing suites, like ABBYY FineReader, also have solid pre-processing 
 
 #### Other open source and programmatic tools for pre-processing.
 
-While most people use ImageMagick for basic image conversion tasks, many people utilize its powerful features for **<a href="http://www.fmwconcepts.com/imagemagick/textcleaner/index.php" target="_blank">batch document cleaning scripts</a>**. **<a href="www.gimp.org/" target="_blank">GIMP</a>**, the popular open source graphic suite, also has promising batch pre-processing capabilities: people have had success with **<a href="http://gimper.net/resources/nuvola-tools.582/" target="_blank">Nuvola tools for cleaning up greyscale scans</a>**.
+While most people use ImageMagick for basic image conversion tasks, many people utilize its powerful features for **<a href="http://www.fmwconcepts.com/imagemagick/textcleaner/index.php" target="_blank">batch document cleaning scripts</a>**. **<a href="https://www.gimp.org/" target="_blank">GIMP</a>**, the popular open source graphic suite, also has promising batch pre-processing capabilities: people have had success with **<a href="http://gimper.net/resources/nuvola-tools.582/" target="_blank">Nuvola tools for cleaning up greyscale scans</a>**.
 
 ### 3. OCRing with ABBYY FineReader 12.
 
@@ -96,7 +96,7 @@ Training is the next crucial step. With historic data, you will likely get poor 
 
 In general, training improves the ability of OCR algorithms to correctly classify characters by "tuning" the algorithm on a sample of your document. In FineReader, training is a trivial task, where you walk the program through recognizing a sample set of characters from your document. You can easily append and save these training files, called "**User Patterns**."
 
-![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbytraining.png)
+![Image](/images/blog/assets/abbytraining.png)
 
 <smaller>Training ABBYY FineReader's OCR engine on a sample document.</smaller>
 
@@ -104,7 +104,7 @@ In general, training improves the ability of OCR algorithms to correctly classif
 
 In FineReader, layout recognition and OCR are known as "analyzing" and "reading", respectively. Unlike straight forward digitization of textual material, we want to make sure FineReader recognizes our table layouts and correct mishaps before it reads the content of individual table cells: First, the **Analyze Selected Pages** command detects the content of our pages (i.e. finds our tables). We then confirm that FineReader has recognized tables and table cells correctly, adjusting mistakes "by hand" with the built-in table editing tools. Second, we OCR the table contents with the **Read Selected Pages** command.
 
-![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/abbyytable.png)
+![Image](/images/blog/assets/abbyytable.png)
 
 #### Check for mistakes, tweak, & repeat.
 
@@ -116,9 +116,9 @@ After the first OCR session it is best to get a sense of how successful characte
 
 Ultimately, FineReader will spit out.csv or.xlsx files, but newly digitized content still needs to be tidied up.
 
-Especially if you're working with old documents, OCRing produces some junk output. Dust, scratches, and page discoloration can get picked up as weird symbols: *, ^,, etc.. You can easily correct these blemishes </span><a style="color: #7a7a7a;" href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank"><span style="font-weight: bold;">using regular expressions</span></a><span style="color: #666666;"> in your preferred scripting language (using </span><span style="font-weight: bold; color: #666666;">sub/gsub</span><span style="color: #666666;"> commands in R,</span><span style="font-weight: bold; color: #666666;"> re.sub</span><span style="color: #666666;"> type commands in Python). Better yet,</span><span style="font-weight: bold; color: #666666;"> <a style="color: #7a7a7a;" href="http://http//openrefine.org/" target="_blank">OpenRefine</a> </span><span style="color: #666666;">provides some extremely flexible tools for wrangling OCRd output, making most cleaning tasks trivial while also supporting advanced regular expression use.
+Especially if you're working with old documents, OCRing produces some junk output. Dust, scratches, and page discoloration can get picked up as weird symbols: *, ^,, etc.. You can easily correct these blemishes </span><a style="color: #7a7a7a;" href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank"><span style="font-weight: bold;">using regular expressions</span></a><span style="color: #666666;"> in your preferred scripting language (using </span><span style="font-weight: bold; color: #666666;">sub/gsub</span><span style="color: #666666;"> commands in R,</span><span style="font-weight: bold; color: #666666;"> re.sub</span><span style="color: #666666;"> type commands in Python). Better yet,</span><span style="font-weight: bold; color: #666666;"> <a style="color: #7a7a7a;" href="http://openrefine.org/" target="_blank">OpenRefine</a> </span><span style="color: #666666;">provides some extremely flexible tools for wrangling OCRd output, making most cleaning tasks trivial while also supporting advanced regular expression use.
 
-<a href="http://openrefine.org/">![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/openrefinelogo.png)</a>
+<a href="http://openrefine.org/">![Image](/images/blog/assets/openrefinelogo.png)</a>
 
 Clean up weird OCR output using OpenRefine and regular expressions.
 
@@ -130,8 +130,8 @@ Why ABBYY FineReader? First, the learning curve is lower than other open source 
 
 Although it is relatively easy, ABBYY FineReader has downsides. For instance, the Mac version isn't as functional as the complete "Professional" PC version. Moreover, multi-core support is limited for both Professional and basic Corporate versions, making large projects slow and unwieldy (in my experience).
 
-While FineReader provides tools for table area recognition, other times we have to pursue more programmatic methods of extracting table. Common approaches can be seen in <a href="http://www.propublica.org/nerds/item/image-to-text-ocr-and-imagemagick" target="_blank">**Dan Nugyen's ProPublica guide**</a> and **<a href="http://rexdouglass.com/extracting-data-from-printed-tables-in-historical-documents/">Dr. Rex Douglass' (UCSD Polisci) method</a>,** who use computer vision techniques to "cut up" tables, OCRing individual cells before reassembling the table. I recommend taking a peak at both to understand alternative workflows for table scraping.
+While FineReader provides tools for table area recognition, other times we have to pursue more programmatic methods of extracting table. Common approaches can be seen in <a href="http://www.propublica.org/nerds/item/image-to-text-ocr-and-imagemagick" target="_blank">**Dan Nugyen's ProPublica guide**</a> and **<a href="http://web.archive.org/web/20170304185858/http://rexdouglass.com/extracting-data-from-printed-tables-in-historical-documents/">Dr. Rex Douglass' (UCSD Polisci) method</a>,** who use computer vision techniques to "cut up" tables, OCRing individual cells before reassembling the table. I recommend taking a peak at both to understand alternative workflows for table scraping.
 
-Some users have opted to detect tables after OCRing: first, recognizing text in PDF files and then stripping the OCRd content using <a href="tabula.nerdpower.org" target="_blank">**PDF table extraction tools like Tabula**</a>. These methods hint to the growing hacker community interested in scraping PDF content. The recent <a href="http://pdfliberation.wordpress.com/">**PDF Liberation Hackathon website**</a> features some great tools to this end.
+Some users have opted to detect tables after OCRing: first, recognizing text in PDF files and then stripping the OCRd content using <a href="https://tabula.technology/" target="_blank">**PDF table extraction tools like Tabula**</a>. These methods hint to the growing hacker community interested in scraping PDF content. The recent <a href="http://pdfliberation.wordpress.com/">**PDF Liberation Hackathon website**</a> features some great tools to this end.
 
 Feel free to shoot me any feedback or share your experiences with digitizing historic data: <a href="mailto:nathaniel.lane@iies.su.se">nathaniel.lane@iies.su.se</a>.

@@ -57,7 +57,7 @@ If you're doing more complicated tasks or working with large sets of data, proce
 
 ### A faster method.
 
-Using <a href="https://github.com/Rdatatable/data.table/wiki">the <code>data.table</code> package</a> can speed things along if we're trying to get big data into R efficiently (<a href="I highly recommend checking out the github for the project">I highly recommend checking out the github for the project</a>).<br />
+Using <a href="https://github.com/Rdatatable/data.table/wiki">the <code>data.table</code> package</a> can speed things along if we're trying to get big data into R efficiently (<a href="https://github.com/Rdatatable/data.table">I highly recommend checking out the github for the project</a>).<br />
 The <code>rbindlist</code> function included in the package is incredibly fast and written in C. In addition the <code>fread</code> function is built to efficiently read data into R.
 
 Below I replace the normal <code>read.csv</code> function with <code>fread()</code>, and replace <code>do.call()</code>+<code>rbind()</code> with <code>rbindlist()</code>.

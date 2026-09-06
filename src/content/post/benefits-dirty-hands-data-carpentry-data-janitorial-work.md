@@ -14,7 +14,7 @@ draft: true
 
 #### Data Janitors and Data Carpentry: value in the nitty gritty?
 
-![Image](http://s3-us-west-2.amazonaws.com/landlaborcapital/blogposts/janitorialscatter.jpg)
+![Image](/images/blog/assets/janitorialscatter.jpg)
 <em>"Report on the investigation of engineer and janitor service, Board of education, city of Chicago" (1913)
 </em>
 

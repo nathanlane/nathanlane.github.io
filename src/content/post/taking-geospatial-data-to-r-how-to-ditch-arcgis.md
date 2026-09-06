@@ -27,7 +27,7 @@ All this means there are many reasons to dump ArcGIS--something I should have do
 
 Here are just some aspects on working with raster and vector data in R for those wanting to migrate from ArcGIS. Plus some tools that helped me with scripts to manipulate "large" data sets--say a couple gigs of raster data, etc..
 
-To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html">* this is helpful to note if you're a Linux user*</a>).
+To get started working with GIS data, a couple of R packages cover most ArcGIS tasks. I'd install <code>sp, Raster, rgeostats, maptools,</code>and <code>rgdal</code> packages, which cover a surprising number of bases (Also: <a title="rgdal in linux" href="http://web.archive.org/web/20171024201100/http://robinlovelace.net/r/2013/11/26/installing-rgdal-on-ubuntu.html">* this is helpful to note if you're a Linux user*</a>).
 
 **Starting with Raster Data**
 

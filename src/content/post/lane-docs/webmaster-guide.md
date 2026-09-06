@@ -404,7 +404,7 @@ pnpm format       # Format code
 ### URLs to Remember
 - Dev: http://localhost:3000
 - GitHub Pages: https://[username].github.io/[repository]/
-- GitHub Actions: https://github.com/[username]/[repository]/actions
+- GitHub Actions: `https://github.com/[username]/[repository]/actions`
 
 ---
 
