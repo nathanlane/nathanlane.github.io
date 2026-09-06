@@ -11,7 +11,6 @@ description: "I study the impact of industrial policy on industrial development
 publication: Quarterly Journal of Economics
 status: published
 type: paper
-date: 2025-08-01T20:41:00.000-07:00
 featured: true
 tags:
   - industrial policy
@@ -22,7 +21,6 @@ tags:
   - HCI Drive
 paperDate: "2025"
 link: https://academic.oup.com/qje/article/140/1/403/7926978
-pdfUrl: https://academic.oup.com/qje/article/140/1/403/7926978
 ---
 
 ## Abstract

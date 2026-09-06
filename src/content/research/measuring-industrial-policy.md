@@ -7,7 +7,6 @@ description: We provide a new, text-based approach to measuring industrial
 publication: NBER Working Paper
 status: working-paper
 type: paper
-date: 2025-07-01T20:44:00.000-07:00
 featured: true
 tags:
   - industrial policy
@@ -15,8 +14,7 @@ tags:
   - machine learning
   - text-as-data
 paperDate: "2025"
-link: https://www.nber.org/papers/w33902
-pdfUrl: ""
+link: https://www.nber.org/papers/w33895
 ---
 
 ## Abstract

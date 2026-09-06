@@ -3,8 +3,8 @@ title: "Homepage Configuration Guide"
 description: "How to easily customize the homepage content sections, including item counts and text"
 publishDate: "2025-01-15"
 tags: ["documentation", "guide", "configuration"]
-series: "lane-docs"
-seriesOrder: 10
+seriesId: "lane-docs"
+orderInSeries: 10
 draft: false
 ---
 

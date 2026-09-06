@@ -5,7 +5,6 @@ description: "An example second post for Citrus Docs series"
 seriesId: lane-docs
 orderInSeries: 3
 updatedDate: '2024-12-22'
-featured: false
 tags: ["example", "series", "citrus"]
 ogImage: ""
 ---

@@ -1,7 +1,7 @@
 ---
 title: "The New Economics of Industrial Policy"
 authors: "Réka Juhász, Nathan Lane, and Dani Rodrik"
-paperDate: "2023"
+paperDate: "2024"
 status: "published"
 type: "paper"
 featured: false

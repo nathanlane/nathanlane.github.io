@@ -1,14 +1,14 @@
 ---
-title: "Industrial Policy and the Global Semiconductor Sector"
+title: "Industrial Policy in the Global Semiconductor Sector"
 authors: "Penny Goldberg, Réka Juhász, Nathan Lane, Guilia Lo Forte, and Jeff Thurk"
-paperDate: "2024"
+paperDate: "2026"
 status: "working-paper"
 type: "paper"
 featured: true
 publication: "NBER Working Paper"
 description: "This paper documents and quantifies the magnitude of industrial policies in the global semiconductor sector since the passage of the CHIPS Act in the United States. We provide a comprehensive examination of semiconductor industrial policies globally, their rationale, and their potential economic impacts including cross-border effects."
-link: "https://www.nber.org/papers/w32892"
-download: "https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/GoldbergEtAl_GlobalChipIndustrialPolicy_2024.pdf"
+link: "https://www.nber.org/papers/w32651"
+download: "https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/GoldbergEtAl_GlobalChipIndustrialPolicy_2026.pdf"
 tags: ["semiconductors", "industrial policy", "CHIPS Act", "global trade", "technology policy"]
 ---
 
@@ -18,10 +18,10 @@ This paper documents and quantifies the magnitude of industrial policies in the 
 
 ## Resources
 
-- [NBER Working Paper](https://www.nber.org/papers/w32892)
+- [NBER Working Paper](https://www.nber.org/papers/w32651)
 - [SSRN Working Paper](https://papers.ssrn.com/abstract=4878912)
 - [SocArxiv](https://osf.io/preprints/osf/ny3eq)
-- [Alternative](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/GoldbergEtAl_GlobalChipIndustrialPolicy_2024.pdf)
+- [Alternative](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/GoldbergEtAl_GlobalChipIndustrialPolicy_2026.pdf)
 - [NBER Digest (Website)](https://www.nber.org/digest/202410/global-perspective-industrial-policy-and-semiconductor-industry)
 - [NBER Digest (Website)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/writing/GoldbergEtAl_NBERSemiConductorDigest_2024.pdf)
 
