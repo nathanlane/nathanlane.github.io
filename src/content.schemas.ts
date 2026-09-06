@@ -14,12 +14,25 @@ const researchStatusValues = researchStatusOptions as [ResearchStatus, ...Resear
 const researchTypeValues = researchTypeOptions as [ResearchType, ...ResearchType[]];
 const mediaTypeValues = mediaTypeOptions as [MediaType, ...MediaType[]];
 
+/**
+ * Wraps an optional field so a blank value means the same as an absent one.
+ *
+ * A CMS writes "" for an optional text field that was opened and left blank, so a blank
+ * is a realistic thing to author -- but "" is not an absent key. It passed `.optional()`
+ * and then failed `.url()`, giving `link: ""` a bare "Invalid URL" that never hinted the
+ * answer was to delete the line; and `ogImage: ""` validated fine, then defeated the `??`
+ * fallback downstream and left three posts advertising the generic site card instead of
+ * their own generated image. Normalising here fixes both at the source.
+ */
+const blankAsAbsent = <T extends z.ZodTypeAny>(schema: T) =>
+	z.preprocess((val) => (val === "" ? undefined : val), schema);
+
 export const seoSchema = z.object({
 	description: z
 		.string()
 		.min(20, "Description should be at least 20 characters")
 		.max(300, "Description must be ≤300 characters"),
-	ogImage: z.string().optional(),
+	ogImage: blankAsAbsent(z.string().optional()),
 	draft: z.boolean().default(sharedBooleanDefaults.draft),
 });
 
@@ -133,79 +146,128 @@ const isoDate = z
 		return new Date(Date.UTC(val.getUTCFullYear(), val.getUTCMonth(), val.getUTCDate()));
 	});
 
+/**
+ * A publication year, not a timestamp.  Unquoted YAML turns 2025 into a number and
+ * 2025-07 into a Date, so a bare `z.string()` here rejected frontmatter that was
+ * perfectly well formed and reported it as a type error, which read as a schema bug
+ * rather than an authoring one.  Numbers are normalised to their string form; Dates
+ * are rejected explicitly, because silently taking their year would let a timestamp
+ * near a year boundary land the paper in the wrong year.
+ */
+const paperYear = z
+	.union([z.string(), z.number(), z.date()])
+	.superRefine((val, ctx) => {
+		if (val instanceof Date) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message:
+					'paperDate is a publication year, not a date. Use a 4-digit year: paperDate: "2025".',
+			});
+			return;
+		}
+		if (!/^\d{4}$/.test(String(val))) {
+			ctx.addIssue({
+				code: z.ZodIssueCode.custom,
+				message: `paperDate must be a 4-digit year: received "${String(val)}".`,
+			});
+		}
+	})
+	.transform((val) => String(val));
+
+/**
+ * Every collection schema is strict: an unrecognised frontmatter key is an error, not
+ * something to drop.  Zod's default is to strip silently, which let dead fields (`date`,
+ * `pdfUrl`) and outright typos for real fields (`series` where the schema says `seriesId`)
+ * sit in content for months looking authoritative while nothing read them.
+ */
 export const createPostSchema = (image?: () => z.ZodTypeAny) =>
-	baseSchema.merge(seoSchema).extend({
-		coverImage: createCoverImageSchema(image),
-		tags: uniqueSlugTags,
-		publishDate: isoDate,
-		updatedDate: isoDate.optional(),
-		seriesId: z.string().optional(),
-		orderInSeries: z.number().optional(),
-	});
+	baseSchema
+		.merge(seoSchema)
+		.extend({
+			coverImage: createCoverImageSchema(image),
+			tags: uniqueSlugTags,
+			publishDate: isoDate,
+			updatedDate: isoDate.optional(),
+			seriesId: z.string().optional(),
+			orderInSeries: z.number().optional(),
+		})
+		.strict();
 
 export const createResearchSchema = () =>
-	researchBaseSchema.merge(seoSchema.pick({ ogImage: true })).extend({
-		description: z
-			.string()
-			.min(50, "Research description should be at least 50 characters")
-			.max(400, "Research description should be ≤400 characters for abstracts"),
-		status: z.enum(researchStatusValues).transform((value): ResearchStatus => value),
-		type: z.enum(researchTypeValues).transform((value): ResearchType => value),
-		paperDate: z.string().regex(/^\d{4}$/, "Must be 4-digit year"),
-		authors: z.string(),
-		publication: z.string().optional(),
-		download: z.string().url().optional(),
-		link: z.string().url().optional(),
-		featured: z.boolean().default(sharedBooleanDefaults.featured),
-		tags: uniqueLowercaseTags,
-	});
+	researchBaseSchema
+		.merge(seoSchema.pick({ ogImage: true }))
+		.extend({
+			description: z
+				.string()
+				.min(50, "Research description should be at least 50 characters")
+				.max(400, "Research description should be ≤400 characters for abstracts"),
+			status: z.enum(researchStatusValues).transform((value): ResearchStatus => value),
+			type: z.enum(researchTypeValues).transform((value): ResearchType => value),
+			paperDate: paperYear,
+			authors: z.string(),
+			publication: z.string().optional(),
+			download: blankAsAbsent(z.string().url().optional()),
+			link: blankAsAbsent(z.string().url().optional()),
+			featured: z.boolean().default(sharedBooleanDefaults.featured),
+			// Breaks ties between papers sharing a paperDate; see compareResearch.
+			order: z.number().optional(),
+			tags: uniqueLowercaseTags,
+		})
+		.strict();
 
 export const createWritingSchema = () =>
-	baseSchema.merge(seoSchema).extend({
-		publishDate: isoDate,
-		type: z.string().default("writing"),
-		featured: z.boolean().default(sharedBooleanDefaults.featured),
-		genre: z.string().optional(),
-		wordCount: z.number().optional(),
-	});
+	baseSchema
+		.merge(seoSchema)
+		.extend({
+			publishDate: isoDate,
+			type: z.string().default("writing"),
+			featured: z.boolean().default(sharedBooleanDefaults.featured),
+			genre: z.string().optional(),
+			wordCount: z.number().optional(),
+		})
+		.strict();
 
 export const createMediaSchema = () =>
-	z.object({
-		title: z.string(),
-		outlet: z.string(),
-		date: isoDate,
-		type: z.enum(mediaTypeValues).transform((value): MediaType => value),
-		link: z.string().url(),
-		description: z.string().optional(),
-	});
-
-export const pagesSchema = z.object({
-	title: z.string(),
-	description: z.string(),
-	headerDescription: z.string().optional(),
-	headerAdditionalInfo: z.string().optional(),
-	showPhoto: z.boolean().default(sharedBooleanDefaults.showPhoto),
-	sections: z
-		.array(
-			z.object({
-				title: z.string(),
-				id: z.string().optional(),
-			}),
-		)
-		.optional(),
-	secondaryAffiliation: z
+	z
 		.object({
 			title: z.string(),
-			role: z.string(),
+			outlet: z.string(),
+			date: isoDate,
+			type: z.enum(mediaTypeValues).transform((value): MediaType => value),
+			link: z.string().url(),
+			description: z.string().optional(),
 		})
-		.optional(),
-	contactLinks: z
-		.array(
-			z.object({
-				label: z.string(),
-				href: z.string(),
-				text: z.string(),
-			}),
-		)
-		.optional(),
-});
+		.strict();
+
+export const pagesSchema = z
+	.object({
+		title: z.string(),
+		description: z.string(),
+		headerDescription: z.string().optional(),
+		headerAdditionalInfo: z.string().optional(),
+		showPhoto: z.boolean().default(sharedBooleanDefaults.showPhoto),
+		sections: z
+			.array(
+				z.object({
+					title: z.string(),
+					id: z.string().optional(),
+				}),
+			)
+			.optional(),
+		secondaryAffiliation: z
+			.object({
+				title: z.string(),
+				role: z.string(),
+			})
+			.optional(),
+		contactLinks: z
+			.array(
+				z.object({
+					label: z.string(),
+					href: z.string(),
+					text: z.string(),
+				}),
+			)
+			.optional(),
+	})
+	.strict();
