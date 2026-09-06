@@ -9,6 +9,14 @@ gitignored `.private/` overlay, so `generate:assistant-docs` and `check:assistan
 for contributors who have that companion repo checked out. This is why they are deliberately not
 part of `validate` or CI.
 
+`verify:links` is also deliberately kept out of `validate`, `check:generated`, and the required CI
+checks. It fetches live third-party URLs, so a publisher rate-limiting or bot-blocking a scripted
+client would fail the build for reasons that have nothing to do with the change being validated.
+It runs instead on its own schedule via `.github/workflows/verify-links.yml`. It only exits
+non-zero when a URL returns a definite HTTP 404/410 — everything else (403/429/401, server errors,
+a network failure that survives retries) is reported as "unverifiable" rather than "dead", since
+none of those responses prove the link is actually gone.
+
 `check:social-card` is also deliberately kept out of `validate`, `check:generated`, and CI. The
 card's SVG uses system fonts (`Georgia`, `Arial`) that a stock Linux runner lacks, so `resvg`
 renders different bytes there than on the committer's machine. The generated PNG is therefore not
@@ -23,6 +31,7 @@ review `public/social-card.png` by hand when the SVG source changes.
 | `scripts/validation/lockfile-regression-check.mjs` | Fail if any package's max resolved version is lower on the branch than on main — guards against silent Dependabot downgrades | `pnpm run check:lockfile <base-lock> <branch-lock>` |
 | `scripts/validation/smoke-test.mjs` | Smoke-test rendered pages on a local server or production | `pnpm smoke:local`, `pnpm smoke:prod`, `pnpm smoke -- <url>` |
 | `scripts/validation/pages-origin-redirect-smoke.mjs` | Verify `nathanlane.github.io` redirects to the canonical domain without path loss | `pnpm run smoke:pages` |
+| `scripts/validation/verify-links.mjs` | Check every external URL referenced from `src/content/` and classify it ok / dead / unverifiable | `pnpm run verify:links` |
 | `scripts/validation/verify-deploy.sh` | Wait for the latest Pages deploy, then run the live smoke suite | `pnpm run verify:deploy` |
 | `scripts/maintenance/generate-cms-config.mjs` | Generate or check the Decap CMS config from the content contract | `pnpm run generate:cms` / `pnpm run check:cms` |
 | `scripts/maintenance/generate-katex-assets.mjs` | Generate or check the KaTeX font and CSS assets | `pnpm run generate:katex` / `pnpm run check:katex` |
