@@ -1,11 +1,11 @@
 ---
 title: "The Value of Names - Civil Society, Information, and Governing Multinationals"
 authors: "David Kreitmeir, Nathan Lane, and Paul A. Raschky"
-paperDate: "2025"
+paperDate: "2026"
 status: "published"
 type: "paper"
 featured: false
-publication: "Journal of the European Economic Association (Accepted)"
+publication: "Journal of the European Economic Association"
 description: "Does the human rights spotlight impact multinationals? We evaluate the effect of publicizing human rights violations on firm value, focusing on salient events at the center of international campaigns: the assassination of environmental activists."
 link: "https://doi.org/10.31235/osf.io/aw7sq"
 download: "https://osf.io/preprints/socarxiv/aw7sq"
