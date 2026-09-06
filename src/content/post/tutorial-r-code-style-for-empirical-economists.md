@@ -89,7 +89,7 @@ Consider a bastardization of the famous "rule of three", from Martin Fowler's se
 
 Breaking code into re-usable, independent chunks will make code easier to read and debug.
 
-Functions play a key role in modularization. Use them often, keeping them short and specific to a task. *(Note: I recommend [Cosma Shalizi's notes on writing good R functions](http://www.stat.cmu.edu/~cshalizi/402/programming/writing-functions.pdf) and the [Clean Code github's function tutorial](http://nicercode.github.io/guides/functions/))*
+Functions play a key role in modularization. Use them often, keeping them short and specific to a task. *(Note: I recommend [Cosma Shalizi's notes on writing good R functions](http://www.stat.cmu.edu/~cshalizi/402/programming/writing-functions.pdf) and the [Clean Code github's function tutorial](http://web.archive.org/web/20260311002943/https://nicercode.github.io/guides/functions/))*
 
 Limit your *actual script files*. Split them into two files if necessary. At minimum, you should divide analysis and data preparation. Jonathan Nagler of NYU Polisci. [explains why](http://www.nyu.edu/classes/nagler/quant2/coding_style.html):
 
@@ -101,4 +101,4 @@ Code should improve through time. Clean code gurus repeat a code of conduct adop
 
 > "Leave the ~~campground~~ code cleaner than you found it"
 >
-> -[Bob Martin's "Clean Code: A Handbook of Agile Software Craftsmanship"](http://amzn.com/0132350882)
+> -[Bob Martin's "Clean Code: A Handbook of Agile Software Craftsmanship"](https://www.amazon.com/dp/0132350882)

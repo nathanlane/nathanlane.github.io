@@ -30,7 +30,7 @@ installedpackages <- as.vector( temp[ is.na( temp[, "Priority" ] ), 1 ] )
 save( installedpackages, file = "oldpackages.rda" )
 {% endhighlight %}
 
-The above code is essentially the same as <a href="https://www.datascienceriot.com/how-to-upgrade-r-without-losing-your-packages/kris/">Data Science Riot</a>.
+The above code is essentially the same as <a href="http://web.archive.org/web/20160408132319/https://www.datascienceriot.com/how-to-upgrade-r-without-losing-your-packages/kris/">Data Science Riot</a>.
 
 Once we setup R Open, we'll evoke this <code>.Rda</code> file to automatically (re-)install the old packages.
 

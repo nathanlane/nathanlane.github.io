@@ -18,7 +18,7 @@ Note: this code does not apply to the "Bulk download" API, which allows users to
 My script loops over lists of reporting countries and their counterparts.
 I have these lists saved as CSV files.
 
-The UN Comtrade system uses its own coding scheme. Thus, we do not make queries based on country names, but using their identifiers found here <a href = "https://unstats.un.org/unsd/tradekb/Knowledgebase/Comtrade-Country-Code-and-Name" target = "_blank">coding scheme</a>.
+The UN Comtrade system uses its own coding scheme. Thus, we do not make queries based on country names, but using their identifiers found here <a href = "https://uncomtrade.org/docs/country-codes/" target = "_blank">coding scheme</a>.
 
 I have list of countries and their corresponding codes saved as.csv files. I have a trade partner list (uncomtrade_partners.csv) and list of reporting countries (uncomtrade_reporting.csv), both of which have the following layout:
 
