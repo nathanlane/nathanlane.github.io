@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { transformerMetaHighlight, transformerNotationDiff } from "@shikijs/transformers";
@@ -113,46 +114,48 @@ export default defineConfig({
 	],
 	markdown: {
 		syntaxHighlight: false,
-		// Enable smartypants for better typography (Tim Brown principle)
-		smartypants: true,
+		processor: unified({
+			// Enable smartypants for better typography (Tim Brown principle)
+			smartypants: true,
 
-		remarkPlugins: [
-			remarkReadingTime,
-			remarkDirective,
-			remarkMath,
-			remarkMathDetect,
-			remarkAdmonitions,
-		],
-		remarkRehype: {
-			footnoteLabelProperties: {
-				className: [""],
+			remarkPlugins: [
+				remarkReadingTime,
+				remarkDirective,
+				remarkMath,
+				remarkMathDetect,
+				remarkAdmonitions,
+			],
+			remarkRehype: {
+				footnoteLabelProperties: {
+					className: [""],
+				},
+				footnoteBackContent: "⤴",
 			},
-			footnoteBackContent: "⤴",
-		},
 
-		rehypePlugins: [
-			[
-				rehypeExternalLinks,
-				{
-					rel: ["nofollow", "noreferrer"],
-					target: "_blank",
-				},
-			],
-
-			[
-				rehypePrettyCode,
-				{
-					theme: {
-						light: "rose-pine-dawn", // after changing the theme, the server needs to be restarted
-						dark: "rose-pine", // after changing the theme, the server needs to be restarted
+			rehypePlugins: [
+				[
+					rehypeExternalLinks,
+					{
+						rel: ["nofollow", "noreferrer"],
+						target: "_blank",
 					},
+				],
 
-					transformers: [transformerNotationDiff(), transformerMetaHighlight()],
-				},
+				[
+					rehypePrettyCode,
+					{
+						theme: {
+							light: "rose-pine-dawn", // after changing the theme, the server needs to be restarted
+							dark: "rose-pine", // after changing the theme, the server needs to be restarted
+						},
+
+						transformers: [transformerNotationDiff(), transformerMetaHighlight()],
+					},
+				],
+				rehypeKatex, // Render LaTeX math with KaTeX
+				rehypeUnwrapImages,
 			],
-			rehypeKatex, // Render LaTeX math with KaTeX
-			rehypeUnwrapImages,
-		],
+		}),
 	},
 	// https://docs.astro.build/en/guides/prefetch/
 	prefetch: true,
