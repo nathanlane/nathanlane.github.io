@@ -29,11 +29,14 @@ export async function renderMarkdown(markdown: string) {
 // resolved reference here is guaranteed to point at a file that exists in the output.
 // Keyed by project-root-relative path (e.g. "/src/content/post/foo/logo.png"), matching
 // the `filePath` Astro reports on collection entries.
-const contentImages = import.meta.glob("/src/content/**/*.{png,jpg,jpeg,gif,svg,webp,avif}", {
-	eager: true,
-	query: "?url",
-	import: "default",
-}) as Record<string, string>;
+const contentImages = import.meta.glob(
+	"/src/content/{post,research,writing}/**/*.{png,jpg,jpeg,gif,svg,webp,avif}",
+	{
+		eager: true,
+		query: "?url",
+		import: "default",
+	},
+) as Record<string, string>;
 
 const SCHEME_PATTERN = /^[a-z][a-z0-9+.-]*:/i;
 
