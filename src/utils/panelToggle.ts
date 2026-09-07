@@ -1,22 +1,9 @@
 /**
- * Panel Toggle Utility
- * ===================
- *
- * Purpose: Provides reusable show/hide functionality for panels (TOC, Series, etc.)
- *
- * Created: July 17, 2025
- * Author: Claude Assistant
- *
- * This utility consolidates duplicate panel toggle code that was previously
- * scattered across BlogPost.astro and Series.astro layouts (~236 lines reduced
- * to this single 70-line module).
- *
- * Features:
- * - Configuration-based initialization
- * - Responsive breakpoint support (md/lg)
- * - Type-safe with TypeScript interfaces
- * - Handles desktop and mobile toggle buttons
- * - Optional close button support
+ * Show/hide behavior for a reading panel (TOC, series navigation) shared by the blog post
+ * and series layouts. Owns visibility, ARIA state, and the responsive default for one panel:
+ * open at/above `breakpointPx`, closed below it, resetting to that default whenever the
+ * viewport crosses the breakpoint. No other stylesheet rule should override the panel's
+ * display once this module is wired up to it.
  *
  * Usage:
  * ```typescript
@@ -27,7 +14,7 @@
  *   toggleButtonId: 'toggle-toc',
  *   mobileToggleButtonId: 'toggle-toc-mobile',
  *   closeButtonId: 'close-toc',
- *   breakpoint: 'md',
+ *   breakpointPx: 768,
  *   visibleClass: 'md:block'
  * });
  * ```
@@ -38,8 +25,12 @@ export interface PanelToggleConfig {
 	toggleButtonId?: string;
 	mobileToggleButtonId?: string;
 	closeButtonId?: string;
-	breakpoint: "md" | "lg";
-	visibleClass: "md:block" | "lg:block";
+	// The width, in CSS pixels, at and above which the panel defaults to open. Must match the
+	// media query encoded in `visibleClass` (e.g. 1281 for "min-[1281px]:block") — this module
+	// is the sole owner of panel visibility, so no other stylesheet rule may hide or show the
+	// panel at a different width.
+	breakpointPx: number;
+	visibleClass: string;
 }
 
 export function initializePanelToggle(config: PanelToggleConfig): void {
@@ -59,12 +50,11 @@ export function initializePanelToggle(config: PanelToggleConfig): void {
 		: null;
 	const closeBtn = config.closeButtonId ? document.getElementById(config.closeButtonId) : null;
 
-	// Breakpoint media query
-	const breakpointSize = config.breakpoint === "md" ? "768px" : "1024px";
+	const breakpointQuery = window.matchMedia(`(min-width: ${config.breakpointPx}px)`);
 
 	// Check if panel is visible
 	const isPanelVisible = (): boolean => {
-		const isLargeScreen = window.matchMedia(`(min-width: ${breakpointSize})`).matches;
+		const isLargeScreen = breakpointQuery.matches;
 		return (
 			(isLargeScreen && panel.classList.contains(config.visibleClass)) ||
 			(!isLargeScreen && !panel.classList.contains("hidden"))
@@ -104,6 +94,17 @@ export function initializePanelToggle(config: PanelToggleConfig): void {
 		}
 	};
 
+	// A closed panel must hand focus back to whichever opener is actually on screen: the
+	// mobile and desktop openers occupy complementary widths, so only one is ever reachable.
+	const focusVisibleOpener = (): void => {
+		for (const btn of [toggleBtn, mobileToggleBtn]) {
+			if (btn instanceof HTMLElement && btn.offsetParent !== null) {
+				btn.focus();
+				return;
+			}
+		}
+	};
+
 	// Attach event listeners
 	if (toggleBtn) {
 		toggleBtn.addEventListener("click", togglePanel);
@@ -114,13 +115,23 @@ export function initializePanelToggle(config: PanelToggleConfig): void {
 	}
 
 	if (closeBtn) {
-		closeBtn.addEventListener("click", hidePanel);
+		closeBtn.addEventListener("click", () => {
+			hidePanel();
+			focusVisibleOpener();
+		});
 	}
 
-	// Publish the initial state, and keep it correct across the breakpoint: the panel's
-	// visibility is class-driven and responsive, so the rendered state can change without
-	// any click.
-	const breakpointQuery = window.matchMedia(`(min-width: ${breakpointSize})`);
+	// Publish the initial state, which is already class-driven and responsive in markup.
 	syncAria(isPanelVisible());
-	breakpointQuery.addEventListener("change", () => syncAria(isPanelVisible()));
+
+	// Crossing the breakpoint moves the panel into a new responsive range, so any user toggle
+	// from the old range no longer applies: reset to that range's own default (open at/above
+	// the breakpoint, closed below it) rather than carrying the prior state forward.
+	breakpointQuery.addEventListener("change", () => {
+		if (breakpointQuery.matches) {
+			showPanel();
+		} else {
+			hidePanel();
+		}
+	});
 }
