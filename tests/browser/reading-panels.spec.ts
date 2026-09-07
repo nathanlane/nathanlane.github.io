@@ -15,13 +15,18 @@ async function expectAriaMatchesVisibility(panel: Locator, expectedVisible: bool
 	// A resize's matchMedia "change" event and the resulting class update are async relative
 	// to Playwright's setViewportSize, so poll instead of reading computed state once.
 	await expect
-		.poll(async () => {
-			const { display, ariaHidden } = await panel.evaluate((el) => ({
-				display: getComputedStyle(el).display,
-				ariaHidden: el.getAttribute("aria-hidden"),
-			}));
-			return { visible: display !== "none", ariaHidden };
-		}, "computed display and aria-hidden should both agree with the expected visibility")
+		.poll(
+			async () => {
+				const { display, ariaHidden } = await panel.evaluate((el) => ({
+					display: getComputedStyle(el).display,
+					ariaHidden: el.getAttribute("aria-hidden"),
+				}));
+				return { visible: display !== "none", ariaHidden };
+			},
+			{
+				message: "computed display and aria-hidden should both agree with the expected visibility",
+			},
+		)
 		.toEqual({ visible: expectedVisible, ariaHidden: String(!expectedVisible) });
 }
 
