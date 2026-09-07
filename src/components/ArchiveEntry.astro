@@ -62,24 +62,36 @@ export interface Props {
   link: string;
   description?: string;
   class?: string;
+  /** Scoped data for callers that filter entries client-side, e.g. archive search. */
+  searchData?: { title: string; tags: string; year: string };
 }
 
-const { 
-  title, 
+const {
+  title,
   primaryMeta,
-  secondaryMeta, 
+  secondaryMeta,
   tertiaryMeta,
-  link, 
-  description, 
-  class: className = "" 
+  link,
+  description,
+  class: className = "",
+  searchData,
 } = Astro.props;
+
+const searchAttrs = searchData
+  ? {
+      "data-post-item": true,
+      "data-post-title": searchData.title,
+      "data-post-tags": searchData.tags,
+      "data-post-year": searchData.year,
+    }
+  : {};
 ---
 
-<article class={`archive-entry ${className}`}>
+<article class={`archive-entry ${className}`} {...searchAttrs}>
   <!-- Title as primary heading with enhanced typography -->
   <h3 class="archive-title">
-    <a 
-      href={link} 
+    <a
+      href={link}
       class="link-title link-underline-thin"
     >
       {title}
