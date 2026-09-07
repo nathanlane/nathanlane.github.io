@@ -27,16 +27,21 @@ const archivedPapers = allResearch.filter(paper => paper.data.status === "archiv
 // Newest year first, with `order` breaking ties within a year.
 const sortResearch = (papers: typeof allResearch) => [...papers].sort(compareResearch);
 
-// Create table of contents data
-const tocSections = [
+// Table of contents: link only sections that actually render below, so navigation never
+// dead-ends on an empty status group. The independent CV link always stays available.
+type TocSection = { title: string; href: string; count?: number };
+
+const paperSections: TocSection[] = [
   { title: "New and Updated", href: "#featured", count: featuredPapers.length },
   { title: "Published Papers", href: "#published", count: publishedPapers.length },
   { title: "Working Papers", href: "#working", count: workingPapers.length },
   { title: "Works in Progress", href: "#wip", count: worksInProgress.length },
-  ...(archivedPapers.length > 0
-    ? [{ title: "Archived", href: "#archived", count: archivedPapers.length }]
-    : []),
-  { title: "Curriculum Vitae", href: siteConfig.resumeUrl || "/cv.pdf" }
+  { title: "Archived", href: "#archived", count: archivedPapers.length },
+].filter((section) => (section.count ?? 0) > 0);
+
+const tocSections: TocSection[] = [
+  ...paperSections,
+  { title: "Curriculum Vitae", href: siteConfig.resumeUrl || "/cv.pdf" },
 ];
 
 const meta = {

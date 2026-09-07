@@ -1,6 +1,7 @@
 ---
 import ArchiveEntry from "@/components/ArchiveEntry.astro";
 import Badge from "@/components/Badge.astro";
+import PostSearch from "@/components/blog/PostSearch.astro";
 import PageHeader from "@/components/PageHeader.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
@@ -109,6 +110,9 @@ const getPrimaryTag = (post: CollectionItemBase) => {
       description={`${postCount} posts exploring economics, technology, design, and development spanning ${yearCount} years (${oldestYear}–${newestYear}). A comprehensive collection of tutorials, essays, research notes, and technical documentation.`}
     />
 
+    <!-- Archive Search: filters the full post corpus rendered below by title/tag -->
+    <PostSearch placeholder="Search by title or tag…" />
+
     <!-- Browse by Topic Section -->
     <section class="mb-12b">
       <h2 class="heading-2 mb-6b">Browse by Topic</h2>
@@ -141,23 +145,28 @@ const getPrimaryTag = (post: CollectionItemBase) => {
         {descYearKeys.map(year => (
           <section id={`year-${year}`}>
             <!-- Year heading with post count -->
-            <h3 class="heading-3 text-light mb-6b">
+            <h3 class="heading-3 text-light mb-6b" data-year-header={year}>
               {year}
               <span class="text-meta ml-2b">• {groupedByYear[year]!.length} posts</span>
             </h3>
-            
+
             <!-- Posts for this year using ArchiveEntry component -->
             <div class="space-y-6b">
               {groupedByYear[year]!
                 .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
                 .map(post => (
-                  <ArchiveEntry 
+                  <ArchiveEntry
                     title={post.data.title}
                     primaryMeta={getPostType(post)}
                     secondaryMeta={formatDate(new Date(post.data.publishDate))}
                     tertiaryMeta={getPrimaryTag(post)}
                     link={`/posts/${post.id}/`}
                     description={post.data.description}
+                    searchData={{
+                      title: post.data.title,
+                      tags: post.data.tags?.join(" ") ?? "",
+                      year,
+                    }}
                   />
               ))}
             </div>
