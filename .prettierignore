@@ -1,5 +1,6 @@
 # Local tooling / machine-specific settings (not source to format)
 .claude/
+.agents/
 
 # Build output and generated artifacts
 dist/
