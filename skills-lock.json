@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "astro-developer": {
+      "source": "withastro/astro",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/astro-developer/SKILL.md",
+      "computedHash": "cd767f617a4c2baef1950ab5fe45bc9b5e88d255f3c374e64b7bc1ee929eb920"
+    },
+    "tailwindcss": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "tailwindcss/SKILL.md",
+      "computedHash": "b1d95ac9242e613966fb11ed413fd2ff61f04641e4e8c1418e0e8258573fcc68"
+    }
+  }
+}
