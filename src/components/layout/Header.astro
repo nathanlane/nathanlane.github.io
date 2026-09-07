@@ -21,7 +21,7 @@ const header = {
 
 <header id="main-header" class="header relative top-0 left-0 z-20 w-full min-w-0 bg-bgColor">
 	<div
-		class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-0 lg:px-space-s"
+		class="header-content mx-auto flex flex-wrap gap-y-2b w-full max-w-5xl items-center justify-between px-0 lg:px-space-s"
 	>
 		<!-- Left side: Logo (if shown) -->
 		{
@@ -131,7 +131,12 @@ const header = {
 	/* Header styles */
 	.header {
 		--header-height: 72px;
-		height: var(--header-height);
+		min-height: var(--header-height);
+	}
+
+	.header-content {
+		min-height: var(--header-height);
+		height: auto;
 	}
 
 	/* Logo image */

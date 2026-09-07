@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 // R01 regression: at 390px the shared layout used to expand to ~557px,
 // pushing header controls outside the viewport.
 
-const WIDTHS = [320, 390, 640, 768, 1280] as const;
+const WIDTHS = [320, 390, 640, 768, 1024, 1280] as const;
 const THEMES = ["light", "dark"] as const;
 const ROUTES: { path: string; label: string }[] = [
 	{ path: "/", label: "home" },
@@ -35,6 +35,10 @@ for (const theme of THEMES) {
 				}) => {
 					await page.setViewportSize({ width, height: 900 });
 					await page.goto(path);
+
+					if (path === "/posts/markdown-elements/" && width >= 1024) {
+						await expect(page.locator("#series-panel")).toBeVisible();
+					}
 
 					const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
 					expect(
@@ -68,16 +72,37 @@ for (const theme of THEMES) {
 			await page.setViewportSize({ width: 390, height: 900 });
 			await page.goto("/posts/markdown-elements/");
 
-			const pageScrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
-			expect(pageScrollWidth).toBeLessThanOrEqual(390);
-
-			const codeBlock = page.locator("pre").first();
-			await expect(codeBlock).toBeVisible();
-			await expect(codeBlock).toHaveCSS("overflow-x", /auto|scroll/);
-
-			const table = page.locator("table").first();
-			await expect(table).toBeVisible();
-			await expect(table).toHaveCSS("overflow-x", /auto|scroll/);
+			// Supply unbreakable content to exercise scrolling, not just its CSS declaration.
+			await page
+				.locator("pre code")
+				.first()
+				.evaluate((code) => {
+					code.textContent = "W".repeat(300);
+				});
+			await page
+				.locator("table td")
+				.first()
+				.evaluate((cell) => {
+					cell.textContent = "W".repeat(300);
+				});
+			for (const selector of ["pre", "table"]) {
+				const element = page.locator(selector).first();
+				await expect(element).toBeVisible();
+				expectWithinViewport(await element.boundingBox(), 390, selector);
+				const metrics = await element.evaluate((node) => {
+					node.scrollLeft = 100;
+					return {
+						width: node.clientWidth,
+						contentWidth: node.scrollWidth,
+						scroll: node.scrollLeft,
+					};
+				});
+				expect(metrics.contentWidth).toBeGreaterThan(metrics.width);
+				expect(metrics.scroll).toBeGreaterThan(0);
+			}
+			expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
+				390,
+			);
 		});
 	});
 }

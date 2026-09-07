@@ -276,11 +276,7 @@ const currentYear = new Date().getFullYear();
 
 	@media (min-width: 1024px) {
 		.footer-nav {
-			grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) minmax(120px, 1fr) minmax(
-					200px,
-					2fr
-				);
-			/* Content-driven with minimum widths, maintains 2:1 ratio */
+			grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 2fr);
 			justify-content: start;
 			gap: var(--space-8); /* 48px - Major third interval */
 		}

@@ -4,13 +4,18 @@
 // Use an async test process so the preview server can keep answering requests.
 
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { preview } from "astro";
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? "4322");
 
 function runPlaywright(env) {
 	return new Promise((resolve, reject) => {
-		const child = spawn("pnpm", ["exec", "playwright", "test"], { stdio: "inherit", env });
+		const child = spawn(
+			process.execPath,
+			[fileURLToPath(import.meta.resolve("@playwright/test/cli")), "test"],
+			{ stdio: "inherit", env },
+		);
 		child.on("error", reject);
 		child.on("exit", (code, signal) => resolve(signal ? 1 : (code ?? 1)));
 	});
