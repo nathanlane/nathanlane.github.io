@@ -79,6 +79,83 @@ function feedIsWellFormed(body) {
 	return null;
 }
 
+const ABSOLUTE_REFERENCE = /^([a-z][a-z0-9+.-]*:|\/\/)/i;
+
+/**
+ * Regression guard for R08: every href/src emitted inside `content:encoded` must be a
+ * portable, absolute reference. A relative link or image path only worked on the site
+ * itself; outside it (a feed reader) it resolved against nothing.
+ */
+function feedReferencesArePortable(body) {
+	const doc = new JSDOM(body, { contentType: "text/xml" }).window.document;
+	const problems = [];
+
+	for (const item of [...doc.querySelectorAll("item")]) {
+		const title = item.querySelector("title")?.textContent ?? "unknown item";
+		const html = item.getElementsByTagName("content:encoded")[0]?.textContent ?? "";
+		// Parse as HTML (not a text regex) so example `href`/`src` strings displayed inside
+		// a <code> block -- this site documents its own markdown pipeline -- are read as the
+		// text they are, not mistaken for a real, unresolved attribute.
+		const contentDoc = new JSDOM(html).window.document;
+		const elements = [...contentDoc.querySelectorAll("a[href], img[src]")];
+
+		for (const el of elements) {
+			const ref = el.getAttribute("href") ?? el.getAttribute("src") ?? "";
+			if (ref && !ABSOLUTE_REFERENCE.test(ref)) {
+				problems.push(`item "${title}" has a non-portable reference "${ref}"`);
+			}
+		}
+	}
+
+	return problems.length > 0 ? problems.join("; ") : null;
+}
+
+function feedIsWellFormedAndPortable(body) {
+	return feedIsWellFormed(body) ?? feedReferencesArePortable(body);
+}
+
+/**
+ * Regression guard for R09: publication and modification are distinct facts. An edited
+ * post must keep advertising its original publish date, with the edit date available
+ * separately, and Open Graph/JSON-LD must agree.
+ */
+function articleDatesMatch(expected) {
+	return (body) => {
+		const doc = new JSDOM(body).window.document;
+		const published = doc
+			.querySelector('meta[property="article:published_time"]')
+			?.getAttribute("content");
+		const modified = doc
+			.querySelector('meta[property="article:modified_time"]')
+			?.getAttribute("content");
+
+		if (!published?.startsWith(expected.publishDate)) {
+			return `article:published_time is "${published}", expected to start with "${expected.publishDate}"`;
+		}
+		if (expected.updatedDate) {
+			if (!modified?.startsWith(expected.updatedDate)) {
+				return `article:modified_time is "${modified}", expected to start with "${expected.updatedDate}"`;
+			}
+		} else if (modified) {
+			return `article:modified_time "${modified}" present on a post with no update`;
+		}
+
+		const articleSchema = [...doc.querySelectorAll('script[type="application/ld+json"]')]
+			.map((script) => JSON.parse(script.textContent ?? "{}"))
+			.find((schema) => schema["@type"] === "Article");
+		if (!articleSchema) return "no Article JSON-LD block found";
+		if (!articleSchema.datePublished?.startsWith(expected.publishDate)) {
+			return `JSON-LD datePublished is "${articleSchema.datePublished}", expected to start with "${expected.publishDate}"`;
+		}
+		const expectedModified = expected.updatedDate ?? expected.publishDate;
+		if (!articleSchema.dateModified?.startsWith(expectedModified)) {
+			return `JSON-LD dateModified is "${articleSchema.dateModified}", expected to start with "${expectedModified}"`;
+		}
+
+		return null;
+	};
+}
+
 export function findBuildIdentityProblem(builtHtml, servedHtml) {
 	const builtDocument = new JSDOM(builtHtml).window.document;
 	const servedDocument = new JSDOM(servedHtml).window.document;
@@ -114,8 +191,18 @@ const CHECKS = [
 	// merged tag page, and a redirect from the old space-containing URL it replaced
 	{ path: "/tags/static-sites/", marker: "Nathan Lane" },
 	{ path: "/tags/best%20practices/", marker: "/tags/best-practices" },
-	{ path: "/rss.xml", marker: "<rss", assert: feedIsWellFormed },
-	{ path: "/research/rss.xml", marker: "<rss", assert: feedIsWellFormed },
+	{
+		path: "/posts/deepseek/",
+		marker: "Nathan Lane",
+		assert: articleDatesMatch({ publishDate: "2024-01-10", updatedDate: "2024-12-22" }),
+	},
+	{
+		path: "/posts/astro-best-practices-for-beginners/",
+		marker: "Nathan Lane",
+		assert: articleDatesMatch({ publishDate: "2024-07-04" }),
+	},
+	{ path: "/rss.xml", marker: "<rss", assert: feedIsWellFormedAndPortable },
+	{ path: "/research/rss.xml", marker: "<rss", assert: feedIsWellFormedAndPortable },
 	{ path: "/sitemap-index.xml", marker: "<sitemapindex" },
 	// satori + resvg rendered OG image
 	{ path: "/og-image/deepseek.png", contentType: "image/png" },

@@ -14,7 +14,14 @@ interface Props {
 }
 
 const {
-	meta: { articleDate, description = siteConfig.description, ogImage, title, hasMath },
+	meta: {
+		publishDate,
+		updatedDate,
+		description = siteConfig.description,
+		ogImage,
+		title,
+		hasMath,
+	},
 	structuredData = []
 } = Astro.props;
 
@@ -26,7 +33,7 @@ const {
 	lang={siteConfig.lang}
 >
 	<head>
-		<BaseHead articleDate={articleDate} description={description} ogImage={ogImage} title={title} hasMath={hasMath} />
+		<BaseHead publishDate={publishDate} updatedDate={updatedDate} description={description} ogImage={ogImage} title={title} hasMath={hasMath} />
 		{/* Website structured data for all pages */}
 		<StructuredData type="website" />
 		{/* Additional structured data passed from child layouts */}

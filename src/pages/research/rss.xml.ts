@@ -3,6 +3,7 @@ import rss from "@astrojs/rss";
 import { siteConfig } from "@/site.config";
 import { compareResearch } from "@/utils/content";
 import { feedContent } from "@/utils/markdown";
+import { toAbsoluteUrl } from "@/utils/url";
 import { escapeXml } from "@/utils/xml";
 
 export const GET = async () => {
@@ -12,20 +13,28 @@ export const GET = async () => {
 	const sortedResearch = [...research].sort(compareResearch);
 
 	const items = await Promise.all(
-		sortedResearch.map(async (item) => ({
-			title: item.data.title,
-			description: item.data.description,
-			pubDate: new Date(`${item.data.paperDate}-01-01`),
-			link: `/research/${item.id}/`,
-			content: await feedContent(item.body, item.filePath, item.data.description),
-			categories: item.data.tags || [],
-			customData: `
+		sortedResearch.map(async (item) => {
+			const link = `/research/${item.id}/`;
+			return {
+				title: item.data.title,
+				description: item.data.description,
+				pubDate: new Date(`${item.data.paperDate}-01-01`),
+				link,
+				content: await feedContent(
+					item.body,
+					item.filePath,
+					item.data.description,
+					toAbsoluteUrl(link, siteConfig.canonicalUrl) ?? link,
+				),
+				categories: item.data.tags || [],
+				customData: `
         <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">${escapeXml(item.data.authors)}</dc:creator>
         <status>${escapeXml(item.data.status)}</status>
         <type>${escapeXml(item.data.type)}</type>
         ${item.data.publication ? `<publication>${escapeXml(item.data.publication)}</publication>` : ""}
       `,
-		})),
+			};
+		}),
 	);
 
 	// The newest item's date, not the build time. lastBuildDate means "when the

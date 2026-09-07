@@ -17,7 +17,6 @@ const { post } = Astro.props;
 const { ogImage, title, description, updatedDate, publishDate, seriesId } = post.data;
 
 const socialImage = ogImage ?? `/og-image/${post.id}.png`;
-const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 
 // Word count comes from the remark-reading-time plugin. It is absent only when a page is
@@ -54,7 +53,7 @@ const structuredData: LayoutStructuredData[] = [
 ];
 ---
 
-<BaseLayout meta={{ articleDate, description, ogImage: socialImage, title, hasMath: remarkPluginFrontmatter?.hasMath }} structuredData={structuredData}>
+<BaseLayout meta={{ publishDate: publishDate.toISOString(), updatedDate: updatedDate?.toISOString(), description, ogImage: socialImage, title, hasMath: remarkPluginFrontmatter?.hasMath }} structuredData={structuredData}>
  	<!-- SeriesPanel is inserted into the named slot "sidebar" -->
 	{seriesId && (<SeriesPanel slot="sidebar" seriesId={seriesId} />)}
 

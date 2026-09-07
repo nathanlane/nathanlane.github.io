@@ -183,7 +183,10 @@ export interface Page<T = unknown> {
 }
 
 export interface SiteMeta {
-	articleDate?: string | undefined;
+	/** Original publication date (ISO string). Emitted as `article:published_time`. */
+	publishDate?: string | undefined;
+	/** Date of a later revision (ISO string), when one exists. Emitted as `article:modified_time`. */
+	updatedDate?: string | undefined;
 	description?: string;
 	ogImage?: string | undefined;
 	title: string;
