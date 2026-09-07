@@ -225,6 +225,12 @@ const header = {
 		flex-direction: column;
 		gap: var(--space-xs);
 	}
+
+	/* Lock background scrolling while the mobile drawer is open. */
+	:global(html.nav-drawer-open),
+	:global(html.nav-drawer-open body) {
+		overflow: hidden;
+	}
 </style>
 
 <script>
@@ -233,9 +239,10 @@ const header = {
 		const openMenuIcon = document.getElementById("open-nav-menu-icon");
 		const closeMenuIcon = document.getElementById("close-nav-menu-icon");
 		const drawer = document.getElementById("drawer");
+		const header = document.getElementById("main-header");
 
 		// Check if elements exist
-		if (!toggleNavMenuMobileButton || !openMenuIcon || !closeMenuIcon || !drawer) {
+		if (!toggleNavMenuMobileButton || !openMenuIcon || !closeMenuIcon || !drawer || !header) {
 			return;
 		}
 
@@ -243,6 +250,58 @@ const header = {
 		if (!drawerBody) {
 			return;
 		}
+
+		const FOCUSABLE_SELECTOR =
+			'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+		// The header stays visible above the drawer (it has the higher z-index), so its
+		// controls (logo, theme toggle, the drawer toggle itself) remain usable overlay
+		// controls alongside the drawer's own links -- everything else is the covered page.
+		const getTrappedFocusable = (): HTMLElement[] =>
+			[
+				...header.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+				...drawer.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+			].filter((el) => el.offsetParent !== null);
+
+		// Make every part of the page outside the header/drawer branch inert so the
+		// content the drawer covers cannot be reached by pointer, keyboard, or AT.
+		// Only elements the drawer itself made inert are tracked and later restored,
+		// so an element that was already inert for an unrelated reason is left alone.
+		let inertedByDrawer: Element[] = [];
+
+		const setBackgroundInert = (active: boolean): void => {
+			if (!active) {
+				for (const el of inertedByDrawer) {
+					el.removeAttribute("inert");
+				}
+				inertedByDrawer = [];
+				return;
+			}
+
+			const targets = new Set<Element>([header, drawer]);
+			const ancestors = new Set<Element>();
+			for (const target of targets) {
+				let node = target.parentElement;
+				while (node) {
+					ancestors.add(node);
+					node = node.parentElement;
+				}
+			}
+			const walk = (node: Element): void => {
+				for (const child of Array.from(node.children)) {
+					if (targets.has(child)) continue;
+					if (ancestors.has(child)) {
+						walk(child);
+						continue;
+					}
+					if (!child.hasAttribute("inert")) {
+						child.setAttribute("inert", "");
+						inertedByDrawer.push(child);
+					}
+				}
+			};
+			walk(document.body);
+		};
 
 		// The drawer is a hidden overlay until opened. `aria-hidden` has to track that:
 		// while it said "true" with the drawer open, its links stayed focusable inside a
@@ -265,16 +324,17 @@ const header = {
 				"aria-label",
 				open ? "Close navigation menu" : "Open navigation menu",
 			);
+
+			document.documentElement.classList.toggle("nav-drawer-open", open);
+			setBackgroundInert(open);
 		};
 
 		const isDrawerOpen = (): boolean =>
 			toggleNavMenuMobileButton.getAttribute("aria-expanded") === "true";
 
-		const closeDrawer = (returnFocus: boolean): void => {
+		const closeDrawer = (focusTarget: HTMLElement | null): void => {
 			setDrawerOpen(false);
-			if (returnFocus) {
-				toggleNavMenuMobileButton.focus();
-			}
+			focusTarget?.focus();
 		};
 
 		toggleNavMenuMobileButton.addEventListener("click", () => {
@@ -289,17 +349,58 @@ const header = {
 			}
 		});
 
-		// Escape closes the drawer and returns focus to the control that opened it.
 		document.addEventListener("keydown", (event) => {
-			if (event.key === "Escape" && isDrawerOpen()) {
-				closeDrawer(true);
+			if (!isDrawerOpen()) return;
+
+			// Escape closes the drawer and returns focus to the control that opened it.
+			if (event.key === "Escape") {
+				closeDrawer(toggleNavMenuMobileButton);
+				return;
+			}
+
+			// Constrain Tab/Shift+Tab to the overlay's own controls so focus cannot
+			// reach the inert (but still tab-order-adjacent) page behind it.
+			if (event.key === "Tab") {
+				const focusable = getTrappedFocusable();
+				const first = focusable[0];
+				const last = focusable[focusable.length - 1];
+				if (!first || !last) return;
+
+				const activeIndex = focusable.indexOf(document.activeElement as HTMLElement);
+
+				if (event.shiftKey) {
+					if (activeIndex <= 0) {
+						event.preventDefault();
+						last.focus();
+					}
+				} else if (activeIndex === -1 || activeIndex === focusable.length - 1) {
+					event.preventDefault();
+					first.focus();
+				}
 			}
 		});
 
 		// Close drawer when clicking on a link (focus follows the navigation itself).
 		const mobileNavLinks = document.querySelectorAll("#nav-menu-mobile a");
 		mobileNavLinks.forEach((link) => {
-			link.addEventListener("click", () => closeDrawer(false));
+			link.addEventListener("click", () => setDrawerOpen(false));
+		});
+
+		// At the desktop breakpoint the mobile drawer/toggle no longer render. Close and
+		// reset it, and if focus was on the now-hidden toggle or inside the drawer, move
+		// it to the first desktop navigation link instead of leaving it stranded.
+		const desktopQuery = window.matchMedia("(min-width: 768px)");
+		desktopQuery.addEventListener("change", (event) => {
+			if (!event.matches || !isDrawerOpen()) return;
+
+			const focusNeedsRelocation =
+				document.activeElement === toggleNavMenuMobileButton || drawer.contains(document.activeElement);
+
+			setDrawerOpen(false);
+
+			if (focusNeedsRelocation) {
+				document.querySelector<HTMLElement>(".nav-desktop a")?.focus();
+			}
 		});
 
 		// Publish the initial closed state.
