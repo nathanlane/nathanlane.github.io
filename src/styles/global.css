@@ -582,6 +582,10 @@
 		hyphenate-limit-chars: 6 3 3; /* minimum word length, before break, after break */
 		hyphenate-limit-lines: 2; /* max consecutive hyphenated lines */
 		hyphenate-limit-last: always; /* allow hyphenation at end of paragraphs */
+		/* R01: hyphenation only finds break points within real words. A raw
+		   URL rendered as link text (no hyphens, no spaces) has none, so it
+		   forced the page wider than narrow viewports instead of wrapping. */
+		overflow-wrap: break-word;
 	}
 
 	/* Disable hyphenation for headings and short text */
@@ -1299,8 +1303,12 @@
 		font-size: var(--step--1); /* Use design token */
 	}
 
-	/* Table spacing - aligned to grid */
+	/* Wide tables scroll locally while their rows retain table layout. */
 	table {
+		display: block;
+		max-width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
 		margin-top: var(--space-6); /* 36px = 1.5 baselines */
 		margin-bottom: var(--space-6);
 	}
@@ -1309,6 +1317,11 @@
 	hr {
 		margin-top: var(--space-12); /* 72px = 3 baselines */
 		margin-bottom: var(--space-12);
+	}
+
+	/* Let the footer shrink as a shared grid item. */
+	.site-footer {
+		min-width: 0;
 	}
 
 	/* Prevent image and icon distortion */
@@ -1579,8 +1592,9 @@
 			"zero" 1;
 		/* Optimal letter spacing for inline code */
 		letter-spacing: 0.02em;
-		/* Prevent breaking when possible */
-		white-space: nowrap;
+		/* Long inline paths must wrap within the reading column. */
+		white-space: normal;
+		overflow-wrap: anywhere;
 		/* Subtle color shift */
 		color: var(--theme-color-800);
 		/* Smooth transition for hover states */

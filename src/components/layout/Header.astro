@@ -19,14 +19,14 @@ const header = {
 };
 ---
 
-<header id="main-header" class="header relative top-0 left-0 z-20 w-full bg-bgColor">
+<header id="main-header" class="header relative top-0 left-0 z-20 w-full min-w-0 bg-bgColor">
 	<div
-		class="header-content mx-auto flex h-full w-full max-w-5xl items-center justify-between px-space-s"
+		class="header-content mx-auto flex flex-wrap gap-y-2b w-full max-w-5xl items-center justify-between px-0 lg:px-space-s"
 	>
 		<!-- Left side: Logo (if shown) -->
 		{
 			header.logo.show && (
-				<div class="flex items-center flex-shrink-0 mr-8b">
+				<div class="flex items-center flex-shrink-0">
 					<a
 						aria-label={header.logo.text}
 						aria-current={Astro.url.pathname === "/" ? "page" : false}
@@ -51,7 +51,7 @@ const header = {
 		{!header.logo.show && <div />}
 
 		<!-- Right side: Navigation and Actions -->
-		<div class="flex items-center gap-space-xs ml-auto pl-12b">
+		<div class="flex items-center gap-space-xs ml-auto">
 			<nav
 				aria-label="Main navigation"
 				class="nav-desktop hidden md:flex items-center gap-space-s"
@@ -71,7 +71,7 @@ const header = {
 				}
 			</nav>
 
-			<div class="nav-actions flex items-center gap-space-xs">
+			<div class="nav-actions flex items-center gap-space-3xs">
 				<ThemeToggle />
 
 				<!-- Mobile menu toggle -->
@@ -131,7 +131,12 @@ const header = {
 	/* Header styles */
 	.header {
 		--header-height: 72px;
-		height: var(--header-height);
+		min-height: var(--header-height);
+	}
+
+	.header-content {
+		min-height: var(--header-height);
+		height: auto;
 	}
 
 	/* Logo image */

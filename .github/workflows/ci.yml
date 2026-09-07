@@ -66,6 +66,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install Chromium for browser checks
+        run: pnpm exec playwright install --with-deps chromium
+
       # Run the authoritative repository validation contract
       - name: Validate repository
         run: pnpm run validate

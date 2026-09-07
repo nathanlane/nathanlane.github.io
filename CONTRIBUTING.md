@@ -38,6 +38,28 @@ At minimum:
 - UI or content changes should be checked in both light and dark themes
 - Typography changes should be checked on mobile and desktop widths
 
+## Browser checks
+
+A small Playwright suite (`tests/browser/`) checks rendered pages — layout,
+header controls, and local scrolling of wide code/tables — against a
+production preview build. It runs as part of `pnpm validate` / `pnpm run
+check:all`, after `pnpm run build`.
+
+One-time local setup:
+
+```bash
+pnpm exec playwright install chromium
+```
+
+To run it on its own against the current `dist/` build:
+
+```bash
+pnpm run test:browser
+```
+
+The runner uses Astro’s experimental `preview()` API to serve the existing build,
+runs the suite, and closes that server. Check the API when upgrading Astro.
+
 ## Content work
 
 - Add or edit entries in `src/content/`

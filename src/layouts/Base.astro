@@ -34,7 +34,7 @@ const {
 			<StructuredData type={sd.type} data={sd.data} />
 		))}
 	</head>
-	<body class="relative m-auto min-h-screen w-full max-w-6xl grow bg-bgColor">
+	<body class="relative m-auto min-h-screen w-full min-w-0 max-w-6xl grow bg-bgColor">
 		<ThemeProvider />
 		<SkipLink />
 
@@ -44,10 +44,10 @@ const {
 			<!-- Sidebar for Docs Series -->
 			<slot name="sidebar" />
 			<!-- Main container for the page content -->
-			<div id="container" class="relative m-auto max-w-4xl grow">
+			<div id="container" class="relative m-auto min-w-0 max-w-4xl grow">
 				<div class="m-auto grid min-h-screen md:grid-rows-[auto_auto_1fr] px-component md:pt-component">
 					<Header />
-					<main id="main" class="relative flex-grow mt-space-xl md:mt-space-m">
+					<main id="main" class="relative min-w-0 flex-grow mt-space-xl md:mt-space-m">
 						<slot />
 					</main>
 					<Footer />
