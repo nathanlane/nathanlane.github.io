@@ -12,7 +12,7 @@ A personal site built with Astro, TypeScript, and TailwindCSS. The site is publi
 
 ## Stack
 
-- Astro v5
+- Astro v7
 - TypeScript
 - TailwindCSS with `tailwindcss-fluid-type`
 - Astro content collections in `src/content/`
