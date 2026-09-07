@@ -79,7 +79,7 @@ const structuredData: LayoutStructuredData[] = [
 				<button
 					type="button"
 					id="toggle-toc"
-					class="hidden md:flex btn-icon-nav"
+					class="hidden min-[1281px]:flex btn-icon-nav"
 					aria-label="Toggle Table of Contents"
 					aria-controls="toc-panel"
 				>
@@ -109,9 +109,9 @@ const structuredData: LayoutStructuredData[] = [
 
 		<!-- Table of Contents - positioned absolutely on desktop -->
 		{!!headings.length && (
-			<aside 
-				id="toc-panel" 
-				class="essay-toc hidden md:block"
+			<aside
+				id="toc-panel"
+				class="essay-toc hidden min-[1281px]:block"
 			>
 				<TOC headings={headings} />
 			</aside>
@@ -123,7 +123,7 @@ const structuredData: LayoutStructuredData[] = [
 		<button
 			type="button"
 			id="toggle-panel-mobile"
-			class="btn-icon-fab block sm:hidden absolute bottom-space-s right-space-s z-50"
+			class="btn-icon-fab block md:hidden absolute bottom-space-s right-space-s z-50"
 			aria-label="Toggle Series Panel"
 			aria-controls="series-panel"
 		>
@@ -146,7 +146,7 @@ const structuredData: LayoutStructuredData[] = [
 		toggleButtonId: "toggle-panel",
 		mobileToggleButtonId: "toggle-panel-mobile",
 		closeButtonId: "close-panel",
-		breakpoint: "lg",
+		breakpointPx: 1024,
 		visibleClass: "lg:block",
 	});
 
@@ -156,7 +156,7 @@ const structuredData: LayoutStructuredData[] = [
 		toggleButtonId: "toggle-toc",
 		mobileToggleButtonId: "toggle-toc-mobile",
 		closeButtonId: "close-toc",
-		breakpoint: "md",
-		visibleClass: "md:block",
+		breakpointPx: 1281,
+		visibleClass: "min-[1281px]:block",
 	});
 </script>

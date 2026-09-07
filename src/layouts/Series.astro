@@ -30,15 +30,17 @@ const { headings } = await render(series);
 		>
 			<Icon aria-hidden="true" class="flex-shrink-0 icon-action" focusable="false" name="lucide:file-text" />
 		</button>
-		<button
-			type="button"
-			id="toggle-toc"
-			class="hidden md:flex z-30 mr-2b btn-icon-nav"
-			aria-label="Toggle Table of Contents"
-			aria-controls="toc-panel"
-		>	
-			<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
-		</button>
+		{!!headings.length && (
+			<button
+				type="button"
+				id="toggle-toc"
+				class="hidden md:flex z-30 mr-2b btn-icon-nav"
+				aria-label="Toggle Table of Contents"
+				aria-controls="toc-panel"
+			>
+				<Icon aria-hidden="true" class="icon-action" focusable="false" name="lucide:list" />
+			</button>
+		)}
 
 		<h1 class="text-5 title line-clamp-none md:line-clamp-1 md:max-w-lg lg:max-w-xl">
 			{title}
@@ -71,7 +73,7 @@ const { headings } = await render(series);
 	<button
 		type="button"
 		id="toggle-panel-mobile"
-		class="btn-icon-fab block sm:hidden absolute bottom-4 right-4 z-50"
+		class="btn-icon-fab block md:hidden absolute bottom-4 right-4 z-50"
 		aria-label="Toggle Series Panel"
 		aria-controls="series-panel"
 	>
@@ -90,17 +92,17 @@ const { headings } = await render(series);
 		toggleButtonId: 'toggle-panel',
 		mobileToggleButtonId: 'toggle-panel-mobile',
 		closeButtonId: 'close-panel',
-		breakpoint: 'lg',
+		breakpointPx: 1024,
 		visibleClass: 'lg:block'
 	});
-	
+
 	// Initialize TOC Panel toggle
 	initializePanelToggle({
 		panelId: 'toc-panel',
 		toggleButtonId: 'toggle-toc',
 		mobileToggleButtonId: 'toggle-toc-mobile',
 		closeButtonId: 'close-toc',
-		breakpoint: 'md',
+		breakpointPx: 768,
 		visibleClass: 'md:block'
 	});
 </script>

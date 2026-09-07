@@ -2045,24 +2045,6 @@
 			margin-right: calc(-1 * var(--space-3)); /* -18px */
 			max-width: calc(100% + 2 * var(--space-3));
 		}
-
-		.essay-toc {
-			display: none !important; /* Hide TOC on mobile */
-		}
-	}
-
-	/* Medium screens - hide TOC if viewport is too narrow */
-	@media (min-width: 1024px) and (max-width: 1280px) {
-		.essay-toc {
-			display: none !important; /* Hide TOC when there's not enough space */
-		}
-	}
-
-	/* Large screens - show TOC only when there's enough space */
-	@media (min-width: 1281px) {
-		.essay-toc {
-			display: block !important;
-		}
 	}
 
 	/* Wide screen optimization */
