@@ -1,54 +1,48 @@
----
-import { Icon } from "astro-icon/components";
----
-
-<theme-toggle>
-	<button
-		class="btn-icon-toggle"
-		type="button"
-	>
-		<span class="sr-only">Dark Theme</span>
-		<Icon
-			aria-hidden="true"
-			class="absolute start-1/2 top-1/2 icon-toggle -translate-x-1/2 -translate-y-1/2 block dark:hidden"
-			focusable="false"
-			name="lucide:sun"
-		/>
-		<Icon
-			aria-hidden="true"
-			class="absolute start-1/2 top-1/2 icon-toggle -translate-x-1/2 -translate-y-1/2 hidden dark:block"
-			focusable="false"
-			name="lucide:moon"
-		/>
-	</button>
+<theme-toggle class="theme-select-wrap">
+	<label class="sr-only" for="theme-preference">Theme</label>
+	<select class="theme-select text--2" id="theme-preference" name="theme-preference">
+		<option value="system">System</option>
+		<option value="light">Light</option>
+		<option value="dark">Dark</option>
+	</select>
 </theme-toggle>
 
+<style>
+	.theme-select-wrap {
+		display: inline-flex;
+	}
+
+	.theme-select {
+		height: 36px;
+		padding: 0 var(--space-2xs, 0.5rem);
+		border: 1px solid var(--theme-special-light);
+		border-radius: 8px;
+		background: transparent;
+		color: var(--theme-text);
+		cursor: pointer;
+	}
+
+	.theme-select:hover {
+		background: var(--theme-special-lighter);
+	}
+</style>
+
 <script>
-	// Note that if you fire the theme-change event outside of this component, it will not be reflected in the button's aria-checked attribute. You will need to add an event listener if you want that.
 	class ThemeToggle extends HTMLElement {
 		connectedCallback() {
-			const button = this.querySelector<HTMLButtonElement>("button")!;
+			const select = this.querySelector<HTMLSelectElement>("select")!;
 
-			const rootInDarkMode = () => document.documentElement.getAttribute("data-theme") === "dark";
+			select.value = document.documentElement.getAttribute("data-theme-preference") || "system";
 
-			// Set aria role value
-			button.setAttribute("role", "switch");
-			button.setAttribute("aria-checked", String(rootInDarkMode()));
-
-			// Button event
-			button.addEventListener("click", () => {
-				// Invert theme
-				let themeChangeEvent = new CustomEvent("theme-change", {
-					detail: {
-						theme: rootInDarkMode() ? "light" : "dark",
-					},
-				});
-				// Dispatch event -> ThemeProvider.astro
-				document.dispatchEvent(themeChangeEvent);
-
-				// Set the aria-checked attribute
-				button.setAttribute("aria-checked", String(rootInDarkMode()));
+			select.addEventListener("change", () => {
+				document.dispatchEvent(
+					new CustomEvent("theme-change", { detail: { preference: select.value } }),
+				);
 			});
+
+			document.addEventListener("theme-applied", ((e: CustomEvent) => {
+				if (select.value !== e.detail.preference) select.value = e.detail.preference;
+			}) as EventListener);
 		}
 	}
 
