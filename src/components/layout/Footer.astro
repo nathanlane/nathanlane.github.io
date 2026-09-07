@@ -186,6 +186,8 @@ const currentYear = new Date().getFullYear();
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline; /* Better alignment per Bringhurst */
+		/* Keep the RSS tooltip from widening the page. */
+		overflow-x: clip;
 		font-size: var(--step--1); /* ~11.5-13px - Increased from step--2 for better readability */
 		font-family: inherit; /* Use IBM Plex Sans from parent */
 		/* Optimize IBM Plex Sans for very small text */

@@ -13,6 +13,11 @@ coverage/
 *.log
 *.log.*
 
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+
 # Editor files
 .vscode/
 .idea/
