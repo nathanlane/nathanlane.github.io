@@ -143,9 +143,9 @@ const getPrimaryTag = (post: CollectionItemBase) => {
       <!-- Year-based archive listing -->
       <div class="space-y-12b">
         {descYearKeys.map(year => (
-          <section id={`year-${year}`}>
+          <section id={`year-${year}`} data-year-group={year}>
             <!-- Year heading with post count -->
-            <h3 class="heading-3 text-light mb-6b" data-year-header={year}>
+            <h3 class="heading-3 text-light mb-6b">
               {year}
               <span class="text-meta ml-2b">• {groupedByYear[year]!.length} posts</span>
             </h3>

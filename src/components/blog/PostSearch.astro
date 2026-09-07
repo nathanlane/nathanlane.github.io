@@ -36,7 +36,7 @@ const { placeholder = "Search by title or tag…" } = Astro.props;
   const searchInput = document.getElementById("post-search") as HTMLInputElement | null;
   const status = document.getElementById("post-search-status");
   const posts = document.querySelectorAll<HTMLElement>("[data-post-item]");
-  const yearHeaders = document.querySelectorAll<HTMLElement>("[data-year-header]");
+  const yearGroups = document.querySelectorAll<HTMLElement>("[data-year-group]");
 
   function describeResults(term: string, matchCount: number, rawValue: string): string {
     if (term === "") return "";
@@ -67,9 +67,9 @@ const { placeholder = "Search by title or tag…" } = Astro.props;
         }
       });
 
-      yearHeaders.forEach((header) => {
-        const year = header.dataset.yearHeader ?? "";
-        header.classList.toggle("hidden", !visibleYears.has(year));
+      yearGroups.forEach((group) => {
+        const year = group.dataset.yearGroup ?? "";
+        group.classList.toggle("hidden", !visibleYears.has(year));
       });
 
       if (status) {

@@ -50,20 +50,21 @@ test.describe("archive search", () => {
 
 	test("hides year headings whose groups have no matches", async ({ page }) => {
 		await page.goto("/posts/archive/");
-		const totalYearHeadings = await page.locator("[data-year-header]").count();
+		const totalYearHeadings = await page.locator("[data-year-group]").count();
 		expect(totalYearHeadings).toBeGreaterThan(1);
 
 		const search = page.getByLabel("Search by title or tag…");
 		await search.fill(KNOWN_OLDER_POST);
 
-		const visibleHeadings = page.locator("[data-year-header]:not(.hidden)");
+		const visibleHeadings = page.locator("[data-year-group]:not(.hidden)");
 		await expect(visibleHeadings).toHaveCount(1);
+		await expect(page.locator('section[id^="year-"]:visible')).toHaveCount(1);
 	});
 
 	test("clearing the query restores all entries and year headings", async ({ page }) => {
 		await page.goto("/posts/archive/");
 		const totalPosts = await page.locator("[data-post-item]").count();
-		const totalYearHeadings = await page.locator("[data-year-header]").count();
+		const totalYearHeadings = await page.locator("[data-year-group]").count();
 
 		const search = page.getByLabel("Search by title or tag…");
 		await search.fill(KNOWN_OLDER_POST);
@@ -71,7 +72,7 @@ test.describe("archive search", () => {
 
 		await search.fill("");
 		await expect(page.locator("[data-post-item]:not(.hidden)")).toHaveCount(totalPosts);
-		await expect(page.locator("[data-year-header]:not(.hidden)")).toHaveCount(totalYearHeadings);
+		await expect(page.locator("[data-year-group]:not(.hidden)")).toHaveCount(totalYearHeadings);
 		await expect(page.getByRole("status")).toHaveText("");
 	});
 
