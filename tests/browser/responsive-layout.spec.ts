@@ -55,8 +55,8 @@ for (const theme of THEMES) {
 						);
 					expect(proseOverflow, "prose should fit its reading column").toEqual([]);
 
-					const themeToggleBox = await page.locator("theme-toggle button").boundingBox();
-					expectWithinViewport(themeToggleBox, width, "theme toggle");
+					const themeSelectBox = await page.locator("theme-toggle select").boundingBox();
+					expectWithinViewport(themeSelectBox, width, "theme selector");
 
 					if (width < 768) {
 						const menuBox = await page.locator("#toggle-nav-menu-mobile").boundingBox();

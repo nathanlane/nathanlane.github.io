@@ -1,47 +1,85 @@
 {/* Inlined to avoid FOUC. This is a parser blocking script. */}
 <script is:inline>
-	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
+	(function () {
+		var STORAGE_KEY = "theme";
+		var media = window.matchMedia("(prefers-color-scheme: dark)");
 
-	function getUserPref() {
-		const storedTheme = typeof localStorage !== "undefined" && localStorage.getItem("theme");
-		return storedTheme || (lightModePref.matches ? "light" : "dark");
-	}
+		// Guards both the localStorage accessor and the operation on it: blocked
+		// storage (e.g. SecurityError in some privacy modes) can throw on access,
+		// not just on read/write, so the accessor must live inside the try too.
+		function readStoredPreference() {
+			try {
+				var value = localStorage.getItem(STORAGE_KEY);
+				return value === "light" || value === "dark" ? value : null;
+			} catch {
+				return null;
+			}
+		}
 
-	function setTheme(newTheme) {
-		if (newTheme !== "light" && newTheme !== "dark") {
-			return console.warn(
-				`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`,
+		function writeStoredPreference(preference) {
+			try {
+				if (preference === null) {
+					localStorage.removeItem(STORAGE_KEY);
+				} else {
+					localStorage.setItem(STORAGE_KEY, preference);
+				}
+			} catch {
+				// Storage unavailable; the current page still applies the choice below.
+			}
+		}
+
+		// preference: null ("system") | "light" | "dark".
+		function resolveAppearance(preference) {
+			if (preference === "light" || preference === "dark") return preference;
+			return media.matches ? "dark" : "light";
+		}
+
+		// The current page's selected preference. Storage persists it for next
+		// load, but a failed write/removal must not change what's live on this
+		// page, so device-change handling reads this instead of storage.
+		var currentPreference = null;
+
+		// Single update path: applied appearance, theme-color metadata, and the
+		// selector's displayed value all flow from here so they cannot drift.
+		function applyPreference(preference) {
+			currentPreference = preference === "light" || preference === "dark" ? preference : null;
+
+			var appearance = resolveAppearance(currentPreference);
+			var label = currentPreference ?? "system";
+			var root = document.documentElement;
+
+			root.setAttribute("data-theme", appearance);
+			root.setAttribute("data-theme-preference", label);
+
+			var themeColorMeta = document.querySelector("meta[name='theme-color']");
+			if (themeColorMeta) {
+				var bgColor = getComputedStyle(root).getPropertyValue("--theme-bg");
+				themeColorMeta.setAttribute("content", `hsl(${bgColor})`);
+			}
+
+			document.dispatchEvent(
+				new CustomEvent("theme-applied", { detail: { preference: label, appearance } }),
 			);
 		}
 
-		const root = document.documentElement;
-
-		// root already set to newTheme, exit early
-		if (newTheme === root.getAttribute("data-theme")) {
-			return;
+		function setPreference(preference) {
+			var normalized = preference === "light" || preference === "dark" ? preference : null;
+			writeStoredPreference(normalized);
+			applyPreference(normalized);
 		}
 
-		root.setAttribute("data-theme", newTheme);
+		// Initial parser-blocking application, before first paint.
+		applyPreference(readStoredPreference());
 
-		const colorThemeMetaTag = document.querySelector("meta[name='theme-color']");
-		const bgColor = getComputedStyle(document.body).getPropertyValue("--theme-bg");
-		colorThemeMetaTag.setAttribute("content", `hsl(${bgColor})`);
-		if (typeof localStorage !== "undefined") {
-			localStorage.setItem("theme", newTheme);
-		}
-	}
+		// View Transitions hook to restore preference after a swap.
+		document.addEventListener("astro:after-swap", () => applyPreference(readStoredPreference()));
 
-	// initial setup
-	setTheme(getUserPref());
+		// Selector dispatches this after the user changes it; see ThemeToggle.astro.
+		document.addEventListener("theme-change", (e) => setPreference(e.detail.preference));
 
-	// View Transitions hook to restore theme
-	document.addEventListener("astro:after-swap", () => setTheme(getUserPref()));
-
-	// listen for theme-change custom event, fired in src/components/ThemeToggle.astro
-	document.addEventListener("theme-change", (e) => {
-		setTheme(e.detail.theme);
-	});
-
-	// listen for prefers-color-scheme change.
-	lightModePref.addEventListener("change", (e) => setTheme(e.matches ? "light" : "dark"));
+		// Only follow device changes while System is the current-page preference.
+		media.addEventListener("change", () => {
+			if (currentPreference === null) applyPreference(null);
+		});
+	})();
 </script>
