@@ -13,7 +13,7 @@ import "@fontsource-variable/inter";
 
 type Props = SiteMeta;
 
-const { articleDate, description, ogImage, title, hasMath } = Astro.props;
+const { publishDate, updatedDate, description, ogImage, title, hasMath } = Astro.props;
 
 const titleSeparator = "•";
 const siteTitle = `${title} ${titleSeparator} ${siteConfig.title}`;
@@ -99,7 +99,7 @@ const socialImageURL = new URL(
 <meta content="#0d0c0b" name="theme-color" />
 
 {/* Open Graph / Facebook */}
-<meta content={articleDate ? "article" : "website"} property="og:type" />
+<meta content={publishDate ? "article" : "website"} property="og:type" />
 <meta content={title} property="og:title" />
 <meta content={description} property="og:description" />
 <meta content={canonicalURL} property="og:url" />
@@ -110,10 +110,11 @@ const socialImageURL = new URL(
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
 {
-	articleDate && (
+	publishDate && (
 		<>
 			<meta content={siteConfig.author} property="article:author" />
-			<meta content={articleDate} property="article:published_time" />
+			<meta content={publishDate} property="article:published_time" />
+			{updatedDate && <meta content={updatedDate} property="article:modified_time" />}
 		</>
 	)
 }

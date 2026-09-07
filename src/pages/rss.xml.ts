@@ -4,6 +4,7 @@ import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 import { isPublishedEntry } from "@/utils/content";
 import { feedContent } from "@/utils/markdown";
+import { toAbsoluteUrl } from "@/utils/url";
 import { escapeXml } from "@/utils/xml";
 
 export const GET = async () => {
@@ -13,30 +14,54 @@ export const GET = async () => {
 
 	// Combine all content and sort by date
 	const allContent = await Promise.all([
-		...posts.map(async (post) => ({
-			title: post.data.title,
-			description: post.data.description || "",
-			pubDate: post.data.publishDate,
-			link: `/posts/${post.id}/`,
-			content: await feedContent(post.body, post.filePath, post.data.description || ""),
-			categories: post.data.tags || [],
-		})),
-		...research.map(async (item) => ({
-			title: item.data.title,
-			description: item.data.description || "",
-			pubDate: new Date(`${item.data.paperDate}-01-01`), // Convert year to date
-			link: `/research/${item.id}/`,
-			content: await feedContent(item.body, item.filePath, item.data.description || ""),
-			categories: item.data.tags || [],
-		})),
-		...writing.map(async (item) => ({
-			title: item.data.title,
-			description: item.data.description || "",
-			pubDate: item.data.publishDate,
-			link: `/writing/${item.id}/`,
-			content: await feedContent(item.body, item.filePath, item.data.description || ""),
-			categories: [], // Writing doesn't have tags
-		})),
+		...posts.map(async (post) => {
+			const link = `/posts/${post.id}/`;
+			return {
+				title: post.data.title,
+				description: post.data.description || "",
+				pubDate: post.data.publishDate,
+				link,
+				content: await feedContent(
+					post.body,
+					post.filePath,
+					post.data.description || "",
+					toAbsoluteUrl(link, siteConfig.canonicalUrl) ?? link,
+				),
+				categories: post.data.tags || [],
+			};
+		}),
+		...research.map(async (item) => {
+			const link = `/research/${item.id}/`;
+			return {
+				title: item.data.title,
+				description: item.data.description || "",
+				pubDate: new Date(`${item.data.paperDate}-01-01`), // Convert year to date
+				link,
+				content: await feedContent(
+					item.body,
+					item.filePath,
+					item.data.description || "",
+					toAbsoluteUrl(link, siteConfig.canonicalUrl) ?? link,
+				),
+				categories: item.data.tags || [],
+			};
+		}),
+		...writing.map(async (item) => {
+			const link = `/writing/${item.id}/`;
+			return {
+				title: item.data.title,
+				description: item.data.description || "",
+				pubDate: item.data.publishDate,
+				link,
+				content: await feedContent(
+					item.body,
+					item.filePath,
+					item.data.description || "",
+					toAbsoluteUrl(link, siteConfig.canonicalUrl) ?? link,
+				),
+				categories: [], // Writing doesn't have tags
+			};
+		}),
 	]);
 
 	const sorted = allContent.sort(
