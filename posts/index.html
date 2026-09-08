@@ -1,0 +1,400 @@
+<!DOCTYPE html><html class="overflow-x-hidden grid scroll-pt-space-xl scroll-smooth font-sans text-textColor text-base antialiased" lang="en-GB"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>Blog Posts • Nathan Lane, PhD</title><link href="/icon.svg" rel="icon" type="image/svg+xml"><link rel="icon" href="/favicon-32x32.png" type="image/png"><link href="/icons/apple-touch-icon.png" rel="apple-touch-icon"><link href="/manifest.webmanifest" rel="manifest"><link href="https://nathanlane.info/posts/" rel="canonical"><meta content="Blog Posts • Nathan Lane, PhD" name="title"><meta content="Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development." name="description"><meta content="Nathan Lane" name="author"><meta content="#0d0c0b" name="theme-color"><meta content="website" property="og:type"><meta content="Blog Posts" property="og:title"><meta content="Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development." property="og:description"><meta content="https://nathanlane.info/posts/" property="og:url"><meta content="Nathan Lane, PhD" property="og:site_name"><meta content="en_GB" property="og:locale"><meta content="https://nathanlane.info/social-card.png" property="og:image"><meta content="Blog Posts" property="og:image:alt"><meta content="1200" property="og:image:width"><meta content="630" property="og:image:height"><meta content="summary_large_image" name="twitter:card"><meta content="https://nathanlane.info/posts/" name="twitter:url"><meta content="Blog Posts" name="twitter:title"><meta content="Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development." name="twitter:description"><meta content="https://nathanlane.info/social-card.png" name="twitter:image"><meta content="Blog Posts" name="twitter:image:alt"><meta content="@straightedge" name="twitter:site"><meta content="@straightedge" name="twitter:creator"><link href="/sitemap-index.xml" rel="sitemap"><link href="/rss.xml" rel="alternate" title="Nathan Lane, PhD" type="application/rss+xml"><meta content="Astro v7.2.6" name="generator"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://nathanlane.info/#website","url":"https://nathanlane.info","name":"Nathan Lane, PhD","description":"Nathan Lane is an economist and data scientist at the London School of Economics studying industrial policy, economic development, and economic history.","author":{"@type":"Person","@id":"https://nathanlane.info/#author","name":"Nathan Lane","url":"https://nathanlane.info","image":"https://nathanlane.info/headshot-full.JPG","sameAs":["https://twitter.com/straightedge","https://www.linkedin.com/in/drnathanlane/","https://github.com/nathanlane","https://orcid.org/0000-0003-0884-8418"],"jobTitle":"Assistant Professor","worksFor":{"@type":"Organization","name":"London School of Economics"}}}</script><style>hr[data-astro-cid-b2i3gsw2]{margin-left:0;margin-right:auto}.page-header-copy p{margin:0}.page-header-copy p+p{margin-top:var(--space-2)}@media (width<=640px){.measure-base[data-astro-cid-b2i3gsw2]{max-width:100%}}
+.metadata-line[data-astro-cid-hpl5ozym]{flex-wrap:wrap;align-items:baseline;gap:0;line-height:1.4;display:flex}.text-meta__separator[data-astro-cid-hpl5ozym]{white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;user-select:none;pointer-events:none;font-feature-settings:"kern" 1;justify-content:center;align-items:center;margin:0 .25em;display:inline-flex;transform:translateY(-.02em)}@media (width<=640px){.metadata-line[data-astro-cid-hpl5ozym]{font-size:var(--step--2)}.text-meta__separator[data-astro-cid-hpl5ozym]{margin:0 .2em}}@media (prefers-contrast:high){.text-meta--light[data-astro-cid-hpl5ozym]{color:var(--theme-color-600);font-weight:500}.text-meta--dark[data-astro-cid-hpl5ozym]{color:var(--theme-text);font-weight:600}}:root[data-theme=dark] .metadata-line[data-astro-cid-hpl5ozym]{filter:brightness(1.05)}
+.section-separator[data-astro-cid-ijjg37xl] hr[data-astro-cid-ijjg37xl]{margin-left:auto;margin-right:auto}
+
+</style><link rel="stylesheet" href="/_astro/Base.2RMqNzAc.css"><script type="module" src="/_astro/page.D6Rx8f8Z.js"></script></head><body class="relative m-auto min-h-screen w-full min-w-0 max-w-6xl grow bg-bgColor"><script>
+	(function () {
+		var STORAGE_KEY = "theme";
+		var media = window.matchMedia("(prefers-color-scheme: dark)");
+
+		// Guards both the localStorage accessor and the operation on it: blocked
+		// storage (e.g. SecurityError in some privacy modes) can throw on access,
+		// not just on read/write, so the accessor must live inside the try too.
+		function readStoredPreference() {
+			try {
+				var value = localStorage.getItem(STORAGE_KEY);
+				return value === "light" || value === "dark" ? value : null;
+			} catch {
+				return null;
+			}
+		}
+
+		function writeStoredPreference(preference) {
+			try {
+				if (preference === null) {
+					localStorage.removeItem(STORAGE_KEY);
+				} else {
+					localStorage.setItem(STORAGE_KEY, preference);
+				}
+			} catch {
+				// Storage unavailable; the current page still applies the choice below.
+			}
+		}
+
+		// preference: null ("system") | "light" | "dark".
+		function resolveAppearance(preference) {
+			if (preference === "light" || preference === "dark") return preference;
+			return media.matches ? "dark" : "light";
+		}
+
+		// The current page's selected preference. Storage persists it for next
+		// load, but a failed write/removal must not change what's live on this
+		// page, so device-change handling reads this instead of storage.
+		var currentPreference = null;
+
+		// Single update path: applied appearance, theme-color metadata, and the
+		// selector's displayed value all flow from here so they cannot drift.
+		function applyPreference(preference) {
+			currentPreference = preference === "light" || preference === "dark" ? preference : null;
+
+			var appearance = resolveAppearance(currentPreference);
+			var label = currentPreference ?? "system";
+			var root = document.documentElement;
+
+			root.setAttribute("data-theme", appearance);
+			root.setAttribute("data-theme-preference", label);
+
+			var themeColorMeta = document.querySelector("meta[name='theme-color']");
+			if (themeColorMeta) {
+				var bgColor = getComputedStyle(root).getPropertyValue("--theme-bg");
+				themeColorMeta.setAttribute("content", `hsl(${bgColor})`);
+			}
+
+			document.dispatchEvent(
+				new CustomEvent("theme-applied", { detail: { preference: label, appearance } }),
+			);
+		}
+
+		function setPreference(preference) {
+			var normalized = preference === "light" || preference === "dark" ? preference : null;
+			writeStoredPreference(normalized);
+			applyPreference(normalized);
+		}
+
+		// Initial parser-blocking application, before first paint.
+		applyPreference(readStoredPreference());
+
+		// View Transitions hook to restore preference after a swap.
+		document.addEventListener("astro:after-swap", () => applyPreference(readStoredPreference()));
+
+		// Selector dispatches this after the user changes it; see ThemeToggle.astro.
+		document.addEventListener("theme-change", (e) => setPreference(e.detail.preference));
+
+		// Only follow device changes while System is the current-page preference.
+		media.addEventListener("change", () => {
+			if (currentPreference === null) applyPreference(null);
+		});
+	})();
+</script><a class="skip-link sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:start-1b focus-visible:top-2b focus-visible:z-50 focus-visible:bg-accent-base focus-visible:text-bgColor focus-visible:px-4b focus-visible:py-2b focus-visible:rounded-md focus-visible:no-underline focus-visible:font-medium" href="#main">Skip to main content</a><!-- Simplified background - removed decorative gradient orbs for minimal aesthetic --><div class="relative flex min-h-screen w-full"><!-- Sidebar for Docs Series --><!-- Main container for the page content --><div id="container" class="relative m-auto min-w-0 max-w-4xl grow"><div class="m-auto grid min-h-screen md:grid-rows-[auto_auto_1fr] px-component md:pt-component"><header id="main-header" class="header relative top-0 left-0 z-20 w-full min-w-0 bg-bgColor" data-astro-cid-isef26zo><div class="header-content mx-auto flex flex-wrap gap-y-2b w-full max-w-5xl items-center justify-between px-0 lg:px-space-s" data-astro-cid-isef26zo><!-- Left side: Logo (if shown) --><div class="flex items-center flex-shrink-0" data-astro-cid-isef26zo><a aria-label="Nathan Lane, PhD" aria-current="false" class="logo-link group flex-nowrap items-center gap-2b hover:filter-none sm:relative" href="/" data-astro-cid-isef26zo><!-- Logo Image --><img src="/logo.svg" alt="" class="logo-image h-6b w-auto flex-shrink-0 max-w-[120px]" aria-hidden="true" data-astro-cid-isef26zo><!-- Optional: Site title next to logo (can be removed if you want logo only) --><span class="site-title font-heading font-light whitespace-nowrap flex-shrink-0" data-astro-cid-isef26zo>Nathan Lane, PhD</span></a></div><!-- If no logo, add spacer div to maintain layout --><!-- Right side: Navigation and Actions --><div class="flex items-center gap-space-xs ml-auto" data-astro-cid-isef26zo><nav aria-label="Main navigation" class="nav-desktop hidden md:flex items-center gap-space-s" data-context="navigation" data-astro-cid-isef26zo><a aria-current="false" class="link-nav text--2" data-astro-prefetch="true" href="/" data-astro-cid-isef26zo>Home</a><a aria-current="false" class="link-nav text--2" data-astro-prefetch="true" href="/research/" data-astro-cid-isef26zo>Research</a><a aria-current="false" class="link-nav text--2" data-astro-prefetch="true" href="/writing/" data-astro-cid-isef26zo>Writing</a><a aria-current="false" class="link-nav text--2" data-astro-prefetch="true" href="/media/" data-astro-cid-isef26zo>Media</a><a aria-current="false" class="link-nav text--2" data-astro-prefetch="true" href="/about/" data-astro-cid-isef26zo>About</a></nav><div class="nav-actions flex items-center gap-space-3xs" data-astro-cid-isef26zo><theme-toggle class="theme-select-wrap" data-astro-cid-l6lhmie6="true"><label class="sr-only" for="theme-preference" data-astro-cid-l6lhmie6>Theme</label><select class="theme-select text--2" id="theme-preference" name="theme-preference" data-astro-cid-l6lhmie6><option value="system" data-astro-cid-l6lhmie6>System</option><option value="light" data-astro-cid-l6lhmie6>Light</option><option value="dark" data-astro-cid-l6lhmie6>Dark</option></select></theme-toggle><script type="module">var e=class extends HTMLElement{connectedCallback(){let e=this.querySelector(`select`);e.value=document.documentElement.getAttribute(`data-theme-preference`)||`system`,e.addEventListener(`change`,()=>{document.dispatchEvent(new CustomEvent(`theme-change`,{detail:{preference:e.value}}))}),document.addEventListener(`theme-applied`,(t=>{e.value!==t.detail.preference&&(e.value=t.detail.preference)}))}};customElements.define(`theme-toggle`,e);</script><!-- Mobile menu toggle --><button aria-expanded="false" aria-controls="drawer" aria-label="Open navigation menu" class="mobile-menu-toggle md:hidden" id="toggle-nav-menu-mobile" type="button" data-astro-cid-isef26zo><svg width="1em" height="1em" viewBox="0 0 24 24" id="open-nav-menu-icon" aria-hidden="true" class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100" focusable="false" data-astro-cid-isef26zo="true" data-icon="lucide:menu"><symbol id="ai:lucide:menu"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16M4 12h16M4 19h16"/></symbol><use href="#ai:lucide:menu"></use></svg><svg width="1em" height="1em" viewBox="0 0 24 24" id="close-nav-menu-icon" aria-hidden="true" class="absolute start-1/2 top-1/2 icon-nav -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0" focusable="false" data-astro-cid-isef26zo="true" data-icon="lucide:x"><symbol id="ai:lucide:x"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></symbol><use href="#ai:lucide:x"></use></svg></button></div></div></div></header><!-- Mobile drawer menu --><div id="drawer" class="fixed inset-0 z-10 hidden" aria-hidden="true" data-astro-cid-isef26zo><div id="drawer-body" class="absolute inset-0 -translate-y-full transform bg-bgColor" data-astro-cid-isef26zo><nav aria-label="Mobile navigation menu" class="absolute inset-0 flex flex-col items-center justify-center gap-y-space-s text-center" id="nav-menu-mobile" data-astro-cid-isef26zo><a aria-current="false" class="link-nav text-1" data-astro-prefetch="true" href="/" data-astro-cid-isef26zo>Home</a><a aria-current="false" class="link-nav text-1" data-astro-prefetch="true" href="/research/" data-astro-cid-isef26zo>Research</a><a aria-current="false" class="link-nav text-1" data-astro-prefetch="true" href="/writing/" data-astro-cid-isef26zo>Writing</a><a aria-current="false" class="link-nav text-1" data-astro-prefetch="true" href="/media/" data-astro-cid-isef26zo>Media</a><a aria-current="false" class="link-nav text-1" data-astro-prefetch="true" href="/about/" data-astro-cid-isef26zo>About</a></nav></div></div><script type="module">document.addEventListener(`DOMContentLoaded`,()=>{let e=document.getElementById(`toggle-nav-menu-mobile`),t=document.getElementById(`open-nav-menu-icon`),n=document.getElementById(`close-nav-menu-icon`),r=document.getElementById(`drawer`),i=document.getElementById(`main-header`);if(!e||!t||!n||!r||!i)return;let a=document.getElementById(`drawer-body`);if(!a)return;let o=`a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])`,s=()=>[...i.querySelectorAll(o),...r.querySelectorAll(o)].filter(e=>e.offsetParent!==null),c=[],l=e=>{if(!e){for(let e of c)e.removeAttribute(`inert`);c=[];return}let t=new Set([i,r]),n=new Set;for(let e of t){let t=e.parentElement;for(;t;)n.add(t),t=t.parentElement}let a=e=>{for(let r of Array.from(e.children))if(!t.has(r)){if(n.has(r)){a(r);continue}r.hasAttribute(`inert`)||(r.setAttribute(`inert`,``),c.push(r))}};a(document.body)},u=i=>{r.classList.toggle(`hidden`,!i),r.classList.toggle(`open`,i),r.setAttribute(`aria-hidden`,String(!i)),a.classList.toggle(`-translate-y-full`,!i),a.classList.toggle(`translate-y-0`,i),t.classList.toggle(`scale-0`,i),t.classList.toggle(`opacity-0`,i),n.classList.toggle(`scale-0`,!i),n.classList.toggle(`opacity-0`,!i),e.setAttribute(`aria-expanded`,String(i)),e.setAttribute(`aria-label`,i?`Close navigation menu`:`Open navigation menu`),document.documentElement.classList.toggle(`nav-drawer-open`,i),l(i)},d=()=>e.getAttribute(`aria-expanded`)===`true`,f=e=>{u(!1),e?.focus()};e.addEventListener(`click`,()=>{let e=!d();u(e),e&&r.querySelector(`#nav-menu-mobile a`)?.focus()}),document.addEventListener(`keydown`,t=>{if(d()){if(t.key===`Escape`){f(e);return}if(t.key===`Tab`){let e=s(),n=e[0],r=e[e.length-1];if(!n||!r)return;let i=e.indexOf(document.activeElement);t.shiftKey?i<=0&&(t.preventDefault(),r.focus()):(i===-1||i===e.length-1)&&(t.preventDefault(),n.focus())}}}),document.querySelectorAll(`#nav-menu-mobile a`).forEach(e=>{e.addEventListener(`click`,()=>u(!1))}),window.matchMedia(`(min-width: 768px)`).addEventListener(`change`,t=>{if(!t.matches||!d())return;let n=document.activeElement===e||r.contains(document.activeElement);u(!1),n&&document.querySelector(`.nav-desktop a`)?.focus()}),u(!1)});</script><main id="main" class="relative min-w-0 flex-grow mt-space-xl md:mt-space-m"><div class="measure-base mx-auto px-4b py-8b" data-astro-cid-bxdp5n4l><!-- Reusable Page Header with links --><header class="mb-10b" data-astro-cid-b2i3gsw2><!-- Main title - left aligned, clean typography --><h1 class="heading-1 mb-4b text-left" data-astro-cid-b2i3gsw2>Blog Posts</h1><!-- Body description text - baseline size, generous reading measure --><div class="page-header-copy text-0 text-base leading-relaxed measure-base mb-2b" data-astro-cid-b2i3gsw2><div data-astro-cid-b2i3gsw2><p>Technical tutorials, economic analysis, research notes, and occasional thoughts on data, policy, and development.</p></div></div><!-- Left-justified horizontal rule - stronger visual punctuation --><div class="mb-2b" data-astro-cid-b2i3gsw2><hr class="w-48 border-0 border-t-2 border-color-300 text-left ml-0" data-astro-cid-b2i3gsw2></div><!-- Additional info - baseline text size, muted, connected to rule --><div class="page-header-copy page-header-copy--muted text-0 text-light leading-relaxed mb-4b" data-astro-cid-b2i3gsw2><div data-astro-cid-b2i3gsw2><p><a class="link-inline" data-variant="editorial" href="/posts/archive">Browse all posts</a> • Also see <a class="link-inline" data-variant="editorial" href="/writing">writing here</a></p></div></div></header><!-- Recent Posts using reusable component --><section class="mb-16b" data-astro-cid-224ltnhm><!-- Section title with left alignment following Writing page pattern --><h2 class="heading-2 text-left mb-8b" data-astro-cid-224ltnhm>Recent Posts</h2><!-- Content items with proper spacing and typography --><div class="space-y-8b" data-astro-cid-224ltnhm><article class="last:mb-0" data-astro-cid-224ltnhm><!-- Item title with semantic heading hierarchy --><h3 class="heading-4 mb-2b" data-astro-cid-224ltnhm><a href="/posts/accessibility-improvements-summary/" class="link-title" data-astro-cid-224ltnhm>Accessibility Improvements: What We Fixed</a></h3><!-- Metadata line if enabled --><!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+--><div class="metadata-line text-meta text-meta--light mb-3b" data-astro-cid-hpl5ozym><span class="text-meta--light" data-astro-cid-hpl5ozym>POST</span><span class="text-meta__separator" aria-hidden="true" data-astro-cid-hpl5ozym>•</span><span class="text-meta--light" data-astro-cid-hpl5ozym>July 16, 2025</span></div><!-- Description text with optimal reading typography --><p class="text-body leading-relaxed" data-astro-cid-224ltnhm>A comprehensive summary of accessibility improvements made to ensure WCAG 2.1 AA compliance</p><div class="text-center mt-6b" data-astro-cid-224ltnhm></div></article><article class="last:mb-0" data-astro-cid-224ltnhm><!-- Item title with semantic heading hierarchy --><h3 class="heading-4 mb-2b" data-astro-cid-224ltnhm><a href="/posts/fixing-heading-hierarchy-semantic-html/" class="link-title" data-astro-cid-224ltnhm>Fixing Heading Hierarchy Without Breaking Typography</a></h3><!-- Metadata line if enabled --><!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+--><div class="metadata-line text-meta text-meta--light mb-3b" data-astro-cid-hpl5ozym><span class="text-meta--light" data-astro-cid-hpl5ozym>POST</span><span class="text-meta__separator" aria-hidden="true" data-astro-cid-hpl5ozym>•</span><span class="text-meta--light" data-astro-cid-hpl5ozym>July 16, 2025</span></div><!-- Description text with optimal reading typography --><p class="text-body leading-relaxed" data-astro-cid-224ltnhm>How I solved the semantic HTML vs visual design dilemma by rebasing heading styles</p><div class="text-center mt-6b" data-astro-cid-224ltnhm></div></article><article class="last:mb-0" data-astro-cid-224ltnhm><!-- Item title with semantic heading hierarchy --><h3 class="heading-4 mb-2b" data-astro-cid-224ltnhm><a href="/posts/lane-docs/accessibility-testing-checklist/" class="link-title" data-astro-cid-224ltnhm>Accessibility Testing Checklist</a></h3><!-- Metadata line if enabled --><!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+--><div class="metadata-line text-meta text-meta--light mb-3b" data-astro-cid-hpl5ozym><span class="text-meta--light" data-astro-cid-hpl5ozym>POST</span><span class="text-meta__separator" aria-hidden="true" data-astro-cid-hpl5ozym>•</span><span class="text-meta--light" data-astro-cid-hpl5ozym>July 16, 2025</span></div><!-- Description text with optimal reading typography --><p class="text-body leading-relaxed" data-astro-cid-224ltnhm>Comprehensive testing checklist for accessibility and performance improvements</p><div class="text-center mt-6b" data-astro-cid-224ltnhm></div></article><article class="last:mb-0" data-astro-cid-224ltnhm><!-- Item title with semantic heading hierarchy --><h3 class="heading-4 mb-2b" data-astro-cid-224ltnhm><a href="/posts/lane-docs/comprehensive-site-maintenance/" class="link-title" data-astro-cid-224ltnhm>Comprehensive Site Maintenance Guide</a></h3><!-- Metadata line if enabled --><!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+--><div class="metadata-line text-meta text-meta--light mb-3b" data-astro-cid-hpl5ozym><span class="text-meta--light" data-astro-cid-hpl5ozym>POST</span><span class="text-meta__separator" aria-hidden="true" data-astro-cid-hpl5ozym>•</span><span class="text-meta--light" data-astro-cid-hpl5ozym>July 16, 2025</span></div><!-- Description text with optimal reading typography --><p class="text-body leading-relaxed" data-astro-cid-224ltnhm>Complete guide for maintaining and updating all aspects of your Lane website</p><div class="text-center mt-6b" data-astro-cid-224ltnhm></div></article><article class="last:mb-0" data-astro-cid-224ltnhm><!-- Item title with semantic heading hierarchy --><h3 class="heading-4 mb-2b" data-astro-cid-224ltnhm><a href="/posts/lane-docs/seo-structured-data-maintenance/" class="link-title" data-astro-cid-224ltnhm>SEO &amp; Structured Data Maintenance Guide</a></h3><!-- Metadata line if enabled --><!--
+# MetadataLine Component
+
+A refined metadata component implementing typographic principles from the masters:
+- Bringhurst: Proper small caps, subordinated punctuation
+- Ruder: Visual hierarchy through weight and color
+- Hochuli: Optimal spacing and optical adjustments
+- Butterick: Practical readability considerations
+
+## Usage Examples:
+
+### Basic Usage (Light - Default)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research" },
+    { text: "Dec 2024" },
+    { text: "Working Paper" },
+    { text: "Nathan Lane" }
+  ]}
+/>
+```
+
+### Dark Variant for Emphasis
+```astro
+<MetadataLine 
+  items={[
+    { text: "Featured Article" },
+    { text: "Dec 2024" },
+    { text: "Nathan Lane" }
+  ]}
+  variant="dark"
+/>
+```
+
+### With Links
+```astro
+<MetadataLine 
+  items={[
+    { text: "Research", href: "/research" },
+    { text: "Nathan Lane", href: "/about" }
+  ]}
+  separator="·"
+/>
+```
+
+### Mixed Types (Override Individual Items)
+```astro
+<MetadataLine 
+  items={[
+    { text: "Important", type: "dark" },
+    { text: "Regular info" }, // Uses variant default
+    { text: "Subtle note", type: "light" }
+  ]}
+  variant="light"
+/>
+```
+
+## Simplified System:
+- light: Elegant, refined (default)
+- dark: Emphasis when needed
+- Globally reusable across all content types
+--><div class="metadata-line text-meta text-meta--light mb-3b" data-astro-cid-hpl5ozym><span class="text-meta--light" data-astro-cid-hpl5ozym>POST</span><span class="text-meta__separator" aria-hidden="true" data-astro-cid-hpl5ozym>•</span><span class="text-meta--light" data-astro-cid-hpl5ozym>July 16, 2025</span></div><!-- Description text with optimal reading typography --><p class="text-body leading-relaxed" data-astro-cid-224ltnhm>How to maintain and update the structured data implementation for better SEO</p></article></div><!-- Archive link following Writing page pattern --><div class="mt-6b" data-astro-cid-224ltnhm><a href="/posts/archive" class="link-nav text-body-sm uppercase tracking-wide" data-astro-cid-224ltnhm>→ View all posts</a></div></section><!-- Wide Full Header Line Separator --><div class="section-separator-full my-12b " data-astro-cid-ijjg37xl><hr class="w-full border-0 border-t border-color-300" data-astro-cid-ijjg37xl></div><!-- Navigation Options with improved typography --><section data-astro-cid-bxdp5n4l><h2 class="heading-2 mb-8b" data-astro-cid-bxdp5n4l>More Ways to Browse</h2><div class="grid sm:grid-cols-3 gap-6b" data-astro-cid-bxdp5n4l><a href="/posts/archive" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200" data-astro-cid-bxdp5n4l><h3 class="heading-4 mb-2b" data-astro-cid-bxdp5n4l>Full Archive</h3><p class="text-meta text-light" data-astro-cid-bxdp5n4l>All 57 posts by year</p></a><a href="/tags/" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200" data-astro-cid-bxdp5n4l><h3 class="heading-4 mb-2b" data-astro-cid-bxdp5n4l>Browse by Tag</h3><p class="text-meta text-light" data-astro-cid-bxdp5n4l>76 topics</p></a><a href="/posts/1/" class="block p-6b bg-theme-bg/30 hover:bg-theme-bg/50 transition-colors duration-200" data-astro-cid-bxdp5n4l><h3 class="heading-4 mb-2b" data-astro-cid-bxdp5n4l>Paginated View</h3><p class="text-meta text-light" data-astro-cid-bxdp5n4l>10 posts per page</p></a></div></section></div></main><footer class="site-footer" data-astro-cid-oenwriqq><!-- Main Footer Content --><div class="footer-content" data-astro-cid-oenwriqq><!-- Navigation Grid: the nav landmark wraps only the link columns
+		     (display:contents keeps them as direct grid items); informational
+		     copy renders as a sibling, outside the nav landmark. --><div class="footer-nav" data-astro-cid-oenwriqq><nav class="footer-nav-links" aria-label="Footer navigation" data-astro-cid-oenwriqq><div class="footer-section" data-astro-cid-oenwriqq><h2 class="footer-section-title" data-astro-cid-oenwriqq>Here</h2><ul class="footer-links" data-astro-cid-oenwriqq><li data-astro-cid-oenwriqq><a href="/" class="link-footer" data-astro-cid-oenwriqq>Home</a></li><li data-astro-cid-oenwriqq><a href="/about/" class="link-footer" data-astro-cid-oenwriqq>About</a></li><li data-astro-cid-oenwriqq><a href="/research/" class="link-footer" data-astro-cid-oenwriqq>Research</a></li><li data-astro-cid-oenwriqq><a href="/writing/" class="link-footer" data-astro-cid-oenwriqq>Writing</a></li><li data-astro-cid-oenwriqq><a href="/posts/" class="link-footer" data-astro-cid-oenwriqq>Blog</a></li><li data-astro-cid-oenwriqq><a href="/sitemap-index.xml" class="link-footer" data-astro-cid-oenwriqq>Sitemap</a></li></ul></div><div class="footer-section" data-astro-cid-oenwriqq><h2 class="footer-section-title" data-astro-cid-oenwriqq>Elsewhere</h2><ul class="footer-links" data-astro-cid-oenwriqq><li data-astro-cid-oenwriqq><a href="https://github.com/nathanlane" class="link-footer" data-astro-cid-oenwriqq>Github</a></li><li data-astro-cid-oenwriqq><a href="https://bsky.app/profile/nathanlane.bsky.social" class="link-footer" data-astro-cid-oenwriqq>Bluesky</a></li><li data-astro-cid-oenwriqq><a href="https://twitter.com/straightedge" class="link-footer" data-astro-cid-oenwriqq>Twitter</a></li><li data-astro-cid-oenwriqq><a href="https://www.linkedin.com/in/drnathanlane/" class="link-footer" data-astro-cid-oenwriqq>LinkedIn</a></li></ul></div><div class="footer-section" data-astro-cid-oenwriqq><h2 class="footer-section-title" data-astro-cid-oenwriqq>Contact</h2><ul class="footer-links" data-astro-cid-oenwriqq><li data-astro-cid-oenwriqq><a href="mailto:n.lane@lse.ac.uk" class="link-footer" data-astro-cid-oenwriqq>Email</a></li><li data-astro-cid-oenwriqq><a href="/cv.pdf" class="link-footer" data-astro-cid-oenwriqq>CV</a></li></ul></div></nav><div class="footer-section" data-astro-cid-oenwriqq><h2 class="footer-section-title" data-astro-cid-oenwriqq>About this site</h2><p class="footer-section-text" data-astro-cid-oenwriqq>Built by me, Nathan Lane, with care using Astro/Tailwind/GitHub Pages, designed with typography in mind. I use Inter (body/headers) and JetBrains Mono (code) for typography.</p></div></div></div><!-- Bottom Bar --><div class="footer-bottom" data-astro-cid-oenwriqq><p class="footer-copyright" data-astro-cid-oenwriqq>© 2026 Nathan Lane</p><nav class="footer-utility" aria-label="Utility links" data-astro-cid-oenwriqq><a href="/sitemap-index.xml" class="link-nav" data-astro-cid-oenwriqq>Sitemap</a><a href="/rss.xml" class="link-nav" title="All content RSS feed" data-astro-cid-oenwriqq>RSS</a></nav></div></footer></div></div></div></body></html>

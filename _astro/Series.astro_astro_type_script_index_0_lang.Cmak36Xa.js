@@ -1,0 +1,1 @@
+import{t as e}from"./panelToggle.B5FJfCfm.js";e({panelId:`series-panel`,toggleButtonId:`toggle-panel`,mobileToggleButtonId:`toggle-panel-mobile`,closeButtonId:`close-panel`,breakpointPx:1024,visibleClass:`lg:block`}),e({panelId:`toc-panel`,toggleButtonId:`toggle-toc`,mobileToggleButtonId:`toggle-toc-mobile`,closeButtonId:`close-toc`,breakpointPx:768,visibleClass:`md:block`});
