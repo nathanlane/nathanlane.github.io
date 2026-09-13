@@ -17,6 +17,7 @@ pnpm run check:social-card
 ```
 
 ## Design Notes
+
 - Dimensions: 1200x630 pixels (standard OG image size)
 - Features the site owner’s current name, title, institution, and domain
 - Uses site's color scheme (#224d67)
