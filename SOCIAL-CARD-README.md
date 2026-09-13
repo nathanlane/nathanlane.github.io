@@ -2,7 +2,7 @@
 
 The site expects a committed `social-card.png` file in the public directory for Open Graph and Twitter cards.
 
-`public/social-card.svg` is the editable source. `public/social-card.png` is generated from that SVG and checked by the validation workflow.
+`public/social-card.svg` is the editable source. `public/social-card.png` is generated from that SVG; `pnpm run check:social-card` verifies the PNG matches the SVG.
 
 ## Generate or check the PNG
 
