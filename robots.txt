@@ -1,5 +1,3 @@
 User-agent: *
-Disallow: /admin
-Disallow: /admin/
 Allow: /
 Sitemap: https://nathanlane.info/sitemap-index.xml
