@@ -20,7 +20,7 @@
   "description": "Nathan Lane is an economist and data scientist at the London School of Economics studying industrial policy, economic development, and economic history.",
   "lang": "en-GB",
   "start_url": "/",
-  "theme_color": "#2bbc8a",
-  "background_color": "#1d1f21",
+  "theme_color": "#11100e",
+  "background_color": "#11100e",
   "display": "standalone"
 }
