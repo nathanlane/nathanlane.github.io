@@ -828,7 +828,7 @@ Also: fairly recently, the prolific Wes McKinney and Hadley Wickham developed th
 
 https://nathanlane.info/about/
 
-**Nathan Lane, PhD**, is an Assistant Professor of Economic Development at the London School of Economics, in the [Department of International Development](https://www.lse.ac.uk/international-development). He is an affiliate of CESifo (Munich), and LSE’s [Centre for Economic Prosperity](https://cep.lse.ac.uk/) (CEP) and [Programme on Innovation and Diffusion](https://poid.lse.ac.uk/) (POID). He co-founded the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/).
+**Nathan Lane, PhD**, is an Assistant Professor of Economic Development at the London School of Economics, in the [Department of International Development](https://www.lse.ac.uk/international-development). He is an affiliate of CESifo (Munich), and LSE’s [Centre for Economic Performance](https://cep.lse.ac.uk/) (CEP) and [Programme on Innovation and Diffusion](https://poid.lse.ac.uk/) (POID). He co-founded the empirical economics research lab, the [Industrial Policy Group](https://www.industrialpolicygroup.com/).
 
 His research covers applied machine learning, economic development, political economy, and industrial economics. Before joining the LSE, Dr. Lane was an Assistant Professor at the University of Oxford, a Senior Lecturer at Monash University, and co-founded [SodaLabs.io](https://sodalabs.io), a lab focused on addressing social science questions using big data and computational tools. He also worked as a postdoctoral researcher at the Massachusetts Institute of Technology under Professor Daron Acemoglu.
 
