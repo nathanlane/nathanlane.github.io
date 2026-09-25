@@ -1,0 +1,44 @@
+# Nathan Lane, PhD
+
+> Nathan Lane is an economist and data scientist at the London School of Economics studying industrial policy, economic development, and economic history.
+
+## Research
+
+- [Geopolitics and Export Miracles: Firm-Level Evidence from U.S. War Procurement in Korea](https://nathanlane.info/research/geopolitics-export-miracles/): U.S. war procurement during the Vietnam War—a shock worth 2.9 percent of South Korea’s GDP—spurred the country’s export-led industrialization. Using new firm-level data, we show that winning a contract sharply raised firms’ exports and entry into global markets. The policy’s lasting effects reveal a neglected channel through which Cold War geopolitics shaped East Asia’s economic rise
+- [Industrial Policy in the Global Semiconductor Sector](https://nathanlane.info/research/semiconductor-industrial-policy/): This paper documents and quantifies the magnitude of industrial policies in the global semiconductor sector since the passage of the CHIPS Act in the United States. We provide a comprehensive examination of semiconductor industrial policies globally, their rationale, and their potential economic impacts including cross-border effects.
+- [The Value of Names: Civil Society, Information, and Governing Multinationals](https://nathanlane.info/research/value-of-names/): Does the human rights spotlight impact multinationals? We evaluate the effect of publicizing human rights violations on firm value, focusing on salient events at the center of international campaigns: the assassination of environmental activists.
+- [Manufacturing Revolutions: Industrial Policy and Industrialization in South Korea](https://nathanlane.info/research/manufacturing-revolutions/): I study the impact of industrial policy on industrial development by considering an important episode during the East Asian miracle: South Korea's heavy and chemical industry (HCI) drive, 1973--1979. Based on newly assembled data, I use the introduction and termination of industrial policies to study their impacts during and after the intervention period.
+- [Measuring Industrial Policy: A Text-Based Approach](https://nathanlane.info/research/measuring-industrial-policy/): We provide a new, text-based approach to measuring industrial policy at scale and deliver a global data set on industrial policy practice.
+- [The New Economics of Industrial Policy](https://nathanlane.info/research/new-economics-industrial-policy/): We review the recent literature on industrial policy, providing a critical assessment of new theoretical insights and empirical evidence. We argue that new economic research offers a more positive perspective on industrial policy than earlier work, while acknowledging important caveats and limitations.
+- [The Political Economy of Industrial Policy](https://nathanlane.info/research/political-economy-industrial-policy/): We examine the ways in which political realities shape industrial policy through the lens of modern political economy. We argue that government failure is not a necessary feature of industrial policy but is more likely when countries pursue policies beyond their governance capacity constraints.
+- [The New Empirics of Industrial Policy](https://nathanlane.info/research/new-empirics-industrial-policy/): A review of how new econometric work is confronting the empirical challenges of studying industrial policy interventions. Through careful research design and attention to institutional detail, emergent studies are rapidly expanding what we know about these policies.
+- [The Historical State, Local Collective Action, and Economic Development in Vietnam](https://nathanlane.info/research/historical-state-development-vietnam/): This study examines how the historical state conditions long-run development, using Vietnam as a laboratory.
+
+## Writing
+
+- [New measures reveal a growing industrial policy divide](https://nathanlane.info/writing/new-measures-reveal-a-growing-industrial-policy-divide/): New measures reveal that advanced economies are leading a global surge in industrial policy—developing countries must navigate the consequences. By Réka Juhász, Nathan Lane, Emily Oehlsen, and Veronica Perez on VoxDev.
+- [A New Economics of Industrial Policy](https://nathanlane.info/writing/a-new-economics-of-industrial-policy-imf-finance-and-development/): Industrial policy is back in advanced economies. A new economics studies why policies succeed or fail and which are feasible. By Réka Juhász and Nathan Lane (IMF Finance & Development).
+- [Not a ‘side dish’: New industrial policy and competition](https://nathanlane.info/writing/not-a-side-dish-new-industrial-policy-and-competition-cepr/): Industrial policy is undergoing a major resurgence. Spurred by multiple overlapping crises, economists have been seeking to draw lessons from the past, while policymakers have had to take urgent action. This column describes how the paradigm shift in ‘industrial strategy’ in the US has been...
+- [Economists Reconsider Industrial Policy](https://nathanlane.info/writing/economists-reconsider-industrial-policy-project-syndicate/): Past assessments focused on limited indicators like tariffs. New research takes a more productive approach and reaches different conclusions. By Dani Rodrik, Réka Juhász, and Nathan Lane (Project Syndicate).
+- [Economics Must Catch Up On Industrial Policy](https://nathanlane.info/writing/economics-must-catch-up-on-industrial-policy-promarket-series/): As countries embrace industrial policies, economics faces a knowledge deficit. We lack systematic understanding and an empirical roadmap for implementation. By Réka Juhász and Nathan Lane (ProMarket Series).
+- [A Flight Plan That Fails](https://nathanlane.info/writing/a-flight-plan-that-fails-boston-review/): Some sweeping Moonshot thinking fails as a guide to the future of industrial policy. Beneath any moonshot must lie launchpad scaffolding, but we lack the messy details of practical deployment. Industrial policy needs to be ambitious, but even more urgently, detailed and precise.
+
+## Posts
+
+- [Industrial Policy - A Round Up of Historical Case...](https://nathanlane.info/posts/industrial-policy-a-round-up-of-historical-case-studies-and-beyond/): A short literature review of recent papers on industrial policy (and related topics), focusing on work coming from economic historians.
+- [A Delightful (Informal) Romp Through Implementation Theory](https://nathanlane.info/posts/a-delightful-informal-romp-through-implementation-theory/): As an undergraduate suffering through a graduate PhD micro course, I recall my professor bringing up the "hot new thing" that was implementation theor...
+- [Saying the Quiet Part](https://nathanlane.info/posts/saying-the-quiet-part-1/): It's often revealing when someone when someone "says the quiet part loud." I thought this was particularly resonant:
+- [Building a Dataset from UN Comtrade's API](https://nathanlane.info/posts/uncomtrade/): The following is a simple program for building data sets using the United Nation's COMTRADE API.
+- [Quick Note: Writing large .csv files in R with fwrite()!...](https://nathanlane.info/posts/writingwithfwrite/): Quick Note: Writing large .csv files in R with fwrite()! and beyond
+
+## About
+
+- [About](https://nathanlane.info/about/)
+- [Media](https://nathanlane.info/media/)
+
+## Optional
+
+- [Posts](https://nathanlane.info/posts/)
+- [Writing Archive](https://nathanlane.info/writing/archive/)
+- [Tags](https://nathanlane.info/tags/)
+- [RSS](https://nathanlane.info/rss.xml)
