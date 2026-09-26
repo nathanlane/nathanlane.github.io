@@ -12,7 +12,7 @@ How did geopolitics shape East Asia’s economic development? We show that U.S. 
 
 ### Resources
 
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/BarteskaKimLaneLee_GeopoliticsAndExportMiracles_2026_v1.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/geopolitics-export-miracles/geopolitics-export-miracles.pdf)
 
 ## Industrial Policy in the Global Semiconductor Sector
 
@@ -27,7 +27,7 @@ This paper documents and quantifies the magnitude of industrial policies in the 
 - [NBER Working Paper](https://www.nber.org/papers/w32651)
 - [SSRN Working Paper](https://papers.ssrn.com/abstract=4878912)
 - [OSF Preprint](https://osf.io/preprints/osf/ny3eq)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/GoldbergEtAl_GlobalChipIndustrialPolicy_2026.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/semiconductor-industrial-policy/semiconductor-industrial-policy.pdf)
 - [NBER Digest](https://www.nber.org/digest/202410/global-perspective-industrial-policy-and-semiconductor-industry)
 - [NBER Digest (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/writing/GoldbergEtAl_NBERSemiConductorDigest_2024.pdf)
 
@@ -41,7 +41,7 @@ Does the human rights spotlight impact multinationals? We evaluate the effect of
 
 ### Resources
 
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/KreitmeirLaneRaschky_ValueOfNames_2026-v1.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/value-of-names/value-of-names.pdf)
 - [SocArXiv Preprint](https://osf.io/preprints/socarxiv/aw7sq)
 - [SSRN Working Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3751162)
 - [synthReturn R package](https://github.com/davidkreitmeir/synthReturn)
@@ -57,7 +57,7 @@ I study the impact of industrial policy on industrial development by considering
 ### Resources
 
 - [Quarterly Journal of Economics Article (Open Access)](https://academic.oup.com/qje/article/140/1/403/7926978)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/Lane_QJE_2025_Manufacturing_Revolutions.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/manufacturing-revolutions/manufacturing-revolutions.pdf)
 - [arXiv Preprint](https://arxiv.org/abs/2505.20566)
 - [SocArXiv Preprint](https://osf.io/preprints/socarxiv/6tqax)
 - [SSRN Working Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3890311)
@@ -73,7 +73,7 @@ Since the 18th century, policymakers have debated the merits of industrial polic
 ### Resources
 
 - [NBER Working Paper](https://www.nber.org/papers/w33895)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/MeasuringIndustrialPolicy_2025.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/measuring-industrial-policy/measuring-industrial-policy.pdf)
 - [SocArXiv Preprint](https://osf.io/preprints/socarxiv/uyxh9)
 - [Industrial Policy Data](https://www.industrialpolicydata.com)
 - [Teaching materials](https://www.industrialpolicydata.com)
@@ -96,7 +96,7 @@ We discuss the considerable literature that has developed in recent years provid
 - [Annual Review of Economics Article (Open Access)](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-081023-024638)
 - [NBER Working Paper](https://www.nber.org/papers/w31538)
 - [SocArXiv Preprint](https://osf.io/preprints/socarxiv/gsyq4)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/JuhaszLaneRodrik_2024_ARE.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/new-economics-industrial-policy/new-economics-industrial-policy.pdf)
 - [Teaching materials](https://www.annualreviews.org/content/journals/10.1146/annurev-economics-081023-024638)
 
 ## The Political Economy of Industrial Policy
@@ -110,7 +110,7 @@ We examine the ways in which political realities shape industrial policy through
 ### Resources
 
 - [Journal of Economic Perspectives Article (Open Access)](https://www.aeaweb.org/articles?id=10.1257/jep.38.4.27)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/JuhaszLane_2024_JEP.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/political-economy-industrial-policy/political-economy-industrial-policy.pdf)
 - [SSRN Working Paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4823810)
 - [OSF Preprint](https://osf.io/preprints/osf/y74uh)
 
@@ -125,7 +125,7 @@ Nations have and will continue to shape their economies through industrial polic
 ### Resources
 
 - [Journal of Industry, Competition and Trade Article](https://link.springer.com/article/10.1007/s10842-019-00323-2)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/Lane_NewEmpiricsOfIndustrialPolicy_2020.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/new-empirics-industrial-policy/new-empirics-industrial-policy.pdf)
 - [SocArXiv Preprint](https://osf.io/preprints/socarxiv/tnxg6)
 
 ## The Historical State, Local Collective Action, and Economic Development in Vietnam
@@ -139,7 +139,7 @@ This study examines how the historical state conditions long-run development, us
 ### Resources
 
 - [Econometrica](https://onlinelibrary.wiley.com/doi/abs/10.3982/ECTA15122)
-- [Full text (PDF)](https://github.com/nathanlane/nathanlanespdfrepo/raw/main/papers/DellLaneQuerubin_ECMA_2018_THE%20HISTORICAL%20STATE%2C%20LOCAL%20COLLECTIVE%20ACTION%2C%20AND%20ECONOMIC%20DEVELOPMENT%20IN%20VIETNAM.pdf)
+- [Full text (PDF)](https://nathanlane.info/research/historical-state-development-vietnam/historical-state-development-vietnam.pdf)
 
 ## New measures reveal a growing industrial policy divide
 
