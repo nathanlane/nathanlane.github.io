@@ -2,6 +2,19 @@
 
 > Nathan Lane is an economist and data scientist at the London School of Economics studying industrial policy, economic development, and economic history.
 
+## Defense Promotion and Industrial Development
+
+https://nathanlane.info/research/defense-promotion-industrial-development/
+
+### Abstract
+
+Major economies are rearming, and rearmament is itself industrial policy. I ask whether defense promotion—especially innovation policy—can drive industrial development beyond the defense sector. I synthesize evidence on supply-side instruments (including R&D tax credits and grants) and demand-side procurement, tracing each from its effects on firms’ own R&D investment through innovation and productivity outcomes to spillovers beyond the recipient firm. The evidence is conditionally positive: public support more often crowds private effort in than out, but returns concentrate among particular firms, technologies, and designs, and weaken as one moves from investment to outputs and from civilian to defense settings. Defense spillovers, in particular, cannot be assumed. I draw five lessons for designing defense industrial policy that delivers broader economic returns, with the greatest weight on Europe’s rearmament. The developmental promise of defense promotion is real but conditional: whether rearmament also strengthens the wider industrial economy turns on how it is designed.
+
+### Resources
+
+- [Working Paper](https://nathanlane.info/research/defense-promotion-industrial-development/)
+- [Full text (PDF)](https://nathanlane.info/research/defense-promotion-industrial-development/defense-promotion-industrial-development.pdf)
+
 ## Geopolitics and Export Miracles: Firm-Level Evidence from U.S. War Procurement in Korea
 
 https://nathanlane.info/research/geopolitics-export-miracles/
